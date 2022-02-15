@@ -1,14 +1,13 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.11;
 
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 
 import './Arena.sol';
 
 
-contract ArenasData is Ownable, ERC721, ERC721Holder {
+contract ArenasData is ERC721, ERC721Holder {
     
     address public methodsContractAddress;
     uint256 public id = 1;
@@ -22,17 +21,17 @@ contract ArenasData is Ownable, ERC721, ERC721Holder {
         methodsContractAddress = methods;
     }
 
-    function setGlobalParameters(address methods) external onlyOwner {
+    function setGlobalParameters(address methods) external {
         (bool success, ) = methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function createArena(Arena.Struct memory arena) external onlyOwner {
+    function createArena(Arena.Struct memory arena) external {
         (bool success, ) = methodsContractAddress.delegatecall(msg.data);
         require(success,error);
     }
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
+    function editArena(uint256 theId, Arena.Struct memory arena) external {
         (bool success, ) = methodsContractAddress.delegatecall(msg.data);
         require(success,error);
     }

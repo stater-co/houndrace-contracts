@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.10;
+pragma solidity <=0.8.11;
 
 
-library FilterForWinners {
+library Filters {
 
     function filterForWinners(uint256[] memory participants) internal pure returns(uint256[3] memory winners) {
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {

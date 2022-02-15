@@ -1,31 +1,35 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.11;
 
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '../../utils/Sortings.sol';
 import '../../arenas/Arena.sol';
 import '../../hounds/Hound.sol';
 import '../../payments/Payments.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/IData.sol';
 import '../../randomness/vanilla/IData.sol';
-import '../../utils/FilterForWinners.sol';
+import '../../utils/Filters.sol';
 import '../races/Race.sol';
-import '../Constructor.sol';
+import './Constructor.sol';
 
 
 /**
  * DIIMIIM:
  * This should not have any storage, except the constructor ones
  */
-contract RaceGeneratorMethods is Payments {
+contract RaceGeneratorMethods is Ownable, Payments {
 
     event NewRace(Race.Struct queue, Race.Finished race);
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
+    IHoundsData public houndsContract;
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external {
+    ) external onlyOwner {
         control = input;
+        houndsContract = IHoundsData(control.hounds);
     }
 
     // Compute the race hounds stats
@@ -64,9 +68,19 @@ contract RaceGeneratorMethods is Payments {
     }
 
     // Simulate the classic race seed
-    function simulateClassicRace(uint256[] memory participants, uint256 terrain, uint256 theRandomness) public view returns(bytes memory output) {
+    function simulateClassicRace(
+        uint256[] memory participants, 
+        uint256 terrain, 
+        uint256 theRandomness
+    ) 
+        public 
+        view 
+    returns(
+        uint256[] memory, 
+        uint256[] memory
+    ) {
         
-        Arena.Struct memory theTerrain = ITerrains(control.terrains).getTerrain(terrain);
+        Arena.Struct memory theTerrain = IArenas(control.terrains).getTerrain(terrain);
 
         // Compute the hounds score power
         
@@ -80,12 +94,11 @@ contract RaceGeneratorMethods is Payments {
             houndsPower[j] = houndsPower[j] + ( ( houndsPower[j] * variation ) / 100 );
         
         // Encoding it into bytes
-        output =  abi.encode(
-            quickSort(
-                houndsPower,
-                0,
-                houndsPower.length-1
-            )
+        return Sortings.rankPlayers(
+            houndsPower,
+            participants,
+            0,
+            houndsPower.length-1
         );
 
     }
@@ -101,26 +114,24 @@ contract RaceGeneratorMethods is Payments {
 
         // Generates the randomness
         uint256 theRandomness = IRandomnessVanillaData(control.randomness).getRandomNumber(abi.encode(block.timestamp));
-        bytes memory seed = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
         // Decode the race seed into the participants array
-        uint256[] memory participants = abi.decode(seed,(uint256[]));
+        (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
         // Gets the first indexes of the best participants
-        uint256[3] memory winners = FilterForWinners.filterForWinners(participants);
+        address[] memory winners = new address[](queue.winnersPercentagePrize.length);
+        uint256[] memory prizes = new uint256[](queue.winnersPercentagePrize.length);
+        
+        for ( uint256 i = 0 ; i < winners.length ; ++i ) {
+            winners[i] = houndsContract.ownerOf(participants[i]);
+            prizes[i] = queue.entryFee * queue.winnersPercentagePrize[i] / 100;
+        }
+        uint256 jackpot = queue.entryFee * queue.totalParticipants;
 
         sendRewards(
-            [
-                IHoundsData(control.hounds).ownerOf(winners[0]),
-                IHoundsData(control.hounds).ownerOf(winners[1]),
-                IHoundsData(control.hounds).ownerOf(winners[2])
-            ],
+            winners,
             queue.currency,
-            [
-                queue.entryFee * 5, 
-                queue.entryFee * 3, 
-                queue.entryFee * 2
-            ]
+            prizes
         );
     
         race = Race.Finished(
@@ -128,7 +139,8 @@ contract RaceGeneratorMethods is Payments {
             participants,
             queue.arena,
             queue.entryFee,
-            theRandomness
+            theRandomness,
+            queue.winnersPercentagePrize
         );
 
         // Emit the race event
@@ -136,8 +148,8 @@ contract RaceGeneratorMethods is Payments {
 
     }
 
-    function sendRewards(address[3] memory winners, address currency, uint256[3] memory amounts) public payable {
-        for ( uint256 i = 0 ; i < 3 ; ++i ) {
+    function sendRewards(address[] memory winners, address currency, uint256[] memory amounts) public payable {
+        for ( uint256 i = 0 ; i < winners.length ; ++i ) {
             transferTokens(
                 address(this),
                 payable(winners[i]),
@@ -145,27 +157,6 @@ contract RaceGeneratorMethods is Payments {
                 amounts[i]
             );
         }
-    }
-
-    function quickSort(uint256[] memory arr, uint256 left, uint256 right) internal pure returns(uint[] memory){
-        uint256 i = left;
-        uint256 j = right;
-        if (i == j) return arr;
-        uint256 pivot = arr[uint(left + (right - left) / 2)];
-        while (i <= j) {
-            while (arr[uint(i)] < pivot) i++;
-            while (pivot < arr[uint(j)]) j--;
-            if (i <= j) {
-                (arr[uint(i)], arr[uint(j)]) = (arr[uint(j)], arr[uint(i)]);
-                i++;
-                j--;
-            }
-        }
-        if (left < j)
-            quickSort(arr, left, j);
-        if (i < right)
-            quickSort(arr, i, right);
-        return arr;
     }
 
 }

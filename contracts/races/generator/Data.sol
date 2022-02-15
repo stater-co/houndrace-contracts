@@ -1,33 +1,35 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.11;
 
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../payments/Payments.sol';
+import '../../utils/Sortings.sol';
 import '../../hounds/IData.sol';
 
 import './IData.sol';
-import '../Constructor.sol';
+import './Constructor.sol';
 
 
 /**
  * DIIMIIM:
  * This should not have any storage, except the constructor ones
  */
-contract RaceGeneratorData is Ownable, Payments {
+contract RaceGeneratorData is Payments {
 
     event NewRace(Race.Struct queue, Race.Finished race);
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
+    IHoundsData public houndsContract;
 
     constructor(
         Constructor.Struct memory input
     ) {
         control = input;
+        houndsContract = IHoundsData(control.hounds);
     }
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external onlyOwner {
+    ) external {
         (bool success, bytes memory output) = input.methods.delegatecall(msg.data);
         require(success,error);
     }

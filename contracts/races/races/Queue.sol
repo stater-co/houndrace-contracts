@@ -1,14 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.11;
 
-library Race {
+library Queue {
     
+    /**
+     * DIIMIIM:
+     * Participants can pay with multiple currencies, ETH included
+     */
     struct Struct {
 
         // address(0) for ETH
         address currency;
 
-        // Race seed
+        // Participants
+        // totalParticipants will be the array length here
         uint256[] participants;
 
         // arena of the race
@@ -17,8 +22,11 @@ library Race {
         // ETH based
         uint256 entryFee;
 
-        // Race randomness
-        uint256 seed;
+        // Start date
+        uint256 startDate;
+
+        // Total number of participants
+        uint32 totalParticipants;
 
         // Informations about the winners of the race
         uint256[] winnersPercentagePrize;

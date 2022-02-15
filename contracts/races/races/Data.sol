@@ -1,28 +1,25 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.11;
 
-import '@openzeppelin/contracts/access/Ownable.sol';
-import '../../utils/FilterForWinners.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/Arena.sol';
-
 import '../generator/IData.sol';
-
+import './Queue.sol';
 import './Race.sol';
-import '../Constructor.sol';
+import './Constructor.sol';
 
 
-contract RacesData is Ownable {
+contract RacesData {
     
     event NewRace(uint256 indexed id, Race.Struct race);
-    event NewFinishedRace(uint256 indexed id, Race.Finished race);
-    event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Race.Struct[] newQueues);
+    event NewFinishedRace(uint256 indexed id, Race.Struct race);
+    event UploadRace(uint256 indexed id, Race.Struct race);
+    event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
-    event UploadRace(uint256 indexed id, Race.Finished race);
     event PlayerEnqueue(uint256 indexed id, uint256 indexed hound, address indexed player);
     uint256 public id = 1;
     Constructor.Struct public control;
-    mapping(uint256 => Race.Struct) public queues;
+    mapping(uint256 => Queue.Struct) public queues;
     string error = "Failed to delegatecall";
 
     /**
@@ -39,22 +36,22 @@ contract RacesData is Ownable {
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external onlyOwner {
+    ) external {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function createQueues(Race.Struct[] memory theQueues) external onlyOwner {
+    function createQueues(Race.Struct[] memory theQueues) external {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function deleteQueue(uint256 theId) external onlyOwner {
+    function deleteQueue(uint256 theId) external {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function uploadRace(Race.Finished memory race) external onlyOwner {
+    function uploadRace(Race.Finished memory race) external {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
@@ -64,7 +61,7 @@ contract RacesData is Ownable {
         require(success,error);
     }
 
-    function queue(uint256 theId) external view returns(Race.Struct memory) {
+    function queue(uint256 theId) external view returns(Queue.Struct memory) {
         return queues[theId];
     }
 
