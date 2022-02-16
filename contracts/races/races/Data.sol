@@ -26,7 +26,8 @@ contract RacesData {
      * DIIMIIM:
      * We'll save the races structure as bytes and we'll decode them into their specific tuple using their specific generator contract
      */
-    mapping(uint256 => Race.Finished) public races;
+    mapping(uint256 => Race.Struct) public races;
+    mapping(uint256 => Payment.Struct[]) public rewards;
     
     constructor(
         Constructor.Struct memory input
@@ -51,7 +52,7 @@ contract RacesData {
         require(success,error);
     }
 
-    function uploadRace(Race.Finished memory race) external {
+    function uploadRace(Race.Struct memory race) external {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }

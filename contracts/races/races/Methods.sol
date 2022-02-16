@@ -24,11 +24,7 @@ contract RacesMethods is Ownable, Payments {
     Constructor.Struct public control;
     mapping(uint256 => Queue.Struct) public queues;
     string error = "Failed to delegatecall";
-
-    /**
-     * DIIMIIM:
-     * We'll save the races structure as bytes and we'll decode them into their specific tuple using their specific generator contract
-     */
+    mapping(uint256 => Payment.Struct[]) public rewards;
     mapping(uint256 => Race.Struct) public races;    
 
     function setGlobalParameters(
@@ -67,13 +63,11 @@ contract RacesMethods is Ownable, Payments {
 
     }
 
-    /*
-     * DIIMIIM:
-     * Enqueue method
-     */
     function enqueue(uint256 theId, uint256 hound) external payable {
     
         require(queues[theId].totalParticipants > 0, "31");
+
+        require(queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp, "33");
 
         // Queue verifications
         require(msg.value >= queues[theId].entryFee, "17");
@@ -91,12 +85,6 @@ contract RacesMethods is Ownable, Payments {
         // If last participant in the queue is calling this
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-
-            /*
-             * DIIMIIM:
-             * Blockchain race generator
-             * No custom rewards mechanism available
-             */
             if ( control.callable ) {
                 
                 (bool success, bytes memory output) = control.raceGenerator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
@@ -113,11 +101,6 @@ contract RacesMethods is Ownable, Payments {
 
                 ++id;
 
-            /*
-             * DIIMIIM:
-             * Back-end race generator
-             * Fully customizable
-             */
             } else {
 
                 emit NewRace(theId, queues[theId]);

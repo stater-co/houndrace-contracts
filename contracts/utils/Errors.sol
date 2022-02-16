@@ -43,4 +43,5 @@ library Errors {
     string public constant PAYMENT_OVERFLOW = '30';
     string public constant NOT_ARENA_OWNER = '31';
     string public constant ARENA_FEE_TOO_EXPENSIVE = '32';
+    string public constant QUEUE_DATES_NOT_REACHED = '33';
 }

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.11;
+import '../../payments/Payment.sol';
 
 library Race {
     
@@ -17,11 +18,11 @@ library Race {
         // ETH based
         uint256 entryFee;
 
+        // Informations about the winners of the race
+        uint256 rewardsId;
+
         // Race randomness
         uint256 seed;
-
-        // Informations about the winners of the race
-        uint256[] winnersPercentagePrize;
 
     }
 

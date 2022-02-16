@@ -6,7 +6,6 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
-import '../payments/Payments.sol';
 import '../incubator/IData.sol';
 
 import './Constructor.sol';
@@ -18,7 +17,7 @@ interface ShopDataInterface { function calculateDiscount(address requester) exte
 /**
  * DIIMIIM: To be run with enable optimisation on 10 cycles
  */
-contract HoundsData is Ownable, ERC721, ERC721Holder, Payments {
+contract HoundsData is Ownable, ERC721, ERC721Holder {
     
     uint256 public id = 1;
     mapping(address => bool) public allowed;

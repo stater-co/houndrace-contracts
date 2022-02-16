@@ -10,6 +10,7 @@ library GlobalVariables {
         address incubator;
         address staterApi;
         address shop;
+        address payments;
         uint256 breedCost;
         uint256 breedFee;
         uint256 refillCost;

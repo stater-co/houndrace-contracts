@@ -15,7 +15,7 @@ import './Constructor.sol';
  */
 contract RaceGeneratorData is Payments {
 
-    event NewRace(Race.Struct queue, Race.Finished race);
+    event NewRace(Queue.Struct queue, Race.Struct race);
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
     IHoundsData public houndsContract;
@@ -41,10 +41,10 @@ contract RaceGeneratorData is Payments {
         return output;
     }
 
-    function generate(Race.Struct memory queue) external payable returns(Race.Finished memory) {
+    function generate(Race.Struct memory queue) external payable returns(Race.Struct memory) {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success,error);
-        return abi.decode(output,(Race.Finished));
+        return abi.decode(output,(Race.Struct));
     }
 
 }

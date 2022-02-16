@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.11;
+import '../../payments/Payment.sol';
 
 library Queue {
     
@@ -25,11 +26,14 @@ library Queue {
         // Start date
         uint256 startDate;
 
-        // Total number of participants
-        uint32 totalParticipants;
+        // End date
+        uint256 endDate;
 
         // Informations about the winners of the race
-        uint256[] winnersPercentagePrize;
+        uint256 rewardsId;
+
+        // Total number of participants
+        uint32 totalParticipants;
 
     }
 

@@ -5,12 +5,11 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../utils/Sortings.sol';
 import '../../arenas/Arena.sol';
 import '../../hounds/Hound.sol';
-import '../../payments/Payments.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/IData.sol';
 import '../../randomness/vanilla/IData.sol';
-import '../../utils/Filters.sol';
 import '../races/Race.sol';
+import '../races/Queue.sol';
 import './Constructor.sol';
 
 
@@ -18,9 +17,9 @@ import './Constructor.sol';
  * DIIMIIM:
  * This should not have any storage, except the constructor ones
  */
-contract RaceGeneratorMethods is Ownable, Payments {
+contract RaceGeneratorMethods is Ownable {
 
-    event NewRace(Race.Struct queue, Race.Finished race);
+    event NewRace(Queue.Struct queue, Race.Struct race);
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
     IHoundsData public houndsContract;
@@ -103,7 +102,7 @@ contract RaceGeneratorMethods is Ownable, Payments {
 
     }
 
-    function generate(Race.Struct memory queue) external payable returns(Race.Finished memory race) {
+    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race) {
 
         require(control.allowed == msg.sender, "23");
         
@@ -118,45 +117,21 @@ contract RaceGeneratorMethods is Ownable, Payments {
         // Decode the race seed into the participants array
         (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
-        // Gets the first indexes of the best participants
-        address[] memory winners = new address[](queue.winnersPercentagePrize.length);
-        uint256[] memory prizes = new uint256[](queue.winnersPercentagePrize.length);
-        
-        for ( uint256 i = 0 ; i < winners.length ; ++i ) {
-            winners[i] = houndsContract.ownerOf(participants[i]);
-            prizes[i] = queue.entryFee * queue.winnersPercentagePrize[i] / 100;
-        }
-        uint256 jackpot = queue.entryFee * queue.totalParticipants;
 
-        sendRewards(
-            winners,
-            queue.currency,
-            prizes
-        );
+        Payments.compoundTransfer(queue.rewards);
     
-        race = Race.Finished(
+        race = Race.Struct(
             queue.currency,
             participants,
             queue.arena,
             queue.entryFee,
             theRandomness,
-            queue.winnersPercentagePrize
+            queue.rewards
         );
 
         // Emit the race event
         emit NewRace(queue,race);
 
-    }
-
-    function sendRewards(address[] memory winners, address currency, uint256[] memory amounts) public payable {
-        for ( uint256 i = 0 ; i < winners.length ; ++i ) {
-            transferTokens(
-                address(this),
-                payable(winners[i]),
-                currency,
-                amounts[i]
-            );
-        }
     }
 
 }
