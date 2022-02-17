@@ -2,11 +2,12 @@
 pragma solidity 0.8.11;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import './PaymentRequest.sol';
 import './Payment.sol';
 import './Constructor.sol';
 
 
-contract Payments is Ownable {
+contract PaymentsData is Ownable {
 
 	mapping(address => bool) public allowed;
 	mapping(uint256 => Payment.Struct[]) public payments;
@@ -50,7 +51,7 @@ contract Payments is Ownable {
 		}
 	}
 
-	function compoundTransfer(Payment.Struct[] memory payments) public payable isAllowed {
+	function compoundTransfer(PaymentRequest.Struct memory paymentRequest) public payable isAllowed {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success,error);
 	}

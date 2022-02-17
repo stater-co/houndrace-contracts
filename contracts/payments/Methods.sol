@@ -3,10 +3,11 @@ pragma solidity 0.8.11;
 
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Payment.sol';
+import './PaymentRequest.sol';
 import './Constructor.sol';
 
 
-contract Payments {
+contract PaymentsMethods {
 
 	mapping(address => bool) public allowed;
 	mapping(uint256 => Payment.Struct[]) public rewards;
@@ -52,7 +53,17 @@ contract Payments {
 		}
 	}
 
-	function compoundTransfer(Payment.Struct[] memory payments) public payable {
+	function sendPayments(PaymentRequest.Struct memory paymentRequest) public payable {
+		uint256 l = rewards[paymentRequest.rewardsBatch].length;
+		uint256 totalPaid;
+		for ( uint256 i = 0 ; i < l ; ++i ) {
+			totalPaid += rewards[paymentRequest.rewardsBatch][i].qty;
+			require(msg.value >= totalPaid, "30");
+			transferTokens(rewards[paymentRequest.rewardsBatch][i]);
+		}
+	}
+
+	function sendHardcodedPayments(Payment.Struct[] memory payments) public payable {
 		uint256 l = payments.length;
 		uint256 totalPaid;
 		for ( uint256 i = 0 ; i < l ; ++i ) {

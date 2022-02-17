@@ -7,25 +7,59 @@ const address0 = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene = [ 1, 2, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ];
 const femaleBoilerplateGene = [ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5 ];
 let paperSafetyVRFMethods, paperSafetyVRFData, geneticsData, geneticsMethods, 
-terrainsContractMethods, terrainsContractData, 
+terrainsContractMethods, terrainsContractData, paymentsData, paymentsMethods, convertersLibrary, sortingsLibrary, 
 commonIncubatorMethods, commonIncubatorData, houndsMethods, houndsData, racesMethods, racesData, 
-raceGeneratorData, raceGeneratorMethods, ogars, shopData, shopMethods, testErc721, testErc1155;
+raceGeneratorData, raceGeneratorMethods, houndracePotions, shopData, shopMethods, testErc721, testErc1155;
 
+
+describe("Setting up the used libraries", function () {
+  
+  it("Deploy the Converters", async function () {
+    const ConvertersLibrary = await hre.ethers.getContractFactory("Converters");
+    convertersLibrary = await ConvertersLibrary.deploy();
+    await convertersLibrary.deployed();
+  });
+
+  it("Deploy the Sortings", async function () {
+    const SortingsLibrary = await hre.ethers.getContractFactory("Sortings");
+    sortingsLibrary = await SortingsLibrary.deploy();
+    await sortingsLibrary.deployed();
+  });
+
+});
 
 describe("Setting up the Payments System", function () {
   
+  it("Deploy the HoundRace Potions contract", async function () {
+    const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
+    houndracePotions = await HoundracePotions.deploy("Ogars","OG");
+    await houndracePotions.deployed();
+  });
+
+  it("Deploy the payments contract", async function () {
+    const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
+    paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
+    await paymentsMethods.deployed();
+
+    const PaymentsData = await hre.ethers.getContractFactory("PaymentsData");
+    paymentsData = await PaymentsData.deploy([paymentsMethods.address,[]]);
+    await paymentsData.deployed();
+  });
+
   it("Deploy the erc721 test contract", async function () {
     const TestingErc721 = await hre.ethers.getContractFactory("TestingErc721");
     testErc721 = await TestingErc721.deploy("test","t");
     await testErc721.deployed();
   });
 
+  /*
   it("Mint erc721 nfts", async function () {
     const [owner] = await ethers.getSigners();
     for ( let i = 0 ; i < 100 ; ++i ) {
       await testErc721.safeMint(owner.address,i,'0x00');
     }
   });
+  */
 
   it("Deploy the erc1155 test contract", async function () {
     const TestingErc1155 = await hre.ethers.getContractFactory("TestingErc1155");
@@ -33,10 +67,12 @@ describe("Setting up the Payments System", function () {
     await testErc1155.deployed();
   });
 
+  /*
   it("Mint erc1155 nfts", async function () {
     const [owner] = await ethers.getSigners();
     await testErc1155.mintBatch(owner.address,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
   });
+  */
 
   it("Deploy the Payments methods contract", async function () {
     const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
@@ -52,7 +88,9 @@ describe("Setting up the Payments System", function () {
     console.log("Shop data: " + shopData.address);
   });
 
+  /*
   it("Add discounts", async function () {
+
     // Add erc721 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
       await shopData.createDiscount([
@@ -65,6 +103,7 @@ describe("Setting up the Payments System", function () {
         false
       ]);
     }
+
     // Add erc1155 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
       await shopData.createDiscount([
@@ -77,6 +116,7 @@ describe("Setting up the Payments System", function () {
         false
       ]);
     }
+
     // Edit erc721 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
       await shopData.editDiscount([
@@ -89,6 +129,7 @@ describe("Setting up the Payments System", function () {
         false
       ],i);
     }
+
     // Edit erc1155 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
       await shopData.editDiscount([
@@ -101,7 +142,9 @@ describe("Setting up the Payments System", function () {
         false
       ],i);
     }
+
   });
+  */
 
 });
 
@@ -112,7 +155,7 @@ describe("Setting up the Houndrace contracts", function () {
     const PaperSafetyVRFMethods = await hre.ethers.getContractFactory("RandomnessVanillaMethods");
     paperSafetyVRFMethods = await PaperSafetyVRFMethods.deploy();
     await paperSafetyVRFMethods.deployed();
-    ////console.log("Paper Safe VRF Generator Methods deployed at: " + paperSafetyVRFMethods.address);
+    console.log("Paper Safe VRF Generator Methods deployed at: " + paperSafetyVRFMethods.address);
   });
 
   it("Paper Safe VRF Generator Data", async function () {
@@ -120,7 +163,7 @@ describe("Setting up the Houndrace contracts", function () {
     paperSafetyVRFData = await PaperSafetyVRFData.deploy(paperSafetyVRFMethods.address);
     await paperSafetyVRFData.deployed();
 
-    ////console.log("Paper Safe VRF Generator Data deployed at: " + paperSafetyVRFData.address);
+    console.log("Paper Safe VRF Generator Data deployed at: " + paperSafetyVRFData.address);
 
     const paperSafetyVRFMethodsAddress = await paperSafetyVRFData.methodsContract();
     expect(paperSafetyVRFMethodsAddress === paperSafetyVRFMethods.address, "Bad Paper Safety");
@@ -130,22 +173,21 @@ describe("Setting up the Houndrace contracts", function () {
     const TerrainsContractMethods = await hre.ethers.getContractFactory("ArenasMethods");
     terrainsContractMethods = await TerrainsContractMethods.deploy("HoundRace Terrains","HrT");
     await terrainsContractMethods.deployed();
-    ////console.log("Terrains methods deployed at: " + terrainsContractMethods.address);
+    console.log("Terrains methods deployed at: " + terrainsContractMethods.address);
   });
 
   it("Terrains data", async function () {
     const TerrainsContractData = await hre.ethers.getContractFactory("ArenasData");
     terrainsContractData = await TerrainsContractData.deploy(terrainsContractMethods.address,"HoundRace Terrains","HrT");
     await terrainsContractData.deployed();
-    ////console.log("Terrains data at: " + terrainsContractData.address);
+    console.log("Terrains data at: " + terrainsContractData.address);
   });
 
   it("Genetics methods", async function () {
     const GeneticsMethods = await hre.ethers.getContractFactory("GeneticsMethods");
     geneticsMethods = await GeneticsMethods.deploy();
     await geneticsMethods.deployed();
-    ////console.log("Genetics methods at: " + geneticsMethods.address);
-    ////console.log("The genetic methods is test unit scripts: " + geneticsMethods.address);
+    console.log("Genetics methods at: " + geneticsMethods.address);
     await geneticsMethods.setGlobalParameters(
       [
         paperSafetyVRFData.address,
@@ -160,7 +202,6 @@ describe("Setting up the Houndrace contracts", function () {
       ]
     );
     const control = await geneticsMethods.control();
-    ////console.log("Genetics methods control >> " + JSON.stringify(control));
     expect(control[0] === paperSafetyVRFData.address, "Genetics methods : bad VRF address");
     expect(control[1] === address0, "Genetics methods : bad methods address");
     expect(control[2] === terrainsContractData.address, "Genetics methods : bad terrains address");
@@ -181,9 +222,8 @@ describe("Setting up the Houndrace contracts", function () {
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
     await geneticsData.deployed();
-    ////console.log("Genetics data at: " + geneticsData.address);
+    console.log("Genetics data at: " + geneticsData.address);
     const control = await geneticsData.control();
-    ////console.log("Genetics data control >> " + JSON.stringify(control));
     expect(control[0] === paperSafetyVRFData.address, "Genetics data : bad VRF address");
     expect(control[1] === geneticsMethods.address, "Genetics data : bad methods address");
     expect(control[2] === terrainsContractData.address, "Genetics data : bad terrains address");
@@ -194,8 +234,7 @@ describe("Setting up the Houndrace contracts", function () {
     const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
     commonIncubatorMethods = await IncubatorMethods.deploy();
     await commonIncubatorMethods.deployed();
-    ////console.log("Common incubator methods deployed at: " + commonIncubatorMethods.address);
-
+    console.log("Common incubator methods deployed at: " + commonIncubatorMethods.address);
 
     const IncubatorData = await hre.ethers.getContractFactory("IncubatorData");
     commonIncubatorData = await IncubatorData.deploy([
@@ -205,7 +244,7 @@ describe("Setting up the Houndrace contracts", function () {
       "0x67657452"
     ]);
     await commonIncubatorData.deployed();
-    ////console.log("Common incubator data deployed at: " + commonIncubatorData.address);
+    console.log("Common incubator data deployed at: " + commonIncubatorData.address);
 
     await commonIncubatorMethods.setGlobalParameters([
       commonIncubatorMethods.address,
@@ -215,16 +254,12 @@ describe("Setting up the Houndrace contracts", function () {
     ]);
 
     const control1 = await commonIncubatorMethods.control();
-    //console.log("Common incubator methods control1 >> " + JSON.stringify(control1));
-    //console.log("Genetics methods address: " + geneticsData.address + " && " + control1[2]);
     expect(control1[0] === commonIncubatorMethods.address, "Common incubator methods : bad common incubator methods address");
     expect(control1[1] === paperSafetyVRFData.address, "Common incubator methods : bad VRF address");
     expect(control1[2] === geneticsData.address, "Common incubator methods : bad genetics data address");
     expect(control1[3] === "0x67657452", "Common incubator methods : seconds to maturity");
 
     const control = await commonIncubatorData.control();
-    //console.log("Common incubator data control >> " + JSON.stringify(control));
-    //console.log("Genetics data address: " + geneticsData.address + " && " + control[2]);
     expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
     expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
     expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
@@ -233,16 +268,19 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Hounds contract", async function () {
-    const [owner,otherOwner] = await ethers.getSigners();
+    const [,otherOwner] = await ethers.getSigners();
     const HoundsMethods = await hre.ethers.getContractFactory("HoundsMethods");
+
+
     houndsMethods = await HoundsMethods.deploy([
-      "Hounds Methods",
-      "HM",
-      [],
-      address0,
-      commonIncubatorData.address,
+      "Hounds Methods", // name
+      "HM", // symbol
+      [], // allowed
+      address0, // methods
+      commonIncubatorData.address, // incubator
       otherOwner.address, // stater api address here
-      shopData.address,
+      shopData.address, // shop
+      paymentsData.address, // payments
       "0xB1A2BC2EC50000",
       "0x2386F26FC10000",
       "0x2386F26FC10000",
@@ -261,6 +299,7 @@ describe("Setting up the Houndrace contracts", function () {
       commonIncubatorData.address,
       otherOwner.address, // stater api address here
       shopData.address,
+      paymentsData.address, // payments
       "0xB1A2BC2EC50000",
       "0x2386F26FC10000",
       "0x2386F26FC10000",
@@ -271,8 +310,6 @@ describe("Setting up the Houndrace contracts", function () {
     console.log("Hounds data deployed at: " + houndsData.address);
 
     const control = await houndsData.control();
-    ////console.log("Hounds data control >> " + JSON.stringify(control));
-    
     expect(control[2] === houndsMethods.address, "Hounds data : bad hounds methods address");
     expect(control[3] === houndsMethods.address, "Hounds data : bad stater api address");
     expect(control[2] === commonIncubatorData.address, "Hounds data : bad common incubator address");
@@ -280,10 +317,15 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy race generator", async function () {
-    const RaceGeneratorMethods = await hre.ethers.getContractFactory("RaceGeneratorMethods");
+    const RaceGeneratorMethods = await hre.ethers.getContractFactory("RaceGeneratorMethods", {
+      libraries: {
+        Converters: convertersLibrary.address,
+        Sortings: sortingsLibrary.address
+      }
+    });
     raceGeneratorMethods = await RaceGeneratorMethods.deploy();
     await raceGeneratorMethods.deployed();
-    ////console.log("Race generator methods deployed at: " + raceGeneratorMethods.address);
+    console.log("Race generator methods deployed at: " + raceGeneratorMethods.address);
 
     const RaceGeneratorData = await hre.ethers.getContractFactory("RaceGeneratorData");
     raceGeneratorData = await RaceGeneratorData.deploy([
@@ -297,11 +339,9 @@ describe("Setting up the Houndrace contracts", function () {
       true
     ]);
     await raceGeneratorData.deployed();
-    ////console.log("Race generator data deployed at: " + raceGeneratorData.address);
+    console.log("Race generator data deployed at: " + raceGeneratorData.address);
 
     const control = await raceGeneratorData.control();
-    ////console.log("Race generator data control >> " + JSON.stringify(control));
-    
     expect(control[0] === paperSafetyVRFData.address, "Race generator data : bad VRF address");
     expect(control[1] === terrainsContractData.address, "Race generator data : bad terrains address");
     expect(control[2] === houndsData.address, "Race generator data : bad hounds address");
@@ -316,17 +356,9 @@ describe("Setting up the Houndrace contracts", function () {
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     racesMethods = await RacesMethods.deploy();
     await racesMethods.deployed();
-    ////console.log("Race methods deployed at: " + racesMethods.address);
+    console.log("Race methods deployed at: " + racesMethods.address);
 
-    const RacesData = await hre.ethers.getContractFactory("RacesData");
-
-    ////console.log("Deploying races data with: ");
-    ////console.log("Paper safety vrf data: " + paperSafetyVRFData.address);
-    ////console.log("Terrains contract data: " + terrainsContractData.address);
-    ////console.log("Hounds data: " + houndsData.address);
-    ////console.log("Race generator data: " + raceGeneratorData.address);
-    ////console.log("Race methods: " + racesMethods.address);
-    ////console.log("Race generator data: " + raceGeneratorData.address);    
+    const RacesData = await hre.ethers.getContractFactory("RacesData"); 
     racesData = await RacesData.deploy(
       [
         paperSafetyVRFData.address,
@@ -335,12 +367,13 @@ describe("Setting up the Houndrace contracts", function () {
         raceGeneratorData.address,
         racesMethods.address,
         raceGeneratorData.address,
+        paymentsData.address,
         500000000, // the race fee
         true // back-end generator for true
       ]
     );
     await racesData.deployed();
-    ////console.log("Race data deployed at: " + racesData.address);
+    console.log("Race data deployed at: " + racesData.address);
 
     await racesMethods.setGlobalParameters(
       [
@@ -350,6 +383,7 @@ describe("Setting up the Houndrace contracts", function () {
         raceGeneratorData.address,
         racesMethods.address,
         raceGeneratorData.address,
+        paymentsData.address,
         500000000, // the race fee
         true
       ]
@@ -362,6 +396,7 @@ describe("Setting up the Houndrace contracts", function () {
       racesData.address,
       raceGeneratorMethods.address,
       raceGeneratorMethods.address,
+      paymentsData.address,
       500000000, // the race fee
       true
     ]);
@@ -373,13 +408,12 @@ describe("Setting up the Houndrace contracts", function () {
       racesData.address,
       address0,
       address0,
+      paymentsData.address,
       500000000, // the race fee
       true
     ]);
 
     const control = await racesMethods.control();
-    ////console.log("Race methods control >> " + JSON.stringify(control));
-    
     expect(control[0] === paperSafetyVRFData.address, "Race generator data : bad VRF address");
     expect(control[1] === terrainsContractData.address, "Race generator data : bad terrains address");
     expect(control[2] === houndsData.address, "Race generator data : bad hounds address");
@@ -393,6 +427,7 @@ describe("Setting up the Houndrace contracts", function () {
       commonIncubatorData.address,
       owner.address,
       shopData.address,
+      paymentsData.address,
       "0xB1A2BC2EC50000",
       "0x2386F26FC10000",
       "0x2386F26FC10000",
@@ -872,6 +907,8 @@ describe("Races", function () {
         1, // terrain
         5000000000,
         0,
+        0,
+        1,
         10
       ]
     ]);
@@ -883,6 +920,8 @@ describe("Races", function () {
         1, // terrain
         3000000000,
         0,
+        0,
+        1,
         10
       ]
     ]);
@@ -894,6 +933,8 @@ describe("Races", function () {
         1, // terrain
         8000000000,
         0,
+        0,
+        1,
         10
       ]
     ]);

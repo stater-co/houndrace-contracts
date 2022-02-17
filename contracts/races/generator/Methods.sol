@@ -3,11 +3,13 @@ pragma solidity 0.8.11;
 
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../utils/Sortings.sol';
+import '../../utils/Converters.sol';
 import '../../arenas/Arena.sol';
 import '../../hounds/Hound.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/IData.sol';
 import '../../randomness/vanilla/IData.sol';
+import '../../payments/PaymentRequest.sol';
 import '../races/Race.sol';
 import '../races/Queue.sol';
 import './Constructor.sol';
@@ -117,16 +119,26 @@ contract RaceGeneratorMethods is Ownable {
         // Decode the race seed into the participants array
         (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
-
-        Payments.compoundTransfer(queue.rewards);
+        // Send the rewards to players
+        (bool success, ) = control.payments.delegatecall(
+            abi.encodeWithSignature(
+                "compoundTransfer((uint256,address[]))",
+                PaymentRequest.Struct(
+                    queue.rewardsId,
+                    Converters.erc721IdsToOwners(control.hounds,participants)
+                )
+            )
+        );
+        require(success,"Failed to createLoan via delegatecall");
     
         race = Race.Struct(
             queue.currency,
             participants,
             queue.arena,
             queue.entryFee,
+            queue.rewardsId,
             theRandomness,
-            queue.rewards
+            abi.encode(participants)
         );
 
         // Emit the race event

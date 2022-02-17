@@ -22,7 +22,10 @@ library Race {
         uint256 rewardsId;
 
         // Race randomness
-        uint256 seed;
+        uint256 randomness;
+
+        // Race seed
+        bytes seed;
 
     }
 

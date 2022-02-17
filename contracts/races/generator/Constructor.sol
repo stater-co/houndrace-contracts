@@ -10,6 +10,7 @@ library Constructor {
         address hounds;
         address allowed;
         address methods;
+        address payments;
     }
 
 }

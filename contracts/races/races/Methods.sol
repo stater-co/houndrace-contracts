@@ -4,15 +4,16 @@ pragma solidity 0.8.11;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../hounds/Hound.sol';
 import '../../hounds/IData.sol';
-import '../../payments/Payments.sol';
 import '../../arenas/Arena.sol';
 import '../../arenas/IData.sol';
+import '../../utils/Converters.sol';
+import '../../payments/PaymentRequest.sol';
 import './Race.sol';
 import './Queue.sol';
 import './Constructor.sol';
 
 
-contract RacesMethods is Ownable, Payments {
+contract RacesMethods is Ownable {
     
     event NewRace(uint256 indexed id, Queue.Struct race);
     event NewFinishedRace(uint256 indexed id, Race.Struct race);
@@ -54,7 +55,14 @@ contract RacesMethods is Ownable, Payments {
         races[id] = race;
 
         // Perform all race payments / rewards
-        compoundTransfer(payments);
+        // Send the rewards to players
+        (bool success, ) = control.payments.delegatecall(
+            abi.encodeWithSignature(
+                "sendHardcodedPayments((address,address,address,uint256[],uint256,uint256,uint32)[])",
+                payments
+            )
+        );
+        require(success,"Failed to createLoan via delegatecall");
 
         emit UploadRace(id, race);
 
