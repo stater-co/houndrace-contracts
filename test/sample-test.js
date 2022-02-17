@@ -888,8 +888,10 @@ describe("Breed with other hounds", function () {
 describe("Races", function () {
 
   it("Create terrain", async function () {
-    
+    const [owner] = await ethers.getSigners();
     let createTerrain = await terrainsContractData.createArena([
+      owner.address,
+      0,
       1,
       1000,
       3

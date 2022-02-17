@@ -81,7 +81,7 @@ contract RaceGeneratorMethods is Ownable {
         uint256[] memory
     ) {
         
-        Arena.Struct memory theTerrain = IArenas(control.terrains).getTerrain(terrain);
+        Arena.Struct memory theTerrain = IArenas(control.terrains).arena(terrain);
 
         // Compute the hounds score power
         

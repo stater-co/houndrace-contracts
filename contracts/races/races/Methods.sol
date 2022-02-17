@@ -35,9 +35,11 @@ contract RacesMethods is Ownable {
     }
 
     function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
-        
+        IArenas arenas = IArenas(control.terrains);
+        Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            require(IArenas(control.terrains).getTerrain(theQueues[i].arena).fee < theQueues[i].entryFee / 2, "32");
+            arena = arenas.arena(theQueues[i].arena);
+            require(arena.fee < theQueues[i].entryFee / 2, "32");
             queues[id] = theQueues[i];
             ++id;
         }

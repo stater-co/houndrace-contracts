@@ -1,15 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '../../hounds/Hound.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/Arena.sol';
-import '../generator/IData.sol';
-import './Queue.sol';
+import '../../arenas/IData.sol';
+import '../../utils/Converters.sol';
+import '../../payments/PaymentRequest.sol';
 import './Race.sol';
+import './Queue.sol';
 import './Constructor.sol';
 
 
-contract RacesData {
+contract RacesData is Ownable {
     
     event NewRace(uint256 indexed id, Race.Struct race);
     event NewFinishedRace(uint256 indexed id, Race.Struct race);
@@ -37,22 +41,22 @@ contract RacesData {
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external {
+    ) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function createQueues(Race.Struct[] memory theQueues) external {
+    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function deleteQueue(uint256 theId) external {
+    function deleteQueue(uint256 theId) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
 
-    function uploadRace(Race.Struct memory race) external {
+    function uploadRace(Race.Struct memory race) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }

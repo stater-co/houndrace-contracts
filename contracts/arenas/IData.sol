@@ -5,9 +5,8 @@ import './Arena.sol';
 
 
 interface IArenas {
-    function createTerrain(Arena.Struct memory terrain) external;
-    function editTerrain(uint256 theId, Arena.Struct memory terrain) external;
-    function getTerrain(uint256 theId) external view returns(Arena.Struct memory);
+    function createArena(Arena.Struct memory arena) external;
+    function editArena(uint256 theId, Arena.Struct memory arena) external;
+    function arena(uint256 theId) external view returns(Arena.Struct memory);
     function ownerOf(uint256 tokenId) external view returns(address);
-    function setArenaFee(uint256 theId, uint256 fee) external;
 }
