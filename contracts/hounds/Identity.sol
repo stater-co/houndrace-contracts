@@ -8,6 +8,7 @@ library Identity {
         uint256 maleParent;
         uint256 femaleParent;
         uint256 generation;
+        uint256 birthDate;
         uint32[50] geneticSequence;
     }
 

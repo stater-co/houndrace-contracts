@@ -138,7 +138,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800; // 2 days
 
         // Incubator call to get the offspring
-        hounds[id] = IIncubatorData(control.incubator).breedHounds(
+        Hound.Struct memory offspring = IIncubatorData(control.incubator).breedHounds(
             hound1, 
             hounds[hound1].identity.geneticSequence, 
             hound2, 
@@ -150,13 +150,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
         updateHoundBreeding(hound2,0);
 
         // Emit hound creation event
-        emit BreedHound(id,msg.sender,hounds[id]);
-
-        // Mint hound
-        _safeMint(msg.sender,id);
-
-        // Increase hound id
-        ++id;
+        emit BreedHound(id,msg.sender,offspring);
 
     }
     
