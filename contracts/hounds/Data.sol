@@ -5,14 +5,16 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-
 import '../incubator/IData.sol';
-
 import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
+import 'hardhat/console.sol';
+
 
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
+interface Methods { function breedHounds(uint256 hound1, uint256 hound2) external payable; }
+
 
 /**
  * DIIMIIM: To be run with enable optimisation on 10 cycles
@@ -55,8 +57,10 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
-        (bool success, ) = control.methods.delegatecall(msg.data);
-        require(success,error);
+        console.log("Sender before call: ", msg.sender, " value: ", msg.value);
+        Methods(control.methods).breedHounds(hound1, hound2);
+        //(bool success, ) = control.methods.call(msg.data);
+        //require(success,error);
     }
 
     function updateHoundStamina(uint256 theId) public payable {

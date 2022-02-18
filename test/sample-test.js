@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const { ethers } = require("hardhat");
+const { ethers, waffle } = require("hardhat");
 const Web3 = require('web3');
 const web3 = new Web3(process.env.WSS);
 
@@ -577,7 +577,7 @@ describe("Hounds", function () {
         0,
         0,
         0,
-        maleBoilerplateGene
+        femaleBoilerplateGene
       ],
       "",
       "",
@@ -639,7 +639,7 @@ describe("Hounds", function () {
     // Check the hound total fields
     expect(hound.length === 8, "Hound has been partially received from contract");
 
-    const houndGene = hound[3][0];
+    const houndGene = hound[3][4];
     expect(houndGene.length > 0, "Hound getter mechanism problems");
 
   });
@@ -649,10 +649,13 @@ describe("Hounds", function () {
     const houndIdBefore = await houndsData.id();
 
     let maleId , femaleId ;
+    console.log("Looking for male and female to breed in " + houndIdBefore + " total hounds...");
     for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
       const hound = await houndsData.hound(i);
-      const houndGene = hound[3][0];
+      const houndGene = hound[3][4];
+
+      console.log("Hound gene >> " + houndGene);
 
       expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -673,23 +676,42 @@ describe("Hounds", function () {
     expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
     expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
     expect(maleId && femaleId, "No partners found for breeding");
+    console.log("Breed: " + maleId + " && " + femaleId);
     if ( maleId && femaleId ) {
+      const [owner, test2] = await ethers.getSigners();
+      await owner.sendTransaction({
+        to: test2.address,
+        value: ethers.utils.parseEther("0.1"), // Sends exactly 1.0 ether
+      });
+
+      /*
+      const provider = waffle.provider;
+      const balance = await provider.getBalance(houndsData.address);
+      console.log("Contract balance: " + balance);
       const houndMaleBefore = await houndsData.hound(maleId);
       const houndFemaleBefore = await houndsData.hound(femaleId);
       console.log("Male >> " + maleId + "\nFemale >> " + femaleId);
+      console.log("Owner: " + owner.address);
+      */
+
+      /*
       await houndsData.breedHounds(maleId, femaleId, { value : "0xD529AE9E860000" });
       const houndMaleAfter = await houndsData.hound(maleId);
       const houndFemaleAfter = await houndsData.hound(femaleId);
       expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
       expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
+      */
+
     }
 
+    /*
     const houndIdAfter = await houndsData.id();
     expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
+    */
 
   });
 
-
+  /*
   it("Breed again", async function () {
 
     const houndIdBefore = await houndsData.id();
@@ -698,7 +720,7 @@ describe("Hounds", function () {
     for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
       const hound = await houndsData.hound(i);
-      const houndGene = hound[3][0];
+      const houndGene = hound[3][4];
 
       expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -823,9 +845,7 @@ describe("Breed with other hounds", function () {
 
     const houndIdAfter = await houndsData.id();
     expect(houndIdBefore !== houndIdAfter, "Hound breeding problem");
-    /*
-    await houndsData.safeTransferFrom(owner,otherOwner,houndIdBefore);
-    */
+    //await houndsData.safeTransferFrom(owner,otherOwner,houndIdBefore);
     otherHound = houndIdBefore;
   });
 
@@ -837,7 +857,7 @@ describe("Breed with other hounds", function () {
     for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
       const hound = await houndsData.hound(i);
-      const houndGene = hound[3][0];
+      const houndGene = hound[3][4];
 
       expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -1039,5 +1059,6 @@ describe("Races", function () {
       houndsStamina[i] = hound[1][2];
     }
   });
+*/
 
 });
