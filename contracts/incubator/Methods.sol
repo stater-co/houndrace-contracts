@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.11;
+pragma solidity 0.8.12;
 
 import '../hounds/Hound.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
@@ -52,6 +52,7 @@ contract IncubatorMethods is Ownable {
             0,
             hound1,
             hound2,
+            block.timestamp,
             genetics // preferences will be extracted from this 
         );
 

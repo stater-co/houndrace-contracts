@@ -523,6 +523,7 @@ describe("Hounds", function () {
         0,
         0,
         0,
+        0,
         maleBoilerplateGene
       ],
       "",
@@ -575,6 +576,7 @@ describe("Hounds", function () {
         0,
         0,
         0,
+        0,
         maleBoilerplateGene
       ],
       "",
@@ -604,6 +606,7 @@ describe("Hounds", function () {
           1000,
           false
         ],[
+          0,
           0,
           0,
           0,
@@ -771,6 +774,7 @@ describe("Breed with other hounds", function () {
         0,
         0,
         0,
+        0,
         femaleBoilerplateGene
       ],
       "",
@@ -805,6 +809,7 @@ describe("Breed with other hounds", function () {
         1000,
         false
       ],[
+        0,
         0,
         0,
         0,
