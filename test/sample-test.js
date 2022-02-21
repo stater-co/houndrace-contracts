@@ -248,10 +248,7 @@ describe("Setting up the Houndrace contracts", function () {
 
   it("Hounds contract", async function () {
     const [,otherOwner] = await ethers.getSigners();
-    const HoundsMethods = await hre.ethers.getContractFactory("HoundsMethods");
-
-
-    houndsMethods = await HoundsMethods.deploy([
+    houndsMethods = await getContractInstance("HoundsMethods",[
       "Hounds Methods", // name
       "HM", // symbol
       [], // allowed
@@ -266,11 +263,9 @@ describe("Setting up the Houndrace contracts", function () {
       "0x2386F26FC10000",
       "0x2386F26FC10000"
     ]);
-    await houndsMethods.deployed();
     console.log("Hounds methods deployed at: " + houndsMethods.address);
 
-    const HoundsData = await hre.ethers.getContractFactory("HoundsData");
-    houndsData = await HoundsData.deploy([
+    houndsData = await getContractInstance("HoundsData",[
       "Hounds Factory",
       "HF",
       [],
@@ -285,7 +280,6 @@ describe("Setting up the Houndrace contracts", function () {
       "0x2386F26FC10000",
       "0x2386F26FC10000"
     ]);
-    await houndsData.deployed();
     console.log("Hounds data deployed at: " + houndsData.address);
 
     const control = await houndsData.control();
@@ -306,8 +300,7 @@ describe("Setting up the Houndrace contracts", function () {
     await raceGeneratorMethods.deployed();
     console.log("Race generator methods deployed at: " + raceGeneratorMethods.address);
 
-    const RaceGeneratorData = await hre.ethers.getContractFactory("RaceGeneratorData");
-    raceGeneratorData = await RaceGeneratorData.deploy([
+    raceGeneratorData = await getContractInstance("RaceGeneratorData",[
       paperSafetyVRFData.address,
       terrainsContractData.address,
       houndsData.address,
@@ -317,7 +310,6 @@ describe("Setting up the Houndrace contracts", function () {
       50000000,
       true
     ]);
-    await raceGeneratorData.deployed();
     console.log("Race generator data deployed at: " + raceGeneratorData.address);
 
     const control = await raceGeneratorData.control();
@@ -332,26 +324,20 @@ describe("Setting up the Houndrace contracts", function () {
 
   it("Deploy race handler", async function () {
     const [owner] = await ethers.getSigners();
-    const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
-    racesMethods = await RacesMethods.deploy();
-    await racesMethods.deployed();
+    racesMethods = await getContractInstance("RacesMethods");
     console.log("Race methods deployed at: " + racesMethods.address);
 
-    const RacesData = await hre.ethers.getContractFactory("RacesData"); 
-    racesData = await RacesData.deploy(
-      [
-        paperSafetyVRFData.address,
-        terrainsContractData.address,
-        houndsData.address,
-        raceGeneratorData.address,
-        racesMethods.address,
-        raceGeneratorData.address,
-        paymentsData.address,
-        500000000, // the race fee
-        true // back-end generator for true
-      ]
-    );
-    await racesData.deployed();
+    racesData = await getContractInstance("RacesData",[
+      paperSafetyVRFData.address,
+      terrainsContractData.address,
+      houndsData.address,
+      raceGeneratorData.address,
+      racesMethods.address,
+      raceGeneratorData.address,
+      paymentsData.address,
+      500000000, // the race fee
+      true // back-end generator for true
+    ]);
     console.log("Race data deployed at: " + racesData.address);
 
     await racesMethods.setGlobalParameters(
