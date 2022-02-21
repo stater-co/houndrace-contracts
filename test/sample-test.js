@@ -11,19 +11,21 @@ terrainsContractMethods, terrainsContractData, paymentsData, paymentsMethods, co
 commonIncubatorMethods, commonIncubatorData, houndsMethods, houndsData, racesMethods, racesData, 
 raceGeneratorData, raceGeneratorMethods, houndracePotions, shopData, shopMethods, testErc721, testErc1155;
 
+async function getContractInstance(name,constructor) {
+  const Contract = await hre.ethers.getContractFactory(name);
+  let contract = constructor ? await Contract.deploy(constructor) : await Contract.deploy();
+  await contract.deployed();
+  return contract;
+}
 
 describe("Setting up the used libraries", function () {
   
   it("Deploy the Converters", async function () {
-    const ConvertersLibrary = await hre.ethers.getContractFactory("Converters");
-    convertersLibrary = await ConvertersLibrary.deploy();
-    await convertersLibrary.deployed();
+    convertersLibrary = await getContractInstance("Converters");
   });
 
   it("Deploy the Sortings", async function () {
-    const SortingsLibrary = await hre.ethers.getContractFactory("Sortings");
-    sortingsLibrary = await SortingsLibrary.deploy();
-    await sortingsLibrary.deployed();
+    sortingsLibrary = await getContractInstance("Sortings");
   });
 
 });
@@ -37,13 +39,8 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the payments contract", async function () {
-    const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
-    paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
-    await paymentsMethods.deployed();
-
-    const PaymentsData = await hre.ethers.getContractFactory("PaymentsData");
-    paymentsData = await PaymentsData.deploy([paymentsMethods.address,[]]);
-    await paymentsData.deployed();
+    paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
+    paymentsData = await getContractInstance("PaymentsData",[paymentsMethods.address,[]]);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -62,9 +59,7 @@ describe("Setting up the Payments System", function () {
   */
 
   it("Deploy the erc1155 test contract", async function () {
-    const TestingErc1155 = await hre.ethers.getContractFactory("TestingErc1155");
-    testErc1155 = await TestingErc1155.deploy("test");
-    await testErc1155.deployed();
+    testErc1155 = await getContractInstance("TestingErc1155","test");
   });
 
   /*
@@ -75,16 +70,12 @@ describe("Setting up the Payments System", function () {
   */
 
   it("Deploy the Payments methods contract", async function () {
-    const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
-    shopMethods = await ShopMethods.deploy();
-    await shopMethods.deployed();
+    shopMethods = await getContractInstance("ShopMethods");
     console.log("Shop methods: " + shopMethods.address);
   });
 
   it("Deploy the Payments data contract", async function () {
-    const ShopData = await hre.ethers.getContractFactory("ShopData");
-    shopData = await ShopData.deploy([shopMethods.address]);
-    await shopData.deployed();
+    shopData = await getContractInstance("ShopData",[shopMethods.address]);
     console.log("Shop data: " + shopData.address);
   });
 
@@ -152,17 +143,12 @@ describe("Setting up the Payments System", function () {
 describe("Setting up the Houndrace contracts", function () {
   
   it("Paper Safe VRF Generator Methods", async function () {
-    const PaperSafetyVRFMethods = await hre.ethers.getContractFactory("RandomnessVanillaMethods");
-    paperSafetyVRFMethods = await PaperSafetyVRFMethods.deploy();
-    await paperSafetyVRFMethods.deployed();
+    paperSafetyVRFMethods = await getContractInstance("RandomnessVanillaMethods");
     console.log("Paper Safe VRF Generator Methods deployed at: " + paperSafetyVRFMethods.address);
   });
 
   it("Paper Safe VRF Generator Data", async function () {
-    const PaperSafetyVRFData = await hre.ethers.getContractFactory("RandomnessVanillaData");
-    paperSafetyVRFData = await PaperSafetyVRFData.deploy(paperSafetyVRFMethods.address);
-    await paperSafetyVRFData.deployed();
-
+    paperSafetyVRFData = await getContractInstance("RandomnessVanillaData",paperSafetyVRFMethods.address);
     console.log("Paper Safe VRF Generator Data deployed at: " + paperSafetyVRFData.address);
 
     const paperSafetyVRFMethodsAddress = await paperSafetyVRFData.methodsContract();
@@ -184,10 +170,9 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Genetics methods", async function () {
-    const GeneticsMethods = await hre.ethers.getContractFactory("GeneticsMethods");
-    geneticsMethods = await GeneticsMethods.deploy();
-    await geneticsMethods.deployed();
+    geneticsMethods = await getContractInstance("GeneticsMethods");
     console.log("Genetics methods at: " + geneticsMethods.address);
+    
     await geneticsMethods.setGlobalParameters(
       [
         paperSafetyVRFData.address,
@@ -209,8 +194,7 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Genetics data", async function () {
-    const GeneticsData = await hre.ethers.getContractFactory("GeneticsData");
-    geneticsData = await GeneticsData.deploy([
+    geneticsData = await getContractInstance("GeneticsData",[
       paperSafetyVRFData.address,
       geneticsMethods.address,
       terrainsContractData.address,
@@ -221,7 +205,6 @@ describe("Setting up the Houndrace contracts", function () {
       [2,6,10,14,18,22,26,30,34,38,42,46],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
-    await geneticsData.deployed();
     console.log("Genetics data at: " + geneticsData.address);
     const control = await geneticsData.control();
     expect(control[0] === paperSafetyVRFData.address, "Genetics data : bad VRF address");
@@ -231,19 +214,15 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Common incubator", async function () {
-    const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
-    commonIncubatorMethods = await IncubatorMethods.deploy();
-    await commonIncubatorMethods.deployed();
+    commonIncubatorMethods = await getContractInstance("IncubatorMethods");
     console.log("Common incubator methods deployed at: " + commonIncubatorMethods.address);
 
-    const IncubatorData = await hre.ethers.getContractFactory("IncubatorData");
-    commonIncubatorData = await IncubatorData.deploy([
+    commonIncubatorData = await getContractInstance("IncubatorData",[
       commonIncubatorMethods.address,
       paperSafetyVRFData.address,
       geneticsData.address,
       "0x67657452"
     ]);
-    await commonIncubatorData.deployed();
     console.log("Common incubator data deployed at: " + commonIncubatorData.address);
 
     await commonIncubatorMethods.setGlobalParameters([
