@@ -10,10 +10,7 @@ import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
 import 'hardhat/console.sol';
-
-
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
-interface Methods { function breedHounds(uint256 hound1, uint256 hound2) external payable; }
 
 
 /**
@@ -57,10 +54,8 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
-        console.log("Sender before call: ", msg.sender, " value: ", msg.value);
-        Methods(control.methods).breedHounds(hound1, hound2);
-        //(bool success, ) = control.methods.call(msg.data);
-        //require(success,error);
+        (bool success, ) = control.methods.delegatecall(msg.data);
+        require(success,error);
     }
 
     function updateHoundStamina(uint256 theId) public payable {

@@ -4,19 +4,178 @@ const Web3 = require('web3');
 const web3 = new Web3(process.env.WSS);
 
 const address0 = "0x0000000000000000000000000000000000000000";
-const maleBoilerplateGene = [ 1, 2, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ];
-const femaleBoilerplateGene = [ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5 ];
+const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ];
+const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5 ];
 let paperSafetyVRFMethods, paperSafetyVRFData, geneticsData, geneticsMethods, 
 terrainsContractMethods, terrainsContractData, paymentsData, paymentsMethods, convertersLibrary, sortingsLibrary, 
 commonIncubatorMethods, commonIncubatorData, houndsMethods, houndsData, racesMethods, racesData, 
 raceGeneratorData, raceGeneratorMethods, houndracePotions, shopData, shopMethods, testErc721, testErc1155;
+const defaultHound = [
+  [ 0, 0, 0, 0],
+  [ 10000000, 10000000, 100, 1, 100 ],
+  [ 1000, 100000, 1000, false ],
+  [ 0, 0, 0, 0, maleBoilerplateGene ],
+  "",
+  "",
+  false,
+  false
+];
 
+// @DIIMIIM: Get smart contract instance
 async function getContractInstance(name,constructor) {
   const Contract = await hre.ethers.getContractFactory(name);
   let contract = constructor ? await Contract.deploy(constructor) : await Contract.deploy();
   await contract.deployed();
   return contract;
 }
+
+// @DIIMIIM: Admin mint hound, no safety checks
+async function mintHoundByAdmin(hound,isFemale) {
+  //console.log("Hound >> " + hound + " and >> " + isFemale);
+  let houndToMint;
+  if ( hound ) {
+    houndToMint = hound;
+  } else {
+    houndToMint = defaultHound;
+    //console.log("We're minting a hound with genetics 1: " + houndToMint[3][4]);
+    if ( isFemale ) {
+      houndToMint[3][4][1] = 2;
+    }
+    //console.log("We're minting a hound with genetics 2: " + houndToMint[3][4]);
+  }
+  //console.log("We're minting a hound with genetics: " + houndToMint[3][4]);
+  await houndsData.adminCreateHound(houndToMint);
+}
+
+async function safelyMintHoundByAdmin(hound,isFemale) {
+  const houndIdBefore = await houndsData.id();
+  await mintHoundByAdmin(hound,isFemale);
+  const houndIdAfter = await houndsData.id();
+  expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
+}
+
+async function safelyUpdateHoundStamina(houndId) {
+  let houndIdBefore;
+  let houndToWorkWith;
+  if ( houndId ) {
+    houndToWorkWith = houndId;
+  } else {
+    houndIdBefore = await houndsData.id();
+    houndToWorkWith = Number(houndIdBefore)-1;
+  }
+  const houndBefore = await houndsData.hound(houndToWorkWith);
+  await houndsData.updateHoundStamina(houndToWorkWith);
+  const houndAfter = await houndsData.hound(houndToWorkWith);
+  expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
+}
+
+async function safelyUpdateHoundBreeding(houndId) {
+  let houndIdBefore;
+  let houndToWorkWith;
+  if ( houndId ) {
+    houndToWorkWith = houndId;
+  } else {
+    houndIdBefore = await houndsData.id();
+    houndToWorkWith = Number(houndIdBefore)-1;
+  }
+  const houndBefore = await houndsData.hound(houndToWorkWith);
+  await houndsData.updateHoundBreeding(houndToWorkWith,10000000);
+  const houndAfter = await houndsData.hound(houndToWorkWith);
+  expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
+}
+
+async function checkHoundStructure(houndId) {
+  const hound = await houndsData.hound(houndId ? houndId : 1);
+
+  // Check the hound statistics field
+  expect(hound[0] && hound[0].length === defaultHound[0].length, "Not all hound statistics are received from contract");
+
+  // Check the hound stamina field
+  expect(hound[1] && hound[1].length === defaultHound[1].length, "Not all hound stamina data has been received from contract");
+
+  // Check the hound breeding field
+  expect(hound[2] && hound[2].length === defaultHound[2].length, "Not all hound breeding data has been received from contract");
+
+  // Check the hound identity field
+  expect(hound[3] && hound[3].length === defaultHound[3].length, "Not all hound identity data has been received from contract");
+
+  // Check the hound total fields
+  expect(hound.length === defaultHound.length, "Hound has been partially received from contract");
+
+  const houndGene = hound[3][4];
+  expect(houndGene.length === defaultHound[3][4].length, "Hound getter mechanism problems");
+}
+
+async function findMaleAndFemaleAvailableForBreed() {
+  const houndIdBefore = await houndsData.id();
+
+  let maleId , femaleId ;
+  for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
+
+    const hound = await houndsData.hound(i);
+    const houndGene = hound[3][4];
+
+    expect(houndGene.length > 0, "Getting hounds gender problem");
+
+    if ( houndGene[1] === 1 && !maleId ) {
+      maleId = houndGene[1];
+      await safelyUpdateHoundBreeding(maleId);
+    }
+
+    if ( houndGene[1] === 2 && !femaleId ) {
+      femaleId = houndGene[1];
+      await safelyUpdateHoundBreeding(femaleId);
+    }
+
+  }
+
+  expect(maleId && femaleId, "No partners found for breeding");
+  return { maleId, femaleId };
+}
+
+async function breed2Hounds() {
+  const houndIdBefore = await houndsData.id();
+  const availableHounds = await findMaleAndFemaleAvailableForBreed();
+  const maleId = availableHounds.maleId;
+  const femaleId = availableHounds.femaleId; 
+  //console.log("Male: " + maleId + "\nFemale: " + femaleId);
+
+  const control = await commonIncubatorData.control();
+  expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
+  expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
+  expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
+  expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
+
+  const houndMaleBefore = await houndsData.hound(maleId);
+  const houndFemaleBefore = await houndsData.hound(femaleId);
+  console.log("Male >> " + maleId + JSON.stringify(houndMaleBefore) + "\nFemale >> " + femaleId + JSON.stringify(houndFemaleBefore));
+
+  const [owner] = await ethers.getSigners();
+  const ownerOfMale = await houndsData.ownerOf(maleId);
+  const ownerOfFemale = await houndsData.ownerOf(femaleId);
+  //console.log("Male: " + ownerOfMale + ", Female: " + ownerOfFemale);
+  let hound1 = maleId , hound2 = femaleId;
+  if ( ownerOfFemale !== owner && ownerOfMale === owner ) {
+    hound1 = maleId;
+    hound2 = femaleId;
+  } else if ( ownerOfMale !== owner && ownerOfFemale === owner ) {
+    hound1 = femaleId;
+    hound2 = maleId;
+  }
+
+  console.log("Right order: " + hound1 + " , " + hound2);
+  
+  await houndsData.breedHounds(hound1, hound2, { value : "0xD529AE9E860000" });
+  const houndMaleAfter = await houndsData.hound(maleId);
+  const houndFemaleAfter = await houndsData.hound(femaleId);
+  expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
+  expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
+  
+  const houndIdAfter = await houndsData.id();
+  expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
+
+}
+
 
 describe("Setting up the used libraries", function () {
   
@@ -40,7 +199,9 @@ describe("Setting up the Payments System", function () {
 
   it("Deploy the payments contract", async function () {
     paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
+    console.log("Payments method: " + paymentsMethods.address);
     paymentsData = await getContractInstance("PaymentsData",[paymentsMethods.address,[]]);
+    console.log("Payments data: " + paymentsData.address);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -401,6 +562,14 @@ describe("Setting up the Houndrace contracts", function () {
       [true]
     ]);
 
+    await paymentsData.setGlobalParameters([paymentsMethods.address,[
+      paperSafetyVRFMethods.address, paperSafetyVRFData.address,
+      houndsData.address, houndsMethods.address,
+      shopData.address, shopMethods.address,
+      raceGeneratorData.address, raceGeneratorMethods.address,
+      racesData.address, racesMethods.address
+    ]]);
+
   });
 
 });
@@ -412,7 +581,6 @@ describe("After deployment calls", function () {
   it("Terrains data set global parameters", async function () {
     await terrainsContractData.setGlobalParameters(terrainsContractMethods.address);
     const control = await terrainsContractData.methodsContractAddress();
-    ////console.log("Terrains data >> " + JSON.stringify(control));
     expect(control === terrainsContractMethods.address, "Terrains data contract : bad terrains methods address");
   });
 
@@ -466,264 +634,37 @@ describe("Genetics methods", function () {
 describe("Hounds", function () {
   
   it("Mint", async function () {
-    const houndIdBefore = await houndsData.id();
-    await houndsData.adminCreateHound([
-      [
-        0,
-        0,
-        0,
-        0
-      ],[
-        10000000,
-        10000000,
-        100,
-        1,
-        100
-      ],[
-        1000,
-        100000,
-        1000,
-        false
-      ],[
-        0,
-        0,
-        0,
-        0,
-        maleBoilerplateGene
-      ],
-      "",
-      "",
-      false,
-      false
-    ]);
-
-    const houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
+    await safelyMintHoundByAdmin(undefined,false);
   });
 
   it("Update hound stamina after creation", async function() {
-    const houndIdBefore = await houndsData.id();
-    const houndToWorkWith = Number(houndIdBefore)-1;
-    const houndBefore = await houndsData.hound(houndToWorkWith);
-    await houndsData.updateHoundStamina(houndToWorkWith);
-    const houndAfter = await houndsData.hound(houndToWorkWith);
-    expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
+    await safelyUpdateHoundStamina();
   });
 
   it("Update hound breeding status after creation", async function() {
-    const houndIdBefore = await houndsData.id();
-    const houndToWorkWith = Number(houndIdBefore)-1;
-    const houndBefore = await houndsData.hound(houndToWorkWith);
-    await houndsData.updateHoundBreeding(houndToWorkWith,10000000);
-    const houndAfter = await houndsData.hound(houndToWorkWith);
-    expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound breeding update on creation problem");
+    await safelyUpdateHoundBreeding();
   });
 
   it("Mint again", async function () {
-    await houndsData.adminCreateHound([
-      [
-        0,
-        0,
-        0,
-        0
-      ],[
-        10000000,
-        10000000,
-        100,
-        1,
-        100
-      ],[
-        1000,
-        100000,
-        1000,
-        false
-      ],[
-        0,
-        0,
-        0,
-        0,
-        femaleBoilerplateGene
-      ],
-      "",
-      "",
-      false,
-      false
-    ]);
+    await safelyMintHoundByAdmin(undefined,false);
   });
 
   it("Mint 10x hounds", async function () {
     for ( let i = 0 ; i < 10 ; ++i ) {
-      await houndsData.adminCreateHound([
-        [
-          0,
-          0,
-          0,
-          0
-        ],[
-          10000000,
-          10000000,
-          100,
-          1,
-          100
-        ],[
-          1000,
-          100000,
-          1000,
-          false
-        ],[
-          0,
-          0,
-          0,
-          0,
-          maleBoilerplateGene
-        ],
-        "",
-        "",
-        false,
-        false
-      ]);
+      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
     }
   });
 
   it("Receiving hound data", async function () {
-
-    const hound = await houndsData.hound(1);
-
-    // Check the hound statistics field
-    expect(hound[0] && hound[0].length === 4, "Not all hound statistics are received from contract");
-
-    // Check the hound stamina field
-    expect(hound[1].length === 5, "Not all hound stamina data has been received from contract");
-
-    // Check the hound breeding field
-    expect(hound[2].length === 4, "Not all hound breeding data has been received from contract");
-
-    // Check the hound identity field
-    expect(hound[3].length === 4, "Not all hound identity data has been received from contract");
-
-    // Check the hound total fields
-    expect(hound.length === 8, "Hound has been partially received from contract");
-
-    const houndGene = hound[3][4];
-    expect(houndGene.length > 0, "Hound getter mechanism problems");
-
+    await checkHoundStructure();
   });
 
   it("Breed", async function () {
-
-    const houndIdBefore = await houndsData.id();
-
-    let maleId , femaleId ;
-    console.log("Looking for male and female to breed in " + houndIdBefore + " total hounds...");
-    for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
-
-      const hound = await houndsData.hound(i);
-      const houndGene = hound[3][4];
-
-      console.log("Hound gene >> " + houndGene);
-
-      expect(houndGene.length > 0, "Getting hounds gender problem");
-
-      if ( houndGene[1] === 1 && !maleId ) {
-        maleId = houndGene[1];
-      }
-
-      if ( houndGene[1] === 2 && !femaleId ) {
-        femaleId = houndGene[1];
-      }
-
-    }
-
-
-    const control = await commonIncubatorData.control();
-    expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
-    expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
-    expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
-    expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
-    expect(maleId && femaleId, "No partners found for breeding");
-    console.log("Breed: " + maleId + " && " + femaleId);
-    if ( maleId && femaleId ) {
-      const [owner, test2] = await ethers.getSigners();
-      await owner.sendTransaction({
-        to: test2.address,
-        value: ethers.utils.parseEther("0.1"), // Sends exactly 1.0 ether
-      });
-
-      /*
-      const provider = waffle.provider;
-      const balance = await provider.getBalance(houndsData.address);
-      console.log("Contract balance: " + balance);
-      const houndMaleBefore = await houndsData.hound(maleId);
-      const houndFemaleBefore = await houndsData.hound(femaleId);
-      console.log("Male >> " + maleId + "\nFemale >> " + femaleId);
-      console.log("Owner: " + owner.address);
-      */
-
-      /*
-      await houndsData.breedHounds(maleId, femaleId, { value : "0xD529AE9E860000" });
-      const houndMaleAfter = await houndsData.hound(maleId);
-      const houndFemaleAfter = await houndsData.hound(femaleId);
-      expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-      expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-      */
-
-    }
-
-    /*
-    const houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
-    */
-
+    await breed2Hounds();
   });
 
-  /*
   it("Breed again", async function () {
-
-    const houndIdBefore = await houndsData.id();
-
-    let maleId , femaleId ;
-    for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
-
-      const hound = await houndsData.hound(i);
-      const houndGene = hound[3][4];
-
-      expect(houndGene.length > 0, "Getting hounds gender problem");
-
-      if ( houndGene[1] === 1 && !maleId ) {
-        maleId = houndGene[1];
-      }
-
-      if ( houndGene[1] === 2 && !femaleId ) {
-        femaleId = houndGene[1];
-      }
-
-    }
-
-    const control = await commonIncubatorData.control();
-    expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
-    expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
-    expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
-    expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
-
-    expect(maleId && femaleId, "No partners found for breeding");
-    if ( maleId && femaleId ) {
-      const houndMaleBefore = await houndsData.hound(maleId);
-      const houndFemaleBefore = await houndsData.hound(femaleId);
-      try {
-        await houndsData.breedHounds(maleId, femaleId, { value : "0xD529AE9E860000" });
-        const houndMaleAfter = await houndsData.hound(maleId);
-        const houndFemaleAfter = await houndsData.hound(femaleId);
-        expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-        expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-        expect(false, "Hounds should not be able to breed again right away");
-      } catch (err) {
-
-      }
-    }
-
-    const houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
-
+    await breed2Hounds();
   });
 
 });
@@ -739,128 +680,15 @@ describe("Breed with other hounds", function () {
   let ownedHound, otherHound;
 
   it("Mint your hound", async function () {
-    const houndIdBefore = await houndsData.id();
-    await houndsData.adminCreateHound([
-      [
-        0,
-        0,
-        0,
-        0
-      ],[
-        10000000,
-        10000000,
-        100,
-        1,
-        100
-      ],[
-        1000,
-        100000,
-        1000,
-        false
-      ],[
-        0,
-        0,
-        0,
-        0,
-        femaleBoilerplateGene
-      ],
-      "",
-      "",
-      false,
-      false
-    ]);
-
-    let houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Hound breeding problem");
-    ownedHound = houndIdBefore;
+    await safelyMintHoundByAdmin(undefined,false);
   });
 
   it("Mint another hound", async function () {
-    const [owner,otherOwner] = await ethers.getSigners();
-    const houndIdBefore = await houndsData.id();
-    await houndsData.adminCreateHound([
-      [
-        0,
-        0,
-        0,
-        0
-      ],[
-        10000000,
-        10000000,
-        100,
-        1,
-        100
-      ],[
-        1000,
-        100000,
-        1000,
-        false
-      ],[
-        0,
-        0,
-        0,
-        0,
-        femaleBoilerplateGene
-      ],
-      "",
-      "",
-      false,
-      false
-    ]);
-
-    const houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Hound breeding problem");
-    //await houndsData.safeTransferFrom(owner,otherOwner,houndIdBefore);
-    otherHound = houndIdBefore;
+    await safelyMintHoundByAdmin(undefined,true);
   });
 
   it("Breed again", async function () {
-
-    const houndIdBefore = await houndsData.id();
-
-    let maleId , femaleId ;
-    for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
-
-      const hound = await houndsData.hound(i);
-      const houndGene = hound[3][4];
-
-      expect(houndGene.length > 0, "Getting hounds gender problem");
-
-      if ( houndGene[1] === 1 && !maleId ) {
-        maleId = houndGene[1];
-      }
-
-      if ( houndGene[1] === 2 && !femaleId ) {
-        femaleId = houndGene[1];
-      }
-
-    }
-
-    const control = await commonIncubatorData.control();
-    expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
-    expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
-    expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
-    expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
-
-    expect(maleId && femaleId, "No partners found for breeding");
-    if ( maleId && femaleId ) {
-      const houndMaleBefore = await houndsData.hound(maleId);
-      const houndFemaleBefore = await houndsData.hound(femaleId);
-      try {
-        await houndsData.breedHounds(maleId, femaleId, { value : "0xD529AE9E860000" });
-        const houndMaleAfter = await houndsData.hound(maleId);
-        const houndFemaleAfter = await houndsData.hound(femaleId);
-        expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-        expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-        expect(false, "Hounds should not be able to breed again right away");
-      } catch (err) {
-
-      }
-    }
-
-    const houndIdAfter = await houndsData.id();
-    expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
-
+    await breed2Hounds();
   });
 
   it("Make hound available to breed", async function () {
@@ -1024,6 +852,6 @@ describe("Races", function () {
       houndsStamina[i] = hound[1][2];
     }
   });
-*/
+
 
 });

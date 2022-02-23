@@ -5,6 +5,7 @@ import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './PaymentRequest.sol';
 import './Payment.sol';
 import './Constructor.sol';
+import 'hardhat/console.sol';
 
 
 contract PaymentsData is Ownable {
@@ -34,7 +35,8 @@ contract PaymentsData is Ownable {
 
 	function transferTokens(
 		Payment.Struct memory payment
-	) public isAllowed {
+	) public payable {
+		console.log("Ok so far... caller: ", msg.sender);
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success,error);
 	}
