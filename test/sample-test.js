@@ -171,6 +171,49 @@ async function breed2Hounds() {
 
 }
 
+async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
+  await shopData.createDiscount([
+    erc721Address ? erc721Address : testErc721.address,
+    ids ? ids : [1],
+    dateStart ? dateStart : 0,
+    dateStop ? dateStop : 0,
+    discount ? discount : 5,
+    tokenType ? tokenType : 0,
+    usable ? usable : false
+  ]);
+}
+
+async function editDiscount(id, erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
+  await shopData.editDiscount([
+    erc721Address ? erc721Address : testErc721.address,
+    ids ? ids : [1],
+    dateStart ? dateStart : 0,
+    dateStop ? dateStop : 0,
+    discount ? discount : 5,
+    tokenType ? tokenType : 0,
+    usable ? usable : false
+  ],id);
+}
+
+async function mintERC1155Batch(receiver, ids, amounts, data) {
+  const [owner] = await ethers.getSigners();
+  await testErc1155.mintBatch(
+    receiver ? receiver : owner.address,
+    ids ? ids : Array.from(Array(100).keys()),
+    amounts ? amounts : Array(100).fill(5000),
+    data ? data : '0x00'
+  );
+}
+
+async function mintERC721(receiver, id, data) {
+  const [owner] = await ethers.getSigners();
+  await testErc721.safeMint(
+    receiver ? receiver : owner.address,
+    id ? id : 1,
+    data ? data : '0x00'
+  );
+}
+
 
 describe("Setting up the used libraries", function () {
   
@@ -205,25 +248,19 @@ describe("Setting up the Payments System", function () {
     await testErc721.deployed();
   });
 
-  /*
   it("Mint erc721 nfts", async function () {
-    const [owner] = await ethers.getSigners();
     for ( let i = 0 ; i < 100 ; ++i ) {
-      await testErc721.safeMint(owner.address,i,'0x00');
+      await mintERC721(undefined,i,'0x00');
     }
   });
-  */
 
   it("Deploy the erc1155 test contract", async function () {
     testErc1155 = await getContractInstance("TestingErc1155","test");
   });
 
-  /*
   it("Mint erc1155 nfts", async function () {
-    const [owner] = await ethers.getSigners();
-    await testErc1155.mintBatch(owner.address,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
+    await mintERC1155Batch(undefined,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
   });
-  */
 
   it("Deploy the Payments methods contract", async function () {
     shopMethods = await getContractInstance("ShopMethods");
@@ -235,25 +272,34 @@ describe("Setting up the Payments System", function () {
     console.log("Shop data: " + shopData.address);
   });
 
-  /*
   it("Add discounts", async function () {
 
     // Add erc721 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
-      await shopData.createDiscount([
-        testErc721.address,
-        [i],
-        0,
-        0,
-        5,
-        0,
-        false
-      ]);
+      await createDiscount(testErc721.address,[i],0,0,5,0,false);
     }
 
     // Add erc1155 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
-      await shopData.createDiscount([
+      await createDiscount(testErc1155.address,[i],0,0,10,1,false);
+    }
+
+    // Edit erc721 nfts
+    for ( let i = 1 ; i < 100 ; ++i ) {
+      await editDiscount(i,[
+        testErc721.address,
+        [i],
+        0,
+        0,
+        5,
+        0,
+        false
+      ]);
+    }
+
+    // Edit erc1155 nfts
+    for ( let i = 1 ; i < 100 ; ++i ) {
+      await shopData.editDiscount(i,[
         testErc1155.address,
         [i],
         0,
@@ -264,34 +310,7 @@ describe("Setting up the Payments System", function () {
       ]);
     }
 
-    // Edit erc721 nfts
-    for ( let i = 1 ; i < 100 ; ++i ) {
-      await shopData.editDiscount([
-        testErc721.address,
-        [i],
-        0,
-        0,
-        5,
-        0,
-        false
-      ],i);
-    }
-
-    // Edit erc1155 nfts
-    for ( let i = 1 ; i < 100 ; ++i ) {
-      await shopData.editDiscount([
-        testErc1155.address,
-        [i],
-        0,
-        0,
-        10,
-        1,
-        false
-      ],i);
-    }
-
   });
-  */
 
 });
 
