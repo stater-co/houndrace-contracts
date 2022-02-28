@@ -20,6 +20,7 @@ const defaultHound = [
   false,
   false
 ];
+let currentDiscountId = 1;
 
 // @DIIMIIM: Get smart contract instance
 async function getContractInstance(name,constructor) {
@@ -174,7 +175,7 @@ async function breed2Hounds() {
 async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
   await shopData.createDiscount([
     erc721Address ? erc721Address : testErc721.address,
-    ids ? ids : [1],
+    ids ? ids : [currentDiscountId-1],
     dateStart ? dateStart : 0,
     dateStop ? dateStop : 0,
     discount ? discount : 5,
@@ -209,9 +210,11 @@ async function mintERC721(receiver, id, data) {
   const [owner] = await ethers.getSigners();
   await testErc721.safeMint(
     receiver ? receiver : owner.address,
-    id ? id : 1,
+    id ? id : currentDiscountId,
     data ? data : '0x00'
   );
+  if ( !id )
+    ++currentDiscountId;
 }
 
 
@@ -250,7 +253,7 @@ describe("Setting up the Payments System", function () {
 
   it("Mint erc721 nfts", async function () {
     for ( let i = 0 ; i < 100 ; ++i ) {
-      await mintERC721(undefined,i,'0x00');
+      await mintERC721(undefined,undefined,'0x00');
     }
   });
 
@@ -286,7 +289,7 @@ describe("Setting up the Payments System", function () {
 
     // Edit erc721 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
-      await editDiscount(i,[
+      await editDiscount(i,
         testErc721.address,
         [i],
         0,
@@ -294,12 +297,12 @@ describe("Setting up the Payments System", function () {
         5,
         0,
         false
-      ]);
+      );
     }
 
     // Edit erc1155 nfts
     for ( let i = 1 ; i < 100 ; ++i ) {
-      await shopData.editDiscount(i,[
+      await editDiscount(i,
         testErc1155.address,
         [i],
         0,
@@ -307,7 +310,7 @@ describe("Setting up the Payments System", function () {
         10,
         1,
         false
-      ]);
+      );
     }
 
   });
