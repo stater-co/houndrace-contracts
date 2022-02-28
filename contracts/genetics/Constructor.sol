@@ -8,12 +8,12 @@ library Constructor {
         address randomness;
         address methods;
         address terrains;
-        uint32[50] male;
-        uint32[50] female;
+        uint32[54] male;
+        uint32[54] female;
         uint32 maleGenesProbability;
         uint32 femaleGenesProbability;
-        uint32[12] geneticSequenceSignature;
-        uint32[50] maxValues;
+        uint32[13] geneticSequenceSignature;
+        uint32[54] maxValues;
     }
 
 }

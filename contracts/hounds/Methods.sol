@@ -10,7 +10,6 @@ import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
 import '../payments/Payment.sol';
-import 'hardhat/console.sol';
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
 
 
@@ -80,14 +79,9 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
-        
-        console.log(msg.value);
 
         // Perform verifications for breeding status
         require(hounds[hound2].breeding.breedCooldown < block.timestamp && hounds[hound1].breeding.breedCooldown < block.timestamp);
-
-        console.log("Owner hound 1 : ", ownerOf(hound1), " sender : ", msg.sender);
-        console.log("Owner hound 2 : ", ownerOf(hound2));
 
         // Checks to make sure the caller owns hound 1
         require(ownerOf(hound1) == msg.sender);
@@ -97,22 +91,16 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
         // If he owns both hounds then he'll be charged using the standard fees
         if ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ) {
 
-            console.log("First require: ", control.breedCost, ", ", control.breedFee);
             require(msg.value >= control.breedCost + control.breedFee);
-
-            console.log("Ok");
 
         // Otherwise, he'll be charged with standard fees + that specific hound 2 breeding fee
         } else {
 
-            console.log("Second require");
             // First we check if the second hound is available to breed
             require(hounds[hound2].breeding.availableToBreed);
 
             // Then we check if the user has sent enough ETH for the fees
             require(msg.value >= control.breedCost + control.breedFee + hounds[hound2].breeding.breedingFee);
-
-            console.log("Transfer tokens using: ", control.payments);
 
             // Finally, we'll send the hound 2 breeding fee to the hound owner
             (bool transferBreedingFeeStatus, ) = control.payments.call{ value : hounds[hound2].breeding.breedingFee }(
@@ -131,10 +119,6 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
             require(transferBreedingFeeStatus,"Failed to createLoan via delegatecall");
 
         }
-
-        console.log("And now...");
-
-        console.log("Transfer tokens using: ", control.payments);
 
         // We send the breeding fee to our game manager account
         (bool transferApiFeeStatus, ) = control.payments.call{ value : control.breedFee }(

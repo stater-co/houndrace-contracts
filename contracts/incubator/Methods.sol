@@ -17,8 +17,8 @@ contract IncubatorMethods is Ownable {
         control = input;
     }
 
-    function breedHounds(uint256 hound1, uint32[50] memory hound1GeneticSequence, uint256 hound2, uint32[50] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
-        uint32[50] memory genetics = IGeneticsMethods(control.genetics).mixGenes(
+    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
+        uint32[54] memory genetics = IGeneticsMethods(control.genetics).mixGenes(
             hound1GeneticSequence, 
             hound2GeneticSequence, 
             IRandomnessVanillaData(control.randomness).getRandomNumber(

@@ -9,7 +9,6 @@ import '../incubator/IData.sol';
 import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
-import 'hardhat/console.sol';
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
 
 
