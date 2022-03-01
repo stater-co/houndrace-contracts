@@ -2,11 +2,11 @@
 pragma solidity <=0.8.12;
 
 
-library Constructor {
+library PaymentRequest {
     
     struct Struct {
-
-        address methods;
+        uint256 rewardsBatch;
+        address[] receivers;
     }
 
 }

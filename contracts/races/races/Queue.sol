@@ -2,14 +2,19 @@
 pragma solidity <=0.8.12;
 import '../../payments/Payment.sol';
 
-library Race {
+library Queue {
     
+    /**
+     * DIIMIIM:
+     * Participants can pay with multiple currencies, ETH included
+     */
     struct Struct {
 
         // address(0) for ETH
         address currency;
 
-        // Race seed
+        // Participants
+        // totalParticipants will be the array length here
         uint256[] participants;
 
         // arena of the race
@@ -18,14 +23,17 @@ library Race {
         // ETH based
         uint256 entryFee;
 
+        // Start date
+        uint256 startDate;
+
+        // End date
+        uint256 endDate;
+
         // Informations about the winners of the race
         uint256 rewardsId;
 
-        // Race randomness
-        uint256 randomness;
-
-        // Race seed
-        bytes seed;
+        // Total number of participants
+        uint32 totalParticipants;
 
     }
 

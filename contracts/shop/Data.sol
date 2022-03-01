@@ -1,11 +1,12 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/interfaces/IERC1155.sol";
 import './Discount.sol';
 import './Constructor.sol';
-import 'hardhat/console.sol';
+import './IData.sol';
+
 
 interface Geyser{ function totalStakedFor(address addr) external view returns(uint256); }
 
@@ -30,17 +31,17 @@ contract ShopData is Ownable {
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external {
+    ) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }
 
-    function createDiscount(Discount.Struct memory discount) external {
+    function createDiscount(Discount.Struct memory discount) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }
 
-    function editDiscount(Discount.Struct memory discount, uint256 theId) external {
+    function editDiscount(Discount.Struct memory discount, uint256 theId) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }
@@ -49,6 +50,10 @@ contract ShopData is Ownable {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
         return abi.decode(output,(uint256));
+    }
+
+    function checkDiscount(address requester) external view returns(uint256) {
+        return IShopData(control.methods).checkDiscount(requester);
     }
 
 }

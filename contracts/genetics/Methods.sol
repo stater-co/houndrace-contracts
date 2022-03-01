@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 import './Constructor.sol';
 
 
@@ -11,10 +11,10 @@ contract GeneticsMethods {
         control = input;
     }
 
-    function wholeArithmeticRecombination(uint32[50] memory geneticSequence1, uint32[50] memory geneticSequence2) public view returns(uint32[50] memory geneticSequence) {
+    function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) public view returns(uint32[54] memory geneticSequence) {
         
         // Return the average of parents genetical sequences
-        for ( uint256 i = 2 ; i < 50 ; ++i ) {
+        for ( uint256 i = 2 ; i < 54 ; ++i ) {
 
             // arithmetic recombination
             geneticSequence[i] = ( geneticSequence1[i] + geneticSequence2[i] ) / 2;
@@ -27,7 +27,7 @@ contract GeneticsMethods {
 
     }
 
-    function swapMutation(uint32[50] memory geneticSequence, uint256 randomness) public view returns(uint32[50] memory) {
+    function swapMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
 
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -43,7 +43,7 @@ contract GeneticsMethods {
         return geneticSequence;
     }
 
-    function inversionMutation(uint32[50] memory geneticSequence, uint256 randomness) public view returns(uint32[50] memory) {
+    function inversionMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
         
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -71,7 +71,7 @@ contract GeneticsMethods {
         return geneticSequence;
     }
 
-    function scrambleMutation(uint32[50] memory geneticSequence, uint256 randomness) public view returns(uint32[50] memory) {
+    function scrambleMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
         
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -103,7 +103,7 @@ contract GeneticsMethods {
         return geneticSequence;
     }
     
-    function arithmeticMutation(uint32[50] memory geneticSequence, uint256 randomness) public view returns(uint32[50] memory) {
+    function arithmeticMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
 
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -123,8 +123,8 @@ contract GeneticsMethods {
 
     }
 
-    function uniformCrossover(uint32[50] calldata geneticSequence1, uint32[50] calldata geneticSequence2, uint256 randomness) public view returns(uint32[50] memory geneticSequence) {
-        for ( uint256 i = 0 ; i < 50 ; ++i ) {
+    function uniformCrossover(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) public view returns(uint32[54] memory geneticSequence) {
+        for ( uint256 i = 0 ; i < 54 ; ++i ) {
             uint256 dominantGene = uint256(keccak256(abi.encodePacked(i, randomness)));
             if ( dominantGene % 100 < control.maleGenesProbability ) {
                 geneticSequence[i] = geneticSequence1[i];
@@ -134,10 +134,10 @@ contract GeneticsMethods {
         }
     }
 
-    function mixGenes(uint32[50] calldata geneticSequence1, uint32[50] calldata geneticSequence2, uint256 randomness) external view returns(uint32[50] memory) {
+    function mixGenes(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) external view returns(uint32[54] memory) {
 
         // Performs the default uniform crossover algorithm
-        uint32[50] memory geneticSequence = uniformCrossover(geneticSequence1,geneticSequence2,randomness);
+        uint32[54] memory geneticSequence = uniformCrossover(geneticSequence1,geneticSequence2,randomness);
 
         uint256 chance = randomness % 1000;
         if ( chance >= 444 && chance <= 446 ) {
@@ -185,7 +185,7 @@ contract GeneticsMethods {
         return ( uint256(keccak256(abi.encodePacked(pillar, randomness))) % 9 ) + 2;
     }
 
-    function generateRandomAlleles(uint32[50] memory geneticSequence, uint256 randomness, uint256 randomGene) internal view returns(uint256,uint256) {
+    function generateRandomAlleles(uint32[54] memory geneticSequence, uint256 randomness, uint256 randomGene) internal view returns(uint256,uint256) {
 
         // Generate 2 random indexes within the gene
         return(

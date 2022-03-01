@@ -1,3 +1,4 @@
+/*
 const Tx = require("ethereumjs-tx");
 const { ethers } = require("hardhat");
 const provider = ethers.getDefaultProvider(process.env.URL);
@@ -84,12 +85,8 @@ async function run() {
     let racesData = new ethers.Contract("0x7595672259Ba958afB6c079286543F1F17B7F9B7", RacesData.interface, wallet1);
     racesData = await racesData.deployed();
 
-
-    /*
     await terrainsContractData.createArena([1,1000,3]);
-    */
 
-    /*
     const totalArenas = await terrainsContractData.id();
     let createdArenas = Array.from(Array(totalArenas).keys());
 
@@ -97,10 +94,12 @@ async function run() {
     await racesData.createQueues([
         [address0,[],1,50000000,0,10]
     ]);
-    */
 
     await houndsData.adminCreateHound([[0,0,0,0],[0,100000000,100,1,100],[0,10000000,264000,false],[[ 1, 2, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ],0,[ 1, 2, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ],[ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5 ]],"Hound #1","Hound #1 Description",true,false]);
 
 }
 
 run();
+
+
+*/

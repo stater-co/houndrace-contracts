@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
 import '../hounds/Hound.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
@@ -26,7 +26,7 @@ contract IncubatorData is Ownable {
         require(success,error);
     }
 
-    function breedHounds(uint256 hound1, uint32[50] memory hound1GeneticSequence, uint256 hound2, uint32[50] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
+    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
         (bool success, bytes memory hound) = control.methods.delegatecall(msg.data);
         require(success,error);
         return abi.decode(hound,(Hound.Struct));

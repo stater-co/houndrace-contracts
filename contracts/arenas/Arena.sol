@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.10;
+pragma solidity <=0.8.12;
 
 
 library Arena {
     
     struct Struct {
+        address owner;
+        uint256 fee;
         uint32 surface;
         uint32 distance;
         uint32 weather;

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.10;
+pragma solidity <=0.8.12;
 
 
 library Identity {
@@ -8,7 +8,8 @@ library Identity {
         uint256 maleParent;
         uint256 femaleParent;
         uint256 generation;
-        uint32[50] geneticSequence;
+        uint256 birthDate;
+        uint32[54] geneticSequence;
     }
 
 }

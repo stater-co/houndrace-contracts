@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.10;
+pragma solidity <=0.8.12;
 
 
 library Constructor {
@@ -12,6 +12,7 @@ library Constructor {
         address incubator;
         address staterApi;
         address shop;
+        address payments;
         uint256 breedCost;
         uint256 breedFee;
         uint256 refillCost;

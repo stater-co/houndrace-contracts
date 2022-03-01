@@ -1,31 +1,36 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '../../utils/Sortings.sol';
+import '../../utils/Converters.sol';
 import '../../arenas/Arena.sol';
 import '../../hounds/Hound.sol';
-import '../../payments/Payments.sol';
 import '../../hounds/IData.sol';
 import '../../arenas/IData.sol';
 import '../../randomness/vanilla/IData.sol';
-import '../../utils/FilterForWinners.sol';
+import '../../payments/PaymentRequest.sol';
 import '../races/Race.sol';
-import '../Constructor.sol';
+import '../races/Queue.sol';
+import './Constructor.sol';
 
 
 /**
  * DIIMIIM:
  * This should not have any storage, except the constructor ones
  */
-contract RaceGeneratorMethods is Payments {
+contract RaceGeneratorMethods is Ownable {
 
-    event NewRace(Race.Struct queue, Race.Finished race);
+    event NewRace(Queue.Struct queue, Race.Struct race);
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
+    IHoundsData public houndsContract;
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external {
+    ) external onlyOwner {
         control = input;
+        houndsContract = IHoundsData(control.hounds);
     }
 
     // Compute the race hounds stats
@@ -64,9 +69,19 @@ contract RaceGeneratorMethods is Payments {
     }
 
     // Simulate the classic race seed
-    function simulateClassicRace(uint256[] memory participants, uint256 terrain, uint256 theRandomness) public view returns(bytes memory output) {
+    function simulateClassicRace(
+        uint256[] memory participants, 
+        uint256 terrain, 
+        uint256 theRandomness
+    ) 
+        public 
+        view 
+    returns(
+        uint256[] memory, 
+        uint256[] memory
+    ) {
         
-        Arena.Struct memory theTerrain = ITerrains(control.terrains).getTerrain(terrain);
+        Arena.Struct memory theTerrain = IArenas(control.terrains).arena(terrain);
 
         // Compute the hounds score power
         
@@ -80,17 +95,16 @@ contract RaceGeneratorMethods is Payments {
             houndsPower[j] = houndsPower[j] + ( ( houndsPower[j] * variation ) / 100 );
         
         // Encoding it into bytes
-        output =  abi.encode(
-            quickSort(
-                houndsPower,
-                0,
-                houndsPower.length-1
-            )
+        return Sortings.rankPlayers(
+            houndsPower,
+            participants,
+            0,
+            houndsPower.length-1
         );
 
     }
 
-    function generate(Race.Struct memory queue) external payable returns(Race.Finished memory race) {
+    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race) {
 
         require(control.allowed == msg.sender, "23");
         
@@ -101,71 +115,35 @@ contract RaceGeneratorMethods is Payments {
 
         // Generates the randomness
         uint256 theRandomness = IRandomnessVanillaData(control.randomness).getRandomNumber(abi.encode(block.timestamp));
-        bytes memory seed = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
         // Decode the race seed into the participants array
-        uint256[] memory participants = abi.decode(seed,(uint256[]));
+        (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
-        // Gets the first indexes of the best participants
-        uint256[3] memory winners = FilterForWinners.filterForWinners(participants);
-
-        sendRewards(
-            [
-                IHoundsData(control.hounds).ownerOf(winners[0]),
-                IHoundsData(control.hounds).ownerOf(winners[1]),
-                IHoundsData(control.hounds).ownerOf(winners[2])
-            ],
-            queue.currency,
-            [
-                queue.entryFee * 5, 
-                queue.entryFee * 3, 
-                queue.entryFee * 2
-            ]
+        // Send the rewards to players
+        (bool success, ) = control.payments.delegatecall(
+            abi.encodeWithSignature(
+                "compoundTransfer((uint256,address[]))",
+                PaymentRequest.Struct(
+                    queue.rewardsId,
+                    Converters.erc721IdsToOwners(control.hounds,participants)
+                )
+            )
         );
+        require(success,"Failed to createLoan via delegatecall");
     
-        race = Race.Finished(
+        race = Race.Struct(
             queue.currency,
             participants,
             queue.arena,
             queue.entryFee,
-            theRandomness
+            queue.rewardsId,
+            theRandomness,
+            abi.encode(participants)
         );
 
         // Emit the race event
         emit NewRace(queue,race);
 
-    }
-
-    function sendRewards(address[3] memory winners, address currency, uint256[3] memory amounts) public payable {
-        for ( uint256 i = 0 ; i < 3 ; ++i ) {
-            transferTokens(
-                address(this),
-                payable(winners[i]),
-                currency,
-                amounts[i]
-            );
-        }
-    }
-
-    function quickSort(uint256[] memory arr, uint256 left, uint256 right) internal pure returns(uint[] memory){
-        uint256 i = left;
-        uint256 j = right;
-        if (i == j) return arr;
-        uint256 pivot = arr[uint(left + (right - left) / 2)];
-        while (i <= j) {
-            while (arr[uint(i)] < pivot) i++;
-            while (pivot < arr[uint(j)]) j--;
-            if (i <= j) {
-                (arr[uint(i)], arr[uint(j)]) = (arr[uint(j)], arr[uint(i)]);
-                i++;
-                j--;
-            }
-        }
-        if (left < j)
-            quickSort(arr, left, j);
-        if (i < right)
-            quickSort(arr, i, right);
-        return arr;
     }
 
 }

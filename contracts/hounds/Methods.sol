@@ -1,24 +1,22 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-
-import '../payments/Payments.sol';
 import '../incubator/IData.sol';
-
 import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
-
+import '../payments/Payment.sol';
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
+
 
 /**
  * DIIMIIM: To be run with enable optimisation on 10 cycles
  */
-contract HoundsMethods is Ownable, ERC721, ERC721Holder, Payments {
+contract HoundsMethods is Ownable, ERC721, ERC721Holder {
     
     uint256 public id = 1;
     mapping(address => bool) public allowed;
@@ -49,6 +47,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder, Payments {
         control.incubator = input.incubator;
         control.staterApi = input.staterApi;
         control.shop = input.shop;
+        control.payments = input.payments;
         control.breedCost = input.breedCost;
         control.breedFee = input.breedFee;
         control.refillCost = input.refillCost;
@@ -87,6 +86,8 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder, Payments {
         // Checks to make sure the caller owns hound 1
         require(ownerOf(hound1) == msg.sender);
 
+        uint256[] memory tmp;
+
         // If he owns both hounds then he'll be charged using the standard fees
         if ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ) {
 
@@ -102,24 +103,45 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder, Payments {
             require(msg.value >= control.breedCost + control.breedFee + hounds[hound2].breeding.breedingFee);
 
             // Finally, we'll send the hound 2 breeding fee to the hound owner
-            transferTokens(
-                msg.sender,
-                payable(ownerOf(hound2)),
-                address(0),
-                hounds[hound2].breeding.breedingFee
+            (bool transferBreedingFeeStatus, ) = control.payments.call{ value : hounds[hound2].breeding.breedingFee }(
+                abi.encodeWithSignature(
+                    "transferTokens((address,address,address,uint256[],uint256,uint32))",
+                    Payment.Struct(
+                        msg.sender,
+                        payable(ownerOf(hound2)),
+                        address(0),
+                        tmp,
+                        hounds[hound2].breeding.breedingFee,
+                        2
+                    )
+                )
             );
+            require(transferBreedingFeeStatus,"Failed to createLoan via delegatecall");
 
         }
 
         // We send the breeding fee to our game manager account
-        transferTokens(msg.sender,payable(control.staterApi),address(0),control.breedFee);
+        (bool transferApiFeeStatus, ) = control.payments.call{ value : control.breedFee }(
+            abi.encodeWithSignature(
+                "transferTokens((address,address,address,uint256[],uint256,uint32))",
+                Payment.Struct(
+                    msg.sender,
+                    payable(control.staterApi),
+                    address(0),
+                    tmp,
+                    control.breedFee,
+                    2
+                )
+            )
+        );
+        require(transferApiFeeStatus,"Failed to createLoan via delegatecall");
 
         // We reset the breeding cooldown here
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800; // 2 days
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800; // 2 days
 
         // Incubator call to get the offspring
-        hounds[id] = IIncubatorData(control.incubator).breedHounds(
+        Hound.Struct memory offspring = IIncubatorData(control.incubator).breedHounds(
             hound1, 
             hounds[hound1].identity.geneticSequence, 
             hound2, 
@@ -131,13 +153,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder, Payments {
         updateHoundBreeding(hound2,0);
 
         // Emit hound creation event
-        emit BreedHound(id,msg.sender,hounds[id]);
-
-        // Mint hound
-        _safeMint(msg.sender,id);
-
-        // Increase hound id
-        ++id;
+        emit BreedHound(id,msg.sender,offspring);
 
     }
     

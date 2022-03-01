@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity <=0.8.10;
+pragma solidity <=0.8.12;
 
 library Errors {
 
@@ -41,4 +41,7 @@ library Errors {
     string public constant NO_FREE_BREED_ALLOWED = '28';
     string public constant INVALID_GENETIC_SEQUENCES = '29';
     string public constant PAYMENT_OVERFLOW = '30';
+    string public constant NOT_ARENA_OWNER = '31';
+    string public constant ARENA_FEE_TOO_EXPENSIVE = '32';
+    string public constant QUEUE_DATES_NOT_REACHED = '33';
 }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
 import '../hounds/Hound.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
@@ -17,8 +17,8 @@ contract IncubatorMethods is Ownable {
         control = input;
     }
 
-    function breedHounds(uint256 hound1, uint32[50] memory hound1GeneticSequence, uint256 hound2, uint32[50] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
-        uint32[50] memory genetics = IGeneticsMethods(control.genetics).mixGenes(
+    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public returns(Hound.Struct memory) {
+        uint32[54] memory genetics = IGeneticsMethods(control.genetics).mixGenes(
             hound1GeneticSequence, 
             hound2GeneticSequence, 
             IRandomnessVanillaData(control.randomness).getRandomNumber(
@@ -52,6 +52,7 @@ contract IncubatorMethods is Ownable {
             0,
             hound1,
             hound2,
+            block.timestamp,
             genetics // preferences will be extracted from this 
         );
 

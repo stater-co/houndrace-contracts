@@ -1,61 +1,70 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.10;
+pragma solidity 0.8.12;
 
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '../../utils/FilterForWinners.sol';
 import '../../hounds/Hound.sol';
 import '../../hounds/IData.sol';
-import '../../payments/Payments.sol';
-
+import '../../arenas/Arena.sol';
+import '../../arenas/IData.sol';
+import '../../utils/Converters.sol';
+import '../../payments/PaymentRequest.sol';
 import './Race.sol';
-import '../Constructor.sol';
+import './Queue.sol';
+import './Constructor.sol';
 
 
-contract RacesMethods is Ownable, Payments {
+contract RacesMethods is Ownable {
     
-    event NewRace(uint256 indexed id, Race.Struct race);
-    event NewFinishedRace(uint256 indexed id, Race.Finished race);
-    event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Race.Struct[] newQueues);
+    event NewRace(uint256 indexed id, Queue.Struct race);
+    event NewFinishedRace(uint256 indexed id, Race.Struct race);
+    event UploadRace(uint256 indexed id, Race.Struct race);
+    event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
-    event UploadRace(uint256 indexed id, Race.Finished race);
     event PlayerEnqueue(uint256 indexed id, uint256 indexed hound, address indexed player);
     uint256 public id = 1;
     Constructor.Struct public control;
-    mapping(uint256 => Race.Struct) public queues;
+    mapping(uint256 => Queue.Struct) public queues;
     string error = "Failed to delegatecall";
-
-    /**
-     * DIIMIIM:
-     * We'll save the races structure as bytes and we'll decode them into their specific tuple using their specific generator contract
-     */
-    mapping(uint256 => Race.Finished) public races;    
+    mapping(uint256 => Payment.Struct[]) public rewards;
+    mapping(uint256 => Race.Struct) public races;    
 
     function setGlobalParameters(
         Constructor.Struct memory input
-    ) external {
+    ) external onlyOwner {
         control = input;
     }
 
-    function createQueues(Race.Struct[] memory theQueues) external {
+    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
+        IArenas arenas = IArenas(control.terrains);
+        Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
+            arena = arenas.arena(theQueues[i].arena);
+            require(arena.fee < theQueues[i].entryFee / 2, "32");
             queues[id] = theQueues[i];
             ++id;
         }
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
     }
 
-    function deleteQueue(uint256 theId) external {
+    function deleteQueue(uint256 theId) external onlyOwner {
         delete queues[theId];
         emit DeleteQueue(theId);
     }
 
-    function uploadRace(Race.Finished memory race, Payment.Struct[] memory payments) external {
+    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external onlyOwner {
         
         // Save the finished race
         races[id] = race;
 
         // Perform all race payments / rewards
-        compoundTransfer(payments);
+        // Send the rewards to players
+        (bool success, ) = control.payments.delegatecall(
+            abi.encodeWithSignature(
+                "sendHardcodedPayments((address,address,address,uint256[],uint256,uint256,uint32)[])",
+                payments
+            )
+        );
+        require(success,"Failed to createLoan via delegatecall");
 
         emit UploadRace(id, race);
 
@@ -64,13 +73,11 @@ contract RacesMethods is Ownable, Payments {
 
     }
 
-    /*
-     * DIIMIIM:
-     * Enqueue method
-     */
     function enqueue(uint256 theId, uint256 hound) external payable {
     
         require(queues[theId].totalParticipants > 0, "31");
+
+        require(queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp, "33");
 
         // Queue verifications
         require(msg.value >= queues[theId].entryFee, "17");
@@ -80,9 +87,6 @@ contract RacesMethods is Ownable, Payments {
 
         require(!houndObj.running, "13");
 
-        bool success;
-        bytes memory output;
-
         // Adds the participant in the queue
         queues[theId].participants.push(hound);
         
@@ -91,15 +95,9 @@ contract RacesMethods is Ownable, Payments {
         // If last participant in the queue is calling this
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-
-            /*
-             * DIIMIIM:
-             * Blockchain race generator
-             * No custom rewards mechanism available
-             */
             if ( control.callable ) {
                 
-                (success, output) = control.raceGenerator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
+                (bool success, bytes memory output) = control.raceGenerator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
                     abi.encodeWithSignature(
                         "generate((uint256,uint256[],address,uint256,uint32))",
                         queues[theId]
@@ -107,17 +105,12 @@ contract RacesMethods is Ownable, Payments {
                 );
                 require(success,error);
                 
-                races[id] = abi.decode(output,(Race.Finished));
+                races[id] = abi.decode(output,(Race.Struct));
 
                 emit NewFinishedRace(id,  races[id]);
 
                 ++id;
 
-            /*
-             * DIIMIIM:
-             * Back-end race generator
-             * Fully customizable
-             */
             } else {
 
                 emit NewRace(theId, queues[theId]);
