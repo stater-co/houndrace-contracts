@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
 
-
 library Constructor {
-
     struct Struct {
         string name;
         string symbol;
@@ -19,5 +17,4 @@ library Constructor {
         uint256 refillBreedingCooldownCost;
         uint256 refillStaminaCooldownCost;
     }
-
 }

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../utils/Sortings.sol';
 import '../../utils/Converters.sol';
@@ -15,10 +14,6 @@ import '../races/Queue.sol';
 import './Constructor.sol';
 
 
-/**
- * DIIMIIM:
- * This should not have any storage, except the constructor ones
- */
 contract RaceGeneratorMethods is Ownable {
 
     event NewRace(Queue.Struct queue, Race.Struct race);
@@ -33,24 +28,19 @@ contract RaceGeneratorMethods is Ownable {
         houndsContract = IHoundsData(control.hounds);
     }
 
-    // Compute the race hounds stats
     function computeHoundsStats(uint256[] memory participants, Arena.Struct memory terrain) internal view returns(uint256[] memory) {
 
         uint256[] memory stats = new uint256[](participants.length);
 
         Hound.Struct memory hound;
 
-        // For each hound
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {
 
-            // Hound verifications
             hound = IHoundsData(control.hounds).hound(participants[i]);
 
-            // Compute the main stats
             stats[i] = uint256((hound.identity.geneticSequence[30] + hound.identity.geneticSequence[31] + hound.identity.geneticSequence[32] + hound.identity.geneticSequence[33]) * 99);
             uint256 tmp = stats[i];
 
-            // Compute the environmental stats
             if ( hound.identity.geneticSequence[9] == terrain.surface )
                 stats[i] += tmp / 20;
             if ( hound.identity.geneticSequence[10] == terrain.distance )
@@ -58,7 +48,6 @@ contract RaceGeneratorMethods is Ownable {
             if ( hound.identity.geneticSequence[11] == terrain.weather )
                 stats[i] += tmp / 20;
 
-            // Compute the stamina stats
             if ( hound.stamina.staminaCap / 2 > hound.stamina.stamina )
                 stats[i] = stats[i] * 90 / 100;
 
@@ -68,7 +57,6 @@ contract RaceGeneratorMethods is Ownable {
 
     }
 
-    // Simulate the classic race seed
     function simulateClassicRace(
         uint256[] memory participants, 
         uint256 terrain, 
@@ -82,19 +70,14 @@ contract RaceGeneratorMethods is Ownable {
     ) {
         
         Arena.Struct memory theTerrain = IArenas(control.terrains).arena(terrain);
-
-        // Compute the hounds score power
         
         uint256[] memory houndsPower = computeHoundsStats(participants, theTerrain);
         
-        // Variation of their power will be up to 15%, using randomness
         uint256 variation = uint256(keccak256(abi.encode(theRandomness, block.difficulty))) % 15;
 
-        // Updating their score power
         for ( uint256 j = 0 ; j < houndsPower.length ; ++j ) 
             houndsPower[j] = houndsPower[j] + ( ( houndsPower[j] * variation ) / 100 );
         
-        // Encoding it into bytes
         return Sortings.rankPlayers(
             houndsPower,
             participants,
@@ -110,16 +93,12 @@ contract RaceGeneratorMethods is Ownable {
         
         require(queue.participants.length == queue.totalParticipants, "19");
 
-        // Queue verifications
         require(queue.entryFee <= msg.value, "17");
 
-        // Generates the randomness
         uint256 theRandomness = IRandomnessVanillaData(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
-        // Decode the race seed into the participants array
         (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
-        // Send the rewards to players
         (bool success, ) = control.payments.delegatecall(
             abi.encodeWithSignature(
                 "compoundTransfer((uint256,address[]))",
@@ -141,7 +120,6 @@ contract RaceGeneratorMethods is Ownable {
             abi.encode(participants)
         );
 
-        // Emit the race event
         emit NewRace(queue,race);
 
     }

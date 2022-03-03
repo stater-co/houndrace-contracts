@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
 import '../hounds/Hound.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
@@ -13,7 +12,7 @@ contract IncubatorMethods is Ownable {
     Constructor.Struct public control;
     string error = "Failed to delegatecall";
     
-    function setGlobalParameters(Constructor.Struct memory input) external {
+    function setGlobalParameters(Constructor.Struct memory input) external onlyOwner {
         control = input;
     }
 

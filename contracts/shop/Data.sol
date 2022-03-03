@@ -6,9 +6,8 @@ import "@openzeppelin/contracts/interfaces/IERC1155.sol";
 import './Discount.sol';
 import './Constructor.sol';
 import './IData.sol';
-
-
 interface Geyser{ function totalStakedFor(address addr) external view returns(uint256); }
+
 
 contract ShopData is Ownable {
     

@@ -46,7 +46,7 @@ export interface IncubatorData extends BaseContract {
         [string, string, string, string],
         [string, string, string, string, string],
         [string, string, string, boolean],
-        [string, string, string, string[]],
+        [string, string, string, string, string[]],
         string,
         string,
         boolean,

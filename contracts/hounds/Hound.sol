@@ -1,14 +1,11 @@
 //SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
-
 import './Statistics.sol';
 import './Stamina.sol';
 import './Breeding.sol';
 import './Identity.sol';
 
-
 library Hound {
-    
     struct Struct {
         Statistics.Struct statistics;
         Stamina.Struct stamina;
@@ -19,5 +16,4 @@ library Hound {
         bool custom;
         bool running;
     }
-    
 }

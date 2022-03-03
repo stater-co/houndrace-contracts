@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
 
-
 library GlobalVariables {
-    
     struct Struct {
         address[] allowedCallers;
         address methods;
@@ -18,5 +16,4 @@ library GlobalVariables {
         uint256 refillStaminaCooldownCost;
         bool[] isAllowed;
     }
-
 }

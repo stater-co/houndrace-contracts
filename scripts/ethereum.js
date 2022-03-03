@@ -1,12 +1,21 @@
 const hre = require("hardhat");
 const address0 = "0x0000000000000000000000000000000000000000";
-const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5 ];
-const femaleBoilerplateGene = [ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5 ];
+const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 0, 1, 0, 8 ];
+const femaleBoilerplateGene = [ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 9, 9, 0, 1 ];
 
 async function main() {
 
 
+  const Converters = await hre.ethers.getContractFactory("Converters");
+  const converters = await Converters.deploy();
+  await converters.deployed();
+  console.log("Converters deployed to: ", converters.address);
 
+  const Sortings = await hre.ethers.getContractFactory("Sortings");
+  const sortings = await Sortings.deploy();
+  await sortings.deployed();
+  console.log("Sortings deployed to: ", sortings.address);
+  
   const RandomnessVanillaMethods = await hre.ethers.getContractFactory("RandomnessVanillaMethods");
   const randomnessVanillaMethods = await RandomnessVanillaMethods.deploy();
   await randomnessVanillaMethods.deployed();
@@ -17,8 +26,24 @@ async function main() {
   await randomnessVanillaData.deployed();
   console.log("RandomnessVanillaData deployed to: ", randomnessVanillaData.address);
 
-  const Ogars = await hre.ethers.getContractFactory("Ogars");
-  const ogars = await Ogars.deploy("OGars", "OG");
+  const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
+  const paymentsMethods = await PaymentsMethods.deploy([
+    address0,
+    []
+  ]);
+  await paymentsMethods.deployed();
+  console.log("PaymentsMethods deployed to: ", paymentsMethods.address);
+
+  const PaymentsData = await hre.ethers.getContractFactory("PaymentsData");
+  const paymentsData = await PaymentsData.deploy([
+    paymentsMethods.address,
+    []
+  ]);
+  await paymentsData.deployed();
+  console.log("PaymentsData deployed to: ", paymentsData.address);
+
+  const Ogars = await hre.ethers.getContractFactory("HoundracePotions");
+  const ogars = await Ogars.deploy("HoundracePotions", "HP");
   await ogars.deployed();
   console.log("Ogars Controlller deployed to: ", ogars.address);
 
@@ -41,24 +66,6 @@ async function main() {
   const arenaData = await ArenaContractData.deploy(arenaContractMethods.address, "HoundRace Terrains", "HrT");
   await arenaData.deployed();
   console.log("ArenasData deployed to: ", arenaData.address);
-
-  await arenaData.createArena([
-    3, // surface
-    1400, // distance
-    2 // weather
-  ]);
-
-  await arenaData.createArena([
-    2, // surface
-    900, // distance
-    3 // weather
-  ]);
-
-  await arenaData.createArena([
-    1, // surface
-    1500, // distance
-    1 // weather
-  ]);
   
   const GeneticsMethods = await hre.ethers.getContractFactory("GeneticsMethods");
   const geneticsMethods = await GeneticsMethods.deploy();
@@ -74,8 +81,8 @@ async function main() {
     femaleBoilerplateGene,
     60,
     40,
-    [2,6,10,14,18,22,26,30,34,38,42,46],
-    [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    [2,6,10,14,18,22,26,30,34,38,42,46,50],
+    [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
   ]);
   await geneticsData.deployed();
   console.log("GeneticsData deployed to: ", geneticsData.address);
@@ -104,6 +111,7 @@ async function main() {
     incubatorData.address,
     "0x4E514Af09D7674e2e2421F333f0bfb9af19dcDD8",
     shopData.address,
+    paymentsData.address,
     "0x429D069189E0000",
     "0xB1A2BC2EC50000",
     "0xB1A2BC2EC50000",
@@ -122,6 +130,7 @@ async function main() {
     incubatorData.address,
     "0x4E514Af09D7674e2e2421F333f0bfb9af19dcDD8",
     shopData.address,
+    paymentsData.address,
     "0x429D069189E0000",
     "0xB1A2BC2EC50000",
     "0xB1A2BC2EC50000",
@@ -131,7 +140,12 @@ async function main() {
   await houndsData.deployed();
   console.log("HoundsData deployed to: ", houndsData.address);
 
-  const RaceGeneratorMethods = await hre.ethers.getContractFactory("RaceGeneratorMethods");
+  const RaceGeneratorMethods = await hre.ethers.getContractFactory("RaceGeneratorMethods", {
+    libraries: {
+      Converters: converters.address,
+      Sortings: sortings.address
+    }
+  });
   const raceGeneratorMethods = await RaceGeneratorMethods.deploy();
   await raceGeneratorMethods.deployed();
   console.log("RaceGeneratorMethods deployed to: ", raceGeneratorMethods.address);
@@ -144,9 +158,7 @@ async function main() {
       houndsData.address,
       raceGeneratorMethods.address,
       raceGeneratorMethods.address,
-      raceGeneratorMethods.address,
-      "0x2386F26FC10000",
-      true
+      raceGeneratorMethods.address
     ]
   );
   await raceGeneratorData.deployed();
@@ -166,6 +178,7 @@ async function main() {
       racesMethods.address,
       racesMethods.address,
       racesMethods.address,
+      paymentsData.address,
       500000000,
       true
     ]
@@ -182,6 +195,7 @@ async function main() {
         racesData.address,
         raceGeneratorMethods.address,
         raceGeneratorMethods.address,
+        paymentsData.address,
         500000000,
         true
       ] 
@@ -237,6 +251,18 @@ async function main() {
 
   try {
     await hre.run("verify:verify", {
+      address: paymentsMethods.address,
+      constructorArguments: [
+        address0,
+        []
+      ]
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    await hre.run("verify:verify", {
       address: randomnessVanillaData.address,
       constructorArguments: [
         randomnessVanillaMethods.address
@@ -250,7 +276,7 @@ async function main() {
     await hre.run("verify:verify", {
       address: ogars.address,
       constructorArguments: [
-        "OGars", "OG"
+        "HoundracePotions", "HP"
       ]
     });
   } catch (err) {
@@ -266,6 +292,14 @@ async function main() {
         "HoundRace Terrains",
         "HrT"
       ]
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    await hre.run("verify:verify", {
+      address: converters.address
     });
   } catch (err) {
     console.error(err);
@@ -296,6 +330,7 @@ async function main() {
           incubatorData.address,
           "0x4E514Af09D7674e2e2421F333f0bfb9af19dcDD8",
           shopData.address,
+          paymentsData.address,
           "0x429D069189E0000",
           "0xB1A2BC2EC50000",
           "0xB1A2BC2EC50000",
@@ -303,6 +338,14 @@ async function main() {
           "0x2386F26FC10000"
         ]
       ]
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    await hre.run("verify:verify", {
+      address: sortings.address
     });
   } catch (err) {
     console.error(err);
@@ -351,6 +394,20 @@ async function main() {
 
   try {
     await hre.run("verify:verify", {
+      address: paymentsData.address,
+      constructorArguments: [
+        [
+          paymentsMethods.address,
+          []
+        ]
+      ]
+    });
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    await hre.run("verify:verify", {
       address: racesData.address,
       constructorArguments: [
         [
@@ -360,6 +417,7 @@ async function main() {
           racesMethods.address,
           racesMethods.address,
           racesMethods.address,
+          paymentsData.address,
           "0x2386F26FC10000",
           true
         ]
@@ -404,8 +462,8 @@ async function main() {
           femaleBoilerplateGene,
           60,
           40,
-          [2,6,10,14,18,22,26,30,34,38,42,46],
-          [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+          [2,6,10,14,18,22,26,30,34,38,42,46,50],
+          [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
         ]
       ]
     });
@@ -432,15 +490,14 @@ async function main() {
           houndsData.address,
           raceGeneratorMethods.address,
           raceGeneratorMethods.address,
-          raceGeneratorMethods.address,
-          "0x2386F26FC10000",
-          true
+          raceGeneratorMethods.address
         ]
       ]
     });
   } catch (err) {
     console.error(err);
   }
+
 
 }
 

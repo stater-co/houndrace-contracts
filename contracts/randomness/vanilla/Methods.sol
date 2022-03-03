@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
+import '@openzeppelin/contracts/access/Ownable.sol';
+import './IData.sol';
 
 
-contract RandomnessVanillaMethods {
+contract RandomnessVanillaMethods is Ownable {
     
     address public methodsContract;
 
-    function setGlobalParameters(address methods) external {
+    function setGlobalParameters(address methods) external onlyOwner {
         methodsContract = methods;
     }
 

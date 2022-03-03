@@ -41,6 +41,9 @@ async function mintHoundByAdmin(hound,isFemale) {
       houndToMint[3][4][1] = 2;
     }
   }
+  const [owner] = await ethers.getSigners();
+  const contractOwner = await houndsData.owner();
+  expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
   await houndsData.adminCreateHound(houndToMint);
 }
 
@@ -173,27 +176,35 @@ async function breed2Hounds() {
 }
 
 async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  await shopData.createDiscount([
-    erc721Address ? erc721Address : testErc721.address,
-    ids ? ids : [currentDiscountId-1],
-    dateStart ? dateStart : 0,
-    dateStop ? dateStop : 0,
-    discount ? discount : 5,
-    tokenType ? tokenType : 0,
-    usable ? usable : false
-  ]);
+  const shopOwner = await shopData.owner();
+  const [owner] = await ethers.getSigners();
+  if ( owner.address === shopOwner ) {
+    await shopData.createDiscount([
+      erc721Address ? erc721Address : testErc721.address,
+      ids ? ids : [currentDiscountId - 1],
+      dateStart ? dateStart : 0,
+      dateStop ? dateStop : 0,
+      discount ? discount : 5,
+      tokenType ? tokenType : 0,
+      usable ? usable : false
+    ]);
+  }
 }
 
 async function editDiscount(id, erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  await shopData.editDiscount([
-    erc721Address ? erc721Address : testErc721.address,
-    ids ? ids : [1],
-    dateStart ? dateStart : 0,
-    dateStop ? dateStop : 0,
-    discount ? discount : 5,
-    tokenType ? tokenType : 0,
-    usable ? usable : false
-  ],id);
+  const shopOwner = await shopData.owner();
+  const [owner] = await ethers.getSigners();
+  if ( owner.address === shopOwner ) {
+    await shopData.editDiscount([
+      erc721Address ? erc721Address : testErc721.address,
+      ids ? ids : [1],
+      dateStart ? dateStart : 0,
+      dateStop ? dateStop : 0,
+      discount ? discount : 5,
+      tokenType ? tokenType : 0,
+      usable ? usable : false
+    ],id);
+  }
 }
 
 async function mintERC1155Batch(receiver, ids, amounts, data) {
@@ -505,6 +516,7 @@ describe("Setting up the Houndrace contracts", function () {
     racesMethods = await getContractInstance("RacesMethods");
     console.log("Race methods deployed at: " + racesMethods.address);
 
+    
     racesData = await getContractInstance("RacesData",[
       paperSafetyVRFData.address,
       terrainsContractData.address,
@@ -592,7 +604,6 @@ describe("Setting up the Houndrace contracts", function () {
 });
 
 
-
 describe("After deployment calls", function () {
 
   it("Terrains data set global parameters", async function () {
@@ -602,7 +613,6 @@ describe("After deployment calls", function () {
   });
 
 });
-
 
 
 describe("Genetics methods", function () {
@@ -647,7 +657,6 @@ describe("Genetics methods", function () {
 });
 
 
-
 describe("Hounds", function () {
   
   it("Mint", async function () {
@@ -687,11 +696,6 @@ describe("Hounds", function () {
 });
 
 
-
-
-
-
-
 describe("Breed with other hounds", function () {
 
   let ownedHound, otherHound;
@@ -714,10 +718,6 @@ describe("Breed with other hounds", function () {
   });
 
 });
-
-
-
-
 
 
 describe("Races", function () {
@@ -869,6 +869,5 @@ describe("Races", function () {
       houndsStamina[i] = hound[1][2];
     }
   });
-
 
 });

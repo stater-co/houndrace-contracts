@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-pragma solidity 0.8.12;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './PaymentRequest.sol';
 import './Payment.sol';
 import './Constructor.sol';
-import 'hardhat/console.sol';
 
 
 contract PaymentsMethods is Ownable {
@@ -29,7 +27,7 @@ contract PaymentsMethods is Ownable {
 	function setGlobalParameters(
         Constructor.Struct memory input
     ) external onlyOwner {
-		control = input;
+		control.methods = input.methods;
 		for ( uint256 i = 0 ; i < input.allowed.length; ++i ) {
 			allowed[input.allowed[i]] = !allowed[input.allowed[i]];
 		}
@@ -38,7 +36,6 @@ contract PaymentsMethods is Ownable {
 	function transferTokens(
 		Payment.Struct memory payment
 	) public payable {
-		console.log("Well called here");
 		if ( payment.currency != address(0) ) {
 			require(IERC20(payment.currency).transferFrom(payment.from, payment.to, payment.qty), "15");
 		} else {

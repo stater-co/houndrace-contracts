@@ -1,10 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-
 import './Arena.sol';
 
 

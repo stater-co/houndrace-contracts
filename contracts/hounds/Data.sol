@@ -1,22 +1,16 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '../incubator/IData.sol';
 import './Constructor.sol';
 import './GlobalVariables.sol';
 import './Hound.sol';
+import '../payments/Payment.sol';
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
 
-
-/**
- * DIIMIIM: To be run with enable optimisation on 10 cycles
- */
 contract HoundsData is Ownable, ERC721, ERC721Holder {
-    
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) hounds;

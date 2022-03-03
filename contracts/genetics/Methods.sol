@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
+import '@openzeppelin/contracts/access/Ownable.sol';
+import './IData.sol';
 import './Constructor.sol';
 
 
-contract GeneticsMethods {
+contract GeneticsMethods is Ownable {
 
     Constructor.Struct public control;
     
-    function setGlobalParameters(Constructor.Struct memory input) external {
+    function setGlobalParameters(Constructor.Struct memory input) external onlyOwner {
         control = input;
     }
 

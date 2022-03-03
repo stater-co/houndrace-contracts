@@ -22,10 +22,10 @@ export interface EventOptions {
 }
 
 export type NewRace = ContractEventLog<{
-  queue: [string, string[], string, string, string, string];
-  race: [string, string[], string, string, string];
-  0: [string, string[], string, string, string, string];
-  1: [string, string[], string, string, string];
+  queue: [string, string[], string, string, string, string, string, string];
+  race: [string, string[], string, string, string, string, string];
+  0: [string, string[], string, string, string, string, string, string];
+  1: [string, string[], string, string, string, string, string];
 }>;
 export type OwnershipTransferred = ContractEventLog<{
   previousOwner: string;
@@ -42,27 +42,19 @@ export interface RaceGeneratorData extends BaseContract {
   ): RaceGeneratorData;
   clone(): RaceGeneratorData;
   methods: {
-    compoundTransfer(
-      payments: [string, string, string, number | string | BN][]
-    ): PayableTransactionObject<void>;
-
     control(): NonPayableTransactionObject<{
       randomness: string;
       terrains: string;
       hounds: string;
       allowed: string;
       methods: string;
-      raceGenerator: string;
-      raceFee: string;
-      callable: boolean;
+      payments: string;
       0: string;
       1: string;
       2: string;
       3: string;
       4: string;
       5: string;
-      6: string;
-      7: boolean;
     }>;
 
     generate(
@@ -72,25 +64,21 @@ export interface RaceGeneratorData extends BaseContract {
         number | string | BN,
         number | string | BN,
         number | string | BN,
-        number | string | BN
+        number | string | BN,
+        string | number[]
       ]
-    ): PayableTransactionObject<[string, string[], string, string, string]>;
+    ): PayableTransactionObject<
+      [string, string[], string, string, string, string, string]
+    >;
+
+    houndsContract(): NonPayableTransactionObject<string>;
 
     owner(): NonPayableTransactionObject<string>;
 
     renounceOwnership(): NonPayableTransactionObject<void>;
 
     setGlobalParameters(
-      input: [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        number | string | BN,
-        boolean
-      ]
+      input: [string, string, string, string, string, string]
     ): NonPayableTransactionObject<void>;
 
     simulateClassicRace(
@@ -118,6 +106,7 @@ export interface RaceGeneratorData extends BaseContract {
           number | string | BN,
           number | string | BN,
           number | string | BN,
+          number | string | BN,
           (number | string | BN)[]
         ],
         string,
@@ -130,13 +119,6 @@ export interface RaceGeneratorData extends BaseContract {
     ): NonPayableTransactionObject<string>;
 
     transferOwnership(newOwner: string): NonPayableTransactionObject<void>;
-
-    transferTokens(
-      from: string,
-      to: string,
-      currency: string,
-      qty: number | string | BN
-    ): NonPayableTransactionObject<void>;
   };
   events: {
     NewRace(cb?: Callback<NewRace>): EventEmitter;

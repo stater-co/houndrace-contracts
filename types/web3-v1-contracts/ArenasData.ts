@@ -40,18 +40,18 @@ export type ApprovalForAll = ContractEventLog<{
 export type EditArena = ContractEventLog<{
   id: string;
   owner: string;
-  arena: [string, string, string];
+  arena: [string, string, string, string, string];
   0: string;
   1: string;
-  2: [string, string, string];
+  2: [string, string, string, string, string];
 }>;
 export type NewArena = ContractEventLog<{
   id: string;
   owner: string;
-  arena: [string, string, string];
+  arena: [string, string, string, string, string];
   0: string;
   1: string;
-  2: [string, string, string];
+  2: [string, string, string, string, string];
 }>;
 export type OwnershipTransferred = ContractEventLog<{
   previousOwner: string;
@@ -83,26 +83,42 @@ export interface ArenasData extends BaseContract {
 
     arena(
       theId: number | string | BN
-    ): NonPayableTransactionObject<[string, string, string]>;
+    ): NonPayableTransactionObject<[string, string, string, string, string]>;
 
     arenas(arg0: number | string | BN): NonPayableTransactionObject<{
+      owner: string;
+      fee: string;
       surface: string;
       distance: string;
       weather: string;
       0: string;
       1: string;
       2: string;
+      3: string;
+      4: string;
     }>;
 
     balanceOf(owner: string): NonPayableTransactionObject<string>;
 
     createArena(
-      arena: [number | string | BN, number | string | BN, number | string | BN]
+      arena: [
+        string,
+        number | string | BN,
+        number | string | BN,
+        number | string | BN,
+        number | string | BN
+      ]
     ): NonPayableTransactionObject<void>;
 
     editArena(
       theId: number | string | BN,
-      arena: [number | string | BN, number | string | BN, number | string | BN]
+      arena: [
+        string,
+        number | string | BN,
+        number | string | BN,
+        number | string | BN,
+        number | string | BN
+      ]
     ): NonPayableTransactionObject<void>;
 
     getApproved(

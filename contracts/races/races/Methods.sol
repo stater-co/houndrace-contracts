@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../hounds/Hound.sol';
 import '../../hounds/IData.sol';
@@ -53,11 +52,8 @@ contract RacesMethods is Ownable {
 
     function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external onlyOwner {
         
-        // Save the finished race
         races[id] = race;
 
-        // Perform all race payments / rewards
-        // Send the rewards to players
         (bool success, ) = control.payments.delegatecall(
             abi.encodeWithSignature(
                 "sendHardcodedPayments((address,address,address,uint256[],uint256,uint256,uint32)[])",
@@ -68,7 +64,6 @@ contract RacesMethods is Ownable {
 
         emit UploadRace(id, race);
 
-        // Increase the finished race id
         ++id;
 
     }
@@ -79,20 +74,16 @@ contract RacesMethods is Ownable {
 
         require(queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp, "33");
 
-        // Queue verifications
         require(msg.value >= queues[theId].entryFee, "17");
 
-        // Hound verifications
         Hound.Struct memory houndObj = IHoundsData(control.hounds).hound(hound);
 
         require(!houndObj.running, "13");
 
-        // Adds the participant in the queue
         queues[theId].participants.push(hound);
         
         IHoundsData(control.hounds).updateHoundStamina(hound);
 
-        // If last participant in the queue is calling this
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
             if ( control.callable ) {
