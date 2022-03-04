@@ -33,7 +33,7 @@ contract IncubatorMethods is Ownable {
         );
 
         Stamina.Struct memory stamina = Stamina.Struct(
-            block.timestamp,
+            0,
             10000000000000000, // 0.01 ETH
             100,
             1,
@@ -43,7 +43,7 @@ contract IncubatorMethods is Ownable {
         Breeding.Struct memory breeding = Breeding.Struct(
             control.secondsToMaturity, 
             300000000000000000, // 0.3 ETH
-            block.timestamp,
+            0,
             false
         );
 
@@ -51,7 +51,6 @@ contract IncubatorMethods is Ownable {
             0,
             hound1,
             hound2,
-            block.timestamp,
             genetics // preferences will be extracted from this 
         );
 

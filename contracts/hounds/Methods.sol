@@ -57,13 +57,14 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
     }
     
     function updateHound(uint256 theId, string memory houndName) external {
-        require(ownerOf(theId) == msg.sender, "20");
+        require(ownerOf(theId) == msg.sender);
         hounds[theId].title = houndName;
         emit HoundNameChanded(theId,houndName);
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
         require(hounds[hound2].breeding.breedCooldown < block.timestamp && hounds[hound1].breeding.breedCooldown < block.timestamp);
+        require(!hounds[hound1].running && !hounds[hound2].running);
         require(ownerOf(hound1) == msg.sender);
         uint256[] memory tmp;
         if ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ) {

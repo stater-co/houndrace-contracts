@@ -14,7 +14,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
   [ 1000, 100000, 1000, false ],
-  [ 0, 0, 0, 0, maleBoilerplateGene ],
+  [ 0, 0, 0, maleBoilerplateGene ],
   "",
   "",
   false,
@@ -38,7 +38,7 @@ async function mintHoundByAdmin(hound,isFemale) {
   } else {
     houndToMint = defaultHound;
     if ( isFemale ) {
-      houndToMint[3][4][1] = 2;
+      houndToMint[3][3][1] = 2;
     }
   }
   const [owner] = await ethers.getSigners();
