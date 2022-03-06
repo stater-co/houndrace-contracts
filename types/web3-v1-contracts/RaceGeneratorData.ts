@@ -106,7 +106,6 @@ export interface RaceGeneratorData extends BaseContract {
           number | string | BN,
           number | string | BN,
           number | string | BN,
-          number | string | BN,
           (number | string | BN)[]
         ],
         string,
