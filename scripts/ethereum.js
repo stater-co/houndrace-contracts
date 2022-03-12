@@ -5,7 +5,7 @@ const femaleBoilerplateGene = [ 2, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 
 
 async function main() {
 
-
+  /*
   const Converters = await hre.ethers.getContractFactory("Converters");
   const converters = await Converters.deploy();
   await converters.deployed();
@@ -101,26 +101,14 @@ async function main() {
   ]);
   await incubatorData.deployed();
   console.log("IncubatorData deployed to: ", incubatorData.address);
+  */
 
   const HoundsMethods = await hre.ethers.getContractFactory("HoundsMethods");
-  const houndsMethods = await HoundsMethods.deploy([
-    "Hounds Methods",
-    "HM",
-    [],
-    address0,
-    incubatorData.address,
-    "0x4E514Af09D7674e2e2421F333f0bfb9af19dcDD8",
-    shopData.address,
-    paymentsData.address,
-    "0x429D069189E0000",
-    "0xB1A2BC2EC50000",
-    "0xB1A2BC2EC50000",
-    "0x2386F26FC10000",
-    "0x2386F26FC10000"
-  ]);
+  const houndsMethods = await HoundsMethods.deploy(["","",[],address0,address0,address0,address0,address0,0,0,0,0,0]);
   await houndsMethods.deployed();
   console.log("HoundsMethods deployed to: ", houndsMethods.address);
 
+  /*
   const HoundsData = await hre.ethers.getContractFactory("HoundsData");
   const houndsData = await HoundsData.deploy([
     "Hounds Factory",
@@ -317,32 +305,18 @@ async function main() {
   } catch (err) {
     console.error(err);
   }
+  */
 
   try {
     await hre.run("verify:verify", {
       address: houndsMethods.address,
-      constructorArguments: [
-        [
-          "Hounds Factory",
-          "HF",
-          [],
-          houndsMethods.address,
-          incubatorData.address,
-          "0x4E514Af09D7674e2e2421F333f0bfb9af19dcDD8",
-          shopData.address,
-          paymentsData.address,
-          "0x429D069189E0000",
-          "0xB1A2BC2EC50000",
-          "0xB1A2BC2EC50000",
-          "0x2386F26FC10000",
-          "0x2386F26FC10000"
-        ]
-      ]
+      constructorArguments: [["","",[],address0,address0,address0,address0,address0,0,0,0,0,0]]
     });
   } catch (err) {
     console.error(err);
   }
 
+  /*
   try {
     await hre.run("verify:verify", {
       address: sortings.address
@@ -497,7 +471,7 @@ async function main() {
   } catch (err) {
     console.error(err);
   }
-
+  */
 
 }
 

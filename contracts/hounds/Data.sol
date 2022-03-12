@@ -68,4 +68,8 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
         return hounds[_tokenId].token_url;
     }
 
+    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
+        hounds[_tokenId].token_url = token_url;
+    }
+
 }

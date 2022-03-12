@@ -50,7 +50,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
 
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         if ( onId > 0 ) {
-            require(hounds[onId].identity.maleParent == 0);
+            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap > 0);
             emit NewHound(onId,msg.sender,theHound);
             hounds[onId] = theHound;
             _safeMint(msg.sender,onId);
@@ -162,6 +162,10 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
 
     function hound(uint256 theId) external view returns(Hound.Struct memory) {
         return hounds[theId];
+    }
+
+    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
+        hounds[_tokenId].token_url = token_url;
     }
 
 }

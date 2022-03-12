@@ -17,4 +17,5 @@ interface IHoundsData {
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) external;
     function transferFrom(address from, address to, uint256 tokenId) external;
     function tokenURI(uint256 _tokenId) external view returns(string memory);
+    function setTokenURI(uint256 _tokenId, string memory token_url) external;
 }
