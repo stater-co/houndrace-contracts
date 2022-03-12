@@ -13,7 +13,7 @@ raceGeneratorData, raceGeneratorMethods, houndracePotions, shopData, shopMethods
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
-  [ 1000, 100000, 1000, false ],
+  [ 0, 100000, 1000, false ],
   [ 0, 0, 0, maleBoilerplateGene ],
   "",
   "",
@@ -44,7 +44,7 @@ async function mintHoundByAdmin(hound,isFemale) {
   const [owner] = await ethers.getSigners();
   const contractOwner = await houndsData.owner();
   expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
-  await houndsData.adminCreateHound(houndToMint);
+  await houndsData.initializeHound(0,houndToMint);
 }
 
 async function safelyMintHoundByAdmin(hound,isFemale) {
@@ -103,8 +103,8 @@ async function checkHoundStructure(houndId) {
   // Check the hound total fields
   expect(hound.length === defaultHound.length, "Hound has been partially received from contract");
 
-  const houndGene = hound[3][4];
-  expect(houndGene.length === defaultHound[3][4].length, "Hound getter mechanism problems");
+  const houndGene = hound[3][3];
+  expect(houndGene.length === defaultHound[3][3].length, "Hound getter mechanism problems");
 }
 
 async function findMaleAndFemaleAvailableForBreed() {
@@ -114,7 +114,7 @@ async function findMaleAndFemaleAvailableForBreed() {
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
     const hound = await houndsData.hound(i);
-    const houndGene = hound[3][4];
+    const houndGene = hound[3][3];
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -714,7 +714,7 @@ describe("Breed with other hounds", function () {
 
   it("Make hound available to breed", async function () {
     const houndId = await houndsData.id();
-    await houndsData.putHoundForBreed(houndId-1,0,true);
+    await houndsData.putHoundForBreed(houndId-2,0,true);
   });
 
 });

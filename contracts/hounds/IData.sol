@@ -5,7 +5,7 @@ import './Hound.sol';
 
 interface IHoundsData {
     function setGlobalParameters(GlobalVariables.Struct memory input) external;
-    function adminCreateHound(Hound.Struct memory theHounds) external;
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external;
     function breedHounds(uint256 hound1, uint256 hound2) external payable;
     function updateHoundStamina(uint256 theId) external;
     function updateHoundBreeding(uint256 theId, uint256 breedingCooldownToConsume) external;
@@ -17,5 +17,4 @@ interface IHoundsData {
     function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) external;
     function transferFrom(address from, address to, uint256 tokenId) external;
     function tokenURI(uint256 _tokenId) external view returns(string memory);
-    function setTokenURI(uint256 _tokenId, string memory token_url) external;
 }

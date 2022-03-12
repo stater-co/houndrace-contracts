@@ -13,12 +13,11 @@ interface ShopDataInterface { function calculateDiscount(address requester) exte
 contract HoundsMethods is Ownable, ERC721, ERC721Holder {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) hounds;
+    mapping(uint256 => Hound.Struct) public hounds;
     string error = "Failed to delegatecall";
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event HoundBreedable(uint256 indexed id, uint256 price);
-    event HoundNameChanded(uint256 indexed id, string name);
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
     Constructor.Struct public control;
@@ -49,17 +48,18 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
 
     }
 
-    function adminCreateHound(Hound.Struct memory theHound) external onlyOwner {
-        emit NewHound(id,msg.sender,theHound);
-        hounds[id] = theHound;
-        _safeMint(msg.sender,id);
-        ++id;
-    }
-    
-    function updateHound(uint256 theId, string memory houndName) external {
-        require(ownerOf(theId) == msg.sender);
-        hounds[theId].title = houndName;
-        emit HoundNameChanded(theId,houndName);
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
+        if ( onId > 0 ) {
+            require(hounds[onId].identity.maleParent == 0);
+            emit NewHound(onId,msg.sender,theHound);
+            hounds[onId] = theHound;
+            _safeMint(msg.sender,onId);
+        } else {
+            emit NewHound(id,msg.sender,theHound);
+            hounds[id] = theHound;
+            _safeMint(msg.sender,id);
+            ++id;
+        }
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
@@ -112,6 +112,7 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
         updateHoundBreeding(hound1,0);
         updateHoundBreeding(hound2,0);
         emit BreedHound(id,msg.sender,offspring);
+        ++id;
     }
     
     function updateHoundStamina(uint256 theId) public payable {
@@ -155,16 +156,12 @@ contract HoundsMethods is Ownable, ERC721, ERC721Holder {
         emit HoundBreedable(theId,fee);
     }
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
-    }
-
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_url;
     }
-    
-    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
-        hounds[_tokenId].token_url = token_url;
+
+    function hound(uint256 theId) external view returns(Hound.Struct memory) {
+        return hounds[theId];
     }
 
 }

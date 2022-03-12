@@ -38,7 +38,6 @@ export type ApprovalForAll = ContractEventLog<{
   2: boolean;
 }>;
 export type BreedHound = ContractEventLog<{
-  id: string;
   owner: string;
   hound: [
     [string, string, string, string],
@@ -51,8 +50,7 @@ export type BreedHound = ContractEventLog<{
     boolean
   ];
   0: string;
-  1: string;
-  2: [
+  1: [
     [string, string, string, string],
     [string, string, string, string, string],
     [string, string, string, boolean],

@@ -13,12 +13,11 @@ interface ShopDataInterface { function calculateDiscount(address requester) exte
 contract HoundsData is Ownable, ERC721, ERC721Holder {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) hounds;
+    mapping(uint256 => Hound.Struct) public hounds;
     string error = "Failed to delegatecall";
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event HoundBreedable(uint256 indexed id, uint256 price);
-    event HoundNameChanded(uint256 indexed id, string name);
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
     Constructor.Struct public control;
@@ -36,12 +35,7 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
         require(success,error);
     }
     
-    function adminCreateHound(Hound.Struct memory theHound) external onlyOwner {
-        (bool success, ) = control.methods.delegatecall(msg.data);
-        require(success,error);
-    }
-    
-    function updateHound(uint256 theId, string memory houndName) external {
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success,error);
     }
@@ -72,10 +66,6 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_url;
-    }
-    
-    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
-        hounds[_tokenId].token_url = token_url;
     }
 
 }
