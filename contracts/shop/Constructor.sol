@@ -2,10 +2,9 @@
 pragma solidity <=0.8.12;
 
 
-library Constructor {
+library ShopConstructor {
     
     struct Struct {
-
         address methods;
     }
 

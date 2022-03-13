@@ -4,7 +4,7 @@ import './Discount.sol';
 import './Constructor.sol';
 
 interface IShopData {
-    function setGlobalParameters(Constructor.Struct memory input) external;
+    function setGlobalParameters(ShopConstructor.Struct memory input) external;
     function createDiscount(Discount.Struct memory discount) external;
     function editDiscount(Discount.Struct memory discount, uint256 theId) external;
     function calculateDiscount(address requester) external returns(uint256);

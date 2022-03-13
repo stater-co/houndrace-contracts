@@ -12,7 +12,7 @@ interface Geyser{ function totalStakedFor(address addr) external view returns(ui
 contract ShopMethods is Ownable {
     
     uint256 public id = 1;
-    Constructor.Struct public control;
+    ShopConstructor.Struct public control;
 
     // list of allowed contracts to use discount nfts on methods call
     mapping(address => bool) allowed;
@@ -23,7 +23,7 @@ contract ShopMethods is Ownable {
     event NewDiscount(uint256 indexed id, Discount.Struct discount);
 
     function setGlobalParameters(
-        Constructor.Struct memory input
+        ShopConstructor.Struct memory input
     ) external onlyOwner {
         control = input;
     }

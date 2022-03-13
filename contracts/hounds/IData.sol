@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
 import './GlobalVariables.sol';
-import './Hound.sol';
+import './hound/Index.sol';
 
 interface IHoundsData {
     function setGlobalParameters(GlobalVariables.Struct memory input) external;

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
 
-library Constructor {
+library PaymentsConstructor {
     
     struct Struct {
         address methods;

@@ -1,19 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.12;
 
-library GlobalVariables {
+library ConstructorFees {
     struct Struct {
-        address[] allowedCallers;
-        address methods;
-        address incubator;
-        address staterApi;
-        address shop;
-        address payments;
         uint256 breedCost;
         uint256 breedFee;
         uint256 refillCost;
         uint256 refillBreedingCooldownCost;
         uint256 refillStaminaCooldownCost;
-        bool[] isAllowed;
     }
 }

@@ -6,7 +6,7 @@ import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '../incubator/IData.sol';
 import './Constructor.sol';
 import './GlobalVariables.sol';
-import './Hound.sol';
+import './hound/Index.sol';
 import '../payments/Payment.sol';
 interface ShopDataInterface { function calculateDiscount(address requester) external returns(uint256); }
 
@@ -26,18 +26,6 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
         Constructor.Struct memory input
     ) ERC721(input.name,input.symbol) {
         control = input;
-    }
-
-    function setGlobalParameters(
-        GlobalVariables.Struct memory input
-    ) external onlyOwner {
-        (bool success, ) = input.methods.delegatecall(msg.data);
-        require(success,error);
-    }
-    
-    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
-        (bool success, ) = control.methods.delegatecall(msg.data);
-        require(success,error);
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
@@ -66,10 +54,6 @@ contract HoundsData is Ownable, ERC721, ERC721Holder {
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_url;
-    }
-
-    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
-        hounds[_tokenId].token_url = token_url;
     }
 
 }

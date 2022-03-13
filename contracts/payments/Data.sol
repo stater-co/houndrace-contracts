@@ -11,7 +11,7 @@ contract PaymentsData is Ownable {
 
 	mapping(address => bool) public allowed;
 	mapping(uint256 => Payment.Struct[]) public payments;
-	Constructor.Struct public control;
+	PaymentsConstructor.Struct public control;
     string error = "Failed to delegatecall";
 
 	modifier isAllowed {
@@ -19,14 +19,14 @@ contract PaymentsData is Ownable {
 		_;
 	}
 
-	constructor(Constructor.Struct memory input) {
+	constructor(PaymentsConstructor.Struct memory input) {
 		for ( uint256 i = 0 ; i < input.allowed.length ; ++i ) 
 			allowed[input.allowed[i]] = true;
 		control = input;
 	}
 
 	function setGlobalParameters(
-        Constructor.Struct memory input
+        PaymentsConstructor.Struct memory input
     ) external onlyOwner {
         (bool success, bytes memory output) = input.methods.delegatecall(msg.data);
         require(success,error);
