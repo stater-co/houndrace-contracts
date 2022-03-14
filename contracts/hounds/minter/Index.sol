@@ -45,7 +45,7 @@ contract HoundsMinter is Params {
         );
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
-        Hound.Struct memory offspring = IIncubatorMinterMethods(control.boilerplate.incubator).breedHounds(
+        Hound.Struct memory offspring = IIncubatorMethods(control.boilerplate.incubator).breedHounds(
             hound1, 
             hounds[hound1].identity.geneticSequence, 
             hound2, 

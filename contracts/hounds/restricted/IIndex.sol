@@ -4,7 +4,7 @@ import '../hound/Index.sol';
 import '../params/GlobalVariables.sol';
 
 
-interface IHoundsRestrictedMethods {
+interface IHoundsRestricted {
 
     function setGlobalParameters(GlobalVariables.Struct memory input) external;
     

@@ -2,7 +2,7 @@
 pragma solidity 0.8.12;
 
 
-interface IRandomnessRestrictedMethods {
+interface IRandomnessRestricted {
     
     function setGlobalParameters(address methods) external;
 

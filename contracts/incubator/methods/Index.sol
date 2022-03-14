@@ -2,19 +2,19 @@
 pragma solidity 0.8.12;
 import '../../hounds/hound/Index.sol';
 import '../params/Constructor.sol';
-import '../../genetics/methods/IIndex.sol';
+import '../../genetics/zerocost/IIndex.sol';
 import '../../randomness/zerocost/IIndex.sol';
 
 
-contract IncubatorMinterMethods {
+contract IncubatorMethods {
     
     IncubatorConstructor.Struct public control;
 
     function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
-        uint32[54] memory genetics = IGeneticsZerocostMethods(control.genetics).mixGenes(
+        uint32[54] memory genetics = IGeneticsZerocost(control.genetics).mixGenes(
             hound1GeneticSequence, 
             hound2GeneticSequence, 
-            IRandomnessMethods(control.randomness).getRandomNumber(
+            IRandomnessZerocost(control.randomness).getRandomNumber(
                 abi.encode(hound1 > hound2 ? hound1GeneticSequence : hound2GeneticSequence)
             )
         );

@@ -2,7 +2,9 @@
 pragma solidity 0.8.12;
 import '../params/Index.sol';
 
-abstract contract HoundsZerocost is Params {
+contract HoundsZerocost is Params {
+
+    constructor() ERC721("","") {}
 
     function hound(uint256 theId) external view returns(Hound.Struct memory) {
         return hounds[theId];

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './params/Index.sol';
 import './payment/Request.sol';
 
 
-contract PaymentsData is Params, Ownable {
+contract Payments is Params {
 
 	constructor(PaymentsConstructor.Struct memory input) {
 		for ( uint256 i = 0 ; i < input.allowed.length ; ++i ) 

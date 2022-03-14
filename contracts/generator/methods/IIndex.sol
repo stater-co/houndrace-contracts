@@ -4,7 +4,7 @@ import '../../races/params/Queue.sol';
 import '../../races/params/Race.sol';
 
 
-interface GeneratorMethods {
+interface IGeneratorMethods {
 
     function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race);
 

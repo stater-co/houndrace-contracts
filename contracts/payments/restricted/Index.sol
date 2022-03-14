@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 import '../params/Constructor.sol';
 
 
-contract PaymentsRestrictedMethods {
+contract PaymentsRestricted {
 
 	mapping(address => bool) public allowed;
 	PaymentsConstructor.Struct public control;

@@ -1,13 +1,12 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
 import './zerocost/Index.sol';
 import './params/Index.sol';
 
 
-contract Shop is Params, Ownable {
+contract Shop is Params {
 
     constructor(ShopConstructor.Struct memory input) {
         control = input;

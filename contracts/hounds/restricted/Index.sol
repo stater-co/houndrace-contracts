@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 import '../params/Index.sol';
 
 
-contract HoundsRestrictedMethods is Params {
+contract HoundsRestricted is Params {
 
     constructor() ERC721("","") {}
 
@@ -14,10 +14,8 @@ contract HoundsRestrictedMethods is Params {
         for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
             allowed[input.allowedCallers[i]] = input.isAllowed[i];
 
-        control.boilerplate.methods = input.boilerplate.methods;
         control.boilerplate.incubator = input.boilerplate.incubator;
         control.boilerplate.staterApi = input.boilerplate.staterApi;
-        control.boilerplate.shop = input.boilerplate.shop;
         control.boilerplate.payments = input.boilerplate.payments;
         control.boilerplate.restricted = input.boilerplate.restricted;
         control.fees.breedCost = input.fees.breedCost;

@@ -1,15 +1,9 @@
 const { expect } = require("chai");
-const { ethers, waffle } = require("hardhat");
-const Web3 = require('web3');
-const web3 = new Web3(process.env.WSS);
+const { ethers } = require("hardhat");
 
 const address0 = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
-let paperSafetyVRFMethods, paperSafetyVRFData, geneticsData, geneticsMethods, 
-terrainsContractMethods, terrainsContractData, paymentsData, paymentsMethods, convertersLibrary, sortingsLibrary, 
-commonIncubatorMethods, commonIncubatorData, houndsMethods, houndsData, racesMethods, racesData, 
-raceGeneratorData, raceGeneratorMethods, houndracePotions, shopData, shopMethods, testErc721, testErc1155;
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
@@ -21,6 +15,57 @@ const defaultHound = [
   false
 ];
 let currentDiscountId = 1;
+let payments = {
+  main: null,
+  methods: null,
+  restricted: null
+};
+let shop = {
+  main: null,
+  methods: null,
+  restricted: null,
+  zerocost: null
+};
+let randomness = {
+  restricted: null,
+  zerocost: null,
+  main: null
+};
+let arenas = {
+  main: null,
+  restricted: null,
+  zerocost: null
+};
+let genetics = {
+  main: null,
+  restricted: null,
+  zerocost: null
+};
+let incubator = {
+  methods: null,
+  restricted: null,
+  main: null
+};
+let hound = {
+  minter: null,
+  modifier: null,
+  restricted: null,
+  zerocost: null,
+  main: null
+};
+let generator = {
+  methods: null,
+  restricted: null,
+  zerocost: null, 
+  main: null
+};
+let races = {
+  methods: null,
+  restricted: null,
+  zerocost: null,
+  main: null
+};
+
 
 // @DIIMIIM: Get smart contract instance
 async function getContractInstance(name,constructor) {
@@ -176,10 +221,10 @@ async function breed2Hounds() {
 }
 
 async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  const shopOwner = await shopData.owner();
+  const shopOwner = await shop.main.owner();
   const [owner] = await ethers.getSigners();
   if ( owner.address === shopOwner ) {
-    await shopData.createDiscount([
+    await shop.main.createDiscount([
       erc721Address ? erc721Address : testErc721.address,
       ids ? ids : [currentDiscountId - 1],
       dateStart ? dateStart : 0,
@@ -192,10 +237,10 @@ async function createDiscount(erc721Address, ids, dateStart, dateStop, discount,
 }
 
 async function editDiscount(id, erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  const shopOwner = await shopData.owner();
+  const shopOwner = await shop.main.owner();
   const [owner] = await ethers.getSigners();
   if ( owner.address === shopOwner ) {
-    await shopData.editDiscount([
+    await shop.main.editDiscount([
       erc721Address ? erc721Address : testErc721.address,
       ids ? ids : [1],
       dateStart ? dateStart : 0,
@@ -241,6 +286,8 @@ describe("Setting up the used libraries", function () {
 
 });
 
+
+
 describe("Setting up the Payments System", function () {
   
   it("Deploy the HoundRace Potions contract", async function () {
@@ -250,10 +297,12 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the payments contract", async function () {
-    paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
-    console.log("Payments method: " + paymentsMethods.address);
-    paymentsData = await getContractInstance("PaymentsData",[paymentsMethods.address,[]]);
-    console.log("Payments data: " + paymentsData.address);
+    payments.methods = await getContractInstance("PaymentsMethods");
+    console.log("Payments method: " + payments.methods.address);
+    payments.restricted = await getContractInstance("PaymentsRestricted");
+    console.log("Payments restricted: " + payments.restricted.address);
+    payments.main = await getContractInstance("Payments",[payments.methods.address,payments.restricted.address,[]]);
+    console.log("Payments data: " + payments.main.address);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -277,13 +326,14 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the Payments methods contract", async function () {
-    shopMethods = await getContractInstance("ShopMethods");
-    console.log("Shop methods: " + shopMethods.address);
-  });
-
-  it("Deploy the Payments data contract", async function () {
-    shopData = await getContractInstance("ShopData",[shopMethods.address]);
-    console.log("Shop data: " + shopData.address);
+    shop.zerocost = await getContractInstance("ShopZerocost");
+    console.log("Shop zerocost: " + shop.zerocost.address);
+    shop.restricted = await getContractInstance("ShopRestricted");
+    console.log("Shop restricted: " + shop.restricted.address);
+    shop.methods = await getContractInstance("ShopMethods");
+    console.log("Shop methods: " + shop.methods.address);
+    shop.main = await getContractInstance("Shop",[shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    console.log("Shop: " + shop.main.address);
   });
 
   it("Add discounts", async function () {
@@ -331,62 +381,34 @@ describe("Setting up the Payments System", function () {
 
 describe("Setting up the Houndrace contracts", function () {
   
-  it("Paper Safe VRF Generator Methods", async function () {
-    paperSafetyVRFMethods = await getContractInstance("RandomnessVanillaMethods");
-    console.log("Paper Safe VRF Generator Methods deployed at: " + paperSafetyVRFMethods.address);
+  it("Deploy the randomness contracts", async function () {
+    randomness.zerocost = await getContractInstance("RandomnessZerocost");
+    console.log("Zerocost contract deployed at: " + randomness.zerocost.address);
+    randomness.restricted = await getContractInstance("RandomnessRestricted");
+    console.log("Restricted contract deployed at: " + randomness.restricted.address);
+    randomness.main = await getContractInstance("Randomness",[randomness.zerocost.address,randomness.restricted.address]);
+    console.log("Randomness main deployed at: " + randomness.main.address);
   });
 
-  it("Paper Safe VRF Generator Data", async function () {
-    paperSafetyVRFData = await getContractInstance("RandomnessVanillaData",paperSafetyVRFMethods.address);
-    console.log("Paper Safe VRF Generator Data deployed at: " + paperSafetyVRFData.address);
-
-    const paperSafetyVRFMethodsAddress = await paperSafetyVRFData.methodsContract();
-    expect(paperSafetyVRFMethodsAddress === paperSafetyVRFMethods.address, "Bad Paper Safety");
-  });
-
-  it("Terrains methods", async function () {
-    const TerrainsContractMethods = await hre.ethers.getContractFactory("ArenasMethods");
-    terrainsContractMethods = await TerrainsContractMethods.deploy("HoundRace Terrains","HrT");
-    await terrainsContractMethods.deployed();
-    console.log("Terrains methods deployed at: " + terrainsContractMethods.address);
-  });
-
-  it("Terrains data", async function () {
-    const TerrainsContractData = await hre.ethers.getContractFactory("ArenasData");
-    terrainsContractData = await TerrainsContractData.deploy(terrainsContractMethods.address,"HoundRace Terrains","HrT");
-    await terrainsContractData.deployed();
-    console.log("Terrains data at: " + terrainsContractData.address);
+  it("Deploy the arenas contracts", async function () {
+    arenas.zerocost = await getContractInstance("ArenasZerocost");
+    console.log("Zerocost contract deployed at: " + arenas.zerocost.address);
+    arenas.restricted = await getContractInstance("ArenasRestricted");
+    console.log("Restricted contract deployed at: " + arenas.restricted.address);
+    arenas.main = await getContractInstance("Arenas",[arenas.zerocost.address,arenas.restricted.address]);
+    console.log("Arenas contract deployed at: " + arenas.main.address);
   });
 
   it("Genetics methods", async function () {
-    geneticsMethods = await getContractInstance("GeneticsMethods");
-    console.log("Genetics methods at: " + geneticsMethods.address);
-    
-    await geneticsMethods.setGlobalParameters(
-      [
-        paperSafetyVRFData.address,
-        address0,
-        terrainsContractData.address,
-        maleBoilerplateGene,
-        femaleBoilerplateGene,
-        60,
-        40,
-        [2,6,10,14,18,22,26,30,34,38,42,46,50],
-        [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-      ]
-    );
-    const control = await geneticsMethods.control();
-    expect(control[0] === paperSafetyVRFData.address, "Genetics methods : bad VRF address");
-    expect(control[1] === address0, "Genetics methods : bad methods address");
-    expect(control[2] === terrainsContractData.address, "Genetics methods : bad terrains address");
-    expect(control[3] === terrainsContractData.address, "Genetics methods : bad terrains address");
-  });
-
-  it("Genetics data", async function () {
-    geneticsData = await getContractInstance("GeneticsData",[
-      paperSafetyVRFData.address,
-      geneticsMethods.address,
-      terrainsContractData.address,
+    genetics.restricted = await getContractInstance("GeneticsRestricted");
+    console.log("Restricted contract deployed at: " + genetics.restricted.address);
+    genetics.zerocost = await getContractInstance("GeneticsZerocost");
+    console.log("Zerocost contract deployed at: " + genetics.zerocost.address);
+    genetics.main = await getContractInstance("Genetics",[
+      randomness.main.address,
+      genetics.zerocost.address,
+      genetics.restricted.address,
+      arenas.main.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
       60,
@@ -394,216 +416,138 @@ describe("Setting up the Houndrace contracts", function () {
       [2,6,10,14,18,22,26,30,34,38,42,46,50],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
-    console.log("Genetics data at: " + geneticsData.address);
-    const control = await geneticsData.control();
-    expect(control[0] === paperSafetyVRFData.address, "Genetics data : bad VRF address");
-    expect(control[1] === geneticsMethods.address, "Genetics data : bad methods address");
-    expect(control[2] === terrainsContractData.address, "Genetics data : bad terrains address");
-    expect(control[3] === terrainsContractData.address, "Genetics data : bad terrains address");
+    console.log("Genetics contract deployed at: " + genetics.main.address);
   });
 
-  it("Common incubator", async function () {
-    commonIncubatorMethods = await getContractInstance("IncubatorMethods");
-    console.log("Common incubator methods deployed at: " + commonIncubatorMethods.address);
-
-    commonIncubatorData = await getContractInstance("IncubatorData",[
-      commonIncubatorMethods.address,
-      paperSafetyVRFData.address,
-      geneticsData.address,
+  it("Deploy the incubator contracts", async function () {
+    incubator.methods = await getContractInstance("IncubatorMethods");
+    console.log("Methods contract deployed at: " + incubator.methods.address);
+    incubator.restricted = await getContractInstance("IncubatorRestricted");
+    console.log("Restricted contract deployed at: " + incubator.restricted.address);
+    incubator.main = await getContractInstance("Incubator",[
+      incubator.methods.address,
+      incubator.restricted.address,
+      randomness.main.address,
+      genetics.main.address,
       "0x67657452"
     ]);
-    console.log("Common incubator data deployed at: " + commonIncubatorData.address);
-
-    await commonIncubatorMethods.setGlobalParameters([
-      commonIncubatorMethods.address,
-      paperSafetyVRFData.address,
-      geneticsData.address,
-      "0x67657452"
-    ]);
-
-    const control1 = await commonIncubatorMethods.control();
-    expect(control1[0] === commonIncubatorMethods.address, "Common incubator methods : bad common incubator methods address");
-    expect(control1[1] === paperSafetyVRFData.address, "Common incubator methods : bad VRF address");
-    expect(control1[2] === geneticsData.address, "Common incubator methods : bad genetics data address");
-    expect(control1[3] === "0x67657452", "Common incubator methods : seconds to maturity");
-
-    const control = await commonIncubatorData.control();
-    expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
-    expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
-    expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
-    expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
+    console.log("Incubator contract deployed at: " + incubator.main.address);
 
   });
 
-  it("Hounds contract", async function () {
+  it("Deploy the hounds contract", async function () {
     const [,otherOwner] = await ethers.getSigners();
-    houndsMethods = await getContractInstance("HoundsMethods",[
-      "Hounds Methods", // name
-      "HM", // symbol
-      [], // allowed
-      address0, // methods
-      commonIncubatorData.address, // incubator
-      otherOwner.address, // stater api address here
-      shopData.address, // shop
-      paymentsData.address, // payments
-      "0xB1A2BC2EC50000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000"
-    ]);
-    console.log("Hounds methods deployed at: " + houndsMethods.address);
-
-    houndsData = await getContractInstance("HoundsData",[
-      "Hounds Factory",
-      "HF",
+    hound.zerocost = await getContractInstance("HoundsZerocost");
+    console.log("Zerocost contract deployed at: " + hound.zerocost.address);
+    hound.restricted = await getContractInstance("HoundsRestricted");
+    console.log("Restricted contract deployed at: " + hound.restricted.address);
+    hound.modifier = await getContractInstance("HoundsModifier");
+    console.log("Modifier contract deployed at: " + hound.modifier.address);
+    hound.minter = await getContractInstance("HoundsMinter");
+    console.log("Minter contract deployed at: " + hound.minter.address);
+    hound.main = await getContractInstance("Hounds",[
+      "HoundRace",
+      "HR",
       [],
-      houndsMethods.address,
-      commonIncubatorData.address,
-      otherOwner.address, // stater api address here
-      shopData.address,
-      paymentsData.address, // payments
-      "0xB1A2BC2EC50000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000"
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
     ]);
-    console.log("Hounds data deployed at: " + houndsData.address);
-
-    const control = await houndsData.control();
-    expect(control[2] === houndsMethods.address, "Hounds data : bad hounds methods address");
-    expect(control[3] === houndsMethods.address, "Hounds data : bad stater api address");
-    expect(control[2] === commonIncubatorData.address, "Hounds data : bad common incubator address");
+    console.log("Incubator contract deployed at: " + genetics.main.address);
 
   });
 
-  it("Deploy race generator", async function () {
-    const RaceGeneratorMethods = await hre.ethers.getContractFactory("RaceGeneratorMethods", {
+  it("Deploy the race contracts", async function () {
+    races.zerocost = await getContractInstance("RacesZeroCost");
+    console.log("Zerocost contract deployed at: " + races.zerocost.address);
+    races.restricted = await getContractInstance("RacesRestricted");
+    console.log("Restricted contract deployed at: " + races.restricted.address);
+    races.methods = await getContractInstance("RacesMethods");
+    console.log("Methods contract deployed at: " + races.methods.address);
+    races.main = await getContractInstance("Races",[
+      randomness.main.address,
+      arenas.main.address,
+      hound.main.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    console.log("Races contract deployed at: " + races.main.address);
+  });
+
+  it("Deploy the generator contracts", async function () {
+    let Contract = await hre.ethers.getContractFactory("GeneratorZerocost", {
       libraries: {
-        Converters: convertersLibrary.address,
         Sortings: sortingsLibrary.address
       }
     });
-    raceGeneratorMethods = await RaceGeneratorMethods.deploy();
-    await raceGeneratorMethods.deployed();
-    console.log("Race generator methods deployed at: " + raceGeneratorMethods.address);
+    let contract = await Contract.deploy();
+    await contract.deployed();
+    generator.zerocost = contract;
+    console.log("Zerocost contract deployed at: " + generator.zerocost.address);
 
-    raceGeneratorData = await getContractInstance("RaceGeneratorData",[
-      paperSafetyVRFData.address,
-      terrainsContractData.address,
-      houndsData.address,
-      raceGeneratorMethods.address,
-      raceGeneratorMethods.address,
-      raceGeneratorMethods.address,
-      50000000,
+    generator.restricted = await getContractInstance("GeneratorRestricted");
+    console.log("Restricted contract deployed at: " + generator.restricted.address);
+
+    Contract = await hre.ethers.getContractFactory("GeneratorMethods", {
+      libraries: {
+        Converters: convertersLibrary.address
+      }
+    });
+    contract = await Contract.deploy();
+    await contract.deployed();
+    generator.methods = contract;
+    console.log("Methods contract deployed at: " + generator.methods.address);
+
+    generator.main = await getContractInstance("Generator",[
+      randomness.main.address,
+      arenas.main.address,
+      hound.main.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.restricted.address,
+      generator.zerocost.address
+    ]);
+    console.log("Generator contract deployed at: " + generator.main.address);
+
+    races.main.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      hound.main.address,
+      races.methods.address,
+      generator.main.address,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
       true
     ]);
-    console.log("Race generator data deployed at: " + raceGeneratorData.address);
-
-    const control = await raceGeneratorData.control();
-    expect(control[0] === paperSafetyVRFData.address, "Race generator data : bad VRF address");
-    expect(control[1] === terrainsContractData.address, "Race generator data : bad terrains address");
-    expect(control[2] === houndsData.address, "Race generator data : bad hounds address");
-    expect(control[3] === raceGeneratorMethods.address, "Race generator data : bad allowed address");
-    expect(control[4] === raceGeneratorMethods.address, "Race generator data : bad methods address");
-    expect(control[5] === raceGeneratorMethods.address, "Race generator data : bad race generator address");
-
-  });
-
-  it("Deploy race handler", async function () {
-    const [owner] = await ethers.getSigners();
-    racesMethods = await getContractInstance("RacesMethods");
-    console.log("Race methods deployed at: " + racesMethods.address);
-
-    
-    racesData = await getContractInstance("RacesData",[
-      paperSafetyVRFData.address,
-      terrainsContractData.address,
-      houndsData.address,
-      raceGeneratorData.address,
-      racesMethods.address,
-      raceGeneratorData.address,
-      paymentsData.address,
-      500000000, // the race fee
-      true // back-end generator for true
-    ]);
-    console.log("Race data deployed at: " + racesData.address);
-
-    await racesMethods.setGlobalParameters(
-      [
-        paperSafetyVRFData.address,
-        terrainsContractData.address,
-        houndsData.address,
-        raceGeneratorData.address,
-        racesMethods.address,
-        raceGeneratorData.address,
-        paymentsData.address,
-        500000000, // the race fee
-        true
-      ]
-    );
-
-    await raceGeneratorData.setGlobalParameters([
-      paperSafetyVRFData.address,
-      terrainsContractData.address,
-      houndsData.address,
-      racesData.address,
-      raceGeneratorMethods.address,
-      raceGeneratorMethods.address,
-      paymentsData.address,
-      500000000, // the race fee
-      true
-    ]);
-
-    await raceGeneratorMethods.setGlobalParameters([
-      paperSafetyVRFData.address,
-      terrainsContractData.address,
-      houndsData.address,
-      racesData.address,
-      address0,
-      address0,
-      paymentsData.address,
-      500000000, // the race fee
-      true
-    ]);
-
-    const control = await racesMethods.control();
-    expect(control[0] === paperSafetyVRFData.address, "Race generator data : bad VRF address");
-    expect(control[1] === terrainsContractData.address, "Race generator data : bad terrains address");
-    expect(control[2] === houndsData.address, "Race generator data : bad hounds address");
-    expect(control[3] === raceGeneratorMethods.address, "Race generator data : bad allowed address");
-    expect(control[4] === racesMethods.address, "Race generator data : bad races methods address");
-    expect(control[5] === raceGeneratorMethods.address, "Race generator data : bad race generator address");
-
-    await houndsData.setGlobalParameters([
-      [racesData.address],
-      houndsMethods.address,
-      commonIncubatorData.address,
-      owner.address,
-      shopData.address,
-      paymentsData.address,
-      "0xB1A2BC2EC50000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      "0x2386F26FC10000",
-      [true]
-    ]);
-
-    await paymentsData.setGlobalParameters([paymentsMethods.address,[
-      paperSafetyVRFMethods.address, paperSafetyVRFData.address,
-      houndsData.address, houndsMethods.address,
-      shopData.address, shopMethods.address,
-      raceGeneratorData.address, raceGeneratorMethods.address,
-      racesData.address, racesMethods.address
-    ]]);
 
   });
 
 });
 
 
+
+/*
 describe("After deployment calls", function () {
 
   it("Terrains data set global parameters", async function () {
@@ -780,7 +724,7 @@ describe("Races", function () {
 
     ////console.log("Queue id >> " + queueId);
 
-    expect(web3.utils.hexToNumber(queueId) === 2, "Queue has not been created");
+    expect(Number(queueId) === 2, "Queue has not been created");
 
   });
 
@@ -871,3 +815,4 @@ describe("Races", function () {
   });
 
 });
+*/

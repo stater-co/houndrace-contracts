@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './zerocost/IIndex.sol';
 import './params/Index.sol';
 
 
-contract RandomnessVanillaData is Params, Ownable {
+contract Randomness is Params {
 
-    constructor(address methods) {
-        methodsContract = methods;
+    constructor(RandomnessConstructor.Struct memory randomnessConstructor) {
+        control = randomnessConstructor;
     }
 
     function setGlobalParameters(address methods) external onlyOwner {
@@ -17,7 +16,7 @@ contract RandomnessVanillaData is Params, Ownable {
     }
 
     function getRandomNumber(bytes memory input) external view returns(uint256) {
-        return IRandomnessMethods(methodsContract).getRandomNumber(input);
+        return IRandomnessZerocost(control.zerocost).getRandomNumber(input);
     }
 
 

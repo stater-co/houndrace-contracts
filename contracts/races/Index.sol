@@ -4,7 +4,7 @@ import './params/Index.sol';
 import './zerocost/Index.sol';
 
 
-contract RacesData is Params {
+contract Races is Params {
     
     constructor(RacesConstructor.Struct memory input) {
         control = input;

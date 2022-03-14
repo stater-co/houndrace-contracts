@@ -6,15 +6,13 @@ library GeneratorConstructor {
     
     struct Struct {
         address randomness;
-        address terrains;
+        address arenas;
         address hounds;
-        address houndsZerocost;
         address allowed;
         address methods;
         address payments;
         address restricted;
         address zerocost;
-        address arenasZerocost;
     }
 
 }

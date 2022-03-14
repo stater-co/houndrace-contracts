@@ -19,7 +19,7 @@ contract Incubator is Ownable {
     }
 
     function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
-        return IIncubatorMinterMethods(control.minter).breedHounds(hound1, hound1GeneticSequence, hound2, hound2GeneticSequence);
+        return IIncubatorMethods(control.methods).breedHounds(hound1, hound1GeneticSequence, hound2, hound2GeneticSequence);
     }
 
 }

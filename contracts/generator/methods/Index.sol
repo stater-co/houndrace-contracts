@@ -13,7 +13,7 @@ contract GeneratorMethods is Params {
 
         require(queue.entryFee <= msg.value);
 
-        uint256 theRandomness = IRandomnessMethods(control.randomness).getRandomNumber(abi.encode(block.timestamp));
+        uint256 theRandomness = IRandomnessZerocost(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
         (, uint256[] memory participants) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
 

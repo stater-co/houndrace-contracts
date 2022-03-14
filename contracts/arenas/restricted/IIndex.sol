@@ -4,7 +4,7 @@ import '../arena/Index.sol';
 import '../params/Constructor.sol';
 
 
-interface ArenasRestricted {
+interface IArenasRestricted {
 
     function setGlobalParameters(ArenasConstructor.Struct memory arenasConstructor) external;
 

@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 import '../params/Constructor.sol';
 
 
-contract IncubatorRestrictedMethods {
+contract IncubatorRestricted {
     
     IncubatorConstructor.Struct public control;
     

@@ -5,7 +5,7 @@ pragma solidity <=0.8.12;
 library IncubatorConstructor {
     
     struct Struct {
-        address minter;
+        address methods;
         address restricted;
         address randomness;
         address genetics;

@@ -27,7 +27,7 @@ contract RacesMethods is Params {
 
             if ( control.callable ) {
                 
-                (bool success, bytes memory output) = control.raceGenerator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
+                (bool success, bytes memory output) = control.generator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
                     abi.encodeWithSignature(
                         "generate((uint256,uint256[],address,uint256,uint32))",
                         queues[theId]

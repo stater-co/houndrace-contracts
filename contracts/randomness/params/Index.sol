@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
+import '@openzeppelin/contracts/access/Ownable.sol';
+import './Constructor.sol';
 
-
-contract Params {
+contract Params is Ownable {
     
-    address public methodsContract;
+    RandomnessConstructor.Struct public control;
 
 }

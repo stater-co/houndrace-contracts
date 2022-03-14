@@ -17,7 +17,7 @@ contract RacesRestricted is Params {
     function createQueues(Queue.Struct[] memory theQueues) external {
         Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arena = IArenasZerocost(control.arenaZerocost).arena(theQueues[i].arena);
+            arena = IArenasZerocost(control.arenas).arena(theQueues[i].arena);
             require(arena.fee < theQueues[i].entryFee / 2);
             queues[id] = theQueues[i];
             ++id;

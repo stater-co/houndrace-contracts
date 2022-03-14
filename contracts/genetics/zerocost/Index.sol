@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-//import './IData.sol';
 import '../params/Constructor.sol';
 
 
-contract GeneticsZerocostMethods {
+contract GeneticsZerocost {
 
     GeneticsConstructor.Struct public control;
 

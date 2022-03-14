@@ -3,7 +3,7 @@ pragma solidity 0.8.12;
 import '../params/Constructor.sol';
 
 
-interface PaymentsRestrictedMethods {
+interface IPaymentsRestricted {
 
 	function setGlobalParameters(PaymentsConstructor.Struct memory input) external;
 
