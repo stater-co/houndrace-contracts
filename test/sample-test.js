@@ -50,9 +50,9 @@ let hound = {
   minter: null,
   modifier: null,
   restricted: null,
-  zerocost: null,
-  main: null
+  zerocost: null
 };
+let houndsContract;
 let generator = {
   methods: null,
   restricted: null,
@@ -87,15 +87,15 @@ async function mintHoundByAdmin(hound,isFemale) {
     }
   }
   const [owner] = await ethers.getSigners();
-  const contractOwner = await houndsData.owner();
+  const contractOwner = await houndsContract.owner();
   expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
-  await houndsData.initializeHound(0,houndToMint);
+  await houndsContract.initializeHound(0,houndToMint);
 }
 
 async function safelyMintHoundByAdmin(hound,isFemale) {
-  const houndIdBefore = await houndsData.id();
+  const houndIdBefore = await houndsContract.id();
   await mintHoundByAdmin(hound,isFemale);
-  const houndIdAfter = await houndsData.id();
+  const houndIdAfter = await houndsContract.id();
   expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
   await safelyUpdateHoundBreeding(houndIdBefore);
 }
@@ -106,12 +106,12 @@ async function safelyUpdateHoundStamina(houndId) {
   if ( houndId ) {
     houndToWorkWith = houndId;
   } else {
-    houndIdBefore = await houndsData.id();
+    houndIdBefore = await houndsContract.id();
     houndToWorkWith = Number(houndIdBefore)-1;
   }
-  const houndBefore = await houndsData.hound(houndToWorkWith);
-  await houndsData.updateHoundStamina(houndToWorkWith);
-  const houndAfter = await houndsData.hound(houndToWorkWith);
+  const houndBefore = await houndsContract.hound(houndToWorkWith);
+  await houndsContract.updateHoundStamina(houndToWorkWith);
+  const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
 
@@ -121,17 +121,17 @@ async function safelyUpdateHoundBreeding(houndId) {
   if ( houndId ) {
     houndToWorkWith = houndId;
   } else {
-    houndIdBefore = await houndsData.id();
+    houndIdBefore = await houndsContract.id();
     houndToWorkWith = Number(houndIdBefore)-1;
   }
-  const houndBefore = await houndsData.hound(houndToWorkWith);
-  await houndsData.updateHoundBreeding(houndToWorkWith,10000000);
-  const houndAfter = await houndsData.hound(houndToWorkWith);
+  const houndBefore = await houndsContract.hound(houndToWorkWith);
+  await houndsContract.updateHoundBreeding(houndToWorkWith,10000000);
+  const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
 
 async function checkHoundStructure(houndId) {
-  const hound = await houndsData.hound(houndId ? houndId : 1);
+  const hound = await houndsContract.hound(houndId ? houndId : 1);
 
   // Check the hound statistics field
   expect(hound[0] && hound[0].length === defaultHound[0].length, "Not all hound statistics are received from contract");
@@ -153,12 +153,12 @@ async function checkHoundStructure(houndId) {
 }
 
 async function findMaleAndFemaleAvailableForBreed() {
-  const houndIdBefore = await houndsData.id();
+  const houndIdBefore = await houndsContract.id();
 
   let maleId , femaleId ;
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
-    const hound = await houndsData.hound(i);
+    const hound = await houndsContract.hound(i);
     const houndGene = hound[3][3];
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
@@ -178,25 +178,19 @@ async function findMaleAndFemaleAvailableForBreed() {
 }
 
 async function breed2Hounds() {
-  const houndIdBefore = await houndsData.id();
+  const houndIdBefore = await houndsContract.id();
   const availableHounds = await findMaleAndFemaleAvailableForBreed();
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
 
-  const control = await commonIncubatorData.control();
-  expect(control[0] === commonIncubatorMethods.address, "Common incubator data : bad common incubator methods address");
-  expect(control[1] === paperSafetyVRFData.address, "Common incubator data : bad VRF address");
-  expect(control[2] === geneticsData.address, "Common incubator data : bad genetics data address");
-  expect(control[3] === "0x67657452", "Common incubator data : seconds to maturity");
-
   if ( maleId && femaleId ) {
 
-    const houndMaleBefore = await houndsData.hound(maleId);
-    const houndFemaleBefore = await houndsData.hound(femaleId);
+    const houndMaleBefore = await houndsContract.hound(maleId);
+    const houndFemaleBefore = await houndsContract.hound(femaleId);
 
     const [owner] = await ethers.getSigners();
-    const ownerOfMale = await houndsData.ownerOf(maleId);
-    const ownerOfFemale = await houndsData.ownerOf(femaleId);
+    const ownerOfMale = await houndsContract.ownerOf(maleId);
+    const ownerOfFemale = await houndsContract.ownerOf(femaleId);
 
     let hound1 = maleId , hound2 = femaleId;
     if ( ownerOfFemale !== owner && ownerOfMale === owner ) {
@@ -207,13 +201,13 @@ async function breed2Hounds() {
       hound2 = maleId;
     }
     
-    await houndsData.breedHounds(hound1, hound2, { value : "0xD529AE9E860000" });
-    const houndMaleAfter = await houndsData.hound(maleId);
-    const houndFemaleAfter = await houndsData.hound(femaleId);
+    await houndsContract.breedHounds(hound1, hound2, { value : "0xD529AE9E860000" });
+    const houndMaleAfter = await houndsContract.hound(maleId);
+    const houndFemaleAfter = await houndsContract.hound(femaleId);
     expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
     expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
     
-    const houndIdAfter = await houndsData.id();
+    const houndIdAfter = await houndsContract.id();
     expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
 
   }
@@ -402,7 +396,18 @@ describe("Setting up the Houndrace contracts", function () {
   it("Genetics methods", async function () {
     genetics.restricted = await getContractInstance("GeneticsRestricted");
     console.log("Restricted contract deployed at: " + genetics.restricted.address);
-    genetics.zerocost = await getContractInstance("GeneticsZerocost");
+    genetics.zerocost = await getContractInstance("GeneticsZerocost",[
+      randomness.main.address,
+      address0,
+      genetics.restricted.address,
+      arenas.main.address,
+      maleBoilerplateGene,
+      femaleBoilerplateGene,
+      60,
+      40,
+      [2,6,10,14,18,22,26,30,34,38,42,46,50],
+      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    ]);
     console.log("Zerocost contract deployed at: " + genetics.zerocost.address);
     genetics.main = await getContractInstance("Genetics",[
       randomness.main.address,
@@ -445,7 +450,7 @@ describe("Setting up the Houndrace contracts", function () {
     console.log("Modifier contract deployed at: " + hound.modifier.address);
     hound.minter = await getContractInstance("HoundsMinter");
     console.log("Minter contract deployed at: " + hound.minter.address);
-    hound.main = await getContractInstance("Hounds",[
+    houndsContract = await getContractInstance("Hounds",[
       "HoundRace",
       "HR",
       [],
@@ -466,7 +471,7 @@ describe("Setting up the Houndrace contracts", function () {
         "0x2386F26FC10000"
       ]
     ]);
-    console.log("Incubator contract deployed at: " + genetics.main.address);
+    console.log("Hounds contract deployed at: " + houndsContract.address);
 
   });
 
@@ -480,7 +485,7 @@ describe("Setting up the Houndrace contracts", function () {
     races.main = await getContractInstance("Races",[
       randomness.main.address,
       arenas.main.address,
-      hound.main.address,
+      houndsContract.address,
       races.methods.address,
       address0,
       payments.main.address,
@@ -519,7 +524,7 @@ describe("Setting up the Houndrace contracts", function () {
     generator.main = await getContractInstance("Generator",[
       randomness.main.address,
       arenas.main.address,
-      hound.main.address,
+      houndsContract.address,
       races.main.address,
       generator.methods.address,
       payments.main.address,
@@ -531,7 +536,7 @@ describe("Setting up the Houndrace contracts", function () {
     races.main.setGlobalParameters([
       randomness.main.address,
       arenas.main.address,
-      hound.main.address,
+      houndsContract.address,
       races.methods.address,
       generator.main.address,
       payments.main.address,
@@ -547,53 +552,41 @@ describe("Setting up the Houndrace contracts", function () {
 
 
 
-/*
-describe("After deployment calls", function () {
-
-  it("Terrains data set global parameters", async function () {
-    await terrainsContractData.setGlobalParameters(terrainsContractMethods.address);
-    const control = await terrainsContractData.methodsContractAddress();
-    expect(control === terrainsContractMethods.address, "Terrains data contract : bad terrains methods address");
-  });
-
-});
-
-
 describe("Genetics methods", function () {
 
   it("Genetics - wholeArithmeticRecombination", async function () {
-    let newGeneticSequence = await geneticsData.wholeArithmeticRecombination(maleBoilerplateGene,femaleBoilerplateGene);
+    let newGeneticSequence = await genetics.main.wholeArithmeticRecombination(maleBoilerplateGene,femaleBoilerplateGene);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - swapMutation", async function () {
-    let newGeneticSequence = await geneticsData.swapMutation(maleBoilerplateGene,5);
+    let newGeneticSequence = await genetics.main.swapMutation(maleBoilerplateGene,5);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - inversionMutation", async function () {
-    let newGeneticSequence = await geneticsData.inversionMutation(maleBoilerplateGene,5);
+    let newGeneticSequence = await genetics.main.inversionMutation(maleBoilerplateGene,5);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - scrambleMutation", async function () {
-    let newGeneticSequence = await geneticsData.scrambleMutation(maleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.scrambleMutation(maleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - arithmeticMutation", async function () {
-    let newGeneticSequence = await geneticsData.arithmeticMutation(maleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.arithmeticMutation(maleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - uniformCrossover", async function () {
-    let newGeneticSequence = await geneticsData.uniformCrossover(maleBoilerplateGene,femaleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.uniformCrossover(maleBoilerplateGene,femaleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
   
   it("Genetics - mixGenes 100x", async function () {
     for ( let i = 0 ; i < 100 ; ++i ) {
-      let newGeneticSequence = await geneticsData.mixGenes(maleBoilerplateGene,femaleBoilerplateGene,i);
+      let newGeneticSequence = await genetics.main.mixGenes(maleBoilerplateGene,femaleBoilerplateGene,i);
       expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
     }
   });
@@ -657,8 +650,8 @@ describe("Breed with other hounds", function () {
   });
 
   it("Make hound available to breed", async function () {
-    const houndId = await houndsData.id();
-    await houndsData.putHoundForBreed(houndId-2,0,true);
+    const houndId = await houndsContract.id();
+    await houndsContract.putHoundForBreed(houndId-2,0,true);
   });
 
 });
@@ -668,7 +661,7 @@ describe("Races", function () {
 
   it("Create terrain", async function () {
     const [owner] = await ethers.getSigners();
-    let createTerrain = await terrainsContractData.createArena([
+    let createTerrain = await arenas.main.createArena([
       owner.address,
       0,
       1,
@@ -681,7 +674,7 @@ describe("Races", function () {
 
   it("Create queue", async function () {
 
-    await racesData.createQueues([
+    await races.main.createQueues([
       [
         "0x0000000000000000000000000000000000000000",
         [],
@@ -694,7 +687,7 @@ describe("Races", function () {
       ]
     ]);
 
-    await racesData.createQueues([
+    await races.main.createQueues([
       [
         "0x0000000000000000000000000000000000000000",
         [],
@@ -707,7 +700,7 @@ describe("Races", function () {
       ]
     ]);
 
-    await racesData.createQueues([
+    await races.main.createQueues([
       [
         "0x0000000000000000000000000000000000000000",
         [],
@@ -720,7 +713,7 @@ describe("Races", function () {
       ]
     ]);
 
-    let queueId = await racesData.id();
+    let queueId = await races.main.id();
 
     ////console.log("Queue id >> " + queueId);
 
@@ -733,7 +726,7 @@ describe("Races", function () {
   it("Hounds stamina check x1", async function () {
 
     for ( let i = 1 ; i <= 10 ; ++i ) {
-      let hound = await houndsData.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       houndsStamina[i] = hound[1][2];
     }
@@ -741,55 +734,33 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    let queue = await racesData.queues(1);
-    let control = await racesData.control();
-    expect(control[0] === paperSafetyVRFData.address,"Randomness not ok");
-    expect(control[1] === terrainsContractData.address,"Terrains not ok");
-    expect(control[2] === houndsData.address,"Hounds not ok");
-    ////console.log("## The race generator address is: " + raceGeneratorData.address);
-    expect(control[3] === raceGeneratorData.address,"Race generator not ok");
-    expect(control[4] === racesMethods.address,"Race methods not ok");
-    expect(control[5] === raceGeneratorData.address,"Race generator(again) not ok");
-    ////console.log("We parse for Join queue x10 : " + queue[3]);
-    ////console.log("Races data control: " + JSON.stringify(control));
-    const raceGeneratorDataControl = await raceGeneratorData.control();
-    const raceGeneratorMethodsControl = await raceGeneratorMethods.control();
-    const racesDataControl = await racesData.control();
-    const racesMethodsControl = await racesMethods.control();
-    ////console.log("=============================");
-    ////console.log(raceGeneratorDataControl[0]);
-    ////console.log(raceGeneratorMethodsControl[0]);
-    ////console.log(racesDataControl[0]);
-    ////console.log(racesMethodsControl[0]);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      ////console.log("Enqueue: " + i);
-      await racesData.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x2", async function () {
-    let queue = await racesData.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      let hound = await houndsData.hound(i);
-      ////console.log("Hound is: " + JSON.stringify(hound));
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
-      //console.log("Stamina: " + hound[1][2]);
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];
     }
   });
 
   it("Join queue x20", async function () {
-    let queue = await racesData.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      await racesData.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x3", async function () {
-    let queue = await racesData.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      let hound = await houndsData.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       //console.log("Stamina: " + hound[1][2]);
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
@@ -798,16 +769,16 @@ describe("Races", function () {
   });
 
   it("Join queue x30", async function () {
-    let queue = await racesData.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      await racesData.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x4", async function () {
-    let queue = await racesData.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
-      let hound = await houndsData.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];
@@ -815,4 +786,3 @@ describe("Races", function () {
   });
 
 });
-*/

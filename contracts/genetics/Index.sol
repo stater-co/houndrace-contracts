@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './zerocost/IIndex.sol';
-import './params/Constructor.sol';
+import './params/Index.sol';
 
 
-contract Genetics is Ownable {
-
-    GeneticsConstructor.Struct public control;
+contract Genetics is Params {
     
     constructor(GeneticsConstructor.Struct memory input) {
         control = input;

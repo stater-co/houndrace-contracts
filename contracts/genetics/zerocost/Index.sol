@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '../params/Constructor.sol';
+import '../params/Index.sol';
 
 
-contract GeneticsZerocost {
+contract GeneticsZerocost is Params {
 
-    GeneticsConstructor.Struct public control;
+    constructor(GeneticsConstructor.Struct memory input) {
+        control = input;
+    }
 
     function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) public view returns(uint32[54] memory geneticSequence) {
         
@@ -108,6 +110,7 @@ contract GeneticsZerocost {
         (uint256 pos1, ) = generateRandomAlleles(geneticSequence,randomness,randomGene);
 
         uint256 randomValueToAdd = uint256(keccak256(abi.encodePacked(geneticSequence[15], randomness))) % control.maxValues[pos1];
+
         // Perform a incrementation
         geneticSequence[pos1] += uint32(randomValueToAdd);
 
