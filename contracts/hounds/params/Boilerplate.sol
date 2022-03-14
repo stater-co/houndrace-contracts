@@ -10,5 +10,8 @@ library ConstructorBoilerplate {
         address payments;
         address restricted;
         address minter;
+        address zerocost;
+        address houndModifier;
+        address shopMethods;
     }
 }

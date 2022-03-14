@@ -1,24 +1,14 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '../params/Constructor.sol';
-import '../hound/Index.sol';
-import '../../shop/IData.sol';
+import '../params/Index.sol';
 
 
-contract HoundsMethods is ERC721 {
-    uint256 public id = 1;
-    mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) public hounds;
-    event HoundBreedable(uint256 indexed id, uint256 price);
-    event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
-    event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
-    Constructor.Struct public control;
-    IShopData public shop;
+contract HoundsModifier is Params {
+
     constructor() ERC721("","") {}
     
     function updateHoundStamina(uint256 theId) public payable {
-        uint256 discount = shop.calculateDiscount(msg.sender);
+        uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(msg.sender);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
         if ( allowed[msg.sender] ) {
             --hounds[theId].stamina.stamina;
@@ -36,7 +26,7 @@ contract HoundsMethods is ERC721 {
 
     function updateHoundBreeding(uint256 theId, uint256 breedingCooldownToConsume) public payable {
         if ( breedingCooldownToConsume == 0 ) {
-            uint256 discount = shop.calculateDiscount(msg.sender);
+            uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(msg.sender);
             uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
             if ( allowed[msg.sender] || msg.value >= refillBreedingCooldownCost ) {
                 hounds[theId].breeding.breedCooldown -= breedingCooldownToConsume;
