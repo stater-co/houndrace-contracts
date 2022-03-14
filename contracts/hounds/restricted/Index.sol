@@ -20,7 +20,6 @@ contract HoundsRestricted is Params {
         control.boilerplate.restricted = input.boilerplate.restricted;
         control.fees.breedCost = input.fees.breedCost;
         control.fees.breedFee = input.fees.breedFee;
-        control.fees.refillCost = input.fees.refillCost;
         control.fees.refillBreedingCooldownCost = input.fees.refillBreedingCooldownCost;
         control.fees.refillStaminaCooldownCost = input.fees.refillStaminaCooldownCost;
 

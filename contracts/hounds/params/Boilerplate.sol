@@ -10,6 +10,7 @@ library ConstructorBoilerplate {
         address minter;
         address zerocost;
         address houndModifier;
-        address shopMethods;
+        address shop;
+        address ogars;
     }
 }

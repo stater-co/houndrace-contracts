@@ -21,7 +21,7 @@ contract RacesMethods is Params {
 
         queues[theId].participants.push(hound);
         
-        IHoundsModifier(control.hounds).updateHoundStamina(hound);
+        IHoundsModifier(control.hounds).updateStamina(hound);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 

@@ -32,12 +32,22 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundStamina(uint256 theId) public payable {
+    function updateStamina(uint256 theId) public payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function updateHoundBreeding(uint256 theId, uint256 breedingCooldownToConsume) public payable {
+    function updateHoundBreeding(uint256 theId) public payable {
+        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success);
+    }
+
+    function boostStamina(uint256 theId) public payable {
+        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success);
+    }
+
+    function boostBreedingCooldown(uint256 theId) public payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

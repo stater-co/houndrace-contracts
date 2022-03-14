@@ -65,6 +65,7 @@ let races = {
   zerocost: null,
   main: null
 };
+let houndracePotions;
 
 
 // @DIIMIIM: Get smart contract instance
@@ -110,7 +111,7 @@ async function safelyUpdateHoundStamina(houndId) {
     houndToWorkWith = Number(houndIdBefore)-1;
   }
   const houndBefore = await houndsContract.hound(houndToWorkWith);
-  await houndsContract.updateHoundStamina(houndToWorkWith);
+  await houndsContract.updateStamina(houndToWorkWith);
   const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
@@ -125,7 +126,7 @@ async function safelyUpdateHoundBreeding(houndId) {
     houndToWorkWith = Number(houndIdBefore)-1;
   }
   const houndBefore = await houndsContract.hound(houndToWorkWith);
-  await houndsContract.updateHoundBreeding(houndToWorkWith,10000000);
+  await houndsContract.updateHoundBreeding(houndToWorkWith);
   const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
@@ -441,7 +442,7 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the hounds contract", async function () {
-    const [,otherOwner] = await ethers.getSigners();
+    const [owner,otherOwner] = await ethers.getSigners();
     hound.zerocost = await getContractInstance("HoundsZerocost");
     console.log("Zerocost contract deployed at: " + hound.zerocost.address);
     hound.restricted = await getContractInstance("HoundsRestricted");
@@ -453,7 +454,7 @@ describe("Setting up the Houndrace contracts", function () {
     houndsContract = await getContractInstance("Hounds",[
       "HoundRace",
       "HR",
-      [],
+      [owner.address,hound.minter.address],
       [
         incubator.main.address,
         otherOwner.address,
@@ -462,7 +463,8 @@ describe("Setting up the Houndrace contracts", function () {
         hound.minter.address,
         hound.zerocost.address,
         hound.modifier.address,
-        shop.main.address
+        shop.main.address,
+        houndracePotions.address
       ],[
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
