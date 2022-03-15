@@ -9,4 +9,6 @@ interface IHoundsZerocost {
 
     function tokenURI(uint256 _tokenId) external view returns(string memory);
 
+    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256);
+
 }

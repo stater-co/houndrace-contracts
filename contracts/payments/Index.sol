@@ -20,6 +20,8 @@ contract Payments is Params {
     }
 
 	function transferTokens(Payment.Struct memory payment) public payable {
+		console.log("We're calling it here");
+		console.log(msg.value);
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
 	}

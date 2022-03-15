@@ -12,6 +12,7 @@ contract PaymentsMethods is Params {
 	function transferTokens(
 		Payment.Struct memory payment
 	) public payable {
+		console.log("Sender is: ", msg.sender);
 		if ( payment.currency != address(0) ) {
 			require(IERC20(payment.currency).transferFrom(payment.from, payment.to, payment.qty));
 		} else {
