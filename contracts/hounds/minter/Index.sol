@@ -49,8 +49,8 @@ contract HoundsMinter is Params {
             hounds[hound2].identity.geneticSequence
         );
         console.log("ok 5");
-        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound1,0);
-        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound2,0);
+        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound1);
+        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound2);
         console.log("ok 6");
         emit BreedHound(id,msg.sender,offspring);
         ++id;

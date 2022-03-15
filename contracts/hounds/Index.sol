@@ -9,6 +9,9 @@ contract Hounds is Params {
     constructor(
         Constructor.Struct memory input
     ) ERC721(input.name,input.symbol) {
+        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
+            allowed[input.allowedCallers[i]] = true;
+
         control = input;
     }
 
@@ -32,12 +35,13 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateStamina(uint256 theId) public payable {
+    function updateStamina(uint256 theId) public {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function updateHoundBreeding(uint256 theId) public payable {
+    function updateHoundBreeding(uint256 theId) public {
+        console.log("We're calling it from here ...");
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

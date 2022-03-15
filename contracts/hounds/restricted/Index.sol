@@ -26,6 +26,7 @@ contract HoundsRestricted is Params {
     }
     
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
+        console.log("Ok for initialize hounds: ", onId);
         if ( onId > 0 ) {
             require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap > 0);
             emit NewHound(onId,msg.sender,theHound);
@@ -34,6 +35,7 @@ contract HoundsRestricted is Params {
         } else {
             emit NewHound(id,msg.sender,theHound);
             hounds[id] = theHound;
+            console.log("so far so good");
             _safeMint(msg.sender,id);
             ++id;
         }

@@ -10,6 +10,7 @@ import '../../payments/methods/IIndex.sol';
 import '../modifier/IIndex.sol';
 import '../../incubator/methods/IIndex.sol';
 import '../../shop/methods/IIndex.sol';
+import '../../ogars/IIndex.sol';
 import "hardhat/console.sol";
 
 

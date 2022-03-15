@@ -90,11 +90,13 @@ async function mintHoundByAdmin(hound,isFemale) {
   const [owner] = await ethers.getSigners();
   const contractOwner = await houndsContract.owner();
   expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
+  console.log("initializing hound: ", 0, JSON.stringify(houndToMint));
   await houndsContract.initializeHound(0,houndToMint);
 }
 
 async function safelyMintHoundByAdmin(hound,isFemale) {
   const houndIdBefore = await houndsContract.id();
+  console.log("Hound id before: " + houndIdBefore);
   await mintHoundByAdmin(hound,isFemale);
   const houndIdAfter = await houndsContract.id();
   expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
