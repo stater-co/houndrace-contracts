@@ -3,6 +3,7 @@ pragma solidity 0.8.12;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../payment/Index.sol';
 import './Constructor.sol';
+import "hardhat/console.sol";
 
 
 contract Params is Ownable {

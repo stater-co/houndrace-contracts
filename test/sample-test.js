@@ -155,11 +155,14 @@ async function checkHoundStructure(houndId) {
 async function findMaleAndFemaleAvailableForBreed() {
   const houndIdBefore = await houndsContract.id();
 
+  //console.log("Hound id to parse: " + houndIdBefore);
   let maleId , femaleId ;
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
     const hound = await houndsContract.hound(i);
     const houndGene = hound[3][3];
+
+    //console.log("Gene: " + i + " >> " + houndGene);
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -180,9 +183,11 @@ async function findMaleAndFemaleAvailableForBreed() {
 async function breed2Hounds() {
   const houndIdBefore = await houndsContract.id();
   const availableHounds = await findMaleAndFemaleAvailableForBreed();
+  //console.log("Available hounds >> " + JSON.stringify(findMaleAndFemaleAvailableForBreed));
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
 
+  //console.log("Male: " + maleId + " , Female:" + femaleId);
   if ( maleId && femaleId ) {
 
     const houndMaleBefore = await houndsContract.hound(maleId);
@@ -201,7 +206,18 @@ async function breed2Hounds() {
       hound2 = maleId;
     }
     
-    await houndsContract.breedHounds(hound1, hound2, { value : "0xD529AE9E860000" });
+    console.log("We breed hounds here !!!!!");
+
+    const foreignHound = await houndsContract.hound(hound2);
+    //console.log("Breed fee: " + Number(foreignHound[2][1]));
+    const control = await houndsContract.control();
+    //console.log(Number(control[3][0]) + " + " + Number(control[3][1]));
+    //console.log(Number(foreignHound[2][1]) + Number(control[3][0]) + Number(control[3][1]));
+
+    const totalToPay = await houndsContract.getBreedCost(hound1,hound2);
+    console.log("Total to pay >> " + totalToPay);
+
+    await houndsContract.breedHounds(hound1, hound2, { value : totalToPay });
     const houndMaleAfter = await houndsContract.hound(maleId);
     const houndFemaleAfter = await houndsContract.hound(femaleId);
     expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
@@ -296,7 +312,7 @@ describe("Setting up the Payments System", function () {
     payments.restricted = await getContractInstance("PaymentsRestricted");
     console.log("Payments restricted: " + payments.restricted.address);
     payments.main = await getContractInstance("Payments",[payments.methods.address,payments.restricted.address,[]]);
-    console.log("Payments data: " + payments.main.address);
+    console.log("Payments: " + payments.main.address);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -472,6 +488,9 @@ describe("Setting up the Houndrace contracts", function () {
       ]
     ]);
     console.log("Hounds contract deployed at: " + houndsContract.address);
+
+    await payments.main.setGlobalParameters([payments.methods.address,payments.restricted.address,[houndsContract.address]]);
+    console.log("Successfully global parameters set");
 
   });
 
