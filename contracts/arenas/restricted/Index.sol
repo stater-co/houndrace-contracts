@@ -6,9 +6,7 @@ import '../params/Index.sol';
 
 contract ArenasRestricted is Params {
 
-    function setGlobalParameters(ArenasConstructor.Struct memory arenasConstructor) external onlyOwner {
-        control = arenasConstructor;
-    }
+    constructor(ArenasConstructor.Struct memory arenasConstructor) Params(arenasConstructor) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {
         arenas[id] = arena;

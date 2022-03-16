@@ -1,24 +1,11 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
 import './params/Index.sol';
-import './zerocost/IIndex.sol';
 
 
 contract Hounds is Params {
 
-    constructor(
-        Constructor.Struct memory input
-    ) ERC721(input.name,input.symbol) {
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
-            allowed[input.allowedCallers[i]] = true;
-
-        control = input;
-    }
-
-    function setGlobalParameters(GlobalVariables.Struct memory input) external onlyOwner {
-        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
-        require(success);
-    }
+    constructor(Constructor.Struct memory input) Params(input) {}
 
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
@@ -41,7 +28,6 @@ contract Hounds is Params {
     }
 
     function updateHoundBreeding(uint256 theId) public {
-        console.log("We're calling it from here ...");
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

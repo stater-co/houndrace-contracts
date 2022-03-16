@@ -5,7 +5,7 @@ import '../params/Index.sol';
 
 contract HoundsModifier is Params {
 
-    constructor() ERC721("","") {}
+    constructor(Constructor.Struct memory input) Params(input) {}
     
     function boostStamina(uint256 theId) public payable {
         uint256 discount = IShopMethods(control.boilerplate.shop).calculateDiscount(msg.sender);

@@ -5,28 +5,9 @@ import '../params/Index.sol';
 
 contract HoundsRestricted is Params {
 
-    constructor() ERC721("","") {}
-
-    function setGlobalParameters(
-        GlobalVariables.Struct memory input
-    ) external {
-
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
-            allowed[input.allowedCallers[i]] = input.isAllowed[i];
-
-        control.boilerplate.incubator = input.boilerplate.incubator;
-        control.boilerplate.staterApi = input.boilerplate.staterApi;
-        control.boilerplate.payments = input.boilerplate.payments;
-        control.boilerplate.restricted = input.boilerplate.restricted;
-        control.fees.breedCost = input.fees.breedCost;
-        control.fees.breedFee = input.fees.breedFee;
-        control.fees.refillBreedingCooldownCost = input.fees.refillBreedingCooldownCost;
-        control.fees.refillStaminaCooldownCost = input.fees.refillStaminaCooldownCost;
-
-    }
+    constructor(Constructor.Struct memory input) Params(input) {}
     
-    function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
-        console.log("Ok for initialize hounds: ", onId);
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         if ( onId > 0 ) {
             require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap > 0);
             emit NewHound(onId,msg.sender,theHound);
@@ -35,13 +16,12 @@ contract HoundsRestricted is Params {
         } else {
             emit NewHound(id,msg.sender,theHound);
             hounds[id] = theHound;
-            console.log("so far so good");
             _safeMint(msg.sender,id);
             ++id;
         }
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_url) external {
+    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
         hounds[_tokenId].token_url = token_url;
     }
 

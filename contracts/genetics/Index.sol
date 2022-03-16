@@ -6,14 +6,9 @@ import './params/Index.sol';
 
 contract Genetics is Params {
     
-    constructor(GeneticsConstructor.Struct memory input) {
-        control = input;
-    }
-    
-    function setGlobalParameters(GeneticsConstructor.Struct memory input) external onlyOwner {
-        (bool success, ) = input.restricted.delegatecall(msg.data);
-        require(success);
-    }
+    constructor(
+        GeneticsConstructor.Struct memory input
+    ) Params(input) {}
 
     function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) external view returns(uint32[54] memory) {
         return IGeneticsZerocost(control.zerocost).wholeArithmeticRecombination(geneticSequence1, geneticSequence2);

@@ -2,8 +2,11 @@
 pragma solidity <=0.8.12;
 
 
-library ArenasConstructor {
+library OgarsConstructor {
+    
     struct Struct {
-        address restricted;
+        string name;
+        string symbol;
     }
+
 }

@@ -8,6 +8,10 @@ import '../../payments/payment/Index.sol';
 import '../../hounds/modifier/IIndex.sol';
 import '../../arenas/arena/Index.sol';
 import '../../arenas/zerocost/IIndex.sol';
+import '../../utils/Converters.sol';
+import '../../payments/methods/IIndex.sol';
+import '../../hounds/hound/Index.sol';
+import '../../hounds/zerocost/IIndex.sol';
 
 
 contract Params is Ownable {
@@ -24,5 +28,15 @@ contract Params is Ownable {
     mapping(uint256 => Queue.Struct) public queues;
     mapping(uint256 => Race.Struct) public races;
     mapping(uint256 => Payment.Struct[]) public rewards;
+
+    constructor(RacesConstructor.Struct memory input) {
+        control = input;
+    }
+
+    function setGlobalParameters(
+        RacesConstructor.Struct memory globalParameters
+    ) external onlyOwner {
+        control = globalParameters;
+    }
 
 }

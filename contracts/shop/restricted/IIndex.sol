@@ -5,8 +5,6 @@ import '../params/Constructor.sol';
 
 
 interface IShopRestricted {
-    
-    function setGlobalParameters(ShopConstructor.Struct memory input) external;
 
     function createDiscount(Discount.Struct memory discount) external;
 

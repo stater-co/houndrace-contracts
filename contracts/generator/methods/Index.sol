@@ -5,6 +5,8 @@ import '../params/Index.sol';
 
 contract GeneratorMethods is Params {
 
+    constructor(GeneratorConstructor.Struct memory input) Params(input) {}
+
     function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race) {
 
         require(control.allowed == msg.sender);

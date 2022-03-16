@@ -6,8 +6,6 @@ import '../params/Constructor.sol';
 
 interface IArenasRestricted {
 
-    function setGlobalParameters(ArenasConstructor.Struct memory arenasConstructor) external;
-
     function createArena(Arena.Struct memory arena) external;
     
     function editArena(uint256 theId, Arena.Struct memory arena) external;

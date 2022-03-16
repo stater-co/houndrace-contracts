@@ -5,7 +5,6 @@ library RandomnessConstructor {
     
     struct Struct {
         address zerocost;
-        address restricted;
     }
 
 }

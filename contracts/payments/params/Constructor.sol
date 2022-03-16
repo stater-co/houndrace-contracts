@@ -5,7 +5,6 @@ library PaymentsConstructor {
     
     struct Struct {
         address methods;
-        address restricted;
         address[] allowed;
     }
 

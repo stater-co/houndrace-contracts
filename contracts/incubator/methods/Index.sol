@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.12;
-import '../../hounds/hound/Index.sol';
-import '../params/Constructor.sol';
-import '../../genetics/zerocost/IIndex.sol';
-import '../../randomness/zerocost/IIndex.sol';
+import '../params/Index.sol';
 
 
-contract IncubatorMethods {
-    
-    IncubatorConstructor.Struct public control;
+contract IncubatorMethods is Params {
+
+    constructor(IncubatorConstructor.Struct memory input) Params(input) {}
 
     function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
         uint32[54] memory genetics = IGeneticsZerocost(control.genetics).mixGenes(

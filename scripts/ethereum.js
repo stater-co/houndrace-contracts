@@ -29,40 +29,35 @@ async function main() {
   console.log("Sortings deployed to: ", sortings.address);
   
   const RandomnessZerocost = await hre.ethers.getContractFactory("RandomnessZerocost");
-  const randomnessZerocost = await RandomnessZerocost.deploy();
+  const randomnessZerocost = await RandomnessZerocost.deploy([address0]);
   await randomnessZerocost.deployed();
   console.log("RandomnessZerocost deployed to: ", randomnessZerocost.address);
 
-  const RandomnessRestricted = await hre.ethers.getContractFactory("RandomnessRestricted");
-  const randomnessRestricted = await RandomnessRestricted.deploy();
-  await randomnessRestricted.deployed();
-  console.log("RandomnessRestricted deployed to: ", randomnessRestricted.address);
-
   const Randomness = await hre.ethers.getContractFactory("Randomness");
-  const randomness = await Randomness.deploy([randomnessZerocost.address,randomnessRestricted.address]);
+  const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
   console.log("Randomness deployed to: ", randomness.address);
 
-  const PaymentsRestricted = await hre.ethers.getContractFactory("PaymentsRestricted");
-  const paymentsRestricted = await PaymentsRestricted.deploy();
-  await paymentsRestricted.deployed();
-  console.log("PaymentsRestricted deployed to: ", paymentsRestricted.address);
+  await randomnessZerocost.setGlobalParameters([randomnessZerocost.address]);
 
   const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
-  const paymentsMethods = await PaymentsMethods.deploy();
+  const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
   await paymentsMethods.deployed();
   console.log("PaymentsMethods deployed to: ", paymentsMethods.address);
 
   const Payments = await hre.ethers.getContractFactory("Payments");
-  const payments = await Payments.deploy([paymentsMethods.address,paymentsRestricted.address,[]]);
+  const payments = await Payments.deploy([paymentsMethods.address,[]]);
   await payments.deployed();
   console.log("Payments deployed to: ", payments.address);
 
+  paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
+
   const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
-  const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
+  const houndracePotions = await HoundracePotions.deploy(["HoundracePotions", "HP"]);
   await houndracePotions.deployed();
   console.log("HoundracePotions deployed to: ", houndracePotions.address);
 
+  /*
   const ShopZerocost = await hre.ethers.getContractFactory("ShopZerocost");
   const shopZerocost = await ShopZerocost.deploy();
   await shopZerocost.deployed();
@@ -183,13 +178,14 @@ async function main() {
     [],
     [
       incubator.address,
-      houndsMinter.address,
+      String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       payments.address,
       houndsRestricted.address,
       houndsMinter.address,
       houndsZerocost.address,
       houndsModifier.address,
-      shop.address
+      shop.address,
+      houndracePotions.address
     ],[
       "0xB1A2BC2EC50000",
       "0x2386F26FC10000",
@@ -679,6 +675,7 @@ async function main() {
   } catch (err) {
     //console.error(err);
   }
+  */
 
 }
 

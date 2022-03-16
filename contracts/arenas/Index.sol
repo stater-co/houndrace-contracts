@@ -4,16 +4,8 @@ import './params/Index.sol';
 
 
 contract Arenas is Params {
-    
-    
-    constructor(ArenasConstructor.Struct memory arenasConstructor) {
-        control = arenasConstructor;
-    }
 
-    function setGlobalParameters(address methods) external onlyOwner {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
+    constructor(ArenasConstructor.Struct memory arenasConstructor) Params(arenasConstructor) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);

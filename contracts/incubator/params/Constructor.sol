@@ -6,7 +6,6 @@ library IncubatorConstructor {
     
     struct Struct {
         address methods;
-        address restricted;
         address randomness;
         address genetics;
         uint256 secondsToMaturity;

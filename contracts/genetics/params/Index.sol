@@ -8,4 +8,12 @@ contract Params is Ownable {
 
     GeneticsConstructor.Struct public control;
 
+    constructor(GeneticsConstructor.Struct memory input) {
+        control = input;
+    }
+    
+    function setGlobalParameters(GeneticsConstructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
+
 }
