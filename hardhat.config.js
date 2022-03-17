@@ -33,14 +33,14 @@ module.exports = {
   networks: {
     hardhat: {
       initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
-      gas: 2100000,
+      gas: 4800000,
       gasPrice: 8000000000
     },
     rinkeby: {
       url: process.env.RINKEBY_URL || "",
       timeout: 120000,
       accounts: accounts,
-      gas: 2100000,
+      gas: 4800000,
       gasPrice: 8000000000
     }
   },
@@ -57,7 +57,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.12"
+        version: "0.8.13"
       }
     ]
   },

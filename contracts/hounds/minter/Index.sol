@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
@@ -31,9 +31,9 @@ contract HoundsMinter is Params {
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
         Hound.Struct memory offspring = IIncubatorMethods(control.boilerplate.incubator).breedHounds(
             hound1, 
-            hounds[hound1].identity.geneticSequence, 
+            hounds[hound1], 
             hound2, 
-            hounds[hound2].identity.geneticSequence
+            hounds[hound2]
         );
         IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound1);
         IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound2);

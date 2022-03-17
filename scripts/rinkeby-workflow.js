@@ -38,11 +38,9 @@ async function run() {
     console.log('hound initialize called successfully');
     */
 
-    /*
     const id1 = await hounds.id();
     console.log('After, id: ' + id1);
-    */
-
+    
     /*
     await hounds.initializeHound(id1,defaultHound);
     console.log('hound initialize called successfully');
@@ -55,11 +53,15 @@ async function run() {
     console.log("Hound 2: " + JSON.stringify(hound2));
     */
 
-    //const estimation = await hounds.getBreedCost(id1-3,id1-2);
-    //console.log("Estimation : " + estimation);
+    console.log("From: " + accounts[0].address);
+    const estimation = await hounds.getBreedCost(id1-3,id1-2,{ from : accounts[0].address });
+    console.log("Estimation : " + estimation);
     
-    await hounds.breedHounds(1,2);
+
+    /*
+    await hounds.breedHounds(7,8,{ value : '0x58D15E176280000' });
     console.log('hound breed called successfully');
+    */
 
 }
 

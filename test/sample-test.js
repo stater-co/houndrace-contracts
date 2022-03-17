@@ -282,7 +282,7 @@ describe("Setting up the Payments System", function () {
   
   it("Deploy the HoundRace Potions contract", async function () {
     const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
-    houndracePotions = await HoundracePotions.deploy("Ogars","OG");
+    houndracePotions = await HoundracePotions.deploy(["Ogars","OG"]);
     await houndracePotions.deployed();
   });
 

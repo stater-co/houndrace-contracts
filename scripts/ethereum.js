@@ -21,34 +21,34 @@ async function main() {
   const Converters = await hre.ethers.getContractFactory('Converters');
   const converters = await Converters.deploy();
   await converters.deployed();
-  console.log('Converters deployed to: ', converters.address);
+  console.log('export CONVERTERS=', converters.address);
 
   const Sortings = await hre.ethers.getContractFactory('Sortings');
   const sortings = await Sortings.deploy();
   await sortings.deployed();
-  console.log('Sortings deployed to: ', sortings.address);
+  console.log('export SORTINGS=', sortings.address);
   
   const RandomnessZerocost = await hre.ethers.getContractFactory('RandomnessZerocost');
   const randomnessZerocost = await RandomnessZerocost.deploy([address0]);
   await randomnessZerocost.deployed();
-  console.log('RandomnessZerocost deployed to: ', randomnessZerocost.address);
+  console.log('export RANDOMNESS_ZEROCOST=', randomnessZerocost.address);
 
   const Randomness = await hre.ethers.getContractFactory('Randomness');
   const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
-  console.log('Randomness deployed to: ', randomness.address);
+  console.log('export RANDOMNESS=', randomness.address);
 
   await randomnessZerocost.setGlobalParameters([randomnessZerocost.address]);
 
   const PaymentsMethods = await hre.ethers.getContractFactory('PaymentsMethods');
   const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
   await paymentsMethods.deployed();
-  console.log('PaymentsMethods deployed to: ', paymentsMethods.address);
+  console.log('export PAYMENTS_METHODS=', paymentsMethods.address);
 
   const Payments = await hre.ethers.getContractFactory('Payments');
   const payments = await Payments.deploy([paymentsMethods.address,[]]);
   await payments.deployed();
-  console.log('Payments deployed to: ', payments.address);
+  console.log('export PAYMENTS=', payments.address);
 
   await paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
 

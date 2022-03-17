@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import './zerocost/IIndex.sol';
 import './params/Index.sol';
 
