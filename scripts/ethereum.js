@@ -21,61 +21,50 @@ async function main() {
   const Converters = await hre.ethers.getContractFactory('Converters');
   const converters = await Converters.deploy();
   await converters.deployed();
-  console.log('export CONVERTERS=', converters.address);
-
+  
   const Sortings = await hre.ethers.getContractFactory('Sortings');
   const sortings = await Sortings.deploy();
   await sortings.deployed();
-  console.log('export SORTINGS=', sortings.address);
   
   const RandomnessZerocost = await hre.ethers.getContractFactory('RandomnessZerocost');
   const randomnessZerocost = await RandomnessZerocost.deploy([address0]);
   await randomnessZerocost.deployed();
-  console.log('export RANDOMNESS_ZEROCOST=', randomnessZerocost.address);
-
+  
   const Randomness = await hre.ethers.getContractFactory('Randomness');
   const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
-  console.log('export RANDOMNESS=', randomness.address);
 
   await randomnessZerocost.setGlobalParameters([randomnessZerocost.address]);
 
   const PaymentsMethods = await hre.ethers.getContractFactory('PaymentsMethods');
   const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
   await paymentsMethods.deployed();
-  console.log('export PAYMENTS_METHODS=', paymentsMethods.address);
-
+  
   const Payments = await hre.ethers.getContractFactory('Payments');
   const payments = await Payments.deploy([paymentsMethods.address,[]]);
   await payments.deployed();
-  console.log('export PAYMENTS=', payments.address);
 
   await paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
 
   const HoundracePotions = await hre.ethers.getContractFactory('HoundracePotions');
   const houndracePotions = await HoundracePotions.deploy(['HoundracePotions', 'HP']);
   await houndracePotions.deployed();
-  console.log('HoundracePotions deployed to: ', houndracePotions.address);
 
   const ShopZerocost = await hre.ethers.getContractFactory('ShopZerocost');
   const shopZerocost = await ShopZerocost.deploy([address0,address0,address0]);
   await shopZerocost.deployed();
-  console.log('ShopZerocost deployed to: ', shopZerocost.address);
 
   const ShopRestricted = await hre.ethers.getContractFactory('ShopRestricted');
   const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
   await shopRestricted.deployed();
-  console.log('ShopRestricted deployed to: ', shopRestricted.address);
-
+  
   const ShopMethods = await hre.ethers.getContractFactory('ShopMethods');
   const shopMethods = await ShopMethods.deploy([address0,address0,address0]);
   await shopMethods.deployed();
-  console.log('ShopMethods deployed to: ', shopMethods.address);
-
+  
   const Shop = await hre.ethers.getContractFactory('Shop');
   const shop = await Shop.deploy([shopMethods.address,shopZerocost.address,shopRestricted.address]);
   await shop.deployed();
-  console.log('Shop deployed to: ', shop.address);
 
   await shopZerocost.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
   await shopRestricted.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
@@ -84,13 +73,11 @@ async function main() {
   const ArenasRestricted = await hre.ethers.getContractFactory('ArenasRestricted');
   const arenasRestricted = await ArenasRestricted.deploy([address0]);
   await arenasRestricted.deployed();
-  console.log('ArenasRestricted deployed to: ', arenasRestricted.address);
-
+  
   const Arenas = await hre.ethers.getContractFactory('Arenas');
   const arenas = await Arenas.deploy([arenasRestricted.address]);
   await arenas.deployed();
-  console.log('Arenas deployed to: ', arenas.address);
-
+  
   await arenasRestricted.setGlobalParameters([arenasRestricted.address]);
 
   const GeneticsZerocost = await hre.ethers.getContractFactory('GeneticsZerocost');
@@ -105,8 +92,7 @@ async function main() {
     [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
   ]);
   await geneticsZerocost.deployed();
-  console.log('GeneticsZerocost deployed to: ', geneticsZerocost.address);
-
+  
   const Genetics = await hre.ethers.getContractFactory('Genetics');
   const genetics = await Genetics.deploy([
     randomness.address,
@@ -119,8 +105,7 @@ async function main() {
     [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
   ]);
   await genetics.deployed();
-  console.log('Genetics deployed to: ', genetics.address);
-
+  
   await geneticsZerocost.setGlobalParameters([
     randomness.address,
     geneticsZerocost.address,
@@ -140,7 +125,6 @@ async function main() {
     0
   ]);
   await incubatorMethods.deployed();
-  console.log('IncubatorMethods deployed to: ', incubatorMethods.address);
 
   const Incubator = await hre.ethers.getContractFactory('Incubator');
   const incubator = await Incubator.deploy([
@@ -150,7 +134,6 @@ async function main() {
     0
   ]);
   await incubator.deployed();
-  console.log('Incubator deployed to: ', incubator.address);
 
   await incubatorMethods.setGlobalParameters([
     incubatorMethods.address,
@@ -182,7 +165,6 @@ async function main() {
     ]
   ]);
   await houndsRestricted.deployed();
-  console.log('HoundsRestricted deployed to: ', houndsRestricted.address);
 
   const HoundsModifier = await hre.ethers.getContractFactory('HoundsModifier');
   const houndsModifier = await HoundsModifier.deploy([
@@ -207,7 +189,6 @@ async function main() {
     ]
   ]);
   await houndsModifier.deployed();
-  console.log('HoundsModifier deployed to: ', houndsModifier.address);
 
   const HoundsMinter = await hre.ethers.getContractFactory('HoundsMinter');
   const houndsMinter = await HoundsMinter.deploy([
@@ -232,7 +213,6 @@ async function main() {
     ]
   ]);
   await houndsMinter.deployed();
-  console.log('HoundsMinter deployed to: ', houndsMinter.address);
 
   const Hounds = await hre.ethers.getContractFactory('Hounds');
   const hounds = await Hounds.deploy([
@@ -257,7 +237,6 @@ async function main() {
     ]
   ]);
   await hounds.deployed();
-  console.log('Hounds deployed to: ', hounds.address);
 
   await houndsRestricted.setGlobalParameters([
     'HoundRace',
@@ -338,7 +317,6 @@ async function main() {
     true
   ]);
   await racesRestricted.deployed();
-  console.log('RacesRestricted deployed to: ', racesRestricted.address);
 
   const RacesMethods = await hre.ethers.getContractFactory('RacesMethods');
   const racesMethods = await RacesMethods.deploy([
@@ -353,7 +331,6 @@ async function main() {
     true
   ]);
   await racesMethods.deployed();
-  console.log('RacesMethods deployed to: ', racesMethods.address);
 
   const Races = await hre.ethers.getContractFactory('Races');
   const races = await Races.deploy([
@@ -368,7 +345,6 @@ async function main() {
     true
   ]);
   await races.deployed();
-  console.log('Races deployed to: ', races.address);
 
   const GeneratorZerocost = await hre.ethers.getContractFactory('GeneratorZerocost', {
     libraries: {
@@ -385,7 +361,6 @@ async function main() {
     address0
   ]);
   await generatorZerocost.deployed();
-  console.log('GeneratorZerocost deployed to: ', generatorZerocost.address);
 
   const GeneratorMethods = await hre.ethers.getContractFactory('GeneratorMethods', {
     libraries: {
@@ -402,7 +377,6 @@ async function main() {
     address0
   ]);
   await generatorMethods.deployed();
-  console.log('GeneratorMethods deployed to: ', generatorMethods.address);
 
   const Generator = await hre.ethers.getContractFactory('Generator');
   const generator = await Generator.deploy([
@@ -415,7 +389,6 @@ async function main() {
     generatorZerocost.address
   ]);
   await generator.deployed();
-  console.log('Generator deployed to: ', generator.address);
 
   await generatorZerocost.setGlobalParameters([
     randomness.address,
@@ -905,6 +878,36 @@ async function main() {
   } catch (err) {
     console.error(err);
   }
+
+
+
+  console.log('export CONVERTERS=', converters.address);
+  console.log('export SORTINGS=', sortings.address);
+  console.log('export RANDOMNESS_ZEROCOST=', randomnessZerocost.address);
+  console.log('export RANDOMNESS=', randomness.address);
+  console.log('export PAYMENTS_METHODS=', paymentsMethods.address);
+  console.log('export PAYMENTS=', payments.address);
+  console.log('export HOUNDRACE_POTIONS=', houndracePotions.address);
+  console.log('export SHOP_ZEROCOST=', shopZerocost.address);
+  console.log('export SHOP_RESTRICTED=', shopRestricted.address);
+  console.log('export SHOP_METHODS=', shopMethods.address);
+  console.log('export SHOP=', shop.address);
+  console.log('export ARENA_RESTRICTED=', arenasRestricted.address);
+  console.log('export ARENAS=', arenas.address);
+  console.log('export GENETICS_ZEROCOST=', geneticsZerocost.address);
+  console.log('export GENETICS=', genetics.address);
+  console.log('export INCUBATOR_METHODS=', incubatorMethods.address);
+  console.log('export INCUBATOR=', incubator.address);
+  console.log('export HOUNDS_RESTRICTED=', houndsRestricted.address);
+  console.log('export HOUNDS_MODIFIER=', houndsModifier.address);
+  console.log('export HOUNDS_MINTER=', houndsMinter.address);
+  console.log('export HOUNDS=', hounds.address);
+  console.log('export RACE_RESTRICTED=', racesRestricted.address);
+  console.log('export RACE_METHODS=', racesMethods.address);
+  console.log('export RACE=', races.address);
+  console.log('export GENERATOR_ZEROCOST=', generatorZerocost.address);
+  console.log('export GENERATOR_METHODS=', generatorMethods.address);
+  console.log('export GENERATOR=', generator.address);
 
 }
 
