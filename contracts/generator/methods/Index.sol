@@ -27,6 +27,7 @@ contract GeneratorMethods is Params {
         );
     
         race = Race.Struct(
+            queue.name,
             queue.currency,
             participants,
             queue.arena,

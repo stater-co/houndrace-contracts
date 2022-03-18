@@ -6,6 +6,8 @@ library Race {
     
     struct Struct {
 
+        string name;
+
         // address(0) for ETH
         address currency;
 

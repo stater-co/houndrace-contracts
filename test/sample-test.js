@@ -882,6 +882,7 @@ describe("Races", function () {
 
     await racesMain.createQueues([
       [
+        "test",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -895,6 +896,7 @@ describe("Races", function () {
 
     await racesMain.createQueues([
       [
+        "test",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -908,6 +910,7 @@ describe("Races", function () {
 
     await racesMain.createQueues([
       [
+        "test",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -941,14 +944,14 @@ describe("Races", function () {
 
   it("Join queue x10", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       await racesMain.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x2", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       let hound = await houndMain.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
@@ -958,14 +961,14 @@ describe("Races", function () {
 
   it("Join queue x20", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       await racesMain.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x3", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       let hound = await houndMain.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       ////console.log("Stamina: " + hound[1][2]);
@@ -976,14 +979,14 @@ describe("Races", function () {
 
   it("Join queue x30", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       await racesMain.enqueue(1,i,{ value : queue[2] });
     }
   });
 
   it("Hounds stamina check x4", async function () {
     let queue = await racesMain.queues(1);
-    for ( let i = 1 ; i <= queue[3] ; ++i ) {
+    for ( let i = 1 ; i <= queue[8] ; ++i ) {
       let hound = await houndMain.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
