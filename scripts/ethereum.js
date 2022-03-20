@@ -449,6 +449,7 @@ async function main() {
 
   await races.createQueues([
     [
+      'Test Race #1',
       '0x0000000000000000000000000000000000000000',
       [],
       1,
@@ -881,33 +882,33 @@ async function main() {
 
 
 
-  console.log('export CONVERTERS=', converters.address);
-  console.log('export SORTINGS=', sortings.address);
-  console.log('export RANDOMNESS_ZEROCOST=', randomnessZerocost.address);
-  console.log('export RANDOMNESS=', randomness.address);
-  console.log('export PAYMENTS_METHODS=', paymentsMethods.address);
-  console.log('export PAYMENTS=', payments.address);
-  console.log('export HOUNDRACE_POTIONS=', houndracePotions.address);
-  console.log('export SHOP_ZEROCOST=', shopZerocost.address);
-  console.log('export SHOP_RESTRICTED=', shopRestricted.address);
-  console.log('export SHOP_METHODS=', shopMethods.address);
-  console.log('export SHOP=', shop.address);
-  console.log('export ARENA_RESTRICTED=', arenasRestricted.address);
-  console.log('export ARENAS=', arenas.address);
-  console.log('export GENETICS_ZEROCOST=', geneticsZerocost.address);
-  console.log('export GENETICS=', genetics.address);
-  console.log('export INCUBATOR_METHODS=', incubatorMethods.address);
-  console.log('export INCUBATOR=', incubator.address);
-  console.log('export HOUNDS_RESTRICTED=', houndsRestricted.address);
-  console.log('export HOUNDS_MODIFIER=', houndsModifier.address);
-  console.log('export HOUNDS_MINTER=', houndsMinter.address);
-  console.log('export HOUNDS=', hounds.address);
-  console.log('export RACE_RESTRICTED=', racesRestricted.address);
-  console.log('export RACE_METHODS=', racesMethods.address);
-  console.log('export RACE=', races.address);
-  console.log('export GENERATOR_ZEROCOST=', generatorZerocost.address);
-  console.log('export GENERATOR_METHODS=', generatorMethods.address);
-  console.log('export GENERATOR=', generator.address);
+  console.log('export CONVERTERS=' + converters.address);
+  console.log('export SORTINGS=' + sortings.address);
+  console.log('export RANDOMNESS_ZEROCOST=' + randomnessZerocost.address);
+  console.log('export RANDOMNESS=' + randomness.address);
+  console.log('export PAYMENTS_METHODS=' + paymentsMethods.address);
+  console.log('export PAYMENTS=' + payments.address);
+  console.log('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+  console.log('export SHOP_ZEROCOST=' + shopZerocost.address);
+  console.log('export SHOP_RESTRICTED=' + shopRestricted.address);
+  console.log('export SHOP_METHODS=' + shopMethods.address);
+  console.log('export SHOP=' + shop.address);
+  console.log('export ARENA_RESTRICTED=' + arenasRestricted.address);
+  console.log('export ARENAS=' + arenas.address);
+  console.log('export GENETICS_ZEROCOST=' + geneticsZerocost.address);
+  console.log('export GENETICS=' + genetics.address);
+  console.log('export INCUBATOR_METHODS=' + incubatorMethods.address);
+  console.log('export INCUBATOR=' + incubator.address);
+  console.log('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+  console.log('export HOUNDS_MODIFIER=' + houndsModifier.address);
+  console.log('export HOUNDS_MINTER=' + houndsMinter.address);
+  console.log('export HOUNDS=' + hounds.address);
+  console.log('export RACE_RESTRICTED=' + racesRestricted.address);
+  console.log('export RACE_METHODS=' + racesMethods.address);
+  console.log('export RACE=' + races.address);
+  console.log('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+  console.log('export GENERATOR_METHODS=' + generatorMethods.address);
+  console.log('export GENERATOR=' + generator.address);
 
 }
 

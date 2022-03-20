@@ -166,7 +166,7 @@ async function breed2Hounds() {
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
 
-  //console.log("Male: " + maleId + " , Female:" + femaleId);
+  console.log("Male: " + maleId + " , Female:" + femaleId);
   if ( maleId && femaleId ) {
 
     const houndMaleBefore = await houndMain.hound(maleId);
@@ -196,13 +196,13 @@ async function breed2Hounds() {
     const totalToPay = await houndMain.getBreedCost(hound1,hound2);
     //console.log("Total to pay >> " + totalToPay);
 
-    //console.log("Breed hounds: " + hound1 + " , " + hound2);
+    console.log("Breed hounds: " + hound1 + " , " + hound2);
     await houndMain.breedHounds(hound1, hound2, { value : totalToPay });
     const houndMaleAfter = await houndMain.hound(maleId);
     const houndFemaleAfter = await houndMain.hound(femaleId);
     expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
     expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-    //console.log("Breed hounds after: " + hound1 + " , " + hound2);
+    console.log("Breed hounds after: " + hound1 + " , " + hound2);
     const houndIdAfter = await houndMain.id();
     expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
 
