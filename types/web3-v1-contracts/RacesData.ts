@@ -27,15 +27,15 @@ export type DeleteQueue = ContractEventLog<{
 }>;
 export type NewFinishedRace = ContractEventLog<{
   id: string;
-  race: [string, string[], string, string, string];
+  race: [string, string[], string, string, string, string, string];
   0: string;
-  1: [string, string[], string, string, string];
+  1: [string, string[], string, string, string, string, string];
 }>;
 export type NewRace = ContractEventLog<{
   id: string;
-  race: [string, string[], string, string, string, string];
+  race: [string, string[], string, string, string, string, string];
   0: string;
-  1: [string, string[], string, string, string, string];
+  1: [string, string[], string, string, string, string, string];
 }>;
 export type OwnershipTransferred = ContractEventLog<{
   previousOwner: string;
@@ -54,16 +54,25 @@ export type PlayerEnqueue = ContractEventLog<{
 export type QueuesCreation = ContractEventLog<{
   idStart: string;
   idStop: string;
-  newQueues: [string, string[], string, string, string, string][];
+  newQueues: [
+    string,
+    string[],
+    string,
+    string,
+    string,
+    string,
+    string,
+    string
+  ][];
   0: string;
   1: string;
-  2: [string, string[], string, string, string, string][];
+  2: [string, string[], string, string, string, string, string, string][];
 }>;
 export type UploadRace = ContractEventLog<{
   id: string;
-  race: [string, string[], string, string, string];
+  race: [string, string[], string, string, string, string, string];
   0: string;
-  1: [string, string[], string, string, string];
+  1: [string, string[], string, string, string, string, string];
 }>;
 
 export interface RacesData extends BaseContract {
@@ -81,6 +90,7 @@ export interface RacesData extends BaseContract {
       allowed: string;
       methods: string;
       raceGenerator: string;
+      payments: string;
       raceFee: string;
       callable: boolean;
       0: string;
@@ -90,13 +100,16 @@ export interface RacesData extends BaseContract {
       4: string;
       5: string;
       6: string;
-      7: boolean;
+      7: string;
+      8: boolean;
     }>;
 
     createQueues(
       theQueues: [
         string,
         (number | string | BN)[],
+        number | string | BN,
+        number | string | BN,
         number | string | BN,
         number | string | BN,
         number | string | BN,
@@ -118,7 +131,7 @@ export interface RacesData extends BaseContract {
     queue(
       theId: number | string | BN
     ): NonPayableTransactionObject<
-      [string, string[], string, string, string, string]
+      [string, string[], string, string, string, string, string, string]
     >;
 
     queues(arg0: number | string | BN): NonPayableTransactionObject<{
@@ -126,7 +139,44 @@ export interface RacesData extends BaseContract {
       arena: string;
       entryFee: string;
       startDate: string;
+      endDate: string;
+      rewardsId: string;
       totalParticipants: string;
+      0: string;
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+      6: string;
+    }>;
+
+    races(arg0: number | string | BN): NonPayableTransactionObject<{
+      currency: string;
+      arena: string;
+      entryFee: string;
+      rewardsId: string;
+      randomness: string;
+      seed: string;
+      0: string;
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+    }>;
+
+    renounceOwnership(): NonPayableTransactionObject<void>;
+
+    rewards(
+      arg0: number | string | BN,
+      arg1: number | string | BN
+    ): NonPayableTransactionObject<{
+      from: string;
+      to: string;
+      currency: string;
+      qty: string;
+      paymentType: string;
       0: string;
       1: string;
       2: string;
@@ -134,21 +184,9 @@ export interface RacesData extends BaseContract {
       4: string;
     }>;
 
-    races(arg0: number | string | BN): NonPayableTransactionObject<{
-      currency: string;
-      arena: string;
-      entryFee: string;
-      seed: string;
-      0: string;
-      1: string;
-      2: string;
-      3: string;
-    }>;
-
-    renounceOwnership(): NonPayableTransactionObject<void>;
-
     setGlobalParameters(
       input: [
+        string,
         string,
         string,
         string,
@@ -168,7 +206,9 @@ export interface RacesData extends BaseContract {
         (number | string | BN)[],
         number | string | BN,
         number | string | BN,
-        number | string | BN
+        number | string | BN,
+        number | string | BN,
+        string | number[]
       ]
     ): NonPayableTransactionObject<void>;
   };

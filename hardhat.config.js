@@ -32,18 +32,22 @@ if ( process.env.KEY2 !== undefined ) {
 module.exports = {
   networks: {
     hardhat: {
-      initialBaseFeePerGas: 0 // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
+      initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
+      gas: 4800000,
+      gasPrice: 8000000000
     },
     rinkeby: {
-      url: process.env.URL || "",
+      url: process.env.RINKEBY_URL || "",
+      timeout: 120000,
       accounts: accounts,
-      timeout: 120000
+      gas: 4800000,
+      gasPrice: 8000000000
     }
   },
   etherscan: {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
-    apiKey: process.env.ETHERSCAN_API_KEY
+    apiKey: process.env.RINKEBY_ETHERSCAN_API_KEY
   },
   mocha: {
     timeout: 100000,
@@ -53,13 +57,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.12",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 1
-          }
-        }
+        version: "0.8.13"
       }
     ]
   },

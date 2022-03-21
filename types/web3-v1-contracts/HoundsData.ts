@@ -38,7 +38,6 @@ export type ApprovalForAll = ContractEventLog<{
   2: boolean;
 }>;
 export type BreedHound = ContractEventLog<{
-  id: string;
   owner: string;
   hound: [
     [string, string, string, string],
@@ -51,8 +50,7 @@ export type BreedHound = ContractEventLog<{
     boolean
   ];
   0: string;
-  1: string;
-  2: [
+  1: [
     [string, string, string, string],
     [string, string, string, string, string],
     [string, string, string, boolean],
@@ -184,10 +182,6 @@ export interface HoundsData extends BaseContract {
       hound2: number | string | BN
     ): PayableTransactionObject<void>;
 
-    compoundTransfer(
-      payments: [string, string, string, number | string | BN][]
-    ): PayableTransactionObject<void>;
-
     control(): NonPayableTransactionObject<{
       name: string;
       symbol: string;
@@ -195,6 +189,7 @@ export interface HoundsData extends BaseContract {
       incubator: string;
       staterApi: string;
       shop: string;
+      payments: string;
       breedCost: string;
       breedFee: string;
       refillCost: string;
@@ -211,6 +206,7 @@ export interface HoundsData extends BaseContract {
       8: string;
       9: string;
       10: string;
+      11: string;
     }>;
 
     getApproved(
@@ -285,6 +281,7 @@ export interface HoundsData extends BaseContract {
         string,
         string,
         string,
+        string,
         number | string | BN,
         number | string | BN,
         number | string | BN,
@@ -316,13 +313,6 @@ export interface HoundsData extends BaseContract {
     ): NonPayableTransactionObject<void>;
 
     transferOwnership(newOwner: string): NonPayableTransactionObject<void>;
-
-    transferTokens(
-      from: string,
-      to: string,
-      currency: string,
-      qty: number | string | BN
-    ): NonPayableTransactionObject<void>;
 
     updateHound(
       theId: number | string | BN,
