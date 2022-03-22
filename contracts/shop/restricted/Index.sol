@@ -1,17 +1,11 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
-import '../discount/Index.sol';
-import '../params/Constructor.sol';
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract ShopRestricted is Params {
 
-    function setGlobalParameters(
-        ShopConstructor.Struct memory input
-    ) external {
-        control = input;
-    }
+    constructor(ShopConstructor.Struct memory input) Params(input) {}
 
     function createDiscount(Discount.Struct memory discount) external {
         discounts[id] = discount;

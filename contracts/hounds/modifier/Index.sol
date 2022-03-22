@@ -1,41 +1,59 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract HoundsModifier is Params {
 
-    constructor() ERC721("","") {}
+    constructor(Constructor.Struct memory input) Params(input) {}
     
-    function updateHoundStamina(uint256 theId) public payable {
-        uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(msg.sender);
-        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
-        if ( allowed[msg.sender] ) {
-            --hounds[theId].stamina.stamina;
-        }
-        if (msg.value >= refillStaminaCooldownCost) {
-            hounds[theId].stamina.stamina += uint32(msg.value / refillStaminaCooldownCost);
-        }
+    function updateHoundStamina(uint256 theId) public {
+        require(allowed[msg.sender]);
+
+        --hounds[theId].stamina.stamina;
+        
         hounds[theId].stamina.stamina += uint32( ( ( block.timestamp - hounds[theId].stamina.lastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
         hounds[theId].stamina.lastUpdate = block.timestamp;
+
         if ( hounds[theId].stamina.stamina > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.stamina = hounds[theId].stamina.staminaCap;
         }
+
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.stamina);
     }
 
-    function updateHoundBreeding(uint256 theId, uint256 breedingCooldownToConsume) public payable {
-        if ( breedingCooldownToConsume == 0 ) {
-            uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(msg.sender);
-            uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
-            if ( allowed[msg.sender] || msg.value >= refillBreedingCooldownCost ) {
-                hounds[theId].breeding.breedCooldown -= breedingCooldownToConsume;
-            }
+    function boostHoundStamina(uint256 theId, address user) public payable {
+        uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(user);
+        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
+        hounds[theId].stamina.stamina += uint32(msg.value / refillStaminaCooldownCost);
+        
+        hounds[theId].stamina.stamina += uint32( ( ( block.timestamp - hounds[theId].stamina.lastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
+        hounds[theId].stamina.lastUpdate = block.timestamp;
+
+        if ( hounds[theId].stamina.stamina > hounds[theId].stamina.staminaCap ) {
+            hounds[theId].stamina.stamina = hounds[theId].stamina.staminaCap;
         }
-        if ( ( block.timestamp - hounds[theId].breeding.lastUpdate ) / 3600 >= hounds[theId].breeding.breedCooldown ) {
-            hounds[theId].breeding.availableToBreed = true;
-            hounds[theId].breeding.lastUpdate = block.timestamp;
-        }
+
+        emit HoundStaminaUpdate(theId,hounds[theId].stamina.stamina);
+    }
+
+    function updateHoundBreeding(uint256 theId) public {
+        require(allowed[msg.sender]);
+        
+        hounds[theId].breeding.breedCooldown += 172800;
+        hounds[theId].breeding.lastUpdate = block.timestamp;
+    
+        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
+    }
+
+    function boostHoundBreeding(uint256 theId, address user) public payable {
+
+        uint256 discount = IShopMethods(control.boilerplate.shopMethods).calculateDiscount(user);
+        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
+        
+        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;
+        hounds[theId].breeding.lastUpdate = block.timestamp;
+        
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
 

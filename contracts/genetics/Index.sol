@@ -1,20 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
-import './zerocost/IIndex.sol';
+pragma solidity 0.8.13;
 import './params/Index.sol';
 
 
 contract Genetics is Params {
     
-    constructor(GeneticsConstructor.Struct memory input) {
-        control = input;
-    }
+    constructor(GeneticsConstructor.Struct memory input) Params(input) {}
     
-    function setGlobalParameters(GeneticsConstructor.Struct memory input) external onlyOwner {
-        (bool success, ) = input.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
     function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) external view returns(uint32[54] memory) {
         return IGeneticsZerocost(control.zerocost).wholeArithmeticRecombination(geneticSequence1, geneticSequence2);
     }

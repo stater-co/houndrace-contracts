@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract GeneratorZerocost is Params {
+
+    constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
     function computeHoundsStats(uint256[] memory participants, Arena.Struct memory terrain) internal view returns(uint256[] memory) {
 

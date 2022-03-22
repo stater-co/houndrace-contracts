@@ -7,7 +7,7 @@ const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 100000, 1000, false ],
+  [ 0, 100000, 1000, true ],
   [ 0, 0, 0, maleBoilerplateGene ],
   "",
   "",
@@ -15,56 +15,16 @@ const defaultHound = [
   false
 ];
 let currentDiscountId = 1;
-let payments = {
-  main: null,
-  methods: null,
-  restricted: null
-};
-let shop = {
-  main: null,
-  methods: null,
-  restricted: null,
-  zerocost: null
-};
-let randomness = {
-  restricted: null,
-  zerocost: null,
-  main: null
-};
-let arenas = {
-  main: null,
-  restricted: null,
-  zerocost: null
-};
-let genetics = {
-  main: null,
-  restricted: null,
-  zerocost: null
-};
-let incubator = {
-  methods: null,
-  restricted: null,
-  main: null
-};
-let hound = {
-  minter: null,
-  modifier: null,
-  restricted: null,
-  zerocost: null
-};
+let payments = {};
+let shop = {};
+let randomness = {};
+let arenas = {};
+let genetics = {};
+let incubator = {};
+let hound = {};
 let houndsContract;
-let generator = {
-  methods: null,
-  restricted: null,
-  zerocost: null, 
-  main: null
-};
-let races = {
-  methods: null,
-  restricted: null,
-  zerocost: null,
-  main: null
-};
+let generator = {};
+let races = {};
 
 
 // @DIIMIIM: Get smart contract instance
@@ -125,7 +85,7 @@ async function safelyUpdateHoundBreeding(houndId) {
     houndToWorkWith = Number(houndIdBefore)-1;
   }
   const houndBefore = await houndsContract.hound(houndToWorkWith);
-  await houndsContract.updateHoundBreeding(houndToWorkWith,10000000);
+  await houndsContract.updateHoundBreeding(houndToWorkWith);
   const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
@@ -155,14 +115,11 @@ async function checkHoundStructure(houndId) {
 async function findMaleAndFemaleAvailableForBreed() {
   const houndIdBefore = await houndsContract.id();
 
-  //console.log("Hound id to parse: " + houndIdBefore);
   let maleId , femaleId ;
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
     const hound = await houndsContract.hound(i);
     const houndGene = hound[3][3];
-
-    //console.log("Gene: " + i + " >> " + houndGene);
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -183,15 +140,14 @@ async function findMaleAndFemaleAvailableForBreed() {
 async function breed2Hounds() {
   const houndIdBefore = await houndsContract.id();
   const availableHounds = await findMaleAndFemaleAvailableForBreed();
-  //console.log("Available hounds >> " + JSON.stringify(findMaleAndFemaleAvailableForBreed));
+
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
 
-  //console.log("Male: " + maleId + " , Female:" + femaleId);
-  if ( maleId && femaleId ) {
+  const houndMaleBefore = await houndsContract.hound(maleId);
+  const houndFemaleBefore = await houndsContract.hound(femaleId);
 
-    const houndMaleBefore = await houndsContract.hound(maleId);
-    const houndFemaleBefore = await houndsContract.hound(femaleId);
+  if ( maleId && femaleId ) {
 
     const [owner] = await ethers.getSigners();
     const ownerOfMale = await houndsContract.ownerOf(maleId);
@@ -205,28 +161,20 @@ async function breed2Hounds() {
       hound1 = femaleId;
       hound2 = maleId;
     }
-    
-    console.log("We breed hounds here !!!!!");
-
-    const foreignHound = await houndsContract.hound(hound2);
-    //console.log("Breed fee: " + Number(foreignHound[2][1]));
-    const control = await houndsContract.control();
-    //console.log(Number(control[3][0]) + " + " + Number(control[3][1]));
-    //console.log(Number(foreignHound[2][1]) + Number(control[3][0]) + Number(control[3][1]));
 
     const totalToPay = await houndsContract.getBreedCost(hound1,hound2);
-    console.log("Total to pay >> " + totalToPay);
 
     await houndsContract.breedHounds(hound1, hound2, { value : totalToPay });
-    const houndMaleAfter = await houndsContract.hound(maleId);
-    const houndFemaleAfter = await houndsContract.hound(femaleId);
-    expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-    expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-    
-    const houndIdAfter = await houndsContract.id();
-    expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
 
   }
+
+  const houndMaleAfter = await houndsContract.hound(maleId);
+  const houndFemaleAfter = await houndsContract.hound(femaleId);
+  expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
+  expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
+  
+  const houndIdAfter = await houndsContract.id();
+  expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
 
 }
 
@@ -307,12 +255,9 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the payments contract", async function () {
-    payments.methods = await getContractInstance("PaymentsMethods");
-    console.log("Payments method: " + payments.methods.address);
-    payments.restricted = await getContractInstance("PaymentsRestricted");
-    console.log("Payments restricted: " + payments.restricted.address);
-    payments.main = await getContractInstance("Payments",[payments.methods.address,payments.restricted.address,[]]);
-    console.log("Payments: " + payments.main.address);
+    payments.methods = await getContractInstance("PaymentsMethods",[address0,[]]);
+    payments.main = await getContractInstance("Payments",[payments.methods.address,[]]);
+    await payments.methods.setGlobalParameters([payments.methods.address,[]]);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -336,14 +281,13 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the Payments methods contract", async function () {
-    shop.zerocost = await getContractInstance("ShopZerocost");
-    console.log("Shop zerocost: " + shop.zerocost.address);
-    shop.restricted = await getContractInstance("ShopRestricted");
-    console.log("Shop restricted: " + shop.restricted.address);
-    shop.methods = await getContractInstance("ShopMethods");
-    console.log("Shop methods: " + shop.methods.address);
+    shop.zerocost = await getContractInstance("ShopZerocost",[address0,address0,address0]);
+    shop.restricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
+    shop.methods = await getContractInstance("ShopMethods",[address0,address0,address0]);
     shop.main = await getContractInstance("Shop",[shop.methods.address,shop.zerocost.address,shop.restricted.address]);
-    console.log("Shop: " + shop.main.address);
+    await shop.zerocost.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    await shop.restricted.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    await shop.methods.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
   });
 
   it("Add discounts", async function () {
@@ -392,30 +336,23 @@ describe("Setting up the Payments System", function () {
 describe("Setting up the Houndrace contracts", function () {
   
   it("Deploy the randomness contracts", async function () {
-    randomness.zerocost = await getContractInstance("RandomnessZerocost");
-    console.log("Zerocost contract deployed at: " + randomness.zerocost.address);
-    randomness.restricted = await getContractInstance("RandomnessRestricted");
-    console.log("Restricted contract deployed at: " + randomness.restricted.address);
-    randomness.main = await getContractInstance("Randomness",[randomness.zerocost.address,randomness.restricted.address]);
-    console.log("Randomness main deployed at: " + randomness.main.address);
+    randomness.zerocost = await getContractInstance("RandomnessZerocost",[address0]);
+    randomness.main = await getContractInstance("Randomness",[randomness.zerocost.address]);
+    await randomness.zerocost.setGlobalParameters([randomness.main.address]);
   });
 
   it("Deploy the arenas contracts", async function () {
-    arenas.zerocost = await getContractInstance("ArenasZerocost");
-    console.log("Zerocost contract deployed at: " + arenas.zerocost.address);
-    arenas.restricted = await getContractInstance("ArenasRestricted");
-    console.log("Restricted contract deployed at: " + arenas.restricted.address);
-    arenas.main = await getContractInstance("Arenas",[arenas.zerocost.address,arenas.restricted.address]);
-    console.log("Arenas contract deployed at: " + arenas.main.address);
+    arenas.zerocost = await getContractInstance("ArenasZerocost", ["HoundRace Arenas", "HRA", address0, address0]);
+    arenas.restricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0]);
+    arenas.main = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
+    await arenas.zerocost.setGlobalParameters(["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
+    await arenas.restricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
   });
 
   it("Genetics methods", async function () {
-    genetics.restricted = await getContractInstance("GeneticsRestricted");
-    console.log("Restricted contract deployed at: " + genetics.restricted.address);
     genetics.zerocost = await getContractInstance("GeneticsZerocost",[
       randomness.main.address,
       address0,
-      genetics.restricted.address,
       arenas.main.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
@@ -424,11 +361,9 @@ describe("Setting up the Houndrace contracts", function () {
       [2,6,10,14,18,22,26,30,34,38,42,46,50],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
-    console.log("Zerocost contract deployed at: " + genetics.zerocost.address);
     genetics.main = await getContractInstance("Genetics",[
       randomness.main.address,
       genetics.zerocost.address,
-      genetics.restricted.address,
       arenas.main.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
@@ -437,36 +372,142 @@ describe("Setting up the Houndrace contracts", function () {
       [2,6,10,14,18,22,26,30,34,38,42,46,50],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
-    console.log("Genetics contract deployed at: " + genetics.main.address);
   });
 
   it("Deploy the incubator contracts", async function () {
-    incubator.methods = await getContractInstance("IncubatorMethods");
-    console.log("Methods contract deployed at: " + incubator.methods.address);
-    incubator.restricted = await getContractInstance("IncubatorRestricted");
-    console.log("Restricted contract deployed at: " + incubator.restricted.address);
+    incubator.methods = await getContractInstance("IncubatorMethods",[
+      address0,
+      address0,
+      address0,
+      "0x67657452"
+    ]);
     incubator.main = await getContractInstance("Incubator",[
       incubator.methods.address,
-      incubator.restricted.address,
       randomness.main.address,
       genetics.main.address,
       "0x67657452"
     ]);
-    console.log("Incubator contract deployed at: " + incubator.main.address);
-
+    await incubator.methods.setGlobalParameters([
+      incubator.methods.address,
+      randomness.main.address,
+      genetics.main.address,
+      "0x67657452"
+    ]);
   });
 
   it("Deploy the hounds contract", async function () {
-    const [,otherOwner] = await ethers.getSigners();
-    hound.zerocost = await getContractInstance("HoundsZerocost");
-    console.log("Zerocost contract deployed at: " + hound.zerocost.address);
-    hound.restricted = await getContractInstance("HoundsRestricted");
-    console.log("Restricted contract deployed at: " + hound.restricted.address);
-    hound.modifier = await getContractInstance("HoundsModifier");
-    console.log("Modifier contract deployed at: " + hound.modifier.address);
-    hound.minter = await getContractInstance("HoundsMinter");
-    console.log("Minter contract deployed at: " + hound.minter.address);
+    const [owner,otherOwner] = await ethers.getSigners();
+    hound.zerocost = await getContractInstance("HoundsZerocost",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    hound.restricted = await getContractInstance("HoundsRestricted",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    hound.modifier = await getContractInstance("HoundsModifier",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    hound.minter = await getContractInstance("HoundsMinter",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
     houndsContract = await getContractInstance("Hounds",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await hound.zerocost.setGlobalParameters([
       "HoundRace",
       "HR",
       [],
@@ -487,20 +528,114 @@ describe("Setting up the Houndrace contracts", function () {
         "0x2386F26FC10000"
       ]
     ]);
-    console.log("Hounds contract deployed at: " + houndsContract.address);
 
-    await payments.main.setGlobalParameters([payments.methods.address,payments.restricted.address,[houndsContract.address]]);
-    console.log("Successfully global parameters set");
+    await hound.minter.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await hound.modifier.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await hound.restricted.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await payments.main.setGlobalParameters([payments.methods.address,[houndsContract.address]]);
 
   });
 
   it("Deploy the race contracts", async function () {
-    races.zerocost = await getContractInstance("RacesZeroCost");
-    console.log("Zerocost contract deployed at: " + races.zerocost.address);
-    races.restricted = await getContractInstance("RacesRestricted");
-    console.log("Restricted contract deployed at: " + races.restricted.address);
-    races.methods = await getContractInstance("RacesMethods");
-    console.log("Methods contract deployed at: " + races.methods.address);
+    races.zerocost = await getContractInstance("RacesZeroCost",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      500000000,
+      true
+    ]);
+    races.restricted = await getContractInstance("RacesRestricted",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      500000000,
+      true
+    ]);
+    races.methods = await getContractInstance("RacesMethods",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      500000000,
+      true
+    ]);
     races.main = await getContractInstance("Races",[
       randomness.main.address,
       arenas.main.address,
@@ -513,7 +648,42 @@ describe("Setting up the Houndrace contracts", function () {
       500000000,
       true
     ]);
-    console.log("Races contract deployed at: " + races.main.address);
+    await races.zerocost.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.restricted.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.methods.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
   });
 
   it("Deploy the generator contracts", async function () {
@@ -522,23 +692,34 @@ describe("Setting up the Houndrace contracts", function () {
         Sortings: sortingsLibrary.address
       }
     });
-    let contract = await Contract.deploy();
+    let contract = await Contract.deploy([
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0
+    ]);
     await contract.deployed();
     generator.zerocost = contract;
-    console.log("Zerocost contract deployed at: " + generator.zerocost.address);
-
-    generator.restricted = await getContractInstance("GeneratorRestricted");
-    console.log("Restricted contract deployed at: " + generator.restricted.address);
 
     Contract = await hre.ethers.getContractFactory("GeneratorMethods", {
       libraries: {
         Converters: convertersLibrary.address
       }
     });
-    contract = await Contract.deploy();
+    contract = await Contract.deploy([
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0
+    ]);
     await contract.deployed();
     generator.methods = contract;
-    console.log("Methods contract deployed at: " + generator.methods.address);
 
     generator.main = await getContractInstance("Generator",[
       randomness.main.address,
@@ -547,12 +728,30 @@ describe("Setting up the Houndrace contracts", function () {
       races.main.address,
       generator.methods.address,
       payments.main.address,
-      generator.restricted.address,
       generator.zerocost.address
     ]);
-    console.log("Generator contract deployed at: " + generator.main.address);
 
-    races.main.setGlobalParameters([
+    await generator.zerocost.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.zerocost.address
+    ]);
+
+    await generator.methods.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.zerocost.address
+    ]);
+
+    await races.main.setGlobalParameters([
       randomness.main.address,
       arenas.main.address,
       houndsContract.address,
@@ -568,7 +767,6 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
 });
-
 
 
 describe("Genetics methods", function () {
@@ -734,8 +932,6 @@ describe("Races", function () {
 
     let queueId = await races.main.id();
 
-    ////console.log("Queue id >> " + queueId);
-
     expect(Number(queueId) === 2, "Queue has not been created");
 
   });
@@ -781,7 +977,6 @@ describe("Races", function () {
     for ( let i = 1 ; i <= queue[3] ; ++i ) {
       let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
-      //console.log("Stamina: " + hound[1][2]);
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];
     }

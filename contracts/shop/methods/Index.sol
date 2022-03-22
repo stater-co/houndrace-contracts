@@ -1,12 +1,11 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/interfaces/IERC1155.sol";
-import '../discount/Index.sol';
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract ShopMethods is Params {
+
+    constructor(ShopConstructor.Struct memory input) Params(input) {}
 
     function calculateDiscount(address requester) external returns(uint256) {
         uint256 discount;

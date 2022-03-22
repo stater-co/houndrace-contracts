@@ -1,21 +1,11 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import './params/Index.sol';
-import './zerocost/IIndex.sol';
 
 
 contract Hounds is Params {
 
-    constructor(
-        Constructor.Struct memory input
-    ) ERC721(input.name,input.symbol) {
-        control = input;
-    }
-
-    function setGlobalParameters(GlobalVariables.Struct memory input) external onlyOwner {
-        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
-        require(success);
-    }
+    constructor(Constructor.Struct memory input) Params(input) {}
 
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
@@ -32,12 +22,22 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundStamina(uint256 theId) public payable {
+    function updateHoundStamina(uint256 theId) public {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function updateHoundBreeding(uint256 theId, uint256 breedingCooldownToConsume) public payable {
+    function updateHoundBreeding(uint256 theId) public {
+        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success);
+    }
+
+    function boostHoundStamina(uint256 theId, address user) public payable {
+        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success);
+    }
+
+    function boostHoundBreeding(uint256 theId, address user) public payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

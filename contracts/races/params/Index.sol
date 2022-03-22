@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Queue.sol';
@@ -8,6 +8,11 @@ import '../../payments/payment/Index.sol';
 import '../../hounds/modifier/IIndex.sol';
 import '../../arenas/arena/Index.sol';
 import '../../arenas/zerocost/IIndex.sol';
+import '../zerocost/IIndex.sol';
+import '../../utils/Converters.sol';
+import '../../payments/methods/IIndex.sol';
+import '../../hounds/hound/Index.sol';
+import '../../hounds/zerocost/IIndex.sol';
 
 
 contract Params is Ownable {
@@ -24,5 +29,13 @@ contract Params is Ownable {
     mapping(uint256 => Queue.Struct) public queues;
     mapping(uint256 => Race.Struct) public races;
     mapping(uint256 => Payment.Struct[]) public rewards;
+
+    constructor(RacesConstructor.Struct memory input) {
+        control = input;
+    }
+
+    function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
 
 }

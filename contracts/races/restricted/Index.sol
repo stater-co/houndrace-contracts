@@ -1,18 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
-import '../../utils/Converters.sol';
-import '../../payments/methods/IIndex.sol';
-import '../params/Constructor.sol';
-import '../params/Queue.sol';
-import '../params/Race.sol';
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract RacesRestricted is Params {
 
-    function setGlobalParameters(RacesConstructor.Struct memory input) external {
-        control = input;
-    }
+    constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function createQueues(Queue.Struct[] memory theQueues) external {
         Arena.Struct memory arena;

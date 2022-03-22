@@ -1,30 +1,11 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract HoundsRestricted is Params {
 
-    constructor() ERC721("","") {}
-
-    function setGlobalParameters(
-        GlobalVariables.Struct memory input
-    ) external {
-
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
-            allowed[input.allowedCallers[i]] = input.isAllowed[i];
-
-        control.boilerplate.incubator = input.boilerplate.incubator;
-        control.boilerplate.staterApi = input.boilerplate.staterApi;
-        control.boilerplate.payments = input.boilerplate.payments;
-        control.boilerplate.restricted = input.boilerplate.restricted;
-        control.fees.breedCost = input.fees.breedCost;
-        control.fees.breedFee = input.fees.breedFee;
-        control.fees.refillCost = input.fees.refillCost;
-        control.fees.refillBreedingCooldownCost = input.fees.refillBreedingCooldownCost;
-        control.fees.refillStaminaCooldownCost = input.fees.refillStaminaCooldownCost;
-
-    }
+    constructor(Constructor.Struct memory input) Params(input) {}
     
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
         if ( onId > 0 ) {
