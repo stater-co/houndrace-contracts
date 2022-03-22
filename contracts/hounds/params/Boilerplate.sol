@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.12;
+pragma solidity <=0.8.13;
 
 library ConstructorBoilerplate {
     struct Struct {
@@ -8,8 +8,8 @@ library ConstructorBoilerplate {
         address payments;
         address restricted;
         address minter;
-        address zerocost;
         address houndModifier;
-        address shopMethods;
+        address shop;
+        address ogars;
     }
 }

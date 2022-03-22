@@ -1,21 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import './params/Index.sol';
-import './zerocost/Index.sol';
 
 
 contract Races is Params {
     
-    constructor(RacesConstructor.Struct memory input) {
-        control = input;
-    }
-
-    function setGlobalParameters(
-        RacesConstructor.Struct memory input
-    ) external onlyOwner {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
+    constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
@@ -38,7 +28,7 @@ contract Races is Params {
     }
 
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
-        return RacesZeroCost(control.zerocost).queue(theId);
+        return queues[theId];
     }
 
 }

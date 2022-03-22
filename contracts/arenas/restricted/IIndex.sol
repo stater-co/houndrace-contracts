@@ -1,12 +1,10 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../arena/Index.sol';
 import '../params/Constructor.sol';
 
 
 interface IArenasRestricted {
-
-    function setGlobalParameters(ArenasConstructor.Struct memory arenasConstructor) external;
 
     function createArena(Arena.Struct memory arena) external;
     

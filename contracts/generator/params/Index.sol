@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import '../../races/params/Queue.sol';
@@ -21,5 +21,17 @@ contract Params is Ownable {
 
     event NewRace(Queue.Struct queue, Race.Struct race);
     GeneratorConstructor.Struct public control;
+
+    constructor(
+        GeneratorConstructor.Struct memory input
+    ) {
+        control = input;
+    }
+
+    function setGlobalParameters(
+        GeneratorConstructor.Struct memory globalParameters
+    ) external onlyOwner {
+        control = globalParameters;
+    }
 
 }

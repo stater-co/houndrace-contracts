@@ -1,20 +1,16 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.12;
+pragma solidity <=0.8.13;
 
 
 library Queue {
     
-    /**
-     * DIIMIIM:
-     * Participants can pay with multiple currencies, ETH included
-     */
     struct Struct {
+
+        string name;
 
         // address(0) for ETH
         address currency;
 
-        // Participants
-        // totalParticipants will be the array length here
         uint256[] participants;
 
         // arena of the race

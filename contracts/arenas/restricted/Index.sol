@@ -1,14 +1,12 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 
 contract ArenasRestricted is Params {
 
-    function setGlobalParameters(ArenasConstructor.Struct memory arenasConstructor) external onlyOwner {
-        control = arenasConstructor;
-    }
+    constructor(ArenasConstructor.Struct memory arenasConstructor) Params(arenasConstructor) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {
         arenas[id] = arena;

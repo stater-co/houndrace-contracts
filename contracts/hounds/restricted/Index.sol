@@ -1,34 +1,15 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract HoundsRestricted is Params {
 
-    constructor() ERC721("","") {}
-
-    function setGlobalParameters(
-        GlobalVariables.Struct memory input
-    ) external {
-
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
-            allowed[input.allowedCallers[i]] = input.isAllowed[i];
-
-        control.boilerplate.incubator = input.boilerplate.incubator;
-        control.boilerplate.staterApi = input.boilerplate.staterApi;
-        control.boilerplate.payments = input.boilerplate.payments;
-        control.boilerplate.restricted = input.boilerplate.restricted;
-        control.fees.breedCost = input.fees.breedCost;
-        control.fees.breedFee = input.fees.breedFee;
-        control.fees.refillCost = input.fees.refillCost;
-        control.fees.refillBreedingCooldownCost = input.fees.refillBreedingCooldownCost;
-        control.fees.refillStaminaCooldownCost = input.fees.refillStaminaCooldownCost;
-
-    }
+    constructor(Constructor.Struct memory input) Params(input) {}
     
-    function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
         if ( onId > 0 ) {
-            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap > 0);
+            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap == 0);
             emit NewHound(onId,msg.sender,theHound);
             hounds[onId] = theHound;
             _safeMint(msg.sender,onId);
@@ -40,7 +21,7 @@ contract HoundsRestricted is Params {
         }
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_url) external {
+    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
         hounds[_tokenId].token_url = token_url;
     }
 

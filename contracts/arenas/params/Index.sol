@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
@@ -15,6 +15,12 @@ contract Params is Ownable, ERC721, ERC721Holder {
     event NewArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
     event EditArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
 
-    constructor() ERC721("","") {}
+    constructor(ArenasConstructor.Struct memory arenasConstructor) ERC721("","") {
+        control = arenasConstructor;
+    }
+
+    function setGlobalParameters(ArenasConstructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
 
 }

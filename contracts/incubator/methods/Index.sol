@@ -1,21 +1,18 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
-import '../../hounds/hound/Index.sol';
-import '../params/Constructor.sol';
-import '../../genetics/zerocost/IIndex.sol';
-import '../../randomness/zerocost/IIndex.sol';
+pragma solidity 0.8.13;
+import '../params/Index.sol';
 
 
-contract IncubatorMethods {
-    
-    IncubatorConstructor.Struct public control;
+contract IncubatorMethods is Params {
 
-    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
+    constructor(IncubatorConstructor.Struct memory input) Params(input) {}
+
+    function breedHounds(uint256 h1, Hound.Struct memory hound1, uint256 h2, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
         uint32[54] memory genetics = IGeneticsZerocost(control.genetics).mixGenes(
-            hound1GeneticSequence, 
-            hound2GeneticSequence, 
+            hound1.identity.geneticSequence, 
+            hound2.identity.geneticSequence, 
             IRandomnessZerocost(control.randomness).getRandomNumber(
-                abi.encode(hound1 > hound2 ? hound1GeneticSequence : hound2GeneticSequence)
+                abi.encode(h1 > h2 ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
             )
         );
 
@@ -42,9 +39,9 @@ contract IncubatorMethods {
         );
 
         Identity.Struct memory identity = Identity.Struct(
-            0,
-            hound1,
-            hound2,
+            h1,
+            h2,
+            hound2.identity.generation + hound1.identity.generation,
             genetics // preferences will be extracted from this 
         );
 

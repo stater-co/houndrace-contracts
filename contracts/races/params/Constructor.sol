@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.12;
+pragma solidity <=0.8.13;
 
 library RacesConstructor {
     struct Struct {
@@ -10,7 +10,6 @@ library RacesConstructor {
         address generator;
         address payments;
         address restricted;
-        address zerocost;
         uint256 raceFee;
         bool callable;
     }

@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
 contract GeneratorMethods is Params {
+
+    constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
     function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race) {
 
@@ -25,6 +27,7 @@ contract GeneratorMethods is Params {
         );
     
         race = Race.Struct(
+            queue.name,
             queue.currency,
             participants,
             queue.arena,

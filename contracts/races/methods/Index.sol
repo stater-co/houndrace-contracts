@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.12;
+pragma solidity 0.8.13;
 import '../params/Index.sol';
-import '../../hounds/hound/Index.sol';
-import '../../hounds/zerocost/IIndex.sol';
 
 
 contract RacesMethods is Params { 
+
+    constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function enqueue(uint256 theId, uint256 hound) external payable {
     
@@ -21,7 +21,7 @@ contract RacesMethods is Params {
 
         queues[theId].participants.push(hound);
         
-        IHoundsModifier(control.hounds).updateHoundStamina(hound);
+        IHoundsModifier(control.hounds).updateStamina(hound);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 

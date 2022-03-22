@@ -32,12 +32,16 @@ if ( process.env.KEY2 !== undefined ) {
 module.exports = {
   networks: {
     hardhat: {
-      initialBaseFeePerGas: 0 // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
+      initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
+      gas: 4800000,
+      gasPrice: 8000000000
     },
     rinkeby: {
       url: process.env.RINKEBY_URL || "",
       timeout: 120000,
-      accounts: accounts
+      accounts: accounts,
+      gas: 4800000,
+      gasPrice: 8000000000
     }
   },
   etherscan: {
@@ -53,7 +57,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.12"
+        version: "0.8.13"
       }
     ]
   },
