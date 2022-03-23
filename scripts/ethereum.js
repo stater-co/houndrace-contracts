@@ -9,7 +9,7 @@ const defaultHound = [
   [ 0, 0, 0, maleBoilerplateGene ],
   "",
   "",
-  false,
+  true,
   false
 ];
 
@@ -37,7 +37,7 @@ async function main() {
   const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
   console.log("Randomness deployed to: ", randomness.address);
-  await randomnessZerocost.setGlobalParameters([randomnessZerocost.address]);
+  await randomnessZerocost.setGlobalParameters([randomness.address]);
 
   const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
   const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
@@ -48,7 +48,7 @@ async function main() {
   const payments = await Payments.deploy([paymentsMethods.address,[]]);
   await payments.deployed();
   console.log("Payments deployed to: ", payments.address);
-  await paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
+  await paymentsMethods.setGlobalParameters([payments.address,[]]);
 
   const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
   const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
@@ -140,10 +140,16 @@ async function main() {
     incubatorMethods.address,
     randomness.address,
     genetics.address,
-    0
+    "0x67657452"
   ]);
   await incubator.deployed();
   console.log("Incubator deployed to: ", incubator.address);
+  await incubatorMethods.setGlobalParameters([
+    incubatorMethods.address,
+    randomness.address,
+    genetics.address,
+    "0x67657452"
+  ]);
 
   const HoundsZerocost = await hre.ethers.getContractFactory("HoundsZerocost");
   const houndsZerocost = await HoundsZerocost.deploy([
@@ -295,7 +301,7 @@ async function main() {
   await houndsRestricted.setGlobalParameters([
     "HoundRace",
     "HR",
-    [],
+    [hounds.address,houndsRestricted.address,houndsMinter.address],
     [
       incubator.address,
       String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -317,7 +323,7 @@ async function main() {
   await houndsModifier.setGlobalParameters([
     "HoundRace",
     "HR",
-    [],
+    [hounds.address,houndsRestricted.address,houndsMinter.address],
     [
       incubator.address,
       String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -339,7 +345,7 @@ async function main() {
   await houndsMinter.setGlobalParameters([
     "HoundRace",
     "HR",
-    [],
+    [hounds.address,houndsRestricted.address,houndsMinter.address],
     [
       incubator.address,
       String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -523,54 +529,63 @@ async function main() {
     generatorZerocost.address
   ]);
 
-  try {
-    await races.setGlobalParameters(
-      [
-        randomness.address,
-        arenas.address,
-        hounds.address,
-        racesMethods.address,
-        generator.address,
-        payments.address,
-        racesRestricted.address,
-        racesZeroCost.address,
-        500000000,
-        true
-      ] 
-    );
-    console.log("races setGlobalParameters called successfully");
-  } catch ( err ) {
-    //console.error(err);
-  }
+  await races.setGlobalParameters(
+    [
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      racesMethods.address,
+      generator.address,
+      payments.address,
+      racesRestricted.address,
+      racesZeroCost.address,
+      500000000,
+      true
+    ] 
+  );
+  console.log("races setGlobalParameters called successfully");
 
-  try {
-    await races.createQueues([
-      [
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1,
-        5000000000,
-        0,
-        0,
-        1,
-        10
-      ]
-    ]);
-    console.log("races create queue called successfully");
-  } catch ( err ) {
-    //console.error(err);
-  }
+  await races.createQueues([["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10]]);
+  console.log("races create queue called successfully");
 
-  try {
-    await hounds.initializeHound(0,defaultHound);
-    console.log("hound initialize called successfully");
-  } catch ( err ) {
-    //console.error(err);
-  }
+  let id = await hounds.id();
+  console.log("ID: " + id);
 
+  await hounds.initializeHound(0,defaultHound);
+  console.log("hound initialize called successfully");
 
+  id = await hounds.id();
+  console.log("ID: " + id);
 
+  await hounds.initializeHound(0,defaultHound);
+  console.log("hound initialize called successfully");
 
+  id = await hounds.id();
+  console.log("ID: " + id);
+
+  await hounds.initializeHound(0,defaultHound);
+  console.log("hound initialize called successfully");
+
+  id = await hounds.id();
+  console.log("ID: " + id);
+
+  await hounds.initializeHound(0,defaultHound);
+  console.log("hound initialize called successfully");
+
+  id = await hounds.id();
+  console.log("ID: " + id);
+
+  await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
+  console.log("hound breed called successfully");
+
+  id = await hounds.id();
+  console.log("ID: " + id);
+
+  await hounds.breedHounds(3,4,{ value: "0xD529AE9E860000" });
+  console.log("hound breed called successfully");
+  
+  id = await hounds.id();
+  console.log("ID: " + id);
 
 
 
@@ -1042,6 +1057,35 @@ async function main() {
   } catch (err) {
     //console.error(err);
   }
+
+  console.log('export CONVERTERS=' + converters.address);
+  console.log('export SORTINGS=' + sortings.address);
+  console.log('export RANDOMNESS_ZEROCOST=' + randomnessZerocost.address);
+  console.log('export RANDOMNESS=' + randomness.address);
+  console.log('export PAYMENTS_METHODS=' + paymentsMethods.address);
+  console.log('export PAYMENTS=' + payments.address);
+  console.log('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+  console.log('export SHOP_ZEROCOST=' + shopZerocost.address);
+  console.log('export SHOP_RESTRICTED=' + shopRestricted.address);
+  console.log('export SHOP_METHODS=' + shopMethods.address);
+  console.log('export SHOP=' + shop.address);
+  console.log('export ARENA_RESTRICTED=' + arenasRestricted.address);
+  console.log('export ARENAS=' + arenas.address);
+  console.log('export GENETICS_ZEROCOST=' + geneticsZerocost.address);
+  console.log('export GENETICS=' + genetics.address);
+  console.log('export INCUBATOR_METHODS=' + incubatorMethods.address);
+  console.log('export INCUBATOR=' + incubator.address);
+  console.log('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+  console.log('export HOUNDS_MODIFIER=' + houndsModifier.address);
+  console.log('export HOUNDS_MINTER=' + houndsMinter.address);
+  console.log('export HOUNDS=' + hounds.address);
+  console.log('export RACE_RESTRICTED=' + racesRestricted.address);
+  console.log('export RACE_METHODS=' + racesMethods.address);
+  console.log('export RACE=' + races.address);
+  console.log('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+  console.log('export GENERATOR_METHODS=' + generatorMethods.address);
+  console.log('export GENERATOR=' + generator.address);
+
 
 }
 

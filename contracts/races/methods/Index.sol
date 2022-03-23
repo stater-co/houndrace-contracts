@@ -11,7 +11,7 @@ contract RacesMethods is Params {
     
         require(queues[theId].totalParticipants > 0);
 
-        require(queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp);
+        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));
 
         require(msg.value >= queues[theId].entryFee);
 
