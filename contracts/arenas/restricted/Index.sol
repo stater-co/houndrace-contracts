@@ -6,7 +6,7 @@ import '../params/Index.sol';
 
 contract ArenasRestricted is Params {
 
-    constructor(ArenasConstructor.Struct memory arenasConstructor) Params(arenasConstructor) {}
+    constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {
         arenas[id] = arena;
@@ -21,6 +21,7 @@ contract ArenasRestricted is Params {
     }
     
     function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
+        require(ownerOf(theId) == owner());
         arenas[theId] = arena;
         emit EditArena(theId,msg.sender,arena);
     }

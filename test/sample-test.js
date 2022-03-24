@@ -15,31 +15,16 @@ const defaultHound = [
   false
 ];
 let currentDiscountId = 1;
-let paymentsMain;
-let paymentsMethods;
-let shopZerocost;
-let shopRestricted;
-let shopMethods;
-let shopMain;
-let randomnessZerocost;
-let randomnessMain;
-let arenasRestricted;
-let arenasMain;
-let geneticsZerocost;
-let geneticsMain;
-let incubatorMethods;
-let incubatorMain;
-let houndMinter;
-let houndModifier;
-let houndRestricted;
-let houndMain;
-let racesMethods;
-let racesRestricted;
-let racesMain;
-let generatorMethods;
-let generatorZerocost;
-let generatorMain;
-let houndracePotions;
+let payments = {};
+let shop = {};
+let randomness = {};
+let arenas = {};
+let genetics = {};
+let incubator = {};
+let hound = {};
+let houndsContract;
+let generator = {};
+let races = {};
 
 
 // @DIIMIIM: Get smart contract instance
@@ -62,17 +47,15 @@ async function mintHoundByAdmin(hound,isFemale) {
     }
   }
   const [owner] = await ethers.getSigners();
-  const contractOwner = await houndMain.owner();
+  const contractOwner = await houndsContract.owner();
   expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
-  //console.log("initializing hound: ", 0, JSON.stringify(houndToMint));
-  await houndMain.initializeHound(0,houndToMint);
+  await houndsContract.initializeHound(0,houndToMint);
 }
 
 async function safelyMintHoundByAdmin(hound,isFemale) {
-  const houndIdBefore = await houndMain.id();
-  //console.log("Hound id before: " + houndIdBefore);
+  const houndIdBefore = await houndsContract.id();
   await mintHoundByAdmin(hound,isFemale);
-  const houndIdAfter = await houndMain.id();
+  const houndIdAfter = await houndsContract.id();
   expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
   await safelyUpdateHoundBreeding(houndIdBefore);
 }
@@ -83,12 +66,12 @@ async function safelyUpdateHoundStamina(houndId) {
   if ( houndId ) {
     houndToWorkWith = houndId;
   } else {
-    houndIdBefore = await houndMain.id();
+    houndIdBefore = await houndsContract.id();
     houndToWorkWith = Number(houndIdBefore)-1;
   }
-  const houndBefore = await houndMain.hound(houndToWorkWith);
-  await houndMain.updateStamina(houndToWorkWith);
-  const houndAfter = await houndMain.hound(houndToWorkWith);
+  const houndBefore = await houndsContract.hound(houndToWorkWith);
+  await houndsContract.updateHoundStamina(houndToWorkWith);
+  const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
 
@@ -98,17 +81,17 @@ async function safelyUpdateHoundBreeding(houndId) {
   if ( houndId ) {
     houndToWorkWith = houndId;
   } else {
-    houndIdBefore = await houndMain.id();
+    houndIdBefore = await houndsContract.id();
     houndToWorkWith = Number(houndIdBefore)-1;
   }
-  const houndBefore = await houndMain.hound(houndToWorkWith);
-  await houndMain.updateHoundBreeding(houndToWorkWith);
-  const houndAfter = await houndMain.hound(houndToWorkWith);
+  const houndBefore = await houndsContract.hound(houndToWorkWith);
+  await houndsContract.updateHoundBreeding(houndToWorkWith);
+  const houndAfter = await houndsContract.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }
 
 async function checkHoundStructure(houndId) {
-  const hound = await houndMain.hound(houndId ? houndId : 1);
+  const hound = await houndsContract.hound(houndId ? houndId : 1);
 
   // Check the hound statistics field
   expect(hound[0] && hound[0].length === defaultHound[0].length, "Not all hound statistics are received from contract");
@@ -130,18 +113,13 @@ async function checkHoundStructure(houndId) {
 }
 
 async function findMaleAndFemaleAvailableForBreed() {
-  const houndIdBefore = await houndMain.id();
+  const houndIdBefore = await houndsContract.id();
 
-  //console.log("Hound id to parse: " + houndIdBefore);
   let maleId , femaleId ;
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
-    const hound = await houndMain.hound(i);
+    const hound = await houndsContract.hound(i);
     const houndGene = hound[3][3];
-
-    //console.log(JSON.stringify(hound));
-
-    //console.log("Gene: " + i + " >> " + houndGene + " >> " + hound[2][3] + " >> " + hound[2][0]*1000 + " >> " + new Date().getTime());
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
@@ -160,21 +138,20 @@ async function findMaleAndFemaleAvailableForBreed() {
 }
 
 async function breed2Hounds() {
-  const houndIdBefore = await houndMain.id();
+  const houndIdBefore = await houndsContract.id();
   const availableHounds = await findMaleAndFemaleAvailableForBreed();
-  //console.log("Available hounds >> " + JSON.stringify(findMaleAndFemaleAvailableForBreed));
+
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
 
-  console.log("Male: " + maleId + " , Female:" + femaleId);
+  const houndMaleBefore = await houndsContract.hound(maleId);
+  const houndFemaleBefore = await houndsContract.hound(femaleId);
+
   if ( maleId && femaleId ) {
 
-    const houndMaleBefore = await houndMain.hound(maleId);
-    const houndFemaleBefore = await houndMain.hound(femaleId);
-
     const [owner] = await ethers.getSigners();
-    const ownerOfMale = await houndMain.ownerOf(maleId);
-    const ownerOfFemale = await houndMain.ownerOf(femaleId);
+    const ownerOfMale = await houndsContract.ownerOf(maleId);
+    const ownerOfFemale = await houndsContract.ownerOf(femaleId);
 
     let hound1 = maleId , hound2 = femaleId;
     if ( ownerOfFemale !== owner && ownerOfMale === owner ) {
@@ -184,37 +161,29 @@ async function breed2Hounds() {
       hound1 = femaleId;
       hound2 = maleId;
     }
-    
-    //console.log("We breed hounds here !!!!!");
 
-    const foreignHound = await houndMain.hound(hound2);
-    ////console.log("Breed fee: " + Number(foreignHound[2][1]));
-    const control = await houndMain.control();
-    ////console.log(Number(control[3][0]) + " + " + Number(control[3][1]));
-    ////console.log(Number(foreignHound[2][1]) + Number(control[3][0]) + Number(control[3][1]));
+    const totalToPay = await houndsContract.getBreedCost(hound1,hound2);
 
-    const totalToPay = await houndMain.getBreedCost(hound1,hound2);
-    //console.log("Total to pay >> " + totalToPay);
-
-    console.log("Breed hounds: " + hound1 + " , " + hound2);
-    await houndMain.breedHounds(hound1, hound2, { value : totalToPay });
-    const houndMaleAfter = await houndMain.hound(maleId);
-    const houndFemaleAfter = await houndMain.hound(femaleId);
-    expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-    expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-    console.log("Breed hounds after: " + hound1 + " , " + hound2);
-    const houndIdAfter = await houndMain.id();
-    expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
-
+    console.log("Breed hound called");
+    await houndsContract.breedHounds(hound1, hound2, { value : totalToPay });
+    console.log("success");
   }
+
+  const houndMaleAfter = await houndsContract.hound(maleId);
+  const houndFemaleAfter = await houndsContract.hound(femaleId);
+  expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
+  expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
+  
+  const houndIdAfter = await houndsContract.id();
+  expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
 
 }
 
 async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  const shopOwner = await shopMain.owner();
+  const shopOwner = await shop.main.owner();
   const [owner] = await ethers.getSigners();
   if ( owner.address === shopOwner ) {
-    await shopMain.createDiscount([
+    await shop.main.createDiscount([
       erc721Address ? erc721Address : testErc721.address,
       ids ? ids : [currentDiscountId - 1],
       dateStart ? dateStart : 0,
@@ -227,10 +196,10 @@ async function createDiscount(erc721Address, ids, dateStart, dateStop, discount,
 }
 
 async function editDiscount(id, erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
-  const shopOwner = await shopMain.owner();
+  const shopOwner = await shop.main.owner();
   const [owner] = await ethers.getSigners();
   if ( owner.address === shopOwner ) {
-    await shopMain.editDiscount([
+    await shop.main.editDiscount([
       erc721Address ? erc721Address : testErc721.address,
       ids ? ids : [1],
       dateStart ? dateStart : 0,
@@ -282,16 +251,14 @@ describe("Setting up the Payments System", function () {
   
   it("Deploy the HoundRace Potions contract", async function () {
     const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
-    houndracePotions = await HoundracePotions.deploy(["Ogars","OG"]);
+    houndracePotions = await HoundracePotions.deploy("Ogars","OG");
     await houndracePotions.deployed();
   });
 
   it("Deploy the payments contract", async function () {
-    paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
-    //console.log("Payments methods: " + paymentsMethods.address);
-    paymentsMain = await getContractInstance("Payments",[paymentsMethods.address,[]]);
-    //console.log("Payments: " + paymentsMain.address);
-    await paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
+    payments.methods = await getContractInstance("PaymentsMethods",[address0,[]]);
+    payments.main = await getContractInstance("Payments",[payments.methods.address,[]]);
+    await payments.methods.setGlobalParameters([payments.methods.address,[]]);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -314,18 +281,14 @@ describe("Setting up the Payments System", function () {
     await mintERC1155Batch(undefined,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
   });
 
-  it("Deploy the Shop contract", async function () {
-    shopZerocost = await getContractInstance("ShopZerocost",[address0,address0,address0]);
-    //console.log("Shop zerocost: " + shopZerocost.address);
-    shopRestricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
-    //console.log("Shop restricted: " + shopRestricted.address);
-    shopMethods = await getContractInstance("ShopMethods",[address0,address0,address0]);
-    //console.log("Shop methods: " + shopMethods.address);
-    shopMain = await getContractInstance("Shop",[shopMethods.address,shopZerocost.address,shopRestricted.address]);
-    //console.log("Shop: " + shopMain.address);
-    await shopZerocost.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-    await shopRestricted.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-    await shopMethods.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
+  it("Deploy the Payments methods contract", async function () {
+    shop.zerocost = await getContractInstance("ShopZerocost",[address0,address0,address0]);
+    shop.restricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
+    shop.methods = await getContractInstance("ShopMethods",[address0,address0,address0]);
+    shop.main = await getContractInstance("Shop",[shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    await shop.zerocost.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    await shop.restricted.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
+    await shop.methods.setGlobalParameters([shop.methods.address,shop.zerocost.address,shop.restricted.address]);
   });
 
   it("Add discounts", async function () {
@@ -374,25 +337,24 @@ describe("Setting up the Payments System", function () {
 describe("Setting up the Houndrace contracts", function () {
   
   it("Deploy the randomness contracts", async function () {
-    randomnessZerocost = await getContractInstance("RandomnessZerocost",[address0]);
-    //console.log("Zerocost contract deployed at: " + randomnessZerocost.address);
-    randomnessMain = await getContractInstance("Randomness",[randomnessZerocost.address]);
-    //console.log("Randomness main deployed at: " + randomnessMain.address);
-    await randomnessZerocost.setGlobalParameters([randomnessZerocost.address]);
+    randomness.zerocost = await getContractInstance("RandomnessZerocost",[address0]);
+    randomness.main = await getContractInstance("Randomness",[randomness.zerocost.address]);
+    await randomness.zerocost.setGlobalParameters([randomness.main.address]);
   });
 
   it("Deploy the arenas contracts", async function () {
-    arenasRestricted = await getContractInstance("ArenasRestricted",[address0]);
-    //console.log("Restricted contract deployed at: " + arenasRestricted.address);
-    arenasMain = await getContractInstance("Arenas",[arenasRestricted.address]);
-    //console.log("Arenas contract deployed at: " + arenasMain.address);
-    await arenasRestricted.setGlobalParameters([arenasRestricted.address]);
+    arenas.zerocost = await getContractInstance("ArenasZerocost", ["HoundRace Arenas", "HRA", address0, address0]);
+    arenas.restricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0]);
+    arenas.main = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
+    await arenas.zerocost.setGlobalParameters(["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
+    await arenas.restricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenas.zerocost.address, arenas.restricted.address]);
   });
 
   it("Genetics methods", async function () {
-    geneticsZerocost = await getContractInstance("GeneticsZerocost",[
-      randomnessMain.address,
+    genetics.zerocost = await getContractInstance("GeneticsZerocost",[
+      randomness.main.address,
       address0,
+      arenas.main.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
       60,
@@ -400,21 +362,10 @@ describe("Setting up the Houndrace contracts", function () {
       [2,6,10,14,18,22,26,30,34,38,42,46,50],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
-    //console.log("Zerocost contract deployed at: " + geneticsZerocost.address);
-    geneticsMain = await getContractInstance("Genetics",[
-      randomnessMain.address,
-      geneticsZerocost.address,
-      maleBoilerplateGene,
-      femaleBoilerplateGene,
-      60,
-      40,
-      [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    ]);
-    //console.log("Genetics contract deployed at: " + geneticsMain.address);
-    await geneticsZerocost.setGlobalParameters([
-      randomnessMain.address,
-      geneticsZerocost.address,
+    genetics.main = await getContractInstance("Genetics",[
+      randomness.main.address,
+      genetics.zerocost.address,
+      arenas.main.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
       60,
@@ -425,135 +376,41 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the incubator contracts", async function () {
-    incubatorMethods = await getContractInstance("IncubatorMethods",[
+    incubator.methods = await getContractInstance("IncubatorMethods",[
       address0,
-      randomnessMain.address,
-      geneticsMain.address,
+      address0,
+      address0,
       "0x67657452"
     ]);
-    //console.log("Methods contract deployed at: " + incubatorMethods.address);
-    incubatorMain = await getContractInstance("Incubator",[
-      incubatorMethods.address,
-      randomnessMain.address,
-      geneticsMain.address,
+    incubator.main = await getContractInstance("Incubator",[
+      incubator.methods.address,
+      randomness.main.address,
+      genetics.main.address,
       "0x67657452"
     ]);
-    //console.log("Incubator contract deployed at: " + incubatorMain.address);
-    await incubatorMethods.setGlobalParameters([
-      incubatorMethods.address,
-      randomnessMain.address,
-      geneticsMain.address,
+    await incubator.methods.setGlobalParameters([
+      incubator.methods.address,
+      randomness.main.address,
+      genetics.main.address,
       "0x67657452"
     ]);
   });
 
   it("Deploy the hounds contract", async function () {
     const [owner,otherOwner] = await ethers.getSigners();
-    houndRestricted = await getContractInstance("HoundsRestricted",[
+    hound.zerocost = await getContractInstance("HoundsZerocost",[
       "HoundRace",
       "HR",
-      [owner.address,otherOwner.address],
+      [owner.address],
       [
-        incubatorMain.address,
+        address0,
         otherOwner.address,
-        paymentsMain.address,
         address0,
         address0,
         address0,
-        shopMain.address,
-        houndracePotions.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    //console.log("Restricted contract deployed at: " + houndRestricted.address);
-    houndModifier = await getContractInstance("HoundsModifier",[
-      "HoundRace",
-      "HR",
-      [owner.address,otherOwner.address],
-      [
-        incubatorMain.address,
-        otherOwner.address,
-        paymentsMain.address,
         address0,
         address0,
-        address0,
-        shopMain.address,
-        houndracePotions.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    //console.log("Modifier contract deployed at: " + houndModifier.address);
-    houndMinter = await getContractInstance("HoundsMinter",[
-      "HoundRace",
-      "HR",
-      [owner.address,otherOwner.address],
-      [
-        incubatorMain.address,
-        otherOwner.address,
-        paymentsMain.address,
-        address0,
-        address0,
-        address0,
-        shopMain.address,
-        houndracePotions.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    //console.log("Minter contract deployed at: " + houndMinter.address);
-    houndMain = await getContractInstance("Hounds",[
-      "HoundRace",
-      "HR",
-      [owner.address,houndMinter.address],
-      [
-        incubatorMain.address,
-        otherOwner.address,
-        paymentsMain.address,
-        houndRestricted.address,
-        houndMinter.address,
-        houndModifier.address,
-        shopMain.address,
-        houndracePotions.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    //console.log("Hounds contract deployed at: " + houndMain.address);
-
-    await paymentsMain.setGlobalParameters([paymentsMethods.address,[houndMain.address,houndMinter.address,houndModifier.address,houndRestricted.address]]);
-    //console.log("Successfully global parameters set");
-
-    await houndModifier.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [houndMain.address],
-      [
-        incubatorMain.address,
-        otherOwner.address,
-        paymentsMain.address,
-        houndMain.address,
-        houndMain.address,
-        houndMain.address,
-        shopMain.address,
-        houndracePotions.address
+        address0
       ],[
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
@@ -563,19 +420,107 @@ describe("Setting up the Houndrace contracts", function () {
       ]
     ]);
 
-    await houndMinter.setGlobalParameters([
+    hound.restricted = await getContractInstance("HoundsRestricted",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    hound.modifier = await getContractInstance("HoundsModifier",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    hound.minter = await getContractInstance("HoundsMinter",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        address0,
+        otherOwner.address,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    houndsContract = await getContractInstance("Hounds",[
+      "HoundRace",
+      "HR",
+      [owner.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await hound.zerocost.setGlobalParameters([
       "HoundRace",
       "HR",
       [],
       [
-        incubatorMain.address,
+        incubator.main.address,
         otherOwner.address,
-        paymentsMain.address,
-        houndMain.address,
-        houndMain.address,
-        houndMain.address,
-        shopMain.address,
-        houndracePotions.address
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
       ],[
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
@@ -585,19 +530,19 @@ describe("Setting up the Houndrace contracts", function () {
       ]
     ]);
 
-    await houndRestricted.setGlobalParameters([
+    await hound.minter.setGlobalParameters([
       "HoundRace",
       "HR",
-      [],
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
       [
-        incubatorMain.address,
+        incubator.main.address,
         otherOwner.address,
-        paymentsMain.address,
-        houndMain.address,
-        houndMain.address,
-        houndMain.address,
-        shopMain.address,
-        houndracePotions.address
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
       ],[
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
@@ -606,46 +551,140 @@ describe("Setting up the Houndrace contracts", function () {
         "0x2386F26FC10000"
       ]
     ]);
+
+    await hound.modifier.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await hound.restricted.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [houndsContract.address,hound.restricted.address,hound.minter.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+
+    await payments.main.setGlobalParameters([payments.methods.address,[houndsContract.address]]);
 
   });
 
   it("Deploy the race contracts", async function () {
-    racesRestricted = await getContractInstance("RacesRestricted",[
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
+    races.zerocost = await getContractInstance("RacesZeroCost",[
       address0,
       address0,
-      paymentsMain.address,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       address0,
       500000000,
       true
     ]);
-    //console.log("Restricted contract deployed at: " + racesRestricted.address);
-    racesMethods = await getContractInstance("RacesMethods",[
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
+    races.restricted = await getContractInstance("RacesRestricted",[
       address0,
       address0,
-      paymentsMain.address,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       address0,
       500000000,
       true
     ]);
-    //console.log("Methods contract deployed at: " + racesMethods.address);
-    racesMain = await getContractInstance("Races",[
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMethods.address,
+    races.methods = await getContractInstance("RacesMethods",[
       address0,
-      paymentsMain.address,
-      racesRestricted.address,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       500000000,
       true
     ]);
-    //console.log("Races contract deployed at: " + racesMain.address);
+    races.main = await getContractInstance("Races",[
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.zerocost.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.restricted.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.methods.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
   });
 
   it("Deploy the generator contracts", async function () {
@@ -655,17 +694,16 @@ describe("Setting up the Houndrace contracts", function () {
       }
     });
     let contract = await Contract.deploy([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMain.address,
       address0,
-      paymentsMain.address,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       address0
     ]);
     await contract.deployed();
-    generatorZerocost = contract;
-    //console.log("Zerocost contract deployed at: " + generatorZerocost.address);
+    generator.zerocost = contract;
 
     Contract = await hre.ethers.getContractFactory("GeneratorMethods", {
       libraries: {
@@ -673,81 +711,56 @@ describe("Setting up the Houndrace contracts", function () {
       }
     });
     contract = await Contract.deploy([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMain.address,
       address0,
-      paymentsMain.address,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       address0
     ]);
     await contract.deployed();
-    generatorMethods = contract;
-    //console.log("Methods contract deployed at: " + generatorMethods.address);
+    generator.methods = contract;
 
-    generatorMain = await getContractInstance("Generator",[
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMain.address,
-      generatorMethods.address,
-      paymentsMain.address,
-      generatorZerocost.address
-    ]);
-    //console.log("Generator contract deployed at: " + generatorMain.address);
-
-    await generatorZerocost.setGlobalParameters([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMain.address,
-      generatorMethods.address,
-      paymentsMain.address,
-      generatorZerocost.address
+    generator.main = await getContractInstance("Generator",[
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.zerocost.address
     ]);
 
-    await generatorMethods.setGlobalParameters([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMain.address,
-      generatorMethods.address,
-      paymentsMain.address,
-      generatorZerocost.address
+    await generator.zerocost.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.zerocost.address
     ]);
 
-    await racesMain.setGlobalParameters([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMethods.address,
-      generatorMain.address,
-      paymentsMain.address,
-      racesRestricted.address,
-      500000000,
-      true
+    await generator.methods.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.main.address,
+      generator.methods.address,
+      payments.main.address,
+      generator.zerocost.address
     ]);
 
-    await racesRestricted.setGlobalParameters([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMethods.address,
-      generatorMain.address,
-      paymentsMain.address,
-      racesRestricted.address,
-      500000000,
-      true
-    ]);
-
-    await racesMethods.setGlobalParameters([
-      randomnessMain.address,
-      arenasMain.address,
-      houndMain.address,
-      racesMethods.address,
-      generatorMain.address,
-      paymentsMain.address,
-      racesRestricted.address,
+    await races.main.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      generator.main.address,
+      payments.main.address,
+      races.restricted.address,
+      races.zerocost.address,
       500000000,
       true
     ]);
@@ -757,42 +770,41 @@ describe("Setting up the Houndrace contracts", function () {
 });
 
 
-
 describe("Genetics methods", function () {
 
   it("Genetics - wholeArithmeticRecombination", async function () {
-    let newGeneticSequence = await geneticsMain.wholeArithmeticRecombination(maleBoilerplateGene,femaleBoilerplateGene);
+    let newGeneticSequence = await genetics.main.wholeArithmeticRecombination(maleBoilerplateGene,femaleBoilerplateGene);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - swapMutation", async function () {
-    let newGeneticSequence = await geneticsMain.swapMutation(maleBoilerplateGene,5);
+    let newGeneticSequence = await genetics.main.swapMutation(maleBoilerplateGene,5);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - inversionMutation", async function () {
-    let newGeneticSequence = await geneticsMain.inversionMutation(maleBoilerplateGene,5);
+    let newGeneticSequence = await genetics.main.inversionMutation(maleBoilerplateGene,5);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - scrambleMutation", async function () {
-    let newGeneticSequence = await geneticsMain.scrambleMutation(maleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.scrambleMutation(maleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - arithmeticMutation", async function () {
-    let newGeneticSequence = await geneticsMain.arithmeticMutation(maleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.arithmeticMutation(maleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
 
   it("Genetics - uniformCrossover", async function () {
-    let newGeneticSequence = await geneticsMain.uniformCrossover(maleBoilerplateGene,femaleBoilerplateGene,9);
+    let newGeneticSequence = await genetics.main.uniformCrossover(maleBoilerplateGene,femaleBoilerplateGene,9);
     expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
   });
   
   it("Genetics - mixGenes 100x", async function () {
     for ( let i = 0 ; i < 100 ; ++i ) {
-      let newGeneticSequence = await geneticsMain.mixGenes(maleBoilerplateGene,femaleBoilerplateGene,i);
+      let newGeneticSequence = await genetics.main.mixGenes(maleBoilerplateGene,femaleBoilerplateGene,i);
       expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
     }
   });
@@ -856,8 +868,8 @@ describe("Breed with other hounds", function () {
   });
 
   it("Make hound available to breed", async function () {
-    const houndId = await houndMain.id();
-    await houndMain.putHoundForBreed(houndId-2,0,true);
+    const houndId = await houndsContract.id();
+    await houndsContract.putHoundForBreed(houndId-2,0,true);
   });
 
 });
@@ -867,7 +879,7 @@ describe("Races", function () {
 
   it("Create terrain", async function () {
     const [owner] = await ethers.getSigners();
-    let createTerrain = await arenasMain.createArena([
+    let createTerrain = await arenas.main.createArena([
       owner.address,
       0,
       1,
@@ -880,9 +892,9 @@ describe("Races", function () {
 
   it("Create queue", async function () {
 
-    await racesMain.createQueues([
+    await races.main.createQueues([
       [
-        "test",
+        "Test queue",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -894,9 +906,9 @@ describe("Races", function () {
       ]
     ]);
 
-    await racesMain.createQueues([
+    await races.main.createQueues([
       [
-        "test",
+        "Test queue",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -908,9 +920,9 @@ describe("Races", function () {
       ]
     ]);
 
-    await racesMain.createQueues([
+    await races.main.createQueues([
       [
-        "test",
+        "Test queue",
         "0x0000000000000000000000000000000000000000",
         [],
         1, // terrain
@@ -922,9 +934,7 @@ describe("Races", function () {
       ]
     ]);
 
-    let queueId = await racesMain.id();
-
-    //////console.log("Queue id >> " + queueId);
+    let queueId = await races.main.id();
 
     expect(Number(queueId) === 2, "Queue has not been created");
 
@@ -935,7 +945,7 @@ describe("Races", function () {
   it("Hounds stamina check x1", async function () {
 
     for ( let i = 1 ; i <= 10 ; ++i ) {
-      let hound = await houndMain.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       houndsStamina[i] = hound[1][2];
     }
@@ -943,16 +953,16 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await racesMain.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[4] });
     }
   });
 
   it("Hounds stamina check x2", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      let hound = await houndMain.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];
@@ -960,34 +970,33 @@ describe("Races", function () {
   });
 
   it("Join queue x20", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await racesMain.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[4] });
     }
   });
 
   it("Hounds stamina check x3", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      let hound = await houndMain.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
-      ////console.log("Stamina: " + hound[1][2]);
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];
     }
   });
 
   it("Join queue x30", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await racesMain.enqueue(1,i,{ value : queue[2] });
+      await races.main.enqueue(1,i,{ value : queue[4] });
     }
   });
 
   it("Hounds stamina check x4", async function () {
-    let queue = await racesMain.queues(1);
+    let queue = await races.main.queues(1);
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      let hound = await houndMain.hound(i);
+      let hound = await houndsContract.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
       houndsStamina[i] = hound[1][2];

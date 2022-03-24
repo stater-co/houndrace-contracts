@@ -7,12 +7,12 @@ contract IncubatorMethods is Params {
 
     constructor(IncubatorConstructor.Struct memory input) Params(input) {}
 
-    function breedHounds(uint256 h1, Hound.Struct memory hound1, uint256 h2, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
+    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
         uint32[54] memory genetics = IGeneticsZerocost(control.genetics).mixGenes(
-            hound1.identity.geneticSequence, 
-            hound2.identity.geneticSequence, 
+            hound1GeneticSequence, 
+            hound2GeneticSequence, 
             IRandomnessZerocost(control.randomness).getRandomNumber(
-                abi.encode(h1 > h2 ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+                abi.encode(hound1 > hound2 ? hound1GeneticSequence : hound2GeneticSequence)
             )
         );
 
@@ -39,9 +39,9 @@ contract IncubatorMethods is Params {
         );
 
         Identity.Struct memory identity = Identity.Struct(
-            h1,
-            h2,
-            hound2.identity.generation + hound1.identity.generation,
+            0,
+            hound1,
+            hound2,
             genetics // preferences will be extracted from this 
         );
 

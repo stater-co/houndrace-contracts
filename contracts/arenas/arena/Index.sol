@@ -5,7 +5,7 @@ pragma solidity <=0.8.13;
 library Arena {
     
     struct Struct {
-        address owner;
+        string name;
         uint256 fee;
         uint32 surface;
         uint32 distance;

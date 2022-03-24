@@ -7,13 +7,13 @@ contract ShopRestricted is Params {
 
     constructor(ShopConstructor.Struct memory input) Params(input) {}
 
-    function createDiscount(Discount.Struct memory discount) external onlyOwner {
+    function createDiscount(Discount.Struct memory discount) external {
         discounts[id] = discount;
         emit NewDiscount(id,discount);
         ++id;
     }
 
-    function editDiscount(Discount.Struct memory discount, uint256 theId) external onlyOwner {
+    function editDiscount(Discount.Struct memory discount, uint256 theId) external {
         discounts[theId] = discount;
         emit NewDiscount(theId, discount);
     }

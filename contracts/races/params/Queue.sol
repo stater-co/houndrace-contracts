@@ -8,27 +8,21 @@ library Queue {
 
         string name;
 
-        // address(0) for ETH
         address currency;
 
         uint256[] participants;
 
-        // arena of the race
         uint256 arena;
 
-        // ETH based
         uint256 entryFee;
 
-        // Start date
         uint256 startDate;
 
-        // End date
         uint256 endDate;
 
         // Informations about the winners of the race
         uint256 rewardsId;
 
-        // Total number of participants
         uint32 totalParticipants;
 
     }

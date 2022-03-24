@@ -4,8 +4,9 @@ import './params/Index.sol';
 
 
 contract Arenas is Params {
-
-    constructor(ArenasConstructor.Struct memory arenasConstructor) Params(arenasConstructor) {}
+    
+    
+    constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);

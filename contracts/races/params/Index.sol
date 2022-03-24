@@ -8,6 +8,7 @@ import '../../payments/payment/Index.sol';
 import '../../hounds/modifier/IIndex.sol';
 import '../../arenas/arena/Index.sol';
 import '../../arenas/zerocost/IIndex.sol';
+import '../zerocost/IIndex.sol';
 import '../../utils/Converters.sol';
 import '../../payments/methods/IIndex.sol';
 import '../../hounds/hound/Index.sol';
@@ -33,9 +34,7 @@ contract Params is Ownable {
         control = input;
     }
 
-    function setGlobalParameters(
-        RacesConstructor.Struct memory globalParameters
-    ) external onlyOwner {
+    function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
     }
 

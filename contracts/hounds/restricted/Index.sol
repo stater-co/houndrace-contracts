@@ -7,9 +7,9 @@ contract HoundsRestricted is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
     
-    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
+    function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
         if ( onId > 0 ) {
-            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap == 0);
+            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap > 0);
             emit NewHound(onId,msg.sender,theHound);
             hounds[onId] = theHound;
             _safeMint(msg.sender,onId);
@@ -21,7 +21,7 @@ contract HoundsRestricted is Params {
         }
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
+    function setTokenURI(uint256 _tokenId, string memory token_url) external {
         hounds[_tokenId].token_url = token_url;
     }
 

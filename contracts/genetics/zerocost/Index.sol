@@ -5,9 +5,7 @@ import '../params/Index.sol';
 
 contract GeneticsZerocost is Params {
 
-    constructor(
-        GeneticsConstructor.Struct memory input
-    ) Params(input) {}
+    constructor(GeneticsConstructor.Struct memory input) Params(input) {}
 
     function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) public view returns(uint32[54] memory geneticSequence) {
         

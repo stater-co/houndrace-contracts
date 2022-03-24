@@ -4,14 +4,14 @@ pragma solidity 0.8.13;
 
 interface IHoundsModifier {
     
-    function boostStamina(uint256 theId) external payable;
+    function updateHoundStamina(uint256 theId) external;
 
-    function updateStamina(uint256 theId) external;
-
-    function boostBreedingCooldown(uint256 theId) external payable;
+    function boostHoundStamina(uint256 theId, address user) external payable;
 
     function updateHoundBreeding(uint256 theId) external;
 
+    function boostHoundBreeding(uint256 theId, address user) external payable;
+
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external;
-    
+
 }

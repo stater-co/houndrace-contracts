@@ -1,7 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 import '../discount/Index.sol';
-import '../params/Constructor.sol';
 
 
 interface IShopRestricted {

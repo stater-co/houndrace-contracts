@@ -6,8 +6,8 @@ contract Incubator is Params {
 
     constructor(IncubatorConstructor.Struct memory input) Params(input) {}
 
-    function breedHounds(uint256 h1, Hound.Struct memory hound1, uint256 h2, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
-        return IIncubatorMethods(control.methods).breedHounds(h1, hound1, h2, hound2);
+    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) public view returns(Hound.Struct memory) {
+        return IIncubatorMethods(control.methods).breedHounds(hound1, hound1GeneticSequence, hound2, hound2GeneticSequence);
     }
 
 }

@@ -15,8 +15,8 @@ contract Params is Ownable, ERC721, ERC721Holder {
     event NewArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
     event EditArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
 
-    constructor(ArenasConstructor.Struct memory arenasConstructor) ERC721("","") {
-        control = arenasConstructor;
+    constructor(ArenasConstructor.Struct memory input) ERC721(input.name,input.symbol) {
+        control = input;
     }
 
     function setGlobalParameters(ArenasConstructor.Struct memory globalParameters) external onlyOwner {

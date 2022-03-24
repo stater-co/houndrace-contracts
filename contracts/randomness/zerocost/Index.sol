@@ -5,7 +5,7 @@ import '../params/Index.sol';
 
 contract RandomnessZerocost is Params {
 
-    constructor(RandomnessConstructor.Struct memory randomnessConstructor) Params(randomnessConstructor) {}
+    constructor(RandomnessConstructor.Struct memory input) Params(input) {}
 
     function getRandomNumber(bytes memory input) external view returns(uint256) {
         return uint256(

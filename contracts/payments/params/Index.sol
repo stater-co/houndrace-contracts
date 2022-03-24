@@ -20,17 +20,14 @@ contract Params is Ownable {
 
 	constructor(PaymentsConstructor.Struct memory input) {
 		for ( uint256 i = 0 ; i < input.allowed.length ; ++i ) 
-			allowed[input.allowed[i]] = true;
+			allowed[input.allowed[i]] = !allowed[input.allowed[i]];
 		control = input;
 	}
 
-	function setGlobalParameters(
-        PaymentsConstructor.Struct memory input
-    ) external onlyOwner {
-		control.methods = input.methods;
-		for ( uint256 i = 0 ; i < input.allowed.length; ++i ) {
-			allowed[input.allowed[i]] = !allowed[input.allowed[i]];
-		}
+	function setGlobalParameters(PaymentsConstructor.Struct memory globalParameters) external onlyOwner {
+		for ( uint256 i = 0 ; i < globalParameters.allowed.length ; ++i ) 
+			allowed[globalParameters.allowed[i]] = !allowed[globalParameters.allowed[i]];
+		control = globalParameters;
     }
 
 }
