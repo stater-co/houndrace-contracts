@@ -29,7 +29,7 @@ module.exports = {
     rinkeby: {
       url: process.env.RINKEBY_URL || "",
       timeout: 120000,
-      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY],
+      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY,process.env.ETH_ACCOUNT_PRIVATE_KEY2],
       gas: 4800000,
       gasPrice: 8000000000
     }
