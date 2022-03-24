@@ -8,7 +8,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
   [ 0, 100000, 1000, true ],
-  [ 0, 0, 0, maleBoilerplateGene ],
+  [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
   false,
@@ -43,7 +43,7 @@ async function mintHoundByAdmin(hound,isFemale) {
   } else {
     houndToMint = defaultHound;
     if ( isFemale ) {
-      houndToMint[3][3][1] = 2;
+      houndToMint[3][4][1] = 2;
     }
   }
   const [owner] = await ethers.getSigners();
@@ -108,8 +108,8 @@ async function checkHoundStructure(houndId) {
   // Check the hound total fields
   expect(hound.length === defaultHound.length, "Hound has been partially received from contract");
 
-  const houndGene = hound[3][3];
-  expect(houndGene.length === defaultHound[3][3].length, "Hound getter mechanism problems");
+  const houndGene = hound[3][4];
+  expect(houndGene.length === defaultHound[3][4].length, "Hound getter mechanism problems");
 }
 
 async function findMaleAndFemaleAvailableForBreed() {
@@ -119,7 +119,7 @@ async function findMaleAndFemaleAvailableForBreed() {
   for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
 
     const hound = await houndsContract.hound(i);
-    const houndGene = hound[3][3];
+    const houndGene = hound[3][4];
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 

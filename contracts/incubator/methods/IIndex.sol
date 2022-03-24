@@ -5,6 +5,6 @@ import '../../hounds/hound/Index.sol';
 
 interface IIncubatorMethods {
 
-    function breedHounds(uint256 hound1, uint32[54] memory hound1GeneticSequence, uint256 hound2, uint32[54] memory hound2GeneticSequence) external view returns(Hound.Struct memory);
+    function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) external view returns(Hound.Struct memory);
 
 }

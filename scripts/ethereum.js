@@ -6,7 +6,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
   [ 0, 100000, 1000, true ],
-  [ 0, 0, 0, maleBoilerplateGene ],
+  [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
   true,
@@ -562,10 +562,14 @@ async function main() {
   id = await hounds.id();
   console.log("ID: " + id);
 
+  await hounds.initializeHound(0,defaultHound);
+  console.log("hound initialize called successfully");
 
+  await hounds.initializeHound(5,defaultHound);
+  console.log("hound initialize called successfully");
 
-
-
+  await hounds.initializeHound(6,defaultHound);
+  console.log("hound initialize called successfully");
   
 
 
