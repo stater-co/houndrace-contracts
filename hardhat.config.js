@@ -18,16 +18,6 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-let accounts = [];
-if ( process.env.KEY1 !== undefined ) {
-  accounts.push(process.env.KEY1);
-}
-if ( process.env.KEY !== undefined ) {
-  accounts.push(process.env.KEY);
-}
-if ( process.env.KEY2 !== undefined ) {
-  accounts.push(process.env.KEY2);
-}
 
 module.exports = {
   networks: {
@@ -39,7 +29,7 @@ module.exports = {
     rinkeby: {
       url: process.env.RINKEBY_URL || "",
       timeout: 120000,
-      accounts: accounts,
+      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY,process.env.ETH_ACCOUNT_PRIVATE_KEY2],
       gas: 4800000,
       gasPrice: 8000000000
     }

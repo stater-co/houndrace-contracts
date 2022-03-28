@@ -7,12 +7,13 @@ contract IncubatorMethods is Params {
 
     constructor(IncubatorConstructor.Struct memory input) Params(input) {}
 
-    function breedHounds(uint256 h1, Hound.Struct memory hound1, uint256 h2, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
+    function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
+        
         uint32[54] memory genetics = IGeneticsZerocost(control.genetics).mixGenes(
             hound1.identity.geneticSequence, 
-            hound2.identity.geneticSequence, 
+            hound2.identity.geneticSequence,
             IRandomnessZerocost(control.randomness).getRandomNumber(
-                abi.encode(h1 > h2 ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+                abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
             )
         );
 
@@ -25,7 +26,7 @@ contract IncubatorMethods is Params {
 
         Stamina.Struct memory stamina = Stamina.Struct(
             0,
-            10000000000000000, // 0.01 ETH
+            .1 ether,
             100,
             1,
             100
@@ -33,15 +34,16 @@ contract IncubatorMethods is Params {
 
         Breeding.Struct memory breeding = Breeding.Struct(
             control.secondsToMaturity, 
-            300000000000000000, // 0.3 ETH
+            .3 ether,
             0,
             false
         );
 
         Identity.Struct memory identity = Identity.Struct(
-            h1,
-            h2,
-            hound2.identity.generation + hound1.identity.generation,
+            hound1Id,
+            hound2Id,
+            hound1.identity.generation + hound2.identity.generation,
+            block.timestamp,
             genetics // preferences will be extracted from this 
         );
 
