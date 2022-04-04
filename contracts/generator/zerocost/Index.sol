@@ -27,7 +27,7 @@ contract GeneratorZerocost is Params {
             if ( hound.identity.geneticSequence[11] == terrain.weather )
                 stats[i] += tmp / 20;
 
-            if ( hound.stamina.staminaCap / 2 > hound.stamina.stamina )
+            if ( hound.stamina.staminaCap / 2 > hound.stamina.staminaValue )
                 stats[i] = stats[i] * 90 / 100;
 
         }
