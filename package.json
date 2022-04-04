@@ -35,7 +35,8 @@
     "hardhat-gas-reporter": "^1.0.7",
     "hardhat-tracer": "^1.0.0-alpha.6",
     "solidity-coverage": "^0.7.18",
-    "typechain": "^7.0.0"
+    "typechain": "^7.0.0",
+    "winston": "^3.6.0"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.4",
