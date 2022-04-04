@@ -98,3 +98,12 @@
 {"level":"info","message":"Randomness Zerocost deployed at: 0xef50eBD8B3dcBE9401Ec27d455E3692Fe9620c05"}
 {"level":"info","message":"Randomness deployed at: 0xC33c15af1EFdBc315136011888ADd5D516741030"}
 {"level":"info","message":"Set global parameters on Randomness Zerocost with: [\"0xC33c15af1EFdBc315136011888ADd5D516741030\"]"}
+{"level":"info","message":"Converters deployed at: 0x51D606C515D9D297195f6f0deA3b30e9c0c03a71"}
+{"level":"info","message":"Sortings deployed at: 0x3b6a7c4FD05f9Cf8Bc67a36794A48562d864e727"}
+{"level":"info","message":"Randomness Zerocost deployed at: 0xdF4420B884Ee6049038118391C44D2d8D61C8Fb4"}
+{"level":"info","message":"Randomness deployed at: 0x984Ed617420486943e96CfA382243E1D9d16D73F"}
+{
+  message: 'Converters deployed at: 0x00e289478C9d74658C7CAE984A90D684B520E6b3',
+  level: 'info',
+  timestamp: '2022-04-04T12:09:30.738Z'
+}
