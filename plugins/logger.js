@@ -14,7 +14,7 @@ const info = new winston.createLogger({
     info: 1
   },
   transports: [
-    new (winston.transports.File)({ filename: './logs.log', level: 'info'})
+    new (winston.transports.File)({ filename: './output.logs', level: 'info'})
   ]
 });
 
@@ -23,7 +23,7 @@ const error = new winston.createLogger({
     error: 3
   },
   transports: [
-    new (winston.transports.File)({ filename: './errors.log', level: 'error'})
+    new (winston.transports.File)({ filename: './output.errors', level: 'error'})
   ]
 });
 

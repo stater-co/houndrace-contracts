@@ -57,15 +57,6 @@ async function main() {
   info(deployedAt("Randomness Zerocost",randomnessZerocost.address));
   deployments.increment();
 
-  try {
-    await hre.run("verify:verify", {
-      address: randomness.address
-    });
-    verifications.increment();
-  } catch (err) {
-    error(err);
-  }
-
   const Randomness = await hre.ethers.getContractFactory("Randomness");
   const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
