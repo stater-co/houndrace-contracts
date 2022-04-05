@@ -5,7 +5,7 @@ library Breeding {
     struct Struct {
         uint256 breedCooldown;
         uint256 breedingFee;
-        uint256 breedlastUpdate;
+        uint256 breedLastUpdate;
         bool availableToBreed;
     }
 }
