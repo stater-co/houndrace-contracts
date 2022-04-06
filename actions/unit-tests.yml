@@ -1,0 +1,6 @@
+name: 'Testing contracts'
+description: 'Performing a serie of tests on houndrace contracts to make sure everything is ok'
+author: 'Gheonea Emilian ( DIIMIIM )'
+runs:
+  using: 'node14'
+  run: npx hardhat test

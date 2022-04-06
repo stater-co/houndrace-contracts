@@ -41,7 +41,7 @@ contract HoundsModifier is Params {
         require(allowed[msg.sender]);
         
         hounds[theId].breeding.breedCooldown += 172800;
-        hounds[theId].breeding.breedlastUpdate = block.timestamp;
+        hounds[theId].breeding.breedLastUpdate = block.timestamp;
     
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
@@ -52,7 +52,7 @@ contract HoundsModifier is Params {
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
         
         hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;
-        hounds[theId].breeding.breedlastUpdate = block.timestamp;
+        hounds[theId].breeding.breedLastUpdate = block.timestamp;
         
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
