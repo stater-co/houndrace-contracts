@@ -15,8 +15,16 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
+        env:
+          ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
+          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
+          ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
+          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
+          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
+          RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
       - run: npm install
       - run: node --version
       - run: npm --version
       - run: npx --version
+      - run: echo ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }} ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
       - run: npx hardhat test
