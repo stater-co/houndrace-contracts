@@ -16,4 +16,6 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - run: npm install
-      - run: echo Hello
+      - run: node --version
+      - run: npm --version
+      - run: npx --version
