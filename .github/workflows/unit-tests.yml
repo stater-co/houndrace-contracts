@@ -1,7 +1,7 @@
 name: Contracts functionality testing
 on: push
 jobs:
-  main:
+  Hardhat-unit-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout set-up
