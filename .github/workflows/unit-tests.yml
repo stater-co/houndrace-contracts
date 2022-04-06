@@ -1,4 +1,5 @@
 name: Contracts functionality testing
+author: Gheonea DIIMIIM Emilian
 on: [pull_request]
 jobs:
   Hardhat-unit-tests:
