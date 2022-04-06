@@ -8,7 +8,7 @@ contract ArenasRestricted is Params {
 
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
-    function createArena(Arena.Struct memory arena) external onlyOwner {
+    function createArena(Arena.Struct memory arena) external {
         arenas[id] = arena;
 
         // Mint arena
@@ -20,14 +20,14 @@ contract ArenasRestricted is Params {
         ++id;
     }
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
+    function editArena(uint256 theId, Arena.Struct memory arena) external {
         require(ownerOf(theId) == owner());
         arenas[theId] = arena;
         emit EditArena(theId,msg.sender,arena);
     }
 
-    function setTokenUri(uint256 theId, string memory token_uri) external onlyOwner {
-        arenas[theId].token_uri = token_uri;
+    function setTokenURI(uint256 _tokenId, string memory token_uri) external {
+        arenas[_tokenId].token_uri = token_uri;
     }
 
 }

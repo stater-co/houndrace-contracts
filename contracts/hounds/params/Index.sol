@@ -18,6 +18,7 @@ contract Params is Ownable, ERC721, ERC721Holder {
     mapping(uint256 => Hound.Struct) public hounds;
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
+    event NewTokenUri(uint256 indexed id, string token_uri);
     event HoundBreedable(uint256 indexed id, uint256 price);
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);

@@ -12,7 +12,7 @@ library Hound {
         Breeding.Struct breeding;
         Identity.Struct identity;
         string title;
-        string token_url;
+        string token_uri;
         bool custom;
         bool running;
     }
