@@ -1,9 +1,5 @@
-# This is a basic workflow that is manually triggered
-
 name: Unit testing
 
-# Controls when the action will run. Workflow runs when manually triggered using the UI
-# or API.
 on:
   pull_request:
     branches: [ master ]
@@ -28,4 +24,3 @@ jobs:
           ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
           RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
-        run: npx hardhat test
