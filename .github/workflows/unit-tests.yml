@@ -24,3 +24,4 @@ jobs:
           ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
           RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
+        run: echo Hello
