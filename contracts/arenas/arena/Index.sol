@@ -6,6 +6,7 @@ library Arena {
     
     struct Struct {
         string name;
+        string token_uri;
         uint256 fee;
         uint32 surface;
         uint32 distance;

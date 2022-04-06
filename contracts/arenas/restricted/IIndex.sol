@@ -9,4 +9,6 @@ interface IArenasRestricted {
     
     function editArena(uint256 theId, Arena.Struct memory arena) external;
 
+    function setTokenUri(uint256 theId, string memory token_uri) external;
+
 }

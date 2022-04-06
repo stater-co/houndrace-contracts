@@ -881,6 +881,7 @@ describe("Races", function () {
     const [owner] = await ethers.getSigners();
     let createTerrain = await arenas.main.createArena([
       owner.address,
+      "token_url",
       0,
       1,
       1000,
