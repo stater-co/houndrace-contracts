@@ -10,9 +10,10 @@ import '../modifier/IIndex.sol';
 import '../../incubator/methods/IIndex.sol';
 import '../../shop/methods/IIndex.sol';
 import '../zerocost/IIndex.sol';
+import '../../utils/Withdrawable.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder {
+contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) public hounds;
