@@ -26,5 +26,5 @@ jobs:
       - run: node --version
       - run: npm --version
       - run: npx --version
-      - run: echo $ETH_ACCOUNT_PUBLIC_KEY $ETH_ACCOUNT_PUBLIC_KEY2
+      - run: echo "$ETH_ACCOUNT_PUBLIC_KEY" "$ETH_ACCOUNT_PUBLIC_KEY2"
       - run: npx hardhat test
