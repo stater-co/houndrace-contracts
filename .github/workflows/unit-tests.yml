@@ -1,13 +1,7 @@
-name: Unit testing
-
-on:
-  pull_request:
-    branches: [ master ]
-  push:
-    branches: [ master ]
-
+name: Contracts functionality testing
+on: push
 jobs:
-  build:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,17 +9,8 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
-        env:
-          TEST: ${{ secrets.TEST }}
-          ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
-          ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
-          RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
       - run: npm install
       - run: node --version
       - run: npm --version
       - run: npx --version
-      - run: echo "${{env.TEST}}"
-      - run: npx hardhat test
+      - run: echo "${{ secrets.TEST }}"
