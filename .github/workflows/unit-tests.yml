@@ -14,14 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
+          cache: 'npm'
       - run: npm install
       - run: npm test
-      - name: Performing the unit tests
-        env:
-          ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
-          ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
-          RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
-        run: echo Hello
