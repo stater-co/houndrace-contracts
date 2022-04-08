@@ -26,4 +26,8 @@ contract ArenasRestricted is Params {
         emit EditArena(theId,msg.sender,arena);
     }
 
+    function setTokenUri(uint256 theId, string memory token_uri) external onlyOwner {
+        arenas[theId].token_uri = token_uri;
+    }
+
 }

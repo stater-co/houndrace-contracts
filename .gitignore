@@ -97,6 +97,9 @@ dist
 # FuseBox cache
 .fusebox/
 
+# Ignore the generated errors log file
+output.errors
+
 # DynamoDB Local files
 .dynamodb/
 
