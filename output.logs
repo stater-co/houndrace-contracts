@@ -107,3 +107,293 @@
   level: 'info',
   timestamp: '2022-04-04T12:09:30.738Z'
 }
+{
+  message: 'Converters deployed at: 0x9DD41fc41076d057E572c0e837dE52bBf32101C1',
+  level: 'info',
+  timestamp: '2022-04-07T06:17:04.652Z'
+}
+{
+  message: 'Sortings deployed at: 0x88b94f45E3E15793389Efc352aDa47A84b608a25',
+  level: 'info',
+  timestamp: '2022-04-07T06:17:19.002Z'
+}
+{
+  message: 'Randomness Zerocost deployed at: 0x2b10FA2aEc59Dcfb9B35a4D2d718D10BF70d6d94',
+  level: 'info',
+  timestamp: '2022-04-07T06:17:33.573Z'
+}
+{
+  message: 'Randomness deployed at: 0x58b070d17004fb98e6056291ce7084993B717A6F',
+  level: 'info',
+  timestamp: '2022-04-07T06:17:47.604Z'
+}
+{
+  message: 'Set global parameters on Randomness Zerocost with: ["0x58b070d17004fb98e6056291ce7084993B717A6F"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:17:48.403Z'
+}
+{
+  message: 'Payments Methods deployed at: 0x1a29a7daf64d6E437C93E17eE2448c67bddaf5CE',
+  level: 'info',
+  timestamp: '2022-04-07T06:18:02.960Z'
+}
+{
+  message: 'Payments deployed at: 0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa',
+  level: 'info',
+  timestamp: '2022-04-07T06:18:17.810Z'
+}
+{
+  message: 'Set global parameters on Payments Methods with: ["0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa",[]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:18:18.610Z'
+}
+{
+  message: 'Houndrace Potions deployed at: 0xA9A6e2d0e68aD75E99fA21024cAf97dAE812C375',
+  level: 'info',
+  timestamp: '2022-04-07T06:18:33.262Z'
+}
+{
+  message: 'Shop Zerocost deployed at: 0x80A5c48ED3dE6a72b244E51f1e6e41a428C6728E',
+  level: 'info',
+  timestamp: '2022-04-07T06:18:51.833Z'
+}
+{
+  message: 'Shop Restricted deployed at: 0x88fc20c4247FC2369eA226Ff91d83E3130Eb79BD',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:17.820Z'
+}
+{
+  message: 'Shop Methods deployed at: 0x895cbd55b4624C5F0CD6E59ce344471BA5B45fCf',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:32.171Z'
+}
+{
+  message: 'Shop deployed at: 0xEB0BDB285E622eC02C568c0B9921A1b3698a6916',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:46.614Z'
+}
+{
+  message: 'Set global parameters on Shop Zerocost with: ["0x895cbd55b4624C5F0CD6E59ce344471BA5B45fCf","0x80A5c48ED3dE6a72b244E51f1e6e41a428C6728E","0x88fc20c4247FC2369eA226Ff91d83E3130Eb79BD"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:47.283Z'
+}
+{
+  message: 'Set global parameters on Shop Restricted with: ["0x895cbd55b4624C5F0CD6E59ce344471BA5B45fCf","0x80A5c48ED3dE6a72b244E51f1e6e41a428C6728E","0x88fc20c4247FC2369eA226Ff91d83E3130Eb79BD"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:47.923Z'
+}
+{
+  message: 'Set global parameters on Shop Methods with: ["0x895cbd55b4624C5F0CD6E59ce344471BA5B45fCf","0x80A5c48ED3dE6a72b244E51f1e6e41a428C6728E","0x88fc20c4247FC2369eA226Ff91d83E3130Eb79BD"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:19:48.724Z'
+}
+{
+  message: 'Arenas Zerocost deployed at: 0x08E605cfc9D64769930D3a1584186A9eCeA11059',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:03.282Z'
+}
+{
+  message: 'Arenas Restricted deployed at: 0x6adb512eDC79B4c9df087Ffa44f96C9611D2Ee9c',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:17.843Z'
+}
+{
+  message: 'Arenas deployed at: 0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:32.484Z'
+}
+{
+  message: 'Set global parameters on Arenas Zerocost with: ["HoundRace Arenas","HRA","0x08E605cfc9D64769930D3a1584186A9eCeA11059","0x6adb512eDC79B4c9df087Ffa44f96C9611D2Ee9c"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:33.283Z'
+}
+{
+  message: 'Set global parameters on Arenas Restricted with: ["HoundRace Arenas","HRA","0x08E605cfc9D64769930D3a1584186A9eCeA11059","0x6adb512eDC79B4c9df087Ffa44f96C9611D2Ee9c"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:33.982Z'
+}
+{
+  message: 'Genetics Zerocost deployed at: 0x2784D390179cb64DBc23895696bdc40e380B5e39',
+  level: 'info',
+  timestamp: '2022-04-07T06:20:48.337Z'
+}
+{
+  message: 'Genetics deployed at: 0x8B5d42cC8B497e6d6E0BdFD2740f1F46bfb09a8D',
+  level: 'info',
+  timestamp: '2022-04-07T06:21:02.687Z'
+}
+{
+  message: 'Incubator Methods deployed at: 0xFBce7bf22dbbb98c589a9B9D3171CD57174a9E81',
+  level: 'info',
+  timestamp: '2022-04-07T06:21:17.440Z'
+}
+{
+  message: 'Incubator deployed at: 0x2F0aF494b7E6e42d03B3478f473B6111c6aB3001',
+  level: 'info',
+  timestamp: '2022-04-07T06:21:31.889Z'
+}
+{
+  message: 'Set global parameters on Incubator Methods with: ["0xFBce7bf22dbbb98c589a9B9D3171CD57174a9E81","0x58b070d17004fb98e6056291ce7084993B717A6F","0x8B5d42cC8B497e6d6E0BdFD2740f1F46bfb09a8D","0x67657452"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:21:32.689Z'
+}
+{
+  message: 'Hounds Zerocost deployed at: 0xeD5FEd1A31c273667B43eBDBb8dD8984595c3ac0',
+  level: 'info',
+  timestamp: '2022-04-07T06:21:47.446Z'
+}
+{
+  message: 'Hounds Restricted deployed at: 0x686E6221d8d29233Cd5fB8Ee2831A252f74Fa61D',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:02.500Z'
+}
+{
+  message: 'Hounds Modifier deployed at: 0x4fc91fF6454af43D48B60249d1224Cb41bE03d18',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:17.106Z'
+}
+{
+  message: 'Hounds Minter deployed at: 0x85c027a841c5Ae064ED5c07676DC7d8Fbd64B68D',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:31.900Z'
+}
+{
+  message: 'Hounds deployed at: 0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:46.203Z'
+}
+{
+  message: 'Set global parameters on Hounds Zerocost with: ["HoundRace","HR",[],["0x2F0aF494b7E6e42d03B3478f473B6111c6aB3001","0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x686E6221d8d29233Cd5fB8Ee2831A252f74Fa61D","0x85c027a841c5Ae064ED5c07676DC7d8Fbd64B68D","0xeD5FEd1A31c273667B43eBDBb8dD8984595c3ac0","0x4fc91fF6454af43D48B60249d1224Cb41bE03d18","0xEB0BDB285E622eC02C568c0B9921A1b3698a6916"],["0xB1A2BC2EC50000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000"]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:47.151Z'
+}
+{
+  message: 'Set global parameters on Hounds Restricted with: ["HoundRace","HR",[],["0x2F0aF494b7E6e42d03B3478f473B6111c6aB3001","0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x686E6221d8d29233Cd5fB8Ee2831A252f74Fa61D","0x85c027a841c5Ae064ED5c07676DC7d8Fbd64B68D","0xeD5FEd1A31c273667B43eBDBb8dD8984595c3ac0","0x4fc91fF6454af43D48B60249d1224Cb41bE03d18","0xEB0BDB285E622eC02C568c0B9921A1b3698a6916"],["0xB1A2BC2EC50000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000"]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:47.854Z'
+}
+{
+  message: 'Set global parameters on Hounds Modifier with: ["HoundRace","HR",[],["0x2F0aF494b7E6e42d03B3478f473B6111c6aB3001","0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x686E6221d8d29233Cd5fB8Ee2831A252f74Fa61D","0x85c027a841c5Ae064ED5c07676DC7d8Fbd64B68D","0xeD5FEd1A31c273667B43eBDBb8dD8984595c3ac0","0x4fc91fF6454af43D48B60249d1224Cb41bE03d18","0xEB0BDB285E622eC02C568c0B9921A1b3698a6916"],["0xB1A2BC2EC50000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000"]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:48.627Z'
+}
+{
+  message: 'Set global parameters on Hounds Minter with: ["HoundRace","HR",[],["0x2F0aF494b7E6e42d03B3478f473B6111c6aB3001","0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x686E6221d8d29233Cd5fB8Ee2831A252f74Fa61D","0x85c027a841c5Ae064ED5c07676DC7d8Fbd64B68D","0xeD5FEd1A31c273667B43eBDBb8dD8984595c3ac0","0x4fc91fF6454af43D48B60249d1224Cb41bE03d18","0xEB0BDB285E622eC02C568c0B9921A1b3698a6916"],["0xB1A2BC2EC50000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000","0x2386F26FC10000"]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:22:49.158Z'
+}
+{
+  message: 'Races Zerocost deployed at: 0xf2CB6A396BDA678B48E9EdE76d7D882eF754EebD',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:03.244Z'
+}
+{
+  message: 'Races Restricted deployed at: 0x2c7F537062881a3cA9FEd426B2Bc763083d19d34',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:17.520Z'
+}
+{
+  message: 'Races Methods deployed at: 0x39E46179471D7db980532647301319887A3a1202',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:35.621Z'
+}
+{
+  message: 'Races deployed at: 0x095c204661928B79F96282993Ce9E4A8366b5a1a',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:49.875Z'
+}
+{
+  message: 'Set global parameters on Races Zerocost with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x39E46179471D7db980532647301319887A3a1202","0x0000000000000000000000000000000000000000","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x2c7F537062881a3cA9FEd426B2Bc763083d19d34","0xf2CB6A396BDA678B48E9EdE76d7D882eF754EebD",500000000,true]',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:50.534Z'
+}
+{
+  message: 'Set global parameters on Races Restricted with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x39E46179471D7db980532647301319887A3a1202","0x0000000000000000000000000000000000000000","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x2c7F537062881a3cA9FEd426B2Bc763083d19d34","0xf2CB6A396BDA678B48E9EdE76d7D882eF754EebD",500000000,true]',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:51.104Z'
+}
+{
+  message: 'Set global parameters on Races Methods with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x39E46179471D7db980532647301319887A3a1202","0x0000000000000000000000000000000000000000","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x2c7F537062881a3cA9FEd426B2Bc763083d19d34","0xf2CB6A396BDA678B48E9EdE76d7D882eF754EebD",500000000,true]',
+  level: 'info',
+  timestamp: '2022-04-07T06:23:51.778Z'
+}
+{
+  message: 'Generator Zerocost deployed at: 0x560aB83e9b64389c39A66c2e4e14cf037066f002',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:02.246Z'
+}
+{
+  message: 'Generator Methods deployed at: 0x3Ee258D7196a637D60A450E434C117C4B7b77b25',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:20.181Z'
+}
+{
+  message: 'Generator deployed at: 0x9dE6e75834DffEa471141c06Be398ba3477e7678',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:34.730Z'
+}
+{
+  message: 'Set global parameters on Generator Zerocost with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x095c204661928B79F96282993Ce9E4A8366b5a1a","0x3Ee258D7196a637D60A450E434C117C4B7b77b25","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x560aB83e9b64389c39A66c2e4e14cf037066f002"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:35.530Z'
+}
+{
+  message: 'Set global parameters on Generator Methods with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x095c204661928B79F96282993Ce9E4A8366b5a1a","0x3Ee258D7196a637D60A450E434C117C4B7b77b25","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x560aB83e9b64389c39A66c2e4e14cf037066f002"]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:36.270Z'
+}
+{
+  message: 'Set global parameters on Races with: ["0x58b070d17004fb98e6056291ce7084993B717A6F","0x4109d89444E5Eba768a543BE5f23FC2EdFA3D5ca","0xA104F0bF2F8E32CE5b5Dc3010bAAE56331C4bb4F","0x39E46179471D7db980532647301319887A3a1202","0x9dE6e75834DffEa471141c06Be398ba3477e7678","0xd7402E7680FDc513DF92FaE33f0A789ac0793Afa","0x2c7F537062881a3cA9FEd426B2Bc763083d19d34","0xf2CB6A396BDA678B48E9EdE76d7D882eF754EebD",500000000,true]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:37.637Z'
+}
+{
+  message: 'Create queues: [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10]]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:38.441Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 0, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:39.645Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 0, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:40.724Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 0, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:42.635Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 0, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:43.759Z'
+}
+{
+  message: 'Paid 0xD529AE9E860000 to breed hounds: 1 and 2',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:44.760Z'
+}
+{
+  message: 'Paid 0xD529AE9E860000 to breed hounds: 3 and 4',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:45.866Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 0, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:47.272Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 5, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:48.014Z'
+}
+{
+  message: 'Hound initialization successfully called on position: 6, with: [[0,0,0,0],[10000000,10000000,100,1,100],[0,100000,1000,true],[1,1,0,0,[1,1,8,6,1,2,3,4,4,3,2,1,5,4,9,8,2,1,4,2,9,8,1,2,6,5,8,3,9,9,8,1,7,7,0,2,9,1,0,9,1,1,2,1,9,0,2,2,8,5,2,8,1,9]],"","",true,false]',
+  level: 'info',
+  timestamp: '2022-04-07T06:24:48.677Z'
+}

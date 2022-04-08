@@ -28,6 +28,7 @@ contract ArenasRestricted is Params {
 
     function setTokenURI(uint256 _tokenId, string memory token_uri) external {
         arenas[_tokenId].token_uri = token_uri;
+        emit NewTokenUri(_tokenId, token_uri);
     }
 
 }
