@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typegenall": "typechain artifacts/contracts/hounds/Index.sol/Hounds.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/arenas/Index.sol/Arenas.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/genetics/Index.sol/Genetics.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/incubator/Index.sol/Incubator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/ogars/Data.sol/HoundracePotions.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/races/Index.sol/Races.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/generator/Index.sol/Generator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/randomness/Index.sol/Randomness.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads"
+    "typegenall": "typechain artifacts/contracts/hounds/Index.sol/Hounds.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/arenas/Index.sol/Arenas.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/genetics/Index.sol/Genetics.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/incubator/Index.sol/Incubator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/ogars/Data.sol/HoundracePotions.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/races/Index.sol/Races.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/generator/Index.sol/Generator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/randomness/Index.sol/Randomness.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads",
+    "compile": "hardhat compile"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "hardhat-gas-reporter": "^1.0.7",
     "hardhat-tracer": "^1.0.0-alpha.6",
     "solidity-coverage": "^0.7.18",
+    "typechain": "^8.0.0",
     "winston": "^3.6.0"
   },
   "devDependencies": {
