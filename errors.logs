@@ -1,0 +1,11 @@
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-14T10:56:20.584Z'
+}
