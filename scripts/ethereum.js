@@ -1,4 +1,4 @@
-const { deployment } = require("../plugins/logger.js");
+const { deployment, errors } = require("../plugins/logger.js");
 const cliProgress = require('cli-progress');
 
 // create new container
@@ -683,7 +683,7 @@ async function main() {
         address: converters.address
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -692,7 +692,7 @@ async function main() {
         address: sortings.address
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -706,7 +706,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -720,7 +720,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -734,7 +734,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -748,7 +748,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -758,7 +758,7 @@ async function main() {
         constructorArguments: ["HoundracePotions", "HP"]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -772,7 +772,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -786,7 +786,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -800,7 +800,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -814,7 +814,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -828,7 +828,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -842,7 +842,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -856,7 +856,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -878,7 +878,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -900,7 +900,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -917,7 +917,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -934,7 +934,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -966,7 +966,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -998,7 +998,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -1030,7 +1030,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -1062,7 +1062,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1094,7 +1094,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -1117,7 +1117,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1140,7 +1140,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1163,7 +1163,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
     
@@ -1186,7 +1186,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1206,7 +1206,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1226,7 +1226,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1246,7 +1246,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      console.error(err);
+      errors(err);
     }
     verifications.increment();
 
@@ -1254,7 +1254,7 @@ async function main() {
     multibar.stop();
 
   } catch(err) {
-    console.error(err);
+    errors(err);
   }
 
 }
@@ -1266,6 +1266,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    console.error(error);
+    errors(error);
     process.exit(1);
 });
