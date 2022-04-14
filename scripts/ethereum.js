@@ -42,110 +42,110 @@ async function main() {
   const Converters = await hre.ethers.getContractFactory("Converters");
   const converters = await Converters.deploy();
   await converters.deployed();
-  info(deployedAt("Converters",converters.address));
+  debug(deployedAt("Converters",converters.address));
   deployments.increment();
 
   const Sortings = await hre.ethers.getContractFactory("Sortings");
   const sortings = await Sortings.deploy();
   await sortings.deployed();
-  info(deployedAt("Sortings",sortings.address));
+  debug(deployedAt("Sortings",sortings.address));
   deployments.increment();
   
   const RandomnessZerocost = await hre.ethers.getContractFactory("RandomnessZerocost");
   const randomnessZerocost = await RandomnessZerocost.deploy([address0]);
   await randomnessZerocost.deployed();
-  info(deployedAt("Randomness Zerocost",randomnessZerocost.address));
+  debug(deployedAt("Randomness Zerocost",randomnessZerocost.address));
   deployments.increment();
 
   const Randomness = await hre.ethers.getContractFactory("Randomness");
   const randomness = await Randomness.deploy([randomnessZerocost.address]);
   await randomness.deployed();
-  info(deployedAt("Randomness",randomness.address));
+  debug(deployedAt("Randomness",randomness.address));
   deployments.increment();
 
   await randomnessZerocost.setGlobalParameters([randomness.address]);
-  info(globalParametersSetAt("Randomness Zerocost",[randomness.address]));
+  debug(globalParametersSetAt("Randomness Zerocost",[randomness.address]));
   configurations.increment();
 
   const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
   const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
   await paymentsMethods.deployed();
-  info(deployedAt("Payments Methods",paymentsMethods.address));
+  debug(deployedAt("Payments Methods",paymentsMethods.address));
   deployments.increment();
 
   const Payments = await hre.ethers.getContractFactory("Payments");
   const payments = await Payments.deploy([paymentsMethods.address,[]]);
   await payments.deployed();
-  info(deployedAt("Payments",payments.address));
+  debug(deployedAt("Payments",payments.address));
   deployments.increment();
 
   await paymentsMethods.setGlobalParameters([payments.address,[]]);
-  info(globalParametersSetAt("Payments Methods",[payments.address,[]]));
+  debug(globalParametersSetAt("Payments Methods",[payments.address,[]]));
   configurations.increment();
 
   const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
   const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
   await houndracePotions.deployed();
-  info(deployedAt("Houndrace Potions",houndracePotions.address));
+  debug(deployedAt("Houndrace Potions",houndracePotions.address));
   deployments.increment();
 
   const ShopZerocost = await hre.ethers.getContractFactory("ShopZerocost");
   const shopZerocost = await ShopZerocost.deploy([address0,address0,address0]);
   await shopZerocost.deployed();
-  info(deployedAt("Shop Zerocost",shopZerocost.address));
+  debug(deployedAt("Shop Zerocost",shopZerocost.address));
   deployments.increment();
 
   const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
   const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
   await shopRestricted.deployed();
-  info(deployedAt("Shop Restricted",shopRestricted.address));
+  debug(deployedAt("Shop Restricted",shopRestricted.address));
   deployments.increment();
 
   const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
   const shopMethods = await ShopMethods.deploy([address0,address0,address0]);
   await shopMethods.deployed();
-  info(deployedAt("Shop Methods",shopMethods.address));
+  debug(deployedAt("Shop Methods",shopMethods.address));
   deployments.increment();
 
   const Shop = await hre.ethers.getContractFactory("Shop");
   const shop = await Shop.deploy([shopMethods.address,shopZerocost.address,shopRestricted.address]);
   await shop.deployed();
-  info(deployedAt("Shop",shop.address));
+  debug(deployedAt("Shop",shop.address));
   deployments.increment();
 
   await shopZerocost.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-  info(globalParametersSetAt("Shop Zerocost",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
+  debug(globalParametersSetAt("Shop Zerocost",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
   configurations.increment();
   await shopRestricted.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-  info(globalParametersSetAt("Shop Restricted",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
+  debug(globalParametersSetAt("Shop Restricted",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
   configurations.increment();
   await shopMethods.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-  info(globalParametersSetAt("Shop Methods",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
+  debug(globalParametersSetAt("Shop Methods",[shopMethods.address,shopZerocost.address,shopRestricted.address]));
   configurations.increment();
 
   const ArenasZerocost = await hre.ethers.getContractFactory("ArenasZerocost");
   const arenasZerocost = await ArenasZerocost.deploy(["HoundRace Arenas", "HRA", address0, address0]);
   await arenasZerocost.deployed();
-  info(deployedAt("Arenas Zerocost",arenasZerocost.address));
+  debug(deployedAt("Arenas Zerocost",arenasZerocost.address));
   deployments.increment();
 
   const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
   const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0]);
   await arenasRestricted.deployed();
-  info(deployedAt("Arenas Restricted",arenasRestricted.address));
+  debug(deployedAt("Arenas Restricted",arenasRestricted.address));
   deployments.increment();
 
   const Arenas = await hre.ethers.getContractFactory("Arenas");
   const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
   await arenas.deployed();
-  info(deployedAt("Arenas",arenas.address));
+  debug(deployedAt("Arenas",arenas.address));
   deployments.increment();
 
   await arenasZerocost.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
-  info(globalParametersSetAt("Arenas Zerocost",["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]));
+  debug(globalParametersSetAt("Arenas Zerocost",["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]));
   configurations.increment();
   await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
-  info(globalParametersSetAt("Arenas Restricted",["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]));
+  debug(globalParametersSetAt("Arenas Restricted",["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]));
   configurations.increment();
 
   const GeneticsZerocost = await hre.ethers.getContractFactory("GeneticsZerocost");
@@ -161,7 +161,7 @@ async function main() {
     [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
   ]);
   await geneticsZerocost.deployed();
-  info(deployedAt("Genetics Zerocost",geneticsZerocost.address));
+  debug(deployedAt("Genetics Zerocost",geneticsZerocost.address));
   deployments.increment();
 
   const Genetics = await hre.ethers.getContractFactory("Genetics");
@@ -177,7 +177,7 @@ async function main() {
     [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
   ]);
   await genetics.deployed();
-  info(deployedAt("Genetics",genetics.address));
+  debug(deployedAt("Genetics",genetics.address));
   deployments.increment();
 
   const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
@@ -188,7 +188,7 @@ async function main() {
     "0x67657452"
   ]);
   await incubatorMethods.deployed();
-  info(deployedAt("Incubator Methods",incubatorMethods.address));
+  debug(deployedAt("Incubator Methods",incubatorMethods.address));
   deployments.increment();
 
   const Incubator = await hre.ethers.getContractFactory("Incubator");
@@ -199,7 +199,7 @@ async function main() {
     "0x67657452"
   ]);
   await incubator.deployed();
-  info(deployedAt("Incubator",incubator.address));
+  debug(deployedAt("Incubator",incubator.address));
   deployments.increment();
 
   await incubatorMethods.setGlobalParameters([
@@ -208,7 +208,7 @@ async function main() {
     genetics.address,
     "0x67657452"
   ]);
-  info(globalParametersSetAt("Incubator Methods",[
+  debug(globalParametersSetAt("Incubator Methods",[
     incubatorMethods.address,
     randomness.address,
     genetics.address,
@@ -239,7 +239,7 @@ async function main() {
     ]
   ]);
   await houndsZerocost.deployed();
-  info(deployedAt("Hounds Zerocost",houndsZerocost.address));
+  debug(deployedAt("Hounds Zerocost",houndsZerocost.address));
   deployments.increment();
 
   const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
@@ -265,7 +265,7 @@ async function main() {
     ]
   ]);
   await houndsRestricted.deployed();
-  info(deployedAt("Hounds Restricted",houndsRestricted.address));
+  debug(deployedAt("Hounds Restricted",houndsRestricted.address));
   deployments.increment();
 
   const HoundsModifier = await hre.ethers.getContractFactory("HoundsModifier");
@@ -291,7 +291,7 @@ async function main() {
     ]
   ]);
   await houndsModifier.deployed();
-  info(deployedAt("Hounds Modifier",houndsModifier.address));
+  debug(deployedAt("Hounds Modifier",houndsModifier.address));
   deployments.increment();
 
   const HoundsMinter = await hre.ethers.getContractFactory("HoundsMinter");
@@ -317,7 +317,7 @@ async function main() {
     ]
   ]);
   await houndsMinter.deployed();
-  info(deployedAt("Hounds Minter",houndsMinter.address));
+  debug(deployedAt("Hounds Minter",houndsMinter.address));
   deployments.increment();
 
   const Hounds = await hre.ethers.getContractFactory("Hounds");
@@ -343,7 +343,7 @@ async function main() {
     ]
   ]);
   await hounds.deployed();
-  info(deployedAt("Hounds",hounds.address));
+  debug(deployedAt("Hounds",hounds.address));
   deployments.increment();
 
   await houndsZerocost.setGlobalParameters([
@@ -367,7 +367,7 @@ async function main() {
       "0x2386F26FC10000"
     ]
   ]);
-  info(globalParametersSetAt("Hounds Zerocost",[
+  debug(globalParametersSetAt("Hounds Zerocost",[
     "HoundRace",
     "HR",
     [],
@@ -411,7 +411,7 @@ async function main() {
       "0x2386F26FC10000"
     ]
   ]);
-  info(globalParametersSetAt("Hounds Restricted",[
+  debug(globalParametersSetAt("Hounds Restricted",[
     "HoundRace",
     "HR",
     [],
@@ -455,7 +455,7 @@ async function main() {
       "0x2386F26FC10000"
     ]
   ]);
-  info(globalParametersSetAt("Hounds Modifier",[
+  debug(globalParametersSetAt("Hounds Modifier",[
     "HoundRace",
     "HR",
     [],
@@ -499,7 +499,7 @@ async function main() {
       "0x2386F26FC10000"
     ]
   ]);
-  info(globalParametersSetAt("Hounds Minter",[
+  debug(globalParametersSetAt("Hounds Minter",[
     "HoundRace",
     "HR",
     [],
@@ -536,7 +536,7 @@ async function main() {
     true
   ]);
   await racesZeroCost.deployed();
-  info(deployedAt("Races Zerocost",racesZeroCost.address));
+  debug(deployedAt("Races Zerocost",racesZeroCost.address));
   deployments.increment();
 
   const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
@@ -553,7 +553,7 @@ async function main() {
     true
   ]);
   await racesRestricted.deployed();
-  info(deployedAt("Races Restricted",racesRestricted.address));
+  debug(deployedAt("Races Restricted",racesRestricted.address));
   deployments.increment();
 
   const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
@@ -570,7 +570,7 @@ async function main() {
     true
   ]);
   await racesMethods.deployed();
-  info(deployedAt("Races Methods",racesMethods.address));
+  debug(deployedAt("Races Methods",racesMethods.address));
   deployments.increment();
 
   const Races = await hre.ethers.getContractFactory("Races");
@@ -587,7 +587,7 @@ async function main() {
     true
   ]);
   await races.deployed();
-  info(deployedAt("Races",races.address));
+  debug(deployedAt("Races",races.address));
   deployments.increment();
 
   await racesZeroCost.setGlobalParameters([
@@ -602,7 +602,7 @@ async function main() {
     500000000,
     true
   ]);
-  info(globalParametersSetAt("Races Zerocost",[
+  debug(globalParametersSetAt("Races Zerocost",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -628,7 +628,7 @@ async function main() {
     500000000,
     true
   ]);
-  info(globalParametersSetAt("Races Restricted",[
+  debug(globalParametersSetAt("Races Restricted",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -654,7 +654,7 @@ async function main() {
     500000000,
     true
   ]);
-  info(globalParametersSetAt("Races Methods",[
+  debug(globalParametersSetAt("Races Methods",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -683,7 +683,7 @@ async function main() {
     address0
   ]);
   await generatorZerocost.deployed();
-  info(deployedAt("Generator Zerocost",generatorZerocost.address));
+  debug(deployedAt("Generator Zerocost",generatorZerocost.address));
   deployments.increment();
 
   const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods", {
@@ -701,7 +701,7 @@ async function main() {
     address0
   ]);
   await generatorMethods.deployed();
-  info(deployedAt("Generator Methods",generatorMethods.address));
+  debug(deployedAt("Generator Methods",generatorMethods.address));
   deployments.increment();
 
   const Generator = await hre.ethers.getContractFactory("Generator");
@@ -715,7 +715,7 @@ async function main() {
     generatorZerocost.address
   ]);
   await generator.deployed();
-  info(deployedAt("Generator",generator.address));
+  debug(deployedAt("Generator",generator.address));
   deployments.increment();
 
   await generatorZerocost.setGlobalParameters([
@@ -727,7 +727,7 @@ async function main() {
     payments.address,
     generatorZerocost.address
   ]);
-  info(globalParametersSetAt("Generator Zerocost",[
+  debug(globalParametersSetAt("Generator Zerocost",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -747,7 +747,7 @@ async function main() {
     payments.address,
     generatorZerocost.address
   ]);
-  info(globalParametersSetAt("Generator Methods",[
+  debug(globalParametersSetAt("Generator Methods",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -772,7 +772,7 @@ async function main() {
       true
     ] 
   );
-  info(globalParametersSetAt("Races",[
+  debug(globalParametersSetAt("Races",[
     randomness.address,
     arenas.address,
     hounds.address,
@@ -787,71 +787,64 @@ async function main() {
   configurations.increment();
 
   await races.createQueues(defaultQueues);
-  info(queuesCreation(defaultQueues));
+  debug(queuesCreation(defaultQueues));
   recommendedCalls.increment();
 
-  let id = await hounds.id();
-  debug(houndId(id));
-  recommendedCalls.increment();
-
-  await hounds.initializeHound(0,defaultHound);
-  info(houndInitialized(0,defaultHound));
-  recommendedCalls.increment();
-
-  id = await hounds.id();
-  debug(houndId(id));
+  await hounds.id();
   recommendedCalls.increment();
 
   await hounds.initializeHound(0,defaultHound);
-  info(houndInitialized(0,defaultHound));
+  debug(houndInitialized(0,defaultHound));
   recommendedCalls.increment();
 
-  id = await hounds.id();
-  debug(houndId(id));
-  recommendedCalls.increment();
-
-  await hounds.initializeHound(0,defaultHound);
-  info(houndInitialized(0,defaultHound));
-  recommendedCalls.increment();
-
-  id = await hounds.id();
-  debug(houndId(id));
+  await hounds.id();
   recommendedCalls.increment();
 
   await hounds.initializeHound(0,defaultHound);
-  info(houndInitialized(0,defaultHound));
+  debug(houndInitialized(0,defaultHound));
   recommendedCalls.increment();
 
-  id = await hounds.id();
-  debug(houndId(id));
+  await hounds.id();
+  recommendedCalls.increment();
+
+  await hounds.initializeHound(0,defaultHound);
+  debug(houndInitialized(0,defaultHound));
+  recommendedCalls.increment();
+
+  await hounds.id();
+  recommendedCalls.increment();
+
+  await hounds.initializeHound(0,defaultHound);
+  debug(houndInitialized(0,defaultHound));
+  recommendedCalls.increment();
+
+  await hounds.id();
   recommendedCalls.increment();
 
   await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
-  info(breedHounds(1,2,"0xD529AE9E860000"));
+  debug(breedHounds(1,2,"0xD529AE9E860000"));
   recommendedCalls.increment();
 
-  id = await hounds.id();
-  debug(houndId(id));
+  await hounds.id();
   recommendedCalls.increment();
 
   await hounds.breedHounds(3,4,{ value: "0xD529AE9E860000" });
-  info(breedHounds(3,4,"0xD529AE9E860000"));
+  debug(breedHounds(3,4,"0xD529AE9E860000"));
   recommendedCalls.increment();
   
-  id = await hounds.id();
-  debug(houndId(id));
+  await hounds.id();
   recommendedCalls.increment();
 
   await hounds.initializeHound(0,defaultHound);
-  info(houndInitialized(0,defaultHound));
+  debug(houndInitialized(0,defaultHound));
   recommendedCalls.increment();
 
   await hounds.initializeHound(5,defaultHound);
-  info(houndInitialized(5,defaultHound));
+  debug(houndInitialized(5,defaultHound));
   recommendedCalls.increment();
 
   await hounds.initializeHound(6,defaultHound);
-  info(houndInitialized(6,defaultHound));
+  debug(houndInitialized(6,defaultHound));
   recommendedCalls.increment();
   
 
@@ -860,19 +853,19 @@ async function main() {
     await hre.run("verify:verify", {
       address: converters.address
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
       address: sortings.address
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -883,10 +876,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -897,10 +890,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -911,10 +904,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -925,20 +918,20 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
       address: houndracePotions.address,
       constructorArguments: ["HoundracePotions", "HP"]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -949,10 +942,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -963,10 +956,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -977,10 +970,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -991,10 +984,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1005,10 +998,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1019,10 +1012,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1033,10 +1026,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1055,10 +1048,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1077,10 +1070,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1094,10 +1087,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -1111,10 +1104,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1143,10 +1136,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1175,10 +1168,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -1207,10 +1200,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -1239,10 +1232,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1271,10 +1264,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -1294,10 +1287,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1317,10 +1310,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1340,10 +1333,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
   
   try {
     await hre.run("verify:verify", {
@@ -1363,10 +1356,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1383,10 +1376,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1403,10 +1396,10 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
   try {
     await hre.run("verify:verify", {
@@ -1423,38 +1416,39 @@ async function main() {
         ]
       ]
     });
-    verifications.increment();
   } catch (err) {
     error(err);
   }
+  verifications.increment();
 
-  console.log('export CONVERTERS=' + converters.address);
-  console.log('export SORTINGS=' + sortings.address);
-  console.log('export RANDOMNESS_ZEROCOST=' + randomnessZerocost.address);
-  console.log('export RANDOMNESS=' + randomness.address);
-  console.log('export PAYMENTS_METHODS=' + paymentsMethods.address);
-  console.log('export PAYMENTS=' + payments.address);
-  console.log('export HOUNDRACE_POTIONS=' + houndracePotions.address);
-  console.log('export SHOP_ZEROCOST=' + shopZerocost.address);
-  console.log('export SHOP_RESTRICTED=' + shopRestricted.address);
-  console.log('export SHOP_METHODS=' + shopMethods.address);
-  console.log('export SHOP=' + shop.address);
-  console.log('export ARENA_RESTRICTED=' + arenasRestricted.address);
-  console.log('export ARENAS=' + arenas.address);
-  console.log('export GENETICS_ZEROCOST=' + geneticsZerocost.address);
-  console.log('export GENETICS=' + genetics.address);
-  console.log('export INCUBATOR_METHODS=' + incubatorMethods.address);
-  console.log('export INCUBATOR=' + incubator.address);
-  console.log('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
-  console.log('export HOUNDS_MODIFIER=' + houndsModifier.address);
-  console.log('export HOUNDS_MINTER=' + houndsMinter.address);
-  console.log('export HOUNDS=' + hounds.address);
-  console.log('export RACE_RESTRICTED=' + racesRestricted.address);
-  console.log('export RACE_METHODS=' + racesMethods.address);
-  console.log('export RACE=' + races.address);
-  console.log('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
-  console.log('export GENERATOR_METHODS=' + generatorMethods.address);
-  console.log('export GENERATOR=' + generator.address);
+  
+  info('export CONVERTERS=' + converters.address);
+  info('export SORTINGS=' + sortings.address);
+  info('export RANDOMNESS_ZEROCOST=' + randomnessZerocost.address);
+  info('export RANDOMNESS=' + randomness.address);
+  info('export PAYMENTS_METHODS=' + paymentsMethods.address);
+  info('export PAYMENTS=' + payments.address);
+  info('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+  info('export SHOP_ZEROCOST=' + shopZerocost.address);
+  info('export SHOP_RESTRICTED=' + shopRestricted.address);
+  info('export SHOP_METHODS=' + shopMethods.address);
+  info('export SHOP=' + shop.address);
+  info('export ARENA_RESTRICTED=' + arenasRestricted.address);
+  info('export ARENAS=' + arenas.address);
+  info('export GENETICS_ZEROCOST=' + geneticsZerocost.address);
+  info('export GENETICS=' + genetics.address);
+  info('export INCUBATOR_METHODS=' + incubatorMethods.address);
+  info('export INCUBATOR=' + incubator.address);
+  info('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+  info('export HOUNDS_MODIFIER=' + houndsModifier.address);
+  info('export HOUNDS_MINTER=' + houndsMinter.address);
+  info('export HOUNDS=' + hounds.address);
+  info('export RACE_RESTRICTED=' + racesRestricted.address);
+  info('export RACE_METHODS=' + racesMethods.address);
+  info('export RACE=' + races.address);
+  info('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+  info('export GENERATOR_METHODS=' + generatorMethods.address);
+  info('export GENERATOR=' + generator.address);
 
 
   // stop all bars
