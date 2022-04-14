@@ -13,9 +13,10 @@ import '../../utils/Converters.sol';
 import '../../payments/methods/IIndex.sol';
 import '../../hounds/hound/Index.sol';
 import '../../hounds/zerocost/IIndex.sol';
+import '../../utils/Withdrawable.sol';
 
 
-contract Params is Ownable {
+contract Params is Ownable, Withdrawable {
     
     event NewRace(uint256 indexed id, Queue.Struct race);
     event NewFinishedRace(uint256 indexed id, Race.Struct race);

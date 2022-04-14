@@ -5,8 +5,10 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '../arena/Index.sol';
 import './Constructor.sol';
+import '../../utils/Withdrawable.sol';
 
-contract Params is Ownable, ERC721, ERC721Holder {
+
+contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
 
     ArenasConstructor.Struct public control;
     uint256 public id = 1;
@@ -14,6 +16,7 @@ contract Params is Ownable, ERC721, ERC721Holder {
     
     event NewArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
     event EditArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
+    event NewTokenUri(uint256 indexed id, string token_uri);
 
     constructor(ArenasConstructor.Struct memory input) ERC721(input.name,input.symbol) {
         control = input;

@@ -22,6 +22,12 @@ function breedHounds(hound1,hound2,value) {
     return "Paid " + value + " to breed hounds: " + hound1 + " and " + hound2;
 }
 
+function consoleLogAllContractAddresses(contracts) {
+    for ( let i = 0 , l = contracts.length ; i < l ; ++i ) {
+        console.log('export ' + contracts[i].name+ '=' + contracts[i].address);
+    }
+}
+
 module.exports = {
-    deployedAt, globalParametersSetAt, queuesCreation, houndId, houndInitialized, breedHounds
+    deployedAt, globalParametersSetAt, queuesCreation, houndId, houndInitialized, breedHounds, consoleLogAllContractAddresses
 }

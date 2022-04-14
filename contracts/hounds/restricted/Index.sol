@@ -21,8 +21,9 @@ contract HoundsRestricted is Params {
         }
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_url) external {
-        hounds[_tokenId].token_url = token_url;
+    function setTokenURI(uint256 _tokenId, string memory token_uri) external {
+        hounds[_tokenId].token_uri = token_uri;
+        emit NewTokenUri(_tokenId, token_uri);
     }
 
 }

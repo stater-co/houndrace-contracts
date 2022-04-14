@@ -5,8 +5,7 @@ require('hardhat-contract-sizer');
 require("hardhat-gas-reporter");
 require("solidity-coverage");
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
+
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
 
@@ -15,19 +14,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
 
 module.exports = {
   networks: {
     hardhat: {
-      initialBaseFeePerGas: 0, // workaround from https://github.com/sc-forks/solidity-coverage/issues/652#issuecomment-896330136 . Remove when that issue is closed.
+      initialBaseFeePerGas: 0,
       gas: 4800000,
       gasPrice: 8000000000
     },
     rinkeby: {
-      url: process.env.RINKEBY_URL || "",
+      url: process.env.RINKEBY_URL,
       timeout: 120000,
       accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY,process.env.ETH_ACCOUNT_PRIVATE_KEY2],
       gas: 4800000,
@@ -35,15 +31,13 @@ module.exports = {
     }
   },
   etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
     apiKey: process.env.RINKEBY_ETHERSCAN_API_KEY
   },
   mocha: {
-    timeout: 100000,
+    timeout: 800000,
     reporter: 'eth-gas-reporter'
   },
-  timeout: 100000,
+  timeout: 800000,
   solidity: {
     compilers: [
       {

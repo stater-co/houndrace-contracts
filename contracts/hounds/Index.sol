@@ -12,7 +12,7 @@ contract Hounds is Params {
         require(success);
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_url) external onlyOwner {
+    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
     }
@@ -52,7 +52,7 @@ contract Hounds is Params {
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return hounds[_tokenId].token_url;
+        return hounds[_tokenId].token_uri;
     }
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {

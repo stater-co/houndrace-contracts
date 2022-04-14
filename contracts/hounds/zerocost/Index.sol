@@ -11,7 +11,7 @@ contract HoundsZerocost is Params {
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return hounds[_tokenId].token_url;
+        return hounds[_tokenId].token_uri;
     }
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
