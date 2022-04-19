@@ -22,6 +22,10 @@ contract Arenas is Params {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
+        return arenas[_tokenId].token_uri;
+    }
     
     function arena(uint256 theId) external view returns(Arena.Struct memory) {
         return arenas[theId];
