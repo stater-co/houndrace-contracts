@@ -28,7 +28,7 @@ contract Races is Params {
     }
 
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
-        return IRacesZeroCost(control.zerocost).queue(theId);
+        return queues[theId];
     }
 
 }
