@@ -731,3 +731,324 @@
     'Reason: Already Verified',
   timestamp: '2022-04-19T07:09:02.114Z'
 }
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-21T10:34:53.118Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:44:49.890Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:45:20.643Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:45:44.429Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:46:20.857Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:47:03.204Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:47:29.998Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:48:09.536Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:48:49.176Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:49:12.659Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:49:33.531Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:49:58.271Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:50:25.614Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:50:52.510Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:51:12.780Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The contract verification failed.\nReason: Fail - Unable to verify',
+  timestamp: '2022-04-21T10:52:55.641Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:53:22.836Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:54:06.591Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:54:41.011Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:55:18.129Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:55:42.426Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:56:05.807Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:56:29.692Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:57:06.469Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-04-21T10:59:40.865Z'
+}
