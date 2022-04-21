@@ -19,6 +19,11 @@ contract RacesRestricted is Params {
     }
 
     function deleteQueue(uint256 theId) external {
+        for ( uint256 i = 0; i < queues[theId].totalParticipants; ++i ) {
+            if ( queues[theId].participants[i] > 0 ) {
+                quitQueue
+            }
+        }
         delete queues[theId];
         emit DeleteQueue(theId);
     }

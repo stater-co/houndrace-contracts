@@ -11,4 +11,6 @@ interface IHoundsZerocost {
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256);
 
+    function ownerOf(uint256 tokenId) external view returns(address);
+
 }
