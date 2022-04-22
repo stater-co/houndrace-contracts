@@ -15,7 +15,8 @@ const defaultHound = [
   false
 ];
 let currentDiscountId = 1;
-let payments = {};
+let payments;
+let paymentsMethods;
 let shop = {};
 let randomness = {};
 let arenas = {};
@@ -256,9 +257,11 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the payments contract", async function () {
-    payments.methods = await getContractInstance("PaymentsMethods",[address0,[]]);
-    payments.main = await getContractInstance("Payments",[payments.methods.address,[]]);
-    await payments.methods.setGlobalParameters([payments.methods.address,[]]);
+    paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
+    console.log("Payments methods: " + paymentsMethods.address);
+    payments = await getContractInstance("Payments",[paymentsMethods.address,[]]);
+    await paymentsMethods.setGlobalParameters([paymentsMethods.address,[]]);
+    console.log("Payments contract: " + payments.address);
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -493,7 +496,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -515,7 +518,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -537,7 +540,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -559,7 +562,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -581,7 +584,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -596,7 +599,7 @@ describe("Setting up the Houndrace contracts", function () {
       ]
     ]);
 
-    await payments.main.setGlobalParameters([payments.methods.address,[houndsContract.address]]);
+    await payments.setGlobalParameters([paymentsMethods.address,[houndsContract.address]]);
 
   });
 
@@ -643,7 +646,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.methods.address,
       address0,
-      payments.main.address,
+      payments.address,
       races.restricted.address,
       races.zerocost.address,
       500000000,
@@ -655,7 +658,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.methods.address,
       address0,
-      payments.main.address,
+      payments.address,
       races.restricted.address,
       races.zerocost.address,
       500000000,
@@ -667,7 +670,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.methods.address,
       address0,
-      payments.main.address,
+      payments.address,
       races.restricted.address,
       races.zerocost.address,
       500000000,
@@ -679,7 +682,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.methods.address,
       address0,
-      payments.main.address,
+      payments.address,
       races.restricted.address,
       races.zerocost.address,
       500000000,
@@ -693,7 +696,7 @@ describe("Setting up the Houndrace contracts", function () {
       [
         incubator.main.address,
         otherOwner.address,
-        payments.main.address,
+        payments.address,
         hound.restricted.address,
         hound.minter.address,
         hound.zerocost.address,
@@ -750,7 +753,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.main.address,
       generator.methods.address,
-      payments.main.address,
+      payments.address,
       generator.zerocost.address
     ]);
 
@@ -760,7 +763,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.main.address,
       generator.methods.address,
-      payments.main.address,
+      payments.address,
       generator.zerocost.address
     ]);
 
@@ -770,7 +773,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.main.address,
       generator.methods.address,
-      payments.main.address,
+      payments.address,
       generator.zerocost.address
     ]);
 
@@ -780,7 +783,7 @@ describe("Setting up the Houndrace contracts", function () {
       houndsContract.address,
       races.methods.address,
       generator.main.address,
-      payments.main.address,
+      payments.address,
       races.restricted.address,
       races.zerocost.address,
       500000000,
@@ -788,6 +791,11 @@ describe("Setting up the Houndrace contracts", function () {
     ]);
 
   });
+
+});
+
+
+describe("Setting up the Houndrace contracts global parameters", function () {
 
 });
 
@@ -1026,6 +1034,59 @@ describe("Races", function () {
       const theQueue = await races.main.queue(2);
       console.log(JSON.stringify(theQueue));
     }
+    console.log("let's see now");
+    const paymentsControl = await payments.control();
+    console.log("Payments control: " + paymentsControl);
+    
+    races.main = await getContractInstance("Races",[
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      paymentsControl,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.zerocost.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      paymentsControl,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.restricted.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      paymentsControl,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+    await races.methods.setGlobalParameters([
+      randomness.main.address,
+      arenas.main.address,
+      houndsContract.address,
+      races.methods.address,
+      address0,
+      paymentsControl,
+      races.restricted.address,
+      races.zerocost.address,
+      500000000,
+      true
+    ]);
+
     await races.main.deleteQueue(2);
   });
 

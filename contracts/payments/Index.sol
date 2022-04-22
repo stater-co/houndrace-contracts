@@ -13,6 +13,7 @@ contract Payments is Params {
 	}
 
 	function rawSend(address token, uint256 amount, address to) public {
+		console.log("ok here again >>", control.methods);
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
 	}

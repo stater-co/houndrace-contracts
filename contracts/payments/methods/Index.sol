@@ -17,12 +17,13 @@ contract PaymentsMethods is Params {
 		}
 	}
 
-	function rawSend(address token, uint256 amount, address payable to) public nonReentrant {
+	function rawSend(address token, uint256 amount, address to) public nonReentrant {
+		console.log("Raw send: ", address(this).balance);
 		require(msg.sender.code.length > 0);
 		if ( token != address(0) ) {
 			IERC20(token).transferFrom(msg.sender, to, amount);
 		} else {
-			require(to.send(amount));
+			require(payable(to).send(amount));
 		}
 	}
 

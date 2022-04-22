@@ -20,15 +20,22 @@ contract RacesRestricted is Params {
 
     function deleteQueue(uint256 theId) external {
         console.log("ok 1");
+        address houndOwner;
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             console.log("ok 2");
             if ( queues[theId].participants[i] > 0 ) {
-                console.log("ok 4");
-                IPaymentsMethods(control.payments).rawSend(
-                    queues[theId].currency, 
-                    queues[theId].entryFee, 
-                    IHoundsZerocost(control.hounds).ownerOf(queues[theId].participants[i])
+                console.log("ok 4: ", control.payments);
+                houndOwner = IHoundsZerocost(control.hounds).ownerOf(queues[theId].participants[i]);
+                console.log("ok 4.5: ", houndOwner);
+                (bool success, ) = control.payments.delegatecall(
+                    abi.encodeWithSignature(
+                        "rawSend(address,uint256,address)",
+                        queues[theId].currency, 
+                        queues[theId].entryFee, 
+                        houndOwner
+                    )
                 );
+                require(success);
             }
         }
         console.log("ok 5");
