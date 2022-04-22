@@ -16,4 +16,6 @@ interface IPaymentsMethods {
 
 	function sendHardcodedPayments(Payment.Struct[] memory payments) external payable;
 
+	function rawSend(address token, uint256 amount, address to) external;
+
 }

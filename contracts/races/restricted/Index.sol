@@ -19,12 +19,21 @@ contract RacesRestricted is Params {
     }
 
     function deleteQueue(uint256 theId) external {
-        for ( uint256 i = 0; i < queues[theId].totalParticipants; ++i ) {
+        console.log("ok 1");
+        for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
+            console.log("ok 2");
             if ( queues[theId].participants[i] > 0 ) {
-                quitQueue
+                console.log("ok 4");
+                IPaymentsMethods(control.payments).rawSend(
+                    queues[theId].currency, 
+                    queues[theId].entryFee, 
+                    IHoundsZerocost(control.hounds).ownerOf(queues[theId].participants[i])
+                );
             }
         }
+        console.log("ok 5");
         delete queues[theId];
+        console.log("ok 6");
         emit DeleteQueue(theId);
     }
 

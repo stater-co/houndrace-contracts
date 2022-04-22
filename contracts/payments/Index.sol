@@ -12,6 +12,11 @@ contract Payments is Params {
         require(success);
 	}
 
+	function rawSend(address token, uint256 amount, address to) public {
+        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
+        require(success);
+	}
+
 	function addPayments(uint256 queueId, Payment.Struct[] memory thePayments) external isAllowed {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);

@@ -55,10 +55,4 @@ contract RacesMethods is Params {
 
     }
 
-    function quitQueue(uint256 theId, uint256 position, uint256 houndId) external {
-        require(queues[theId].participants[position] == houndId);
-        require(IHoundsZerocost(control.hounds).ownerOf(houndId) == msg.sender);
-        
-    }
-
 }

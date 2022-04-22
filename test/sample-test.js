@@ -685,6 +685,28 @@ describe("Setting up the Houndrace contracts", function () {
       500000000,
       true
     ]);
+    const [,otherOwner] = await ethers.getSigners();
+    await houndsContract.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [races.main.address],
+      [
+        incubator.main.address,
+        otherOwner.address,
+        payments.main.address,
+        hound.restricted.address,
+        hound.minter.address,
+        hound.zerocost.address,
+        hound.modifier.address,
+        shop.main.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
   });
 
   it("Deploy the generator contracts", async function () {
@@ -992,6 +1014,19 @@ describe("Races", function () {
     for ( let i = 1 ; i <= queue[8] ; ++i ) {
       await races.main.enqueue(1,i,{ value : queue[4] });
     }
+  });
+
+  it("Join queue and then delete it", async function () {
+    let queue = await races.main.queues(2);
+    console.log(queue);
+    for ( let i = 1 ; i <= queue.totalParticipants - 4 ; ++i ) {
+      console.log("Enqueueing: " + i);
+      await races.main.enqueue(2,i,{ value : queue.entryFee });
+      console.log("Queue after: ");
+      const theQueue = await races.main.queue(2);
+      console.log(JSON.stringify(theQueue));
+    }
+    await races.main.deleteQueue(2);
   });
 
   it("Hounds stamina check x4", async function () {
