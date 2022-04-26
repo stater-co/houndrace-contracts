@@ -9,16 +9,11 @@ const multibar = new cliProgress.MultiBar({
 }, cliProgress.Presets.shades_classic);
 
 const deployments = multibar.create(30,0);
-const configurations = multibar.create(18,0);
+const configurations = multibar.create(19,0);
 const recommendedCalls = multibar.create(17,0);
 const verifications = multibar.create(30,0);
 
 
-const { 
-  deployedAt, globalParametersSetAt, 
-  queuesCreation, houndId, 
-  houndInitialized, breedHounds 
-} = require("../plugins/message-formats.js");
 const hre = require("hardhat");
 const address0 = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
@@ -335,98 +330,6 @@ async function main() {
     deployments.increment();
     deployment('export HOUNDS=' + hounds.address);
 
-    await houndsZerocost.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [],
-      [
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        houndsZerocost.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsRestricted.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [hounds.address,houndsRestricted.address,houndsMinter.address],
-      [
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        houndsZerocost.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsModifier.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [hounds.address,houndsRestricted.address,houndsMinter.address],
-      [
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        houndsZerocost.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsMinter.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [hounds.address,houndsRestricted.address,houndsMinter.address],
-      [
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        houndsZerocost.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
     const RacesZeroCost = await hre.ethers.getContractFactory("RacesZeroCost");
     const racesZeroCost = await RacesZeroCost.deploy([
       address0,
@@ -534,6 +437,121 @@ async function main() {
       racesZeroCost.address,
       500000000,
       true
+    ]);
+    configurations.increment();
+
+    await houndsZerocost.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [hounds.address,houndsRestricted.address,houndsMinter.address,races.address,racesMethods.address,racesRestricted.address],
+      [
+        incubator.address,
+        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        payments.address,
+        houndsRestricted.address,
+        houndsMinter.address,
+        houndsZerocost.address,
+        houndsModifier.address,
+        shop.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+    configurations.increment();
+
+    await houndsRestricted.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [hounds.address,houndsRestricted.address,houndsMinter.address,races.address,racesMethods.address,racesRestricted.address],
+      [
+        incubator.address,
+        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        payments.address,
+        houndsRestricted.address,
+        houndsMinter.address,
+        houndsZerocost.address,
+        houndsModifier.address,
+        shop.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+    configurations.increment();
+
+    await houndsModifier.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [hounds.address,houndsRestricted.address,houndsMinter.address,races.address,racesMethods.address,racesRestricted.address],
+      [
+        incubator.address,
+        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        payments.address,
+        houndsRestricted.address,
+        houndsMinter.address,
+        houndsZerocost.address,
+        houndsModifier.address,
+        shop.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+    configurations.increment();
+
+    await houndsMinter.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [hounds.address,houndsRestricted.address,houndsMinter.address,races.address,racesMethods.address,racesRestricted.address],
+      [
+        incubator.address,
+        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        payments.address,
+        houndsRestricted.address,
+        houndsMinter.address,
+        houndsZerocost.address,
+        houndsModifier.address,
+        shop.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
+    ]);
+    configurations.increment();
+
+    await hounds.setGlobalParameters([
+      "HoundRace",
+      "HR",
+      [hounds.address,houndsRestricted.address,houndsMinter.address,races.address,racesMethods.address,racesRestricted.address],
+      [
+        incubator.address,
+        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        payments.address,
+        houndsRestricted.address,
+        houndsMinter.address,
+        houndsZerocost.address,
+        houndsModifier.address,
+        shop.address
+      ],[
+        "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000",
+        "0x2386F26FC10000"
+      ]
     ]);
     configurations.increment();
 
