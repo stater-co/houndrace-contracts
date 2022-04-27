@@ -1296,3 +1296,187 @@
   errorMessage: 'The contract verification failed.\nReason: Fail - Unable to verify',
   timestamp: '2022-04-26T07:02:48.422Z'
 }
+{
+  parent: undefined,
+  name: 'HardhatError',
+  errorDescriptor: {
+    number: 700,
+    message: 'Artifact for contract "%contractName%" not found. %suggestion%',
+    title: 'Artifact not found',
+    description: 'Tried to import a nonexistent artifact.\n' +
+      '\n' +
+      "Please double check that your contracts have been compiled and double check your artifact's name.",
+    shouldBeReported: false
+  },
+  number: 700,
+  messageArguments: { contractName: 'RacesZeroCost', suggestion: '' },
+  _isHardhatError: true,
+  level: 'error',
+  errorMessage: 'HH700: Artifact for contract "RacesZeroCost" not found. ',
+  timestamp: '2022-04-27T13:25:29.891Z'
+}
+{
+  level: 'error',
+  errorMessage: 'racesZeroCost is not defined',
+  timestamp: '2022-04-27T13:39:51.666Z'
+}
+{
+  level: 'error',
+  errorMessage: 'races.createQueues is not a function',
+  timestamp: '2022-04-27T13:41:19.773Z'
+}
+{
+  level: 'error',
+  errorMessage: 'races.createQueues is not a function',
+  timestamp: '2022-04-27T13:41:53.115Z'
+}
+{
+  level: 'error',
+  errorMessage: 'queues is not defined',
+  timestamp: '2022-04-27T13:42:22.825Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: 500000000,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=500000000, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T13:53:51.602Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: 500000000,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=500000000, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T13:56:02.552Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: 500000000,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=500000000, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:01:36.105Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: 500000000,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=500000000, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:25:51.502Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: 500000000,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=500000000, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:26:44.953Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: undefined,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=undefined, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:29:17.639Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: undefined,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=undefined, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:32:57.393Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: undefined,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=undefined, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:36:59.222Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: undefined,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=undefined, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:42:41.950Z'
+}
+{
+  reason: 'invalid address or ENS name',
+  code: 'INVALID_ARGUMENT',
+  argument: 'name',
+  value: undefined,
+  level: 'error',
+  errorMessage: 'invalid address or ENS name (argument="name", value=undefined, code=INVALID_ARGUMENT, version=contracts/5.6.0)',
+  timestamp: '2022-04-27T14:45:09.634Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-27T14:48:59.428Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-27T14:50:36.860Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-27T14:53:38.810Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-27T14:54:27.888Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-04-27T14:54:41.625Z'
+}

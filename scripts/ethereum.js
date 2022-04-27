@@ -8,10 +8,10 @@ const multibar = new cliProgress.MultiBar({
 
 }, cliProgress.Presets.shades_classic);
 
-const deployments = multibar.create(30,0);
-const configurations = multibar.create(19,0);
+const deployments = multibar.create(33,0);
+const configurations = multibar.create(21,0);
 const recommendedCalls = multibar.create(17,0);
-const verifications = multibar.create(30,0);
+const verifications = multibar.create(33,0);
 
 
 const hre = require("hardhat");
@@ -330,26 +330,8 @@ async function main() {
     deployments.increment();
     deployment('export HOUNDS=' + hounds.address);
 
-    const RacesZeroCost = await hre.ethers.getContractFactory("RacesZeroCost");
-    const racesZeroCost = await RacesZeroCost.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
-    ]);
-    await racesZeroCost.deployed();
-    deployments.increment();
-    deployment('export RACE_ZEROCOST=' + racesZeroCost.address);
-
     const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
     const racesRestricted = await RacesRestricted.deploy([
-      address0,
       address0,
       address0,
       address0,
@@ -373,7 +355,6 @@ async function main() {
       address0,
       address0,
       address0,
-      address0,
       500000000,
       true
     ]);
@@ -390,27 +371,12 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
-      racesZeroCost.address,
       500000000,
       true
     ]);
     await races.deployed();
     deployments.increment();
     deployment('export RACE=' + races.address);
-
-    await racesZeroCost.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      address0,
-      payments.address,
-      racesRestricted.address,
-      racesZeroCost.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
 
     await racesRestricted.setGlobalParameters([
       randomness.address,
@@ -420,7 +386,6 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
-      racesZeroCost.address,
       500000000,
       true
     ]);
@@ -434,7 +399,6 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
-      racesZeroCost.address,
       500000000,
       true
     ]);
@@ -636,14 +600,95 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        racesZeroCost.address,
         500000000,
         true
       ] 
     );
     configurations.increment();
 
-    await races.createQueues(defaultQueues);
+    const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
+    const queuesMethods = await QueuesMethods.deploy([
+      arenas.address,
+      hounds.address,
+      address0,
+      payments.address,
+      address0,
+      races.address
+    ]);
+    await queuesMethods.deployed();
+    deployments.increment();
+    deployment('export QUEUES_METHODS=' + queuesMethods.address);
+
+    const QueuesRestricted = await hre.ethers.getContractFactory("QueuesRestricted");
+    const queuesRestricted = await QueuesRestricted.deploy([
+      arenas.address,
+      hounds.address,
+      address0,
+      payments.address,
+      address0,
+      races.address
+    ]);
+    await queuesRestricted.deployed();
+    deployments.increment();
+    deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
+
+    const QueuesZerocost = await hre.ethers.getContractFactory("QueuesZerocost");
+    const queuesZerocost = await QueuesZerocost.deploy([
+      arenas.address,
+      hounds.address,
+      address0,
+      payments.address,
+      address0,
+      races.address
+    ]);
+    await queuesZerocost.deployed();
+    deployments.increment();
+    deployment('export QUEUES_ZEROCOST=' + queuesZerocost.address);
+
+    const Queues = await hre.ethers.getContractFactory("Queues");
+    const queues = await Queues.deploy([
+      arenas.address,
+      hounds.address,
+      queuesMethods.address,
+      payments.address,
+      queuesRestricted.address,
+      races.address
+    ]);
+    await queues.deployed();
+    deployments.increment();
+    deployment('export QUEUES=' + queues.address);
+
+    await queuesMethods.setGlobalParameters([
+      arenas.address,
+      hounds.address,
+      queuesMethods.address,
+      payments.address,
+      queuesRestricted.address,
+      races.address
+    ]);
+    configurations.increment();
+
+    await queuesRestricted.setGlobalParameters([
+      arenas.address,
+      hounds.address,
+      queuesMethods.address,
+      payments.address,
+      queuesRestricted.address,
+      races.address
+    ]);
+    configurations.increment();
+
+    await queuesZerocost.setGlobalParameters([
+      arenas.address,
+      hounds.address,
+      queuesMethods.address,
+      payments.address,
+      queuesRestricted.address,
+      races.address
+    ]);
+    configurations.increment();
+
+    await queues.createQueues(defaultQueues);
     recommendedCalls.increment();
 
     await hounds.id();
@@ -1115,29 +1160,6 @@ async function main() {
       errors(err);
     }
     verifications.increment();
-    
-    try {
-      await hre.run("verify:verify", {
-        address: racesZeroCost.address,
-        constructorArguments: [
-          [
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            500000000,
-            true
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
 
     try {
       await hre.run("verify:verify", {
@@ -1197,7 +1219,6 @@ async function main() {
             address0,
             payments.address,
             racesRestricted.address,
-            racesZeroCost.address,
             500000000,
             true
           ]
@@ -1268,6 +1289,82 @@ async function main() {
     }
     verifications.increment();
 
+    try {
+      await hre.run("verify:verify", {
+        address: queuesZerocost.address,
+        constructorArguments: [
+          [
+            arenas.address,
+            hounds.address,
+            address0,
+            payments.address,
+            address0,
+            races.address
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.increment();
+
+    try {
+      await hre.run("verify:verify", {
+        address: queuesRestricted.address,
+        constructorArguments: [
+          [
+            arenas.address,
+            hounds.address,
+            address0,
+            payments.address,
+            address0,
+            races.address
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.increment();
+
+    try {
+      await hre.run("verify:verify", {
+        address: queuesMethods.address,
+        constructorArguments: [
+          [
+            arenas.address,
+            hounds.address,
+            address0,
+            payments.address,
+            address0,
+            races.address
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.increment();
+
+    try {
+      await hre.run("verify:verify", {
+        address: queues.address,
+        constructorArguments: [
+          [
+            arenas.address,
+            hounds.address,
+            queuesMethods.address,
+            payments.address,
+            queuesRestricted.address,
+            races.address
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.increment();
+    
     // stop all bars
     multibar.stop();
 
