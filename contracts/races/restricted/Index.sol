@@ -9,7 +9,13 @@ contract RacesRestricted is Params {
 
     function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external {
         races[id] = race;
-        IPaymentsMethods(control.payments).sendHardcodedPayments(payments);
+        (bool success, ) = control.payments.delegatecall(
+            abi.encodeWithSignature(
+                "sendHardcodedPayments((address,address,address,uint256[],uint256,uint32)[])",
+                payments
+            )
+        );
+        require(success);
         emit UploadRace(id, race);
         ++id;
     }

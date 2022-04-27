@@ -40,6 +40,7 @@ let generatorZerocost;
 let generatorMethods;
 let races;
 let racesRestricted;
+let racesMethods;
 let queues;
 let queuesMethods;
 let queuesRestricted;
@@ -166,7 +167,6 @@ async function breed2Hounds() {
 
   const maleId = availableHounds.maleId;
   const femaleId = availableHounds.femaleId; 
-  console.log("Breed hounds 0 : " + maleId + " , " + femaleId);
 
   if ( maleId && femaleId ) {
 
@@ -186,9 +186,7 @@ async function breed2Hounds() {
       hound2 = maleId;
     }
 
-    console.log("Breed hounds 1 : " + hound1 + " , " + hound2);
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    console.log("Breed hounds 2 : " + hound1 + " , " + hound2);
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
 
     const houndMaleAfter = await hounds.hound(maleId);
@@ -530,6 +528,18 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
+      address0,
+      500000000,
+      true
+    ]);
+    racesMethods = await getContractInstance("RacesMethods",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
       500000000,
       true
     ]);
@@ -537,6 +547,7 @@ describe("Setting up the Houndrace contracts", function () {
       randomness.address,
       arenas.address,
       hounds.address,
+      racesMethods.address,
       address0,
       payments.address,
       racesRestricted.address,
@@ -552,11 +563,7 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
+      address0
     ]);
     queuesZerocost = await getContractInstance("QueuesZerocost",[
       address0,
@@ -564,11 +571,7 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
+      address0
     ]);
     queuesMethods = await getContractInstance("QueuesMethods",[
       address0,
@@ -576,59 +579,39 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
+      address0
     ]);
     queues = await getContractInstance("Queues",[
-      randomness.address,
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      address0,
       paymentsMethods.address,
       queuesRestricted.address,
-      queuesZerocost.address,
-      500000000,
-      true
+      races.address
     ]);
     await queuesRestricted.setGlobalParameters([
-      randomness.address,
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      address0,
       paymentsMethods.address,
       queuesRestricted.address,
-      queuesZerocost.address,
-      500000000,
-      true
+      races.address
     ]);
     await queuesZerocost.setGlobalParameters([
-      randomness.address,
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      address0,
       paymentsMethods.address,
       queuesRestricted.address,
-      queuesZerocost.address,
-      500000000,
-      true
+      races.address
     ]);
     await queuesMethods.setGlobalParameters([
-      randomness.address,
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      address0,
       paymentsMethods.address,
       queuesRestricted.address,
-      queuesZerocost.address,
-      500000000,
-      true
+      races.address
     ]);
   });
 
@@ -898,7 +881,20 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       randomness.address,
       arenas.address,
       hounds.address,
-      address0,
+      racesMethods.address,
+      generator.address,
+      payments.address,
+      racesRestricted.address,
+      500000000,
+      true
+    ]);
+
+    await racesMethods.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      racesMethods.address,
+      generator.address,
       payments.address,
       racesRestricted.address,
       500000000,
@@ -909,6 +905,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       randomness.address,
       arenas.address,
       hounds.address,
+      racesMethods.address,
       generator.address,
       payments.address,
       racesRestricted.address,
@@ -1169,10 +1166,8 @@ describe("Races", function () {
 
   it("Join queue and then delete it", async function () {
     let queue = await queues.queues(2);
-    console.log("The queue is: " + queue.totalParticipants + " and " + queue.entryFee);
     for ( let i = 1 ; i <= queue.totalParticipants - ( queue.totalParticipants - 2 ) ; ++i ) {
       let hound = await hounds.hound(i);
-      console.log(hound[7]);
       if ( !hound[7] ) {
         await queues.enqueue(2,i,{ value : queue.entryFee });
       }

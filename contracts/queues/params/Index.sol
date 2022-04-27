@@ -13,7 +13,7 @@ import '../../payments/methods/IIndex.sol';
 import '../../hounds/hound/Index.sol';
 import '../../hounds/zerocost/IIndex.sol';
 import '../../utils/Withdrawable.sol';
-import 'hardhat/console.sol';
+import '../../races/methods/IIndex.sol';
 
 
 contract Params is Ownable, Withdrawable {

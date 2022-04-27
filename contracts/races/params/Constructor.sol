@@ -6,6 +6,7 @@ library RacesConstructor {
         address randomness;
         address arenas;
         address hounds;
+        address methods;
         address generator;
         address payments;
         address restricted;

@@ -13,7 +13,6 @@ contract Payments is Params {
 	}
 
 	function rawSend(address token, uint256 amount, address to) public {
-		console.log("Delegate call to: ", control.payments);
         (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}
@@ -24,11 +23,6 @@ contract Payments is Params {
 	}
 
 	function setPayments(uint256 queueId, Payment.Struct[] memory thePayments) external isAllowed {
-        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
-        require(success);
-	}
-
-	function compoundTransfer(PaymentRequest.Struct memory paymentRequest) public payable isAllowed {
         (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}

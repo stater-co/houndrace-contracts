@@ -12,10 +12,5 @@ library Arena {
         uint32 distance;
         uint32 weather;
     }
-
-    struct Wrapped {
-        uint256 id;
-        Struct arena;
-    }
-
+    
 }
