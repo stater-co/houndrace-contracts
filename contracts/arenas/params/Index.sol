@@ -3,7 +3,7 @@ pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-import '../arena/Index.sol';
+import './Arena.sol';
 import './Constructor.sol';
 import '../../utils/Withdrawable.sol';
 

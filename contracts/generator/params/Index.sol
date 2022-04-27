@@ -8,7 +8,7 @@ import '../../hounds/minter/IIndex.sol';
 import '../../hounds/modifier/IIndex.sol';
 import '../../hounds/zerocost/IIndex.sol';
 import '../../randomness/zerocost/IIndex.sol';
-import '../../arenas/arena/Index.sol';
+import '../../arenas/params/Arena.sol';
 import '../../arenas/zerocost/IIndex.sol';
 import '../../hounds/hound/Index.sol';
 import '../../payments/methods/IIndex.sol';

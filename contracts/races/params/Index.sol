@@ -5,7 +5,7 @@ import './Race.sol';
 import './Constructor.sol';
 import '../../payments/payment/Index.sol';
 import '../../hounds/modifier/IIndex.sol';
-import '../../arenas/arena/Index.sol';
+import '../../arenas/params/Arena.sol';
 import '../../arenas/zerocost/IIndex.sol';
 import '../../utils/Converters.sol';
 import '../../payments/methods/IIndex.sol';
