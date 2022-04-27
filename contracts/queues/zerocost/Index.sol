@@ -3,7 +3,7 @@ pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
-contract QueuesZeroCost is Params {
+contract QueuesZerocost is Params {
 
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
