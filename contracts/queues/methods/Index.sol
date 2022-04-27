@@ -3,12 +3,12 @@ pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
-contract RacesMethods is Params {
+contract QueuesMethods is Params {
 
-    constructor(RacesConstructor.Struct memory input) Params(input) {}
+    constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function enqueue(uint256 theId, uint256 hound) external payable {
-    
+
         require(queues[theId].totalParticipants > 0);
 
         require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));
@@ -24,30 +24,8 @@ contract RacesMethods is Params {
         IHoundsModifier(control.hounds).updateHoundStamina(hound);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
-
-            if ( control.callable ) {
-                
-                (bool success, bytes memory output) = control.generator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
-                    abi.encodeWithSignature(
-                        "generate((uint256,uint256[],address,uint256,uint32))",
-                        queues[theId]
-                    )
-                );
-                require(success);
-                
-                races[id] = abi.decode(output,(Race.Struct));
-
-                emit NewFinishedRace(id,  races[id]);
-
-                ++id;
-
-            } else {
-
-                emit NewRace(theId, queues[theId]);
-
-            }
-
-            delete queues[theId].participants;
+            
+            // call
 
         }
 

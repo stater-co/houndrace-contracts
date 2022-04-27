@@ -11,6 +11,8 @@ contract HoundsModifier is Params {
         require(allowed[msg.sender]);
 
         --hounds[theId].stamina.staminaValue;
+
+        hounds[theId].running = true;
         
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
         hounds[theId].stamina.staminaLastUpdate = block.timestamp;

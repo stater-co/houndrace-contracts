@@ -7,37 +7,6 @@ contract RacesRestricted is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function createQueues(Queue.Struct[] memory theQueues) external {
-        Arena.Struct memory arena;
-        for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arena = IArenasZerocost(control.arenas).arena(theQueues[i].arena);
-            require(arena.fee < theQueues[i].entryFee / 2);
-            queues[id] = theQueues[i];
-            ++id;
-        }
-        emit QueuesCreation(id-theQueues.length,id-1,theQueues);
-    }
-
-    function deleteQueue(uint256 theId) external {
-        address houndOwner;
-        for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
-            if ( queues[theId].participants[i] > 0 ) {
-                houndOwner = IHoundsZerocost(control.hounds).ownerOf(queues[theId].participants[i]);
-                (bool success, ) = control.payments.delegatecall(
-                    abi.encodeWithSignature(
-                        "rawSend(address,uint256,address)",
-                        queues[theId].currency, 
-                        queues[theId].entryFee, 
-                        houndOwner
-                    )
-                );
-                require(success);
-            }
-        }
-        delete queues[theId];
-        emit DeleteQueue(theId);
-    }
-
     function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external {
         races[id] = race;
         IPaymentsMethods(control.payments).sendHardcodedPayments(payments);
