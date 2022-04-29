@@ -10,6 +10,7 @@ library RacesConstructor {
         address generator;
         address payments;
         address restricted;
+        address allowed;
         uint256 raceFee;
         bool callable;
     }

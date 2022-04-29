@@ -529,10 +529,12 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
     racesMethods = await getContractInstance("RacesMethods",[
+      address0,
       address0,
       address0,
       address0,
@@ -551,6 +553,7 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       payments.address,
       racesRestricted.address,
+      address0,
       500000000,
       true
     ]);
@@ -885,6 +888,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
+      queues.address,
       500000000,
       true
     ]);
@@ -897,6 +901,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
+      queues.address,
       500000000,
       true
     ]);
@@ -909,6 +914,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
+      queues.address,
       500000000,
       true
     ]);

@@ -24,6 +24,7 @@ contract Params is Ownable, Withdrawable {
     uint256 public id = 1;
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
+    mapping(address => bool) public allowed;
 
     constructor(RacesConstructor.Struct memory input) {
         control = input;
@@ -31,6 +32,7 @@ contract Params is Ownable, Withdrawable {
 
     function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        allowed[globalParameters.allowed] = true;
     }
 
 }

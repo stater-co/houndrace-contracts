@@ -31,14 +31,12 @@ const defaultHound = [
 const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10]];
 
 
-
 async function main() {
 
   try {
 
     const Converters = await hre.ethers.getContractFactory("Converters");
     const converters = await Converters.deploy();
-    await converters.deployed();
     deployments.increment();
     deployment('export CONVERTERS=' + converters.address);
 

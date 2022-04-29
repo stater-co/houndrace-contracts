@@ -7,12 +7,13 @@ contract Races is Params {
     
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function uploadRace(Race.Struct memory race) external onlyOwner { //isAllowed
+    function uploadRace(Race.Struct memory race) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function raceStart(Queue.Struct memory queue) external payable { //isAllowed
+    function raceStart(Queue.Struct memory queue) external payable {
+        require(allowed[msg.sender]);
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }

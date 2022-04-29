@@ -24,8 +24,8 @@ module.exports = {
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
-      timeout: 120000,
-      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY,process.env.ETH_ACCOUNT_PRIVATE_KEY2],
+      timeout: 240000,
+      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY],
       gas: 4800000,
       gasPrice: 8000000000
     }
