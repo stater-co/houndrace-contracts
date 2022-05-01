@@ -337,6 +337,7 @@ async function main() {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
@@ -346,6 +347,7 @@ async function main() {
 
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
+      address0,
       address0,
       address0,
       address0,
@@ -369,38 +371,13 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
+      address0,
       500000000,
       true
     ]);
     await races.deployed();
     deployments.increment();
     deployment('export RACE=' + races.address);
-
-    await racesRestricted.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      address0,
-      payments.address,
-      racesRestricted.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
-
-    await racesMethods.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      address0,
-      payments.address,
-      racesRestricted.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
 
     await houndsZerocost.setGlobalParameters([
       "HoundRace",
@@ -589,21 +566,6 @@ async function main() {
     ]);
     configurations.increment();
 
-    await races.setGlobalParameters(
-      [
-        randomness.address,
-        arenas.address,
-        hounds.address,
-        racesMethods.address,
-        generator.address,
-        payments.address,
-        racesRestricted.address,
-        500000000,
-        true
-      ] 
-    );
-    configurations.increment();
-
     const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
     const queuesMethods = await QueuesMethods.deploy([
       arenas.address,
@@ -683,6 +645,48 @@ async function main() {
       payments.address,
       queuesRestricted.address,
       races.address
+    ]);
+    configurations.increment();
+
+    await racesRestricted.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      racesMethods.address,
+      generator.address,
+      payments.address,
+      racesRestricted.address,
+      queues.address,
+      500000000,
+      true
+    ]);
+    configurations.increment();
+
+    await racesMethods.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      racesMethods.address,
+      generator.address,
+      payments.address,
+      racesRestricted.address,
+      queues.address,
+      500000000,
+      true
+    ]);
+    configurations.increment();
+
+    await races.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      racesMethods.address,
+      generator.address,
+      payments.address,
+      racesRestricted.address,
+      queues.address,
+      500000000,
+      true
     ]);
     configurations.increment();
 
