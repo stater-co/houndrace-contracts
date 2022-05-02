@@ -23,6 +23,7 @@ contract Hounds is Params {
     }
 
     function updateHoundStamina(uint256 theId) public {
+        console.log("Delegate call to: ", control.boilerplate.houndModifier);
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

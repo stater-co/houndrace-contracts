@@ -15,7 +15,7 @@ contract GeneratorZerocost is Params {
 
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {
 
-            hound = IHoundsZerocost(control.hounds).hound(participants[i]);
+            hound = IHounds(control.hounds).hound(participants[i]);
 
             stats[i] = uint256((hound.identity.geneticSequence[30] + hound.identity.geneticSequence[31] + hound.identity.geneticSequence[32] + hound.identity.geneticSequence[33]) * 99);
             uint256 tmp = stats[i];

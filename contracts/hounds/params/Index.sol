@@ -9,8 +9,8 @@ import '../../payments/methods/IIndex.sol';
 import '../modifier/IIndex.sol';
 import '../../incubator/methods/IIndex.sol';
 import '../../shop/methods/IIndex.sol';
-import '../zerocost/IIndex.sol';
 import '../../utils/Withdrawable.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -35,6 +35,13 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i )
             allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
         control = globalParameters;
+    }
+
+    function houndOwner(uint256 tokenId) external view returns(address) {
+        console.log("Returning owner here... ");
+        address owner = ownerOf(tokenId);
+        console.log("Owner is: ", owner);
+        return owner;
     }
 
 }

@@ -10,6 +10,9 @@ contract RacesMethods is Params {
     function raceStart(Queue.Struct memory queue) external payable {
         if ( control.callable ) {
             
+            console.log("The sender is: ", msg.sender);
+
+            /*
             (bool success, bytes memory output) = control.generator.call{ value: queue.entryFee * queue.totalParticipants }(
                 abi.encodeWithSignature(
                     "generate((uint256,uint256[],address,uint256,uint32))",
@@ -19,6 +22,7 @@ contract RacesMethods is Params {
             require(success);
             
             races[id] = abi.decode(output,(Race.Struct));
+            */
 
             emit NewFinishedRace(id,  races[id]);
 

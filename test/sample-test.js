@@ -31,7 +31,6 @@ let geneticsZerocost;
 let incubator;
 let incubatorMethods;
 let hounds;
-let houndZerocost;
 let houndsModifier;
 let houndsRestricted;
 let houndsMinter;
@@ -254,6 +253,23 @@ async function mintERC721(receiver, id, data) {
     ++currentDiscountId;
 }
 
+async function joinQueueAutomatically(queueId, totalJoins) {
+  let queue = await queues.queues(queueId);
+  let participating = 0;
+  let houndsId = Number(await hounds.id()) - 1;
+  let joins = totalJoins ? totalJoins : queue.totalParticipants;
+  while ( participating < joins && houndsId >= 1 ) {
+    let houndToEnqueue = await hounds.hound(houndsId);
+    if ( !houndToEnqueue.running ) {
+      console.log("Enqueue hound: " + houndsId);
+      await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
+      ++participating;
+    } else {
+      --houndsId;
+    }
+  }
+}
+
 
 describe("Setting up the used libraries", function () {
   
@@ -409,27 +425,6 @@ describe("Setting up the Houndrace contracts", function () {
 
   it("Deploy the hounds contract", async function () {
     const [owner,otherOwner] = await ethers.getSigners();
-    houndZerocost = await getContractInstance("HoundsZerocost",[
-      "HoundRace",
-      "HR",
-      [owner.address],
-      [
-        address0,
-        otherOwner.address,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
 
     houndsRestricted = await getContractInstance("HoundsRestricted",[
       "HoundRace",
@@ -507,7 +502,6 @@ describe("Setting up the Houndrace contracts", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
-        houndZerocost.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -710,35 +704,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
   it("Setting up hounds contracts dependencies", async function () {
     
     const [,otherOwner] = await ethers.getSigners();
-
-    await houndZerocost.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [
-        races.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address,
-        queuesZerocost.address
-      ],
-      [
-        incubator.address,
-        otherOwner.address,
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        houndZerocost.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
   
     await houndsMinter.setGlobalParameters([
       "HoundRace",
@@ -760,7 +725,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
-        houndZerocost.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -792,7 +756,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
-        houndZerocost.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -824,7 +787,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
-        houndZerocost.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -856,7 +818,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
-        houndZerocost.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -1014,6 +975,12 @@ describe("Hounds", function () {
     }
   });
 
+  it("Mint 40x hounds", async function () {
+    for ( let i = 0 ; i < 40 ; ++i ) {
+      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
+    }
+  });
+
   it("Receiving hound data", async function () {
     await checkHoundStructure();
   });
@@ -1130,15 +1097,12 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await queues.enqueue(1,i,{ value : queue[4] });
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Hounds stamina check x2", async function () {
     let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
+    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
       let hound = await hounds.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
@@ -1147,15 +1111,12 @@ describe("Races", function () {
   });
 
   it("Join queue x20", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await queues.enqueue(1,i,{ value : queue[4] });
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Hounds stamina check x3", async function () {
     let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
+    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
       let hound = await hounds.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
@@ -1164,27 +1125,19 @@ describe("Races", function () {
   });
 
   it("Join queue x30", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
-      await queues.enqueue(1,i,{ value : queue[4] });
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Join queue and then delete it", async function () {
-    let queue = await queues.queues(2);
-    for ( let i = 1 ; i <= queue.totalParticipants - ( queue.totalParticipants - 2 ) ; ++i ) {
-      let hound = await hounds.hound(i);
-      if ( !hound[7] ) {
-        await queues.enqueue(2,i,{ value : queue.entryFee });
-      }
-    }
-
+    await joinQueueAutomatically(2,3);
+    const houndOwner = await hounds.houndOwner(1);
+    console.log("Hound owner from delete request: " + houndOwner);
     await queues.deleteQueue(2);
   });
 
   it("Hounds stamina check x4", async function () {
     let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue[8] ; ++i ) {
+    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
       let hound = await hounds.hound(i);
       expect(hound !== undefined, "Hound getter problem");
       expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
