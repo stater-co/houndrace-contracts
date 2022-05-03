@@ -11,17 +11,25 @@ contract RacesMethods is Params {
         if ( control.callable ) {
             
             console.log("The sender is: ", msg.sender);
-            console.log("Race start here, 3");
-
-            (bool success, bytes memory output) = control.generator.call{ value: queue.entryFee * queue.totalParticipants }(
-                abi.encodeWithSignature(
-                    "generate((string,address,uint256[],uint256,uint256,uint256,uint256,uint256,uint32))",
-                    queue
-                )
-            );
-            require(success);
+            console.log("Race start with reward id: ", queue.rewardsId);
             
-            races[id] = abi.decode(output,(Race.Struct));
+            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);
+
+            uint256 ethToSend = 0;
+
+            console.log("Total payments found: ", payments.length);
+
+            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications
+            for ( uint256 i = 0 ; i < payments.length ; ++i ) {
+                if ( payments[i].currency == address(0) ) {
+                    if ( payments[i].paymentType == 3 ) {
+                        ethToSend += msg.value / 100 * payments[i].percentageWon;
+                    }
+                    ethToSend += payments[i].qty;
+                }
+            }
+
+            races[id] = IGenerator(control.generator).generate{ value: msg.value }(queue);
             console.log("Race start here, 4");
 
             emit NewFinishedRace(id,  races[id]);

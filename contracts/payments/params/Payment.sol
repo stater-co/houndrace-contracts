@@ -13,7 +13,10 @@ library Payment {
         // 0 - erc721
         // 1 - erc1155
         // 2 - erc20
+        // 3 - erc20 race winner
+        // 4 - erc20 fee
         uint32 paymentType;
+        uint32 percentageWon;
     }
 
 }

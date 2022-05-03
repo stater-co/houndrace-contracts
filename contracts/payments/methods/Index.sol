@@ -38,11 +38,12 @@ contract PaymentsMethods is Params {
 	}
 
 	function sendPayments(PaymentRequest.Struct memory paymentRequest) public payable {
+		console.log("sendPayments ...");
 		uint256 l = payments[paymentRequest.rewardsBatch].length;
 		uint256 totalPaid;
 		for ( uint256 i = 0 ; i < l ; ++i ) {
 			totalPaid += payments[paymentRequest.rewardsBatch][i].qty;
-			require(msg.value >= totalPaid);
+			require(address(this).balance >= totalPaid);
 			transferTokens(payments[paymentRequest.rewardsBatch][i]);
 		}
 	}

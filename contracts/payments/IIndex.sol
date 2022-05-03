@@ -18,4 +18,6 @@ interface IPayments {
 
 	function rawSend(address token, uint256 amount, address to) external;
 
+	function getPayments(uint256 batchId) external view returns(Payment.Struct[] memory);
+
 }

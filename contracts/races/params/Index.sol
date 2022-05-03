@@ -9,6 +9,7 @@ import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';
 import '../../payments/IIndex.sol';
 import '../../hounds/IIndex.sol';
+import '../../generator/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 import 'hardhat/console.sol';

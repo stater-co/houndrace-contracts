@@ -6,6 +6,7 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Payment.sol';
 import './PaymentRequest.sol';
 import './Constructor.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
@@ -30,5 +31,9 @@ contract Params is Ownable, ReentrancyGuard {
 			allowed[globalParameters.allowed[i]] = !allowed[globalParameters.allowed[i]];
 		control = globalParameters;
     }
+
+	function getPayments(uint256 batchId) public view returns(Payment.Struct[] memory) {
+		return payments[batchId];
+	}
 
 }

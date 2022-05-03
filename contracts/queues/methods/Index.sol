@@ -26,8 +26,9 @@ contract QueuesMethods is Params {
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-            console.log("Race start here");
-            IRacesMethods(control.races).raceStart(queues[theId]);
+            console.log("Race start here, from queue: ", theId);
+
+            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);
 
         }
 

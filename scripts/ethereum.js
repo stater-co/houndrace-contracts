@@ -45,21 +45,12 @@ async function main() {
     await sortings.deployed();
     deployments.increment();
     deployment('export SORTINGS=' + sortings.address);
-    
-    const RandomnessZerocost = await hre.ethers.getContractFactory("RandomnessZerocost");
-    const randomnessZerocost = await RandomnessZerocost.deploy([address0]);
-    await randomnessZerocost.deployed();
-    deployments.increment();
-    deployment('export RANDOMNESS_ZEROCOST=' + randomnessZerocost.address);
 
     const Randomness = await hre.ethers.getContractFactory("Randomness");
-    const randomness = await Randomness.deploy([randomnessZerocost.address]);
+    const randomness = await Randomness.deploy();
     await randomness.deployed();
     deployments.increment();
     deployment('export RANDOMNESS=' + randomness.address);
-
-    await randomnessZerocost.setGlobalParameters([randomness.address]);
-    configurations.increment();
 
     const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
     const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
@@ -67,8 +58,9 @@ async function main() {
     deployments.increment();
     deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
 
+    const [owner] = await ethers.getSigners();
     const Payments = await hre.ethers.getContractFactory("Payments");
-    const payments = await Payments.deploy([paymentsMethods.address,[]]);
+    const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
     await payments.deployed();
     deployments.increment();
     deployment('export PAYMENTS=' + payments.address);
@@ -81,12 +73,6 @@ async function main() {
     await houndracePotions.deployed();
     deployments.increment();
     deployment('export HOUNDRACE_POTIONS=' + houndracePotions.address);
-
-    const ShopZerocost = await hre.ethers.getContractFactory("ShopZerocost");
-    const shopZerocost = await ShopZerocost.deploy([address0,address0,address0]);
-    await shopZerocost.deployed();
-    deployments.increment();
-    deployment('export SHOP_ZEROCOST=' + shopZerocost.address);
 
     const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
     const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
@@ -101,23 +87,15 @@ async function main() {
     deployment('export SHOP_METHODS=' + shopMethods.address);
 
     const Shop = await hre.ethers.getContractFactory("Shop");
-    const shop = await Shop.deploy([shopMethods.address,shopZerocost.address,shopRestricted.address]);
+    const shop = await Shop.deploy([shopMethods.address,shopRestricted.address]);
     await shop.deployed();
     deployments.increment();
     deployment('export SHOP=' + shop.address);
 
-    await shopZerocost.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
+    await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address]);
     configurations.increment();
-    await shopRestricted.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
+    await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address]);
     configurations.increment();
-    await shopMethods.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-    configurations.increment();
-
-    const ArenasZerocost = await hre.ethers.getContractFactory("ArenasZerocost");
-    const arenasZerocost = await ArenasZerocost.deploy(["HoundRace Arenas", "HRA", address0, address0]);
-    await arenasZerocost.deployed();
-    deployments.increment();
-    deployment('export ARENA_ZEROCOST=' + arenasZerocost.address);
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
     const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0]);
@@ -126,36 +104,17 @@ async function main() {
     deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
 
     const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
+    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA",arenasRestricted.address]);
     await arenas.deployed();
     deployments.increment();
     deployment('export ARENAS=' + arenas.address);
 
-    await arenasZerocost.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
+    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
     configurations.increment();
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address,arenasRestricted.address]);
-    configurations.increment();
-
-    const GeneticsZerocost = await hre.ethers.getContractFactory("GeneticsZerocost");
-    const geneticsZerocost = await GeneticsZerocost.deploy([
-      randomness.address,
-      address0,
-      arenas.address,
-      maleBoilerplateGene,
-      femaleBoilerplateGene,
-      60,
-      40,
-      [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    ]);
-    await geneticsZerocost.deployed();
-    deployments.increment();
-    deployment('export GENETICS_ZEROCOST=' + geneticsZerocost.address);
 
     const Genetics = await hre.ethers.getContractFactory("Genetics");
     const genetics = await Genetics.deploy([
       randomness.address,
-      geneticsZerocost.address,
       arenas.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
@@ -287,6 +246,7 @@ async function main() {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        address0,
         houndsModifier.address,
         shop.address
       ],[
@@ -352,26 +312,9 @@ async function main() {
     deployments.increment();
     deployment('export RACE=' + races.address);
 
-    const GeneratorZerocost = await hre.ethers.getContractFactory("GeneratorZerocost", {
-      libraries: {
-        Sortings: sortings.address
-      }
-    });
-    const generatorZerocost = await GeneratorZerocost.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
-    await generatorZerocost.deployed();
-    deployments.increment();
-    deployment('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
-
     const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods", {
       libraries: {
+        Sortings: sortings.address,
         Converters: converters.address
       }
     });
@@ -388,30 +331,22 @@ async function main() {
     deployments.increment();
     deployment('export GENERATOR_METHODS=' + generatorMethods.address);
 
-    const Generator = await hre.ethers.getContractFactory("Generator");
+    const Generator = await hre.ethers.getContractFactory("Generator", {
+      libraries: {
+        Sortings: sortings.address
+      }
+    });
     const generator = await Generator.deploy([
       randomness.address,
       arenas.address,
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
+      payments.address
     ]);
     await generator.deployed();
     deployments.increment();
     deployment('export GENERATOR=' + generator.address);
-
-    await generatorZerocost.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-    configurations.increment();
 
     await generatorMethods.setGlobalParameters([
       randomness.address,
@@ -419,8 +354,7 @@ async function main() {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
+      payments.address
     ]);
     configurations.increment();
 
@@ -450,19 +384,6 @@ async function main() {
     deployments.increment();
     deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
 
-    const QueuesZerocost = await hre.ethers.getContractFactory("QueuesZerocost");
-    const queuesZerocost = await QueuesZerocost.deploy([
-      arenas.address,
-      hounds.address,
-      address0,
-      payments.address,
-      address0,
-      races.address
-    ]);
-    await queuesZerocost.deployed();
-    deployments.increment();
-    deployment('export QUEUES_ZEROCOST=' + queuesZerocost.address);
-
     const Queues = await hre.ethers.getContractFactory("Queues");
     const queues = await Queues.deploy([
       arenas.address,
@@ -487,16 +408,6 @@ async function main() {
     configurations.increment();
 
     await queuesRestricted.setGlobalParameters([
-      arenas.address,
-      hounds.address,
-      queuesMethods.address,
-      payments.address,
-      queuesRestricted.address,
-      races.address
-    ]);
-    configurations.increment();
-
-    await queuesZerocost.setGlobalParameters([
       arenas.address,
       hounds.address,
       queuesMethods.address,
@@ -561,7 +472,6 @@ async function main() {
         queues.address,
         queuesMethods.address,
         queuesRestricted.address,
-        queuesZerocost.address,
         races.address,
         racesMethods.address,
         racesRestricted.address
@@ -571,6 +481,7 @@ async function main() {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -596,7 +507,6 @@ async function main() {
         queues.address,
         queuesMethods.address,
         queuesRestricted.address,
-        queuesZerocost.address,
         races.address,
         racesMethods.address,
         racesRestricted.address
@@ -606,6 +516,7 @@ async function main() {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -631,7 +542,6 @@ async function main() {
         queues.address,
         queuesMethods.address,
         queuesRestricted.address,
-        queuesZerocost.address,
         races.address,
         racesMethods.address,
         racesRestricted.address
@@ -641,6 +551,7 @@ async function main() {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -666,7 +577,6 @@ async function main() {
         queues.address,
         queuesMethods.address,
         queuesRestricted.address,
-        queuesZerocost.address,
         races.address,
         racesMethods.address,
         racesRestricted.address
@@ -676,6 +586,7 @@ async function main() {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -739,6 +650,34 @@ async function main() {
     await hounds.initializeHound(6,defaultHound);
     recommendedCalls.increment();
 
+    await payments.addPayments(1,[
+      [
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        50 // % of the total race prize
+      ],[
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        30 // % of the total race prize
+      ],[
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        20 // % of the total race prize
+      ]
+    ]);
+
     console.log("Enqueue now...");
     for ( let i = 0 ; i < 10 ; ++i ) {
       await hounds.initializeHound(0,defaultHound);
@@ -759,8 +698,8 @@ async function main() {
 
     await queues.deleteQueue(999999);
     recommendedCalls.increment();
-    
-    /*
+
+
     try {
       await hre.run("verify:verify", {
         address: converters.address
@@ -781,26 +720,7 @@ async function main() {
 
     try {
       await hre.run("verify:verify", {
-        address: randomnessZerocost.address,
-        constructorArguments: [
-          [
-            address0
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
-        address: randomness.address,
-        constructorArguments: [
-          [
-            randomnessZerocost.address
-          ]
-        ]
+        address: randomness.address
       });
     } catch (err) {
       errors(err);
@@ -847,20 +767,6 @@ async function main() {
 
     try {
       await hre.run("verify:verify", {
-        address: shopZerocost.address,
-        constructorArguments: [
-          [
-            address0,address0,address0
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
         address: shopRestricted.address,
         constructorArguments: [
           [
@@ -892,21 +798,7 @@ async function main() {
         address: shop.address,
         constructorArguments: [
           [
-            shopMethods.address,shopZerocost.address,shopRestricted.address
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
-        address: arenasZerocost.address,
-        constructorArguments: [
-          [
-            "HoundRace Arenas", "HRA", address0, address0
+            shopMethods.address,shopRestricted.address
           ]
         ]
       });
@@ -934,29 +826,7 @@ async function main() {
         address: arenas.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", arenasZerocost.address, arenasRestricted.address
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
-        address: geneticsZerocost.address,
-        constructorArguments: [
-          [
-            randomness.address,
-            address0,
-            arenas.address,
-            maleBoilerplateGene,
-            femaleBoilerplateGene,
-            60,
-            40,
-            [2,6,10,14,18,22,26,30,34,38,42,46,50],
-            [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+            "HoundRace Arenas", "HRA", arenasRestricted.address
           ]
         ]
       });
@@ -971,7 +841,6 @@ async function main() {
         constructorArguments: [
           [
             randomness.address,
-            geneticsZerocost.address,
             arenas.address,
             maleBoilerplateGene,
             femaleBoilerplateGene,
@@ -1218,26 +1087,6 @@ async function main() {
 
     try {
       await hre.run("verify:verify", {
-        address: generatorZerocost.address,
-        constructorArguments: [
-          [
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
         address: generatorMethods.address, 
         constructorArguments: [
           [
@@ -1266,27 +1115,7 @@ async function main() {
             hounds.address,
             races.address,
             generatorMethods.address,
-            payments.address,
-            generatorZerocost.address
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.increment();
-
-    try {
-      await hre.run("verify:verify", {
-        address: queuesZerocost.address,
-        constructorArguments: [
-          [
-            arenas.address,
-            hounds.address,
-            address0,
-            payments.address,
-            address0,
-            races.address
+            payments.address
           ]
         ]
       });
@@ -1351,7 +1180,6 @@ async function main() {
       errors(err);
     }
     verifications.increment();
-    */
     
     // stop all bars
     multibar.stop();
