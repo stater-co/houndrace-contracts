@@ -29,14 +29,14 @@ contract HoundsMinter is Params {
         require(payable(control.boilerplate.staterApi).send(control.fees.breedFee));
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
-        Hound.Struct memory offspring = IIncubatorMethods(control.boilerplate.incubator).breedHounds(
+        Hound.Struct memory offspring = IIncubator(control.boilerplate.incubator).breedHounds(
             hound1, 
             hounds[hound1], 
             hound2, 
             hounds[hound2]
         );
-        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound1);
-        IHoundsModifier(control.boilerplate.houndModifier).updateHoundBreeding(hound2);
+        IHounds(control.boilerplate.hounds).updateHoundBreeding(hound1);
+        IHounds(control.boilerplate.hounds).updateHoundBreeding(hound2);
         emit BreedHound(id,msg.sender,offspring);
         ++id;
     } 

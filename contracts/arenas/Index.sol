@@ -27,8 +27,4 @@ contract Arenas is Params {
         return arenas[_tokenId].token_uri;
     }
     
-    function arena(uint256 theId) external view returns(Arena.Struct memory) {
-        return arenas[theId];
-    }
-    
 }

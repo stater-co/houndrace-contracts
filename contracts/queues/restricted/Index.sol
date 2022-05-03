@@ -10,7 +10,7 @@ contract QueuesRestricted is Params {
     function createQueues(Queue.Struct[] memory theQueues) external {
         Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arena = IArenasZerocost(control.arenas).arena(theQueues[i].arena);
+            arena = IArenas(control.arenas).arena(theQueues[i].arena);
             require(arena.fee < theQueues[i].entryFee / 2);
             queues[id] = theQueues[i];
             ++id;
@@ -19,6 +19,7 @@ contract QueuesRestricted is Params {
     }
 
     function deleteQueue(uint256 theId) external {
+        console.log("Delete queue here too !");
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
                 console.log("Hounds control: ", control.hounds, queues[theId].participants[i]);

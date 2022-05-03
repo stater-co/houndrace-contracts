@@ -13,7 +13,9 @@ contract Races is Params {
     }
 
     function raceStart(Queue.Struct memory queue) external payable {
+        console.log("Race start here, 1");
         require(allowed[msg.sender]);
+        console.log("Race start here, 2");
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }

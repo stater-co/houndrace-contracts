@@ -17,17 +17,13 @@ const defaultHound = [
 let currentDiscountId = 1;
 let payments;
 let paymentsMethods;
-let shopZerocost;
 let shopRestricted;
 let shopMethods;
 let shop;
 let randomness;
-let randomnessZerocost;
 let arenas;
-let arenasZerocost;
 let arenasRestricted;
 let genetics;
-let geneticsZerocost;
 let incubator;
 let incubatorMethods;
 let hounds;
@@ -35,7 +31,6 @@ let houndsModifier;
 let houndsRestricted;
 let houndsMinter;
 let generator;
-let generatorZerocost;
 let generatorMethods;
 let races;
 let racesRestricted;
@@ -43,15 +38,20 @@ let racesMethods;
 let queues;
 let queuesMethods;
 let queuesRestricted;
-let queuesZerocost;
 
 function deploymentMessage(name,address) {
   console.log(name + " deployed at: " + address);
 }
 
 // @DIIMIIM: Get smart contract instance
-async function getContractInstance(name,constructor) {
-  const Contract = await hre.ethers.getContractFactory(name);
+async function getContractInstance(name,constructor,props) {
+  let Contract;
+  if ( props ) {
+    Contract = await hre.ethers.getContractFactory(name,props);
+  } else {
+    Contract = await hre.ethers.getContractFactory(name);
+  }
+   
   let contract = constructor ? await Contract.deploy(constructor) : await Contract.deploy();
   await contract.deployed();
   deploymentMessage(name,contract.address);
@@ -321,10 +321,9 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the Payments methods contract", async function () {
-    shopZerocost = await getContractInstance("ShopZerocost",[address0,address0,address0]);
     shopRestricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
     shopMethods = await getContractInstance("ShopMethods",[address0,address0,address0]);
-    shop = await getContractInstance("Shop",[shopMethods.address,shopZerocost.address,shopRestricted.address]);
+    shop = await getContractInstance("Shop",[shopMethods.address,shopRestricted.address]);
   });
 
   it("Add discounts", async function () {
@@ -373,31 +372,17 @@ describe("Setting up the Payments System", function () {
 describe("Setting up the Houndrace contracts", function () {
   
   it("Deploy the randomness contracts", async function () {
-    randomnessZerocost = await getContractInstance("RandomnessZerocost",[address0]);
-    randomness = await getContractInstance("Randomness",[randomnessZerocost.address]);
+    randomness = await getContractInstance("Randomness",[]);
   });
 
   it("Deploy the arenas contracts", async function () {
-    arenasZerocost = await getContractInstance("ArenasZerocost", ["HoundRace Arenas", "HRA", address0, address0]);
     arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0]);
-    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasZerocost.address, arenasRestricted.address]);
+    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address]);
   });
 
   it("Genetics methods", async function () {
-    geneticsZerocost = await getContractInstance("GeneticsZerocost",[
-      randomness.address,
-      address0,
-      arenas.address,
-      maleBoilerplateGene,
-      femaleBoilerplateGene,
-      60,
-      40,
-      [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    ]);
     genetics = await getContractInstance("Genetics",[
       randomness.address,
-      geneticsZerocost.address,
       arenas.address,
       maleBoilerplateGene,
       femaleBoilerplateGene,
@@ -502,6 +487,7 @@ describe("Setting up the Houndrace contracts", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        address0,
         houndsModifier.address,
         shop.address
       ],[
@@ -562,14 +548,6 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0
     ]);
-    queuesZerocost = await getContractInstance("QueuesZerocost",[
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
     queuesMethods = await getContractInstance("QueuesMethods",[
       address0,
       address0,
@@ -594,14 +572,6 @@ describe("Setting up the Houndrace contracts", function () {
       queuesRestricted.address,
       races.address
     ]);
-    await queuesZerocost.setGlobalParameters([
-      arenas.address,
-      hounds.address,
-      queuesMethods.address,
-      paymentsMethods.address,
-      queuesRestricted.address,
-      races.address
-    ]);
     await queuesMethods.setGlobalParameters([
       arenas.address,
       hounds.address,
@@ -613,41 +583,22 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the generator contracts", async function () {
-    let Contract = await hre.ethers.getContractFactory("GeneratorZerocost", {
+
+    generatorMethods = await getContractInstance("GeneratorMethods",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0
+    ],{
       libraries: {
+        Converters: convertersLibrary.address,
         Sortings: sortingsLibrary.address
       }
     });
-    let contract = await Contract.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
-    await contract.deployed();
-    generatorZerocost = contract;
-    deploymentMessage("GeneratorZerocost",generatorZerocost.address);
 
-    Contract = await hre.ethers.getContractFactory("GeneratorMethods", {
-      libraries: {
-        Converters: convertersLibrary.address
-      }
-    });
-    contract = await Contract.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
-    await contract.deployed();
-    generatorMethods = contract;
-    deploymentMessage("GeneratorMethods",generatorMethods.address);
 
     generator = await getContractInstance("Generator",[
       randomness.address,
@@ -655,9 +606,12 @@ describe("Setting up the Houndrace contracts", function () {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
+      payments.address
+    ],{
+      libraries: {
+        Sortings: sortingsLibrary.address
+      }
+    });
 
   });
 
@@ -668,25 +622,15 @@ describe("Setting up the Houndrace contracts global parameters", function () {
 
   it("Setting up shop contracts dependencies", async function () {
 
-    await shopZerocost.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-
-    await shopRestricted.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
+    await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address]);
   
-    await shopMethods.setGlobalParameters([shopMethods.address,shopZerocost.address,shopRestricted.address]);
-
-  });
-
-  it("Setting up randomness contracts dependencies", async function () {
-    
-    await randomnessZerocost.setGlobalParameters([randomness.address]);
+    await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address]);
 
   });
 
   it("Setting up arenas contracts dependencies", async function () {
-    
-    await arenasZerocost.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address, arenasRestricted.address]);
 
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasZerocost.address, arenasRestricted.address]);
+    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
 
   });
 
@@ -716,8 +660,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address,
-        queuesZerocost.address
+        queuesRestricted.address
       ],
       [
         incubator.address,
@@ -725,6 +668,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -747,8 +691,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address,
-        queuesZerocost.address
+        queuesRestricted.address
       ],
       [
         incubator.address,
@@ -756,6 +699,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -778,8 +722,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address,
-        queuesZerocost.address
+        queuesRestricted.address
       ],
       [
         incubator.address,
@@ -787,6 +730,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -809,8 +753,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address,
-        queuesZerocost.address
+        queuesRestricted.address
       ],
       [
         incubator.address,
@@ -818,6 +761,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         payments.address,
         houndsRestricted.address,
         houndsMinter.address,
+        hounds.address,
         houndsModifier.address,
         shop.address
       ],[
@@ -883,16 +827,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
   });
 
   it("Setting up generator contracts dependencies", async function () {
-
-    await generatorZerocost.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
   
     await generatorMethods.setGlobalParameters([
       randomness.address,
@@ -900,8 +834,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
+      payments.address
     ]);
 
   });

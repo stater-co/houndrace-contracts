@@ -15,11 +15,11 @@ contract GeneratorMethods is Params {
 
         require(queue.entryFee <= msg.value);
 
-        uint256 theRandomness = IRandomnessZerocost(control.randomness).getRandomNumber(abi.encode(block.timestamp));
+        uint256 theRandomness = IRandomness(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
-        (, uint256[] memory participants) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
+        (, uint256[] memory participants) = simulateClassicRace(queue.participants,queue.arena,theRandomness);
 
-        IPaymentsMethods(control.payments).sendPayments(
+        IPayments(control.payments).sendPayments(
             PaymentRequest.Struct(
                 queue.rewardsId,
                 Converters.erc721IdsToOwners(control.hounds,participants)

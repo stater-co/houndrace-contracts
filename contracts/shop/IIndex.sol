@@ -1,12 +1,16 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import '../discount/Index.sol';
+import './params/Discount.sol';
 
 
-interface IShopRestricted {
+interface IShop {
+
+    function calculateDiscount(address requester) external returns(uint256);
 
     function createDiscount(Discount.Struct memory discount) external;
 
     function editDiscount(Discount.Struct memory discount, uint256 theId) external;
+
+    function checkDiscount(address requester) external view returns(uint256);
 
 }

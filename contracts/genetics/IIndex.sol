@@ -2,7 +2,7 @@
 pragma solidity 0.8.13;
 
 
-interface IGeneticsZerocost {
+interface IGenetics {
 
     function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) external view returns(uint32[54] memory geneticSequence);
 

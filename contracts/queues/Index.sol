@@ -13,6 +13,7 @@ contract Queues is Params {
     }
 
     function deleteQueue(uint256 theId) external onlyOwner {
+        console.log("Delete queue here !");
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
@@ -20,10 +21,6 @@ contract Queues is Params {
     function enqueue(uint256 theId, uint256 hound) external payable {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
-    }
-
-    function queue(uint256 theId) external view returns(Queue.Struct memory) {
-        return queues[theId];
     }
 
 }

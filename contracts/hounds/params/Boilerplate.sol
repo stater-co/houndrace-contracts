@@ -8,7 +8,8 @@ library ConstructorBoilerplate {
         address payments;
         address restricted;
         address minter;
+        address hounds;
         address houndModifier;
-        address shopMethods;
+        address shop;
     }
 }

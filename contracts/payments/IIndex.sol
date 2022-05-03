@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import '../payment/Request.sol';
-import '../payment/Index.sol';
+import './params/PaymentRequest.sol';
+import './params/Payment.sol';
 
 
-interface IPaymentsMethods {
+interface IPayments {
 
 	function transferTokens(Payment.Struct memory payment) external payable;
 

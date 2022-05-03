@@ -3,15 +3,14 @@ pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Queue.sol';
 import './Constructor.sol';
-import '../../payments/payment/Index.sol';
+import '../../payments/params/Payment.sol';
 import '../../arenas/params/Arena.sol';
-import '../../arenas/zerocost/IIndex.sol';
-import '../zerocost/IIndex.sol';
+import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';
-import '../../payments/methods/IIndex.sol';
+import '../../payments/IIndex.sol';
 import '../../hounds/IIndex.sol';
 import '../../utils/Withdrawable.sol';
-import '../../races/methods/IIndex.sol';
+import '../../races/IIndex.sol';
 import 'hardhat/console.sol';
 
 
@@ -31,6 +30,10 @@ contract Params is Ownable, Withdrawable {
 
     function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+    }
+    
+    function queue(uint256 theId) external view returns(Queue.Struct memory) {
+        return queues[theId];
     }
 
 }

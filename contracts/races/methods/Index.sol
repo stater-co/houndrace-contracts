@@ -11,18 +11,18 @@ contract RacesMethods is Params {
         if ( control.callable ) {
             
             console.log("The sender is: ", msg.sender);
+            console.log("Race start here, 3");
 
-            /*
             (bool success, bytes memory output) = control.generator.call{ value: queue.entryFee * queue.totalParticipants }(
                 abi.encodeWithSignature(
-                    "generate((uint256,uint256[],address,uint256,uint32))",
+                    "generate((string,address,uint256[],uint256,uint256,uint256,uint256,uint256,uint32))",
                     queue
                 )
             );
             require(success);
             
             races[id] = abi.decode(output,(Race.Struct));
-            */
+            console.log("Race start here, 4");
 
             emit NewFinishedRace(id,  races[id]);
 
@@ -31,6 +31,8 @@ contract RacesMethods is Params {
             emit NewRace(id, races[id]);
 
         }
+
+        console.log("Race start here, 5");
 
         ++id;
 

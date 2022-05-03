@@ -13,7 +13,8 @@ contract Generator is Params {
         return output;
     }
 
-    function generate(Race.Struct memory queue) external payable returns(Race.Struct memory) {
+    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {
+        console.log("Generating race here ...");
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
         return abi.decode(output,(Race.Struct));

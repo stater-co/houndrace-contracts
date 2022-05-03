@@ -739,18 +739,28 @@ async function main() {
     await hounds.initializeHound(6,defaultHound);
     recommendedCalls.increment();
 
+    console.log("Enqueue now...");
     for ( let i = 0 ; i < 10 ; ++i ) {
       await hounds.initializeHound(0,defaultHound);
       recommendedCalls.increment();
 
+      console.log("Now we enqueue !!");
       await queues.enqueue(1,Number(await hounds.id())-1,{
         value: defaultQueues[0][4]
       });
       recommendedCalls.increment();
     }
 
+    await queues.createQueues(defaultQueues);
+    recommendedCalls.increment();
 
+    await queues.deleteQueue(Number(await hounds.id())-1);
+    recommendedCalls.increment();
 
+    await queues.deleteQueue(999999);
+    recommendedCalls.increment();
+    
+    /*
     try {
       await hre.run("verify:verify", {
         address: converters.address
@@ -1341,6 +1351,7 @@ async function main() {
       errors(err);
     }
     verifications.increment();
+    */
     
     // stop all bars
     multibar.stop();

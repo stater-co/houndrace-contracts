@@ -1,11 +1,11 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '../../hounds/hound/Index.sol';
+import '../../hounds/params/Hound.sol';
 import './Constructor.sol';
-import '../methods/IIndex.sol';
-import '../../genetics/zerocost/IIndex.sol';
-import '../../randomness/zerocost/IIndex.sol';
+import '../IIndex.sol';
+import '../../genetics/IIndex.sol';
+import '../../randomness/IIndex.sol';
 
 
 contract Params is Ownable {

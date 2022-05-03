@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import './hound/Index.sol';
+import './params/Hound.sol';
 
 
 interface IHounds {

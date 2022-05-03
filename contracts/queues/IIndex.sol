@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import '../../payments/payment/Index.sol';
-import '../params/Constructor.sol';
-import '../params/Queue.sol';
+import './params/Constructor.sol';
+import './params/Queue.sol';
 
 
-interface IQueuesRestricted {
+interface IQueuesMethods { 
+
+    function enqueue(uint256 theId, uint256 hound) external payable;
+
+    function queue(uint256 theId) external view returns(Queue.Struct memory);
 
     function setGlobalParameters(QueuesConstructor.Struct memory input) external;
 

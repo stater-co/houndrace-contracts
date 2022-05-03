@@ -4,11 +4,11 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import './Constructor.sol';
-import '../hound/Index.sol';
-import '../../payments/methods/IIndex.sol';
-import '../modifier/IIndex.sol';
-import '../../incubator/methods/IIndex.sol';
-import '../../shop/methods/IIndex.sol';
+import './Hound.sol';
+import '../IIndex.sol';
+import '../../payments/IIndex.sol';
+import '../../incubator/IIndex.sol';
+import '../../shop/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import 'hardhat/console.sol';
 

@@ -6,7 +6,6 @@ library GeneticsConstructor {
     
     struct Struct {
         address randomness;
-        address zerocost;
         address terrains;
         uint32[54] male;
         uint32[54] female;
