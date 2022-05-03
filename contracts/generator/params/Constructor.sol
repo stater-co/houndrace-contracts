@@ -11,6 +11,7 @@ library GeneratorConstructor {
         address allowed;
         address methods;
         address payments;
+        address zerocost;
     }
 
 }

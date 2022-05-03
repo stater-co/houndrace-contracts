@@ -19,10 +19,8 @@ contract QueuesRestricted is Params {
     }
 
     function deleteQueue(uint256 theId) external {
-        console.log("Delete queue here too !");
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
-                console.log("Hounds control: ", control.hounds, queues[theId].participants[i]);
                 (bool success, ) = control.payments.delegatecall(
                     abi.encodeWithSignature(
                         "rawSend(address,uint256,address)",

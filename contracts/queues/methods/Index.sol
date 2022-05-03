@@ -19,14 +19,10 @@ contract QueuesMethods is Params {
         require(!houndObj.running);
 
         queues[theId].participants.push(hound);
-        
-        console.log("Update hound stamina");
 
         IHounds(control.hounds).updateHoundStamina(hound);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
-
-            console.log("Race start here, from queue: ", theId);
 
             IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);
 

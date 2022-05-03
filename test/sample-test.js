@@ -1,6 +1,6 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-
+const isGithubAutomation = true;
 const address0 = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
@@ -32,6 +32,7 @@ let houndsRestricted;
 let houndsMinter;
 let generator;
 let generatorMethods;
+let generatorZerocost;
 let races;
 let racesRestricted;
 let racesMethods;
@@ -261,7 +262,6 @@ async function joinQueueAutomatically(queueId, totalJoins) {
   while ( participating < joins && houndsId >= 1 ) {
     let houndToEnqueue = await hounds.hound(houndsId);
     if ( !houndToEnqueue.running ) {
-      console.log("Enqueue hound: " + houndsId);
       await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
       ++participating;
     } else {
@@ -501,7 +501,9 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the race contracts", async function () {
+    const [,otherOwner] = await ethers.getSigners();
     racesRestricted = await getContractInstance("RacesRestricted",[
+      address0,
       address0,
       address0,
       address0,
@@ -522,6 +524,7 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
@@ -534,6 +537,7 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       racesRestricted.address,
       address0,
+      otherOwner.address,
       500000000,
       true
     ]);
@@ -592,13 +596,21 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0
+    ]);
+
+    generatorZerocost = await getContractInstance("GeneratorZerocost",[
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0
     ],{
       libraries: {
-        Converters: convertersLibrary.address,
         Sortings: sortingsLibrary.address
       }
     });
-
 
     generator = await getContractInstance("Generator",[
       randomness.address,
@@ -606,12 +618,9 @@ describe("Setting up the Houndrace contracts", function () {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address
-    ],{
-      libraries: {
-        Sortings: sortingsLibrary.address
-      }
-    });
+      payments.address,
+      generatorZerocost.address
+    ]);
 
   });
 
@@ -784,7 +793,8 @@ describe("Setting up the Houndrace contracts global parameters", function () {
   });
   
   it("Setting up races contracts dependencies", async function () {
-  
+    const [,otherOwner] = await ethers.getSigners();
+
     await racesRestricted.setGlobalParameters([
       randomness.address,
       arenas.address,
@@ -794,6 +804,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       payments.address,
       racesRestricted.address,
       queues.address,
+      otherOwner.address,
       500000000,
       true
     ]);
@@ -807,6 +818,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       payments.address,
       racesRestricted.address,
       queues.address,
+      otherOwner.address,
       500000000,
       true
     ]);
@@ -820,6 +832,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       payments.address,
       racesRestricted.address,
       queues.address,
+      otherOwner.address,
       500000000,
       true
     ]);
@@ -834,7 +847,18 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address
+      payments.address,
+      generatorZerocost.address
+    ]);
+
+    await generatorZerocost.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      races.address,
+      generatorMethods.address,
+      payments.address,
+      generatorZerocost.address
     ]);
 
   });
@@ -1030,7 +1054,9 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    await joinQueueAutomatically(1);
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(1);
+    }
   });
 
   it("Hounds stamina check x2", async function () {
@@ -1044,7 +1070,9 @@ describe("Races", function () {
   });
 
   it("Join queue x20", async function () {
-    await joinQueueAutomatically(1);
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(1);
+    }
   });
 
   it("Hounds stamina check x3", async function () {
@@ -1058,12 +1086,16 @@ describe("Races", function () {
   });
 
   it("Join queue x30", async function () {
-    await joinQueueAutomatically(1);
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(1);
+    }
   });
 
   it("Join queue and then delete it", async function () {
-    await joinQueueAutomatically(2,3);
-    await queues.deleteQueue(2);
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(2,3);
+      await queues.deleteQueue(2);
+    }
   });
 
   it("Hounds stamina check x4", async function () {

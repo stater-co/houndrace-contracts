@@ -13,7 +13,6 @@ contract Queues is Params {
     }
 
     function deleteQueue(uint256 theId) external onlyOwner {
-        console.log("Delete queue here !");
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

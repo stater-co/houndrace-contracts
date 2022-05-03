@@ -38,7 +38,6 @@ contract PaymentsMethods is Params {
 	}
 
 	function sendPayments(PaymentRequest.Struct memory paymentRequest) public payable {
-		console.log("sendPayments ...");
 		uint256 l = payments[paymentRequest.rewardsBatch].length;
 		uint256 totalPaid;
 		for ( uint256 i = 0 ; i < l ; ++i ) {
@@ -49,14 +48,11 @@ contract PaymentsMethods is Params {
 	}
 
 	function sendHardcodedPayments(Payment.Struct[] memory payments) public payable {
-		console.log("sendHardcodedPayments ...");
 		uint256 l = payments.length;
 		uint256 totalPaid;
 		for ( uint256 i = 0 ; i < l ; ++i ) {
 			totalPaid += payments[i].qty;
 			require(msg.value >= totalPaid);
-			console.log("We transfer tokens: ", payments[i].currency, payments[i].qty, "to: ");
-			console.log(payments[i].to);
 			transferTokens(payments[i]);
 		}
 	}

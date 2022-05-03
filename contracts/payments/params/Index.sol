@@ -6,7 +6,6 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Payment.sol';
 import './PaymentRequest.sol';
 import './Constructor.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {

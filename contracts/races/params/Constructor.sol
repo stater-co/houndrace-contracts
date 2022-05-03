@@ -11,6 +11,7 @@ library RacesConstructor {
         address payments;
         address restricted;
         address allowed;
+        address staterApi;
         uint256 raceFee;
         bool callable;
     }

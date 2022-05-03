@@ -8,10 +8,10 @@ const multibar = new cliProgress.MultiBar({
 
 }, cliProgress.Presets.shades_classic);
 
-const deployments = multibar.create(33,0);
-const configurations = multibar.create(21,0);
-const recommendedCalls = multibar.create(37,0);
-const verifications = multibar.create(33,0);
+const deployments = multibar.create(27,0);
+const configurations = multibar.create(16,0);
+const recommendedCalls = multibar.create(41,0);
+const verifications = multibar.create(26,0);
 
 
 const hre = require("hardhat");
@@ -29,11 +29,23 @@ const defaultHound = [
   false
 ];
 const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10]];
+const defaultRace = [
+  "race name",
+  address0,
+  [1,2,3,4,5,6,7,8,9,10],
+  1,
+  500,
+  1,
+  55,
+  '0x00'
+];
 
 
 async function main() {
 
   try {
+
+    const [owner] = await hre.ethers.getSigners();
 
     const Converters = await hre.ethers.getContractFactory("Converters");
     const converters = await Converters.deploy();
@@ -58,7 +70,6 @@ async function main() {
     deployments.increment();
     deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
 
-    const [owner] = await ethers.getSigners();
     const Payments = await hre.ethers.getContractFactory("Payments");
     const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
     await payments.deployed();
@@ -271,6 +282,7 @@ async function main() {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
@@ -280,6 +292,7 @@ async function main() {
 
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
+      address0,
       address0,
       address0,
       address0,
@@ -305,6 +318,7 @@ async function main() {
       payments.address,
       racesRestricted.address,
       address0,
+      owner.address,
       500000000,
       true
     ]);
@@ -312,11 +326,7 @@ async function main() {
     deployments.increment();
     deployment('export RACE=' + races.address);
 
-    const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods", {
-      libraries: {
-        Sortings: sortings.address
-      }
-    });
+    const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods");
     const generatorMethods = await GeneratorMethods.deploy([
       address0,
       address0,
@@ -330,18 +340,33 @@ async function main() {
     deployments.increment();
     deployment('export GENERATOR_METHODS=' + generatorMethods.address);
 
-    const Generator = await hre.ethers.getContractFactory("Generator", {
+    const GeneratorZerocost = await hre.ethers.getContractFactory("GeneratorZerocost",{
       libraries: {
         Sortings: sortings.address
       }
     });
+    const generatorZerocost = await GeneratorZerocost.deploy([
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0,
+      address0
+    ]);
+    await generatorZerocost.deployed();
+    deployments.increment();
+    deployment('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+
+    const Generator = await hre.ethers.getContractFactory("Generator");
     const generator = await Generator.deploy([
       randomness.address,
       arenas.address,
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address
+      payments.address,
+      generatorZerocost.address
     ]);
     await generator.deployed();
     deployments.increment();
@@ -353,7 +378,19 @@ async function main() {
       hounds.address,
       races.address,
       generatorMethods.address,
-      payments.address
+      payments.address,
+      generatorZerocost.address
+    ]);
+    configurations.increment();
+
+    await generatorZerocost.setGlobalParameters([
+      randomness.address,
+      arenas.address,
+      hounds.address,
+      races.address,
+      generatorMethods.address,
+      payments.address,
+      generatorZerocost.address
     ]);
     configurations.increment();
 
@@ -425,6 +462,7 @@ async function main() {
       payments.address,
       racesRestricted.address,
       queues.address,
+      owner.address,
       500000000,
       true
     ]);
@@ -439,6 +477,7 @@ async function main() {
       payments.address,
       racesRestricted.address,
       queues.address,
+      owner.address,
       500000000,
       true
     ]);
@@ -453,6 +492,7 @@ async function main() {
       payments.address,
       racesRestricted.address,
       queues.address,
+      owner.address,
       500000000,
       true
     ]);
@@ -680,12 +720,10 @@ async function main() {
       ]
     ]);
 
-    console.log("Enqueue now...");
     for ( let i = 0 ; i < 10 ; ++i ) {
       await hounds.initializeHound(0,defaultHound);
       recommendedCalls.increment();
 
-      console.log("Now we enqueue !!");
       await queues.enqueue(1,Number(await hounds.id())-1,{
         value: defaultQueues[0][4]
       });
@@ -701,6 +739,40 @@ async function main() {
     await queues.deleteQueue(999999);
     recommendedCalls.increment();
 
+    const defaultRacePayments = [
+      [
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [1,2,3,4,5,6,7,8,9,10], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        50, // % of the total race prize
+        0 // first place
+      ],[
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [1,2,3,4,5,6,7,8,9,10], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        30, // % of the total race prize
+        1 // second place
+      ],[
+        payments.address, // from
+        address0, // to
+        address0, // currency
+        [1,2,3,4,5,6,7,8,9,10], // token ids
+        0, // amount
+        3, // 2 - erc20 1 - erc1155 0 - erc721
+        20, // % of the total race prize
+        2 // third place
+      ]
+    ];
+    await races.uploadRace(defaultRace,defaultRacePayments,{
+      value: defaultRace[4] * defaultRace[2].length
+    });
+    recommendedCalls.increment();
 
     try {
       await hre.run("verify:verify", {
