@@ -1063,8 +1063,6 @@ describe("Races", function () {
 
   it("Join queue and then delete it", async function () {
     await joinQueueAutomatically(2,3);
-    const houndOwner = await hounds.houndOwner(1);
-    console.log("Hound owner from delete request: " + houndOwner);
     await queues.deleteQueue(2);
   });
 

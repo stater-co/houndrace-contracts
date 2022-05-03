@@ -10,7 +10,7 @@ contract RacesMethods is Params {
     function raceStart(Queue.Struct memory queue) external payable {
         if ( control.callable ) {
             
-            console.log("The sender is: ", msg.sender);
+            console.log("The sender is: ", msg.sender, ", ", msg.value);
             console.log("Race start with reward id: ", queue.rewardsId);
             
             Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);
@@ -19,18 +19,31 @@ contract RacesMethods is Params {
 
             console.log("Total payments found: ", payments.length);
 
+            races[id] = IGenerator(control.generator).generate(queue);
+            console.log("Race start here, 4");
+
             // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications
             for ( uint256 i = 0 ; i < payments.length ; ++i ) {
+                console.log("Check payment: ", i);
                 if ( payments[i].currency == address(0) ) {
+                    console.log("OK .");
                     if ( payments[i].paymentType == 3 ) {
-                        ethToSend += msg.value / 100 * payments[i].percentageWon;
+                        console.log("OK ..");
+                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;
+                        // payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));
+                        ethToSend += payments[i].qty;
+                        console.log("ETH to send in progress: ", ethToSend);
+                    } else {
+                        ethToSend += payments[i].qty;
                     }
-                    ethToSend += payments[i].qty;
                 }
             }
 
-            races[id] = IGenerator(control.generator).generate{ value: msg.value }(queue);
-            console.log("Race start here, 4");
+            console.log("ETH to send: ", ethToSend);
+
+            require(queue.entryFee * queue.totalParticipants <= msg.value);
+
+            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);
 
             emit NewFinishedRace(id,  races[id]);
 

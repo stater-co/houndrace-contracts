@@ -38,7 +38,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     }
 
     function houndOwner(uint256 tokenId) external view returns(address) {
-        console.log("Returning owner here... ");
+        console.log("Returning owner here... ", tokenId);
         address owner = ownerOf(tokenId);
         console.log("Owner is: ", owner);
         return owner;

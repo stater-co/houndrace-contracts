@@ -17,6 +17,7 @@ library Payment {
         // 4 - erc20 fee
         uint32 paymentType;
         uint32 percentageWon;
+        uint32 place;
     }
 
 }

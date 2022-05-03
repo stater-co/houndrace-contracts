@@ -314,8 +314,7 @@ async function main() {
 
     const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods", {
       libraries: {
-        Sortings: sortings.address,
-        Converters: converters.address
+        Sortings: sortings.address
       }
     });
     const generatorMethods = await GeneratorMethods.deploy([
@@ -658,7 +657,8 @@ async function main() {
         [], // token ids
         0, // amount
         3, // 2 - erc20 1 - erc1155 0 - erc721
-        50 // % of the total race prize
+        50, // % of the total race prize
+        0 // first place
       ],[
         payments.address, // from
         address0, // to
@@ -666,7 +666,8 @@ async function main() {
         [], // token ids
         0, // amount
         3, // 2 - erc20 1 - erc1155 0 - erc721
-        30 // % of the total race prize
+        30, // % of the total race prize
+        1 // second place
       ],[
         payments.address, // from
         address0, // to
@@ -674,7 +675,8 @@ async function main() {
         [], // token ids
         0, // amount
         3, // 2 - erc20 1 - erc1155 0 - erc721
-        20 // % of the total race prize
+        20, // % of the total race prize
+        2 // third place
       ]
     ]);
 

@@ -9112,3 +9112,2593 @@
   errorMessage: 'Transaction reverted without a reason string',
   timestamp: '2022-05-03T09:54:59.896Z'
 }
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: msg.value }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 32,
+        range: [ 1186, 1251 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T09:55:31.937Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: msg.value }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 35,
+        range: [ 1324, 1389 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T09:57:39.014Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 35,
+        range: [ 1341, 1406 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T09:59:43.975Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 37,
+        range: [ 1395, 1460 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:00:28.463Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        console.log("ETH to send in progress: ", ethToSend);\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 38,
+        range: [ 1472, 1537 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:01:52.880Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        console.log("ETH to send in progress: ", ethToSend);\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 38,
+        range: [ 1472, 1537 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:04:48.417Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        console.log("ETH to send in progress: ", ethToSend);\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 38,
+        range: [ 1472, 1537 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:07:07.258Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        ethToSend += msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        console.log("ETH to send in progress: ", ethToSend);\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate{ value: ethToSend }(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 38,
+        range: [ 1472, 1537 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'generate',
+        contract: 'Generator',
+        sourceName: 'contracts/generator/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Generator is Params {\n' +
+          '\n' +
+          '    constructor(GeneratorConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function simulateClassicRace(Hound.Struct[] memory participants, uint256 terrain, uint256 theRandomness) public returns(bytes memory seed) {\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return output;\n' +
+          '    }\n' +
+          '\n' +
+          '    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {\n' +
+          '        console.log("Generating race here ...");\n' +
+          '        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '        return abi.decode(output,(Race.Struct));\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 19,
+        range: [ 721, 737 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:13:32.843Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: 'hardhat-ethers',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'You tried to link the contract GeneratorMethods with Converters, which is not one of its libraries.\n' +
+    'The libraries needed are:\n' +
+    '* contracts/utils/Sortings.sol:Sortings',
+  timestamp: '2022-05-03T10:22:26.624Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T10:22:55.606Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 19,
+        range: [ 584, 622 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 15,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            console.log("The sender is: ", msg.sender, ", ", msg.value);\n' +
+          '            console.log("Race start with reward id: ", queue.rewardsId);\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            console.log("Total payments found: ", payments.length);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                console.log("Check payment: ", i);\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    console.log("OK .");\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        console.log("OK ..");\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                        console.log("ETH to send in progress: ", ethToSend);\n' +
+          '                    }\n' +
+          '                    ethToSend += payments[i].qty;\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            console.log("ETH to send: ", ethToSend);\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '            console.log("Race start here, 4");\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        console.log("Race start here, 5");\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 44,
+        range: [ 1715, 1794 ]
+      }
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted: function call failed to execute',
+  timestamp: '2022-05-03T10:25:52.379Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T10:27:16.237Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T10:30:34.854Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 20,
+        range: [ 632, 648 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:36:57.439Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 20,
+        range: [ 632, 648 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:39:37.929Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T10:40:12.702Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 20,
+        range: [ 632, 648 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:41:48.368Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        console.log("Delete queue here !");\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 22,
+        range: [ 681, 719 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '        \n' +
+          '        console.log("Update hound stamina");\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            console.log("Race start here, from queue: ", theId);\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 31,
+        range: [ 991, 1111 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        console.log("Race start here, 1");\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        console.log("Race start here, 2");\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 20,
+        range: [ 632, 648 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0x098df43fcc166bb882c771ec4e2a13a794fc5380d8ca7d854c3ea4e8da74ddbe',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-03T10:42:14.003Z'
+}

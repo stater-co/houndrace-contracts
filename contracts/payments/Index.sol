@@ -27,4 +27,16 @@ contract Payments is Params {
         require(success);
 	}
 
+	function sendPayments(PaymentRequest.Struct memory paymentRequest) public payable {
+		console.log("Send paymnets here...");
+		(bool success, bytes memory output) = control.payments.delegatecall(msg.data);
+        require(success);
+	}
+
+	function sendHardcodedPayments(Payment.Struct[] memory payments) public payable {
+		console.log("Send hardcoded paymnets here...");
+		(bool success, bytes memory output) = control.payments.delegatecall(msg.data);
+        require(success);
+	}
+
 }
