@@ -10,7 +10,7 @@ const multibar = new cliProgress.MultiBar({
 
 const deployments = multibar.create(27,0);
 const configurations = multibar.create(16,0);
-const recommendedCalls = multibar.create(41,0);
+const recommendedCalls = multibar.create(40,0);
 const verifications = multibar.create(26,0);
 
 

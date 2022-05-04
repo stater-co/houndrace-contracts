@@ -472,3 +472,1020 @@
   errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
   timestamp: '2022-05-04T11:17:21.310Z'
 }
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:42:29.991Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:42:30.145Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:43:26.352Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:43:26.519Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:48:31.059Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:48:31.236Z'
+}

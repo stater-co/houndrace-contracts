@@ -22,6 +22,7 @@ contract RacesMethods is Params {
                     if ( payments[i].paymentType == 3 ) {
                         payments[i].qty = msg.value / 100 * payments[i].percentageWon;
                         payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));
+                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);
                         ethToSend += payments[i].qty;
                     } else {
                         ethToSend += payments[i].qty;

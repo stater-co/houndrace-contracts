@@ -10,13 +10,17 @@ contract HoundsModifier is Params {
     function updateHoundStamina(uint256 theId) public {
         require(allowed[msg.sender]);
         --hounds[theId].stamina.staminaValue;
-        hounds[theId].running = true;
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
         hounds[theId].stamina.staminaLastUpdate = block.timestamp;
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
+    }
+
+    function updateHoundRunning(uint256 theId, bool running) public {
+        require(allowed[msg.sender]);
+        hounds[theId].running = running;
     }
 
     function boostHoundStamina(uint256 theId, address user) public payable {
