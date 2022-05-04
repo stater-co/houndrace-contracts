@@ -31,3 +31,18 @@
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
   timestamp: '2022-05-03T14:39:06.423Z'
 }
+{
+  reason: 'replacement fee too low',
+  code: 'REPLACEMENT_UNDERPRICED',
+  error: ProviderError: replacement transaction underpriced
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
+  timestamp: '2022-05-04T05:55:16.135Z'
+}

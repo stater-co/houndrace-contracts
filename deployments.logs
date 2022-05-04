@@ -36478,3 +36478,195 @@
   network: 'hardhat',
   timestamp: '2022-05-03T14:39:02.115Z'
 }
+{
+  message: '##############################################',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-03T14:54:06.641Z'
+}
+{
+  message: 'export CONVERTERS=0xE8dA017671EB1676B9cA4D3c687a4C6B738b4787',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-03T14:54:09.110Z'
+}
+{
+  message: '##############################################',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:24:36.895Z'
+}
+{
+  message: 'export CONVERTERS=0x23EFb69a464Af7eD3Eed26E3256C0D8c5003d787',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:24:40.086Z'
+}
+{
+  message: '##############################################',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:48:15.073Z'
+}
+{
+  message: 'export CONVERTERS=0x5376bFd4cC337305d90af0870D69DA414d8A80a4',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:48:17.753Z'
+}
+{
+  message: 'export SORTINGS=0x8b45Ecde32FBb954415Bfee7f15ff76B5a5917dE',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:48:28.283Z'
+}
+{
+  message: 'export RANDOMNESS=0x0e16eB3d2c47d55daA22182329fE0518f267D885',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:48:42.000Z'
+}
+{
+  message: 'export PAYMENTS_METHODS=0xA3F3bFf12BC8E9087eaFdcf14f8993067A989a63',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:48:56.385Z'
+}
+{
+  message: 'export PAYMENTS=0x7D16F37F7EF6658C564133e41262EB695a230d76',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:49:14.447Z'
+}
+{
+  message: 'export HOUNDRACE_POTIONS=0xC81C0d3eb24C898b65D30Ede9E6D07c73f63F983',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:49:29.314Z'
+}
+{
+  message: 'export SHOP_RESTRICTED=0x31dB1B950c28A851d30C7669D52AEE55fB995512',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:49:43.149Z'
+}
+{
+  message: 'export SHOP_METHODS=0x64606339c1dDC83E9AA3c6377a7c419789310486',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:49:57.300Z'
+}
+{
+  message: 'export SHOP=0x6271B4Ae43a475D4058E144017faA8a0Eb4059E5',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:50:12.553Z'
+}
+{
+  message: 'export ARENAS_RESTRICTED=0x9405586cbd5583c72f28bbEeC8202F637cac22eF',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:50:28.308Z'
+}
+{
+  message: 'export ARENAS=0x7Ff8CB36b88c058BC86fECc41049A8A17238a6aE',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:50:42.862Z'
+}
+{
+  message: 'export GENETICS=0x5931CF6e4ed4b71E90BDE2b8e1BA860a7f84469E',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:50:58.411Z'
+}
+{
+  message: 'export INCUBATOR_METHODS=0x81bD5CdB346F4D1a5Ad35146250E92ec89Ee9B1f',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:51:13.065Z'
+}
+{
+  message: 'export INCUBATOR=0xD90f7c095b17922907B563D9d2e1EB26aeaf96dD',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:51:27.314Z'
+}
+{
+  message: 'export HOUNDS_RESTRICTED=0xE6Ca77Ce45d406e5450Ac8DeF5671FD08714c316',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:51:42.269Z'
+}
+{
+  message: 'export HOUNDS_MODIFIER=0x9Dda5234Ea21535fC03ae887D7Df7F198f47fB31',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:52:00.534Z'
+}
+{
+  message: 'export HOUNDS_MINTER=0xB82EdA246FF8006FF4894767823318234eF56CC4',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:52:15.088Z'
+}
+{
+  message: 'export HOUNDS=0x8e641189B56b2534D38573CA8B1Ad741d540d487',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:52:29.235Z'
+}
+{
+  message: 'export RACE_RESTRICTED=0x1900Ac582ece62B24626567e8112197cFaa113D2',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:52:43.553Z'
+}
+{
+  message: 'export RACE_METHODS=0x14A5902F141c0EBd56CecF307fEa156C0aB34314',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:52:58.017Z'
+}
+{
+  message: 'export RACE=0x98CD85c76526019e503aC5Df87736580C51f3F9E',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:53:12.027Z'
+}
+{
+  message: 'export GENERATOR_METHODS=0x263875129A9b0296bd9697120CbbeA6A45d5206D',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:53:30.317Z'
+}
+{
+  message: 'export GENERATOR_ZEROCOST=0xD5c64b7F56d9821bf957b6b5a476E3862448346e',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:53:44.695Z'
+}
+{
+  message: 'export GENERATOR=0x9845243BE67E22973316CBEe172e44A776d3242b',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:53:58.877Z'
+}
+{
+  message: 'export QUEUES_METHODS=0x7511417cdb9572162eAc10232a41394024721D2F',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:54:14.233Z'
+}
+{
+  message: 'export QUEUES_RESTRICTED=0xffa4ea3F29AA10E9d078bb9b665dBd0d56073A46',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:54:28.249Z'
+}
+{
+  message: 'export QUEUES=0xebB21c257c25823E96C50D3294ED9eCba499BDE4',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-05-04T05:54:42.291Z'
+}
