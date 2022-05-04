@@ -152,3 +152,323 @@
   errorMessage: 'arenas is not defined',
   timestamp: '2022-05-04T07:31:50.986Z'
 }
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T11:05:32.193Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T11:05:47.788Z'
+}
+{
+  parent: undefined,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
+  level: 'error',
+  errorMessage: 'already known',
+  timestamp: '2022-05-04T11:06:09.410Z'
+}
+{
+  parent: undefined,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
+  level: 'error',
+  errorMessage: 'already known',
+  timestamp: '2022-05-04T11:06:23.422Z'
+}
+{
+  reason: 'insufficient funds for intrinsic transaction cost',
+  code: 'INSUFFICIENT_FUNDS',
+  error: ProviderError: insufficient funds for gas * price + value
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:06:37.728Z'
+}
+{
+  reason: 'insufficient funds for intrinsic transaction cost',
+  code: 'INSUFFICIENT_FUNDS',
+  error: ProviderError: insufficient funds for gas * price + value
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:07:01.594Z'
+}
+{
+  reason: 'replacement fee too low',
+  code: 'REPLACEMENT_UNDERPRICED',
+  error: ProviderError: replacement transaction underpriced
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:17:05.212Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:05.885Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:06.536Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:07.254Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:08.020Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:08.599Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:09.223Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:09.832Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:10.430Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:11.018Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:11.654Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:12.249Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:12.825Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:13.458Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:14.060Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:14.655Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:15.262Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:15.858Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:16.493Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:17.096Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:17.686Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:18.294Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:18.887Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:19.485Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:20.098Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:20.706Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:21.310Z'
+}
