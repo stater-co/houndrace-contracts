@@ -34,4 +34,8 @@ contract Params is Ownable, Withdrawable {
         allowed[globalParameters.allowed] = true;
     }
 
+    function race(uint256 theId) external view returns(Race.Struct memory) {
+        return races[theId];
+    }
+
 }

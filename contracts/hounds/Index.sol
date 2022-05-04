@@ -47,14 +47,6 @@ contract Hounds is Params {
         require(success);
     }
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
-    }
-
-    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return hounds[_tokenId].token_uri;
-    }
-
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
         require(ownerOf(hound1) == msg.sender);
         return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );

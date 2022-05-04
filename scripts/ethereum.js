@@ -48,697 +48,958 @@ async function main() {
     deployment('##############################################');
     const [owner] = await hre.ethers.getSigners();
 
-    const Converters = await hre.ethers.getContractFactory("Converters");
-    const converters = await Converters.deploy();
-    deployments.increment();
-    deployment('export CONVERTERS=' + converters.address);
-
-    const Sortings = await hre.ethers.getContractFactory("Sortings");
-    const sortings = await Sortings.deploy();
-    await sortings.deployed();
-    deployments.increment();
-    deployment('export SORTINGS=' + sortings.address);
-
-    const Randomness = await hre.ethers.getContractFactory("Randomness");
-    const randomness = await Randomness.deploy();
-    await randomness.deployed();
-    deployments.increment();
-    deployment('export RANDOMNESS=' + randomness.address);
-
-    const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
-    const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
-    await paymentsMethods.deployed();
-    deployments.increment();
-    deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
-
-    const Payments = await hre.ethers.getContractFactory("Payments");
-    const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
-    await payments.deployed();
-    deployments.increment();
-    deployment('export PAYMENTS=' + payments.address);
-
-    await paymentsMethods.setGlobalParameters([payments.address,[]]);
-    configurations.increment();
-
-    const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
-    const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
-    await houndracePotions.deployed();
-    deployments.increment();
-    deployment('export HOUNDRACE_POTIONS=' + houndracePotions.address);
-
-    const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
-    const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
-    await shopRestricted.deployed();
-    deployments.increment();
-    deployment('export SHOP_RESTRICTED=' + shopRestricted.address);
-
-    const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
-    const shopMethods = await ShopMethods.deploy([address0,address0,address0]);
-    await shopMethods.deployed();
-    deployments.increment();
-    deployment('export SHOP_METHODS=' + shopMethods.address);
-
-    const Shop = await hre.ethers.getContractFactory("Shop");
-    const shop = await Shop.deploy([shopMethods.address,shopRestricted.address]);
-    await shop.deployed();
-    deployments.increment();
-    deployment('export SHOP=' + shop.address);
-
-    await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address]);
-    configurations.increment();
-    await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address]);
-    configurations.increment();
-
-    const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
-    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0]);
-    await arenasRestricted.deployed();
-    deployments.increment();
-    deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
-
-    const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA",arenasRestricted.address]);
-    await arenas.deployed();
-    deployments.increment();
-    deployment('export ARENAS=' + arenas.address);
-
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
-    configurations.increment();
-
-    const Genetics = await hre.ethers.getContractFactory("Genetics");
-    const genetics = await Genetics.deploy([
-      randomness.address,
-      arenas.address,
-      maleBoilerplateGene,
-      femaleBoilerplateGene,
-      60,
-      40,
-      [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    ]);
-    await genetics.deployed();
-    deployments.increment();
-    deployment('export GENETICS=' + genetics.address);
-
-    const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
-    const incubatorMethods = await IncubatorMethods.deploy([
-      address0,
-      address0,
-      address0,
-      "0x67657452"
-    ]);
-    await incubatorMethods.deployed();
-    deployments.increment();
-    deployment('export INCUBATOR_METHODS=' + incubatorMethods.address);
-
-    const Incubator = await hre.ethers.getContractFactory("Incubator");
-    const incubator = await Incubator.deploy([
-      incubatorMethods.address,
-      randomness.address,
-      genetics.address,
-      "0x67657452"
-    ]);
-    await incubator.deployed();
-    deployments.increment();
-    deployment('export INCUBATOR=' + incubator.address);
-
-    await incubatorMethods.setGlobalParameters([
-      incubatorMethods.address,
-      randomness.address,
-      genetics.address,
-      "0x67657452"
-    ]);
-    configurations.increment();
-
-    const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
-    const houndsRestricted = await HoundsRestricted.deploy([
-      "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        address0,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    await houndsRestricted.deployed();
-    deployments.increment();
-    deployment('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
-
-    const HoundsModifier = await hre.ethers.getContractFactory("HoundsModifier");
-    const houndsModifier = await HoundsModifier.deploy([
-      "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        address0,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    await houndsModifier.deployed();
-    deployments.increment();
-    deployment('export HOUNDS_MODIFIER=' + houndsModifier.address);
-
-    const HoundsMinter = await hre.ethers.getContractFactory("HoundsMinter");
-    const houndsMinter = await HoundsMinter.deploy([
-      "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        address0,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    await houndsMinter.deployed();
-    deployments.increment();
-    deployment('export HOUNDS_MINTER=' + houndsMinter.address);
-
-    const Hounds = await hre.ethers.getContractFactory("Hounds");
-    const hounds = await Hounds.deploy([
-      "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        address0,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    await hounds.deployed();
-    deployments.increment();
-    deployment('export HOUNDS=' + hounds.address);
-
-    const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
-    const racesRestricted = await RacesRestricted.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
-    ]);
-    await racesRestricted.deployed();
-    deployments.increment();
-    deployment('export RACE_RESTRICTED=' + racesRestricted.address);
-
-    const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
-    const racesMethods = await RacesMethods.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      500000000,
-      true
-    ]);
-    await racesMethods.deployed();
-    deployments.increment();
-    deployment('export RACE_METHODS=' + racesMethods.address);
-
-    const Races = await hre.ethers.getContractFactory("Races");
-    const races = await Races.deploy([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      address0,
-      payments.address,
-      racesRestricted.address,
-      address0,
-      owner.address,
-      500000000,
-      true
-    ]);
-    await races.deployed();
-    deployments.increment();
-    deployment('export RACE=' + races.address);
-
-    const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods");
-    const generatorMethods = await GeneratorMethods.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
-    await generatorMethods.deployed();
-    deployments.increment();
-    deployment('export GENERATOR_METHODS=' + generatorMethods.address);
-
-    const GeneratorZerocost = await hre.ethers.getContractFactory("GeneratorZerocost",{
-      libraries: {
-        Sortings: sortings.address
-      }
-    });
-    const generatorZerocost = await GeneratorZerocost.deploy([
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0,
-      address0
-    ]);
-    await generatorZerocost.deployed();
-    deployments.increment();
-    deployment('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
-
-    const Generator = await hre.ethers.getContractFactory("Generator");
-    const generator = await Generator.deploy([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-    await generator.deployed();
-    deployments.increment();
-    deployment('export GENERATOR=' + generator.address);
-
-    await generatorMethods.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-    configurations.increment();
-
-    await generatorZerocost.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-    configurations.increment();
-
-    const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
-    const queuesMethods = await QueuesMethods.deploy([
-      arenas.address,
-      hounds.address,
-      address0,
-      payments.address,
-      address0,
-      races.address
-    ]);
-    await queuesMethods.deployed();
-    deployments.increment();
-    deployment('export QUEUES_METHODS=' + queuesMethods.address);
-
-    const QueuesRestricted = await hre.ethers.getContractFactory("QueuesRestricted");
-    const queuesRestricted = await QueuesRestricted.deploy([
-      arenas.address,
-      hounds.address,
-      address0,
-      payments.address,
-      address0,
-      races.address
-    ]);
-    await queuesRestricted.deployed();
-    deployments.increment();
-    deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
-
-    const Queues = await hre.ethers.getContractFactory("Queues");
-    const queues = await Queues.deploy([
-      arenas.address,
-      hounds.address,
-      queuesMethods.address,
-      payments.address,
-      queuesRestricted.address,
-      races.address
-    ]);
-    await queues.deployed();
-    deployments.increment();
-    deployment('export QUEUES=' + queues.address);
-
-    await queuesMethods.setGlobalParameters([
-      arenas.address,
-      hounds.address,
-      queuesMethods.address,
-      payments.address,
-      queuesRestricted.address,
-      races.address
-    ]);
-    configurations.increment();
-
-    await queuesRestricted.setGlobalParameters([
-      arenas.address,
-      hounds.address,
-      queuesMethods.address,
-      payments.address,
-      queuesRestricted.address,
-      races.address
-    ]);
-    configurations.increment();
-
-    await racesRestricted.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      generator.address,
-      payments.address,
-      racesRestricted.address,
-      queues.address,
-      owner.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
-
-    await racesMethods.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      generator.address,
-      payments.address,
-      racesRestricted.address,
-      queues.address,
-      owner.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
-
-    await races.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      racesMethods.address,
-      generator.address,
-      payments.address,
-      racesRestricted.address,
-      queues.address,
-      owner.address,
-      500000000,
-      true
-    ]);
-    configurations.increment();
-
-    await hounds.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [
-        hounds.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address
-      ],[
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        hounds.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsModifier.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [
-        hounds.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address
-      ],[
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        hounds.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsRestricted.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [
-        hounds.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address
-      ],[
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        hounds.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await houndsMinter.setGlobalParameters([
-      "HoundRace",
-      "HR",
-      [
-        hounds.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address,
-        races.address,
-        racesMethods.address,
-        racesRestricted.address
-      ],[
-        incubator.address,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        hounds.address,
-        houndsModifier.address,
-        shop.address
-      ],[
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
-    configurations.increment();
-
-    await queues.createQueues(defaultQueues);
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(0,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(0,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(0,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(0,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
-    recommendedCalls.increment();
-
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.breedHounds(3,4,{ value: "0xD529AE9E860000" });
-    recommendedCalls.increment();
-    
-    await hounds.id();
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(0,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(5,defaultHound);
-    recommendedCalls.increment();
-
-    await hounds.initializeHound(6,defaultHound);
-    recommendedCalls.increment();
-
-    await payments.addPayments(1,[
-      [
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        50, // % of the total race prize
-        0 // first place
-      ],[
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        30, // % of the total race prize
-        1 // second place
-      ],[
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        20, // % of the total race prize
-        2 // third place
-      ]
-    ]);
-
-    for ( let i = 0 ; i < 10 ; ++i ) {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.increment();
-
-      await queues.enqueue(1,Number(await hounds.id())-1,{
-        value: defaultQueues[0][4]
-      });
-      recommendedCalls.increment();
+    try {
+      const Converters = await hre.ethers.getContractFactory("Converters");
+      const converters = await Converters.deploy();
+      deployments.increment();
+      deployment('export CONVERTERS=' + converters.address);
+    } catch(err) {
+      errors(err);
     }
 
-    await queues.createQueues(defaultQueues);
-    recommendedCalls.increment();
+    try {
+      const Sortings = await hre.ethers.getContractFactory("Sortings");
+      const sortings = await Sortings.deploy();
+      await sortings.deployed();
+      deployments.increment();
+      deployment('export SORTINGS=' + sortings.address);
+    } catch(err) {
+      errors(err);
+    }
 
-    await queues.deleteQueue(Number(await hounds.id())-1);
-    recommendedCalls.increment();
+    try {
+      const Randomness = await hre.ethers.getContractFactory("Randomness");
+      const randomness = await Randomness.deploy();
+      await randomness.deployed();
+      deployments.increment();
+      deployment('export RANDOMNESS=' + randomness.address);
+    } catch(err) {
+      errors(err);
+    }
 
-    await queues.deleteQueue(999999);
-    recommendedCalls.increment();
+    try {
+      const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
+      const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
+      await paymentsMethods.deployed();
+      deployments.increment();
+      deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Payments = await hre.ethers.getContractFactory("Payments");
+      const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
+      await payments.deployed();
+      deployments.increment();
+      deployment('export PAYMENTS=' + payments.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await paymentsMethods.setGlobalParameters([payments.address,[]]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
+      const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
+      await houndracePotions.deployed();
+      deployments.increment();
+      deployment('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
+      const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
+      await shopRestricted.deployed();
+      deployments.increment();
+      deployment('export SHOP_RESTRICTED=' + shopRestricted.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
+      const shopMethods = await ShopMethods.deploy([address0,address0,address0]);
+      await shopMethods.deployed();
+      deployments.increment();
+      deployment('export SHOP_METHODS=' + shopMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Shop = await hre.ethers.getContractFactory("Shop");
+      const shop = await Shop.deploy([shopMethods.address,shopRestricted.address]);
+      await shop.deployed();
+      deployments.increment();
+      deployment('export SHOP=' + shop.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
+      const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0]);
+      await arenasRestricted.deployed();
+      deployments.increment();
+      deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Arenas = await hre.ethers.getContractFactory("Arenas");
+      const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA",arenasRestricted.address]);
+      await arenas.deployed();
+      deployments.increment();
+      deployment('export ARENAS=' + arenas.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Genetics = await hre.ethers.getContractFactory("Genetics");
+      const genetics = await Genetics.deploy([
+        randomness.address,
+        arenas.address,
+        maleBoilerplateGene,
+        femaleBoilerplateGene,
+        60,
+        40,
+        [2,6,10,14,18,22,26,30,34,38,42,46,50],
+        [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+      ]);
+      await genetics.deployed();
+      deployments.increment();
+      deployment('export GENETICS=' + genetics.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
+      const incubatorMethods = await IncubatorMethods.deploy([
+        address0,
+        address0,
+        address0,
+        "0x67657452"
+      ]);
+      await incubatorMethods.deployed();
+      deployments.increment();
+      deployment('export INCUBATOR_METHODS=' + incubatorMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Incubator = await hre.ethers.getContractFactory("Incubator");
+      const incubator = await Incubator.deploy([
+        incubatorMethods.address,
+        randomness.address,
+        genetics.address,
+        "0x67657452"
+      ]);
+      await incubator.deployed();
+      deployments.increment();
+      deployment('export INCUBATOR=' + incubator.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await incubatorMethods.setGlobalParameters([
+        incubatorMethods.address,
+        randomness.address,
+        genetics.address,
+        "0x67657452"
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
+      const houndsRestricted = await HoundsRestricted.deploy([
+        "HoundRace",
+        "HR",
+        [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+        [
+          address0,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          address0,
+          address0,
+          address0,
+          address0,
+          address0,
+          address0
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      await houndsRestricted.deployed();
+      deployments.increment();
+      deployment('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const HoundsModifier = await hre.ethers.getContractFactory("HoundsModifier");
+      const houndsModifier = await HoundsModifier.deploy([
+        "HoundRace",
+        "HR",
+        [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+        [
+          address0,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          address0,
+          address0,
+          address0,
+          address0,
+          address0,
+          address0
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      await houndsModifier.deployed();
+      deployments.increment();
+      deployment('export HOUNDS_MODIFIER=' + houndsModifier.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const HoundsMinter = await hre.ethers.getContractFactory("HoundsMinter");
+      const houndsMinter = await HoundsMinter.deploy([
+        "HoundRace",
+        "HR",
+        [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+        [
+          address0,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          address0,
+          address0,
+          address0,
+          address0,
+          address0,
+          address0
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      await houndsMinter.deployed();
+      deployments.increment();
+      deployment('export HOUNDS_MINTER=' + houndsMinter.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Hounds = await hre.ethers.getContractFactory("Hounds");
+      const hounds = await Hounds.deploy([
+        "HoundRace",
+        "HR",
+        [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+        [
+          incubator.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          payments.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          address0,
+          houndsModifier.address,
+          shop.address
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      await hounds.deployed();
+      deployments.increment();
+      deployment('export HOUNDS=' + hounds.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
+      const racesRestricted = await RacesRestricted.deploy([
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        500000000,
+        true
+      ]);
+      await racesRestricted.deployed();
+      deployments.increment();
+      deployment('export RACE_RESTRICTED=' + racesRestricted.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
+      const racesMethods = await RacesMethods.deploy([
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        500000000,
+        true
+      ]);
+      await racesMethods.deployed();
+      deployments.increment();
+      deployment('export RACE_METHODS=' + racesMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Races = await hre.ethers.getContractFactory("Races");
+      const races = await Races.deploy([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        racesMethods.address,
+        address0,
+        payments.address,
+        racesRestricted.address,
+        address0,
+        owner.address,
+        500000000,
+        true
+      ]);
+      await races.deployed();
+      deployments.increment();
+      deployment('export RACE=' + races.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods");
+      const generatorMethods = await GeneratorMethods.deploy([
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ]);
+      await generatorMethods.deployed();
+      deployments.increment();
+      deployment('export GENERATOR_METHODS=' + generatorMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const GeneratorZerocost = await hre.ethers.getContractFactory("GeneratorZerocost",{
+        libraries: {
+          Sortings: sortings.address
+        }
+      });
+      const generatorZerocost = await GeneratorZerocost.deploy([
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0,
+        address0
+      ]);
+      await generatorZerocost.deployed();
+      deployments.increment();
+      deployment('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Generator = await hre.ethers.getContractFactory("Generator");
+      const generator = await Generator.deploy([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        races.address,
+        generatorMethods.address,
+        payments.address,
+        generatorZerocost.address
+      ]);
+      await generator.deployed();
+      deployments.increment();
+      deployment('export GENERATOR=' + generator.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await generatorMethods.setGlobalParameters([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        races.address,
+        generatorMethods.address,
+        payments.address,
+        generatorZerocost.address
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await generatorZerocost.setGlobalParameters([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        races.address,
+        generatorMethods.address,
+        payments.address,
+        generatorZerocost.address
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
+      const queuesMethods = await QueuesMethods.deploy([
+        arenas.address,
+        hounds.address,
+        address0,
+        payments.address,
+        address0,
+        races.address
+      ]);
+      await queuesMethods.deployed();
+      deployments.increment();
+      deployment('export QUEUES_METHODS=' + queuesMethods.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const QueuesRestricted = await hre.ethers.getContractFactory("QueuesRestricted");
+      const queuesRestricted = await QueuesRestricted.deploy([
+        arenas.address,
+        hounds.address,
+        address0,
+        payments.address,
+        address0,
+        races.address
+      ]);
+      await queuesRestricted.deployed();
+      deployments.increment();
+      deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      const Queues = await hre.ethers.getContractFactory("Queues");
+      const queues = await Queues.deploy([
+        arenas.address,
+        hounds.address,
+        queuesMethods.address,
+        payments.address,
+        queuesRestricted.address,
+        races.address
+      ]);
+      await queues.deployed();
+      deployments.increment();
+      deployment('export QUEUES=' + queues.address);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queuesMethods.setGlobalParameters([
+        arenas.address,
+        hounds.address,
+        queuesMethods.address,
+        payments.address,
+        queuesRestricted.address,
+        races.address
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queuesRestricted.setGlobalParameters([
+        arenas.address,
+        hounds.address,
+        queuesMethods.address,
+        payments.address,
+        queuesRestricted.address,
+        races.address
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await racesRestricted.setGlobalParameters([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        racesMethods.address,
+        generator.address,
+        payments.address,
+        racesRestricted.address,
+        queues.address,
+        owner.address,
+        500000000,
+        true
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await racesMethods.setGlobalParameters([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        racesMethods.address,
+        generator.address,
+        payments.address,
+        racesRestricted.address,
+        queues.address,
+        owner.address,
+        500000000,
+        true
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await races.setGlobalParameters([
+        randomness.address,
+        arenas.address,
+        hounds.address,
+        racesMethods.address,
+        generator.address,
+        payments.address,
+        racesRestricted.address,
+        queues.address,
+        owner.address,
+        500000000,
+        true
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.setGlobalParameters([
+        "HoundRace",
+        "HR",
+        [
+          hounds.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address,
+          queues.address,
+          queuesMethods.address,
+          queuesRestricted.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address
+        ],[
+          incubator.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          payments.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          hounds.address,
+          houndsModifier.address,
+          shop.address
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await houndsModifier.setGlobalParameters([
+        "HoundRace",
+        "HR",
+        [
+          hounds.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address,
+          queues.address,
+          queuesMethods.address,
+          queuesRestricted.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address
+        ],[
+          incubator.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          payments.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          hounds.address,
+          houndsModifier.address,
+          shop.address
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await houndsRestricted.setGlobalParameters([
+        "HoundRace",
+        "HR",
+        [
+          hounds.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address,
+          queues.address,
+          queuesMethods.address,
+          queuesRestricted.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address
+        ],[
+          incubator.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          payments.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          hounds.address,
+          houndsModifier.address,
+          shop.address
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await houndsMinter.setGlobalParameters([
+        "HoundRace",
+        "HR",
+        [
+          hounds.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address,
+          queues.address,
+          queuesMethods.address,
+          queuesRestricted.address,
+          races.address,
+          racesMethods.address,
+          racesRestricted.address
+        ],[
+          incubator.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+          payments.address,
+          houndsRestricted.address,
+          houndsMinter.address,
+          hounds.address,
+          houndsModifier.address,
+          shop.address
+        ],[
+          "0xB1A2BC2EC50000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000",
+          "0x2386F26FC10000"
+        ]
+      ]);
+      configurations.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.createQueues(defaultQueues);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(0,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(0,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(0,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(0,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.breedHounds(3,4,{ value: "0xD529AE9E860000" });
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.id();
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(0,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(5,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await hounds.initializeHound(6,defaultHound);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await payments.addPayments(1,[
+        [
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          50, // % of the total race prize
+          0 // first place
+        ],[
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          30, // % of the total race prize
+          1 // second place
+        ],[
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          20, // % of the total race prize
+          2 // third place
+        ]
+      ]);
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      for ( let i = 0 ; i < 10 ; ++i ) {
+        await hounds.initializeHound(0,defaultHound);
+        recommendedCalls.increment();
+
+        await queues.enqueue(1,Number(await hounds.id())-1,{
+          value: defaultQueues[0][4]
+        });
+        recommendedCalls.increment();
+      }
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.createQueues(defaultQueues);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.deleteQueue(Number(await hounds.id())-1);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.deleteQueue(999999);
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
 
     const defaultRacePayments = [
       [
@@ -770,10 +1031,15 @@ async function main() {
         2 // third place
       ]
     ];
-    await races.uploadRace(defaultRace,defaultRacePayments,{
-      value: defaultRace[4] * defaultRace[2].length
-    });
-    recommendedCalls.increment();
+
+    try {
+      await races.uploadRace(defaultRace,defaultRacePayments,{
+        value: defaultRace[4] * defaultRace[2].length
+      });
+      recommendedCalls.increment();
+    } catch(err) {
+      errors(err);
+    }
 
     try {
       await hre.run("verify:verify", {

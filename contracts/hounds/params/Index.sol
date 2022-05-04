@@ -41,4 +41,12 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         return owner;
     }
 
+    function hound(uint256 theId) external view returns(Hound.Struct memory) {
+        return hounds[theId];
+    }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
+        return hounds[_tokenId].token_uri;
+    }
+
 }

@@ -46,3 +46,109 @@
   errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
   timestamp: '2022-05-04T05:55:16.135Z'
 }
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T07:21:36.813Z'
+}
+{
+  level: 'error',
+  errorMessage: 'paymentsMethods is not defined',
+  timestamp: '2022-05-04T07:31:49.977Z'
+}
+{
+  level: 'error',
+  errorMessage: 'paymentsMethods is not defined',
+  timestamp: '2022-05-04T07:31:49.977Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.173Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.173Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.174Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenasRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.267Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenasRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.267Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.286Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.358Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.359Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubator is not defined',
+  timestamp: '2022-05-04T07:31:50.736Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.876Z'
+}
+{
+  level: 'error',
+  errorMessage: 'sortings is not defined',
+  timestamp: '2022-05-04T07:31:50.928Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'generatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'generatorZerocost is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.958Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.973Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.986Z'
+}
