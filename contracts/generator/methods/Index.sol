@@ -7,24 +7,15 @@ contract GeneratorMethods is Params {
 
     constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
-    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory race) {
+    function generate(Queue.Struct memory queue) external returns(Race.Struct memory race) {
 
         require(control.allowed == msg.sender);
         
         require(queue.participants.length == queue.totalParticipants);
+        
+        uint256 theRandomness = IRandomness(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
-        require(queue.entryFee <= msg.value);
-
-        uint256 theRandomness = IRandomnessZerocost(control.randomness).getRandomNumber(abi.encode(block.timestamp));
-
-        (, uint256[] memory participants) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
-
-        IPaymentsMethods(control.payments).sendPayments(
-            PaymentRequest.Struct(
-                queue.rewardsId,
-                Converters.erc721IdsToOwners(control.hounds,participants)
-            )
-        );
+        (uint256[] memory participants, uint256[] memory scores) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
     
         race = Race.Struct(
             queue.name,
@@ -34,7 +25,7 @@ contract GeneratorMethods is Params {
             queue.entryFee,
             queue.rewardsId,
             theRandomness,
-            abi.encode(participants)
+            abi.encode(scores)
         );
 
         emit NewRace(queue,race);

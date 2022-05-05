@@ -23,8 +23,4 @@ contract Shop is Params {
         return abi.decode(output,(uint256));
     }
 
-    function checkDiscount(address requester) external view returns(uint256) {
-        return IShopZerocost(control.zerocost).checkDiscount(requester);
-    }
-
 }

@@ -2,12 +2,13 @@
 pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '../payment/Index.sol';
-import '../payment/Request.sol';
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+import './Payment.sol';
+import './PaymentRequest.sol';
 import './Constructor.sol';
 
 
-contract Params is Ownable {
+contract Params is Ownable, ReentrancyGuard {
 
 	mapping(address => bool) public allowed;
 	mapping(uint256 => Payment.Struct[]) public payments;
@@ -29,5 +30,9 @@ contract Params is Ownable {
 			allowed[globalParameters.allowed[i]] = !allowed[globalParameters.allowed[i]];
 		control = globalParameters;
     }
+
+	function getPayments(uint256 batchId) public view returns(Payment.Struct[] memory) {
+		return payments[batchId];
+	}
 
 }

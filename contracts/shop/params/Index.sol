@@ -1,9 +1,8 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '../discount/Index.sol';
+import './Discount.sol';
 import './Constructor.sol';
-import '../zerocost/IIndex.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
 interface Geyser { function totalStakedFor(address addr) external view returns(uint256); }

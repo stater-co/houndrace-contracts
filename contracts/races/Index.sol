@@ -7,28 +7,15 @@ contract Races is Params {
     
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
+    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function deleteQueue(uint256 theId) external onlyOwner {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
-    function uploadRace(Race.Struct memory race) external onlyOwner {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
-    function enqueue(uint256 theId, uint256 hound) external payable {
+    function raceStart(Queue.Struct memory queue) external payable {
+        require(allowed[msg.sender]);
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
-    }
-
-    function queue(uint256 theId) external view returns(Queue.Struct memory) {
-        return IRacesZeroCost(control.zerocost).queue(theId);
     }
 
 }

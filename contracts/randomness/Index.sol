@@ -1,14 +1,22 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import './params/Index.sol';
 
 
-contract Randomness is Params {
-
-    constructor(RandomnessConstructor.Struct memory input) Params(input) {}
+contract Randomness {
 
     function getRandomNumber(bytes memory input) external view returns(uint256) {
-        return IRandomnessZerocost(control.zerocost).getRandomNumber(input);
+        return uint256(
+            keccak256(
+                abi.encodePacked(
+                    block.difficulty, 
+                    block.timestamp, 
+                    block.gaslimit,
+                    blockhash(block.number-1),
+                    input
+                )
+            )
+        );
     }
 
 }
+

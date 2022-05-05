@@ -4,12 +4,11 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import './Constructor.sol';
-import '../hound/Index.sol';
-import '../../payments/methods/IIndex.sol';
-import '../modifier/IIndex.sol';
-import '../../incubator/methods/IIndex.sol';
-import '../../shop/methods/IIndex.sol';
-import '../zerocost/IIndex.sol';
+import './Hound.sol';
+import '../IIndex.sol';
+import '../../payments/IIndex.sol';
+import '../../incubator/IIndex.sol';
+import '../../shop/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 
 
@@ -35,6 +34,19 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i )
             allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
         control = globalParameters;
+    }
+
+    function houndOwner(uint256 tokenId) external view returns(address) {
+        address owner = ownerOf(tokenId);
+        return owner;
+    }
+
+    function hound(uint256 theId) external view returns(Hound.Struct memory) {
+        return hounds[theId];
+    }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
+        return hounds[_tokenId].token_uri;
     }
 
 }

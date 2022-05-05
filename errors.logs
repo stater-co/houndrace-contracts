@@ -7,7 +7,7 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-04-14T10:56:20.584Z'
+  timestamp: '2022-05-03T14:30:45.827Z'
 }
 {
   parent: undefined,
@@ -17,10 +17,8 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:12:42.034Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T14:37:38.284Z'
 }
 {
   parent: undefined,
@@ -30,361 +28,23 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:13:21.534Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-03T14:39:06.423Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:13:58.819Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:14:26.503Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:14:54.071Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:15:28.280Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:16:06.145Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:16:26.255Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:16:58.765Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:19:57.981Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:20:24.216Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:20:59.809Z'
-}
-{
-  parent: NomicLabsHardhatPluginError: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <title>403 - Forbidden: Access is denied.</title>
-  <style type="text/css">
-  <!--
-  body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
-  fieldset{padding:0 15px 10px 15px;} 
-  h1{font-size:2.4em;margin:0;color:#FFF;}
-  h2{font-size:1.7em;margin:0;color:#CC0000;} 
-  h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
-  #header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
-  background-color:#555555;}
-  #content{margin:0 0 0 2%;position:relative;}
-  .content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
-  -->
-  </style>
-  <script async src='/cdn-cgi/challenge-platform/h/g/scripts/invisible.js?ts=1649934000'></script></head>
-  <body>
-  <div id="header"><h1>Server Error</h1></div>
-  <div id="content">
-  <div class="content-container"><fieldset>
-  <h2>403 - Forbidden: Access is denied.</h2>
-  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
-  </fieldset></div>
-  </div>
-  <script type="text/javascript">(function(){window['__CF$cv$params']={r:'6fbc0f0acb926255',m:'80ad93186ab52d8534f14fe888576d51fdee3c1d-1649935295-0-Ac/hAuWuPuWJ4M/FUqU/zTiU/gwNjwE2yKbnT4O46HtWYcMSRwG7IzqbG0bEaStvuAc0FMrdkhivR5u11F7kVR+FG212HOVJnKXpr7tfsv/FotnNloMthE2KdAC56pFD5eH+fnzVgmmk2bhB8wdDzVWLMcUBJfaey9X52/qhtZycM7n3PRK2I8qR/3uLKedvE1+sqMLcX8ChfE1QJ0vj1Xb2l7/6H/YTYIESj7W7bui2gHKYGEJag7CBo5nXGg5l15I0cj1Et84P9zJvVI/EH87AnymsFpjrEHGWN7aNHUp4',s:[0x15410abe3a,0xd81d7b9c0c],u:'/cdn-cgi/challenge-platform/h/g'}})();</script></body>
-  </html>
-  
-      at getVerificationStatus (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/etherscan/EtherscanService.ts:97:13)
+  reason: 'replacement fee too low',
+  code: 'REPLACEMENT_UNDERPRICED',
+  error: ProviderError: replacement transaction underpriced
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
       at processTicksAndRejections (node:internal/process/task_queues:96:5)
-      at attemptVerification (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:459:30)
-      at SimpleTaskDefinition.action (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:741:48)
-      at Environment._runTaskDefinition (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:217:14)
-      at Environment.run (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:129:14)
-      at SimpleTaskDefinition.verifySubtask [as action] (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:281:28)
-      at Environment._runTaskDefinition (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:217:14)
-      at Environment.run (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:129:14)
-      at main (/home/gheoneaemilian/houndrace-contracts/scripts/ethereum.js:925:7),
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
   level: 'error',
-  errorMessage: 'Failure during etherscan status polling. The verification may still succeed but\n' +
-    'should be checked manually.\n' +
-    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=KXUZPTIKZ1G3N4ZQEAKFQXK3S912CYF7WP&module=contract&action=checkverifystatus&guid=cwrwgubrbmuuxnlk1ibvnfn9fp6z8kuanp1vwrthkcmgcjbawi\n' +
-    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
-    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
-    '<head>\n' +
-    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
-    '<title>403 - Forbidden: Access is denied.</title>\n' +
-    '<style type="text/css">\r\n' +
-    '<!--\r\n' +
-    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
-    'fieldset{padding:0 15px 10px 15px;} \r\n' +
-    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
-    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
-    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
-    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
-    'background-color:#555555;}\r\n' +
-    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
-    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
-    '-->\r\n' +
-    '</style>\n' +
-    "<script async src='/cdn-cgi/challenge-platform/h/g/scripts/invisible.js?ts=1649934000'></script></head>\n" +
-    '<body>\n' +
-    '<div id="header"><h1>Server Error</h1></div>\n' +
-    '<div id="content">\n' +
-    '<div class="content-container"><fieldset>\n' +
-    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
-    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
-    '</fieldset></div>\n' +
-    '</div>\n' +
-    `<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6fbc0f0acb926255',m:'80ad93186ab52d8534f14fe888576d51fdee3c1d-1649935295-0-Ac/hAuWuPuWJ4M/FUqU/zTiU/gwNjwE2yKbnT4O46HtWYcMSRwG7IzqbG0bEaStvuAc0FMrdkhivR5u11F7kVR+FG212HOVJnKXpr7tfsv/FotnNloMthE2KdAC56pFD5eH+fnzVgmmk2bhB8wdDzVWLMcUBJfaey9X52/qhtZycM7n3PRK2I8qR/3uLKedvE1+sqMLcX8ChfE1QJ0vj1Xb2l7/6H/YTYIESj7W7bui2gHKYGEJag7CBo5nXGg5l15I0cj1Et84P9zJvVI/EH87AnymsFpjrEHGWN7aNHUp4',s:[0x15410abe3a,0xd81d7b9c0c],u:'/cdn-cgi/challenge-platform/h/g'}})();</script></body>\n` +
-    '</html>\n',
-  timestamp: '2022-04-14T11:21:35.867Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:22:14.902Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:22:56.993Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:23:37.593Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:24:03.190Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:24:36.391Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:25:20.491Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:25:50.745Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:26:35.926Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:27:23.879Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-14T11:29:50.801Z'
-}{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-04-14T11:54:35.794Z'
+  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
+  timestamp: '2022-05-04T05:55:16.135Z'
 }
 {
   parent: undefined,
@@ -395,7 +55,102 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-04-14T11:55:01.696Z'
+  timestamp: '2022-05-04T07:21:36.813Z'
+}
+{
+  level: 'error',
+  errorMessage: 'paymentsMethods is not defined',
+  timestamp: '2022-05-04T07:31:49.977Z'
+}
+{
+  level: 'error',
+  errorMessage: 'paymentsMethods is not defined',
+  timestamp: '2022-05-04T07:31:49.977Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.173Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.173Z'
+}
+{
+  level: 'error',
+  errorMessage: 'shopMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.174Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenasRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.267Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenasRestricted is not defined',
+  timestamp: '2022-05-04T07:31:50.267Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.286Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.358Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.359Z'
+}
+{
+  level: 'error',
+  errorMessage: 'incubator is not defined',
+  timestamp: '2022-05-04T07:31:50.736Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.876Z'
+}
+{
+  level: 'error',
+  errorMessage: 'sortings is not defined',
+  timestamp: '2022-05-04T07:31:50.928Z'
+}
+{
+  level: 'error',
+  errorMessage: 'randomness is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'generatorMethods is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'generatorZerocost is not defined',
+  timestamp: '2022-05-04T07:31:50.944Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.958Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.973Z'
+}
+{
+  level: 'error',
+  errorMessage: 'arenas is not defined',
+  timestamp: '2022-05-04T07:31:50.986Z'
 }
 {
   parent: undefined,
@@ -406,7 +161,7 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-04-19T06:42:11.559Z'
+  timestamp: '2022-05-04T11:05:32.193Z'
 }
 {
   parent: undefined,
@@ -416,10 +171,634 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:53:07.619Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T11:05:47.788Z'
+}
+{
+  parent: undefined,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
+  level: 'error',
+  errorMessage: 'already known',
+  timestamp: '2022-05-04T11:06:09.410Z'
+}
+{
+  parent: undefined,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
+  level: 'error',
+  errorMessage: 'already known',
+  timestamp: '2022-05-04T11:06:23.422Z'
+}
+{
+  reason: 'insufficient funds for intrinsic transaction cost',
+  code: 'INSUFFICIENT_FUNDS',
+  error: ProviderError: insufficient funds for gas * price + value
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:06:37.728Z'
+}
+{
+  reason: 'insufficient funds for intrinsic transaction cost',
+  code: 'INSUFFICIENT_FUNDS',
+  error: ProviderError: insufficient funds for gas * price + value
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:07:01.594Z'
+}
+{
+  reason: 'replacement fee too low',
+  code: 'REPLACEMENT_UNDERPRICED',
+  error: ProviderError: replacement transaction underpriced
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
+  level: 'error',
+  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
+  timestamp: '2022-05-04T11:17:05.212Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:05.885Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:06.536Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:07.254Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:08.020Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:08.599Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:09.223Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:09.832Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:10.430Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:11.018Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:11.654Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:12.249Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:12.825Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:13.458Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:14.060Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:14.655Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:15.262Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:15.858Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:16.493Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:17.096Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:17.686Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:18.294Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:18.887Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:19.485Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:20.098Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:20.706Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
+  timestamp: '2022-05-04T11:17:21.310Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:42:29.991Z'
 }
 {
   parent: undefined,
@@ -429,10 +808,336 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:53:30.989Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:42:30.145Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:43:26.352Z'
 }
 {
   parent: undefined,
@@ -442,10 +1147,336 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:53:51.660Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:43:26.519Z'
+}
+{
+  stackTrace: [
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'Queues',
+        sourceName: 'contracts/queues/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Queues is Params {\n' +
+          '    \n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 21,
+        range: [ 637, 675 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'enqueue',
+        contract: 'QueuesMethods',
+        sourceName: 'contracts/queues/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract QueuesMethods is Params {\n' +
+          '\n' +
+          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
+          '        require(queues[theId].totalParticipants > 0);\n' +
+          '\n' +
+          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
+          '\n' +
+          '        require(msg.value >= queues[theId].entryFee);\n' +
+          '\n' +
+          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
+          '\n' +
+          '        require(!houndObj.running);\n' +
+          '\n' +
+          '        queues[theId].participants.push(hound);\n' +
+          '\n' +
+          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
+          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
+          '\n' +
+          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
+          '\n' +
+          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 28,
+        range: [ 936, 1056 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'Races',
+        sourceName: 'contracts/races/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Races is Params {\n' +
+          '    \n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
+          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 17,
+        range: [ 540, 578 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'raceStart',
+        contract: 'RacesMethods',
+        sourceName: 'contracts/races/methods/Index.sol',
+        sourceContent: '// SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract RacesMethods is Params {\n' +
+          '\n' +
+          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
+          '        if ( control.callable ) {\n' +
+          '            \n' +
+          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
+          '\n' +
+          '            uint256 ethToSend = 0;\n' +
+          '\n' +
+          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
+          '\n' +
+          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
+          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
+          '                if ( payments[i].currency == address(0) ) {\n' +
+          '                    if ( payments[i].paymentType == 3 ) {\n' +
+          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
+          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
+          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    } else {\n' +
+          '                        ethToSend += payments[i].qty;\n' +
+          '                    }\n' +
+          '                }\n' +
+          '            }\n' +
+          '\n' +
+          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
+          '\n' +
+          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
+          '\n' +
+          '            emit NewFinishedRace(id,  races[id]);\n' +
+          '\n' +
+          '        } else {\n' +
+          '\n' +
+          '            require(payable(control.staterApi).send(msg.value));\n' +
+          '            emit NewRace(id, races[id]);\n' +
+          '\n' +
+          '        }\n' +
+          '\n' +
+          '        ++id;\n' +
+          '\n' +
+          '    }\n' +
+          '\n' +
+          '}\n',
+        line: 25,
+        range: [ 1076, 1168 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 0,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'Hounds',
+        sourceName: 'contracts/hounds/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import './params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract Hounds is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '\n' +
+          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
+          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
+          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
+          '        require(success); \n' +
+          '    }\n' +
+          '\n' +
+          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
+          '        require(ownerOf(hound1) == msg.sender);\n' +
+          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 51,
+        range: [ 1819, 1875 ]
+      },
+      functionType: 1
+    },
+    {
+      type: 4,
+      sourceReference: {
+        function: 'updateHoundRunning',
+        contract: 'HoundsModifier',
+        sourceName: 'contracts/hounds/modifier/Index.sol',
+        sourceContent: '//SPDX-License-Identifier: MIT\n' +
+          'pragma solidity 0.8.13;\n' +
+          "import '../params/Index.sol';\n" +
+          '\n' +
+          '\n' +
+          'contract HoundsModifier is Params {\n' +
+          '\n' +
+          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
+          '    \n' +
+          '    function updateHoundStamina(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        --hounds[theId].stamina.staminaValue;\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].running = running;\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
+          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
+          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
+          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
+          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
+          '        }\n' +
+          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
+          '    }\n' +
+          '\n' +
+          '    function updateHoundBreeding(uint256 theId) public {\n' +
+          '        require(allowed[msg.sender]);\n' +
+          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
+          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
+          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
+          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
+          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
+          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
+          '    }\n' +
+          '\n' +
+          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
+          '        require(ownerOf(theId) == msg.sender);\n' +
+          '        if ( status )\n' +
+          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
+          '        hounds[theId].breeding.breedingFee = fee;\n' +
+          '        hounds[theId].breeding.availableToBreed = status;\n' +
+          '        emit HoundBreedable(theId,fee);\n' +
+          '    }\n' +
+          '\n' +
+          '}',
+        line: 22,
+        range: [ 911, 939 ]
+      },
+      message: ReturnData { value: <Buffer > },
+      isInvalidOpcodeError: false
+    }
+  ],
+  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  level: 'error',
+  errorMessage: 'Transaction reverted without a reason string',
+  timestamp: '2022-05-04T14:48:31.059Z'
 }
 {
   parent: undefined,
@@ -455,279 +1486,6 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:54:15.540Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:54:48.689Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:55:15.305Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:55:51.623Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:56:30.797Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:57:22.053Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:57:49.330Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:58:19.218Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T06:59:52.066Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:00:16.006Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:00:40.025Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The contract verification failed.\nReason: Fail - Unable to verify',
-  timestamp: '2022-04-19T07:02:11.557Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:02:41.823Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:03:09.419Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:03:38.223Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:04:03.610Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:04:31.780Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:04:55.953Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:05:26.662Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:05:51.132Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:06:31.245Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-04-19T07:09:02.114Z'
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-04T14:48:31.236Z'
 }

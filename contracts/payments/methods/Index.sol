@@ -9,11 +9,19 @@ contract PaymentsMethods is Params {
 
 	function transferTokens(
 		Payment.Struct memory payment
-	) public payable {
+	) public payable nonReentrant {
 		if ( payment.currency != address(0) ) {
 			require(IERC20(payment.currency).transferFrom(payment.from, payment.to, payment.qty));
 		} else {
 			require(payment.to.send(payment.qty));
+		}
+	}
+
+	function rawSend(address token, uint256 amount, address to) public nonReentrant {
+		if ( token != address(0) ) {
+			IERC20(token).transferFrom(msg.sender, to, amount);
+		} else {
+			require(payable(to).send(amount));
 		}
 	}
 
@@ -34,7 +42,7 @@ contract PaymentsMethods is Params {
 		uint256 totalPaid;
 		for ( uint256 i = 0 ; i < l ; ++i ) {
 			totalPaid += payments[paymentRequest.rewardsBatch][i].qty;
-			require(msg.value >= totalPaid);
+			require(address(this).balance >= totalPaid);
 			transferTokens(payments[paymentRequest.rewardsBatch][i]);
 		}
 	}

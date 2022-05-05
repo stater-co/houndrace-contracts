@@ -47,12 +47,9 @@ contract Hounds is Params {
         require(success);
     }
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
-    }
-
-    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return hounds[_tokenId].token_uri;
+    function updateHoundRunning(uint256 theId, bool running) public {
+        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success); 
     }
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {

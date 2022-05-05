@@ -6,7 +6,6 @@ library ArenasConstructor {
     struct Struct {
         string name;
         string symbol;
-        address zerocost;
         address restricted;
     }
 }

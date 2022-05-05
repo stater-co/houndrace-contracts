@@ -7,51 +7,43 @@ contract RacesMethods is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function enqueue(uint256 theId, uint256 hound) external payable {
-    
-        require(queues[theId].totalParticipants > 0);
+    function raceStart(Queue.Struct memory queue) external payable {
+        if ( control.callable ) {
+            
+            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);
 
-        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));
+            uint256 ethToSend = 0;
 
-        require(msg.value >= queues[theId].entryFee);
+            races[id] = IGenerator(control.generator).generate(queue);
 
-        Hound.Struct memory houndObj = IHoundsZerocost(control.hounds).hound(hound);
-
-        require(!houndObj.running);
-
-        queues[theId].participants.push(hound);
-        
-        IHoundsModifier(control.hounds).updateHoundStamina(hound);
-
-        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
-
-            if ( control.callable ) {
-                
-                (bool success, bytes memory output) = control.generator.call{ value: queues[theId].entryFee * queues[theId].totalParticipants }(
-                    abi.encodeWithSignature(
-                        "generate((uint256,uint256[],address,uint256,uint32))",
-                        queues[theId]
-                    )
-                );
-                require(success);
-                
-                races[id] = abi.decode(output,(Race.Struct));
-
-                emit NewFinishedRace(id,  races[id]);
-
-                ++id;
-
-            } else {
-
-                emit NewRace(theId, queues[theId]);
-
+            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications
+            for ( uint256 i = 0 ; i < payments.length ; ++i ) {
+                if ( payments[i].currency == address(0) ) {
+                    if ( payments[i].paymentType == 3 ) {
+                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;
+                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));
+                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);
+                        ethToSend += payments[i].qty;
+                    } else {
+                        ethToSend += payments[i].qty;
+                    }
+                }
             }
 
-            delete queues[theId].participants;
+            require(queue.entryFee * queue.totalParticipants <= msg.value);
+
+            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);
+
+            emit NewFinishedRace(id,  races[id]);
+
+        } else {
+
+            require(payable(control.staterApi).send(msg.value));
+            emit NewRace(id, races[id]);
 
         }
 
-        emit PlayerEnqueue(theId,hound,msg.sender);
+        ++id;
 
     }
 

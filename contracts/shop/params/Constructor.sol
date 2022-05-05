@@ -6,7 +6,6 @@ library ShopConstructor {
     
     struct Struct {
         address methods;
-        address zerocost;
         address restricted;
     }
 

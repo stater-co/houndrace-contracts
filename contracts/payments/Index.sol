@@ -8,22 +8,32 @@ contract Payments is Params {
 	constructor(PaymentsConstructor.Struct memory input) Params(input) {}
 
 	function transferTokens(Payment.Struct memory payment) public payable {
-        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
+        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
+        require(success);
+	}
+
+	function rawSend(address token, uint256 amount, address to) public {
+        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}
 
 	function addPayments(uint256 queueId, Payment.Struct[] memory thePayments) external isAllowed {
-        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
+        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}
 
 	function setPayments(uint256 queueId, Payment.Struct[] memory thePayments) external isAllowed {
-        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
+        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}
 
-	function compoundTransfer(PaymentRequest.Struct memory paymentRequest) public payable isAllowed {
-        (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
+	function sendPayments(PaymentRequest.Struct memory paymentRequest) public payable {
+		(bool success, bytes memory output) = control.payments.delegatecall(msg.data);
+        require(success);
+	}
+
+	function sendHardcodedPayments(Payment.Struct[] memory payments) public payable {
+		(bool success, bytes memory output) = control.payments.delegatecall(msg.data);
         require(success);
 	}
 

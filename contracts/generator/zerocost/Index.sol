@@ -7,7 +7,15 @@ contract GeneratorZerocost is Params {
 
     constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
-    function computeHoundsStats(uint256[] memory participants, Arena.Struct memory terrain) internal view returns(uint256[] memory) {
+    function computeHoundsStats(
+        uint256[] memory participants, 
+        Arena.Struct memory terrain
+    ) 
+        internal 
+        view 
+    returns(
+        uint256[] memory
+    ) {
 
         uint256[] memory stats = new uint256[](participants.length);
 
@@ -15,7 +23,7 @@ contract GeneratorZerocost is Params {
 
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {
 
-            hound = IHoundsZerocost(control.hounds).hound(participants[i]);
+            hound = IHounds(control.hounds).hound(participants[i]);
 
             stats[i] = uint256((hound.identity.geneticSequence[30] + hound.identity.geneticSequence[31] + hound.identity.geneticSequence[32] + hound.identity.geneticSequence[33]) * 99);
             uint256 tmp = stats[i];
@@ -48,7 +56,7 @@ contract GeneratorZerocost is Params {
         uint256[] memory
     ) {
         
-        Arena.Struct memory theTerrain = IArenasZerocost(control.arenas).arena(terrain);
+        Arena.Struct memory theTerrain = IArenas(control.arenas).arena(terrain);
         
         uint256[] memory houndsPower = computeHoundsStats(participants, theTerrain);
         
