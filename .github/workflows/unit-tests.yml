@@ -1,5 +1,5 @@
 name: Contracts functionality testing
-on: [pull_request]
+on: push
 jobs:
   Hardhat-unit-tests:
     runs-on: ubuntu-latest
