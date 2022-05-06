@@ -1,16 +1,35 @@
 const { deployment, errors } = require("../plugins/logger.js");
 const cliProgress = require('cli-progress');
 
+const opt = {
+  format: 'progress [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
+}
+
+const deploymentsStepsName = [
+
+];
+const configurationsStepsName = [
+
+];
+const recommendedCallsStepsCalls = [
+
+];
+const verificationsStepsCalls = [
+
+];
+
 // create new container
 const multibar = new cliProgress.MultiBar({
   clearOnComplete: false,
-  hideCursor: true
-
+  hideCursor: true,
+  stopOnComplete: true,
+  noTTYOutput: true
 }, cliProgress.Presets.shades_classic);
+
 
 const deployments = multibar.create(27,0);
 const configurations = multibar.create(16,0);
-const recommendedCalls = multibar.create(40,0);
+const recommendedCalls = multibar.create(39,0);
 const verifications = multibar.create(26,0);
 
 
@@ -1413,9 +1432,6 @@ async function main() {
       errors(err);
     }
     verifications.increment();
-    
-    // stop all bars
-    multibar.stop();
 
   } catch(err) {
     console.error(err);
