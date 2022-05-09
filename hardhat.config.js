@@ -18,26 +18,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   networks: {
     hardhat: {
-      initialBaseFeePerGas: 0,
-      gas: 4800000,
-      gasPrice: 8000000000
+      initialBaseFeePerGas: 0
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
-      timeout: 240000,
-      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY],
-      gas: 4800000,
-      gasPrice: 8000000000
+      accounts: [process.env.ETH_ACCOUNT_PRIVATE_KEY]
     }
   },
   etherscan: {
     apiKey: process.env.RINKEBY_ETHERSCAN_API_KEY
   },
   mocha: {
-    timeout: 800000,
     reporter: 'eth-gas-reporter'
   },
-  timeout: 800000,
   solidity: {
     compilers: [
       {

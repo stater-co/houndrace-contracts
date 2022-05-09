@@ -1,7 +1,7 @@
 const { deployment, errors } = require("../plugins/logger.js");
 const cliProgress = require('cli-progress');
 const opt = {
-  format: 'progress {step} [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
+  format: '{step} [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
 }
 
 // create new container
@@ -22,7 +22,7 @@ const configurations = multibar.create(16,0);
 configurations.update(0, {
   step: "Set global parameters for payment methods"
 });
-const recommendedCalls = multibar.create(39,0);
+const recommendedCalls = multibar.create(22,0);
 recommendedCalls.update(0, {
   step: "Create queues"
 });
@@ -57,11 +57,6 @@ const defaultRace = [
   55,
   '0x00'
 ];
-
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 
 async function main() {
@@ -130,7 +125,7 @@ async function main() {
     });
 
     const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
-    const shopRestricted = await ShopRestricted.deploy([address0,address0,address0]);
+    const shopRestricted = await ShopRestricted.deploy([address0,address0]);
     await shopRestricted.deployed();
     deployment('export SHOP_RESTRICTED=' + shopRestricted.address);
     deployments.update(7, {
@@ -138,7 +133,7 @@ async function main() {
     });
 
     const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
-    const shopMethods = await ShopMethods.deploy([address0,address0,address0]);
+    const shopMethods = await ShopMethods.deploy([address0,address0]);
     await shopMethods.deployed();
     deployment('export SHOP_METHODS=' + shopMethods.address);
     deployments.update(8, {
@@ -172,7 +167,7 @@ async function main() {
     }
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
-    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0]);
+    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0]);
     await arenasRestricted.deployed();
     deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
     deployments.update(10, {
@@ -180,7 +175,7 @@ async function main() {
     });
 
     const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA",arenasRestricted.address]);
+    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address]);
     await arenas.deployed();
     deployment('export ARENAS=' + arenas.address);
     deployments.update(11, {
@@ -664,10 +659,7 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address
+          queuesRestricted.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -705,10 +697,7 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address
+          queuesRestricted.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -746,10 +735,7 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address
+          queuesRestricted.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -787,10 +773,7 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address
+          queuesRestricted.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -1006,42 +989,6 @@ async function main() {
       errors(err);
     }
 
-    try {
-      for ( let i = 0 ; i < 10 ; ++i ) {
-        await hounds.initializeHound(0,defaultHound);
-        recommendedCalls.update(19 + i*2, {
-          step: "Initialize hound"
-        });
-
-        await queues.enqueue(1,Number(await hounds.id())-1,{
-          value: defaultQueues[0][4]
-        });
-        recommendedCalls.update(19 + (i*2+1), {
-          step: "Enqueue"
-        });
-      }
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await queues.createQueues(defaultQueues);
-      recommendedCalls.update(40, {
-        step: "Create queues"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await queues.deleteQueue(Number(await hounds.id())-1);
-      recommendedCalls.update(41, {
-        step: "Delete queues"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
     const defaultRacePayments = [
       [
         payments.address, // from
@@ -1077,8 +1024,41 @@ async function main() {
       await races.uploadRace(defaultRace,defaultRacePayments,{
         value: defaultRace[4] * defaultRace[2].length
       });
-      recommendedCalls.update(42, {
+      recommendedCalls.update(19, {
         step: "Upload race"
+      });
+    } catch(err) {
+      console.error(err);
+      errors(err);
+    }
+
+    try {
+      for ( let i = 0 ; i < 10 ; ++i ) {
+        await hounds.initializeHound(0,defaultHound);
+        await queues.enqueue(1,Number(await hounds.id())-1,{
+          value: defaultQueues[0][4]
+        });
+      }
+      recommendedCalls.update(20, {
+        step: "10x Enqueue, Race creation"
+      });
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.createQueues(defaultQueues);
+      recommendedCalls.update(21, {
+        step: "Create queues"
+      });
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.deleteQueue(Number(await hounds.id())-1);
+      recommendedCalls.update(22, {
+        step: "Finished!"
       });
     } catch(err) {
       errors(err);
@@ -1091,9 +1071,10 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(1, {
+      step: "Verify sortings"
+    });
 
-    /*
     try {
       await hre.run("verify:verify", {
         address: sortings.address
@@ -1101,7 +1082,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(2, {
+      step: "Verify randomness"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1110,7 +1093,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(3, {
+      step: "Verify payment methods"
+    });
     
     try {
       await hre.run("verify:verify", {
@@ -1124,7 +1109,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(4, {
+      step: "Verify payments"
+    });
     
     try {
       await hre.run("verify:verify", {
@@ -1138,7 +1125,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(5, {
+      step: "Verify houndrace potions"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1148,7 +1137,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(6, {
+      step: "Verify shop restricted"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1162,7 +1153,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(7, {
+      step: "Verify shop methods"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1176,7 +1169,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(8, {
+      step: "Verify shop"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1190,21 +1185,25 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(9, {
+      step: "Verify arenas restricted"
+    });
 
     try {
       await hre.run("verify:verify", {
         address: arenasRestricted.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0, address0
+            "HoundRace Arenas", "HRA", address0
           ]
         ]
       });
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(10, {
+      step: "Verify arenas"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1218,7 +1217,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(11, {
+      step: "Verify genetics"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1239,7 +1240,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(12, {
+      step: "Verify incubator methods"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1256,7 +1259,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(13, {
+      step: "Verify incubator"
+    });
     
     try {
       await hre.run("verify:verify", {
@@ -1266,14 +1271,16 @@ async function main() {
             incubatorMethods.address,
             randomness.address,
             genetics.address,
-            0
+            "0x67657452"
           ]
         ]
       });
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(14, {
+      step: "Verify hounds restricted"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1305,7 +1312,10 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(15, {
+      step: "Verify hounds modifier"
+    });
+
     
     try {
       await hre.run("verify:verify", {
@@ -1337,7 +1347,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(16, {
+      step: "Verify hounds minter"
+    });
     
     try {
       await hre.run("verify:verify", {
@@ -1369,7 +1381,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(17, {
+      step: "Verify hounds"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1385,6 +1399,7 @@ async function main() {
               payments.address,
               houndsRestricted.address,
               houndsMinter.address,
+              address0,
               houndsModifier.address,
               shop.address
             ],[
@@ -1400,7 +1415,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(18, {
+      step: "Verify races restricted"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1415,6 +1432,7 @@ async function main() {
             address0,
             address0,
             address0,
+            address0,
             500000000,
             true
           ]
@@ -1423,7 +1441,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(19, {
+      step: "Verify races methods"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1438,6 +1458,7 @@ async function main() {
             address0,
             address0,
             address0,
+            address0,
             500000000,
             true
           ]
@@ -1446,7 +1467,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(20, {
+      step: "Verify races"
+    });
     
     try {
       await hre.run("verify:verify", {
@@ -1460,6 +1483,8 @@ async function main() {
             address0,
             payments.address,
             racesRestricted.address,
+            address0,
+            owner.address,
             500000000,
             true
           ]
@@ -1468,7 +1493,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(21, {
+      step: "Verify generator methods"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1488,7 +1515,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(22, {
+      step: "Verify generator"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1500,14 +1529,17 @@ async function main() {
             hounds.address,
             races.address,
             generatorMethods.address,
-            payments.address
+            payments.address,
+            generatorZerocost.address
           ]
         ]
       });
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(23, {
+      step: "Verify queues restricted"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1526,7 +1558,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(24, {
+      step: "Verify queues methods"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1545,7 +1579,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
+    verifications.update(25, {
+      step: "Verify queues"
+    });
 
     try {
       await hre.run("verify:verify", {
@@ -1564,8 +1600,9 @@ async function main() {
     } catch (err) {
       errors(err);
     }
-    verifications.increment();
-    */
+    verifications.update(26, {
+      step: "Finished!"
+    });
 
   } catch(err) {
     console.error(err);
