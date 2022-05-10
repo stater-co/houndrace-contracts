@@ -21,7 +21,7 @@ contract Generator is Params {
         return IGeneratorZerocost(control.zerocost).simulateClassicRace(participants, terrain, theRandomness);
     }
 
-    function generate(Queue.Struct memory queue) external payable returns(Race.Struct memory) {
+    function generate(Queue.Struct memory queue) external returns(Race.Struct memory) {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
         return abi.decode(output,(Race.Struct));

@@ -5,7 +5,7 @@ library Hound {
 
     struct Breeding {
         uint256 breedCooldown;
-        uint256 breedingFee;
+        uint256 breedingFee; // ETH only
         uint256 breedLastUpdate;
         bool availableToBreed;
     }

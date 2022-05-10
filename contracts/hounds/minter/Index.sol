@@ -16,7 +16,7 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        if ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ) {
+        if ( ownerOf(hound2) == msg.sender ) {
             require(msg.value >= control.fees.breedCost + control.fees.breedFee);
         } else {
             require(
@@ -27,6 +27,7 @@ contract HoundsMinter is Params {
         }
 
         require(payable(control.boilerplate.staterApi).send(control.fees.breedFee));
+        require(payable(control.boilerplate.payments).send(control.fees.breedCost + (msg.value - (hounds[hound2].breeding.breedingFee == address(0) ? control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee : control.fees.breedCost + control.fees.breedFee))));
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
         Hound.Struct memory offspring = IIncubator(control.boilerplate.incubator).breedHounds(
