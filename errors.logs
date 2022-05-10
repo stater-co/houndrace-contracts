@@ -1,40 +1,7 @@
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-03T14:30:45.827Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-03T14:37:38.284Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-03T14:39:06.423Z'
-}
-{
-  reason: 'replacement fee too low',
-  code: 'REPLACEMENT_UNDERPRICED',
-  error: ProviderError: replacement transaction underpriced
+  reason: 'insufficient funds for intrinsic transaction cost',
+  code: 'INSUFFICIENT_FUNDS',
+  error: ProviderError: insufficient funds for gas * price + value
       at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
       at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
       at runMicrotasks (<anonymous>)
@@ -43,156 +10,8 @@
   method: 'sendTransaction',
   transaction: undefined,
   level: 'error',
-  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
-  timestamp: '2022-05-04T05:55:16.135Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T07:21:36.813Z'
-}
-{
-  level: 'error',
-  errorMessage: 'paymentsMethods is not defined',
-  timestamp: '2022-05-04T07:31:49.977Z'
-}
-{
-  level: 'error',
-  errorMessage: 'paymentsMethods is not defined',
-  timestamp: '2022-05-04T07:31:49.977Z'
-}
-{
-  level: 'error',
-  errorMessage: 'shopMethods is not defined',
-  timestamp: '2022-05-04T07:31:50.173Z'
-}
-{
-  level: 'error',
-  errorMessage: 'shopRestricted is not defined',
-  timestamp: '2022-05-04T07:31:50.173Z'
-}
-{
-  level: 'error',
-  errorMessage: 'shopMethods is not defined',
-  timestamp: '2022-05-04T07:31:50.174Z'
-}
-{
-  level: 'error',
-  errorMessage: 'arenasRestricted is not defined',
-  timestamp: '2022-05-04T07:31:50.267Z'
-}
-{
-  level: 'error',
-  errorMessage: 'arenasRestricted is not defined',
-  timestamp: '2022-05-04T07:31:50.267Z'
-}
-{
-  level: 'error',
-  errorMessage: 'randomness is not defined',
-  timestamp: '2022-05-04T07:31:50.286Z'
-}
-{
-  level: 'error',
-  errorMessage: 'incubatorMethods is not defined',
-  timestamp: '2022-05-04T07:31:50.358Z'
-}
-{
-  level: 'error',
-  errorMessage: 'incubatorMethods is not defined',
-  timestamp: '2022-05-04T07:31:50.359Z'
-}
-{
-  level: 'error',
-  errorMessage: 'incubator is not defined',
-  timestamp: '2022-05-04T07:31:50.736Z'
-}
-{
-  level: 'error',
-  errorMessage: 'randomness is not defined',
-  timestamp: '2022-05-04T07:31:50.876Z'
-}
-{
-  level: 'error',
-  errorMessage: 'sortings is not defined',
-  timestamp: '2022-05-04T07:31:50.928Z'
-}
-{
-  level: 'error',
-  errorMessage: 'randomness is not defined',
-  timestamp: '2022-05-04T07:31:50.944Z'
-}
-{
-  level: 'error',
-  errorMessage: 'generatorMethods is not defined',
-  timestamp: '2022-05-04T07:31:50.944Z'
-}
-{
-  level: 'error',
-  errorMessage: 'generatorZerocost is not defined',
-  timestamp: '2022-05-04T07:31:50.944Z'
-}
-{
-  level: 'error',
-  errorMessage: 'arenas is not defined',
-  timestamp: '2022-05-04T07:31:50.958Z'
-}
-{
-  level: 'error',
-  errorMessage: 'arenas is not defined',
-  timestamp: '2022-05-04T07:31:50.973Z'
-}
-{
-  level: 'error',
-  errorMessage: 'arenas is not defined',
-  timestamp: '2022-05-04T07:31:50.986Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T11:05:32.193Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T11:05:47.788Z'
-}
-{
-  parent: undefined,
-  name: 'ProviderError',
-  code: -32000,
-  _isProviderError: true,
-  data: undefined,
-  level: 'error',
-  errorMessage: 'already known',
-  timestamp: '2022-05-04T11:06:09.410Z'
-}
-{
-  parent: undefined,
-  name: 'ProviderError',
-  code: -32000,
-  _isProviderError: true,
-  data: undefined,
-  level: 'error',
-  errorMessage: 'already known',
-  timestamp: '2022-05-04T11:06:23.422Z'
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:21:22.159Z'
 }
 {
   reason: 'insufficient funds for intrinsic transaction cost',
@@ -207,26 +26,12 @@
   transaction: undefined,
   level: 'error',
   errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
-  timestamp: '2022-05-04T11:06:37.728Z'
+  timestamp: '2022-05-09T12:21:22.534Z'
 }
 {
   reason: 'insufficient funds for intrinsic transaction cost',
   code: 'INSUFFICIENT_FUNDS',
   error: ProviderError: insufficient funds for gas * price + value
-      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
-      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
-      at processTicksAndRejections (node:internal/process/task_queues:96:5)
-      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
-  method: 'sendTransaction',
-  transaction: undefined,
-  level: 'error',
-  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
-  timestamp: '2022-05-04T11:07:01.594Z'
-}
-{
-  reason: 'replacement fee too low',
-  code: 'REPLACEMENT_UNDERPRICED',
-  error: ProviderError: replacement transaction underpriced
       at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
       at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
       at runMicrotasks (<anonymous>)
@@ -235,1610 +40,90 @@
   method: 'sendTransaction',
   transaction: undefined,
   level: 'error',
-  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
-  timestamp: '2022-05-04T11:17:05.212Z'
+  errorMessage: 'insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:21:23.417Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:05.885Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:06.536Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:07.254Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:08.020Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:08.599Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:09.223Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:09.832Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:10.430Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:11.018Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:11.654Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:12.249Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:12.825Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:13.458Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:14.060Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:14.655Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:15.262Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:15.858Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:16.493Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:17.096Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:17.686Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:18.294Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:18.887Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:19.485Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:20.098Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:20.706Z'
-}
-{
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
-  level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T11:17:21.310Z'
-}
-{
-  stackTrace: [
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'Queues',
-        sourceName: 'contracts/queues/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Queues is Params {\n' +
-          '    \n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 21,
-        range: [ 637, 675 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'QueuesMethods',
-        sourceName: 'contracts/queues/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract QueuesMethods is Params {\n' +
-          '\n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        require(queues[theId].totalParticipants > 0);\n' +
-          '\n' +
-          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
-          '\n' +
-          '        require(msg.value >= queues[theId].entryFee);\n' +
-          '\n' +
-          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
-          '\n' +
-          '        require(!houndObj.running);\n' +
-          '\n' +
-          '        queues[theId].participants.push(hound);\n' +
-          '\n' +
-          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
-          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
-          '\n' +
-          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
-          '\n' +
-          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 28,
-        range: [ 936, 1056 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'Races',
-        sourceName: 'contracts/races/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Races is Params {\n' +
-          '    \n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 17,
-        range: [ 540, 578 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'RacesMethods',
-        sourceName: 'contracts/races/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract RacesMethods is Params {\n' +
-          '\n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        if ( control.callable ) {\n' +
-          '            \n' +
-          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
-          '\n' +
-          '            uint256 ethToSend = 0;\n' +
-          '\n' +
-          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
-          '\n' +
-          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
-          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
-          '                if ( payments[i].currency == address(0) ) {\n' +
-          '                    if ( payments[i].paymentType == 3 ) {\n' +
-          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
-          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
-          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    } else {\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    }\n' +
-          '                }\n' +
-          '            }\n' +
-          '\n' +
-          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
-          '\n' +
-          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
-          '\n' +
-          '            emit NewFinishedRace(id,  races[id]);\n' +
-          '\n' +
-          '        } else {\n' +
-          '\n' +
-          '            require(payable(control.staterApi).send(msg.value));\n' +
-          '            emit NewRace(id, races[id]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        ++id;\n' +
-          '\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 25,
-        range: [ 1076, 1168 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'Hounds',
-        sourceName: 'contracts/hounds/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Hounds is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
-          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success); \n' +
-          '    }\n' +
-          '\n' +
-          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
-          '        require(ownerOf(hound1) == msg.sender);\n' +
-          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 51,
-        range: [ 1819, 1875 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 4,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'HoundsModifier',
-        sourceName: 'contracts/hounds/modifier/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract HoundsModifier is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '    \n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        --hounds[theId].stamina.staminaValue;\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].running = running;\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        require(ownerOf(theId) == msg.sender);\n' +
-          '        if ( status )\n' +
-          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
-          '        hounds[theId].breeding.breedingFee = fee;\n' +
-          '        hounds[theId].breeding.availableToBreed = status;\n' +
-          '        emit HoundBreedable(theId,fee);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 22,
-        range: [ 911, 939 ]
-      },
-      message: ReturnData { value: <Buffer > },
-      isInvalidOpcodeError: false
-    }
-  ],
-  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
-  level: 'error',
-  errorMessage: 'Transaction reverted without a reason string',
-  timestamp: '2022-05-04T14:42:29.991Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T14:42:30.145Z'
-}
-{
-  stackTrace: [
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'Queues',
-        sourceName: 'contracts/queues/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Queues is Params {\n' +
-          '    \n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 21,
-        range: [ 637, 675 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'QueuesMethods',
-        sourceName: 'contracts/queues/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract QueuesMethods is Params {\n' +
-          '\n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        require(queues[theId].totalParticipants > 0);\n' +
-          '\n' +
-          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
-          '\n' +
-          '        require(msg.value >= queues[theId].entryFee);\n' +
-          '\n' +
-          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
-          '\n' +
-          '        require(!houndObj.running);\n' +
-          '\n' +
-          '        queues[theId].participants.push(hound);\n' +
-          '\n' +
-          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
-          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
-          '\n' +
-          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
-          '\n' +
-          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 28,
-        range: [ 936, 1056 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'Races',
-        sourceName: 'contracts/races/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Races is Params {\n' +
-          '    \n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 17,
-        range: [ 540, 578 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'RacesMethods',
-        sourceName: 'contracts/races/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract RacesMethods is Params {\n' +
-          '\n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        if ( control.callable ) {\n' +
-          '            \n' +
-          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
-          '\n' +
-          '            uint256 ethToSend = 0;\n' +
-          '\n' +
-          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
-          '\n' +
-          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
-          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
-          '                if ( payments[i].currency == address(0) ) {\n' +
-          '                    if ( payments[i].paymentType == 3 ) {\n' +
-          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
-          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
-          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    } else {\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    }\n' +
-          '                }\n' +
-          '            }\n' +
-          '\n' +
-          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
-          '\n' +
-          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
-          '\n' +
-          '            emit NewFinishedRace(id,  races[id]);\n' +
-          '\n' +
-          '        } else {\n' +
-          '\n' +
-          '            require(payable(control.staterApi).send(msg.value));\n' +
-          '            emit NewRace(id, races[id]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        ++id;\n' +
-          '\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 25,
-        range: [ 1076, 1168 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'Hounds',
-        sourceName: 'contracts/hounds/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Hounds is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
-          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success); \n' +
-          '    }\n' +
-          '\n' +
-          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
-          '        require(ownerOf(hound1) == msg.sender);\n' +
-          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 51,
-        range: [ 1819, 1875 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 4,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'HoundsModifier',
-        sourceName: 'contracts/hounds/modifier/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract HoundsModifier is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '    \n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        --hounds[theId].stamina.staminaValue;\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].running = running;\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        require(ownerOf(theId) == msg.sender);\n' +
-          '        if ( status )\n' +
-          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
-          '        hounds[theId].breeding.breedingFee = fee;\n' +
-          '        hounds[theId].breeding.availableToBreed = status;\n' +
-          '        emit HoundBreedable(theId,fee);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 22,
-        range: [ 911, 939 ]
-      },
-      message: ReturnData { value: <Buffer > },
-      isInvalidOpcodeError: false
-    }
-  ],
-  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
-  level: 'error',
-  errorMessage: 'Transaction reverted without a reason string',
-  timestamp: '2022-05-04T14:43:26.352Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T14:43:26.519Z'
-}
-{
-  stackTrace: [
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'Queues',
-        sourceName: 'contracts/queues/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Queues is Params {\n' +
-          '    \n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 21,
-        range: [ 637, 675 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'QueuesMethods',
-        sourceName: 'contracts/queues/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract QueuesMethods is Params {\n' +
-          '\n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        require(queues[theId].totalParticipants > 0);\n' +
-          '\n' +
-          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
-          '\n' +
-          '        require(msg.value >= queues[theId].entryFee);\n' +
-          '\n' +
-          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
-          '\n' +
-          '        require(!houndObj.running);\n' +
-          '\n' +
-          '        queues[theId].participants.push(hound);\n' +
-          '\n' +
-          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
-          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
-          '\n' +
-          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
-          '\n' +
-          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 28,
-        range: [ 936, 1056 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'Races',
-        sourceName: 'contracts/races/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Races is Params {\n' +
-          '    \n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 17,
-        range: [ 540, 578 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'RacesMethods',
-        sourceName: 'contracts/races/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract RacesMethods is Params {\n' +
-          '\n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        if ( control.callable ) {\n' +
-          '            \n' +
-          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
-          '\n' +
-          '            uint256 ethToSend = 0;\n' +
-          '\n' +
-          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
-          '\n' +
-          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
-          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
-          '                if ( payments[i].currency == address(0) ) {\n' +
-          '                    if ( payments[i].paymentType == 3 ) {\n' +
-          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
-          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
-          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    } else {\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    }\n' +
-          '                }\n' +
-          '            }\n' +
-          '\n' +
-          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
-          '\n' +
-          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
-          '\n' +
-          '            emit NewFinishedRace(id,  races[id]);\n' +
-          '\n' +
-          '        } else {\n' +
-          '\n' +
-          '            require(payable(control.staterApi).send(msg.value));\n' +
-          '            emit NewRace(id, races[id]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        ++id;\n' +
-          '\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 25,
-        range: [ 1076, 1168 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'Hounds',
-        sourceName: 'contracts/hounds/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Hounds is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
-          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success); \n' +
-          '    }\n' +
-          '\n' +
-          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
-          '        require(ownerOf(hound1) == msg.sender);\n' +
-          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 51,
-        range: [ 1819, 1875 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 4,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'HoundsModifier',
-        sourceName: 'contracts/hounds/modifier/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract HoundsModifier is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '    \n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        --hounds[theId].stamina.staminaValue;\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].running = running;\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        require(ownerOf(theId) == msg.sender);\n' +
-          '        if ( status )\n' +
-          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
-          '        hounds[theId].breeding.breedingFee = fee;\n' +
-          '        hounds[theId].breeding.availableToBreed = status;\n' +
-          '        emit HoundBreedable(theId,fee);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 22,
-        range: [ 911, 939 ]
-      },
-      message: ReturnData { value: <Buffer > },
-      isInvalidOpcodeError: false
-    }
-  ],
-  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
-  level: 'error',
-  errorMessage: 'Transaction reverted without a reason string',
-  timestamp: '2022-05-04T14:48:31.059Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-04T14:48:31.236Z'
-}
-{
-  reason: 'replacement fee too low',
-  code: 'REPLACEMENT_UNDERPRICED',
-  error: ProviderError: replacement transaction underpriced
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
       at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
-      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
       at processTicksAndRejections (node:internal/process/task_queues:96:5)
       at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
-  method: 'sendTransaction',
-  transaction: undefined,
+  method: 'estimateGas',
+  transaction: {
+    from: '0xe1BE8376A85aEe03775b635FB202543f7C123A4b',
+    to: '0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02',
+    value: BigNumber { value: "60000000000000000" },
+    data: '0xead0587600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.5)',
-  timestamp: '2022-05-04T18:23:12.682Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xe1BE8376A85aEe03775b635FB202543f7C123A4b","to":"0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02","value":{"type":"BigNumber","hex":"0xD529AE9E860000"},"data":"0xead0587600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:31:58.337Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xe1BE8376A85aEe03775b635FB202543f7C123A4b',
+    to: '0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02',
+    value: BigNumber { value: "60000000000000000" },
+    data: '0xead0587600000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-04T18:24:15.965Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xe1BE8376A85aEe03775b635FB202543f7C123A4b","to":"0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02","value":{"type":"BigNumber","hex":"0xD529AE9E860000"},"data":"0xead0587600000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:31:59.136Z'
 }
 {
-  stackTrace: [
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'Queues',
-        sourceName: 'contracts/queues/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Queues is Params {\n' +
-          '    \n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function deleteQueue(uint256 theId) external onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 21,
-        range: [ 637, 675 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'enqueue',
-        contract: 'QueuesMethods',
-        sourceName: 'contracts/queues/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract QueuesMethods is Params {\n' +
-          '\n' +
-          '    constructor(QueuesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function enqueue(uint256 theId, uint256 hound) external payable {\n' +
-          '        require(queues[theId].totalParticipants > 0);\n' +
-          '\n' +
-          '        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));\n' +
-          '\n' +
-          '        require(msg.value >= queues[theId].entryFee);\n' +
-          '\n' +
-          '        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);\n' +
-          '\n' +
-          '        require(!houndObj.running);\n' +
-          '\n' +
-          '        queues[theId].participants.push(hound);\n' +
-          '\n' +
-          '        IHounds(control.hounds).updateHoundStamina(hound);\n' +
-          '        IHounds(control.hounds).updateHoundRunning(theId, true);\n' +
-          '\n' +
-          '        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {\n' +
-          '\n' +
-          '            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        emit PlayerEnqueue(theId,hound,msg.sender);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 28,
-        range: [ 936, 1056 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'Races',
-        sourceName: 'contracts/races/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Races is Params {\n' +
-          '    \n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable onlyOwner {\n' +
-          '        (bool success, ) = control.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        (bool success, ) = control.methods.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 17,
-        range: [ 540, 578 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'raceStart',
-        contract: 'RacesMethods',
-        sourceName: 'contracts/races/methods/Index.sol',
-        sourceContent: '// SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract RacesMethods is Params {\n' +
-          '\n' +
-          '    constructor(RacesConstructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function raceStart(Queue.Struct memory queue) external payable {\n' +
-          '        if ( control.callable ) {\n' +
-          '            \n' +
-          '            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);\n' +
-          '\n' +
-          '            uint256 ethToSend = 0;\n' +
-          '\n' +
-          '            races[id] = IGenerator(control.generator).generate(queue);\n' +
-          '\n' +
-          '            // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications\n' +
-          '            for ( uint256 i = 0 ; i < payments.length ; ++i ) {\n' +
-          '                if ( payments[i].currency == address(0) ) {\n' +
-          '                    if ( payments[i].paymentType == 3 ) {\n' +
-          '                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;\n' +
-          '                        payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));\n' +
-          '                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    } else {\n' +
-          '                        ethToSend += payments[i].qty;\n' +
-          '                    }\n' +
-          '                }\n' +
-          '            }\n' +
-          '\n' +
-          '            require(queue.entryFee * queue.totalParticipants <= msg.value);\n' +
-          '\n' +
-          '            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);\n' +
-          '\n' +
-          '            emit NewFinishedRace(id,  races[id]);\n' +
-          '\n' +
-          '        } else {\n' +
-          '\n' +
-          '            require(payable(control.staterApi).send(msg.value));\n' +
-          '            emit NewRace(id, races[id]);\n' +
-          '\n' +
-          '        }\n' +
-          '\n' +
-          '        ++id;\n' +
-          '\n' +
-          '    }\n' +
-          '\n' +
-          '}\n',
-        line: 25,
-        range: [ 1076, 1168 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 0,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'Hounds',
-        sourceName: 'contracts/hounds/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import './params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract Hounds is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '\n' +
-          '    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {\n' +
-          '        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function breedHounds(uint256 hound1, uint256 hound2) external payable {\n' +
-          '        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);\n' +
-          '        require(success); \n' +
-          '    }\n' +
-          '\n' +
-          '    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {\n' +
-          '        require(ownerOf(hound1) == msg.sender);\n' +
-          '        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 51,
-        range: [ 1819, 1875 ]
-      },
-      functionType: 1
-    },
-    {
-      type: 4,
-      sourceReference: {
-        function: 'updateHoundRunning',
-        contract: 'HoundsModifier',
-        sourceName: 'contracts/hounds/modifier/Index.sol',
-        sourceContent: '//SPDX-License-Identifier: MIT\n' +
-          'pragma solidity 0.8.13;\n' +
-          "import '../params/Index.sol';\n" +
-          '\n' +
-          '\n' +
-          'contract HoundsModifier is Params {\n' +
-          '\n' +
-          '    constructor(Constructor.Struct memory input) Params(input) {}\n' +
-          '    \n' +
-          '    function updateHoundStamina(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        --hounds[theId].stamina.staminaValue;\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundRunning(uint256 theId, bool running) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].running = running;\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundStamina(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);\n' +
-          '        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );\n' +
-          '        hounds[theId].stamina.staminaLastUpdate = block.timestamp;\n' +
-          '        if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {\n' +
-          '            hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;\n' +
-          '        }\n' +
-          '        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);\n' +
-          '    }\n' +
-          '\n' +
-          '    function updateHoundBreeding(uint256 theId) public {\n' +
-          '        require(allowed[msg.sender]);\n' +
-          '        hounds[theId].breeding.breedCooldown += 172800;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function boostHoundBreeding(uint256 theId, address user) public payable {\n' +
-          '        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);\n' +
-          '        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);\n' +
-          '        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;\n' +
-          '        hounds[theId].breeding.breedLastUpdate = block.timestamp;\n' +
-          '        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);\n' +
-          '    }\n' +
-          '\n' +
-          '    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {\n' +
-          '        require(ownerOf(theId) == msg.sender);\n' +
-          '        if ( status )\n' +
-          '            require(hounds[theId].breeding.breedCooldown < block.timestamp);\n' +
-          '        hounds[theId].breeding.breedingFee = fee;\n' +
-          '        hounds[theId].breeding.availableToBreed = status;\n' +
-          '        emit HoundBreedable(theId,fee);\n' +
-          '    }\n' +
-          '\n' +
-          '}',
-        line: 22,
-        range: [ 911, 939 ]
-      },
-      message: ReturnData { value: <Buffer > },
-      isInvalidOpcodeError: false
-    }
-  ],
-  transactionHash: '0xc25094e32cd9377ac539c35b8c45a819f6c41337d612cbc4e750f8a0785ebff5',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xe1BE8376A85aEe03775b635FB202543f7C123A4b',
+    to: '0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02',
+    data: '0x92d0527700000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: 'Transaction reverted without a reason string',
-  timestamp: '2022-05-05T09:27:51.331Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xe1BE8376A85aEe03775b635FB202543f7C123A4b","to":"0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02","data":"0x92d0527700000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:32:01.373Z'
+}
+{
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xe1BE8376A85aEe03775b635FB202543f7C123A4b',
+    to: '0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02',
+    data: '0x92d0527700000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    accessList: null
+  },
+  level: 'error',
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xe1BE8376A85aEe03775b635FB202543f7C123A4b","to":"0x69143C6bb5d697df07470B79bA1ff39BDa2d4a02","data":"0x92d0527700000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T12:32:01.726Z'
 }
 {
   parent: undefined,
@@ -1848,240 +133,734 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-05T09:27:51.488Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:35:12.795Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:30.696Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:36:11.471Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:31.217Z'
+  errorMessage: 'The contract verification failed.\nReason: Fail - Unable to verify',
+  timestamp: '2022-05-09T12:38:19.283Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:31.871Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:40:00.539Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.1)
+      at Logger.makeError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:112:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:32.610Z'
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-05-09T12:40:17.249Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.1)
+      at Logger.makeError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:112:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:33.488Z'
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-05-09T12:40:33.683Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:34.138Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:41:22.259Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:34.807Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:42:36.493Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:35.414Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:44:14.797Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:35.950Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:44:54.908Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:36.695Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:48:48.511Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:37.471Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:50:28.659Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:38.087Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:51:51.295Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x228d18c64D9Ee25Bced6FDe2BECbF4B634fDb9AB","0xe1BE8376A85aEe03775b635FB202543f7C123A4b","0xE941Da5ec851c83081Ecdfb87Be6C0bC98fb5a8b","0xE4f58a16F097E6b886530cC8B6c5B183527e2dA4","0xc5d0b33eBa83a7a4F94535eA31aDFBaE5c2B5D4C","0x75E54F4449DEFbbE6984224751a04bC13b031B43","0x7B3Af7F66cFeFB27d4347a6a16422588aB55dbe9"], code=INVALID_ARGUMENT, version=abi/5.6.1)
+      at Logger.makeError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:62:19 {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x228d18c64D9Ee25Bced6FDe2BECbF4B634fDb9AB',
+      '0xe1BE8376A85aEe03775b635FB202543f7C123A4b',
+      '0xE941Da5ec851c83081Ecdfb87Be6C0bC98fb5a8b',
+      '0xE4f58a16F097E6b886530cC8B6c5B183527e2dA4',
+      '0xc5d0b33eBa83a7a4F94535eA31aDFBaE5c2B5D4C',
+      '0x75E54F4449DEFbbE6984224751a04bC13b031B43',
+      '0x7B3Af7F66cFeFB27d4347a6a16422588aB55dbe9'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:38.756Z'
+  errorMessage: 'Value 0x228d18c64D9Ee25Bced6FDe2BECbF4B634fDb9AB,0xe1BE8376A85aEe03775b635FB202543f7C123A4b,0xE941Da5ec851c83081Ecdfb87Be6C0bC98fb5a8b,0xE4f58a16F097E6b886530cC8B6c5B183527e2dA4,0xc5d0b33eBa83a7a4F94535eA31aDFBaE5c2B5D4C,0x75E54F4449DEFbbE6984224751a04bC13b031B43,0x7B3Af7F66cFeFB27d4347a6a16422588aB55dbe9 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-05-09T12:52:08.672Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:39.458Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:55:17.014Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:41.571Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:56:59.517Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:43.595Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:57:24.532Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:45.469Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T12:57:52.866Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B',
+    to: '0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad',
+    value: BigNumber { value: "60000000000000000" },
+    data: '0xead0587600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:46.911Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","to":"0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad","value":{"type":"BigNumber","hex":"0xD529AE9E860000"},"data":"0xead0587600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T15:59:11.720Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B',
+    to: '0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad',
+    value: BigNumber { value: "60000000000000000" },
+    data: '0xead0587600000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:47.948Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","to":"0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad","value":{"type":"BigNumber","hex":"0xD529AE9E860000"},"data":"0xead0587600000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000004","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T15:59:12.787Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B',
+    to: '0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad',
+    data: '0x92d0527700000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:48.968Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","to":"0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad","data":"0x92d0527700000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T15:59:14.901Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B',
+    to: '0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad',
+    data: '0x92d0527700000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:49.786Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","to":"0x954f16C497C22e8f087ec08BCBe56fB31467F8Ad","data":"0x92d0527700000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009896800000000000000000000000000000000000000000000000000000000000989680000000000000000000000000000000000000000000000000000000000000006400000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000064000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000186a000000000000000000000000000000000000000000000000000000000000003e800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000500000000000000000000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000600000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000000300000000000000000000000000000000000000000000000000000000000000090000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000007000000000000000000000000000000000000000000000000000000000000000700000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000900000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000050000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000009000000000000000000000000000000000000000000000000000000000000096000000000000000000000000000000000000000000000000000000000000009800000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T15:59:15.213Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  reason: 'cannot estimate gas; transaction may fail or may require manual gas limit',
+  code: 'UNPREDICTABLE_GAS_LIMIT',
+  error: ProviderError: execution reverted
+      at HttpProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:74:19)
+      at LocalAccountsProvider.request (/home/gheoneaemilian/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:188:34)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (node:internal/process/task_queues:96:5)
+      at EthersProviderWrapper.send (/home/gheoneaemilian/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'estimateGas',
+  transaction: {
+    from: '0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B',
+    to: '0x21A2b041c39Af26301F6fB3408724e92f004A04E',
+    value: BigNumber { value: "5000000000" },
+    data: '0x982d64d40000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000b',
+    accessList: null
+  },
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:50.412Z'
+  errorMessage: 'cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="estimateGas", transaction={"from":"0xb051E12E7F71ECbBe8413A4121166A1B62Ab050B","to":"0x21A2b041c39Af26301F6fB3408724e92f004A04E","value":{"type":"BigNumber","hex":"0x012a05f200"},"data":"0x982d64d40000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000b","accessList":null}, code=UNPREDICTABLE_GAS_LIMIT, version=providers/5.6.5)',
+  timestamp: '2022-05-09T15:59:45.265Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:50.987Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:01:25.965Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:51.833Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:01:47.901Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:52.557Z'
+  errorMessage: 'The contract verification failed.\nReason: Fail - Unable to verify',
+  timestamp: '2022-05-09T16:02:52.491Z'
 }
 {
-  errno: -2,
-  code: 'ENOENT',
-  syscall: 'open',
-  path: '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json',
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: "ENOENT: no such file or directory, open '/home/gheoneaemilian/houndrace-contracts/artifacts/build-info/6cee8145959831e9f94ba548cef818b7.json'",
-  timestamp: '2022-05-05T09:35:53.169Z'
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:03:13.925Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.1)
+      at Logger.makeError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:112:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-05-09T16:03:30.113Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.1)
+      at Logger.makeError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/gheoneaemilian/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:112:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-05-09T16:03:45.991Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:04:10.968Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:04:46.773Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:05:23.530Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:05:57.740Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:06:41.267Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:07:31.838Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:07:55.287Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:08:25.511Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:08:48.739Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:09:21.737Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:09:44.240Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:10:18.748Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:10:39.124Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:11:11.690Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:11:33.818Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:12:09.237Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:12:36.885Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-05-09T16:13:09.427Z'
 }
