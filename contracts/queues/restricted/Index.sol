@@ -21,15 +21,17 @@ contract QueuesRestricted is Params {
     function deleteQueue(uint256 theId) external {
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
-                (bool success, ) = control.payments.delegatecall(
-                    abi.encodeWithSignature(
-                        "rawSend(address,uint256,address)",
-                        queues[theId].currency, 
-                        queues[theId].entryFee, 
-                        IHounds(control.hounds).houndOwner(queues[theId].participants[i])
-                    )
+                IHounds(control.hounds).updateHoundRunning(
+                    queues[theId].participants[i], 
+                    true
                 );
-                require(success);
+                IPayments(control.payments).rawSend{ 
+                    value: queues[theId].currency == address(0) ? queues[theId].entryFee * queues[theId].totalParticipants : 0 
+                }(
+                    queues[theId].currency, 
+                    queues[theId].entryFee, 
+                    IHounds(control.hounds).houndOwner(queues[theId].participants[i])
+                );
             }
         }
         delete queues[theId];

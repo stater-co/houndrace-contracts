@@ -17,7 +17,7 @@ contract PaymentsMethods is Params {
 		}
 	}
 
-	function rawSend(address token, uint256 amount, address to) public nonReentrant {
+	function rawSend(address token, uint256 amount, address to) public payable nonReentrant {
 		if ( token != address(0) ) {
 			IERC20(token).transferFrom(msg.sender, to, amount);
 		} else {

@@ -16,7 +16,7 @@ interface IPayments {
 
 	function sendHardcodedPayments(Payment.Struct[] memory payments) external payable;
 
-	function rawSend(address token, uint256 amount, address to) external;
+	function rawSend(address token, uint256 amount, address to) external payable;
 
 	function getPayments(uint256 batchId) external view returns(Payment.Struct[] memory);
 
