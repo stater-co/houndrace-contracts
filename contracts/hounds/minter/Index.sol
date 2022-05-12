@@ -16,18 +16,66 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        if ( ownerOf(hound2) == msg.sender ) {
-            require(msg.value >= control.fees.breedCost + control.fees.breedFee);
-        } else {
-            require(
-                hounds[hound2].breeding.availableToBreed && 
-                msg.value >= control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee
-            );
-            require(payable(ownerOf(hound2)).send(hounds[hound2].breeding.breedingFee));
+        uint256 amountToSpend;
+        if ( control.fees.breedCostCurrency == address(0) ) {
+            amountToSpend += control.fees.breedCost;
+            require(amountToSpend <= msg.value);
         }
+        IPayments(control.boilerplate.payments).transferTokens{
+            value: amountToSpend
+        }(
+            Payment.Struct(
+                msg.sender,
+                payable(control.boilerplate.payments),
+                control.fees.breedCostCurrency,
+                new uint256[](0),
+                control.fees.breedCost,
+                4,
+                1,
+                1
+            )
+        );
 
-        require(payable(control.boilerplate.staterApi).send(control.fees.breedFee));
-        require(payable(control.boilerplate.payments).send(control.fees.breedCost + (msg.value - (hounds[hound2].breeding.breedingFee == address(0) ? control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee : control.fees.breedCost + control.fees.breedFee))));
+        if ( control.fees.breedFeeCurrency == address(0) ) {
+            amountToSpend += control.fees.breedFee;
+            require(amountToSpend <= msg.value);
+        }
+        IPayments(control.boilerplate.staterApi).transferTokens{
+            value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
+        }(
+            Payment.Struct(
+                msg.sender,
+                payable(ownerOf(hound2)),
+                control.fees.breedFeeCurrency,
+                new uint256[](0),
+                control.fees.breedFee,
+                4,
+                1,
+                1
+            )
+        );
+
+        if ( ownerOf(hound2) != msg.sender ) {
+            if ( hounds[hound2].breeding.breedingFeeCurrency == address(0) ) {
+                amountToSpend += hounds[hound2].breeding.breedingFee;
+                require(amountToSpend <= msg.value);
+            }
+            IPayments(control.boilerplate.payments).transferTokens{
+                value: hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
+            }(
+                Payment.Struct(
+                    msg.sender,
+                    payable(ownerOf(hound2)),
+                    hounds[hound2].breeding.breedingFeeCurrency,
+                    new uint256[](0),
+                    hounds[hound2].breeding.breedingFee,
+                    4,
+                    1,
+                    1
+                )
+            );
+        }
+    
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
         Hound.Struct memory offspring = IIncubator(control.boilerplate.incubator).breedHounds(

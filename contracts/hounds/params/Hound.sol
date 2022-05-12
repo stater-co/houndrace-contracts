@@ -4,6 +4,7 @@ pragma solidity <=0.8.13;
 library Hound {
 
     struct Breeding {
+        address breedingFeeCurrency;
         uint256 breedCooldown;
         uint256 breedingFee; // ETH only
         uint256 breedLastUpdate;

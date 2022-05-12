@@ -35,4 +35,9 @@ contract Params is Ownable, Withdrawable {
         return queues[theId];
     }
 
+    function enqueueCost(uint256 theId) external view returns(uint256,address) {
+        require(IArenas(control.arenas).arena(queues[theId].arena).feeCurrency == queues[theId].currency);
+        return (queues[theId].entryFee + IArenas(control.arenas).arena(queues[theId].arena).fee,queues[theId].currency);
+    }
+
 }
