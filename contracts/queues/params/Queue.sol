@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.13;
+import './Payment.sol';
+import './Reward.sol';
 
 
 library Queue {
@@ -16,12 +18,15 @@ library Queue {
 
         uint256 entryFee;
 
+        uint256 entryFeeCurrency;
+
         uint256 startDate;
 
         uint256 endDate;
 
-        // Informations about the winners of the race
-        uint256 rewardsId;
+        Payment.Struct[] payments;
+
+        Reward.Struct[] rewards;
 
         uint32 totalParticipants;
 

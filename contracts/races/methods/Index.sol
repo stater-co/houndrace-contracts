@@ -7,7 +7,7 @@ contract RacesMethods is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function raceStart(Queue.Struct memory queue) external payable {
+    function raceStart(Queue.Struct memory queue) external {
         if ( control.callable ) {
             
             Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);
@@ -20,10 +20,12 @@ contract RacesMethods is Params {
             for ( uint256 i = 0 ; i < payments.length ; ++i ) {
                 if ( payments[i].currency == address(0) ) {
                     if ( payments[i].paymentType == 3 ) {
-                        payments[i].qty = msg.value / 100 * payments[i].percentageWon;
+                        payments[i].qty = (queue.entryFee * queue.totalParticipants) / 100 * payments[i].percentageWon;
                         payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));
                         IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);
                         ethToSend += payments[i].qty;
+                    } else if ( payments[i].paymentType == 5 ) { 
+
                     } else {
                         ethToSend += payments[i].qty;
                     }

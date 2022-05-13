@@ -6,7 +6,7 @@ import '../payments/params/Payment.sol';
 
 interface IRacesMethods {
 
-    function raceStart(Queue.Struct memory queue) external payable;
+    function raceStart(Queue.Struct memory queue) external;
 
     function uploadRace(Race.Struct memory race, Payment.Struct[] memory payments) external payable;
 

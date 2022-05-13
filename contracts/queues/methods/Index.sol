@@ -9,30 +9,48 @@ contract QueuesMethods is Params {
 
     function enqueue(uint256 theId, uint256 hound) external payable {
 
-        require(queues[theId].totalParticipants > 0);
+        require(
+            ( 
+                queues[theId].totalParticipants > 0 
+            ) && ( (
+                    queues[theId].endDate == 0 && queues[theId].startDate == 0
+                ) || (
+                    queues[theId].startDate <= block.timestamp && 
+                    queues[theId].endDate >= block.timestamp
+                )
+            ) && (
+                queues[theId].currency == IArenas(control.arenas).arena(queues[theId].arena).feeCurrency
+            ) && (
+                queues[theId].currency == address(0) && msg.value >= IArenas(control.arenas).arena(queues[theId].arena).fee + queues[theId].entryFee || true
+            )
+        );
 
-        require(queues[theId].currency == IArenas(control.arenas).arena(queues[theId].arena).feeCurrency);
-
-        require((queues[theId].endDate == 0 && queues[theId].startDate == 0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));
-
-        Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);
-
-        require(!houndObj.running);
+        IPayments(control.payments).transferTokens{
+            value: msg.value
+        }(
+            Payment.Struct(
+                msg.sender,
+                payable(control.payments),
+                queues[theId].currency,
+                new uint256[](0),
+                queues[theId].entryFee,
+                4,
+                1,
+                1
+            )
+        );
 
         queues[theId].participants.push(hound);
-
         IHounds(control.hounds).updateHoundStamina(hound);
-        IHounds(control.hounds).updateHoundRunning(theId, true);
+        require(
+                !IHounds(control.hounds).updateHoundRunning(theId, true) 
+            && 
+                queues[theId].participants[queues[theId].totalParticipants] == 0
+        );
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-            if ( queues[theId].currency == address(0) ) {
-
-            } else {
-                
-            }
-            IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);
-
+            IRacesMethods(control.races).raceStart(queues[theId]);
 
             delete queues[theId].participants;
 

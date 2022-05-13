@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../payments/params/Payment.sol';
@@ -33,11 +34,6 @@ contract Params is Ownable, Withdrawable {
     
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
         return queues[theId];
-    }
-
-    function enqueueCost(uint256 theId) external view returns(uint256,address) {
-        require(IArenas(control.arenas).arena(queues[theId].arena).feeCurrency == queues[theId].currency);
-        return (queues[theId].entryFee + IArenas(control.arenas).arena(queues[theId].arena).fee,queues[theId].currency);
     }
 
 }

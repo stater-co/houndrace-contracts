@@ -16,13 +16,8 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        uint256 amountToSpend;
-        if ( control.fees.breedCostCurrency == address(0) ) {
-            amountToSpend += control.fees.breedCost;
-            require(amountToSpend <= msg.value);
-        }
         IPayments(control.boilerplate.payments).transferTokens{
-            value: amountToSpend
+            value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
             Payment.Struct(
                 msg.sender,
@@ -36,16 +31,12 @@ contract HoundsMinter is Params {
             )
         );
 
-        if ( control.fees.breedFeeCurrency == address(0) ) {
-            amountToSpend += control.fees.breedFee;
-            require(amountToSpend <= msg.value);
-        }
-        IPayments(control.boilerplate.staterApi).transferTokens{
+        IPayments(control.boilerplate.payments).transferTokens{
             value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
         }(
             Payment.Struct(
                 msg.sender,
-                payable(ownerOf(hound2)),
+                payable(control.boilerplate.staterApi),
                 control.fees.breedFeeCurrency,
                 new uint256[](0),
                 control.fees.breedFee,
@@ -56,10 +47,6 @@ contract HoundsMinter is Params {
         );
 
         if ( ownerOf(hound2) != msg.sender ) {
-            if ( hounds[hound2].breeding.breedingFeeCurrency == address(0) ) {
-                amountToSpend += hounds[hound2].breeding.breedingFee;
-                require(amountToSpend <= msg.value);
-            }
             IPayments(control.boilerplate.payments).transferTokens{
                 value: hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
             }(
@@ -75,6 +62,7 @@ contract HoundsMinter is Params {
                 )
             );
         }
+        require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
     
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;

@@ -15,6 +15,7 @@ library Payment {
         // 2 - erc20
         // 3 - erc20 race winner
         // 4 - erc20 fee
+        // 5 - arena owner fee
         uint32 paymentType;
         uint32 percentageWon;
         uint32 place;
