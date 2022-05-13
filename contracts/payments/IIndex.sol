@@ -11,10 +11,4 @@ interface IPayments {
 		uint256 amount
 	) external payable;
 
-	function rawSend(
-		address token, 
-		uint256 amount, 
-		address to
-	) external payable;
-
 }

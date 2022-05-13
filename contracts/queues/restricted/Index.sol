@@ -28,14 +28,15 @@ contract QueuesRestricted is Params {
             if ( queues[theId].participants[i] > 0 ) {
                 IHounds(control.hounds).updateHoundRunning(
                     queues[theId].participants[i], 
-                    true
+                    false
                 );
-                IPayments(control.payments).rawSend{ 
-                    value: queues[theId].currency == address(0) ? queues[theId].entryFee * queues[theId].totalParticipants : 0 
+                IPayments(control.payments).transferTokens{ 
+                    value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
                 }(
                     queues[theId].currency, 
-                    queues[theId].entryFee, 
-                    IHounds(control.hounds).houndOwner(queues[theId].participants[i])
+                    address(this),
+                    payable(IHounds(control.hounds).houndOwner(queues[theId].participants[i])),
+                    queues[theId].entryFee
                 );
             }
         }

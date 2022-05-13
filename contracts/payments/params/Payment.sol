@@ -9,13 +9,12 @@ library Payment {
         address payable to;
         address currency;
         uint256[] tokenIds;
-        uint256 qty;
+        uint256[] amounts;
+        uint256 amount;
         // 0 - erc721
         // 1 - erc1155
         // 2 - erc20
-        // 3 - erc20 race winner
-        // 4 - erc20 fee
-        // 5 - arena owner fee
+        // 3 - ETH payment
         uint32 paymentType;
         uint32 percentageWon;
         uint32 place;

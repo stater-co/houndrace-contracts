@@ -47,6 +47,10 @@ contract QueuesMethods is Params {
                 arena.fee
             );
 
+            for ( uint256 i = 0 ; i < queues[theId].payments.length ; ++i ) {
+                
+            }
+
             IRacesMethods(control.races).raceStart(queues[theId]);
 
             delete queues[theId].participants;

@@ -20,12 +20,60 @@ contract PaymentsMethods is Params {
 		}
 	}
 
-	function rawSend(address token, uint256 amount, address to) external payable nonReentrant {
-		if ( token != address(0) ) {
-			IERC20(token).transferFrom(msg.sender, to, amount);
-		} else {
-			require(payable(to).send(amount));
+	function runPayment(
+		Payment.Struct memory payment
+	) public payable nonReentrant {
+		if ( payment.paymentType == 0 ) {
+			
+		} else if ( payment.paymentType == 1 ) {
+			handleERC1155Payment(
+				payment.currency,
+				payment.from,
+				payment.to,
+				payment.ids,
+				payment.amounts
+			);
+		} else if ( payment.paymentType == 2 ) {
+			handleERC20Payment(
+				payment.currency,
+				payment.from,
+				payment.to,
+				payment.amount
+			);
+		} else if ( payment.paymentType == 3 ) {
+			handleETHPayment(
+				payment.to,
+				payment.amount
+			);
 		}
+	}
+
+	function handleERC20Payment(
+		address currency,
+		address from,
+		address payable to,
+		uint256 amount
+	) internal {
+		require(IERC20(currency).transferFrom(from, to, amount));
+	}
+
+	function handleETHPayment(
+		address payable to,
+		uint256 amount
+	) public payable {
+		require(amount == msg.value);
+		require(to.send(amount));
+	}
+
+
+	function handleERC1155Payment(
+		address token,
+		address from,
+		address to,
+		uint256[] ids,
+		uint256[] amounts
+	) internal {
+		IERC1155(token).safeBatchTransferFrom(from, to, ids, amounts, "");
 	}
 
 }
