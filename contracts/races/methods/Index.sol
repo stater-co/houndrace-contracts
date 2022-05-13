@@ -9,8 +9,6 @@ contract RacesMethods is Params {
 
     function raceStart(Queue.Struct memory queue) external {
         if ( control.callable ) {
-            
-            Payment.Struct[] memory payments = IPayments(control.payments).getPayments(queue.rewardsId);
 
             uint256 ethToSend = 0;
 
@@ -18,9 +16,7 @@ contract RacesMethods is Params {
 
             require(queue.entryFee * queue.totalParticipants <= msg.value);
 
-            IPayments(control.payments).sendHardcodedPayments{ value: ethToSend }(payments);
-
-            emit NewFinishedRace(id,  races[id]);
+            emit NewFinishedRace(id, races[id]);
 
         } else {
 

@@ -17,5 +17,7 @@ interface IArenas {
     function setGlobalParameters(ArenasConstructor.Struct memory globalParameters) external;
     
     function arena(uint256 theId) external view returns(Arena.Struct memory);
+
+    function arenaOwner(uint256 tokenId) external view returns(address);
     
 }

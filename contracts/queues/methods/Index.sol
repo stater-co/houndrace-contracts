@@ -21,22 +21,8 @@ contract QueuesMethods is Params {
             ) && (
                 queues[theId].currency == IArenas(control.arenas).arena(queues[theId].arena).feeCurrency
             ) && (
-                queues[theId].currency == address(0) && msg.value >= IArenas(control.arenas).arena(queues[theId].arena).fee + queues[theId].entryFee || true
-            )
-        );
-
-        IPayments(control.payments).transferTokens{
-            value: msg.value
-        }(
-            Payment.Struct(
-                msg.sender,
-                payable(control.payments),
-                queues[theId].currency,
-                new uint256[](0),
-                queues[theId].entryFee,
-                4,
-                1,
-                1
+                queues[theId].currency == address(0) && 
+                msg.value >= enqueueCost(theId) || true
             )
         );
 
@@ -49,6 +35,17 @@ contract QueuesMethods is Params {
         );
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
+
+            Arena.Struct memory arena = IArenas(control.arenas).arena(queues[theId].arena);
+
+            IPayments(control.payments).transferTokens{
+                value: arena.fee
+            }(
+                arena.feeCurrency,
+                address(this),
+                payable(IArenas(control.arenas).arenaOwner(queues[theId].arena)),
+                arena.fee
+            );
 
             IRacesMethods(control.races).raceStart(queues[theId]);
 

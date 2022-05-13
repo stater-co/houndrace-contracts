@@ -35,4 +35,8 @@ contract Params is Ownable, Withdrawable {
         return queues[theId];
     }
 
+    function enqueueCost(uint256 theId) public view returns(uint256) {
+        return IArenas(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee;
+    }
+
 }
