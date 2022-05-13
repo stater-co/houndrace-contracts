@@ -3,7 +3,6 @@ pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
-import '../../payments/params/Payment.sol';
 import '../../arenas/params/Arena.sol';
 import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';

@@ -4,7 +4,6 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Queue.sol';
 import './Constructor.sol';
-import '../../payments/params/Payment.sol';
 import '../../arenas/params/Arena.sol';
 import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';
