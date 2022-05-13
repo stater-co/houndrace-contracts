@@ -8,8 +8,9 @@ library Payment {
         address from;
         address payable to;
         address currency;
-        uint256[] tokenIds;
+        uint256[] ids;
         uint256[] amounts;
+        uint256 id;
         uint256 amount;
         // 0 - erc721
         // 1 - erc1155

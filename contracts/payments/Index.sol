@@ -17,4 +17,11 @@ contract Payments is Params {
         require(success);
 	}
 
+	function runPayment(
+		Payment.Struct memory payment
+	) public payable {
+        (bool success, bytes memory output) = control.payments.delegatecall(msg.data);
+        require(success);
+	}
+
 }

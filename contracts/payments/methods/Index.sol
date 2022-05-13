@@ -24,7 +24,12 @@ contract PaymentsMethods is Params {
 		Payment.Struct memory payment
 	) public payable nonReentrant {
 		if ( payment.paymentType == 0 ) {
-			
+			handleERC721Payment(
+				payment.currency,
+				payment.from,
+				payment.to,
+				payment.id
+			);
 		} else if ( payment.paymentType == 1 ) {
 			handleERC1155Payment(
 				payment.currency,
@@ -70,10 +75,19 @@ contract PaymentsMethods is Params {
 		address token,
 		address from,
 		address to,
-		uint256[] ids,
-		uint256[] amounts
+		uint256[] memory ids,
+		uint256[] memory amounts
 	) internal {
 		IERC1155(token).safeBatchTransferFrom(from, to, ids, amounts, "");
+	}
+
+	function handleERC721Payment(
+		address token,
+		address from,
+		address to,
+		uint256 id
+	) internal {
+		IERC721(token).safeTransferFrom(from, to, id);
 	}
 
 }
