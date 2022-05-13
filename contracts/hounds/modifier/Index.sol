@@ -37,16 +37,10 @@ contract HoundsModifier is Params {
         IPayments(control.boilerplate.payments).transferTokens{
             value: control.fees.refillStaminaCostCurrency == address(0) ? refillStaminaCooldownCost : 0
         }(
-            Payment.Struct(
-                msg.sender,
-                payable(control.boilerplate.payments),
-                control.fees.refillStaminaCostCurrency,
-                new uint256[](0),
-                refillStaminaCooldownCost,
-                4,
-                1,
-                1
-            )
+            control.fees.refillStaminaCostCurrency,
+            msg.sender,
+            payable(control.boilerplate.payments),
+            refillStaminaCooldownCost
         );
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
@@ -67,16 +61,10 @@ contract HoundsModifier is Params {
         IPayments(control.boilerplate.payments).transferTokens{
             value: control.fees.refillBreedingCostCurrency == address(0) ? refillBreedingCooldownCost : 0
         }(
-            Payment.Struct(
-                msg.sender,
-                payable(control.boilerplate.payments),
-                refillBreedingCooldownCost,
-                new uint256[](0),
-                refillBreedingCostCurrency,
-                4,
-                1,
-                1
-            )
+            control.fees.refillBreedingCostCurrency,
+            msg.sender,
+            payable(control.boilerplate.payments),
+            refillBreedingCooldownCost
         );
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }

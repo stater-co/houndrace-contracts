@@ -33,6 +33,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Breeding memory breeding = Hound.Breeding(
+            address(0),
             control.secondsToMaturity, 
             .3 ether,
             0,

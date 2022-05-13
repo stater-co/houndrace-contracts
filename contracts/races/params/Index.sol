@@ -11,6 +11,8 @@ import '../../hounds/IIndex.sol';
 import '../../generator/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
+import '../../payments/params/Payment.sol';
+import '../../payments/params/Reward.sol';
 
 
 contract Params is Ownable, Withdrawable {

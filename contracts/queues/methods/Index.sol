@@ -52,7 +52,7 @@ contract QueuesMethods is Params {
             }
 
             for ( uint256 i = 0 ; i < queues[theId].rewards.length ; ++i ) {
-                
+                IPayments(control.payments).runPayment(queues[theId].rewards[i].payment);
             }
 
             IRacesMethods(control.races).raceStart(queues[theId]);

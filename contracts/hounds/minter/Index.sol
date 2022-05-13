@@ -19,47 +19,29 @@ contract HoundsMinter is Params {
         IPayments(control.boilerplate.payments).transferTokens{
             value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
-            Payment.Struct(
-                msg.sender,
-                payable(control.boilerplate.payments),
-                control.fees.breedCostCurrency,
-                new uint256[](0),
-                control.fees.breedCost,
-                4,
-                1,
-                1
-            )
+            control.fees.breedCostCurrency,
+            msg.sender,
+            payable(control.boilerplate.payments),
+            control.fees.breedCost
         );
 
         IPayments(control.boilerplate.payments).transferTokens{
             value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
         }(
-            Payment.Struct(
-                msg.sender,
-                payable(control.boilerplate.staterApi),
-                control.fees.breedFeeCurrency,
-                new uint256[](0),
-                control.fees.breedFee,
-                4,
-                1,
-                1
-            )
+            control.fees.breedFeeCurrency,
+            msg.sender,
+            payable(control.boilerplate.staterApi),
+            control.fees.breedFee
         );
 
         if ( ownerOf(hound2) != msg.sender ) {
             IPayments(control.boilerplate.payments).transferTokens{
                 value: hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
             }(
-                Payment.Struct(
-                    msg.sender,
-                    payable(ownerOf(hound2)),
-                    hounds[hound2].breeding.breedingFeeCurrency,
-                    new uint256[](0),
-                    hounds[hound2].breeding.breedingFee,
-                    4,
-                    1,
-                    1
-                )
+                hounds[hound2].breeding.breedingFeeCurrency,
+                msg.sender,
+                payable(ownerOf(hound2)),
+                hounds[hound2].breeding.breedingFee
             );
         }
         require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));

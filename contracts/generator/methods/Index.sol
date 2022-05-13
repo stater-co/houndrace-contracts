@@ -23,7 +23,6 @@ contract GeneratorMethods is Params {
             participants,
             queue.arena,
             queue.entryFee,
-            queue.rewardsId,
             theRandomness,
             abi.encode(scores)
         );

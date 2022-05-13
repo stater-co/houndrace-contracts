@@ -6,6 +6,10 @@ library Race {
     
     struct Struct {
 
+        Payment.Struct[] payments;
+
+        Reward.Struct[] rewards;
+
         string name;
 
         address currency;
@@ -15,9 +19,6 @@ library Race {
         uint256 arena;
 
         uint256 entryFee;
-
-        // Informations about the winners of the race
-        uint256 rewardsId;
 
         uint256 randomness;
 
