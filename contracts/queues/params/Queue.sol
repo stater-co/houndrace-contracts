@@ -1,16 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.13;
-import '../../payments/params/Payment.sol';
-import '../../payments/params/Reward.sol';
 
 
 library Queue {
     
     struct Struct {
-
-        Payment.Struct[] payments;
-
-        Reward.Struct[] rewards;
 
         string name;
 
@@ -27,6 +21,8 @@ library Queue {
         uint256 startDate;
 
         uint256 endDate;
+
+        uint256 directiveId;
 
         uint32 totalParticipants;
 

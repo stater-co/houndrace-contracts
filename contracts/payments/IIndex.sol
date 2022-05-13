@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
-import './params/Payment.sol';
+import '../directives/params/Payment.sol';
 
 
 interface IPayments {

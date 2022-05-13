@@ -6,10 +6,6 @@ library Race {
     
     struct Struct {
 
-        Payment.Struct[] payments;
-
-        Reward.Struct[] rewards;
-
         string name;
 
         address currency;
@@ -21,6 +17,8 @@ library Race {
         uint256 entryFee;
 
         uint256 randomness;
+
+        uint256 directiveId;
 
         bytes seed;
 
