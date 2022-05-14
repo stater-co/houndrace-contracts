@@ -47,12 +47,15 @@ contract QueuesMethods is Params {
                 arena.fee
             );
 
-            for ( uint256 i = 0 ; i < queues[theId].payments.length ; ++i ) {
-                IPayments(control.payments).runPayment(queues[theId].payments[i]);
+            Payment.Struct[] memory payments = IDirectives(control.directives).getPayments(queues[theId].paymentsId);
+            Reward.Struct[] memory rewards = IDirectives(control.directives).getRewards(queues[theId].rewardsId);
+
+            for ( uint256 i = 0 ; i < payments.length ; ++i ) {
+                IPayments(control.payments).runPayment(payments[i]);
             }
 
-            for ( uint256 i = 0 ; i < queues[theId].rewards.length ; ++i ) {
-                IPayments(control.payments).runPayment(queues[theId].rewards[i].payment);
+            for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
+                IPayments(control.payments).runPayment(rewards[i].payment);
             }
 
             IRacesMethods(control.races).raceStart(queues[theId]);

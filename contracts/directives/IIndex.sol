@@ -1,19 +1,20 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.13;
 import './params/Constructor.sol';
-import './params/Queue.sol';
+import './params/Reward.sol';
+import './params/Payment.sol';
 
 
-interface IQueuesMethods { 
+interface IDirectives { 
 
-    function enqueue(uint256 theId, uint256 hound) external payable;
+    function setGlobalParameters(Constructor.Struct memory input) external;
 
-    function queue(uint256 theId) external view returns(Queue.Struct memory);
+    function createRewardsBatch(Reward.Struct[] memory batch) external;
 
-    function setGlobalParameters(QueuesConstructor.Struct memory input) external;
+    function createPaymentsBatch(Payment.Struct[] memory batch) external;
 
-    function createQueues(Queue.Struct[] memory theQueues) external;
+    function getPayments(uint256 id) external view returns(Payment.Struct[] memory);
 
-    function deleteQueue(uint256 theId) external;
+    function getRewards(uint256 id) external view returns(Reward.Struct[] memory);
 
 }

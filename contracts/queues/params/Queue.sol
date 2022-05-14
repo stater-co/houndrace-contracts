@@ -22,7 +22,9 @@ library Queue {
 
         uint256 endDate;
 
-        uint256 directiveId;
+        uint256 paymentsId;
+
+        uint256 rewardsId;
 
         uint32 totalParticipants;
 

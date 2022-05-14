@@ -3,24 +3,24 @@ pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
-contract QueuesRestricted is Params {
+contract DirectivesRestricted is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
-    function createDirectives(Queue.Struct[] memory theQueues) external {
-        Arena.Struct memory arena;
-        for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arena = IArenas(control.arenas).arena(theQueues[i].arena);
-            require(arena.fee < theQueues[i].entryFee / 2);
-            require(arena.feeCurrency == theQueues[i].currency);
-            require(theQueues[i].payments.length > 0);
-            for ( uint256 j = 0 ; j < theQueues[i].payments.length ; ++j ) {
-                require(theQueues[i].payments[j].currency == theQueues[i].currency);
-            }
-            queues[id] = theQueues[i];
-            ++id;
+    function createRewardsBatch(Reward.Struct[] memory batch) external {
+        for ( uint256 i = 0 ; i < batch.length ; ++i ) {
+            rewards[rewardId].push(batch[i]);
         }
-        emit QueuesCreation(id-theQueues.length,id-1,theQueues);
+        emit NewRewardBatch(rewardId, batch);
+        ++rewardId;
+    }
+
+    function createPaymentsBatch(Payment.Struct[] memory batch) external {
+        for ( uint256 i = 0 ; i < batch.length ; ++i ) {
+            payments[paymentId].push(batch[i]);
+        }
+        emit NewPaymentBatch(paymentId, batch);
+        ++paymentId;
     }
 
 }

@@ -6,7 +6,7 @@ import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Constructor.sol';
-import './Payment.sol';
+import '../../directives/params/Payment.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {

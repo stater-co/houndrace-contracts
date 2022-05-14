@@ -18,14 +18,14 @@ contract GeneratorMethods is Params {
         (uint256[] memory participants, uint256[] memory scores) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
     
         race = Race.Struct(
-            queue.payments,
-            queue.rewards,
             queue.name,
             queue.currency,
             participants,
             queue.arena,
             queue.entryFee,
             theRandomness,
+            queue.paymentsId,
+            queue.rewardsId,
             abi.encode(scores)
         );
 

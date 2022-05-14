@@ -18,7 +18,9 @@ library Race {
 
         uint256 randomness;
 
-        uint256 directiveId;
+        uint256 paymentsId;
+
+        uint256 rewardsId;
 
         bytes seed;
 

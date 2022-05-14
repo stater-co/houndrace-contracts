@@ -13,9 +13,12 @@ contract QueuesRestricted is Params {
             arena = IArenas(control.arenas).arena(theQueues[i].arena);
             require(arena.fee < theQueues[i].entryFee / 2);
             require(arena.feeCurrency == theQueues[i].currency);
-            require(theQueues[i].payments.length > 0);
-            for ( uint256 j = 0 ; j < theQueues[i].payments.length ; ++j ) {
-                require(theQueues[i].payments[j].currency == theQueues[i].currency);
+            require(theQueues[i].paymentsId > 0);
+            require(theQueues[i].rewardsId > 0);
+            
+            Payment.Struct[] memory payments = IDirectives(control.directives).getPayments(theQueues[i].paymentsId);
+            for ( uint256 j = 0 ; j < payments.length ; ++j ) {
+                require(payments[j].currency == theQueues[i].currency);
             }
             queues[id] = theQueues[i];
             ++id;
