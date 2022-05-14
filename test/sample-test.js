@@ -8,7 +8,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
   [ 0, 100000, 1000, true ],
-  [ 1, 1, 0, 0, maleBoilerplateGene ],
+  [ address0, 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
   false,
@@ -18,6 +18,8 @@ let currentDiscountId = 1;
 let payments;
 let paymentsMethods;
 let shopRestricted;
+let directivesRestricted;
+let directives;
 let shopMethods;
 let shop;
 let randomness;
@@ -393,6 +395,15 @@ describe("Setting up the Houndrace contracts", function () {
     ]);
   });
 
+  it("Deploy the directives contracts", async function () {
+    directivesRestricted = await getContractInstance("DirectivesRestricted",[
+      address0
+    ]);
+    directives = await getContractInstance("Directives",[
+      directivesRestricted.address
+    ]);
+  });
+
   it("Deploy the incubator contracts", async function () {
     incubatorMethods = await getContractInstance("IncubatorMethods",[
       address0,
@@ -425,6 +436,10 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -447,7 +462,12 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -469,7 +489,12 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -491,7 +516,12 @@ describe("Setting up the Houndrace contracts", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
+        "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -550,9 +580,11 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
+      address0,
       address0
     ]);
     queuesMethods = await getContractInstance("QueuesMethods",[
+      address0,
       address0,
       address0,
       address0,
@@ -566,7 +598,8 @@ describe("Setting up the Houndrace contracts", function () {
       queuesMethods.address,
       paymentsMethods.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address
     ]);
     await queuesRestricted.setGlobalParameters([
       arenas.address,
@@ -574,7 +607,8 @@ describe("Setting up the Houndrace contracts", function () {
       queuesMethods.address,
       paymentsMethods.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address
     ]);
     await queuesMethods.setGlobalParameters([
       arenas.address,
@@ -582,7 +616,8 @@ describe("Setting up the Houndrace contracts", function () {
       queuesMethods.address,
       paymentsMethods.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address
     ]);
   });
 
@@ -681,6 +716,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -712,6 +751,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -743,6 +786,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -774,6 +821,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
