@@ -1282,5 +1282,19 @@ describe("Complex tests", function () {
     }
   });
 
+  it("Update hound with custom tokens stamina", async function () {
+    await safelyUpdateHoundStamina(houndsId[houndsId.length-1]);
+  });
+
+  it("Update hound with custom tokens breeding", async function () {
+    await safelyUpdateHoundBreeding(houndsId[houndsId.length-1]);
+  });
+
+  it("Join queue with custom token x10", async function () {
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(queueId);
+    }
+  });
+
 
 });
