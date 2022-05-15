@@ -208,12 +208,15 @@ async function findMaleAndFemaleAvailableForBreed() {
   return { maleId, femaleId };
 }
 
-async function breed2Hounds() {
+async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
   const houndIdBefore = await hounds.id();
-  const availableHounds = await findMaleAndFemaleAvailableForBreed();
+  let availableHounds;
+  if ( !hardcodedMaleId && ! hardcodedFemaleId ) {
+    availableHounds = await findMaleAndFemaleAvailableForBreed();
+  }
 
-  const maleId = availableHounds.maleId;
-  const femaleId = availableHounds.femaleId; 
+  const maleId = hardcodedMaleId ? hardcodedMaleId : availableHounds.maleId;
+  const femaleId = hardcodedFemaleId ? hardcodedFemaleId : availableHounds.femaleId; 
 
   if ( maleId && femaleId ) {
 
@@ -1274,10 +1277,8 @@ describe("Complex tests", function () {
   it("Breed hounds with custom tokens", async function () {
     let houndId = await hounds.id();
     houndId = ( Number(houndId)-1 ) / 2;
-    while ( houndId > 0 ) {
-      await breed2Hounds();
-      --houndId;
-      console.log("========================================== " + houndId);
+    for ( i = 0 ; i < 4 ; ++i ) {
+      await breed2Hounds(houndId - ( ( i * 2 ) + 1 ), houndId - ( ( i * 2 ) + 2 ) );
     }
   });
 
