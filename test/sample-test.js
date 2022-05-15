@@ -2,17 +2,29 @@ const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const isGithubAutomation = true;
 const address0 = "0x0000000000000000000000000000000000000000";
-const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
-const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
+const maleBoilerplateGene = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
+const femaleBoilerplateGene = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 100000, 1000, true ],
-  [ address0, 1, 1, 0, 0, maleBoilerplateGene ],
+  [ address0, 0, 100000, 1000, true ],
+  [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
   false,
   false
+];
+const payment = [
+  address0,
+  address0,
+  address0,
+  [],
+  [],
+  0,
+  1,
+  3,
+  5,
+  1
 ];
 let currentDiscountId = 1;
 let payments;
@@ -149,11 +161,12 @@ async function findMaleAndFemaleAvailableForBreed() {
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
-    if ( houndGene[1] === 1 && !maleId && hound[2][3] && hound[2][0]*1000 <= new Date().getTime() && !hound[7] ) {
+    console.log("Test: " + hound[2][1]*1000 + " <= " + new Date().getTime());
+    if ( houndGene[1] === 1 && !maleId && hound[2][3] && hound[2][1]*1000 <= new Date().getTime() && !hound[7] ) {
       maleId = i;
     }
 
-    if ( houndGene[1] === 2 && !femaleId && hound[2][3] && hound[2][0]*1000 <= new Date().getTime() && !hound[7] ) {
+    if ( houndGene[1] === 2 && !femaleId && hound[2][3] && hound[2][1]*1000 <= new Date().getTime() && !hound[7] ) {
       femaleId = i;
     }
 
@@ -189,6 +202,8 @@ async function breed2Hounds() {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
+    console.log("total to pay: " + totalToPay);
+    console.log("breed: ", hound1, hound2);
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
 
     const houndMaleAfter = await hounds.hound(maleId);
@@ -409,13 +424,13 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      "0x67657452"
+      0
     ]);
     incubator = await getContractInstance("Incubator",[
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      "0x67657452"
+      0
     ]);
   });
 
@@ -684,7 +699,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      "0x67657452"
+      0
     ]);
 
   });
@@ -1033,6 +1048,7 @@ describe("Races", function () {
     let createTerrain = await arenas.createArena([
       owner.address,
       "token_url",
+      address0,
       0,
       1,
       1000,
@@ -1044,6 +1060,10 @@ describe("Races", function () {
 
   it("Create queue", async function () {
 
+    await directives.createPaymentsBatch([
+      payment
+    ]);
+
     await queues.createQueues([
       [
         "Test queue",
@@ -1051,8 +1071,11 @@ describe("Races", function () {
         [],
         1, // terrain
         5000000000,
+        address0,
         0,
         0,
+        1,
+        1,
         1,
         10
       ]
@@ -1065,8 +1088,11 @@ describe("Races", function () {
         [],
         1, // terrain
         3000000000,
+        address0,
         0,
         0,
+        1,
+        1,
         1,
         10
       ]
@@ -1079,8 +1105,11 @@ describe("Races", function () {
         [],
         1, // terrain
         8000000000,
+        address0,
         0,
         0,
+        1,
+        1,
         1,
         10
       ]
