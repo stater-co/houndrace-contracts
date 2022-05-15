@@ -20,6 +20,7 @@ library Hound {
     }
 
     struct Stamina {
+        address staminaRefill1xCurrency;
         uint256 staminaLastUpdate;
         uint256 staminaRefill1x;
         uint32 staminaValue;

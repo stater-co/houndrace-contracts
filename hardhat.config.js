@@ -30,14 +30,21 @@ module.exports = {
     apiKey: process.env.RINKEBY_ETHERSCAN_API_KEY
   },
   mocha: {
-    reporter: 'eth-gas-reporter'
+    reporter: 'eth-gas-reporter',
+    timeout: 100000000
   },
   solidity: {
     compilers: [
       {
         version: "0.8.13"
       }
-    ]
+    ],
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1,
+      },
+    }
   },
   paths: {
     sources: "./contracts",

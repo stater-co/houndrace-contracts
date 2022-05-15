@@ -6,7 +6,7 @@ const maleBoilerplateGene = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2,
 const femaleBoilerplateGene = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
 const defaultHound = [
   [ 0, 0, 0, 0],
-  [ 10000000, 10000000, 100, 1, 100 ],
+  [ address0, 10000000, 10000000, 100, 1, 100 ],
   [ address0, 0, 100000, 1000, true ],
   [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
@@ -35,7 +35,6 @@ const queue = [
   address0,
   0,
   0,
-  1,
   1,
   1,
   10
@@ -1146,7 +1145,7 @@ describe("Races", function () {
     queueToUse[4] = 8000000000;
     await queues.createQueues([queueToUse]);
 
-    let queueId = await races.id();
+    let queueId = await queues.id();
 
     expect(Number(queueId) === 2, "Queue has not been created");
 
@@ -1213,6 +1212,74 @@ describe("Races", function () {
 
 describe("Complex tests", function () {
 
+  let arenaId;
+  let queueId;
+  let paymentBatchId;
+  let houndsId = [];
+
+  it("Create terrain with custom fee token", async function () {
+    const [owner] = await ethers.getSigners();
+    let arenaToUse = arena;
+    arenaToUse[0] = owner.address;
+    arenaToUse[2] = houndracePotions.address;
+    let createTerrain = await arenas.createArena(arenaToUse);
+    let theArenaId = await arenas.id();
+    arenaId = Number(theArenaId) - 1;
+    expect(createTerrain !== undefined, "Create terrain problem");
+  });
+
+  it("Create queue with custom token", async function () {
+
+    let paymentToUse = payment;
+    paymentToUse[2] = houndracePotions.address;
+    await directives.createPaymentsBatch([
+      paymentToUse
+    ]);
+
+    const paymentsId = await directives.paymentId();
+    paymentBatchId = Number(paymentsId) - 1;
+
+    let queueToUse = queue;
+    queueToUse[3] = arenaId;
+    queueToUse[4] = 5000000000;
+    queueToUse[8] = paymentBatchId;
+    queueToUse[1] = houndracePotions.address;
+    queueToUse[5] = houndracePotions.address;
+    console.log("Create queue: " + JSON.stringify(queueToUse));
+    await queues.createQueues([queueToUse]);
+
+    queueToUse[4] = 3000000000;
+    await queues.createQueues([queueToUse]);
+
+    queueToUse[4] = 8000000000;
+    await queues.createQueues([queueToUse]);
+
+    let theQueueId = await queues.id();
+    queueId = Number(theQueueId) - 1;
+
+  });
+
+  it("Mint hound with custom tokens", async function () {
+    let houndToUse = defaultHound;
+    houndToUse[1][0] = houndracePotions.address;
+    houndToUse[2][0] = houndracePotions.address;
+    for ( let i = 0 ; i < 30 ; ++i ) {
+      await safelyMintHoundByAdmin(houndToUse,false);
+      const houndId = await hounds.id();
+      houndsId.push(Number(houndId)-1);
+      console.log("Hounds created: " + houndsId);
+    }
+  });
+
+  it("Breed hounds with custom tokens", async function () {
+    let houndId = await hounds.id();
+    houndId = ( Number(houndId)-1 ) / 2;
+    while ( houndId > 0 ) {
+      await breed2Hounds();
+      --houndId;
+      console.log("========================================== " + houndId);
+    }
+  });
 
 
 });

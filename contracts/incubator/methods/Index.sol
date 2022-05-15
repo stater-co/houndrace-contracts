@@ -9,12 +9,13 @@ contract IncubatorMethods is Params {
 
     function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
         
+        uint256 randomness = IRandomness(control.randomness).getRandomNumber(
+            abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+        );
         uint32[54] memory genetics = IGenetics(control.genetics).mixGenes(
             hound1.identity.geneticSequence, 
             hound2.identity.geneticSequence,
-            IRandomness(control.randomness).getRandomNumber(
-                abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
-            )
+            randomness
         );
 
         Hound.Statistics memory houndStatistics = Hound.Statistics(
@@ -25,6 +26,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Stamina memory stamina = Hound.Stamina(
+            randomness % 2 == 0 ? hound1.stamina.staminaRefill1xCurrency : hound2.stamina.staminaRefill1xCurrency,
             0,
             .1 ether,
             100,
@@ -33,7 +35,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Breeding memory breeding = Hound.Breeding(
-            address(0),
+            randomness % 2 == 0 ? hound1.breeding.breedingFeeCurrency : hound2.breeding.breedingFeeCurrency,
             control.secondsToMaturity, 
             .3 ether,
             0,
