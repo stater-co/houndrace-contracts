@@ -26,6 +26,29 @@ const payment = [
   5,
   1
 ];
+const queue = [
+  "Test queue",
+  "0x0000000000000000000000000000000000000000",
+  [],
+  1, // terrain
+  5000000000,
+  address0,
+  0,
+  0,
+  1,
+  1,
+  1,
+  10
+];
+const arena = [
+  address0,
+  "token_url",
+  address0,
+  0,
+  1,
+  1000,
+  3
+];
 let currentDiscountId = 1;
 let payments;
 let paymentsMethods;
@@ -126,6 +149,16 @@ async function safelyUpdateHoundBreeding(houndId) {
   await hounds.updateHoundBreeding(houndToWorkWith);
   const houndAfter = await hounds.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
+}
+
+async function checkHoundsStamina() {
+  let queue = await queues.queues(1);
+  for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
+    let hound = await hounds.hound(i);
+    expect(hound !== undefined, "Hound getter problem");
+    expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
+    houndsStamina[i] = hound[1][2];
+  }
 }
 
 async function checkHoundStructure(houndId) {
@@ -288,6 +321,10 @@ async function joinQueueAutomatically(queueId, totalJoins) {
 }
 
 
+
+
+
+
 describe("Setting up the used libraries", function () {
   
   it("Deploy the Converters", async function () {
@@ -299,6 +336,9 @@ describe("Setting up the used libraries", function () {
   });
 
 });
+
+
+
 
 
 
@@ -384,6 +424,10 @@ describe("Setting up the Payments System", function () {
   });
 
 });
+
+
+
+
 
 
 describe("Setting up the Houndrace contracts", function () {
@@ -677,6 +721,11 @@ describe("Setting up the Houndrace contracts", function () {
 });
 
 
+
+
+
+
+
 describe("Setting up the Houndrace contracts global parameters", function () {
 
   it("Setting up shop contracts dependencies", async function () {
@@ -932,6 +981,16 @@ describe("Setting up the Houndrace contracts global parameters", function () {
 });
 
 
+
+
+
+
+
+
+
+
+
+
 describe("Genetics methods", function () {
 
   it("Genetics - wholeArithmeticRecombination", async function () {
@@ -974,6 +1033,11 @@ describe("Genetics methods", function () {
 });
 
 
+
+
+
+
+
 describe("Hounds", function () {
   
   it("Mint", async function () {
@@ -1012,8 +1076,22 @@ describe("Hounds", function () {
     await breed2Hounds();
   });
 
-  it("Breed again", async function () {
-    await breed2Hounds();
+  it("Bad update hound stamina", async function () {
+    try {
+      await safelyUpdateHoundStamina(99999);
+    } catch(err) {
+      expect(true);
+    }
+    expect(false);
+  });
+
+  it("Bad update hound breeding", async function () {
+    try {
+      await safelyUpdateHoundBreeding(99999);
+    } catch(err) {
+      expect(true);
+    }
+    expect(false);
   });
 
 });
@@ -1045,15 +1123,9 @@ describe("Races", function () {
 
   it("Create terrain", async function () {
     const [owner] = await ethers.getSigners();
-    let createTerrain = await arenas.createArena([
-      owner.address,
-      "token_url",
-      address0,
-      0,
-      1,
-      1000,
-      3
-    ]);
+    let arenaToUse = arena;
+    arenaToUse[0] = owner.address;
+    let createTerrain = await arenas.createArena(arenaToUse);
 
     expect(createTerrain !== undefined, "Create terrain problem");
   });
@@ -1064,56 +1136,15 @@ describe("Races", function () {
       payment
     ]);
 
-    await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        5000000000,
-        address0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        10
-      ]
-    ]);
+    let queueToUse = queue;
+    queueToUse[4] = 5000000000;
+    await queues.createQueues([queueToUse]);
 
-    await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        3000000000,
-        address0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        10
-      ]
-    ]);
+    queueToUse[4] = 3000000000;
+    await queues.createQueues([queueToUse]);
 
-    await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        8000000000,
-        address0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        10
-      ]
-    ]);
+    queueToUse[4] = 8000000000;
+    await queues.createQueues([queueToUse]);
 
     let queueId = await races.id();
 
@@ -1140,13 +1171,7 @@ describe("Races", function () {
   });
 
   it("Hounds stamina check x2", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
-      let hound = await hounds.hound(i);
-      expect(hound !== undefined, "Hound getter problem");
-      expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
-      houndsStamina[i] = hound[1][2];
-    }
+    checkHoundsStamina();
   });
 
   it("Join queue x20", async function () {
@@ -1156,13 +1181,7 @@ describe("Races", function () {
   });
 
   it("Hounds stamina check x3", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
-      let hound = await hounds.hound(i);
-      expect(hound !== undefined, "Hound getter problem");
-      expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
-      houndsStamina[i] = hound[1][2];
-    }
+    checkHoundsStamina();
   });
 
   it("Join queue x30", async function () {
@@ -1179,13 +1198,21 @@ describe("Races", function () {
   });
 
   it("Hounds stamina check x4", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
-      let hound = await hounds.hound(i);
-      expect(hound !== undefined, "Hound getter problem");
-      expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
-      houndsStamina[i] = hound[1][2];
-    }
+    checkHoundsStamina();
   });
+
+});
+
+
+
+
+
+
+
+
+
+describe("Complex tests", function () {
+
+
 
 });
