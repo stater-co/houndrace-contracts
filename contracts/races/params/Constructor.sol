@@ -12,6 +12,7 @@ library RacesConstructor {
         address restricted;
         address allowed;
         address staterApi;
+        address queues;
         uint256 raceFee;
         bool callable;
     }

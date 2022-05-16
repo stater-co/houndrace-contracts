@@ -5,7 +5,6 @@ import './params/Index.sol';
 
 contract Arenas is Params {
     
-    
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
     function createArena(Arena.Struct memory arena) external onlyOwner {

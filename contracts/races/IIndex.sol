@@ -7,6 +7,6 @@ interface IRacesMethods {
 
     function raceStart(Queue.Struct memory queue) external;
 
-    function uploadRace(Queue.Struct memory queue) external payable;
+    function uploadRace(Race.Struct memory race) external payable;
 
 }

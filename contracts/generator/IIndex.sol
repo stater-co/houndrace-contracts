@@ -9,6 +9,6 @@ interface IGenerator {
 
     function simulateClassicRace(uint256[] memory participants, uint256 terrain, uint256 theRandomness) external view returns(uint256[] memory, uint256[] memory);
 
-    function generate(Queue.Struct memory queue) external returns(Race.Struct memory);
+    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory);
 
 }

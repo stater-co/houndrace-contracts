@@ -22,6 +22,8 @@ library Race {
 
         uint256 rewardsId;
 
+        uint256 queueId;
+
         bytes seed;
 
     }

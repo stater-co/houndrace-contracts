@@ -7,7 +7,7 @@ contract GeneratorMethods is Params {
 
     constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
-    function generate(Queue.Struct memory queue) external returns(Race.Struct memory race) {
+    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory race) {
 
         require(control.allowed == msg.sender);
         
@@ -26,6 +26,7 @@ contract GeneratorMethods is Params {
             theRandomness,
             queue.paymentsId,
             queue.rewardsId,
+            queueId,
             abi.encode(scores)
         );
 

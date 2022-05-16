@@ -33,4 +33,7 @@ contract Params is Ownable {
         return rewards[id];
     }
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }

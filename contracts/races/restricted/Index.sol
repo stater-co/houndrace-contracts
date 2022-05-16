@@ -7,11 +7,9 @@ contract RacesRestricted is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function uploadRace(Race.Struct memory race) external payable {
-        uint256 ethToSend = 0;
-        uint256 racePrize = race.participants.length * race.entryFee;
+    function uploadRace(Race.Struct memory race) external payable onlyOwner {
 
-        require(msg.value >= racePrize);
+        IQueues(control.queues).onBeforeRace{ value: msg.value }(race.queueId);
 
         races[id] = race;
 

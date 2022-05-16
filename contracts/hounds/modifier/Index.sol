@@ -39,7 +39,7 @@ contract HoundsModifier is Params {
         }(
             control.fees.refillStaminaCostCurrency,
             msg.sender,
-            payable(control.boilerplate.payments),
+            control.boilerplate.payments,
             refillStaminaCooldownCost
         );
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
@@ -63,7 +63,7 @@ contract HoundsModifier is Params {
         }(
             control.fees.refillBreedingCostCurrency,
             msg.sender,
-            payable(control.boilerplate.payments),
+            control.boilerplate.payments,
             refillBreedingCooldownCost
         );
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);

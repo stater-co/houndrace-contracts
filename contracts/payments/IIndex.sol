@@ -8,12 +8,17 @@ interface IPayments {
 	function transferTokens(
 		address currency,
 		address from,
-		address payable to,
+		address to,
 		uint256 amount
 	) external payable;
 
 	function runPayment(
 		Payment.Struct memory payment
+	) external payable;
+
+	function handleETHPayment(
+		address payable to,
+		uint256 amount
 	) external payable;
 
 }

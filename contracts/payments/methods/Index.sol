@@ -3,14 +3,12 @@ pragma solidity 0.8.13;
 import '../params/Index.sol';
 
 
-contract PaymentsMethods is Params {
-
-	constructor(Constructor.Struct memory input) Params(input) {}
+contract Payments is Params {
 
 	function transferTokens(
 		address currency,
 		address from,
-		address payable to,
+		address to,
 		uint256 amount
 	) public payable nonReentrant {
 		if ( currency != address(0) ) {
@@ -20,7 +18,7 @@ contract PaymentsMethods is Params {
 				(bool success, )= to.call{ value: msg.value }("");
 				require(success);
 			} else {
-				require(to.send(amount));
+				require(payable(to).send(amount));
 			}
 		}
 	}
@@ -71,7 +69,6 @@ contract PaymentsMethods is Params {
 		address payable to,
 		uint256 amount
 	) public payable {
-		require(amount == msg.value);
 		require(to.send(amount));
 	}
 

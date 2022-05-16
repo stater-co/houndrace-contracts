@@ -32,8 +32,10 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     }
 
     function arenaOwner(uint256 tokenId) external view returns(address) {
-        address owner = ownerOf(tokenId);
-        return owner;
+        return ownerOf(tokenId);
     }
+
+    fallback() external payable {}
+    receive() external payable {}
 
 }

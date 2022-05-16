@@ -9,6 +9,7 @@ import '../../utils/Converters.sol';
 import '../../payments/IIndex.sol';
 import '../../hounds/IIndex.sol';
 import '../../generator/IIndex.sol';
+import '../../queues/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 
@@ -36,5 +37,8 @@ contract Params is Ownable, Withdrawable {
     function race(uint256 theId) external view returns(Race.Struct memory) {
         return races[theId];
     }
+
+    fallback() external payable {}
+    receive() external payable {}
 
 }

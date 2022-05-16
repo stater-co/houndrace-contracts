@@ -5,7 +5,7 @@ import '../params/Index.sol';
 
 contract QueuesRestricted is Params {
 
-    constructor(QueuesConstructor.Struct memory input) Params(input) {}
+    constructor(QueuesConstructor.Struct memory input, address[] memory allowedCallers) Params(input, allowedCallers) {}
 
     function createQueues(Queue.Struct[] memory theQueues) external {
         Arena.Struct memory arena;
@@ -33,12 +33,13 @@ contract QueuesRestricted is Params {
                     queues[theId].participants[i], 
                     false
                 );
+                address houndOwner = IHounds(control.hounds).houndOwner(queues[theId].participants[i]);
                 IPayments(control.payments).transferTokens{ 
                     value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
                 }(
                     queues[theId].currency, 
                     address(this),
-                    payable(IHounds(control.hounds).houndOwner(queues[theId].participants[i])),
+                    houndOwner,
                     queues[theId].entryFee
                 );
             }

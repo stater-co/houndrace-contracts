@@ -21,7 +21,7 @@ contract HoundsMinter is Params {
         }(
             control.fees.breedCostCurrency,
             msg.sender,
-            payable(control.boilerplate.payments),
+            control.boilerplate.payments,
             control.fees.breedCost
         );
 
@@ -30,7 +30,7 @@ contract HoundsMinter is Params {
         }(
             control.fees.breedFeeCurrency,
             msg.sender,
-            payable(control.boilerplate.staterApi),
+            control.boilerplate.staterApi,
             control.fees.breedFee
         );
 
@@ -42,7 +42,7 @@ contract HoundsMinter is Params {
             }(
                 hounds[hound2].breeding.breedingFeeCurrency,
                 msg.sender,
-                payable(ownerOf(hound2)),
+                ownerOf(hound2),
                 hounds[hound2].breeding.breedingFee
             );
         }

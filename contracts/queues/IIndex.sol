@@ -4,7 +4,7 @@ import './params/Constructor.sol';
 import './params/Queue.sol';
 
 
-interface IQueuesMethods { 
+interface IQueues { 
 
     function enqueue(uint256 theId, uint256 hound) external payable;
 
@@ -15,5 +15,7 @@ interface IQueuesMethods {
     function createQueues(Queue.Struct[] memory theQueues) external;
 
     function deleteQueue(uint256 theId) external;
+
+    function onBeforeRace(uint256 theId) external payable;
 
 }

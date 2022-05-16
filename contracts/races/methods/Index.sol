@@ -8,9 +8,12 @@ contract RacesMethods is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function raceStart(Queue.Struct memory queue) external {
+        require(allowed[msg.sender]);
         if ( control.callable ) {
 
-            races[id] = IGenerator(control.generator).generate(queue);
+            races[id] = IGenerator(control.generator).generate(queue,races[id].queueId);
+
+            IQueues(control.queues).onBeforeRace(races[id].queueId);
 
             emit NewFinishedRace(id, races[id]);
 
