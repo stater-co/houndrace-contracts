@@ -40,7 +40,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ address0, 10000000, 10000000, 100, 1, 100 ],
   [ address0, 0, 100000, 1000, true ],
-  [ 1, 1, 0, 0, maleBoilerplateGene ],
+  [ 1, 1, 1, new Date().getTime() / 1000, maleBoilerplateGene ],
   "",
   "",
   true,
@@ -48,7 +48,17 @@ const defaultHound = [
 ];
 const defaultQueues = [
   [
-    "Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,address0,0,0,1,1,10
+    "Test queue",
+    "0x0000000000000000000000000000000000000000",
+    [],
+    1,
+    5000000000,
+    address0,
+    0,
+    0,
+    1,
+    1,
+    10
   ]
 ];
 const defaultRace = [
@@ -57,8 +67,10 @@ const defaultRace = [
   [1,2,3,4,5,6,7,8,9,10],
   1,
   500,
-  1,
   55,
+  1,
+  1,
+  1,
   '0x00'
 ];
 
@@ -107,32 +119,13 @@ async function main() {
       step: "Deploy payment methods"
     });
 
-
-    const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
-    const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
-    await paymentsMethods.deployed();
-    deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
-    deployments.update(4, {
-      step: "Deploy payments"
-    });
-
-
     const Payments = await hre.ethers.getContractFactory("Payments");
-    const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
+    const payments = await Payments.deploy();
     await payments.deployed();
     deployment('export PAYMENTS=' + payments.address);
     deployments.update(5, {
       step: "Deploy houndrace potions"
     });
-
-    try {
-      await paymentsMethods.setGlobalParameters([payments.address,[]]);
-      configurations.update(1, {
-        step: "Set global parameters for shop restricted"
-      });
-    } catch(err) {
-      errors(err);
-    }
 
     const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
     const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
@@ -405,6 +398,7 @@ async function main() {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
@@ -416,6 +410,7 @@ async function main() {
 
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
+      address0,
       address0,
       address0,
       address0,
@@ -445,6 +440,7 @@ async function main() {
       racesRestricted.address,
       address0,
       owner.address,
+      address0,
       500000000,
       true
     ]);
@@ -549,6 +545,10 @@ async function main() {
       address0,
       races.address,
       directives.address
+    ],[
+      racesMethods.address,
+      racesRestricted.address,
+      races.address
     ]);
     await queuesMethods.deployed();
     deployment('export QUEUES_METHODS=' + queuesMethods.address);
@@ -560,11 +560,15 @@ async function main() {
     const queuesRestricted = await QueuesRestricted.deploy([
       arenas.address,
       hounds.address,
-      address0,
+      queuesMethods.address,
       payments.address,
       address0,
       races.address,
       directives.address
+    ],[
+      racesMethods.address,
+      racesRestricted.address,
+      races.address
     ]);
     await queuesRestricted.deployed();
     deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
@@ -581,6 +585,10 @@ async function main() {
       queuesRestricted.address,
       races.address,
       directives.address
+    ],[
+      racesMethods.address,
+      racesRestricted.address,
+      races.address
     ]);
     await queues.deployed();
     deployment('export QUEUES=' + queues.address);
@@ -597,7 +605,7 @@ async function main() {
         queuesRestricted.address,
         races.address,
         directives.address
-      ]);
+      ],[]);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
       });
@@ -614,7 +622,7 @@ async function main() {
         queuesRestricted.address,
         races.address,
         directives.address
-      ]);
+      ],[]);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
       });
@@ -633,6 +641,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         true
       ]);
@@ -654,6 +663,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         true
       ]);
@@ -675,6 +685,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         true
       ]);
@@ -1006,79 +1017,6 @@ async function main() {
       errors(err);
     }
 
-    /*
-    try {
-      await payments.addPayments(1,[
-        [
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          50, // % of the total race prize
-          0 // first place
-        ],[
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          30, // % of the total race prize
-          1 // second place
-        ],[
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          20, // % of the total race prize
-          2 // third place
-        ]
-      ]);
-      recommendedCalls.update(18, {
-        step: "Add payments"
-      });
-    } catch(err) {
-      errors(err);
-    }
-    */
-
-    /*
-    const defaultRacePayments = [
-      [
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [1,2,3,4,5,6,7,8,9,10], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        50, // % of the total race prize
-        0 // first place
-      ],[
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [1,2,3,4,5,6,7,8,9,10], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        30, // % of the total race prize
-        1 // second place
-      ],[
-        payments.address, // from
-        address0, // to
-        address0, // currency
-        [1,2,3,4,5,6,7,8,9,10], // token ids
-        0, // amount
-        3, // 2 - erc20 1 - erc1155 0 - erc721
-        20, // % of the total race prize
-        2 // third place
-      ]
-    ];
-    */
-
     try {
       await races.uploadRace(defaultRace,{
         value: defaultRace[4] * defaultRace[2].length
@@ -1090,7 +1028,7 @@ async function main() {
       console.error(err);
       errors(err);
     }
-
+    
     /*
     try {
       for ( let i = 0 ; i < 10 ; ++i ) {
@@ -1160,28 +1098,7 @@ async function main() {
     
     try {
       await hre.run("verify:verify", {
-        address: paymentsMethods.address,
-        constructorArguments: [
-          [
-            address0,[]
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.update(4, {
-      step: "Verify payments"
-    });
-    
-    try {
-      await hre.run("verify:verify", {
-        address: payments.address,
-        constructorArguments: [
-          [
-            paymentsMethods.address,[]
-          ]
-        ]
+        address: payments.address
       });
     } catch (err) {
       errors(err);
