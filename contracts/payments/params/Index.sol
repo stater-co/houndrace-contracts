@@ -8,7 +8,6 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import './Constructor.sol';
 import '../../directives/params/Payment.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
@@ -34,5 +33,8 @@ contract Params is Ownable, ReentrancyGuard {
     }
 
     fallback() external payable {}
+
+
+    receive() external payable {}
 
 }

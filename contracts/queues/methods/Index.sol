@@ -50,13 +50,10 @@ contract QueuesMethods is Params {
             Payment.Struct[] memory payments = IDirectives(control.directives).getPayments(queues[theId].paymentsId);
             Reward.Struct[] memory rewards = IDirectives(control.directives).getRewards(queues[theId].rewardsId);
 
-
-            console.log(">> ", payments.length);
             for ( uint256 i = 0 ; i < payments.length ; ++i ) {
                 IPayments(control.payments).runPayment(payments[i]);
             }
 
-            console.log(">> ", rewards.length);
             for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
                 IPayments(control.payments).runPayment(rewards[i].payment);
             }

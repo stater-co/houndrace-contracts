@@ -17,7 +17,6 @@ contract PaymentsMethods is Params {
 			require(IERC20(currency).transferFrom(from, to, amount));
 		} else {
 			if ( Address.isContract(to) ) {
-				console.log("Send to: ", to);
 				(bool success, )= to.call{ value: msg.value }("");
 				require(success);
 			} else {

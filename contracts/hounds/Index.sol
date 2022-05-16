@@ -55,7 +55,7 @@ contract Hounds is Params {
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
         require(ownerOf(hound1) == msg.sender);
-        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );
+        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );
     }
 
 }

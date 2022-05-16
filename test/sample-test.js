@@ -193,7 +193,6 @@ async function findMaleAndFemaleAvailableForBreed() {
 
     expect(houndGene.length > 0, "Getting hounds gender problem");
 
-    console.log("Test: " + hound[2][1]*1000 + " <= " + new Date().getTime());
     if ( houndGene[1] === 1 && !maleId && hound[2][3] && hound[2][1]*1000 <= new Date().getTime() && !hound[7] ) {
       maleId = i;
     }
@@ -237,8 +236,6 @@ async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    console.log("total to pay: " + totalToPay);
-    console.log("breed: ", hound1, hound2);
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
 
     const houndMaleAfter = await hounds.hound(maleId);
@@ -1248,7 +1245,6 @@ describe("Complex tests", function () {
     queueToUse[8] = paymentBatchId;
     queueToUse[1] = houndracePotions.address;
     queueToUse[5] = houndracePotions.address;
-    console.log("Create queue: " + JSON.stringify(queueToUse));
     await queues.createQueues([queueToUse]);
 
     queueToUse[4] = 3000000000;
@@ -1270,7 +1266,6 @@ describe("Complex tests", function () {
       await safelyMintHoundByAdmin(houndToUse,false);
       const houndId = await hounds.id();
       houndsId.push(Number(houndId)-1);
-      console.log("Hounds created: " + houndsId);
     }
   });
 
