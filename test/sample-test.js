@@ -1296,5 +1296,16 @@ describe("Complex tests", function () {
     }
   });
 
+  it("Hounds stamina check for custome token", async function () {
+    checkHoundsStamina();
+  });
+
+  it("Join queue with custom token x20", async function () {
+    if ( !isGithubAutomation ) {
+      await joinQueueAutomatically(queueId);
+    }
+  });
+
+
 
 });
