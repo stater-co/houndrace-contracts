@@ -8,8 +8,6 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) public {
-        console.log("Allowed: ", allowed[msg.sender]);
-        console.log(msg.sender, hounds[theId].stamina.staminaValue);
         require(allowed[msg.sender]);
         --hounds[theId].stamina.staminaValue;
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
