@@ -40,7 +40,7 @@ const defaultHound = [
   [ 0, 0, 0, 0],
   [ address0, 10000000, 10000000, 100, 1, 100 ],
   [ address0, 0, 100000, 1000, true ],
-  [ 1, 1, 1, new Date().getTime() / 1000, maleBoilerplateGene ],
+  [ 1, 1, 1, 0, maleBoilerplateGene ],
   "",
   "",
   true,
@@ -955,6 +955,7 @@ async function main() {
     }
 
     try {
+      console.log("before revert");
       await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
       recommendedCalls.update(11, {
         step: "Breed hounds"
@@ -964,6 +965,7 @@ async function main() {
     }
 
     try {
+      console.log("after revert");
       await hounds.id();
       recommendedCalls.update(12, {
         step: "Get hound id"
@@ -980,7 +982,7 @@ async function main() {
     } catch(err) {
       errors(err);
     }
-
+    
     try {
       await hounds.id();
       recommendedCalls.update(14, {
@@ -1029,7 +1031,6 @@ async function main() {
       errors(err);
     }
     
-    /*
     try {
       for ( let i = 0 ; i < 10 ; ++i ) {
         await hounds.initializeHound(0,defaultHound);
@@ -1061,7 +1062,6 @@ async function main() {
     } catch(err) {
       errors(err);
     }
-    */
 
     try {
       await hre.run("verify:verify", {
