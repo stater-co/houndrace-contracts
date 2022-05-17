@@ -31,4 +31,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         return arenas[theId];
     }
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }

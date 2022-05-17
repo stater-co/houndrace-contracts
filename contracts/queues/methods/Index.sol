@@ -27,6 +27,8 @@ contract QueuesMethods is Params {
 
             IRacesMethods(control.races).raceStart{ value: queues[theId].entryFee * queues[theId].totalParticipants }(queues[theId]);
 
+            delete queues[theId].participants;
+
         }
     
         emit PlayerEnqueue(theId,hound,msg.sender);

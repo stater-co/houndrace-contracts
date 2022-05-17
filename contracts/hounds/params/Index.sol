@@ -10,6 +10,7 @@ import '../../payments/IIndex.sol';
 import '../../incubator/IIndex.sol';
 import '../../shop/IIndex.sol';
 import '../../utils/Withdrawable.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -48,5 +49,8 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_uri;
     }
+
+    fallback() external payable {}
+    receive() external payable {}
 
 }

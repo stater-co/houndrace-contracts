@@ -35,4 +35,7 @@ contract Params is Ownable, Withdrawable {
         return queues[theId];
     }
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }

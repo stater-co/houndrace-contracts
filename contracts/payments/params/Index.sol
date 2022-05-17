@@ -35,4 +35,7 @@ contract Params is Ownable, ReentrancyGuard {
 		return payments[batchId];
 	}
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }
