@@ -7,6 +7,7 @@ import './Constructor.sol';
 import './Hound.sol';
 import '../interfaces/IUpdateHoundBreeding.sol';
 import '../../payments/interfaces/ITransferTokens.sol';
+import '../../payments/interfaces/IHandleHoundsBreedPayment.sol';
 import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../utils/Withdrawable.sol';
@@ -25,14 +26,12 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     Constructor.Struct public control;
 
     constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i )
-            allowed[input.allowedCallers[i]] = !allowed[input.allowedCallers[i]];
+        handleAllowedCallers(input.allowedCallers);
         control = input;
     }
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i )
-            allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
+        handleAllowedCallers(globalParameters.allowedCallers);
         control = globalParameters;
     }
 
@@ -46,6 +45,11 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_uri;
+    }
+
+    function handleAllowedCallers(address[] memory allowedCallers) internal {
+        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
+            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
 
     fallback() external payable {}

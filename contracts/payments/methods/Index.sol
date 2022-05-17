@@ -27,69 +27,47 @@ contract Payments is Params {
 		Payment.Struct memory payment
 	) public payable nonReentrant {
 		if ( payment.paymentType == 0 ) {
-			handleERC721Payment(
-				payment.currency,
-				payment.from,
-				payment.to,
-				payment.id
-			);
+			IERC721(payment.currency).safeTransferFrom(payment.from, payment.to, payment.id);
 		} else if ( payment.paymentType == 1 ) {
-			handleERC1155Payment(
-				payment.currency,
-				payment.from,
-				payment.to,
-				payment.ids,
-				payment.amounts
-			);
+			IERC1155(payment.currency).safeBatchTransferFrom(payment.from, payment.to, payment.ids, payment.amounts, "");
 		} else if ( payment.paymentType == 2 ) {
-			handleERC20Payment(
-				payment.currency,
-				payment.from,
-				payment.to,
-				payment.amount
-			);
+			require(IERC20(payment.currency).transferFrom(payment.from, payment.to, payment.amount));
 		} else if ( payment.paymentType == 3 ) {
-			handleETHPayment(
-				payment.to,
-				payment.amount
-			);
+			require(payment.to.send(payment.amount));
 		}
 	}
 
-	function handleERC20Payment(
-		address currency,
-		address from,
-		address payable to,
-		uint256 amount
-	) internal {
-		require(IERC20(currency).transferFrom(from, to, amount));
-	}
+	function handleHoundsBreedPayment(HoundsBreedPayment.Struct memory houndsBreedPayment) external payable {
+        this.transferTokens{
+            value: houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0
+        }(
+            houndsBreedPayment.breedCostCurrency,
+            msg.sender,
+            address(this),
+            houndsBreedPayment.breedCost
+        );
 
-	function handleETHPayment(
-		address payable to,
-		uint256 amount
-	) public payable {
-		require(to.send(amount));
-	}
+        this.transferTokens{
+            value: houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0
+        }(
+            houndsBreedPayment.breedFeeCurrency,
+            msg.sender,
+            houndsBreedPayment.staterApi,
+            houndsBreedPayment.breedFee
+        );
 
-
-	function handleERC1155Payment(
-		address token,
-		address from,
-		address to,
-		uint256[] memory ids,
-		uint256[] memory amounts
-	) internal {
-		IERC1155(token).safeBatchTransferFrom(from, to, ids, amounts, "");
-	}
-
-	function handleERC721Payment(
-		address token,
-		address from,
-		address to,
-		uint256 id
-	) internal {
-		IERC721(token).safeTransferFrom(from, to, id);
+        require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0));
+        if ( houndsBreedPayment.secondHoundOwned ) {
+            require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
+            this.transferTokens{
+                value: houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0
+            }(
+                houndsBreedPayment.breedingFeeCurrency,
+                msg.sender,
+                houndsBreedPayment.foreignOwner,
+                houndsBreedPayment.breedingFee
+            );
+        }
 	}
 
 }
