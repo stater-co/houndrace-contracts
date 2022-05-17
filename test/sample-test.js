@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
-const isGithubAutomation = true;
+const isGithubAutomation = false;
 const address0 = '0x0000000000000000000000000000000000000000';
 const maleBoilerplateGene = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
@@ -37,7 +37,8 @@ const queue = [
   0,
   1,
   1,
-  10
+  10,
+  0
 ];
 const arena = [
   address0,
@@ -307,15 +308,24 @@ async function joinQueueAutomatically(queueId, totalJoins) {
   let participating = 0;
   let houndsId = Number(await hounds.id()) - 1;
   let joins = totalJoins ? totalJoins : queue.totalParticipants;
+  console.log(participating, joins, houndsId);
+  let raceIdBefore = await races.id();
   while ( participating < joins && houndsId >= 1 ) {
     let houndToEnqueue = await hounds.hound(houndsId);
+    console.log("Join queue automatically");
     if ( !houndToEnqueue.running ) {
-      await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
+      console.log("Join queue automatically >>> ", queueId,houndsId);
+      let houndObj = await hounds.hound(houndsId);
+      console.log("Hound obj: " + JSON.stringify(houndObj));
+      await queues.enqueue(queueId, houndsId, { value : queue.entryFee });
       ++participating;
     } else {
       --houndsId;
     }
   }
+  let raceIdAfter = await races.id();
+  console.log(Number(raceIdBefore) + " < " + Number(raceIdAfter));
+  expect(Number(raceIdBefore) < Number(raceIdAfter));
 }
 
 

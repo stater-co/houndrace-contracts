@@ -58,7 +58,8 @@ const defaultQueues = [
     0,
     1,
     1,
-    10
+    10,
+    0
   ]
 ];
 const defaultRace = [
@@ -72,6 +73,15 @@ const defaultRace = [
   1,
   1,
   '0x00'
+];
+const defaultArena = [
+  "default arena",
+  "token uri",
+  address0,
+  100000,
+  1,
+  1200,
+  1
 ];
 
 
@@ -568,7 +578,8 @@ async function main() {
     ],[
       racesMethods.address,
       racesRestricted.address,
-      races.address
+      races.address,
+      queuesMethods.address
     ]);
     await queuesRestricted.deployed();
     deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
@@ -588,7 +599,9 @@ async function main() {
     ],[
       racesMethods.address,
       racesRestricted.address,
-      races.address
+      races.address,
+      queuesMethods.address,
+      queuesRestricted.address
     ]);
     await queues.deployed();
     deployment('export QUEUES=' + queues.address);
@@ -605,7 +618,7 @@ async function main() {
         queuesRestricted.address,
         races.address,
         directives.address
-      ],[]);
+      ],[queues.address]);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
       });
@@ -622,9 +635,26 @@ async function main() {
         queuesRestricted.address,
         races.address,
         directives.address
-      ],[]);
+      ],[queues.address]);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
+      });
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await queues.setGlobalParameters([
+        arenas.address,
+        hounds.address,
+        queuesMethods.address,
+        payments.address,
+        queuesRestricted.address,
+        races.address,
+        directives.address
+      ],[queues.address]);
+      configurations.update(8, {
+        step: "Set global parameters for queues restricted"
       });
     } catch(err) {
       errors(err);
@@ -865,6 +895,15 @@ async function main() {
     }
 
     try {
+      await arenas.createArena(defaultArena);
+      recommendedCalls.update(1, {
+        step: "Get hound id"
+      });
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
       await queues.createQueues(defaultQueues);
       recommendedCalls.update(1, {
         step: "Get hound id"
@@ -1019,6 +1058,8 @@ async function main() {
       errors(err);
     }
 
+    updatedRaces = await races.id();
+
     try {
       await races.uploadRace(defaultRace,{
         value: defaultRace[4] * defaultRace[2].length
@@ -1030,13 +1071,40 @@ async function main() {
       console.error(err);
       errors(err);
     }
-    
+
+    updatedRacesAfter = await races.id();
+    if ( Number(updatedRaces) >= Number(updatedRacesAfter) ) {
+      errors("Upload race didn't work, seems to be bugged");
+    }
+
     try {
-      for ( let i = 0 ; i < 10 ; ++i ) {
+      let nrOfParticipants = 0;
+      let initialRaces = await races.id();
+      console.log("Initial race: " + initialRaces);
+      for ( let i = 1 ; i <= 30 ; ++i ) {
         await hounds.initializeHound(0,defaultHound);
-        await queues.enqueue(1,Number(await hounds.id())-1,{
+        console.log("Enqueue: ", 1, i, defaultQueues[0][4]);
+        let latestHoundCreated = Number(await hounds.id())-1;
+        console.log("HOUND OBJ: " + defaultQueues[0][4]);
+        console.log(1,i,nrOfParticipants,{
           value: defaultQueues[0][4]
         });
+        await queues.enqueue(1,i,{
+          value: defaultQueues[0][4]
+        });
+        let updateHound = await hounds.hound(latestHoundCreated);
+        if ( updateHound.running === true ) {
+          errors("Hound enqueue didn't work for: " + i);
+        }
+        ++nrOfParticipants;
+        if ( nrOfParticipants === defaultQueues[0][10] ) {
+          nrOfParticipants = 0;
+        }
+      }
+      let afterInitialRaces = await races.id();
+      console.log("After initial race: " + initialRaces + " , " + afterInitialRaces);
+      if ( initialRaces >= afterInitialRaces ) {
+        errors("Enqueue didn't trigger the race creation");
       }
       recommendedCalls.update(20, {
         step: "10x Enqueue, Race creation"

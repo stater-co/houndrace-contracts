@@ -8,24 +8,37 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) public {
+        console.log(">>> ", allowed[msg.sender], hounds[theId].breeding.breedingFee);
+        console.log("Compare hounds ids: ", theId, " < ", id);
+        require(theId < id);
         require(allowed[msg.sender]);
+        console.log(">>> 1 ", hounds[theId].stamina.staminaValue);
         --hounds[theId].stamina.staminaValue;
+        console.log(">>> 2");
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
+        console.log(">>> 3");
         hounds[theId].stamina.staminaLastUpdate = block.timestamp;
+        console.log(">>> 4");
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
+            console.log(">>> 4.5");
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
+        console.log("We're ok here !!");
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
     function updateHoundRunning(uint256 theId, bool running) public returns(bool) {
+        require(theId < id);
         require(allowed[msg.sender]);
+        console.log("Hound id: ", theId, " >>> ", hounds[theId].running);
         bool oldRunning = hounds[theId].running;
         hounds[theId].running = running;
+        console.log("Return: ", oldRunning);
         return oldRunning;
     }
 
     function boostHoundStamina(uint256 theId, address user) public payable {
+        require(theId < id);
         uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
         hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);
@@ -46,6 +59,7 @@ contract HoundsModifier is Params {
     }
 
     function updateHoundBreeding(uint256 theId) public {
+        require(theId < id);
         require(allowed[msg.sender]);
         hounds[theId].breeding.breedCooldown += 172800;
         hounds[theId].breeding.breedLastUpdate = block.timestamp;
@@ -53,6 +67,7 @@ contract HoundsModifier is Params {
     }
 
     function boostHoundBreeding(uint256 theId, address user) public payable {
+        require(theId < id);
         uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
         hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;
@@ -70,6 +85,7 @@ contract HoundsModifier is Params {
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
+        require(theId < id);
         require(ownerOf(theId) == msg.sender);
         if ( status )
             require(hounds[theId].breeding.breedCooldown < block.timestamp);

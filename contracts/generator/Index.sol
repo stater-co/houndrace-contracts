@@ -21,9 +21,11 @@ contract Generator is Params {
         return IGeneratorZerocost(control.zerocost).simulateClassicRace(participants, terrain, theRandomness);
     }
 
-    function generate(Queue.Struct memory queue) external returns(Race.Struct memory) {
+    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory) {
+        console.log("Generate it here");
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
+        console.log("Generated");
         return abi.decode(output,(Race.Struct));
     }
 

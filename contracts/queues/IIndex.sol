@@ -18,4 +18,6 @@ interface IQueues {
 
     function onBeforeRace(uint256 theId) external payable;
 
+    function participantsOf(uint256 theId) external view returns(uint256[] memory);
+
 }

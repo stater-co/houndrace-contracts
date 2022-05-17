@@ -9,8 +9,10 @@ contract GeneratorMethods is Params {
 
     function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory race) {
 
+        console.log("ok from generate 1");
         require(control.allowed == msg.sender);
         
+        console.log("ok from generate 2");
         require(queue.participants.length == queue.totalParticipants);
         
         uint256 theRandomness = IRandomness(control.randomness).getRandomNumber(abi.encode(block.timestamp));

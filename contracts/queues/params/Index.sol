@@ -12,6 +12,7 @@ import '../../hounds/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/IIndex.sol';
 import '../../directives/IIndex.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -40,13 +41,17 @@ contract Params is Ownable, Withdrawable {
     }
 
     function enqueueCost(uint256 theId) public view returns(uint256) {
-        return IArenas(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee;
+        return IArenas(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee + 1;
     }
 
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i ) {
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
         }
+    }
+
+    function participantsOf(uint256 theId) external view returns(uint256[] memory) {
+        return queues[theId].participants;
     }
 
     fallback() external payable {}

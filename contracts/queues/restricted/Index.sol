@@ -20,7 +20,9 @@ contract QueuesRestricted is Params {
             for ( uint256 j = 0 ; j < payments.length ; ++j ) {
                 require(payments[j].currency == theQueues[i].currency);
             }
+            
             queues[id] = theQueues[i];
+            queues[id].participants = new uint256[](theQueues[i].participants.length);
             ++id;
         }
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
@@ -29,9 +31,11 @@ contract QueuesRestricted is Params {
     function deleteQueue(uint256 theId) external {
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
-                IHounds(control.hounds).updateHoundRunning(
+                require(
+                    IHounds(control.hounds).updateHoundRunning(
                     queues[theId].participants[i], 
                     false
+                    )
                 );
                 address houndOwner = IHounds(control.hounds).houndOwner(queues[theId].participants[i]);
                 IPayments(control.payments).transferTokens{ 

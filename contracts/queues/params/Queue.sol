@@ -28,6 +28,8 @@ library Queue {
 
         uint32 totalParticipants;
 
+        uint32 currentParticipants;
+
     }
 
 }
