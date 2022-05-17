@@ -7,5 +7,27 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-17T11:46:42.164Z'
+  timestamp: '2022-05-17T12:53:34.760Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-17T13:32:58.503Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-05-17T13:33:51.997Z'
 }

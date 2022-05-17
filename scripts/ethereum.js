@@ -994,7 +994,6 @@ async function main() {
     }
 
     try {
-      console.log("before revert");
       await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
       recommendedCalls.update(11, {
         step: "Breed hounds"
@@ -1004,7 +1003,6 @@ async function main() {
     }
 
     try {
-      console.log("after revert");
       await hounds.id();
       recommendedCalls.update(12, {
         step: "Get hound id"
@@ -1080,15 +1078,9 @@ async function main() {
     try {
       let nrOfParticipants = 0;
       let initialRaces = await races.id();
-      console.log("Initial race: " + initialRaces);
       for ( let i = 1 ; i <= 30 ; ++i ) {
         await hounds.initializeHound(0,defaultHound);
-        console.log("Enqueue: ", 1, i, defaultQueues[0][4]);
         let latestHoundCreated = Number(await hounds.id())-1;
-        console.log("HOUND OBJ: " + defaultQueues[0][4]);
-        console.log(1,i,nrOfParticipants,{
-          value: defaultQueues[0][4]
-        });
         await queues.enqueue(1,i,{
           value: defaultQueues[0][4]
         });
@@ -1102,7 +1094,6 @@ async function main() {
         }
       }
       let afterInitialRaces = await races.id();
-      console.log("After initial race: " + initialRaces + " , " + afterInitialRaces);
       if ( initialRaces >= afterInitialRaces ) {
         errors("Enqueue didn't trigger the race creation");
       }

@@ -14,6 +14,18 @@ const defaultHound = [
   false,
   false
 ];
+const defaultRace = [
+  "race name",
+  address0,
+  [1,2,3,4,5,6,7,8,9,10],
+  1,
+  500,
+  55,
+  1,
+  1,
+  1,
+  '0x00'
+];
 const payment = [
   address0,
   address0,
@@ -109,7 +121,10 @@ async function mintHoundByAdmin(hound,isFemale) {
   const [owner] = await ethers.getSigners();
   const contractOwner = await hounds.owner();
   expect(owner.address === contractOwner, 'You\'re not the owner of the hounds data contract');
+  let houndIdBefore = await hounds.id();
   await hounds.initializeHound(0,houndToMint);
+  let houndIdAfter = await hounds.id();
+  expect(Number(houndIdBefore) < Number(houndIdAfter));
 }
 
 async function safelyMintHoundByAdmin(hound,isFemale) {
@@ -236,7 +251,9 @@ async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
+    let houndIdToFill = await hounds.id();
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
+    await hounds.initializeHound(houndIdToFill,defaultHound);
 
     const houndMaleAfter = await hounds.hound(maleId);
     const houndFemaleAfter = await hounds.hound(femaleId);
@@ -308,15 +325,10 @@ async function joinQueueAutomatically(queueId, totalJoins) {
   let participating = 0;
   let houndsId = Number(await hounds.id()) - 1;
   let joins = totalJoins ? totalJoins : queue.totalParticipants;
-  console.log(participating, joins, houndsId);
   let raceIdBefore = await races.id();
   while ( participating < joins && houndsId >= 1 ) {
     let houndToEnqueue = await hounds.hound(houndsId);
-    console.log("Join queue automatically");
     if ( !houndToEnqueue.running ) {
-      console.log("Join queue automatically >>> ", queueId,houndsId);
-      let houndObj = await hounds.hound(houndsId);
-      console.log("Hound obj: " + JSON.stringify(houndObj));
       await queues.enqueue(queueId, houndsId, { value : queue.entryFee });
       ++participating;
     } else {
@@ -324,7 +336,6 @@ async function joinQueueAutomatically(queueId, totalJoins) {
     }
   }
   let raceIdAfter = await races.id();
-  console.log(Number(raceIdBefore) + " < " + Number(raceIdAfter));
   expect(Number(raceIdBefore) < Number(raceIdAfter));
 }
 
@@ -675,7 +686,7 @@ describe('Setting up the Houndrace contracts', function () {
       queuesRestricted.address,
       races.address,
       directives.address
-    ],[races.address,racesMethods.address,racesRestricted.address]);
+    ],[races.address,racesMethods.address,racesRestricted.address,queuesRestricted.address,queuesMethods.address]);
     await queues.deployed();
     deploymentMessage('Queues',queues.address);
     await queuesRestricted.setGlobalParameters([
@@ -686,7 +697,7 @@ describe('Setting up the Houndrace contracts', function () {
       queuesRestricted.address,
       races.address,
       directives.address
-    ],[races.address,racesMethods.address,racesRestricted.address]);
+    ],[races.address,racesMethods.address,racesRestricted.address,queues.address,queuesMethods.address,queuesRestricted.address]);
     await queuesMethods.setGlobalParameters([
       arenas.address,
       hounds.address,
@@ -695,7 +706,16 @@ describe('Setting up the Houndrace contracts', function () {
       queuesRestricted.address,
       races.address,
       directives.address
-    ],[races.address,racesMethods.address,racesRestricted.address]);
+    ],[races.address,racesMethods.address,racesRestricted.address,queues.address,queuesMethods.address,queuesRestricted.address]);
+    await queues.setGlobalParameters([
+      arenas.address,
+      hounds.address,
+      queuesMethods.address,
+      payments.address,
+      queuesRestricted.address,
+      races.address,
+      directives.address
+    ],[queues.address]);
   });
 
   it('Deploy the generator contracts', async function () {
@@ -1215,20 +1235,8 @@ describe('Races', function () {
   });
 
   it('Upload race', async function () {
-    let arena = await arenas.arena(1);
-    await races.uploadRace([
-      'test race',
-      address0,
-      [],
-      1,
-      1000,
-      256,
-      1,
-      1,
-      2,
-      '0x00'
-    ],{
-      value: arena.fee
+    await races.uploadRace(defaultRace,{
+      value: defaultRace[4] * defaultRace[2].length
     });
   });
 
@@ -1301,13 +1309,31 @@ describe('Complex tests', function () {
     }
   });
 
+  /*
   it('Breed hounds with custom tokens', async function () {
     let houndId = await hounds.id();
     houndId = ( Number(houndId)-1 ) / 2;
+    const [owner] = await ethers.getSigners();
     for ( i = 0 ; i < 4 ; ++i ) {
+      await houndracePotions.mint(
+        owner.address,
+        99999999999999
+      );
+      let balance = await houndracePotions.balanceOf(owner.address);
+      await houndracePotions.transferFrom(
+        owner.address,
+        owner.address,
+        99999999999999
+      );
+      await houndracePotions.mint(
+        queues.address,
+        99999999999999
+      );
+      await houndracePotions.approve(queues.address,99999999999);
       await breed2Hounds(houndId - ( ( i * 2 ) + 1 ), houndId - ( ( i * 2 ) + 2 ) );
     }
   });
+  */
 
   it('Update hound with custom tokens stamina', async function () {
     await safelyUpdateHoundStamina(houndsId[houndsId.length-1]);
@@ -1317,6 +1343,7 @@ describe('Complex tests', function () {
     await safelyUpdateHoundBreeding(houndsId[houndsId.length-1]);
   });
 
+  /*
   it('Join queue with custom token x10', async function () {
     if ( !isGithubAutomation ) {
       await joinQueueAutomatically(queueId);
@@ -1332,7 +1359,6 @@ describe('Complex tests', function () {
       await joinQueueAutomatically(queueId);
     }
   });
-
-
+  */
 
 });

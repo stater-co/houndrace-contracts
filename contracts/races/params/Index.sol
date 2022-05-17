@@ -12,7 +12,6 @@ import '../../generator/IIndex.sol';
 import '../../queues/IIndex.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {

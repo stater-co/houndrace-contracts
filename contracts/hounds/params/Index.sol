@@ -10,7 +10,6 @@ import '../../payments/IIndex.sol';
 import '../../incubator/IIndex.sol';
 import '../../shop/IIndex.sol';
 import '../../utils/Withdrawable.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {

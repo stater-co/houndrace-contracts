@@ -22,10 +22,8 @@ contract Generator is Params {
     }
 
     function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory) {
-        console.log("Generate it here");
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
-        console.log("Generated");
         return abi.decode(output,(Race.Struct));
     }
 

@@ -9,7 +9,6 @@ contract QueuesMethods is Params {
 
     function enqueue(uint256 theId, uint256 hound) external payable {
 
-        console.log("in enqueue");
         require(
             ( 
                 queues[theId].totalParticipants > 0 
@@ -28,45 +27,29 @@ contract QueuesMethods is Params {
             )
         );
 
-        console.log("in enqueue x2");
-
         queues[theId].participants.push(hound);
-        console.log("in enqueue x2.1 ", hound, control.hounds);
 
         IHounds(control.hounds).updateHoundStamina(hound);
-        console.log("in enqueue x2.2 ", theId);
 
         require(!IHounds(control.hounds).updateHoundRunning(hound, true));
 
-        console.log("in enqueue x3");
-
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-            console.log("in enqueue x3.1");
-            this.onBeforeRace(theId);
+            this.onBeforeRace{ value: msg.value }(theId);
 
-            console.log("in enqueue x3.2");
             IRaces(control.races).raceStart(queues[theId], theId);
 
-            console.log("in enqueue x3.2");
             delete queues[theId].participants;
 
         }
-
-        console.log("in enqueue x4");
     
         emit PlayerEnqueue(theId,hound,msg.sender);
     }
 
     function onBeforeRace(uint256 theId) public payable {
-        console.log("= > ", allowed[msg.sender], msg.sender, queues[theId].arena);
-        console.log(address(this));
         require(allowed[msg.sender]);
         Arena.Struct memory arena = IArenas(control.arenas).arena(queues[theId].arena);
-        console.log("ok so >> ", control.arenas, arena.fee);
         address arenaOwner = IArenas(control.arenas).arenaOwner(queues[theId].arena);
-        console.log(msg.value);
-        console.log("ok so far");
         IPayments(control.payments).transferTokens{
             value: msg.value
         }(
@@ -86,6 +69,7 @@ contract QueuesMethods is Params {
         for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
             IPayments(control.payments).runPayment(rewards[i].payment);
         }
+
     }
 
 }

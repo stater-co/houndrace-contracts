@@ -13,7 +13,6 @@ import '../../payments/IIndex.sol';
 import '../../utils/Converters.sol';
 import '../../utils/Sortings.sol';
 import '../zerocost/IIndex.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable {

@@ -8,32 +8,22 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) public {
-        console.log(">>> ", allowed[msg.sender], hounds[theId].breeding.breedingFee);
-        console.log("Compare hounds ids: ", theId, " < ", id);
         require(theId < id);
         require(allowed[msg.sender]);
-        console.log(">>> 1 ", hounds[theId].stamina.staminaValue);
         --hounds[theId].stamina.staminaValue;
-        console.log(">>> 2");
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
-        console.log(">>> 3");
         hounds[theId].stamina.staminaLastUpdate = block.timestamp;
-        console.log(">>> 4");
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
-            console.log(">>> 4.5");
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
-        console.log("We're ok here !!");
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
     function updateHoundRunning(uint256 theId, bool running) public returns(bool) {
         require(theId < id);
         require(allowed[msg.sender]);
-        console.log("Hound id: ", theId, " >>> ", hounds[theId].running);
         bool oldRunning = hounds[theId].running;
         hounds[theId].running = running;
-        console.log("Return: ", oldRunning);
         return oldRunning;
     }
 
