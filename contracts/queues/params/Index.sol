@@ -5,13 +5,18 @@ import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../arenas/params/Arena.sol';
-import '../../arenas/IIndex.sol';
+import '../../arenas/interfaces/IArena.sol';
+import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../utils/Converters.sol';
-import '../../payments/IIndex.sol';
-import '../../hounds/IIndex.sol';
+import '../../directives/interfaces/IGetPayments.sol';
+import '../../directives/interfaces/IGetRewards.sol';
+import '../../payments/interfaces/ITransferTokens.sol';
+import '../../payments/interfaces/IRunPayment.sol';
+import '../../hounds/interfaces/IUpdateHoundStamina.sol';
+import '../../hounds/interfaces/IUpdateHoundRunning.sol';
+import '../../hounds/interfaces/IHoundOwner.sol';
 import '../../utils/Withdrawable.sol';
-import '../../races/IIndex.sol';
-import '../../directives/IIndex.sol';
+import '../../races/interfaces/IRaceStart.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -40,7 +45,7 @@ contract Params is Ownable, Withdrawable {
     }
 
     function enqueueCost(uint256 theId) public view returns(uint256) {
-        return IArenas(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee + 1;
+        return IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee + 1;
     }
 
     function handleAllowedCallers(address[] memory allowedCallers) internal {

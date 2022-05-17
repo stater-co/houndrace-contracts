@@ -3,9 +3,9 @@ pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../hounds/params/Hound.sol';
 import './Constructor.sol';
-import '../IIndex.sol';
-import '../../genetics/IIndex.sol';
-import '../../randomness/IIndex.sol';
+import '../../genetics/interfaces/IMixGenes.sol';
+import '../../randomness/IGetRandomNumber.sol';
+import '../interfaces/IBreedHounds.sol';
 
 
 contract Params is Ownable {

@@ -18,7 +18,7 @@ contract Generator is Params {
         uint256[] memory, 
         uint256[] memory
     ) {
-        return IGeneratorZerocost(control.zerocost).simulateClassicRace(participants, terrain, theRandomness);
+        return ISimulateClassicRace(control.zerocost).simulateClassicRace(participants, terrain, theRandomness);
     }
 
     function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory) {

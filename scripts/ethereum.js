@@ -1486,6 +1486,7 @@ async function main() {
             address0,
             address0,
             address0,
+            address0,
             500000000,
             true
           ]
@@ -1503,6 +1504,7 @@ async function main() {
         address: racesMethods.address,
         constructorArguments: [
           [
+            address0,
             address0,
             address0,
             address0,
@@ -1538,6 +1540,7 @@ async function main() {
             racesRestricted.address,
             address0,
             owner.address,
+            address0,
             500000000,
             true
           ]
@@ -1612,7 +1615,21 @@ async function main() {
       errors(err);
     }
     verifications.update(24, {
-      step: "Verify queues methods"
+      step: "Verify directives"
+    });
+
+    try {
+      await hre.run("verify:verify", {
+        address: directives.address,
+        constructorArguments: [
+          [directivesRestricted.address]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.update(25, {
+      step: "Verify queues"
     });
 
     try {

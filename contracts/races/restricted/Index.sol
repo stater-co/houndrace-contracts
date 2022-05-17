@@ -9,7 +9,7 @@ contract RacesRestricted is Params {
 
     function uploadRace(Race.Struct memory race) external payable onlyOwner {
 
-        IQueues(control.queues).onBeforeRace{ value: msg.value }(race.queueId);
+        IOnBeforeRace(control.queues).onBeforeRace{ value: msg.value }(race.queueId);
 
         races[id] = race;
 

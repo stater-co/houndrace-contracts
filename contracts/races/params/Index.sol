@@ -3,13 +3,9 @@ pragma solidity 0.8.13;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
-import '../../arenas/params/Arena.sol';
-import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';
-import '../../payments/IIndex.sol';
-import '../../hounds/IIndex.sol';
-import '../../generator/IIndex.sol';
-import '../../queues/IIndex.sol';
+import '../../generator/interfaces/IGenerate.sol';
+import '../../queues/interfaces/IOnBeforeRace.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 

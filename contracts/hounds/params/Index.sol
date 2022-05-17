@@ -5,10 +5,10 @@ import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import './Constructor.sol';
 import './Hound.sol';
-import '../IIndex.sol';
-import '../../payments/IIndex.sol';
-import '../../incubator/IIndex.sol';
-import '../../shop/IIndex.sol';
+import '../interfaces/IUpdateHoundBreeding.sol';
+import '../../payments/interfaces/ITransferTokens.sol';
+import '../../incubator/interfaces/IBreedHounds.sol';
+import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../utils/Withdrawable.sol';
 
 

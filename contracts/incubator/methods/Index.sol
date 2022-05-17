@@ -9,10 +9,10 @@ contract IncubatorMethods is Params {
 
     function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
         
-        uint256 randomness = IRandomness(control.randomness).getRandomNumber(
+        uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
             abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
         );
-        uint32[54] memory genetics = IGenetics(control.genetics).mixGenes(
+        uint32[54] memory genetics = IMixGenes(control.genetics).mixGenes(
             hound1.identity.geneticSequence, 
             hound2.identity.geneticSequence,
             randomness

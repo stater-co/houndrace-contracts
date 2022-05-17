@@ -11,9 +11,9 @@ contract RacesMethods is Params {
         require(allowed[msg.sender]);
         if ( control.callable ) {
 
-            races[id] = IGenerator(control.generator).generate(queue,theId);
+            races[id] = IGenerate(control.generator).generate(queue,theId);
 
-            IQueues(control.queues).onBeforeRace(races[id].queueId);
+            IOnBeforeRace(control.queues).onBeforeRace(races[id].queueId);
 
             emit NewFinishedRace(id, races[id]);
 

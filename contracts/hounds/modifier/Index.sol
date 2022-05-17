@@ -29,7 +29,7 @@ contract HoundsModifier is Params {
 
     function boostHoundStamina(uint256 theId, address user) public payable {
         require(theId < id);
-        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);
+        uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
         hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);
         hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
@@ -37,7 +37,7 @@ contract HoundsModifier is Params {
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
-        IPayments(control.boilerplate.payments).transferTokens{
+        ITransferTokens(control.boilerplate.payments).transferTokens{
             value: control.fees.refillStaminaCostCurrency == address(0) ? refillStaminaCooldownCost : 0
         }(
             control.fees.refillStaminaCostCurrency,
@@ -58,12 +58,12 @@ contract HoundsModifier is Params {
 
     function boostHoundBreeding(uint256 theId, address user) public payable {
         require(theId < id);
-        uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);
+        uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
         hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;
         hounds[theId].breeding.breedLastUpdate = block.timestamp;
 
-        IPayments(control.boilerplate.payments).transferTokens{
+        ITransferTokens(control.boilerplate.payments).transferTokens{
             value: control.fees.refillBreedingCostCurrency == address(0) ? refillBreedingCooldownCost : 0
         }(
             control.fees.refillBreedingCostCurrency,

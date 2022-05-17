@@ -12,9 +12,9 @@ contract GeneratorMethods is Params {
         require(control.allowed == msg.sender);
         require(queue.participants.length == queue.totalParticipants);
         
-        uint256 theRandomness = IRandomness(control.randomness).getRandomNumber(abi.encode(block.timestamp));
+        uint256 theRandomness = IGetRandomNumber(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
-        (uint256[] memory participants, uint256[] memory scores) = IGeneratorZerocost(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
+        (uint256[] memory participants, uint256[] memory scores) = ISimulateClassicRace(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
     
         race = Race.Struct(
             queue.name,

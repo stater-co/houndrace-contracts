@@ -19,7 +19,7 @@ contract QueuesMethods is Params {
                     queues[theId].endDate >= block.timestamp
                 )
             ) && (
-                queues[theId].currency == IArenas(control.arenas).arena(queues[theId].arena).feeCurrency
+                queues[theId].currency == IArena(control.arenas).arena(queues[theId].arena).feeCurrency
             ) && (
                     ( queues[theId].currency == address(0) && msg.value >= enqueueCost(theId) ) 
                 || 
@@ -29,15 +29,15 @@ contract QueuesMethods is Params {
 
         queues[theId].participants.push(hound);
 
-        IHounds(control.hounds).updateHoundStamina(hound);
+        IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
-        require(!IHounds(control.hounds).updateHoundRunning(hound, true));
+        require(!IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, true));
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
             this.onBeforeRace{ value: msg.value }(theId);
 
-            IRaces(control.races).raceStart(queues[theId], theId);
+            IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].participants;
 
@@ -48,9 +48,9 @@ contract QueuesMethods is Params {
 
     function onBeforeRace(uint256 theId) public payable {
         require(allowed[msg.sender]);
-        Arena.Struct memory arena = IArenas(control.arenas).arena(queues[theId].arena);
-        address arenaOwner = IArenas(control.arenas).arenaOwner(queues[theId].arena);
-        IPayments(control.payments).transferTokens{
+        Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
+        address arenaOwner = IArenaOwner(control.arenas).arenaOwner(queues[theId].arena);
+        ITransferTokens(control.payments).transferTokens{
             value: msg.value
         }(
             arena.feeCurrency,
@@ -59,15 +59,15 @@ contract QueuesMethods is Params {
             arena.fee
         );
 
-        Payment.Struct[] memory payments = IDirectives(control.directives).getPayments(queues[theId].paymentsId);
-        Reward.Struct[] memory rewards = IDirectives(control.directives).getRewards(queues[theId].rewardsId);
+        Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(queues[theId].paymentsId);
+        Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(queues[theId].rewardsId);
 
         for ( uint256 i = 0 ; i < payments.length ; ++i ) {
-            IPayments(control.payments).runPayment(payments[i]);
+            IRunPayment(control.payments).runPayment(payments[i]);
         }
 
         for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
-            IPayments(control.payments).runPayment(rewards[i].payment);
+            IRunPayment(control.payments).runPayment(rewards[i].payment);
         }
 
     }

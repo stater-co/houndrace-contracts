@@ -1,33 +1,30 @@
 {
   parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-17T12:53:34.760Z'
+  errorMessage: 'max code size exceeded',
+  timestamp: '2022-05-17T15:05:29.912Z'
 }
 {
   parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-17T13:32:58.503Z'
+  errorMessage: 'max code size exceeded',
+  timestamp: '2022-05-17T15:07:31.871Z'
 }
 {
   parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  name: 'ProviderError',
+  code: -32000,
+  _isProviderError: true,
+  data: undefined,
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-05-17T13:33:51.997Z'
+  errorMessage: 'max code size exceeded',
+  timestamp: '2022-05-17T16:28:28.724Z'
 }

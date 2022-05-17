@@ -10,13 +10,13 @@ contract QueuesRestricted is Params {
     function createQueues(Queue.Struct[] memory theQueues) external {
         Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arena = IArenas(control.arenas).arena(theQueues[i].arena);
+            arena = IArena(control.arenas).arena(theQueues[i].arena);
             require(arena.fee < theQueues[i].entryFee / 2);
             require(arena.feeCurrency == theQueues[i].currency);
             require(theQueues[i].paymentsId > 0);
             require(theQueues[i].rewardsId > 0);
             
-            Payment.Struct[] memory payments = IDirectives(control.directives).getPayments(theQueues[i].paymentsId);
+            Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(theQueues[i].paymentsId);
             for ( uint256 j = 0 ; j < payments.length ; ++j ) {
                 require(payments[j].currency == theQueues[i].currency);
             }
@@ -32,13 +32,13 @@ contract QueuesRestricted is Params {
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
                 require(
-                    IHounds(control.hounds).updateHoundRunning(
+                    IUpdateHoundRunning(control.hounds).updateHoundRunning(
                     queues[theId].participants[i], 
                     false
                     )
                 );
-                address houndOwner = IHounds(control.hounds).houndOwner(queues[theId].participants[i]);
-                IPayments(control.payments).transferTokens{ 
+                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[theId].participants[i]);
+                ITransferTokens(control.payments).transferTokens{ 
                     value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
                 }(
                     queues[theId].currency, 
