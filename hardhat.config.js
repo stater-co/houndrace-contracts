@@ -18,8 +18,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 module.exports = {
   networks: {
     hardhat: {
-      initialBaseFeePerGas: 0,
-      allowUnlimitedContractSize: true
+      initialBaseFeePerGas: 0
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
