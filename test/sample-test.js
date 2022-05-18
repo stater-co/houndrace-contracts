@@ -265,7 +265,6 @@ async function joinQueueAutomatically(queueId, totalJoins) {
     if ( !houndToEnqueue.running ) {
       await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
       ++participating;
-    } else {
       --houndsId;
     }
   }

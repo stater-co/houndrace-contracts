@@ -18,6 +18,10 @@ contract QueuesMethods is Params {
 
         require(!houndObj.running);
 
+        for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
+            require(queues[theId].participants[i] != hound);
+        }
+
         queues[theId].participants.push(hound);
 
         IHounds(control.hounds).updateHoundStamina(hound);
