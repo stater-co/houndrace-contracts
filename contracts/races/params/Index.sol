@@ -38,4 +38,7 @@ contract Params is Ownable, Withdrawable {
         return races[theId];
     }
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }

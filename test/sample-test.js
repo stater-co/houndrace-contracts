@@ -1,6 +1,5 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const isGithubAutomation = true;
 const address0 = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
@@ -187,7 +186,9 @@ async function breed2Hounds() {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
+    let houndToFillUp = await hounds.id();
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
+    await hounds.initializeHound(houndToFillUp,defaultHound);
 
     const houndMaleAfter = await hounds.hound(maleId);
     const houndFemaleAfter = await hounds.hound(femaleId);
@@ -264,7 +265,6 @@ async function joinQueueAutomatically(queueId, totalJoins) {
     if ( !houndToEnqueue.running ) {
       await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
       ++participating;
-    } else {
       --houndsId;
     }
   }
@@ -1054,9 +1054,7 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Hounds stamina check x2", async function () {
@@ -1070,9 +1068,7 @@ describe("Races", function () {
   });
 
   it("Join queue x20", async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Hounds stamina check x3", async function () {
@@ -1086,16 +1082,12 @@ describe("Races", function () {
   });
 
   it("Join queue x30", async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+    await joinQueueAutomatically(1);
   });
 
   it("Join queue and then delete it", async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(2,3);
-      await queues.deleteQueue(2);
-    }
+    await joinQueueAutomatically(2,3);
+    await queues.deleteQueue(2);
   });
 
   it("Hounds stamina check x4", async function () {

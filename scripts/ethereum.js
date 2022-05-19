@@ -1025,7 +1025,7 @@ async function main() {
         value: defaultRace[4] * defaultRace[2].length
       });
       recommendedCalls.update(19, {
-        step: "Upload race"
+        step: "Enqueue"
       });
     } catch(err) {
       console.error(err);
@@ -1033,11 +1033,16 @@ async function main() {
     }
 
     try {
-      for ( let i = 0 ; i < 10 ; ++i ) {
+      let raceIdBefore = await races.id();
+      for ( let i = 0 ; i < 30 ; ++i ) {
         await hounds.initializeHound(0,defaultHound);
         await queues.enqueue(1,Number(await hounds.id())-1,{
           value: defaultQueues[0][4]
         });
+      }
+      let raceIdAfter = await races.id();
+      if ( Number(raceIdBefore) >= Number(raceIdAfter) ) {
+        errors("Races have not been created after enqueues");
       }
       recommendedCalls.update(20, {
         step: "10x Enqueue, Race creation"

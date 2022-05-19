@@ -49,4 +49,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         return hounds[_tokenId].token_uri;
     }
 
+    fallback() external payable {}
+    receive() external payable {}
+
 }
