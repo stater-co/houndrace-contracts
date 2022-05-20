@@ -14,6 +14,8 @@ contract QueuesMethods is Params {
 
         require(msg.value >= queues[theId].entryFee);
 
+        require(IHounds(control.hounds).houndOwner(hound) == msg.sender);
+
         Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);
 
         require(!houndObj.running);
