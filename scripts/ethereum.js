@@ -46,7 +46,7 @@ const defaultHound = [
   true,
   false
 ];
-const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10]];
+const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10,false]];
 const defaultRace = [
   "race name",
   address0,
@@ -1061,7 +1061,7 @@ async function main() {
     }
 
     try {
-      await queues.deleteQueue(Number(await hounds.id())-1);
+      await queues.editQueue(Number(await hounds.id())-1, defaultQueues);
       recommendedCalls.update(22, {
         step: "Finished!"
       });

@@ -17,12 +17,12 @@ contract Queues is Params {
         require(success);
     }
 
-    function editQueue(uint256 theId, Queue.Struct memory queue) external {
+    function editQueue(uint256 theId, Queue.Struct memory queue) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function closeQueue(uint256 theId) external {
+    function closeQueue(uint256 theId) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
