@@ -19,7 +19,7 @@ contract QueuesMethods is Params {
         Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);
 
         require(!houndObj.running);
-
+        
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
             require(queues[theId].participants[i] != hound);
         }

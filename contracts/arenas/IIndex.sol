@@ -10,7 +10,7 @@ interface IArenas {
     
     function editArena(uint256 theId, Arena.Struct memory arena) external;
 
-    function setTokenUri(uint256 theId, string memory token_uri) external;
+    function setTokenURI(uint256 _tokenId, string memory token_uri) external;
 
     function tokenURI(uint256 _tokenId) external view returns (string memory);
 
