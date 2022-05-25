@@ -18,22 +18,16 @@ contract QueuesRestricted is Params {
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
     }
 
-    function deleteQueue(uint256 theId) external {
-        for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
-            if ( queues[theId].participants[i] > 0 ) {
-                (bool success, ) = control.payments.delegatecall(
-                    abi.encodeWithSignature(
-                        "rawSend(address,uint256,address)",
-                        queues[theId].currency, 
-                        queues[theId].entryFee, 
-                        IHounds(control.hounds).houndOwner(queues[theId].participants[i])
-                    )
-                );
-                require(success);
-            }
-        }
-        delete queues[theId];
-        emit DeleteQueue(theId);
+    function editQueue(uint256 theId, Queue.Struct memory queue) external {
+        Arena.Struct memory arena = IArenas(control.arenas).arena(queue.arena);
+        require(arena.fee < queue.entryFee / 2);
+        queues[theId] = queue;
+        emit EditQueue(theId,queues[theId]);
+    }
+
+    function closeQueue(uint256 theId) external {
+        queues[theId].closed = true;
+        emit QueueClosed(theId);
     }
 
 }

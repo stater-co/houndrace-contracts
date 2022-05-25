@@ -25,6 +25,8 @@ library Queue {
 
         uint32 totalParticipants;
 
+        bool closed;
+
     }
 
 }

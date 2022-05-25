@@ -14,6 +14,8 @@ interface IQueuesMethods {
 
     function createQueues(Queue.Struct[] memory theQueues) external;
 
-    function deleteQueue(uint256 theId) external;
+    function editQueue(uint256 theId, Queue.Struct memory queue) external;
+
+    function closeQueue(uint256 theId) external;
 
 }
