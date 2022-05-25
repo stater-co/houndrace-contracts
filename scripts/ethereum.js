@@ -1061,7 +1061,7 @@ async function main() {
     }
 
     try {
-      await queues.editQueue(Number(await hounds.id())-1, defaultQueues);
+      await queues.editQueue(Number(await hounds.id())-1, defaultQueues[0]);
       recommendedCalls.update(22, {
         step: "Finished!"
       });
@@ -1608,6 +1608,7 @@ async function main() {
     verifications.update(26, {
       step: "Finished!"
     });
+   
 
   } catch(err) {
     console.error(err);
