@@ -13,6 +13,18 @@ const defaultHound = [
   false,
   false
 ];
+const defaultQueue = [
+  "Test queue",
+  "0x0000000000000000000000000000000000000000",
+  [],
+  1, // terrain
+  5000000000,
+  0,
+  0,
+  1,
+  10,
+  false
+];
 let currentDiscountId = 1;
 let payments;
 let paymentsMethods;
@@ -994,45 +1006,15 @@ describe("Races", function () {
   it("Create queue", async function () {
 
     await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        5000000000,
-        0,
-        0,
-        1,
-        10
-      ]
+      defaultQueue
     ]);
 
     await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        3000000000,
-        0,
-        0,
-        1,
-        10
-      ]
+      defaultQueue
     ]);
 
     await queues.createQueues([
-      [
-        "Test queue",
-        "0x0000000000000000000000000000000000000000",
-        [],
-        1, // terrain
-        8000000000,
-        0,
-        0,
-        1,
-        10
-      ]
+      defaultQueue
     ]);
 
     let queueId = await races.id();
@@ -1085,9 +1067,10 @@ describe("Races", function () {
     await joinQueueAutomatically(1);
   });
 
-  it("Join queue and then delete it", async function () {
+  it("Join queue and then edit it and then close it", async function () {
     await joinQueueAutomatically(2,3);
-    await queues.deleteQueue(2);
+    await queues.editQueue(1,defaultQueue);
+    await queues.closeQueue(1);
   });
 
   it("Hounds stamina check x4", async function () {

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.13;
+pragma solidity <=0.8.14;
 
 
 library Queue {
@@ -24,6 +24,8 @@ library Queue {
         uint256 rewardsId;
 
         uint32 totalParticipants;
+
+        bool closed;
 
     }
 

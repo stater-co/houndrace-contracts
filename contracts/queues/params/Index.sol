@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Queue.sol';
 import './Constructor.sol';
@@ -16,8 +16,9 @@ import '../../races/IIndex.sol';
 contract Params is Ownable, Withdrawable {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
-    event DeleteQueue(uint256 indexed id);
+    event EditQueue(uint256 indexed id, Queue.Struct queue);
     event PlayerEnqueue(uint256 indexed id, uint256 indexed hound, address indexed player);
+    event QueueClosed(uint256 indexed id);
 
     uint256 public id = 1;
     QueuesConstructor.Struct public control;

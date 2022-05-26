@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 import './params/Constructor.sol';
 import './params/Queue.sol';
 
@@ -14,6 +14,8 @@ interface IQueuesMethods {
 
     function createQueues(Queue.Struct[] memory theQueues) external;
 
-    function deleteQueue(uint256 theId) external;
+    function editQueue(uint256 theId, Queue.Struct memory queue) external;
+
+    function closeQueue(uint256 theId) external;
 
 }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.13;
+pragma solidity 0.8.14;
 import './params/Index.sol';
 
 
@@ -12,13 +12,18 @@ contract Queues is Params {
         require(success);
     }
 
-    function deleteQueue(uint256 theId) external onlyOwner {
+    function enqueue(uint256 theId, uint256 hound) external payable {
+        (bool success, ) = control.methods.delegatecall(msg.data);
+        require(success);
+    }
+
+    function editQueue(uint256 theId, Queue.Struct memory queue) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function enqueue(uint256 theId, uint256 hound) external payable {
-        (bool success, ) = control.methods.delegatecall(msg.data);
+    function closeQueue(uint256 theId) external onlyOwner {
+        (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
