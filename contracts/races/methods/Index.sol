@@ -36,14 +36,23 @@ contract RacesMethods is Params {
 
             emit NewFinishedRace(id,  races[id]);
 
+            ++id;
+
         } else {
 
             require(payable(control.staterApi).send(msg.value));
-            emit NewRace(id, races[id]);
+            emit NewRace(id, Race.Struct(
+                queue.name,
+                queue.currency,
+                queue.participants,
+                queue.arena,
+                queue.entryFee,
+                queue.rewardsId,
+                0,
+                '0x00'
+            ));
 
         }
-
-        ++id;
 
     }
 
