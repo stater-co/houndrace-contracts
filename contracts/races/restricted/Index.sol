@@ -13,6 +13,10 @@ contract RacesRestricted is Params {
 
         require(msg.value >= racePrize);
 
+        for ( uint256 i = 0 ; i < race.participants.length ; ++i ) {
+            IHounds(control.hounds).updateHoundRunning(race.participants[i], false);
+        }
+
         // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications
         for ( uint256 i = 0 ; i < payments.length ; ++i ) {
             if ( payments[i].currency == address(0) ) {
