@@ -16,13 +16,16 @@ contract RacesMethods is Params {
 
             races[id] = IGenerator(control.generator).generate(queue);
 
+            for ( uint256 i = 0 ; i < races[id].participants.length ; ++i ) {
+                IHounds(control.hounds).updateHoundRunning(races[id].participants[i], false);
+            }
+
             // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications
             for ( uint256 i = 0 ; i < payments.length ; ++i ) {
                 if ( payments[i].currency == address(0) ) {
                     if ( payments[i].paymentType == 3 ) {
                         payments[i].qty = msg.value / 100 * payments[i].percentageWon;
                         payments[i].to = payable(IHounds(control.hounds).houndOwner(races[id].participants[payments[i].place]));
-                        IHounds(control.hounds).updateHoundRunning(races[id].participants[payments[i].place], false);
                         ethToSend += payments[i].qty;
                     } else {
                         ethToSend += payments[i].qty;
