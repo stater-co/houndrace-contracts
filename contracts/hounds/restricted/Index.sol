@@ -9,10 +9,10 @@ contract HoundsRestricted is Params {
     
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external {
         if ( onId > 0 ) {
-            //require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap == 0 && onId < id);
-            //emit NewHound(onId,msg.sender,theHound);
+            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap == 0 && onId < id);
+            emit NewHound(onId,msg.sender,theHound);
             hounds[onId] = theHound;
-            //_safeMint(msg.sender,onId);
+            _safeMint(msg.sender,onId);
         } else {
             emit NewHound(id,msg.sender,theHound);
             hounds[id] = theHound;
