@@ -343,7 +343,7 @@ async function main() {
         houndsModifier.address,
         shop.address
       ],[
-        "0xB1A2BC2EC50000",
+        "0x38D7EA4C68000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -1168,7 +1168,7 @@ async function main() {
               houndsModifier.address,
               shop.address
             ],[
-              "0xB1A2BC2EC50000",
+              "0x38D7EA4C68000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
