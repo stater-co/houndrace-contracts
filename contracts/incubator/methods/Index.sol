@@ -43,7 +43,7 @@ contract IncubatorMethods is Params {
             hound1Id,
             hound2Id,
             hound1.identity.generation + hound2.identity.generation,
-            block.timestamp * 1000, // evm timestamps are in seconds
+            block.timestamp, // evm timestamps are in seconds
             genetics // preferences will be extracted from this 
         );
 
