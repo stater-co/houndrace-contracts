@@ -883,7 +883,7 @@ async function main() {
         address: payments.address,
         constructorArguments: [
           [
-            paymentsMethods.address,[]
+            paymentsMethods.address,[owner.address]
           ]
         ]
       });
