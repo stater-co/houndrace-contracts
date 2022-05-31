@@ -368,7 +368,7 @@ async function main() {
       address0,
       address0,
       500000000,
-      true
+      false
     ]);
     await racesRestricted.deployed();
     deployment('export RACE_RESTRICTED=' + racesRestricted.address);
@@ -388,7 +388,7 @@ async function main() {
       address0,
       address0,
       500000000,
-      true
+      false
     ]);
     await racesMethods.deployed();
     deployment('export RACE_METHODS=' + racesMethods.address);
@@ -408,7 +408,7 @@ async function main() {
       address0,
       owner.address,
       500000000,
-      true
+      false
     ]);
     await races.deployed();
     deployment('export RACE=' + races.address);
@@ -591,7 +591,7 @@ async function main() {
         queues.address,
         owner.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(10, {
         step: "Set global parameters for races methods"
@@ -612,7 +612,7 @@ async function main() {
         queues.address,
         owner.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(11, {
         step: "Set global parameters for races"
@@ -633,7 +633,7 @@ async function main() {
         queues.address,
         owner.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(12, {
         step: "Set global parameters hounds"
@@ -1199,7 +1199,7 @@ async function main() {
             address0,
             address0,
             500000000,
-            true
+            false
           ]
         ]
       });
@@ -1225,7 +1225,7 @@ async function main() {
             address0,
             address0,
             500000000,
-            true
+            false
           ]
         ]
       });
@@ -1251,7 +1251,7 @@ async function main() {
             address0,
             owner.address,
             500000000,
-            true
+            false
           ]
         ]
       });
