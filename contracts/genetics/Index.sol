@@ -122,8 +122,14 @@ contract Genetics is Params {
 
     function uniformCrossover(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) public view returns(uint32[54] memory geneticSequence) {
         bool differentGeneticSequences;
-        for ( uint256 i = 0 ; i < 54 ; ++i ) {
-            uint256 dominantGene = uint256(keccak256(abi.encodePacked(i, randomness)));
+        uint256 dominantGene = uint256(keccak256(abi.encodePacked(randomness)));
+        if ( dominantGene % 100 < control.maleGenesProbability ) {
+            geneticSequence[1] = geneticSequence1[1];
+        } else {
+            geneticSequence[1] = geneticSequence2[1];
+        }
+        for ( uint256 i = 2 ; i < 54 ; ++i ) {
+            dominantGene = uint256(keccak256(abi.encodePacked(i, randomness)));
             if ( dominantGene % 100 < control.maleGenesProbability ) {
                 geneticSequence[i] = geneticSequence1[i];
             } else {
@@ -135,7 +141,7 @@ contract Genetics is Params {
                 }
             }
         }
-        require(differentGeneticSequences);
+        //require(differentGeneticSequences);
     }
 
     function mixGenes(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) external view returns(uint32[54] memory) {

@@ -57058,3 +57058,21 @@
   network: 'rinkeby',
   timestamp: '2022-06-1T13:36:42.661Z'
 }
+{
+  message: 'export GENETICS=0xF3A3FbB423AE43bE60F930C0eF6d51A5C356db36',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-06-1T13:36:42.661Z'
+}
+{
+  message: 'export HOUNDS_MINTER=0xcab5Bb8cF62d69BfF628F0d5936481A3E8Ebba53',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-06-1T13:36:42.661Z'
+}
+{
+  message: 'export GENETICS=0x667aEb39d682054CeDbce8559C7263C0EEA45762',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-06-1T13:36:42.661Z'
+}
