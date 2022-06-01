@@ -57046,3 +57046,15 @@
   network: 'rinkeby',
   timestamp: '2022-05-31T13:36:42.661Z'
 }
+{
+  message: '##############################################',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-06-01T13:29:45.183Z'
+}
+{
+  message: 'export GENETICS=0xa7e93FaAa71fc47Ec5AA33464a0cdE1E278dA617',
+  level: 'info',
+  network: 'rinkeby',
+  timestamp: '2022-06-1T13:36:42.661Z'
+}
