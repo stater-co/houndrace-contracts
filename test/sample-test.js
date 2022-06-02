@@ -14,52 +14,17 @@ const defaultHound = [
   false,
   false
 ];
-const defaultRace = [
-  "race name",
-  address0,
-  [1,2,3,4,5,6,7,8,9,10],
-  1,
-  500,
-  55,
-  1,
-  1,
-  1,
-  '0x00'
-];
-const payment = [
-  address0,
-  address0,
-  address0,
-  [],
-  [],
-  0,
-  1,
-  3,
-  5,
-  1
-];
-const queue = [
-  'Test queue',
-  '0x0000000000000000000000000000000000000000',
+const defaultQueue = [
+  "Test queue",
+  "0x0000000000000000000000000000000000000000",
   [],
   1, // terrain
   5000000000,
-  address0,
   0,
   0,
-  1,
   1,
   10,
-  0
-];
-const arena = [
-  address0,
-  'token_url',
-  address0,
-  10000,
-  1,
-  1000,
-  3
+  false
 ];
 let currentDiscountId = 1;
 let payments;
@@ -251,9 +216,9 @@ async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    let houndIdToFill = await hounds.id();
+    let houndToFillUp = await hounds.id();
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
-    await hounds.initializeHound(houndIdToFill,defaultHound);
+    await hounds.initializeHound(houndToFillUp,defaultHound);
 
     const houndMaleAfter = await hounds.hound(maleId);
     const houndFemaleAfter = await hounds.hound(femaleId);
@@ -331,7 +296,6 @@ async function joinQueueAutomatically(queueId, totalJoins) {
     if ( !houndToEnqueue.running ) {
       await queues.enqueue(queueId, houndsId, { value : queue.entryFee });
       ++participating;
-    } else {
       --houndsId;
     }
   }
@@ -1165,16 +1129,17 @@ describe('Races', function () {
 
   it('Create queue', async function () {
 
-    await directives.createPaymentsBatch([
-      payment
+    await queues.createQueues([
+      defaultQueue
     ]);
 
-    let queueToUse = queue;
-    queueToUse[4] = 5000000000;
-    await queues.createQueues([queueToUse]);
+    await queues.createQueues([
+      defaultQueue
+    ]);
 
-    queueToUse[4] = 3000000000;
-    await queues.createQueues([queueToUse]);
+    await queues.createQueues([
+      defaultQueue
+    ]);
 
     queueToUse[4] = 8000000000;
     await queues.createQueues([queueToUse]);
@@ -1197,37 +1162,30 @@ describe('Races', function () {
 
   });
 
-  it('Join queue x10', async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+  it("Join queue x10", async function () {
+    await joinQueueAutomatically(1);
   });
 
   it('Hounds stamina check x2', async function () {
     checkHoundsStamina();
   });
 
-  it('Join queue x20', async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+  it("Join queue x20", async function () {
+    await joinQueueAutomatically(1);
   });
 
   it('Hounds stamina check x3', async function () {
     checkHoundsStamina();
   });
 
-  it('Join queue x30', async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(1);
-    }
+  it("Join queue x30", async function () {
+    await joinQueueAutomatically(1);
   });
 
-  it('Join queue and then delete it', async function () {
-    if ( !isGithubAutomation ) {
-      await joinQueueAutomatically(2,3);
-      await queues.deleteQueue(2);
-    }
+  it("Join queue and then edit it and then close it", async function () {
+    await joinQueueAutomatically(2,3);
+    await queues.editQueue(1,defaultQueue);
+    await queues.closeQueue(1);
   });
 
   it('Hounds stamina check x4', async function () {

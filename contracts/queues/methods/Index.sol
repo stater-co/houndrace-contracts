@@ -11,7 +11,7 @@ contract QueuesMethods is Params {
 
         require(
             ( 
-                queues[theId].totalParticipants > 0 
+                queues[theId].totalParticipants > 0 && !queues[theId].closed 
             ) && ( (
                     queues[theId].endDate == 0 && queues[theId].startDate == 0
                 ) || (
@@ -27,6 +27,10 @@ contract QueuesMethods is Params {
             )
         );
 
+        for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
+            require(queues[theId].participants[i] != hound);
+        }
+
         queues[theId].participants.push(hound);
 
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
@@ -38,6 +42,8 @@ contract QueuesMethods is Params {
             this.onBeforeRace{ value: msg.value }(theId);
 
             IRaceStart(control.races).raceStart(queues[theId], theId);
+
+            delete queues[theId].participants;
 
             delete queues[theId].participants;
 

@@ -13,7 +13,10 @@ contract HoundsMinter is Params {
             hounds[hound1].breeding.breedCooldown < block.timestamp && 
             !hounds[hound1].running && 
             !hounds[hound2].running && 
-            ownerOf(hound1) == msg.sender
+            ownerOf(hound1) == msg.sender && 
+            hound1 != hound2 && 
+            ( hounds[hound1].identity.geneticSequence[1] == 1 || hounds[hound1].identity.geneticSequence[1] == 2 ) && 
+            ( hounds[hound2].identity.geneticSequence[1] == 1 || hounds[hound2].identity.geneticSequence[1] == 2 )
         );
 
         IHandleHoundsBreedPayment(control.boilerplate.payments).handleHoundsBreedPayment{

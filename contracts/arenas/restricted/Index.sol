@@ -11,12 +11,10 @@ contract ArenasRestricted is Params {
     function createArena(Arena.Struct memory arena) external onlyOwner {
         arenas[id] = arena;
 
-        // Mint arena
         _safeMint(msg.sender,id);
 
         emit NewArena(id,msg.sender,arena);
 
-        // Increase arena id
         ++id;
     }
     

@@ -22,10 +22,6 @@ const configurations = multibar.create(16,0);
 configurations.update(0, {
   step: "Set global parameters for payment methods"
 });
-const recommendedCalls = multibar.create(22,0);
-recommendedCalls.update(0, {
-  step: "Create queues"
-});
 const verifications = multibar.create(26,0);
 verifications.update(0, {
   step: "Verify converters"
@@ -34,8 +30,8 @@ verifications.update(0, {
 
 const hre = require("hardhat");
 const address0 = "0x0000000000000000000000000000000000000000";
-const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
-const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
+const maleBoilerplateGene = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
+const femaleBoilerplateGene = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ address0, 10000000, 10000000, 100, 1, 100 ],
@@ -46,22 +42,7 @@ const defaultHound = [
   true,
   false
 ];
-const defaultQueues = [
-  [
-    "Test queue",
-    "0x0000000000000000000000000000000000000000",
-    [],
-    1,
-    5000000000,
-    address0,
-    0,
-    0,
-    1,
-    1,
-    10,
-    0
-  ]
-];
+const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10,false]];
 const defaultRace = [
   "race name",
   address0,
@@ -380,11 +361,7 @@ async function main() {
         houndsModifier.address,
         shop.address
       ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        "0xB1A2BC2EC50000",
+        "0x38D7EA4C68000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -410,7 +387,7 @@ async function main() {
       address0,
       address0,
       500000000,
-      true
+      false
     ]);
     await racesRestricted.deployed();
     deployment('export RACE_RESTRICTED=' + racesRestricted.address);
@@ -431,7 +408,7 @@ async function main() {
       address0,
       address0,
       500000000,
-      true
+      false
     ]);
     await racesMethods.deployed();
     deployment('export RACE_METHODS=' + racesMethods.address);
@@ -452,7 +429,7 @@ async function main() {
       owner.address,
       address0,
       500000000,
-      true
+      false
     ]);
     await races.deployed();
     deployment('export RACE=' + races.address);
@@ -673,7 +650,7 @@ async function main() {
         owner.address,
         queues.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(10, {
         step: "Set global parameters for races methods"
@@ -695,7 +672,7 @@ async function main() {
         owner.address,
         queues.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(11, {
         step: "Set global parameters for races"
@@ -717,7 +694,7 @@ async function main() {
         owner.address,
         queues.address,
         500000000,
-        true
+        false
       ]);
       configurations.update(12, {
         step: "Set global parameters hounds"
@@ -895,229 +872,36 @@ async function main() {
     }
 
     try {
-      await arenas.createArena(defaultArena);
-      recommendedCalls.update(1, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await queues.createQueues(defaultQueues);
-      recommendedCalls.update(1, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(2, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.update(3, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(4, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.update(5, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(6, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.update(7, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(8, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.update(9, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(10, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.breedHounds(1,2,{ value: "0xD529AE9E860000" });
-      recommendedCalls.update(11, {
-        step: "Breed hounds"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.id();
-      recommendedCalls.update(12, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.breedHounds(3,4,{ value: "0xD529AE9E860000" });
-      recommendedCalls.update(13, {
-        step: "Breed hounds"
-      });
-    } catch(err) {
-      errors(err);
-    }
-    
-    try {
-      await hounds.id();
-      recommendedCalls.update(14, {
-        step: "Get hound id"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(0,defaultHound);
-      recommendedCalls.update(15, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(5,defaultHound);
-      recommendedCalls.update(16, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await hounds.initializeHound(6,defaultHound);
-      recommendedCalls.update(17, {
-        step: "Initialize hound"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    updatedRaces = await races.id();
-
-    try {
-      await races.uploadRace(defaultRace,{
-        value: defaultRace[4] * defaultRace[2].length
-      });
-      recommendedCalls.update(19, {
-        step: "Upload race"
-      });
-    } catch(err) {
-      console.error(err);
-      errors(err);
-    }
-
-    updatedRacesAfter = await races.id();
-    if ( Number(updatedRaces) >= Number(updatedRacesAfter) ) {
-      errors("Upload race didn't work, seems to be bugged");
-    }
-
-    try {
-      let nrOfParticipants = 0;
-      let initialRaces = await races.id();
-      for ( let i = 1 ; i <= 30 ; ++i ) {
-        await hounds.initializeHound(0,defaultHound);
-        let latestHoundCreated = Number(await hounds.id())-1;
-        await queues.enqueue(1,i,{
-          value: defaultQueues[0][4]
-        });
-        let updateHound = await hounds.hound(latestHoundCreated);
-        if ( updateHound.running === true ) {
-          errors("Hound enqueue didn't work for: " + i);
-        }
-        ++nrOfParticipants;
-        if ( nrOfParticipants === defaultQueues[0][10] ) {
-          nrOfParticipants = 0;
-        }
-      }
-      let afterInitialRaces = await races.id();
-      if ( initialRaces >= afterInitialRaces ) {
-        errors("Enqueue didn't trigger the race creation");
-      }
-      recommendedCalls.update(20, {
-        step: "10x Enqueue, Race creation"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await queues.createQueues(defaultQueues);
-      recommendedCalls.update(21, {
-        step: "Create queues"
-      });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await queues.deleteQueue(Number(await hounds.id())-1);
-      recommendedCalls.update(22, {
-        step: "Finished!"
-      });
+      await payments.addPayments(1,[
+        [
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          50, // % of the total race prize
+          0 // first place
+        ],[
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          30, // % of the total race prize
+          1 // second place
+        ],[
+          payments.address, // from
+          address0, // to
+          address0, // currency
+          [], // token ids
+          0, // amount
+          3, // 2 - erc20 1 - erc1155 0 - erc721
+          20, // % of the total race prize
+          2 // third place
+        ]
+      ]);
     } catch(err) {
       errors(err);
     }
@@ -1157,7 +941,28 @@ async function main() {
     
     try {
       await hre.run("verify:verify", {
-        address: payments.address
+        address: paymentsMethods.address,
+        constructorArguments: [
+          [
+            address0,[]
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.update(4, {
+      step: "Verify payments"
+    });
+    
+    try {
+      await hre.run("verify:verify", {
+        address: payments.address,
+        constructorArguments: [
+          [
+            paymentsMethods.address,[owner.address]
+          ]
+        ]
       });
     } catch (err) {
       errors(err);
@@ -1452,11 +1257,7 @@ async function main() {
               houndsModifier.address,
               shop.address
             ],[
-              address0,
-              address0,
-              address0,
-              address0,
-              "0xB1A2BC2EC50000",
+              "0x38D7EA4C68000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1488,7 +1289,7 @@ async function main() {
             address0,
             address0,
             500000000,
-            true
+            false
           ]
         ]
       });
@@ -1515,7 +1316,7 @@ async function main() {
             address0,
             address0,
             500000000,
-            true
+            false
           ]
         ]
       });
@@ -1542,7 +1343,7 @@ async function main() {
             owner.address,
             address0,
             500000000,
-            true
+            false
           ]
         ]
       });
@@ -1673,6 +1474,7 @@ async function main() {
     verifications.update(26, {
       step: "Finished!"
     });
+   
 
   } catch(err) {
     console.error(err);
