@@ -8,6 +8,7 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import '../../directives/params/Payment.sol';
 import './HoundsBreedPayment.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
