@@ -16,7 +16,4 @@ contract Params is Ownable {
         control = globalParameters;
     }
 
-    fallback() external payable {}
-    receive() external payable {}
-
 }

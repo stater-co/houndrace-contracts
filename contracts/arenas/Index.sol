@@ -17,7 +17,7 @@ contract Arenas is Params {
         require(success);
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {
+    function setTokenUri(uint256 theId, string memory token_uri) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

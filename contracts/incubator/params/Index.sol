@@ -18,8 +18,4 @@ contract Params is Ownable {
     function setGlobalParameters(IncubatorConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
-
 }

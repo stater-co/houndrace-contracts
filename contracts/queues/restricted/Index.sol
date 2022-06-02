@@ -28,16 +28,28 @@ contract QueuesRestricted is Params {
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
     }
 
-    function editQueue(uint256 theId, Queue.Struct memory queue) external {
-        Arena.Struct memory arena = IArenas(control.arenas).arena(queue.arena);
-        require(arena.fee < queue.entryFee / 2);
-        queues[theId] = queue;
-        emit EditQueue(theId,queues[theId]);
-    }
-
-    function closeQueue(uint256 theId) external {
-        queues[theId].closed = true;
-        emit QueueClosed(theId);
+    function deleteQueue(uint256 theId) external {
+        for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
+            if ( queues[theId].participants[i] > 0 ) {
+                require(
+                    IUpdateHoundRunning(control.hounds).updateHoundRunning(
+                    queues[theId].participants[i], 
+                    false
+                    )
+                );
+                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[theId].participants[i]);
+                ITransferTokens(control.payments).transferTokens{ 
+                    value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
+                }(
+                    queues[theId].currency, 
+                    address(this),
+                    houndOwner,
+                    queues[theId].entryFee
+                );
+            }
+        }
+        delete queues[theId];
+        emit DeleteQueue(theId);
     }
 
 }

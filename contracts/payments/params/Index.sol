@@ -15,7 +15,4 @@ contract Params is Ownable, ReentrancyGuard {
     fallback() external payable {}
     receive() external payable {}
 
-    fallback() external payable {}
-    receive() external payable {}
-
 }
