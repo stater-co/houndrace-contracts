@@ -16,6 +16,7 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
+/*
         IHandleHoundsBreedPayment(control.boilerplate.payments).handleHoundsBreedPayment{
             value: msg.value
         }(
@@ -31,6 +32,7 @@ contract HoundsMinter is Params {
                 ownerOf(hound2) == ownerOf(hound1)
             )
         );
+*/
 
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
