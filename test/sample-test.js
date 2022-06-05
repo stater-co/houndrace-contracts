@@ -160,7 +160,7 @@ async function safelyUpdateHoundBreeding(houndId) {
     houndToWorkWith = Number(houndIdBefore)-1;
   }
   const houndBefore = await hounds.hound(houndToWorkWith);
-  await hounds.updateHoundBreeding(houndToWorkWith);
+  await hounds.updateHoundBreeding(houndToWorkWith,houndToWorkWith);
   const houndAfter = await hounds.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), 'Hound stamin update on creation problem');
 }
@@ -252,9 +252,9 @@ async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
     console.log("Total to pay: " + totalToPay);
-    let houndIdToFill = await hounds.id();
+    let houndIdToFill = Number(await hounds.id()) - 1;
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
-    await hounds.initializeHound(houndIdToFill,defaultHound);
+    //await hounds.initializeHound(houndIdToFill,defaultHound);
 
     const houndMaleAfter = await hounds.hound(maleId);
     const houndFemaleAfter = await hounds.hound(femaleId);
@@ -499,112 +499,13 @@ describe('Setting up the Houndrace contracts', function () {
   it('Deploy the hounds contract', async function () {
     const [owner,otherOwner] = await ethers.getSigners();
 
-    houndsRestricted = await getContractInstance('HoundsRestricted',[[
-      'HoundRace',
-      'HR',
-      [owner.address],
-      [
-        address0,
-        otherOwner.address,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        '0xB1A2BC2EC50000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000'
-      ]
-    ]]);
+    houndsRestricted = await getContractInstance('HoundsRestricted',['HoundRace','HR']);
 
-    houndsModifier = await getContractInstance('HoundsModifier',[[
-      'HoundRace',
-      'HR',
-      [owner.address],
-      [
-        address0,
-        otherOwner.address,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        '0xB1A2BC2EC50000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000'
-      ]
-    ]]);
+    houndsModifier = await getContractInstance('HoundsModifier',['HoundRace','HR']);
 
-    houndsMinter = await getContractInstance('HoundsMinter',[[
-      'HoundRace',
-      'HR',
-      [owner.address],
-      [
-        address0,
-        otherOwner.address,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        '0xB1A2BC2EC50000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000'
-      ]
-    ]]);
+    houndsMinter = await getContractInstance('HoundsMinter');
 
-    hounds = await getContractInstance('Hounds',[[
-      'HoundRace',
-      'HR',
-      [owner.address],
-      [
-        incubator.address,
-        otherOwner.address,
-        payments.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        address0,
-        houndsModifier.address,
-        shop.address
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        '0xB1A2BC2EC50000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000',
-        '0x2386F26FC10000'
-      ]
-    ]]);
+    hounds = await getContractInstance('Hounds',['HoundRace','HR']);
   });
 
   it('Deploy the race contracts', async function () {
@@ -794,21 +695,12 @@ describe('Setting up the Houndrace contracts global parameters', function () {
 
   it('Setting up hounds contracts dependencies', async function () {
     
-    const [,otherOwner] = await ethers.getSigners();
+    const [owner,otherOwner] = await ethers.getSigners();
   
     await houndsMinter.setGlobalParameters([
       'HoundRace',
       'HR',
-      [
-        hounds.address,
-        houndsRestricted.address,
-        houndsMinter.address,
-        races.address,
-        racesRestricted.address,
-        queues.address,
-        queuesMethods.address,
-        queuesRestricted.address
-      ],
+      [owner.address],
       [
         incubator.address,
         otherOwner.address,
@@ -842,7 +734,8 @@ describe('Setting up the Houndrace contracts global parameters', function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address
+        queuesRestricted.address,
+        owner.address
       ],
       [
         incubator.address,
@@ -877,7 +770,8 @@ describe('Setting up the Houndrace contracts global parameters', function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address
+        queuesRestricted.address,
+        owner.address
       ],
       [
         incubator.address,
@@ -912,7 +806,8 @@ describe('Setting up the Houndrace contracts global parameters', function () {
         racesRestricted.address,
         queues.address,
         queuesMethods.address,
-        queuesRestricted.address
+        queuesRestricted.address,
+        owner.address
       ],
       [
         incubator.address,

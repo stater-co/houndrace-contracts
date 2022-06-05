@@ -39,6 +39,7 @@ contract Payments is Params {
 
 	function handleHoundsBreedPayment(HoundsBreedPayment.Struct memory houndsBreedPayment) external payable {
 		console.log("Handle hounds breed payment 0");
+	
         this.transferTokens{
             value: houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0
         }(
@@ -47,7 +48,7 @@ contract Payments is Params {
             address(this),
             houndsBreedPayment.breedCost
         );
-
+		
 		console.log("Handle hounds breed payment 1");
         this.transferTokens{
             value: houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0
@@ -67,7 +68,7 @@ contract Payments is Params {
 			console.log(houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0);
 			console.log(houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0);
 			console.log(houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0);
-            require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
+            require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.hound.breeding.breedingFeeCurrency == address(0) ? houndsBreedPayment.hound.breeding.breedingFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
 			console.log("Handle hounds breed payment 5");
             this.transferTokens{
                 value: houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0

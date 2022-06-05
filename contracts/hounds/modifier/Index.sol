@@ -1,11 +1,23 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
-import '../params/Index.sol';
+import '@openzeppelin/contracts/access/Ownable.sol';
+import '../interfaces/IHoundOwner.sol';
+import '../../payments/interfaces/ITransferTokens.sol';
+import '../../shop/interfaces/ICalculateDiscount.sol';
+import '../params/Constructor.sol';
+import '../params/Hound.sol';
 
 
-contract HoundsModifier is Params {
+contract HoundsModifier is Ownable {
+    uint256 public id = 1;
+    mapping(address => bool) public allowed;
+    mapping(uint256 => Hound.Struct) public hounds;
+    event HoundEvent(uint256 indexed id, Hound.Struct hound);
+    Constructor.Struct public control;
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
     
     function updateHoundStamina(uint256 theId) public {
         require(theId < id);
@@ -16,7 +28,7 @@ contract HoundsModifier is Params {
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
-        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
+        emit HoundEvent(theId,hounds[theId]);
     }
 
     function updateHoundRunning(uint256 theId, bool running) public returns(bool) {
@@ -45,15 +57,18 @@ contract HoundsModifier is Params {
             control.boilerplate.payments,
             refillStaminaCooldownCost
         );
-        emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
+        emit HoundEvent(theId,hounds[theId]);
     }
 
-    function updateHoundBreeding(uint256 theId) public {
-        require(theId < id);
+    function updateHoundBreeding(uint256 hound1, uint256 hound2) public {
+        require(hound1 < id && hound2 < id);
         require(allowed[msg.sender]);
-        hounds[theId].breeding.breedCooldown += 172800;
-        hounds[theId].breeding.breedLastUpdate = block.timestamp;
-        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
+        hounds[hound1].breeding.breedCooldown += 172800;
+        hounds[hound1].breeding.breedLastUpdate = block.timestamp;
+        hounds[hound2].breeding.breedCooldown += 172800;
+        hounds[hound2].breeding.breedLastUpdate = block.timestamp;
+        emit HoundEvent(hound1,hounds[hound1]);
+        emit HoundEvent(hound2,hounds[hound2]);
     }
 
     function boostHoundBreeding(uint256 theId, address user) public payable {
@@ -71,17 +86,17 @@ contract HoundsModifier is Params {
             control.boilerplate.payments,
             refillBreedingCooldownCost
         );
-        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
+        emit HoundEvent(theId,hounds[theId]);
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
         require(theId < id);
-        require(ownerOf(theId) == msg.sender);
+        require(IHoundOwner(control.boilerplate.hounds).houndOwner(theId) == msg.sender);
         if ( status )
             require(hounds[theId].breeding.breedCooldown < block.timestamp);
         hounds[theId].breeding.breedingFee = fee;
         hounds[theId].breeding.availableToBreed = status;
-        emit HoundBreedable(theId,fee);
+        emit HoundEvent(theId,hounds[theId]);
     }
 
 }

@@ -285,28 +285,7 @@ async function main() {
     const HoundsModifier = await hre.ethers.getContractFactory("HoundsModifier");
     const houndsModifier = await HoundsModifier.deploy([
       "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        address0,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
+      "HR"
     ]);
     await houndsModifier.deployed();
     deployment('export HOUNDS_MODIFIER=' + houndsModifier.address);
@@ -315,31 +294,7 @@ async function main() {
     });
 
     const HoundsMinter = await hre.ethers.getContractFactory("HoundsMinter");
-    const houndsMinter = await HoundsMinter.deploy([
-      "HoundRace",
-      "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      [
-        address0,
-        String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        address0,
-        address0,
-        address0,
-        address0,
-        address0,
-        address0
-      ],[
-        address0,
-        address0,
-        address0,
-        address0,
-        "0xB1A2BC2EC50000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000",
-        "0x2386F26FC10000"
-      ]
-    ]);
+    const houndsMinter = await HoundsMinter.deploy();
     await houndsMinter.deployed();
     deployment('export HOUNDS_MINTER=' + houndsMinter.address);
     deployments.update(17, {
@@ -350,7 +305,7 @@ async function main() {
     const hounds = await Hounds.deploy([
       "HoundRace",
       "HR",
-      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),owner.address],
       [
         incubator.address,
         String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -716,7 +671,8 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address
+          queuesRestricted.address,
+          owner.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -758,7 +714,8 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address
+          queuesRestricted.address,
+          owner.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -800,7 +757,8 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address
+          queuesRestricted.address,
+          owner.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -842,7 +800,8 @@ async function main() {
           racesRestricted.address,
           queues.address,
           queuesMethods.address,
-          queuesRestricted.address
+          queuesRestricted.address,
+          owner.address
         ],[
           incubator.address,
           String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -1170,7 +1129,7 @@ async function main() {
           [
             "HoundRace",
             "HR",
-            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),owner.address],
             [
               address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
