@@ -3,10 +3,6 @@ pragma solidity 0.8.14;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-import '../../payments/interfaces/IHandleHoundsBreedPayment.sol';
-import '../../incubator/interfaces/IBreedHounds.sol';
-import '../interfaces/IUpdateHoundBreeding.sol';
-import '../interfaces/IHoundOwner.sol';
 import './Constructor.sol';
 import './Hound.sol';
 
@@ -19,17 +15,24 @@ contract Params is Ownable, ERC721, ERC721Holder {
     Constructor.Struct public control;
 
     constructor(string memory name, string memory symbol) ERC721(name,symbol) {
-        
+ 
     }
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        handleAllowedCallers(globalParameters.allowedCallers);
+        for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i )
+            allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
         control = globalParameters;
     }
 
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
+    function send(address target, string memory method, bytes memory input) public returns(bytes memory){
+        (bool success, bytes memory output) = target.delegatecall(
+            abi.encodeWithSignature(
+                method,
+                input
+            )
+        );
+        require(success);
+        return output;
     }
 
 }

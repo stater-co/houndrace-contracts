@@ -1,20 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
 import '../params/Index.sol';
-
+import '../params/BreedHoundsInput.sol';
 
 contract IncubatorMethods is Params {
 
-    constructor(IncubatorConstructor.Struct memory input) Params(input) {}
-
-    function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
+    function breedHounds(bytes memory rawInput) public view returns(Hound.Struct memory) {
+        BreedHoundsInput.Struct memory input = abi.decode(rawInput,(BreedHoundsInput.Struct));
         
         uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
-            abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+            abi.encode(input.hound1Id > input.hound2Id ? input.hound1.identity.geneticSequence : input.hound2.identity.geneticSequence)
         );
         uint32[54] memory genetics = IMixGenes(control.genetics).mixGenes(
-            hound1.identity.geneticSequence, 
-            hound2.identity.geneticSequence,
+            input.hound1.identity.geneticSequence, 
+            input.hound2.identity.geneticSequence,
             randomness
         );
 
@@ -26,7 +25,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Stamina memory stamina = Hound.Stamina(
-            randomness % 2 == 0 ? hound1.stamina.staminaRefill1xCurrency : hound2.stamina.staminaRefill1xCurrency,
+            randomness % 2 == 0 ? input.hound1.stamina.staminaRefill1xCurrency : input.hound2.stamina.staminaRefill1xCurrency,
             0,
             .1 ether,
             100,
@@ -35,7 +34,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Breeding memory breeding = Hound.Breeding(
-            randomness % 2 == 0 ? hound1.breeding.breedingFeeCurrency : hound2.breeding.breedingFeeCurrency,
+            randomness % 2 == 0 ? input.hound1.breeding.breedingFeeCurrency : input.hound2.breeding.breedingFeeCurrency,
             control.secondsToMaturity, 
             .3 ether,
             0,
@@ -43,9 +42,9 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Identity memory identity = Hound.Identity(
-            hound1Id,
-            hound2Id,
-            hound1.identity.generation + hound2.identity.generation,
+            input.hound1Id,
+            input.hound2Id,
+            input.hound1.identity.generation + input.hound2.identity.generation,
             block.timestamp * 1000, // evm timestamps are in seconds
             genetics // preferences will be extracted from this 
         );

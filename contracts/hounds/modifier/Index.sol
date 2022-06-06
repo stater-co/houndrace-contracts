@@ -1,24 +1,17 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
-import '@openzeppelin/contracts/access/Ownable.sol';
-import '../interfaces/IHoundOwner.sol';
-import '../../payments/interfaces/ITransferTokens.sol';
+import '../params/Index.sol';
+import '../params/UpdateHoundBreedingInput.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
-import '../params/Constructor.sol';
-import '../params/Hound.sol';
+import '../../payments/interfaces/ITransferTokens.sol';
 
 
-contract HoundsModifier is Ownable {
-    uint256 public id = 1;
-    mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) public hounds;
-    event HoundEvent(uint256 indexed id, Hound.Struct hound);
-    Constructor.Struct public control;
-
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        control = globalParameters;
-    }
+contract HoundsModifier is Params {
     
+    constructor(string memory name, string memory symbol) Params(name,symbol) {
+        
+    }
+
     function updateHoundStamina(uint256 theId) public {
         require(theId < id);
         require(allowed[msg.sender]);
@@ -60,15 +53,16 @@ contract HoundsModifier is Ownable {
         emit HoundEvent(theId,hounds[theId]);
     }
 
-    function updateHoundBreeding(uint256 hound1, uint256 hound2) public {
-        require(hound1 < id && hound2 < id);
+    function updateHoundBreeding(bytes memory rawInput) public {
+        UpdateHoundBreedingInput.Struct memory input = abi.decode(rawInput,(UpdateHoundBreedingInput.Struct));
+        require(input.hound1 < id && input.hound2 < id);
         require(allowed[msg.sender]);
-        hounds[hound1].breeding.breedCooldown += 172800;
-        hounds[hound1].breeding.breedLastUpdate = block.timestamp;
-        hounds[hound2].breeding.breedCooldown += 172800;
-        hounds[hound2].breeding.breedLastUpdate = block.timestamp;
-        emit HoundEvent(hound1,hounds[hound1]);
-        emit HoundEvent(hound2,hounds[hound2]);
+        hounds[input.hound1].breeding.breedCooldown += 172800;
+        hounds[input.hound1].breeding.breedLastUpdate = block.timestamp;
+        hounds[input.hound2].breeding.breedCooldown += 172800;
+        hounds[input.hound2].breeding.breedLastUpdate = block.timestamp;
+        emit HoundEvent(input.hound1,hounds[input.hound1]);
+        emit HoundEvent(input.hound2,hounds[input.hound2]);
     }
 
     function boostHoundBreeding(uint256 theId, address user) public payable {
@@ -91,7 +85,7 @@ contract HoundsModifier is Ownable {
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
         require(theId < id);
-        require(IHoundOwner(control.boilerplate.hounds).houndOwner(theId) == msg.sender);
+        require(ownerOf(theId) == msg.sender);
         if ( status )
             require(hounds[theId].breeding.breedCooldown < block.timestamp);
         hounds[theId].breeding.breedingFee = fee;

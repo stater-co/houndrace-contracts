@@ -482,26 +482,15 @@ describe('Setting up the Houndrace contracts', function () {
   });
 
   it('Deploy the incubator contracts', async function () {
-    incubatorMethods = await getContractInstance('IncubatorMethods',[[
-      address0,
-      address0,
-      address0,
-      0
-    ]]);
-    incubator = await getContractInstance('Incubator',[[
-      incubatorMethods.address,
-      randomness.address,
-      genetics.address,
-      0
-    ]]);
+    incubatorMethods = await getContractInstance('IncubatorMethods');
+    incubator = await getContractInstance('Incubator');
   });
 
   it('Deploy the hounds contract', async function () {
-    const [owner,otherOwner] = await ethers.getSigners();
 
     houndsRestricted = await getContractInstance('HoundsRestricted',['HoundRace','HR']);
 
-    houndsModifier = await getContractInstance('HoundsModifier',['HoundRace','HR']);
+    houndsModifier = await getContractInstance('HoundsModifier');
 
     houndsMinter = await getContractInstance('HoundsMinter');
 
@@ -700,8 +689,7 @@ describe('Setting up the Houndrace contracts global parameters', function () {
     await houndsMinter.setGlobalParameters([
       'HoundRace',
       'HR',
-      [owner.address],
-      [
+      [owner.address],[
         incubator.address,
         otherOwner.address,
         payments.address,
@@ -736,8 +724,7 @@ describe('Setting up the Houndrace contracts global parameters', function () {
         queuesMethods.address,
         queuesRestricted.address,
         owner.address
-      ],
-      [
+      ],[
         incubator.address,
         otherOwner.address,
         payments.address,

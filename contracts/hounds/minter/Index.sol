@@ -1,67 +1,85 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
-import '@openzeppelin/contracts/access/Ownable.sol';
-import '../../payments/interfaces/IHandleHoundsBreedPayment.sol';
-import '../../incubator/interfaces/IBreedHounds.sol';
-import '../interfaces/IUpdateHoundBreeding.sol';
-import '../interfaces/IHoundOwner.sol';
-import '../params/Constructor.sol';
-import '../params/Hound.sol';
+import '../params/Index.sol';
+import '../../payments/params/HoundsBreedPayment.sol';
+import '../params/UpdateHoundBreedingInput.sol';
 
 
-contract HoundsMinter is Ownable {
-    uint256 public id = 1;
-    mapping(uint256 => Hound.Struct) public hounds;
-    event HoundEvent(uint256 indexed id, Hound.Struct hound);
-    Constructor.Struct public control;
+contract HoundsMinter is Params {
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        control = globalParameters;
+    constructor(string memory name, string memory symbol) Params(name,symbol) {
+        
     }
 
-    function breedHounds(uint256 hound1, uint256 hound2) external payable returns(bool) {
+    function breedHounds(uint256 hound1, uint256 hound2) external payable {
 
-        /*
         require(
             hounds[hound2].breeding.breedCooldown < block.timestamp && 
             hounds[hound1].breeding.breedCooldown < block.timestamp && 
             !hounds[hound1].running && 
-            !hounds[hound2].running // && 
-            //IHoundOwner(control.boilerplate.hounds).houndOwner(hound1) == msg.sender
+            !hounds[hound2].running && 
+            ownerOf(hound1) == msg.sender
         );
-        */
-/*
-        IHandleHoundsBreedPayment(control.boilerplate.payments).handleHoundsBreedPayment{
-            value: msg.value
-        }(
-            HoundsBreedPayment.Struct(
-                control.fees.breedCostCurrency,
-                control.fees.breedFeeCurrency,
-                hounds[hound2].breeding.breedingFeeCurrency,
-                control.boilerplate.staterApi,
-                IHoundOwner(control.boilerplate.hounds).houndOwner(hound2),
-                control.fees.breedCost,
-                hounds[hound2].breeding.breedingFee,
-                control.fees.breedFee,
-                IHoundOwner(control.boilerplate.hounds).houndOwner(hound2) == IHoundOwner(control.boilerplate.hounds).houndOwner(hound1),
-                hounds[hound2]
+
+        bool success;
+        bytes memory output;
+        (success, ) = control.boilerplate.payments.delegatecall(
+            abi.encodeWithSignature(
+                "handleHoundsBreedPayment(bytes)",
+                abi.encode(
+                    HoundsBreedPayment.Struct(
+                        control.fees.breedCostCurrency,
+                        control.fees.breedFeeCurrency,
+                        hounds[hound2].breeding.breedingFeeCurrency,
+                        control.boilerplate.staterApi,
+                        ownerOf(hound2),
+                        control.fees.breedCost,
+                        hounds[hound2].breeding.breedingFee,
+                        control.fees.breedFee,
+                        ownerOf(hound2) == ownerOf(hound1),
+                        hounds[hound2]
+                    )
+                )
             )
         );
-*/
 
         hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
         hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
-        Hound.Struct memory offspring;/* = IBreedHounds(control.boilerplate.incubator).breedHounds(
-            hound1, 
-            hounds[hound1], 
-            hound2, 
-            hounds[hound2]
+        (success, output) = control.boilerplate.incubator.call(
+            abi.encodeWithSignature(
+                "breedHounds(bytes)",
+                abi.encode(
+                    HoundsBreedPayment.Struct(
+                        control.fees.breedCostCurrency,
+                        control.fees.breedFeeCurrency,
+                        hounds[hound2].breeding.breedingFeeCurrency,
+                        control.boilerplate.staterApi,
+                        ownerOf(hound2),
+                        control.fees.breedCost,
+                        hounds[hound2].breeding.breedingFee,
+                        control.fees.breedFee,
+                        ownerOf(hound2) == ownerOf(hound1),
+                        hounds[hound2]
+                    )
+                )
+            )
         );
-        IUpdateHoundBreeding(control.boilerplate.hounds).updateHoundBreeding(hound1,hound2);
-        */
+        Hound.Struct memory offspring = abi.decode(output,(Hound.Struct));
+        
+        control.boilerplate.hounds.call(
+            abi.encodeWithSignature(
+                "updateHoundBreeding(bytes)",
+                abi.encode(
+                    UpdateHoundBreedingInput.Struct(
+                        hound1,
+                        hound2
+                    )
+                )
+            )
+        );
+        
         emit HoundEvent(id,offspring);
         ++id;
-        return true;
     } 
 
 }

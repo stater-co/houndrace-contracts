@@ -37,7 +37,8 @@ contract Payments is Params {
 		}
 	}
 
-	function handleHoundsBreedPayment(HoundsBreedPayment.Struct memory houndsBreedPayment) external payable {
+	function handleHoundsBreedPayment(bytes memory input) external payable {
+		HoundsBreedPayment.Struct memory houndsBreedPayment = abi.decode(input,(HoundsBreedPayment.Struct));
 		console.log("Handle hounds breed payment 0");
 	
         this.transferTokens{

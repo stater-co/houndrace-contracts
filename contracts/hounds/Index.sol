@@ -1,27 +1,12 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
-import '@openzeppelin/contracts/access/Ownable.sol';
-import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-import './params/Constructor.sol';
-import './params/Hound.sol';
+import './params/Index.sol';
 
 
-contract Hounds is Ownable, ERC721, ERC721Holder {
-    uint256 public id = 1;
-    mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) public hounds;
-    event HoundEvent(uint256 indexed id, Hound.Struct hound);
-    Constructor.Struct public control;
+contract Hounds is Params {
 
-    constructor(string memory name, string memory symbol) ERC721(name,symbol) {
- 
-    }
-
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i )
-            allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
-        control = globalParameters;
+    constructor(string memory name, string memory symbol) Params(name,symbol) {
+        
     }
 
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
@@ -34,12 +19,9 @@ contract Hounds is Ownable, ERC721, ERC721Holder {
         require(success);
     }
 
-    function breedHounds(uint256 hound1, uint256 hound2) external payable returns(bool) {
-        (bool success, bytes memory output) = control.boilerplate.minter.delegatecall(msg.data);
+    function breedHounds(uint256 hound1, uint256 hound2) external payable {
+        (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);
         require(success);
-        success = abi.decode(output,(bool));
-        
-        return success;
     }
 
     function updateHoundStamina(uint256 theId) public {
@@ -47,7 +29,7 @@ contract Hounds is Ownable, ERC721, ERC721Holder {
         require(success);
     }
 
-    function updateHoundBreeding(uint256 hound1, uint256 hound2) public {
+    function updateHoundBreeding(bytes memory rawInput) public {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

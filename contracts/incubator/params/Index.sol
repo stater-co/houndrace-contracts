@@ -10,10 +10,6 @@ import '../interfaces/IBreedHounds.sol';
 
 contract Params is Ownable {
     IncubatorConstructor.Struct public control;
-
-    constructor(IncubatorConstructor.Struct memory input) {
-        control = input;
-    }
     
     function setGlobalParameters(IncubatorConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
