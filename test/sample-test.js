@@ -11,7 +11,7 @@ const defaultHound = [
   [ 1, 1, 0, 0, maleBoilerplateGene ],
   '',
   '',
-  false,
+  0,
   false
 ];
 const defaultRace = [

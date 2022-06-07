@@ -11,8 +11,8 @@ contract HoundsMinter is Params {
         require(
             hounds[hound2].breeding.breedCooldown < block.timestamp && 
             hounds[hound1].breeding.breedCooldown < block.timestamp && 
-            !hounds[hound1].running && 
-            !hounds[hound2].running && 
+            hounds[hound1].queueId == 0 && 
+            hounds[hound2].queueId == 0 && 
             ownerOf(hound1) == msg.sender
         );
 

@@ -42,7 +42,7 @@ library Hound {
         Identity identity;
         string title;
         string token_uri;
+        uint256 queueId;
         bool custom;
-        bool running;
     }
 }

@@ -29,9 +29,11 @@ contract QueuesMethods is Params {
 
         queues[theId].participants.push(hound);
 
+        console.log("Before error");
+
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
-        require(!IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, true));
+        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
