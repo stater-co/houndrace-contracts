@@ -1,10 +1,9 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.14;
 import './params/Index.sol';
-import '../utils/Withdrawable.sol';
 
 
-contract Hounds is Params, Withdrawable {
+contract Hounds is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
@@ -56,22 +55,7 @@ contract Hounds is Params, Withdrawable {
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
         require(ownerOf(hound1) == msg.sender);
-        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );
+        return (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
     }
-
-    function houndOwner(uint256 tokenId) external view returns(address) {
-        return ownerOf(tokenId);
-    }
-
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
-    }
-
-    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
-        return hounds[_tokenId].token_uri;
-    }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

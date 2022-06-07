@@ -251,7 +251,6 @@ async function breed2Hounds(hardcodedMaleId, hardcodedFemaleId) {
     }
 
     const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    console.log("Total to pay: " + totalToPay);
     let houndIdToFill = await hounds.id();
     await hounds.breedHounds(hound1, hound2, { value : totalToPay });
     await hounds.initializeHound(houndIdToFill,defaultHound);

@@ -10,9 +10,10 @@ import '../../payments/interfaces/ITransferTokens.sol';
 import '../../payments/interfaces/IHandleHoundsBreedPayment.sol';
 import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
+import '../../utils/Withdrawable.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder {
+contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) public hounds;
@@ -34,9 +35,24 @@ contract Params is Ownable, ERC721, ERC721Holder {
         control = globalParameters;
     }
 
+    function houndOwner(uint256 tokenId) external view returns(address) {
+        return ownerOf(tokenId);
+    }
+
+    function hound(uint256 theId) external view returns(Hound.Struct memory) {
+        return hounds[theId];
+    }
+
+    function tokenURI(uint256 _tokenId) public view override returns (string memory) {
+        return hounds[_tokenId].token_uri;
+    }
+
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
+
+    fallback() external payable {}
+    receive() external payable {}
 
 }

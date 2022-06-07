@@ -38,7 +38,6 @@ contract Payments is Params {
 	}
 
 	function handleHoundsBreedPayment(HoundsBreedPayment.Struct memory houndsBreedPayment) external payable {
-		console.log("Handle hounds breed payment 0");
         this.transferTokens{
             value: houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0
         }(
@@ -48,7 +47,6 @@ contract Payments is Params {
             houndsBreedPayment.breedCost
         );
 
-		console.log("Handle hounds breed payment 1");
         this.transferTokens{
             value: houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0
         }(
@@ -58,17 +56,9 @@ contract Payments is Params {
             houndsBreedPayment.breedFee
         );
 
-		console.log("Handle hounds breed payment 2");
         require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0));
-		console.log("Handle hounds breed payment 3");
         if ( houndsBreedPayment.secondHoundOwned ) {
-			console.log("Handle hounds breed payment 4");
-			console.log(msg.value);
-			console.log(houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0);
-			console.log(houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0);
-			console.log(houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0);
             require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
-			console.log("Handle hounds breed payment 5");
             this.transferTokens{
                 value: houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0
             }(
@@ -77,9 +67,7 @@ contract Payments is Params {
                 houndsBreedPayment.foreignOwner,
                 houndsBreedPayment.breedingFee
             );
-			console.log("Handle hounds breed payment 6");
         }
-		console.log("Handle hounds breed payment 7");
 	}
 
 }
