@@ -7,6 +7,8 @@ library Hound {
         uint256 breedCooldown;
         uint256 breedingFee;
         uint256 breedLastUpdate;
+        uint256 breedingPeriod;
+        uint256 breedingStart;
         bool availableToBreed;
     }
 

@@ -13,6 +13,8 @@ contract HoundsMinter is Params {
             hounds[hound1].breeding.breedCooldown < block.timestamp && 
             hounds[hound2].identity.secondsToMaturity + hounds[hound2].identity.birthDate < block.timestamp && 
             hounds[hound1].identity.secondsToMaturity + hounds[hound1].identity.birthDate < block.timestamp && 
+            block.timestamp % hounds[hound1].breeding.breedingStart < hounds[hound1].breeding.breedingPeriod && 
+            block.timestamp % hounds[hound2].breeding.breedingStart < hounds[hound2].breeding.breedingPeriod && 
             hounds[hound1].running == 0 && 
             hounds[hound2].running == 0 && 
             ownerOf(hound1) == msg.sender && 
