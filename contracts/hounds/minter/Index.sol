@@ -9,8 +9,8 @@ contract HoundsMinter is Params {
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
         require(
-            hounds[hound2].breeding.breedCooldown < block.timestamp && 
-            hounds[hound1].breeding.breedCooldown < block.timestamp && 
+            hounds[hound2].breeding.lastBreed + hounds[hound2].breeding.breedingCooldown < block.timestamp && 
+            hounds[hound1].breeding.lastBreed + hounds[hound1].breeding.breedingCooldown < block.timestamp && 
             hounds[hound2].identity.secondsToMaturity + hounds[hound2].identity.birthDate < block.timestamp && 
             hounds[hound1].identity.secondsToMaturity + hounds[hound1].identity.birthDate < block.timestamp && 
             block.timestamp % hounds[hound1].breeding.breedingStart < hounds[hound1].breeding.breedingPeriod && 
@@ -34,8 +34,8 @@ contract HoundsMinter is Params {
         }
 
         require(payable(control.boilerplate.staterApi).send(control.fees.breedFee));
-        hounds[hound2].breeding.breedCooldown = block.timestamp + 172800;
-        hounds[hound1].breeding.breedCooldown = block.timestamp + 172800;
+        hounds[hound2].breeding.lastBreed = block.timestamp;
+        hounds[hound1].breeding.lastBreed = block.timestamp;
         Hound.Struct memory offspring = IIncubator(control.boilerplate.incubator).breedHounds(
             hound1, 
             hounds[hound1], 

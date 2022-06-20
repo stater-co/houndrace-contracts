@@ -4,9 +4,9 @@ pragma solidity <=0.8.15;
 library Hound {
 
     struct Breeding {
-        uint256 breedCooldown;
+        uint256 lastBreed;
+        uint256 breedingCooldown;
         uint256 breedingFee;
-        uint256 breedLastUpdate;
         uint256 breedingPeriod;
         uint256 breedingStart;
         bool availableToBreed;

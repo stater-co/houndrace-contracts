@@ -37,23 +37,19 @@ contract HoundsModifier is Params {
 
     function updateHoundBreeding(uint256 theId) public {
         require(allowed[msg.sender]);
-        hounds[theId].breeding.breedCooldown += 172800;
-        hounds[theId].breeding.breedLastUpdate = block.timestamp;
+        hounds[theId].breeding.lastBreed = block.timestamp;
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
 
     function boostHoundBreeding(uint256 theId, address user) public payable {
         uint256 discount = IShop(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
-        hounds[theId].breeding.breedCooldown -= msg.value / refillBreedingCooldownCost;
-        hounds[theId].breeding.breedLastUpdate = block.timestamp;
+        hounds[theId].breeding.lastBreed += msg.value / refillBreedingCooldownCost;
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
         require(ownerOf(theId) == msg.sender);
-        if ( status )
-            require(hounds[theId].breeding.breedCooldown < block.timestamp);
         hounds[theId].breeding.breedingFee = fee;
         hounds[theId].breeding.availableToBreed = status;
         emit HoundBreedable(theId,fee);

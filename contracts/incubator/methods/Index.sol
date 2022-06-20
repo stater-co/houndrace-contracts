@@ -33,9 +33,9 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Breeding memory breeding = Hound.Breeding(
-            control.secondsToMaturity, 
-            .3 ether,
-            0,
+            0, 
+            genetics[1] == 1 ? control.maleBreedingCooldown : control.femaleBreedingCooldown,
+            control.houndBreedingFee,
             4 weeks,
             85 weeks,
             false
@@ -46,7 +46,7 @@ contract IncubatorMethods is Params {
             hound2Id,
             hound1.identity.generation + hound2.identity.generation,
             block.timestamp, // evm timestamps are in seconds
-            4 weeks,
+            control.secondsToMaturity,
             genetics // preferences will be extracted from this 
         );
 
