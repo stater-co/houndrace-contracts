@@ -36,6 +36,8 @@ contract IncubatorMethods is Params {
             control.secondsToMaturity, 
             .3 ether,
             0,
+            4 weeks,
+            85 weeks,
             false
         );
 
@@ -44,6 +46,7 @@ contract IncubatorMethods is Params {
             hound2Id,
             hound1.identity.generation + hound2.identity.generation,
             block.timestamp, // evm timestamps are in seconds
+            4 weeks,
             genetics // preferences will be extracted from this 
         );
 
@@ -54,7 +57,7 @@ contract IncubatorMethods is Params {
             identity,
             "",
             "",
-            false,
+            0,
             false
         );
     }
