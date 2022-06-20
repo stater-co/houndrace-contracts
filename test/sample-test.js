@@ -6,11 +6,11 @@ const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 100000, 1000, true ],
-  [ 1, 1, 0, 0, maleBoilerplateGene ],
+  [ 0, 0, 100000, 100000, 1000, true ],
+  [ 1, 1, 0, 0, 0, maleBoilerplateGene ],
   "",
   "",
-  false,
+  0,
   false
 ];
 const defaultQueue = [
@@ -410,13 +410,19 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      "0x67657452"
+      "0x67657452",
+      1800,
+      2419200,
+      '300000000000000000'
     ]);
     incubator = await getContractInstance("Incubator",[
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      "0x67657452"
+      "0x67657452",
+      1800,
+      2419200,
+      '300000000000000000'
     ]);
   });
 
@@ -661,7 +667,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      "0x67657452"
+      "0x67657452",
+      1800,
+      2419200,
+      '300000000000000000'
     ]);
 
   });
