@@ -17,7 +17,7 @@ contract RacesMethods is Params {
             races[id] = IGenerator(control.generator).generate(queue);
 
             for ( uint256 i = 0 ; i < races[id].participants.length ; ++i ) {
-                IHounds(control.hounds).updateHoundRunning(races[id].participants[i], false);
+                IHounds(control.hounds).updateHoundRunning(races[id].participants[i], 0);
             }
 
             // custom ERC20 / ERC721 / ERC1155 will be sent to the contract that makes the transfer, to avoid code complications

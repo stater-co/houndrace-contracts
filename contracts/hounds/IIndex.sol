@@ -29,6 +29,6 @@ interface IHounds {
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256);
 
-    function updateHoundRunning(uint256 theId, bool running) external;
+    function updateHoundRunning(uint256 theId, uint256 running) external;
 
 }

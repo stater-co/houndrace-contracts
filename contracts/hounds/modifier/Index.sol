@@ -18,7 +18,7 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function updateHoundRunning(uint256 theId, bool running) public {
+    function updateHoundRunning(uint256 theId, uint256 running) public {
         require(allowed[msg.sender]);
         hounds[theId].running = running;
     }

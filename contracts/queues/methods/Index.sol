@@ -29,7 +29,7 @@ contract QueuesMethods is Params {
         queues[theId].participants.push(hound);
 
         IHounds(control.hounds).updateHoundStamina(hound);
-        IHounds(control.hounds).updateHoundRunning(hound, true);
+        IHounds(control.hounds).updateHoundRunning(hound, theId);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 

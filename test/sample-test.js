@@ -274,7 +274,7 @@ async function joinQueueAutomatically(queueId, totalJoins) {
   let joins = totalJoins ? totalJoins : queue.totalParticipants;
   while ( participating < joins && houndsId >= 1 ) {
     let houndToEnqueue = await hounds.hound(houndsId);
-    if ( !houndToEnqueue.running ) {
+    if ( Number(houndToEnqueue.running) === 0 ) {
       await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
       ++participating;
       --houndsId;

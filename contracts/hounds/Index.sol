@@ -47,7 +47,7 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, bool running) public {
+    function updateHoundRunning(uint256 theId, uint256 running) public {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success); 
     }
