@@ -15,6 +15,7 @@ library Hound {
         uint256 femaleParent;
         uint256 generation;
         uint256 birthDate;
+        uint256 secondsToMaturity;
         uint32[54] geneticSequence;
     }
 
@@ -40,7 +41,7 @@ library Hound {
         Identity identity;
         string title;
         string token_uri;
+        uint256 running;
         bool custom;
-        bool running;
     }
 }

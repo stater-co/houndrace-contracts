@@ -8,17 +8,19 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function enqueue(uint256 theId, uint256 hound) external payable {
-        require(queues[theId].totalParticipants > 0 && !queues[theId].closed);
-
-        require((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp));
-
-        require(msg.value >= queues[theId].entryFee);
-
-        require(IHounds(control.hounds).houndOwner(hound) == msg.sender);
+        require(
+            queues[theId].totalParticipants > 0 && !queues[theId].closed && 
+            ((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
+            msg.value >= queues[theId].entryFee && 
+            IHounds(control.hounds).houndOwner(hound) == msg.sender
+        );
 
         Hound.Struct memory houndObj = IHounds(control.hounds).hound(hound);
 
-        require(!houndObj.running);
+        require(
+            houndObj.running == 0 && 
+            houndObj.identity.secondsToMaturity + houndObj.identity.birthDate < block.timestamp
+        );
         
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
             require(queues[theId].participants[i] != hound);
