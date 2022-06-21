@@ -55,7 +55,7 @@ contract QueuesMethods is Params {
         console.log("join queue 5");
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
-        console.log("join queue 6");
+        console.log("join queue 6 ", hound, theId, control.hounds);
         IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId);
 
         console.log("join queue 7");
@@ -73,9 +73,17 @@ contract QueuesMethods is Params {
     }
 
     function onBeforeRace(uint256 theId) public payable {
+        console.log("## on before race");
+        console.log(msg.sender);
         require(allowed[msg.sender]);
+
+        console.log("###");
         Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
+
+        console.log("####");
         address arenaOwner = IArenaOwner(control.arenas).arenaOwner(queues[theId].arena);
+
+        console.log("#####");
         ITransferTokens(control.payments).transferTokens{
             value: msg.value
         }(
@@ -85,15 +93,25 @@ contract QueuesMethods is Params {
             arena.fee
         );
 
+        console.log("###### ..");
+        console.log(msg.value);
         Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(queues[theId].paymentsId);
         Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(queues[theId].rewardsId);
 
+        console.log("####### ", control.payments);
         for ( uint256 i = 0 ; i < payments.length ; ++i ) {
-            IRunPayment(control.payments).runPayment(payments[i]);
+            (bool success, ) = control.payments.delegatecall(
+                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
+            );
+            require(success);
         }
 
+        console.log("########");
         for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
-            IRunPayment(control.payments).runPayment(rewards[i].payment);
+            (bool success, ) = control.payments.delegatecall(
+                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", rewards[i].payment)
+            );
+            require(success);
         }
 
     }

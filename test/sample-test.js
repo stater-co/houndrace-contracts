@@ -637,7 +637,7 @@ describe("Setting up the Houndrace contracts", function () {
       queuesRestricted.address,
       races.address,
       directives.address,
-      []
+      [races.address,racesMethods.address,racesRestricted.address]
     ]);
     await queuesRestricted.setGlobalParameters([
       arenas.address,
@@ -647,7 +647,7 @@ describe("Setting up the Houndrace contracts", function () {
       queuesRestricted.address,
       races.address,
       directives.address,
-      []
+      [races.address,racesMethods.address,racesRestricted.address]
     ]);
     await queuesMethods.setGlobalParameters([
       arenas.address,
@@ -657,7 +657,7 @@ describe("Setting up the Houndrace contracts", function () {
       queuesRestricted.address,
       races.address,
       directives.address,
-      []
+      [races.address,racesMethods.address,racesRestricted.address]
     ]);
   });
 
@@ -891,7 +891,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
-      address0,
+      queues.address,
       500000000,
       true
     ]);
@@ -906,7 +906,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
-      address0,
+      queues.address,
       500000000,
       true
     ]);
@@ -921,7 +921,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
-      address0,
+      queues.address,
       500000000,
       true
     ]);

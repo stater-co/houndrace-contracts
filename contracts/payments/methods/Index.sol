@@ -26,6 +26,8 @@ contract Payments is Params {
 	function runPayment(
 		Payment.Struct memory payment
 	) public payable nonReentrant {
+		console.log("We're in here...");
+		console.log(payment.paymentType);
 		if ( payment.paymentType == 0 ) {
 			IERC721(payment.currency).safeTransferFrom(payment.from, payment.to, payment.id);
 		} else if ( payment.paymentType == 1 ) {
@@ -33,6 +35,8 @@ contract Payments is Params {
 		} else if ( payment.paymentType == 2 ) {
 			require(IERC20(payment.currency).transferFrom(payment.from, payment.to, payment.amount));
 		} else if ( payment.paymentType == 3 ) {
+			console.log(msg.value);
+			console.log(address(this).balance);
 			require(payment.to.send(payment.amount));
 		}
 	}

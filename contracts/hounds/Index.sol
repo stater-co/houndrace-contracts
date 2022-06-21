@@ -47,10 +47,10 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256) {
+    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256 oldQueueId) {
         (bool success, bytes memory output) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
-        return abi.decode(output,(uint256)); 
+        oldQueueId = abi.decode(output,(uint256)); 
     }
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {

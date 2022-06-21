@@ -29,6 +29,7 @@ contract Queues is Params {
     }
 
     function onBeforeRace(uint256 theId) public payable {
+        console.log("##### onBeforeRace main");
         (bool success,) = control.methods.delegatecall(msg.data);
         require(success); 
     }

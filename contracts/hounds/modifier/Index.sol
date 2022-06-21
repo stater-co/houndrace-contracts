@@ -19,12 +19,16 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256) {
+    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256 oldQueueId) {
+        console.log("Called by: ");
+        console.log(msg.sender);
+        console.log(theId, " < ", id);
         require(theId < id);
+        console.log(msg.sender);
         require(allowed[msg.sender]);
-        uint256 oldQueueId = hounds[theId].queueId;
-        hounds[theId].queueId = queueId;
-        return oldQueueId;
+        console.log("ok... ", hounds[theId].queueI);
+        oldQueueId = hounds[theId].queueId;
+        //hounds[theId].queueId = queueId;
     }
 
     function boostHoundStamina(uint256 theId, address user) public payable {
