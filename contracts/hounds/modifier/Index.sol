@@ -26,7 +26,7 @@ contract HoundsModifier is Params {
         require(theId < id);
         console.log(msg.sender);
         require(allowed[msg.sender]);
-        console.log("ok... ", hounds[theId].queueI);
+        console.log("ok... ", hounds[theId].queueId);
         oldQueueId = hounds[theId].queueId;
         //hounds[theId].queueId = queueId;
     }
