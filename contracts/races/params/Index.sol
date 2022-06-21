@@ -3,15 +3,12 @@ pragma solidity 0.8.15;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
-import '../../payments/params/Payment.sol';
-import '../../arenas/params/Arena.sol';
-import '../../arenas/IIndex.sol';
 import '../../utils/Converters.sol';
-import '../../payments/IIndex.sol';
-import '../../hounds/IIndex.sol';
-import '../../generator/IIndex.sol';
+import '../../generator/interfaces/IGenerate.sol';
+import '../../queues/interfaces/IOnBeforeRace.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -36,6 +33,10 @@ contract Params is Ownable, Withdrawable {
 
     function race(uint256 theId) external view returns(Race.Struct memory) {
         return races[theId];
+    }
+
+    function participantsOf(uint256 theId) external view returns(uint256[] memory) {
+        return races[theId].participants;
     }
 
     fallback() external payable {}

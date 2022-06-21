@@ -6,7 +6,9 @@ library Hound {
     struct Breeding {
         uint256 lastBreed;
         uint256 breedingCooldown;
+        address breedingFeeCurrency;
         uint256 breedingFee;
+        uint256 secondsToMaturity;
         uint256 breedingPeriod;
         uint256 breedingStart;
         bool availableToBreed;
@@ -17,11 +19,11 @@ library Hound {
         uint256 femaleParent;
         uint256 generation;
         uint256 birthDate;
-        uint256 secondsToMaturity;
         uint32[54] geneticSequence;
     }
 
     struct Stamina {
+        address staminaRefill1xCurrency;
         uint256 staminaLastUpdate;
         uint256 staminaRefill1x;
         uint32 staminaValue;
@@ -43,7 +45,7 @@ library Hound {
         Identity identity;
         string title;
         string token_uri;
-        uint256 running;
+        uint256 queueId;
         bool custom;
     }
 }

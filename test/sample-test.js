@@ -5,29 +5,45 @@ const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2,
 const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
 const defaultHound = [
   [ 0, 0, 0, 0],
-  [ 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 0, 100000, 100000, 1000, true ],
-  [ 1, 1, 0, 0, 0, maleBoilerplateGene ],
+  [ address0, 10000000, 10000000, 100, 1, 100 ],
+  [ 0, 0, address0, 100000, 0, 1000000, 0, true ],
+  [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
   0,
   false
 ];
+const payment = [
+  address0,
+  address0,
+  address0,
+  [],
+  [],
+  0,
+  1,
+  3,
+  5,
+  1
+];
 const defaultQueue = [
   "Test queue",
-  "0x0000000000000000000000000000000000000000",
+  address0,
   [],
   1, // terrain
   5000000000,
+  address0,
   0,
   0,
   1,
+  1,
   10,
+  0,
   false
 ];
 let currentDiscountId = 1;
 let payments;
-let paymentsMethods;
+let directivesRestricted;
+let directives;
 let shopRestricted;
 let shopMethods;
 let shop;
@@ -269,12 +285,16 @@ async function mintERC721(receiver, id, data) {
 
 async function joinQueueAutomatically(queueId, totalJoins) {
   let queue = await queues.queues(queueId);
+  //console.log("Queue: " + JSON.stringify(queue));
   let participating = 0;
   let houndsId = Number(await hounds.id()) - 1;
   let joins = totalJoins ? totalJoins : queue.totalParticipants;
   while ( participating < joins && houndsId >= 1 ) {
+    //console.log("while join... " + houndsId);
     let houndToEnqueue = await hounds.hound(houndsId);
-    if ( Number(houndToEnqueue.running) === 0 ) {
+    //console.log(houndToEnqueue);
+    if ( Number(houndToEnqueue.queueId) === 0 ) {
+      //console.log("Enqueue ...");
       await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
       ++participating;
       --houndsId;
@@ -307,8 +327,7 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the payments contract", async function () {
-    paymentsMethods = await getContractInstance("PaymentsMethods",[address0,[]]);
-    payments = await getContractInstance("Payments",[paymentsMethods.address,[]]);
+    payments = await getContractInstance("Payments");
   });
 
   it("Deploy the erc721 test contract", async function () {
@@ -392,6 +411,15 @@ describe("Setting up the Houndrace contracts", function () {
     arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address]);
   });
 
+  it('Deploy the directives contracts', async function () {
+    directivesRestricted = await getContractInstance('DirectivesRestricted',[
+      address0
+    ]);
+    directives = await getContractInstance('Directives',[
+      directivesRestricted.address
+    ]);
+  });
+
   it("Genetics methods", async function () {
     genetics = await getContractInstance("Genetics",[
       randomness.address,
@@ -443,6 +471,10 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -465,6 +497,10 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -487,6 +523,10 @@ describe("Setting up the Houndrace contracts", function () {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -509,6 +549,10 @@ describe("Setting up the Houndrace contracts", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -521,6 +565,7 @@ describe("Setting up the Houndrace contracts", function () {
   it("Deploy the race contracts", async function () {
     const [,otherOwner] = await ethers.getSigners();
     racesRestricted = await getContractInstance("RacesRestricted",[
+      address0,
       address0,
       address0,
       address0,
@@ -543,6 +588,7 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       true
     ]);
@@ -556,6 +602,7 @@ describe("Setting up the Houndrace contracts", function () {
       racesRestricted.address,
       address0,
       otherOwner.address,
+      address0,
       500000000,
       true
     ]);
@@ -568,7 +615,9 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0
+      address0,
+      address0,
+      []
     ]);
     queuesMethods = await getContractInstance("QueuesMethods",[
       address0,
@@ -576,31 +625,39 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0
+      address0,
+      address0,
+      []
     ]);
     queues = await getContractInstance("Queues",[
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      paymentsMethods.address,
+      payments.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
     await queuesRestricted.setGlobalParameters([
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      paymentsMethods.address,
+      payments.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
     await queuesMethods.setGlobalParameters([
       arenas.address,
       hounds.address,
       queuesMethods.address,
-      paymentsMethods.address,
+      payments.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
   });
 
@@ -702,6 +759,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -733,6 +794,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -764,6 +829,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -795,6 +864,10 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -802,14 +875,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
         "0x2386F26FC10000"
       ]
     ]);
-
-  });
-
-  it("Setting up payment contracts dependencies", async function () {
-    
-    await paymentsMethods.setGlobalParameters([paymentsMethods.address,[hounds.address]]);
-
-    await payments.setGlobalParameters([paymentsMethods.address,[hounds.address]]);
 
   });
   
@@ -826,6 +891,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
+      address0,
       500000000,
       true
     ]);
@@ -840,6 +906,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
+      address0,
       500000000,
       true
     ]);
@@ -854,6 +921,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       queues.address,
       otherOwner.address,
+      address0,
       500000000,
       true
     ]);
@@ -1001,11 +1069,12 @@ describe("Races", function () {
   it("Create terrain", async function () {
     const [owner] = await ethers.getSigners();
     let createTerrain = await arenas.createArena([
-      owner.address,
+      "name",
       "token_url",
+      address0,
       0,
       1,
-      1000,
+      2,
       3
     ]);
 
@@ -1014,21 +1083,26 @@ describe("Races", function () {
 
   it("Create queue", async function () {
 
+    await directives.createPaymentsBatch([
+      payment
+    ]);
+
+    let queueToUse = defaultQueue;
+
+    queueToUse[4] = 5000000000;
     await queues.createQueues([
       defaultQueue
     ]);
 
+    queueToUse[4] = 3000000000;
     await queues.createQueues([
       defaultQueue
     ]);
 
+    queueToUse[4] = 8000000000;
     await queues.createQueues([
       defaultQueue
     ]);
-
-    let queueId = await races.id();
-
-    expect(Number(queueId) === 2, "Queue has not been created");
 
   });
 

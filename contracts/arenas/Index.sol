@@ -7,17 +7,17 @@ contract Arenas is Params {
     
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
-    function createArena(Arena.Struct memory arena) external onlyOwner {
+    function createArena(Arena.Struct memory arena) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
+    function editArena(uint256 theId, Arena.Struct memory arena) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {
+    function setTokenUri(uint256 theId, string memory token_uri) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

@@ -9,12 +9,13 @@ contract IncubatorMethods is Params {
 
     function breedHounds(uint256 hound1Id, Hound.Struct memory hound1, uint256 hound2Id, Hound.Struct memory hound2) public view returns(Hound.Struct memory) {
         
-        uint32[54] memory genetics = IGenetics(control.genetics).mixGenes(
+        uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
+            abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+        );
+        uint32[54] memory genetics = IMixGenes(control.genetics).mixGenes(
             hound1.identity.geneticSequence, 
             hound2.identity.geneticSequence,
-            IRandomness(control.randomness).getRandomNumber(
-                abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
-            )
+            randomness
         );
 
         Hound.Statistics memory houndStatistics = Hound.Statistics(
@@ -25,6 +26,7 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Stamina memory stamina = Hound.Stamina(
+            randomness % 2 == 0 ? hound1.stamina.staminaRefill1xCurrency : hound2.stamina.staminaRefill1xCurrency,
             0,
             .1 ether,
             100,
@@ -34,8 +36,10 @@ contract IncubatorMethods is Params {
 
         Hound.Breeding memory breeding = Hound.Breeding(
             0, 
+            4 weeks,
+            hound1.breeding.breedingFeeCurrency,
+            hound1.breeding.breedingFee,
             genetics[1] == 1 ? control.maleBreedingCooldown : control.femaleBreedingCooldown,
-            control.houndBreedingFee,
             4 weeks,
             85 weeks,
             false
@@ -46,7 +50,6 @@ contract IncubatorMethods is Params {
             hound2Id,
             hound1.identity.generation + hound2.identity.generation,
             block.timestamp, // evm timestamps are in seconds
-            control.secondsToMaturity,
             genetics // preferences will be extracted from this 
         );
 

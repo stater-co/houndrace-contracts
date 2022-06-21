@@ -8,12 +8,7 @@ contract Queues is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
-    function enqueue(uint256 theId, uint256 hound) external payable {
-        (bool success, ) = control.methods.delegatecall(msg.data);
+        (bool success,) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
@@ -25,6 +20,17 @@ contract Queues is Params {
     function closeQueue(uint256 theId) external onlyOwner {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
+    }
+
+    function enqueue(uint256 theId, uint256 hound) external payable {
+        console.log("Enqueue: ", control.methods);
+        (bool success,) = control.methods.delegatecall(msg.data);
+        require(success);
+    }
+
+    function onBeforeRace(uint256 theId) public payable {
+        (bool success,) = control.methods.delegatecall(msg.data);
+        require(success); 
     }
 
 }

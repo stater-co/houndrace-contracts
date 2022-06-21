@@ -16,10 +16,13 @@ library Race {
 
         uint256 entryFee;
 
-        // Informations about the winners of the race
+        uint256 randomness;
+
+        uint256 paymentsId;
+
         uint256 rewardsId;
 
-        uint256 randomness;
+        uint256 queueId;
 
         bytes seed;
 

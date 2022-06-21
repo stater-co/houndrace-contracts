@@ -3,7 +3,6 @@ pragma solidity 0.8.15;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
-import '../IIndex.sol';
 import './Arena.sol';
 import './Constructor.sol';
 import '../../utils/Withdrawable.sol';
@@ -29,6 +28,10 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
 
     function arena(uint256 theId) external view returns(Arena.Struct memory) {
         return arenas[theId];
+    }
+
+    function arenaOwner(uint256 tokenId) external view returns(address) {
+        return ownerOf(tokenId);
     }
 
     fallback() external payable {}

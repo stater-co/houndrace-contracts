@@ -47,14 +47,15 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 running) public {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
-        require(success); 
+    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256) {
+        (bool success, bytes memory output) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        require(success);
+        return abi.decode(output,(uint256)); 
     }
 
     function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
         require(ownerOf(hound1) == msg.sender);
-        return control.fees.breedCost + control.fees.breedFee + ( ownerOf(hound1) == msg.sender && ownerOf(hound2) == msg.sender ? 0 : hounds[hound2].breeding.breedingFee );
+        return (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
     }
 
 }
