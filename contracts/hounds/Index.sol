@@ -22,22 +22,22 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundStamina(uint256 theId) public {
+    function updateHoundStamina(uint256 theId) external {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function updateHoundBreeding(uint256 theId) public {
+    function updateHoundBreeding(uint256 theId) external {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function boostHoundStamina(uint256 theId, address user) public payable {
+    function boostHoundStamina(uint256 theId, address user) external payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function boostHoundBreeding(uint256 theId, address user) public payable {
+    function boostHoundBreeding(uint256 theId, address user) external payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
@@ -47,7 +47,7 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256 oldQueueId) {
+    function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
         (bool success, bytes memory output) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
         oldQueueId = abi.decode(output,(uint256)); 

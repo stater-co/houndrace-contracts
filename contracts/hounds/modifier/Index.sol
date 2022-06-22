@@ -7,7 +7,7 @@ contract HoundsModifier is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
     
-    function updateHoundStamina(uint256 theId) public {
+    function updateHoundStamina(uint256 theId) external {
         require(theId < id);
         require(allowed[msg.sender]);
         --hounds[theId].stamina.staminaValue;
@@ -19,7 +19,7 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 queueId) public returns(uint256 oldQueueId) {
+    function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
         console.log("Called by: ");
         console.log(msg.sender);
         console.log(theId, " < ", id);
@@ -28,10 +28,10 @@ contract HoundsModifier is Params {
         require(allowed[msg.sender]);
         console.log("ok... ", hounds[theId].queueId);
         oldQueueId = hounds[theId].queueId;
-        //hounds[theId].queueId = queueId;
+        hounds[theId].queueId = queueId;
     }
 
-    function boostHoundStamina(uint256 theId, address user) public payable {
+    function boostHoundStamina(uint256 theId, address user) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
@@ -52,14 +52,14 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function updateHoundBreeding(uint256 theId) public {
+    function updateHoundBreeding(uint256 theId) external {
         require(theId < id);
         require(allowed[msg.sender]);
         hounds[theId].breeding.lastBreed = block.timestamp;
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
 
-    function boostHoundBreeding(uint256 theId, address user) public payable {
+    function boostHoundBreeding(uint256 theId, address user) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);

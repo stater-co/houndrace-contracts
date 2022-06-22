@@ -42,7 +42,21 @@ const defaultHound = [
   true,
   false
 ];
-const defaultQueues = [["Test queue","0x0000000000000000000000000000000000000000",[],1,5000000000,0,0,1,10,false]];
+const defaultQueues = [[
+  "Test queue",
+  address0,
+  [],
+  1, // terrain
+  5000000000,
+  address0,
+  0,
+  0,
+  1,
+  1,
+  10,
+  0,
+  false
+]];
 const defaultRace = [
   "race name",
   address0,
@@ -85,32 +99,13 @@ async function main() {
       step: "Deploy payment methods"
     });
 
-
-    const PaymentsMethods = await hre.ethers.getContractFactory("PaymentsMethods");
-    const paymentsMethods = await PaymentsMethods.deploy([address0,[]]);
-    await paymentsMethods.deployed();
-    deployment('export PAYMENTS_METHODS=' + paymentsMethods.address);
-    deployments.update(4, {
-      step: "Deploy payments"
-    });
-
-
     const Payments = await hre.ethers.getContractFactory("Payments");
-    const payments = await Payments.deploy([paymentsMethods.address,[owner.address]]);
+    const payments = await Payments.deploy();
     await payments.deployed();
     deployment('export PAYMENTS=' + payments.address);
     deployments.update(5, {
       step: "Deploy houndrace potions"
     });
-
-    try {
-      await paymentsMethods.setGlobalParameters([payments.address,[]]);
-      configurations.update(1, {
-        step: "Set global parameters for shop restricted"
-      });
-    } catch(err) {
-      errors(err);
-    }
 
     const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
     const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
@@ -126,6 +121,20 @@ async function main() {
     deployment('export SHOP_RESTRICTED=' + shopRestricted.address);
     deployments.update(7, {
       step: "Deploy shop methods"
+    });
+
+    const DirectivesRestricted = await hre.ethers.getContractFactory("DirectivesRestricted");
+    const directivesRestricted = await DirectivesRestricted.deploy([address0]);
+    deployment('export DIRECTIVES_RESTRICTED=' + directivesRestricted.address);
+    deployments.update(1, {
+      step: "Deploy directives"
+    });
+
+    const Directives = await hre.ethers.getContractFactory("Directives");
+    const directives = await Directives.deploy([directivesRestricted.address]);
+    deployment('export DIRECTIVES=' + directives.address);
+    deployments.update(1, {
+      step: "Deploy randomness"
     });
 
     const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
@@ -209,7 +218,10 @@ async function main() {
       address0,
       address0,
       address0,
-      264000
+      '0x67657452',
+      1800,
+      2419200,
+      '300000000000000000'
     ]);
     await incubatorMethods.deployed();
     deployment('export INCUBATOR_METHODS=' + incubatorMethods.address);
@@ -222,7 +234,10 @@ async function main() {
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      264000
+      '0x67657452',
+      1800,
+      2419200,
+      '300000000000000000'
     ]);
     await incubator.deployed();
     deployment('export INCUBATOR=' + incubator.address);
@@ -235,7 +250,10 @@ async function main() {
         incubatorMethods.address,
         randomness.address,
         genetics.address,
-        264000
+        '0x67657452',
+        1800,
+        2419200,
+        '300000000000000000'
       ]);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
@@ -259,6 +277,10 @@ async function main() {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -287,6 +309,10 @@ async function main() {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -315,6 +341,10 @@ async function main() {
         address0,
         address0
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0xB1A2BC2EC50000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -343,6 +373,10 @@ async function main() {
         houndsModifier.address,
         shop.address
       ],[
+        address0,
+        address0,
+        address0,
+        address0,
         "0x38D7EA4C68000",
         "0x2386F26FC10000",
         "0x2386F26FC10000",
@@ -358,6 +392,7 @@ async function main() {
 
     const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
     const racesRestricted = await RacesRestricted.deploy([
+      address0,
       address0,
       address0,
       address0,
@@ -387,6 +422,7 @@ async function main() {
       address0,
       address0,
       address0,
+      address0,
       500000000,
       false
     ]);
@@ -407,6 +443,7 @@ async function main() {
       racesRestricted.address,
       address0,
       owner.address,
+      address0,
       500000000,
       false
     ]);
@@ -509,7 +546,9 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
     await queuesMethods.deployed();
     deployment('export QUEUES_METHODS=' + queuesMethods.address);
@@ -524,7 +563,9 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
     await queuesRestricted.deployed();
     deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
@@ -539,7 +580,9 @@ async function main() {
       queuesMethods.address,
       payments.address,
       queuesRestricted.address,
-      races.address
+      races.address,
+      directives.address,
+      []
     ]);
     await queues.deployed();
     deployment('export QUEUES=' + queues.address);
@@ -554,7 +597,9 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address
+        races.address,
+        directives.address,
+        []
       ]);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
@@ -570,7 +615,9 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address
+        races.address,
+        directives.address,
+        []
       ]);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
@@ -590,6 +637,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         false
       ]);
@@ -611,6 +659,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         false
       ]);
@@ -632,6 +681,7 @@ async function main() {
         racesRestricted.address,
         queues.address,
         owner.address,
+        queues.address,
         500000000,
         false
       ]);
@@ -666,6 +716,10 @@ async function main() {
           houndsModifier.address,
           shop.address
         ],[
+          address0,
+          address0,
+          address0,
+          address0,
           "0xB1A2BC2EC50000",
           "0x2386F26FC10000",
           "0x2386F26FC10000",
@@ -704,6 +758,10 @@ async function main() {
           houndsModifier.address,
           shop.address
         ],[
+          address0,
+          address0,
+          address0,
+          address0,
           "0xB1A2BC2EC50000",
           "0x2386F26FC10000",
           "0x2386F26FC10000",
@@ -742,6 +800,10 @@ async function main() {
           houndsModifier.address,
           shop.address
         ],[
+          address0,
+          address0,
+          address0,
+          address0,
           "0xB1A2BC2EC50000",
           "0x2386F26FC10000",
           "0x2386F26FC10000",
@@ -780,6 +842,10 @@ async function main() {
           houndsModifier.address,
           shop.address
         ],[
+          address0,
+          address0,
+          address0,
+          address0,
           "0xB1A2BC2EC50000",
           "0x2386F26FC10000",
           "0x2386F26FC10000",
@@ -790,41 +856,6 @@ async function main() {
       configurations.update(16, {
         step: "Finished!"
       });
-    } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await payments.addPayments(1,[
-        [
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          50, // % of the total race prize
-          0 // first place
-        ],[
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          30, // % of the total race prize
-          1 // second place
-        ],[
-          payments.address, // from
-          address0, // to
-          address0, // currency
-          [], // token ids
-          0, // amount
-          3, // 2 - erc20 1 - erc1155 0 - erc721
-          20, // % of the total race prize
-          2 // third place
-        ]
-      ]);
     } catch(err) {
       errors(err);
     }
@@ -864,28 +895,7 @@ async function main() {
     
     try {
       await hre.run("verify:verify", {
-        address: paymentsMethods.address,
-        constructorArguments: [
-          [
-            address0,[]
-          ]
-        ]
-      });
-    } catch (err) {
-      errors(err);
-    }
-    verifications.update(4, {
-      step: "Verify payments"
-    });
-    
-    try {
-      await hre.run("verify:verify", {
-        address: payments.address,
-        constructorArguments: [
-          [
-            paymentsMethods.address,[owner.address]
-          ]
-        ]
+        address: payments.address
       });
     } catch (err) {
       errors(err);
@@ -1017,7 +1027,10 @@ async function main() {
             address0,
             address0,
             address0,
-            264000
+            '0x67657452',
+            1800,
+            2419200,
+            '300000000000000000'
           ]
         ]
       });
@@ -1036,7 +1049,10 @@ async function main() {
             incubatorMethods.address,
             randomness.address,
             genetics.address,
-            264000
+            '0x67657452',
+            1800,
+            2419200,
+            '300000000000000000'
           ]
         ]
       });
@@ -1065,6 +1081,10 @@ async function main() {
               address0,
               address0
             ],[
+              address0,
+              address0,
+              address0,
+              address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1100,6 +1120,10 @@ async function main() {
               address0,
               address0
             ],[
+              address0,
+              address0,
+              address0,
+              address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1134,6 +1158,10 @@ async function main() {
               address0,
               address0
             ],[
+              address0,
+              address0,
+              address0,
+              address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1168,6 +1196,10 @@ async function main() {
               houndsModifier.address,
               shop.address
             ],[
+              address0,
+              address0,
+              address0,
+              address0,
               "0x38D7EA4C68000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1189,6 +1221,7 @@ async function main() {
         address: racesRestricted.address,
         constructorArguments: [
           [
+            address0,
             address0,
             address0,
             address0,
@@ -1224,6 +1257,7 @@ async function main() {
             address0,
             address0,
             address0,
+            address0,
             500000000,
             false
           ]
@@ -1250,6 +1284,7 @@ async function main() {
             racesRestricted.address,
             address0,
             owner.address,
+            address0,
             500000000,
             false
           ]
@@ -1316,7 +1351,9 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address
+            races.address,
+            directives.address,
+            []
           ]
         ]
       });
@@ -1337,7 +1374,9 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address
+            races.address,
+            directives.address,
+            []
           ]
         ]
       });
@@ -1358,7 +1397,9 @@ async function main() {
             queuesMethods.address,
             payments.address,
             queuesRestricted.address,
-            races.address
+            races.address,
+            directives.address,
+            []
           ]
         ]
       });
@@ -1368,7 +1409,6 @@ async function main() {
     verifications.update(26, {
       step: "Finished!"
     });
-   
 
   } catch(err) {
     console.error(err);

@@ -1027,6 +1027,12 @@ describe("Hounds", function () {
     }
   });
 
+  it("Mint 100x hounds", async function () {
+    for ( let i = 0 ; i < 100 ; ++i ) {
+      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
+    }
+  });
+
   it("Receiving hound data", async function () {
     await checkHoundStructure();
   });
@@ -1133,7 +1139,7 @@ describe("Races", function () {
   });
 
   it("Join queue x20", async function () {
-    await joinQueueAutomatically(1);
+    await joinQueueAutomatically(2);
   });
 
   it("Hounds stamina check x3", async function () {
@@ -1147,13 +1153,13 @@ describe("Races", function () {
   });
 
   it("Join queue x30", async function () {
-    await joinQueueAutomatically(1);
+    await joinQueueAutomatically(3);
   });
 
   it("Join queue and then edit it and then close it", async function () {
-    await joinQueueAutomatically(2,3);
-    await queues.editQueue(1,defaultQueue);
-    await queues.closeQueue(1);
+    await joinQueueAutomatically(4,3);
+    await queues.editQueue(4,defaultQueue);
+    await queues.closeQueue(4);
   });
 
   it("Hounds stamina check x4", async function () {
