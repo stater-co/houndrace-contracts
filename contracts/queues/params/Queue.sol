@@ -16,8 +16,6 @@ library Queue {
 
         uint256 entryFee;
 
-        uint256 entryFeeCurrency;
-
         uint256 startDate;
 
         uint256 endDate;
@@ -27,8 +25,6 @@ library Queue {
         uint256 rewardsId;
 
         uint32 totalParticipants;
-
-        uint32 currentParticipants;
 
         bool closed;
 
