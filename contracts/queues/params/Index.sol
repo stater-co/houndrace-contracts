@@ -29,6 +29,7 @@ contract Params is Ownable, Withdrawable {
     event PlayerEnqueue(uint256 indexed id, uint256 indexed hound, address indexed player);
     event EditQueue(uint256 indexed id, Queue.Struct queue);
     event QueueClosed(uint256 indexed id);
+    event Unenqueue(uint256 indexed id, uint256 indexed hound);
 
     uint256 public id = 1;
     QueuesConstructor.Struct public control;

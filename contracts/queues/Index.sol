@@ -28,6 +28,12 @@ contract Queues is Params {
         require(success);
     }
 
+    function unenqueue(uint256 theId, uint256 hound) external {
+        console.log("Unenqueue: ", control.methods);
+        (bool success,) = control.methods.delegatecall(msg.data);
+        require(success);
+    }
+
     function onBeforeRace(uint256 theId) public payable {
         console.log("##### onBeforeRace main");
         (bool success,) = control.methods.delegatecall(msg.data);

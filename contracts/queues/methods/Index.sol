@@ -11,19 +11,37 @@ contract QueuesMethods is Params {
         Hound.Struct memory houndObj = IHound(control.hounds).hound(hound);
         require(houndObj.queueId == theId);
 
+        console.log("ok 1");
         uint256[] memory replacedParticipants = queues[theId].participants;
         delete queues[theId].participants;
 
+        console.log("ok 2");
         bool exists;
         for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
+            console.log(replacedParticipants[i]);
             if ( replacedParticipants[i] == hound ) {
                 exists = true;
             } else {
-                queues[theId].participants.push(queues[theId].participants[i]);
+                queues[theId].participants.push(replacedParticipants[i]);
             }
         }
         require(exists);
+        console.log("ok 3");
 
+        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) != 0);
+        console.log("ok 4");
+        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
+        console.log("ok 5");
+        ITransferTokens(control.payments).transferTokens{ 
+            value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
+        }(
+            queues[theId].currency, 
+            address(this),
+            houndOwner,
+            queues[theId].entryFee
+        );
+        console.log("ok 6");
+        emit Unenqueue(theId, hound);
     }
 
     function enqueue(uint256 theId, uint256 hound) external payable {

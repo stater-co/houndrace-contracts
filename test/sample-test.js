@@ -31,7 +31,6 @@ const defaultQueue = [
   [],
   1, // terrain
   5000000000,
-  address0,
   0,
   0,
   1,
@@ -1125,7 +1124,7 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    await joinQueueAutomatically(1);
+    await joinQueueAutomatically(1,33);
   });
 
   it("Hounds stamina check x2", async function () {
@@ -1138,37 +1137,16 @@ describe("Races", function () {
     }
   });
 
-  it("Join queue x20", async function () {
-    await joinQueueAutomatically(2);
+  it("Edit queue and then close it", async function () {
+    await queues.editQueue(2,defaultQueue);
+    await queues.closeQueue(2);
   });
 
-  it("Hounds stamina check x3", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
-      let hound = await hounds.hound(i);
-      expect(hound !== undefined, "Hound getter problem");
-      expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
-      houndsStamina[i] = hound[1][2];
-    }
-  });
-
-  it("Join queue x30", async function () {
-    await joinQueueAutomatically(3);
-  });
-
-  it("Join queue and then edit it and then close it", async function () {
-    await joinQueueAutomatically(4,3);
-    await queues.editQueue(4,defaultQueue);
-    await queues.closeQueue(4);
-  });
-
-  it("Hounds stamina check x4", async function () {
-    let queue = await queues.queues(1);
-    for ( let i = 1 ; i <= queue.totalParticipants ; ++i ) {
-      let hound = await hounds.hound(i);
-      expect(hound !== undefined, "Hound getter problem");
-      expect(houndsStamina[i] < hound[1][2], "Hound stamina not consumed");
-      houndsStamina[i] = hound[1][2];
+  it("Unenqueue", async function () {
+    let queue = await queues.queue(1);
+    if ( queue.participants.length > 0 ) {
+      let houndToUnenqueue = Number(queue.participants[0]);
+      await queues.unenqueue(1,houndToUnenqueue);
     }
   });
 
