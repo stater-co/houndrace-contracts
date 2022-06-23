@@ -27,11 +27,6 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundBreeding(uint256 theId) external {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
-        require(success);
-    }
-
     function boostHoundStamina(uint256 theId, address user) external payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);

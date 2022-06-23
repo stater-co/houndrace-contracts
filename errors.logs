@@ -71,3 +71,180 @@
     'Encoder error reason: types/value length mismatch',
   timestamp: '2022-06-22T11:56:38.911Z'
 }
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-06-23T07:03:34.864Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:12:09.440Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:13:10.354Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
+      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-06-23T07:13:31.065Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
+      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-06-23T07:13:52.468Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:14:18.491Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:14:49.499Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:15:16.695Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:15:46.399Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:16:18.356Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-23T07:16:46.911Z'
+}

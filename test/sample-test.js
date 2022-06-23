@@ -6,7 +6,7 @@ const femaleBoilerplateGene = [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 
 const defaultHound = [
   [ 0, 0, 0, 0],
   [ address0, 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 0, address0, 100000, 0, 1000000, 0, true ],
+  [ 0, 0, address0, 100000, 1655990582, 10000000000, 1655990582, true ],
   [ 1, 1, 0, 0, maleBoilerplateGene ],
   "",
   "",
@@ -135,7 +135,6 @@ async function safelyUpdateHoundBreeding(houndId) {
     houndToWorkWith = Number(houndIdBefore)-1;
   }
   const houndBefore = await hounds.hound(houndToWorkWith);
-  await hounds.updateHoundBreeding(houndToWorkWith);
   const houndAfter = await hounds.hound(houndToWorkWith);
   expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
 }

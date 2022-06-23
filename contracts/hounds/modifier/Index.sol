@@ -47,13 +47,6 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function updateHoundBreeding(uint256 theId) external {
-        require(theId < id);
-        require(allowed[msg.sender]);
-        hounds[theId].breeding.lastBreed = block.timestamp;
-        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
-    }
-
     function boostHoundBreeding(uint256 theId, address user) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
