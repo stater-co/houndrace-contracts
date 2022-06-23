@@ -20,13 +20,8 @@ contract HoundsModifier is Params {
     }
 
     function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
-        console.log("Called by: ");
-        console.log(msg.sender);
-        console.log(theId, " < ", id);
         require(theId < id);
-        console.log(msg.sender);
         require(allowed[msg.sender]);
-        console.log("ok... ", hounds[theId].queueId);
         oldQueueId = hounds[theId].queueId;
         hounds[theId].queueId = queueId;
     }

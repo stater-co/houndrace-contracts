@@ -8,36 +8,24 @@ contract QueuesRestricted is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function createQueues(Queue.Struct[] memory theQueues) external {
-        console.log("create queue here...");
         Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            console.log("create queue here 1");
             arena = IArena(control.arenas).arena(theQueues[i].arena);
-            console.log("create queue here 2");
             require(arena.fee < theQueues[i].entryFee / 2);
-            console.log("create queue here 3");
             require(arena.feeCurrency == theQueues[i].currency);
-            console.log("create queue here 4");
             require(theQueues[i].paymentsId > 0);
-            console.log("create queue here 5");
             require(theQueues[i].rewardsId > 0);
             
-            console.log("create queue here 6");
             Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(theQueues[i].paymentsId);
-            console.log("create queue here 7");
             for ( uint256 j = 0 ; j < payments.length ; ++j ) {
                 require(payments[j].currency == theQueues[i].currency);
             }
             
-            console.log("create queue here 8");
             queues[id] = theQueues[i];
-            console.log("create queue here 9");
             queues[id].participants = new uint256[](theQueues[i].participants.length);
-            console.log("create queue here 10");
             ++id;
         }
 
-        console.log("create queue here final");
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
     }
 

@@ -8,7 +8,6 @@ contract Races is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function uploadRace(Race.Struct memory race) external payable {
-        console.log("OK AICI ...");
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

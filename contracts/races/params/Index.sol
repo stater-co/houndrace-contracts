@@ -8,7 +8,6 @@ import '../../generator/interfaces/IGenerate.sol';
 import '../../queues/interfaces/IOnBeforeRace.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
