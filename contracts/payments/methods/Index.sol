@@ -57,7 +57,7 @@ contract Payments is Params {
         );
 
         require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0));
-        if ( houndsBreedPayment.secondHoundOwned ) {
+        if ( !houndsBreedPayment.secondHoundOwned ) {
             require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
             this.transferTokens{
                 value: houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0
