@@ -21,6 +21,11 @@ contract QueuesRestricted is Params {
                 require(payments[j].currency == theQueues[i].currency);
             }
             
+            Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(theQueues[i].rewardsId);
+            for ( uint256 j = 0 ; j < rewards.length ; ++j ) {
+                require(rewards[j].payment.currency == rewards[i].payment.currency);
+            }
+
             queues[id] = theQueues[i];
             queues[id].participants = new uint256[](theQueues[i].participants.length);
             ++id;
