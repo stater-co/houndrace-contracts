@@ -15,6 +15,8 @@ contract RacesMethods is Params {
 
             IHandleArenaUsage(control.queues).handleArenaUsage(races[id].queueId);
 
+            IHandleRaceLoot(control.methods).handleRaceLoot(races[id].paymentsId, races[id].rewardsId);
+
             emit NewFinishedRace(id, races[id]);
 
             ++id;
