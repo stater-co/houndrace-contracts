@@ -7,7 +7,6 @@ import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import '../../directives/params/Payment.sol';
-import './HoundsBreedPayment.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {

@@ -22,21 +22,36 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        IHandleHoundsBreedPayment(control.boilerplate.payments).handleHoundsBreedPayment{
-            value: msg.value
+        ITransferTokens(control.boilerplate.payments).transferTokens{
+            value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
-            HoundsBreedPayment.Struct(
-                control.fees.breedCostCurrency,
-                control.fees.breedFeeCurrency,
-                hounds[hound2].breeding.breedingFeeCurrency,
-                control.boilerplate.staterApi,
-                ownerOf(hound2),
-                control.fees.breedCost,
-                hounds[hound2].breeding.breedingFee,
-                control.fees.breedFee,
-                ownerOf(hound2) == ownerOf(hound1)
-            )
+            control.fees.breedCostCurrency,
+            msg.sender,
+            address(this),
+            control.fees.breedCost
         );
+
+        ITransferTokens(control.boilerplate.payments).transferTokens{
+            value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
+        }(
+            control.fees.breedFeeCurrency,
+            msg.sender,
+            control.boilerplate.staterApi,
+            control.fees.breedFee
+        );
+
+        require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0));
+        if ( ownerOf(hound2) != ownerOf(hound1) ) {
+            require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
+            ITransferTokens(control.boilerplate.payments).transferTokens{
+                value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
+            }(
+                control.fees.breedCostCurrency,
+                msg.sender,
+                ownerOf(hound2),
+                hounds[hound2].breeding.breedingFee
+            );
+        }
 
         hounds[hound2].breeding.lastBreed = block.timestamp;
         emit HoundBreedingStatusUpdate(hound2,hounds[hound2].breeding.availableToBreed);

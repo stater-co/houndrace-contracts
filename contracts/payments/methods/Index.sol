@@ -37,37 +37,4 @@ contract Payments is Params {
 		}
 	}
 
-	function handleHoundsBreedPayment(HoundsBreedPayment.Struct memory houndsBreedPayment) external payable {
-        this.transferTokens{
-            value: houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0
-        }(
-            houndsBreedPayment.breedCostCurrency,
-            msg.sender,
-            address(this),
-            houndsBreedPayment.breedCost
-        );
-
-        this.transferTokens{
-            value: houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0
-        }(
-            houndsBreedPayment.breedFeeCurrency,
-            msg.sender,
-            houndsBreedPayment.staterApi,
-            houndsBreedPayment.breedFee
-        );
-
-        require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0));
-        if ( !houndsBreedPayment.secondHoundOwned ) {
-            require(msg.value >= (houndsBreedPayment.breedCostCurrency == address(0) ? houndsBreedPayment.breedCost : 0) + (houndsBreedPayment.breedFeeCurrency == address(0) ? houndsBreedPayment.breedFee : 0) + (houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0));
-            this.transferTokens{
-                value: houndsBreedPayment.breedingFeeCurrency == address(0) ? houndsBreedPayment.breedingFee : 0
-            }(
-                houndsBreedPayment.breedingFeeCurrency,
-                msg.sender,
-                houndsBreedPayment.foreignOwner,
-                houndsBreedPayment.breedingFee
-            );
-        }
-	}
-
 }

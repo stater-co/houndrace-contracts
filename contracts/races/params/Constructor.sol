@@ -10,10 +10,10 @@ library RacesConstructor {
         address generator;
         address payments;
         address restricted;
-        address allowed;
         address staterApi;
         address queues;
         address directives;
+        address[] allowedCallers;
         uint256 raceFee;
         bool callable;
     }

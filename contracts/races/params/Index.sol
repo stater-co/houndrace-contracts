@@ -29,11 +29,16 @@ contract Params is Ownable, Withdrawable {
 
     constructor(RacesConstructor.Struct memory input) {
         control = input;
+        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i ) {
+            allowed[input.allowedCallers[i]] = !allowed[input.allowedCallers[i]];
+        }
     }
 
     function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
-        allowed[globalParameters.allowed] = true;
+        for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i ) {
+            allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
+        }
     }
 
     function race(uint256 theId) external view returns(Race.Struct memory) {

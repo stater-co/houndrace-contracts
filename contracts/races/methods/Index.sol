@@ -29,9 +29,9 @@ contract RacesMethods is Params {
                 queue.participants,
                 queue.arena,
                 queue.entryFee,
-                0, // randomness >> to be generated on back-end
-                1, // paymentsId >> to be set on back-end
-                1, // rewardsId >> to be set on back-end
+                0,
+                1,
+                1,
                 theId,
                 '0x00'
             ));
