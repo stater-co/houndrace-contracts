@@ -24,6 +24,7 @@ contract HoundsModifier is Params {
         require(allowed[msg.sender]);
         oldQueueId = hounds[theId].queueId;
         hounds[theId].queueId = queueId;
+        emit HoundQueueStatusUpdate(theId, queueId);
     }
 
     function boostHoundStamina(uint256 theId, address user) external payable {

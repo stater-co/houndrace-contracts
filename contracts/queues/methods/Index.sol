@@ -73,7 +73,7 @@ contract QueuesMethods is Params {
     }
 
     function onBeforeRace(uint256 theId) public payable {
-        //require(allowed[msg.sender]);
+        require(allowed[msg.sender]);
 
         Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
 

@@ -248,3 +248,291 @@
     'Reason: Already Verified',
   timestamp: '2022-06-23T07:16:46.911Z'
 }
+{
+  reason: 'invalid address',
+  code: 'INVALID_ARGUMENT',
+  argument: 'address',
+  value: '0xE932701c08031de66f7537e21c4BE5e291044cb',
+  level: 'error',
+  errorMessage: 'invalid address (argument="address", value="0xE932701c08031de66f7537e21c4BE5e291044cb", code=INVALID_ARGUMENT, version=address/5.6.1)',
+  timestamp: '2022-06-29T09:02:37.190Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-06-29T09:20:09.407Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
+  timestamp: '2022-06-29T09:20:31.252Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:32:16.033Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:33:32.296Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
+      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-06-29T09:33:50.745Z'
+}
+{
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
+      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
+      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
+      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
+      at Array.forEach (<anonymous>)
+      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
+      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
+      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
+    reason: 'types/value length mismatch',
+    code: 'INVALID_ARGUMENT',
+    argument: 'tuple',
+    value: [
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000',
+      '0x0000000000000000000000000000000000000000'
+    ]
+  },
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  timestamp: '2022-06-29T09:34:11.750Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:34:40.838Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:35:22.584Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:35:59.512Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:36:35.539Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:37:05.245Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:37:38.861Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:41:57.268Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:42:34.297Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:42:54.869Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:43:37.120Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:44:00.499Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:45:09.812Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-06-29T09:45:38.343Z'
+}

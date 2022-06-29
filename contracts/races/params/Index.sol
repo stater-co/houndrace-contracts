@@ -5,6 +5,7 @@ import './Race.sol';
 import './Constructor.sol';
 import '../../utils/Converters.sol';
 import '../../generator/interfaces/IGenerate.sol';
+import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../queues/interfaces/IOnBeforeRace.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';

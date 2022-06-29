@@ -12,6 +12,10 @@ contract RacesRestricted is Params {
 
         races[id] = race;
 
+        for ( uint256 i = 0 ; i > race.participants.length ; ++i ) {
+            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.participants[i], 0) != 0);
+        }
+
         emit UploadRace(id, race);
 
         ++id;

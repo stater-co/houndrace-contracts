@@ -23,6 +23,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     event HoundBreedable(uint256 indexed id, uint256 price);
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
+    event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);
     Constructor.Struct public control;
 
     constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
