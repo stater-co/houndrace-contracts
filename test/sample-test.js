@@ -282,21 +282,20 @@ async function mintERC721(receiver, id, data) {
 }
 
 async function joinQueueAutomatically(queueId, totalJoins) {
-  let queue = await queues.queues(queueId);
-  //console.log("Queue: " + JSON.stringify(queue));
   let participating = 0;
   let houndsId = Number(await hounds.id()) - 1;
-  let joins = totalJoins ? totalJoins : queue.totalParticipants;
-  while ( participating < joins && houndsId >= 1 ) {
-    //console.log("while join... " + houndsId);
+  while ( participating < totalJoins && houndsId >= 1 ) {
+    let queue = await queues.queue(queueId);
     let houndToEnqueue = await hounds.hound(houndsId);
-    //console.log(houndToEnqueue);
     if ( Number(houndToEnqueue.queueId) === 0 ) {
-      //console.log("Enqueue ...");
-      await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
+      if ( Number(queue.participants.length) - 1 === Number(queue.totalParticipants) ) {
+        await expect(queues.enqueue(queueId,houndsId,{ value : queue.entryFee })).to.emit(races,'NewFinishedRace');
+      } else {
+        await expect(queues.enqueue(queueId,houndsId,{ value : queue.entryFee })).to.emit(queues,'PlayerEnqueue');
+      }
       ++participating;
-      --houndsId;
     }
+    --houndsId;
   }
 }
 
@@ -1138,7 +1137,15 @@ describe("Races", function () {
   });
 
   it("Join queue x10", async function () {
-    await joinQueueAutomatically(1,33);
+    await joinQueueAutomatically(1,10);
+  });
+
+  it("Join queue x200", async function () {
+    await joinQueueAutomatically(1,200);
+  });
+
+  it("Join queue x300", async function () {
+    await joinQueueAutomatically(1,300);
   });
 
   it("Hounds stamina check x2", async function () {
