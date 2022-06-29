@@ -17,13 +17,25 @@ contract RacesMethods is Params {
 
             emit NewFinishedRace(id, races[id]);
 
+            ++id;
+
         } else {
 
-            emit NewRace(id, races[id]);
+            emit NewRace(id, Race.Struct(
+                queue.name,
+                queue.currency,
+                queue.participants,
+                queue.arena,
+                queue.entryFee,
+                0, // randomness >> to be generated on back-end
+                1, // paymentsId >> to be set on back-end
+                1, // rewardsId >> to be set on back-end
+                theId,
+                '0x00'
+            ));
 
         }
 
-        ++id;
     }
 
 }
