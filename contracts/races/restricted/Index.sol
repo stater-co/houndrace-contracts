@@ -8,7 +8,9 @@ contract RacesRestricted is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function uploadRace(Race.Struct memory race) external payable onlyOwner {
-        IOnBeforeRace(control.queues).onBeforeRace{ value: msg.value }(race.queueId);
+        IHandleArenaUsage(control.queues).handleArenaUsage{ value: msg.value }(race.queueId);
+
+        IHandleRaceLoot(control.methods).handleRaceLoot(race.paymentsId, race.rewardsId);
 
         races[id] = race;
 

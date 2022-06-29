@@ -32,7 +32,7 @@ contract Queues is Params {
         require(success);
     }
 
-    function onBeforeRace(uint256 theId) public payable {
+    function handleArenaUsage(uint256 theId) external payable {
         (bool success,) = control.methods.delegatecall(msg.data);
         require(success); 
     }

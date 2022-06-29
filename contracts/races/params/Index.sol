@@ -3,10 +3,15 @@ pragma solidity 0.8.15;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
+import '../interfaces/IHandleRaceLoot.sol';
 import '../../utils/Converters.sol';
 import '../../generator/interfaces/IGenerate.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
-import '../../queues/interfaces/IOnBeforeRace.sol';
+import '../../queues/interfaces/IHandleArenaUsage.sol';
+import '../../directives/params/Payment.sol';
+import '../../directives/params/Reward.sol';
+import '../../directives/interfaces/IGetPayments.sol';
+import '../../directives/interfaces/IGetRewards.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 

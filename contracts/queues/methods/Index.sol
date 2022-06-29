@@ -72,7 +72,7 @@ contract QueuesMethods is Params {
         emit PlayerEnqueue(theId,hound,msg.sender);
     }
 
-    function onBeforeRace(uint256 theId) public payable {
+    function handleArenaUsage(uint256 theId) public payable {
         require(allowed[msg.sender]);
 
         Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
@@ -87,23 +87,6 @@ contract QueuesMethods is Params {
             arenaOwner,
             arena.fee
         );
-
-        Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(queues[theId].paymentsId);
-        Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(queues[theId].rewardsId);
-
-        for ( uint256 i = 0 ; i < payments.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
-            );
-            require(success);
-        }
-
-        for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", rewards[i].payment)
-            );
-            require(success);
-        }
 
     }
 
