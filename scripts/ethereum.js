@@ -402,6 +402,7 @@ async function main() {
       address0,
       address0,
       address0,
+      [],
       500000000,
       false
     ]);
@@ -423,6 +424,7 @@ async function main() {
       address0,
       address0,
       address0,
+      [],
       500000000,
       false
     ]);
@@ -444,6 +446,7 @@ async function main() {
       address0,
       owner.address,
       address0,
+      [],
       500000000,
       false
     ]);
@@ -638,6 +641,10 @@ async function main() {
         queues.address,
         owner.address,
         queues.address,
+        [
+          racesRestricted.address,racesMethods.address,races.address,
+          queuesRestricted.address,queuesMethods.address,queues.address
+        ],
         500000000,
         false
       ]);
@@ -660,6 +667,10 @@ async function main() {
         queues.address,
         owner.address,
         queues.address,
+        [
+          racesRestricted.address,racesMethods.address,races.address,
+          queuesRestricted.address,queuesMethods.address,queues.address
+        ],
         500000000,
         false
       ]);
@@ -682,6 +693,10 @@ async function main() {
         queues.address,
         owner.address,
         queues.address,
+        [
+          racesRestricted.address,racesMethods.address,races.address,
+          queuesRestricted.address,queuesMethods.address,queues.address
+        ],
         500000000,
         false
       ]);
@@ -857,6 +872,112 @@ async function main() {
         step: "Finished!"
       });
     } catch(err) {
+      errors(err);
+    }
+
+    try {
+      await directives.createRewardsBatch([
+        [
+          [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000",
+            [],
+            [],
+            0,
+            0,
+            3,
+            50,
+            0
+          ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ],[
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          30,
+          1
+        ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ],[
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          20,
+          2
+        ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ]
+    ]);
+    } catch (err) {
+      errors(err);
+    }
+
+    try {
+      await directives.createPaymentsBatch([
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          50,
+          0
+      ],[
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          30,
+          1
+      ],[
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          20,
+          2
+      ]
+    ]);
+    } catch (err) {
       errors(err);
     }
 
@@ -1231,6 +1352,7 @@ async function main() {
             address0,
             address0,
             address0,
+            [],
             500000000,
             false
           ]
@@ -1258,6 +1380,7 @@ async function main() {
             address0,
             address0,
             address0,
+            [],
             500000000,
             false
           ]
@@ -1285,6 +1408,7 @@ async function main() {
             address0,
             owner.address,
             address0,
+            [],
             500000000,
             false
           ]

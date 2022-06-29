@@ -7,69 +7,7 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-06-22T11:43:00.019Z'
-}
-{
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-22T11:56:12.188Z'
-}
-{
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-22T11:56:38.911Z'
+  timestamp: '2022-06-29T15:14:49.722Z'
 }
 {
   parent: undefined,
@@ -80,459 +18,419 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-06-23T07:03:34.864Z'
+  timestamp: '2022-06-29T15:15:09.064Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:12:09.440Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:22:56.948Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:13:10.354Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:23:15.147Z'
 }
 {
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-23T07:13:31.065Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:23:35.056Z'
 }
 {
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-23T07:13:52.468Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:23:55.111Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:14:18.491Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:24:14.817Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:14:49.499Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:24:38.584Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:15:16.695Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:25:01.091Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:15:46.399Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:25:22.881Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:16:18.356Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:25:45.327Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-23T07:16:46.911Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:26:08.747Z'
 }
 {
-  reason: 'invalid address',
-  code: 'INVALID_ARGUMENT',
-  argument: 'address',
-  value: '0xE932701c08031de66f7537e21c4BE5e291044cb',
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'invalid address (argument="address", value="0xE932701c08031de66f7537e21c4BE5e291044cb", code=INVALID_ARGUMENT, version=address/5.6.1)',
-  timestamp: '2022-06-29T09:02:37.190Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:26:29.965Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-06-29T09:20:09.407Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:26:52.396Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-06-29T09:20:31.252Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:27:18.458Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:32:16.033Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:27:41.452Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:33:32.296Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:28:04.503Z'
 }
 {
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-29T09:33:50.745Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:28:27.561Z'
 }
 {
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
-      at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
-      at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
-      at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:47:16)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at /home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:71:19
-      at Array.forEach (<anonymous>)
-      at pack (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/array.ts:54:12)
-      at TupleCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/coders/tuple.ts:54:20)
-      at AbiCoder.encode (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/abi/src.ts/abi-coder.ts:111:15) {
-    reason: 'types/value length mismatch',
-    code: 'INVALID_ARGUMENT',
-    argument: 'tuple',
-    value: [
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000',
-      '0x0000000000000000000000000000000000000000'
-    ]
-  },
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-06-29T09:34:11.750Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:28:50.721Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:34:40.838Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:29:13.562Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:35:22.584Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:29:37.002Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:35:59.512Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:29:59.861Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:36:35.539Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:30:22.972Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:37:05.245Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:30:46.199Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:37:38.861Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:31:09.658Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:41:57.268Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:31:33.089Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:42:34.297Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T15:31:56.114Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:42:54.869Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:29:25.627Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:43:37.120Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:29:48.245Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:44:00.499Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:30:11.115Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:45:09.812Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:30:33.975Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
   level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-06-29T09:45:38.343Z'
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:30:56.702Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:31:19.316Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:31:42.197Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:32:05.391Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:32:28.550Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:32:51.667Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:33:14.658Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:33:37.815Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:34:00.791Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:34:23.850Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:34:47.431Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:35:10.842Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:35:34.357Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:35:57.484Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:36:20.913Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:36:44.495Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:37:08.223Z'
 }
