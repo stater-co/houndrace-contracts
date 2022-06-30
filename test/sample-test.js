@@ -49,6 +49,7 @@ let shop;
 let randomness;
 let arenas;
 let arenasRestricted;
+let arenasMethods;
 let genetics;
 let incubator;
 let incubatorMethods;
@@ -288,11 +289,20 @@ async function joinQueueAutomatically(queueId, totalJoins) {
     let queue = await queues.queue(queueId);
     let houndToEnqueue = await hounds.hound(houndsId);
     if ( Number(houndToEnqueue.queueId) === 0 ) {
-      if ( Number(queue.participants.length) - 1 === Number(queue.totalParticipants) ) {
-        await expect(queues.enqueue(queueId,houndsId,{ value : queue.entryFee })).to.emit(races,'NewFinishedRace');
+      await queues.enqueue(queueId,houndsId,{ value : queue.entryFee });
+      queue = await queues.queue(queueId);
+      if ( Number(queue.participants.length) === Number(queue.totalParticipants) - 1 ) {
+        for ( let i = 0 , l = queue.participants.length ; i < l ; ++i ) {
+          let hound = await hounds.hound(queue.participants[i]);
+          expect(hound.queueId === 0);
+        }
       } else {
-        await expect(queues.enqueue(queueId,houndsId,{ value : queue.entryFee })).to.emit(queues,'PlayerEnqueue');
+        let hound = await hounds.hound(houndsId);
+        expect(hound.queueId === queueId);
       }
+      let beforeQueue = queue;
+      let afterQueue = await queues.queue(queueId);
+      expect(beforeQueue.participants.length < afterQueue.participants.length);
       ++participating;
     }
     --houndsId;
@@ -404,8 +414,9 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the arenas contracts", async function () {
-    arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0]);
-    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address]);
+    arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0, address0, []]);
+    arenasMethods = await getContractInstance("ArenasMethods", ["HoundRace Arenas", "HRA", address0, address0, address0, []]);
+    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
   });
 
   it('Deploy the directives contracts', async function () {
@@ -714,7 +725,20 @@ describe("Setting up the Houndrace contracts global parameters", function () {
 
   it("Setting up arenas contracts dependencies", async function () {
 
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
+    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+      racesRestricted.address,racesMethods.address,races.address,
+      queuesRestricted.address,queuesMethods.address,queues.address
+    ]]);
+
+    await arenasMethods.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+      racesRestricted.address,racesMethods.address,races.address,
+      queuesRestricted.address,queuesMethods.address,queues.address
+    ]]);
+
+    await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+      racesRestricted.address,racesMethods.address,races.address,
+      queuesRestricted.address,queuesMethods.address,queues.address
+    ]]);
 
   });
 
@@ -730,6 +754,110 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       '300000000000000000'
     ]);
 
+  });
+
+  it("Setting rewards and payments ID", async function() {
+    await directives.createRewardsBatch(
+      [
+        [
+          [
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000",
+            "0x0000000000000000000000000000000000000000",
+            [],
+            [],
+            0,
+            0,
+            3,
+            50,
+            0
+          ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ],[
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          30,
+          1
+        ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ],[
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          20,
+          2
+        ],
+        "0x152D02C7E14AF67FFFFF",
+        0,
+        0,
+        4969500574497,
+        1,
+        false
+      ]
+    ]
+    );
+
+    await directives.createPaymentsBatch(
+      [
+        [
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          50,
+          0
+      ],[
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          30,
+          1
+      ],[
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          "0x0000000000000000000000000000000000000000",
+          [],
+          [],
+          0,
+          0,
+          3,
+          20,
+          2
+        ]
+      ]
+    );
   });
 
   it("Setting up hounds contracts dependencies", async function () {
@@ -879,7 +1007,7 @@ describe("Setting up the Houndrace contracts global parameters", function () {
   });
   
   it("Setting up races contracts dependencies", async function () {
-    const [,otherOwner] = await ethers.getSigners();
+    const [owner,otherOwner] = await ethers.getSigners();
 
     await racesRestricted.setGlobalParameters([
       randomness.address,
@@ -894,10 +1022,11 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
+        queuesRestricted.address,queuesMethods.address,queues.address,
+        owner.address
       ],
       500000000,
-      true
+      false
     ]);
 
     await racesMethods.setGlobalParameters([
@@ -913,10 +1042,11 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
+        queuesRestricted.address,queuesMethods.address,queues.address,
+        owner.address
       ],
       500000000,
-      true
+      false
     ]);
 
     await races.setGlobalParameters([
@@ -932,10 +1062,11 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
+        queuesRestricted.address,queuesMethods.address,queues.address,
+        owner.address
       ],
       500000000,
-      true
+      false
     ]);
 
   });
@@ -1090,7 +1221,7 @@ describe("Races", function () {
       "name",
       "token_url",
       address0,
-      0,
+      1000000,
       1,
       2,
       3
@@ -1140,6 +1271,7 @@ describe("Races", function () {
     await joinQueueAutomatically(1,10);
   });
 
+  /*
   it("Join queue x200", async function () {
     await joinQueueAutomatically(1,200);
   });
@@ -1147,6 +1279,7 @@ describe("Races", function () {
   it("Join queue x300", async function () {
     await joinQueueAutomatically(1,300);
   });
+  */
 
   it("Hounds stamina check x2", async function () {
     let queue = await queues.queues(1);
@@ -1168,6 +1301,42 @@ describe("Races", function () {
     if ( queue.participants.length > 0 ) {
       let houndToUnenqueue = Number(queue.participants[0]);
       await queues.unenqueue(1,houndToUnenqueue);
+    }
+  });
+
+  if("Hounds Queue ID verification", async function() {
+    let id = Number(await hounds.id());
+    let runningHounds = 0;
+    for ( let i = 1 ; i < id ; ++i ) {
+      let hound = await hounds.hound(i);
+      if ( Number(hound.queueId) > 0 ) {
+        ++runningHounds;
+      }
+    }
+    console.log("Total running: " + runningHounds);
+  })
+
+  it("UploadRace", async function () {
+    let id = await races.id();
+    let queue = await queues.queue(1);
+    for ( let i = 0 ; i < id ; ++i ) {
+      let race = await races.race(i);
+      if ( Number(race.arena) === 0 ) {
+        await races.uploadRace([
+          "Race #1",
+          address0,
+          [1,2,3],
+          queue.arena,
+          queue.entryFee,
+          12,
+          queue.paymentsId,
+          queue.rewardsId,
+          i,
+          "0x3333"
+        ], {
+          value: Number(race.entryFee) * race.participants.length
+        });
+      }
     }
   });
 

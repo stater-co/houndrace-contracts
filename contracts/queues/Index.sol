@@ -32,9 +32,4 @@ contract Queues is Params {
         require(success);
     }
 
-    function handleArenaUsage(uint256 theId) external payable {
-        (bool success,) = control.methods.delegatecall(msg.data);
-        require(success); 
-    }
-
 }

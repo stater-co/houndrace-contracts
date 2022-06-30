@@ -29,8 +29,6 @@ contract GeneratorMethods is Params {
             abi.encode(scores)
         );
 
-        emit NewRace(queue,race);
-
     }
 
 }

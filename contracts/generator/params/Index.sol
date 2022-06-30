@@ -15,7 +15,6 @@ import '../../utils/Sortings.sol';
 
 contract Params is Ownable {
 
-    event NewRace(Queue.Struct queue, Race.Struct race);
     GeneratorConstructor.Struct public control;
 
     constructor(GeneratorConstructor.Struct memory input) {

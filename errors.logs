@@ -434,3 +434,264 @@
   errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
   timestamp: '2022-06-29T16:37:08.223Z'
 }
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:37:32.403Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:37:56.525Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:38:20.999Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-29T16:38:47.087Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:54:35.395Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:54:55.026Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:55:15.458Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:55:35.957Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:55:57.112Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:56:20.055Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:56:38.800Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:56:57.824Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:57:17.464Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:57:37.486Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:57:56.816Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:58:16.317Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:58:35.520Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:58:54.844Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:59:14.568Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:59:34.269Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T06:59:53.671Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:00:13.058Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:00:33.143Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:00:52.626Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:01:12.219Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:01:31.816Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:01:51.414Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:02:10.888Z'
+}
+{
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json',
+  level: 'error',
+  errorMessage: "ENOENT: no such file or directory, open '/home/diimiim/houndrace-contracts/artifacts/build-info/c4bbc3aafcafe1361eae9bc4e92a6113.json'",
+  timestamp: '2022-06-30T07:02:30.229Z'
+}

@@ -7,5 +7,8 @@ library ArenasConstructor {
         string name;
         string symbol;
         address restricted;
+        address methods;
+        address payments;
+        address[] allowedCallers;
     }
 }

@@ -12,6 +12,11 @@ contract Arenas is Params {
         require(success);
     }
     
+    function handleArenaUsage(uint256 theId) external payable {
+        (bool success, ) = control.methods.delegatecall(msg.data);
+        require(success);
+    }
+
     function editArena(uint256 theId, Arena.Struct memory arena) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);

@@ -59,7 +59,7 @@ contract QueuesMethods is Params {
         queues[theId].participants.push(hound);
 
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
-        IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId);
+        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
@@ -70,24 +70,6 @@ contract QueuesMethods is Params {
         }
     
         emit PlayerEnqueue(theId,hound,msg.sender);
-    }
-
-    function handleArenaUsage(uint256 theId) public payable {
-        require(allowed[msg.sender]);
-
-        Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
-
-        address arenaOwner = IArenaOwner(control.arenas).arenaOwner(queues[theId].arena);
-
-        ITransferTokens(control.payments).transferTokens{
-            value: msg.value
-        }(
-            arena.feeCurrency,
-            address(this),
-            arenaOwner,
-            arena.fee
-        );
-
     }
 
 }
