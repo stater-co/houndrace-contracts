@@ -8,15 +8,8 @@ contract RacesRestricted is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function uploadRace(Race.Struct memory race) external payable onlyOwner {
-        console.log("Handle arena usage with: ", race.arena);
 
         Arena.Struct memory arena = IArena(control.arenas).arena(races[id].arena);
-
-        console.log(arena.feeCurrency);
-        console.log(arena.fee);
-        console.log(race.arena);
-        console.log("Look: ", control.arenas);
-        console.log("Call now!!");
         
         /*
         IHandleArenaUsage(control.arenas).handleArenaUsage{ 
@@ -25,9 +18,6 @@ contract RacesRestricted is Params {
         console.log("FINALLY FINE!");
         */
 
-        console.log(">> ", control.methods);
-        console.log(race.paymentsId);
-        console.log(race.rewardsId);
         handleRaceLoot(race.paymentsId,race.rewardsId);
 
         console.log("FINALLY FINE! x2");

@@ -58,7 +58,6 @@ contract Params is Ownable, Withdrawable {
 
         console.log("SO FAR SO GOOD");
 
-/*
         for ( uint256 i = 0 ; i < payments.length ; ++i ) {
             (bool success, ) = control.payments.delegatecall(
                 abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
@@ -72,7 +71,6 @@ contract Params is Ownable, Withdrawable {
             );
             require(success);
         }
-*/
 
     }
 

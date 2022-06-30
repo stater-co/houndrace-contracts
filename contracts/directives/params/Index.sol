@@ -4,6 +4,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './Payment.sol';
 import './Reward.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable {
