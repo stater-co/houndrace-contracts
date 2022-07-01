@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity <=0.8.15;
-
+import '../../payments/params/Payment.sol';
 
 library Race {
     
@@ -18,9 +18,7 @@ library Race {
 
         uint256 randomness;
 
-        uint256 paymentsId;
-
-        uint256 rewardsId;
+        Payment.Struct payments;
 
         uint256 queueId;
 

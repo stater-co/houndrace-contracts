@@ -9,7 +9,6 @@ library QueuesConstructor {
         address payments;
         address restricted;
         address races;
-        address directives;
         address[] allowedCallers;
     }
 }

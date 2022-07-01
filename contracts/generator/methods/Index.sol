@@ -7,7 +7,7 @@ contract GeneratorMethods is Params {
 
     constructor(GeneratorConstructor.Struct memory input) Params(input) {}
 
-    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory race) {
+    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory) {
 
         require(control.allowed == msg.sender);
         require(queue.participants.length == queue.totalParticipants);
@@ -16,15 +16,14 @@ contract GeneratorMethods is Params {
 
         (uint256[] memory participants, uint256[] memory scores) = ISimulateClassicRace(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
     
-        race = Race.Struct(
+        return Race.Struct(
             queue.name,
             queue.currency,
             participants,
             queue.arena,
             queue.entryFee,
             theRandomness,
-            queue.paymentsId,
-            queue.rewardsId,
+            queue.payments,
             queueId,
             abi.encode(scores)
         );

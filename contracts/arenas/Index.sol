@@ -13,7 +13,6 @@ contract Arenas is Params {
     }
     
     function handleArenaUsage(uint256 theId) external payable {
-        console.log("Handle Arena Usage Here!!");
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }

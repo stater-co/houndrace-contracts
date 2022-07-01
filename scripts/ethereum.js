@@ -123,20 +123,6 @@ async function main() {
       step: "Deploy shop methods"
     });
 
-    const DirectivesRestricted = await hre.ethers.getContractFactory("DirectivesRestricted");
-    const directivesRestricted = await DirectivesRestricted.deploy([address0]);
-    deployment('export DIRECTIVES_RESTRICTED=' + directivesRestricted.address);
-    deployments.update(1, {
-      step: "Deploy directives"
-    });
-
-    const Directives = await hre.ethers.getContractFactory("Directives");
-    const directives = await Directives.deploy([directivesRestricted.address]);
-    deployment('export DIRECTIVES=' + directives.address);
-    deployments.update(1, {
-      step: "Deploy randomness"
-    });
-
     const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
     const shopMethods = await ShopMethods.deploy([address0,address0]);
     await shopMethods.deployed();
@@ -557,8 +543,7 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address,
-      directives.address,
+      races.address
       []
     ]);
     await queuesMethods.deployed();
@@ -574,8 +559,7 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address,
-      directives.address,
+      races.address
       []
     ]);
     await queuesRestricted.deployed();
@@ -591,8 +575,7 @@ async function main() {
       queuesMethods.address,
       payments.address,
       queuesRestricted.address,
-      races.address,
-      directives.address,
+      races.address
       []
     ]);
     await queues.deployed();
@@ -608,8 +591,7 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address,
-        directives.address,
+        races.address
         []
       ]);
       configurations.update(8, {
@@ -626,8 +608,7 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address,
-        directives.address,
+        races.address
         []
       ]);
       configurations.update(9, {
@@ -889,112 +870,6 @@ async function main() {
         step: "Finished!"
       });
     } catch(err) {
-      errors(err);
-    }
-
-    try {
-      await directives.createRewardsBatch([
-        [
-          [
-            "0x0000000000000000000000000000000000000000",
-            "0x0000000000000000000000000000000000000000",
-            "0x0000000000000000000000000000000000000000",
-            [],
-            [],
-            0,
-            0,
-            3,
-            50,
-            0
-          ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ],[
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          30,
-          1
-        ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ],[
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          20,
-          2
-        ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ]
-    ]);
-    } catch (err) {
-      errors(err);
-    }
-
-    try {
-      await directives.createPaymentsBatch([
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          50,
-          0
-      ],[
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          30,
-          1
-      ],[
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          20,
-          2
-      ]
-    ]);
-    } catch (err) {
       errors(err);
     }
 
@@ -1508,8 +1383,7 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address,
-            directives.address,
+            races.address
             []
           ]
         ]
@@ -1531,8 +1405,7 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address,
-            directives.address,
+            races.address
             []
           ]
         ]
@@ -1554,8 +1427,7 @@ async function main() {
             queuesMethods.address,
             payments.address,
             queuesRestricted.address,
-            races.address,
-            directives.address,
+            races.address
             []
           ]
         ]

@@ -17,7 +17,7 @@ contract Races is Params {
         require(success);
     }
 
-    function handleRaceLoot(uint256 paymentsId, uint256 rewardsId) public payable {
+    function handleRaceLoot(Payment.Struct memory payments) public payable {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }

@@ -12,7 +12,6 @@ library RacesConstructor {
         address restricted;
         address staterApi;
         address queues;
-        address directives;
         address[] allowedCallers;
         uint256 raceFee;
         bool callable;

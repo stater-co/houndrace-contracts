@@ -41,8 +41,6 @@ const defaultQueue = [
 ];
 let currentDiscountId = 1;
 let payments;
-let directivesRestricted;
-let directives;
 let shopRestricted;
 let shopMethods;
 let shop;
@@ -419,15 +417,6 @@ describe("Setting up the Houndrace contracts", function () {
     arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
   });
 
-  it('Deploy the directives contracts', async function () {
-    directivesRestricted = await getContractInstance('DirectivesRestricted',[
-      address0
-    ]);
-    directives = await getContractInstance('Directives',[
-      directivesRestricted.address
-    ]);
-  });
-
   it("Genetics methods", async function () {
     genetics = await getContractInstance("Genetics",[
       randomness.address,
@@ -611,8 +600,7 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       racesRestricted.address,
       otherOwner.address,
-      address0,
-      directives.address,
+      address0
       [],
       500000000,
       true
@@ -647,7 +635,6 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       queuesRestricted.address,
       races.address,
-      directives.address,
       [races.address,racesMethods.address,racesRestricted.address]
     ]);
     await queuesRestricted.setGlobalParameters([
@@ -657,7 +644,6 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       queuesRestricted.address,
       races.address,
-      directives.address,
       [races.address,racesMethods.address,racesRestricted.address]
     ]);
     await queuesMethods.setGlobalParameters([
@@ -667,7 +653,6 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       queuesRestricted.address,
       races.address,
-      directives.address,
       [races.address,racesMethods.address,racesRestricted.address]
     ]);
   });
@@ -754,110 +739,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       '300000000000000000'
     ]);
 
-  });
-
-  it("Setting rewards and payments ID", async function() {
-    await directives.createRewardsBatch(
-      [
-        [
-          [
-            "0x0000000000000000000000000000000000000000",
-            "0x0000000000000000000000000000000000000000",
-            "0x0000000000000000000000000000000000000000",
-            [],
-            [],
-            0,
-            0,
-            3,
-            50,
-            0
-          ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ],[
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          30,
-          1
-        ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ],[
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          20,
-          2
-        ],
-        "0x152D02C7E14AF67FFFFF",
-        0,
-        0,
-        4969500574497,
-        1,
-        false
-      ]
-    ]
-    );
-
-    await directives.createPaymentsBatch(
-      [
-        [
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          50,
-          0
-      ],[
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          30,
-          1
-      ],[
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          "0x0000000000000000000000000000000000000000",
-          [],
-          [],
-          0,
-          0,
-          3,
-          20,
-          2
-        ]
-      ]
-    );
   });
 
   it("Setting up hounds contracts dependencies", async function () {
@@ -1019,7 +900,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       otherOwner.address,
       queues.address,
-      directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
         queuesRestricted.address,queuesMethods.address,queues.address,
@@ -1039,7 +919,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       otherOwner.address,
       queues.address,
-      directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
         queuesRestricted.address,queuesMethods.address,queues.address,
@@ -1059,7 +938,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       racesRestricted.address,
       otherOwner.address,
       queues.address,
-      directives.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
         queuesRestricted.address,queuesMethods.address,queues.address,
@@ -1235,10 +1113,6 @@ describe("Races", function () {
 
   it("Create queue", async function () {
 
-    await directives.createPaymentsBatch([
-      payment
-    ]);
-
     let queueToUse = defaultQueue;
 
     queueToUse[4] = 5000000000;
@@ -1333,8 +1207,7 @@ describe("Races", function () {
           queue.arena,
           queue.entryFee,
           12,
-          queue.paymentsId,
-          queue.rewardsId,
+          [],
           i,
           "0x3333"
         ], {

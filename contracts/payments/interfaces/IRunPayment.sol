@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
-import '../../directives/params/Payment.sol';
+import '../../payments/params/Payment.sol';
 
 
 interface IRunPayment {

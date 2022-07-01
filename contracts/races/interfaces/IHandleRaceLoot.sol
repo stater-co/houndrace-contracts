@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.15;
+import '../../payments/params/Payment.sol';
 
 
 interface IHandleRaceLoot {
 
-    function handleRaceLoot(uint256 paymentsId, uint256 rewardsId) external payable;
+    function handleRaceLoot(Payment.Struct memory payments) external payable;
 
 }

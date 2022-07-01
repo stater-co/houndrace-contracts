@@ -63,7 +63,7 @@ contract QueuesMethods is Params {
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-            IRaceStart(control.races).raceStart(queues[theId], theId);
+            //IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].participants;
 

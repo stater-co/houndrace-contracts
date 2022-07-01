@@ -9,6 +9,7 @@ contract RacesMethods is Params {
 
     function raceStart(Queue.Struct memory queue, uint256 theId) external {
         require(allowed[msg.sender]);
+
         if ( control.callable ) {
 
             races[id] = IGenerate(control.generator).generate(queue,theId);
@@ -19,7 +20,7 @@ contract RacesMethods is Params {
                 value: arena.feeCurrency == address(0) ? arena.fee : 0
             }(races[id].arena);
 
-            handleRaceLoot(races[id].paymentsId, races[id].rewardsId);
+            handleRaceLoot(queue.payments);
 
             for ( uint256 i = 0 ; i < queue.participants.length ; ++i ) {
                 ISetHoundIdling(control.hounds).setHoundIdling(queue.participants[i]);
@@ -36,8 +37,7 @@ contract RacesMethods is Params {
                 queue.arena,
                 queue.entryFee,
                 0,
-                1,
-                1,
+                queue.payments, // payments to be filled
                 theId,
                 '0x00'
             ));
@@ -48,21 +48,12 @@ contract RacesMethods is Params {
 
     }
 
-    function handleRaceLoot(uint256 paymentsId, uint256 rewardsId) public payable {
+    function handleRaceLoot(Payment.Struct memory payments) public payable {
         require(allowed[msg.sender]);
-        Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(paymentsId);
-        Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(rewardsId);
 
         for ( uint256 i = 0 ; i < payments.length ; ++i ) {
             (bool success, ) = control.payments.delegatecall(
                 abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
-            );
-            require(success);
-        }
-
-        for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", rewards[i].payment)
             );
             require(success);
         }
