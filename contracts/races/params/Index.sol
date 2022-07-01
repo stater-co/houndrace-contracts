@@ -5,17 +5,18 @@ import './Race.sol';
 import './Constructor.sol';
 import '../../utils/Converters.sol';
 import '../../generator/interfaces/IGenerate.sol';
-import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../arenas/interfaces/IHandleArenaUsage.sol';
 import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/params/Arena.sol';
 import '../../directives/params/Payment.sol';
 import '../../directives/params/Reward.sol';
+import '../interfaces/IHandleRaceLoot.sol';
 import '../../directives/interfaces/IGetPayments.sol';
 import '../../directives/interfaces/IGetRewards.sol';
+import '../../payments/interfaces/ITransferTokens.sol';
+import '../../hounds/interfaces/ISetHoundIdling.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -49,29 +50,6 @@ contract Params is Ownable, Withdrawable {
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
         return races[theId].participants;
-    }
-
-    function handleRaceLoot(uint256 paymentsId, uint256 rewardsId) public payable {
-        require(allowed[msg.sender]);
-        Payment.Struct[] memory payments = IGetPayments(control.directives).getPayments(paymentsId);
-        Reward.Struct[] memory rewards = IGetRewards(control.directives).getRewards(rewardsId);
-
-        console.log("SO FAR SO GOOD");
-
-        for ( uint256 i = 0 ; i < payments.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
-            );
-            require(success);
-        }
-
-        for ( uint256 i = 0 ; i < rewards.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", rewards[i].payment)
-            );
-            require(success);
-        }
-
     }
 
     fallback() external payable {}

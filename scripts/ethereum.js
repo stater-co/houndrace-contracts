@@ -172,15 +172,23 @@ async function main() {
     }
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
-    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0]);
+    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, []]);
     await arenasRestricted.deployed();
     deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
     deployments.update(10, {
       step: "Deploy arenas"
     });
 
+    const ArenasMethods = await hre.ethers.getContractFactory("ArenasMethods");
+    const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, []]);
+    await arenasMethods.deployed();
+    deployment('export ARENAS_METHODS=' + arenasMethods.address);
+    deployments.update(10, {
+      step: "Deploy arenas"
+    });
+
     const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address]);
+    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
     await arenas.deployed();
     deployment('export ARENAS=' + arenas.address);
     deployments.update(11, {
@@ -188,7 +196,7 @@ async function main() {
     });
 
     try {
-      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address]);
+      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -708,6 +716,15 @@ async function main() {
     }
 
     try {
+      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, [races.address]]);
+      configurations.update(4, {
+        step: "Set global parameters for incubator methods"
+      });
+    } catch(err) {
+      errors(err);
+    }
+
+    try {
       await hounds.setGlobalParameters([
         "HoundRace",
         "HR",
@@ -1090,7 +1107,23 @@ async function main() {
         address: arenasRestricted.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0
+            "HoundRace Arenas", "HRA", address0, address0, address0, []
+          ]
+        ]
+      });
+    } catch (err) {
+      errors(err);
+    }
+    verifications.update(10, {
+      step: "Verify arenas"
+    });
+
+    try {
+      await hre.run("verify:verify", {
+        address: arenasMethods.address,
+        constructorArguments: [
+          [
+            "HoundRace Arenas", "HRA", address0, address0, address0, []
           ]
         ]
       });
@@ -1106,7 +1139,7 @@ async function main() {
         address: arenas.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", arenasRestricted.address
+            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []
           ]
         ]
       });

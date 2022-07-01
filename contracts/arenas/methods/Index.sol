@@ -12,8 +12,7 @@ contract ArenasMethods is Params {
         require(allowed[msg.sender]);
 
         console.log("================= 2");
-
-/*
+        
         ITransferTokens(control.payments).transferTokens{
             value: arenas[theId].feeCurrency == address(0) ? msg.value : 0
         }(
@@ -22,7 +21,7 @@ contract ArenasMethods is Params {
             ownerOf(theId),
             arenas[theId].fee
         );
-*/
+
     }
 
 }

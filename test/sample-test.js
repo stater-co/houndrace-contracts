@@ -1226,6 +1226,9 @@ describe("Races", function () {
       2,
       3
     ]);
+    let arenaOwner = await arenas.arenaOwner(1);
+    console.log("Arena Owner: " + arenaOwner);
+    console.log("Owner: " + owner.address);
 
     expect(createTerrain !== undefined, "Create terrain problem");
   });
@@ -1317,12 +1320,13 @@ describe("Races", function () {
   })
 
   it("UploadRace", async function () {
-    let id = await races.id();
+    let id = Number(await races.id());
     let queue = await queues.queue(1);
-    for ( let i = 0 ; i < id ; ++i ) {
+    for ( let i = 1 ; i < id ; ++i ) {
       let race = await races.race(i);
+      console.log(Number(queue.entryFee) + " + " + Number(queue.totalParticipants));
       if ( Number(race.arena) === 0 ) {
-        await races.uploadRace([
+        await races.uploadRace(9999,[
           "Race #1",
           address0,
           [1,2,3],
@@ -1334,7 +1338,7 @@ describe("Races", function () {
           i,
           "0x3333"
         ], {
-          value: Number(race.entryFee) * race.participants.length
+          value: Number(queue.entryFee) * Number(queue.totalParticipants)
         });
       }
     }

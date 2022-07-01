@@ -7,29 +7,23 @@ contract RacesRestricted is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function uploadRace(Race.Struct memory race) external payable onlyOwner {
+    function uploadRace(uint256 theId, Race.Struct memory race) external payable onlyOwner {
 
-        Arena.Struct memory arena = IArena(control.arenas).arena(races[id].arena);
-        
-        /*
+        Arena.Struct memory arena = IArena(control.arenas).arena(race.arena);
+
         IHandleArenaUsage(control.arenas).handleArenaUsage{ 
             value: arena.feeCurrency == address(0) ? arena.fee : 0
         }(race.arena);
-        console.log("FINALLY FINE!");
-        */
 
-        handleRaceLoot(race.paymentsId,race.rewardsId);
+        //IHandleRaceLoot(control.methods).handleRaceLoot(race.paymentsId,race.rewardsId);
 
-        console.log("FINALLY FINE! x2");
+        races[theId] = race;
 
-        races[id] = race;
-
-        for ( uint256 i = 0 ; i > race.participants.length ; ++i ) {
-            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.participants[i], 0) != 0);
+        for ( uint256 i = 0 ; i < race.participants.length ; ++i ) {
+            ISetHoundIdling(control.hounds).setHoundIdling(race.participants[i]);
         }
-        console.log("FINALLY FINE! x3");
 
-        emit UploadRace(id, race);
+        emit UploadRace(theId, race);
 
     }
 
