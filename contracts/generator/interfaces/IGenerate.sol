@@ -6,6 +6,6 @@ import '../../races/params/Race.sol';
 
 interface IGenerate {
 
-    function generate(Queue.Struct memory queue, uint256 queueId) external returns(Race.Struct memory);
+    function generate(Queue.Struct memory queue, uint256 queueId) external view returns(Race.Struct memory);
 
 }

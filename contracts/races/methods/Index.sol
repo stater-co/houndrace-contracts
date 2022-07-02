@@ -20,7 +20,14 @@ contract RacesMethods is Params {
                 value: arena.feeCurrency == address(0) ? arena.fee : 0
             }(races[id].arena);
 
-            handleRaceLoot(queue.payments);
+            handleRaceLoot(
+                queue.payments.from,
+                queue.payments.to,
+                queue.payments.currency,
+                queue.payments.ids,
+                queue.payments.amounts,
+                queue.payments.paymentType
+            );
 
             for ( uint256 i = 0 ; i < queue.participants.length ; ++i ) {
                 ISetHoundIdling(control.hounds).setHoundIdling(queue.participants[i]);
@@ -48,12 +55,27 @@ contract RacesMethods is Params {
 
     }
 
-    function handleRaceLoot(Payment.Struct memory payments) public payable {
+    function handleRaceLoot(
+        address[] memory from,
+        address[] memory to,
+        address[] memory currency,
+        uint256[][] memory id,
+        uint256[][] memory amount,
+        uint32[] memory paymentType
+    ) public payable {
         require(allowed[msg.sender]);
 
-        for ( uint256 i = 0 ; i < payments.length ; ++i ) {
+        for ( uint256 i = 0 ; i < from.length ; ++i ) {
             (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature("runPayment((address,address,address,uint256[],uint256,uint32,uint32,uint32))", payments[i])
+                abi.encodeWithSignature(
+                    "pay(address,address,address,uint256[],uint256[],uint32)", 
+                    from[i],
+                    to[i],
+                    currency[i],
+                    id[i],
+                    amount[i],
+                    paymentType[i]
+                )
             );
             require(success);
         }

@@ -44,14 +44,6 @@ contract HoundsModifier is Params {
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
         }
-        ITransferTokens(control.boilerplate.payments).transferTokens{
-            value: control.fees.refillStaminaCostCurrency == address(0) ? refillStaminaCooldownCost : 0
-        }(
-            control.fees.refillStaminaCostCurrency,
-            msg.sender,
-            control.boilerplate.payments,
-            refillStaminaCooldownCost
-        );
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
@@ -60,15 +52,6 @@ contract HoundsModifier is Params {
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
         hounds[theId].breeding.lastBreed += msg.value / refillBreedingCooldownCost;
-
-        ITransferTokens(control.boilerplate.payments).transferTokens{
-            value: control.fees.refillBreedingCostCurrency == address(0) ? refillBreedingCooldownCost : 0
-        }(
-            control.fees.refillBreedingCostCurrency,
-            msg.sender,
-            control.boilerplate.payments,
-            refillBreedingCooldownCost
-        );
         emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
     }
 

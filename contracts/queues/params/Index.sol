@@ -8,7 +8,7 @@ import '../../arenas/params/Arena.sol';
 import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../utils/Converters.sol';
-import '../../payments/interfaces/ITransferTokens.sol';
+import '../../payments/interfaces/IPay.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';

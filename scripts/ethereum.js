@@ -543,7 +543,7 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address
+      races.address,
       []
     ]);
     await queuesMethods.deployed();
@@ -559,7 +559,7 @@ async function main() {
       address0,
       payments.address,
       address0,
-      races.address
+      races.address,
       []
     ]);
     await queuesRestricted.deployed();
@@ -575,7 +575,7 @@ async function main() {
       queuesMethods.address,
       payments.address,
       queuesRestricted.address,
-      races.address
+      races.address,
       []
     ]);
     await queues.deployed();
@@ -591,7 +591,7 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address
+        races.address,
         []
       ]);
       configurations.update(8, {
@@ -608,7 +608,7 @@ async function main() {
         queuesMethods.address,
         payments.address,
         queuesRestricted.address,
-        races.address
+        races.address,
         []
       ]);
       configurations.update(9, {
@@ -1383,7 +1383,7 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address
+            races.address,
             []
           ]
         ]
@@ -1405,7 +1405,7 @@ async function main() {
             address0,
             payments.address,
             address0,
-            races.address
+            races.address,
             []
           ]
         ]
@@ -1427,7 +1427,7 @@ async function main() {
             queuesMethods.address,
             payments.address,
             queuesRestricted.address,
-            races.address
+            races.address,
             []
           ]
         ]

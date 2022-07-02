@@ -10,8 +10,9 @@ contract QueuesMethods is Params {
     function unenqueue(uint256 theId, uint256 hound) external {
         Hound.Struct memory houndObj = IHound(control.hounds).hound(hound);
         require(houndObj.queueId == theId);
+        Queue.Struct memory _queue = queues[theId];
 
-        uint256[] memory replacedParticipants = queues[theId].participants;
+        uint256[] memory replacedParticipants = _queue.participants;
         delete queues[theId].participants;
 
         bool exists;
@@ -26,14 +27,22 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) != 0);
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
-        ITransferTokens(control.payments).transferTokens{ 
-            value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = _queue.entryFee;
+        uint256 value = _queue.currency == address(0) ? _queue.entryFee : 0;
+        
+        IPay(control.payments).pay{
+            value: value
         }(
-            queues[theId].currency, 
             address(this),
             houndOwner,
-            queues[theId].entryFee
+            _queue.currency,
+            new uint256[](0),
+            amounts,
+            _queue.currency == address(0) ? 3 : 2
         );
+
         emit Unenqueue(theId, hound);
     }
 

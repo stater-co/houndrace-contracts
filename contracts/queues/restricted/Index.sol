@@ -35,17 +35,23 @@ contract QueuesRestricted is Params {
     }
 
     function deleteQueue(uint256 theId) external {
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = queues[theId].entryFee;
+
         for ( uint256 i = 0; i < queues[theId].participants.length; ++i ) {
             if ( queues[theId].participants[i] > 0 ) {
                 require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[theId].participants[i], theId) != 0);
                 address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[theId].participants[i]);
-                ITransferTokens(control.payments).transferTokens{ 
-                    value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0 
+
+                IPay(control.payments).pay{
+                    value: queues[theId].currency == address(0) ? queues[theId].entryFee : 0
                 }(
-                    queues[theId].currency, 
                     address(this),
                     houndOwner,
-                    queues[theId].entryFee
+                    queues[theId].currency,
+                    new uint256[](0),
+                    amounts,
+                    queues[theId].currency == address(0) ? 3 : 2
                 );
             }
         }

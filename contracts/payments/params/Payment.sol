@@ -7,9 +7,9 @@ library Payment {
     struct Struct {
         address[] from;
         address[] to;
-        address[] currencies;
-        uint256[] ids;
-        uint256[] amounts;
+        address[] currency;
+        uint256[][] ids;
+        uint256[][] amounts;
         uint32[] paymentType;
     }
 

@@ -13,18 +13,6 @@ const defaultHound = [
   0,
   false
 ];
-const payment = [
-  address0,
-  address0,
-  address0,
-  [],
-  [],
-  0,
-  1,
-  3,
-  5,
-  1
-];
 const defaultQueue = [
   "Test queue",
   address0,
@@ -33,10 +21,8 @@ const defaultQueue = [
   5000000000,
   0,
   0,
-  1,
-  1,
+  [],
   10,
-  0,
   false
 ];
 let currentDiscountId = 1;
@@ -571,13 +557,11 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
       [],
       500000000,
       true
     ]);
     racesMethods = await getContractInstance("RacesMethods",[
-      address0,
       address0,
       address0,
       address0,
@@ -600,7 +584,7 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       racesRestricted.address,
       otherOwner.address,
-      address0
+      address0,
       [],
       500000000,
       true
@@ -615,11 +599,9 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
       []
     ]);
     queuesMethods = await getContractInstance("QueuesMethods",[
-      address0,
       address0,
       address0,
       address0,

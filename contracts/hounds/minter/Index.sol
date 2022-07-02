@@ -22,35 +22,49 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        ITransferTokens(control.boilerplate.payments).transferTokens{
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = control.fees.breedCost;
+        
+        IPay(control.boilerplate.payments).pay{
             value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
-            control.fees.breedCostCurrency,
             msg.sender,
             address(this),
-            control.fees.breedCost
+            control.fees.breedCostCurrency,
+            new uint256[](0),
+            amounts,
+            control.fees.breedCostCurrency == address(0) ? 3 : 2
         );
 
-        ITransferTokens(control.boilerplate.payments).transferTokens{
+        amounts[0] = control.fees.breedFee;
+        IPay(control.boilerplate.payments).pay{
             value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
         }(
-            control.fees.breedFeeCurrency,
             msg.sender,
             control.boilerplate.staterApi,
-            control.fees.breedFee
+            control.fees.breedFeeCurrency,
+            new uint256[](0),
+            amounts,
+            control.fees.breedFeeCurrency == address(0) ? 3 : 2
         );
 
         require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0));
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
             require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
-            ITransferTokens(control.boilerplate.payments).transferTokens{
+            
+            amounts[0] = hounds[hound2].breeding.breedingFee;
+            IPay(control.boilerplate.payments).pay{
                 value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
             }(
-                control.fees.breedCostCurrency,
                 msg.sender,
                 ownerOf(hound2),
-                hounds[hound2].breeding.breedingFee
+                control.fees.breedCostCurrency,
+                new uint256[](0),
+                amounts,
+                control.fees.breedCostCurrency == address(0) ? 3 : 2
             );
+                
         }
 
         hounds[hound2].breeding.lastBreed = block.timestamp;

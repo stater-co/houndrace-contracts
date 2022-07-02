@@ -5,7 +5,7 @@ import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
-import '../../payments/interfaces/ITransferTokens.sol';
+import '../../payments/interfaces/IPay.sol';
 import './Arena.sol';
 import './Constructor.sol';
 import '../../utils/Withdrawable.sol';

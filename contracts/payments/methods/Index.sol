@@ -5,40 +5,27 @@ import '../params/Index.sol';
 
 contract Payments is Params {
 
-	function transferTokens(
-		address currency,
-		address from,
-		address to,
-		uint256 amount
-	) public payable {
-		if ( currency != address(0) ) {
-			require(IERC20(currency).transferFrom(from, to, amount));
-		} else {
-			if ( Address.isContract(to) ) {
-				(bool success, )= to.call{ value: msg.value }("");
-				require(success);
-			} else {
-				require(payable(to).send(amount));
-			}
-		}
-	}
-
-	function runPayment(
+	function pay(
 		address from,
         address to,
         address currency,
-        uint256 id,
-        uint256 amount,
+        uint256[] memory id, // for batch transfers
+        uint256[] memory amount, // for batch transfers
         uint32 paymentType
 	) public payable {
 		if ( paymentType == 0 ) {
-			IERC721(currency).safeTransferFrom(from, to, id);
+			IERC721(currency).safeTransferFrom(from, to, id[0]);
 		} else if ( paymentType == 1 ) {
 			IERC1155(currency).safeBatchTransferFrom(from, to, id, amount, "");
 		} else if ( paymentType == 2 ) {
-			require(IERC20(currency).transferFrom(from, to, amount));
+			require(IERC20(currency).transferFrom(from, to, amount[0]));
 		} else if ( paymentType == 3 ) {
-			require(payable(to).send(amount));
+			if ( Address.isContract(to) ) {
+				(bool success, )= to.call{ value: amount[0] }("");
+				require(success);
+			} else {
+				require(payable(to).send(amount[0]));
+			}
 		}
 	}
 
