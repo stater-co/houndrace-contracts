@@ -1098,6 +1098,20 @@ describe("Races", function () {
     let queueToUse = defaultQueue;
 
     queueToUse[4] = 5000000000;
+    queueToUse[7] = [
+      [
+        address0, address0, address0
+      ],
+      [
+        address0, address0, address0
+      ],
+      [
+        address0, address0, address0
+      ],
+      [],
+      [],
+      [3,3,3]
+    ];
     await queues.createQueues([
       defaultQueue
     ]);
