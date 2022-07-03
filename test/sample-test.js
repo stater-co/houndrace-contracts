@@ -1192,7 +1192,6 @@ describe("Races", function () {
   it("UploadRace", async function () {
     let id = Number(await races.id());
     let queue = await queues.queue(1);
-    const [owner] = await ethers.getSigners();
     for ( let i = 1 ; i < id ; ++i ) {
       let race = await races.race(i);
       console.log(Number(queue.entryFee) + " + " + Number(queue.totalParticipants));
@@ -1200,21 +1199,17 @@ describe("Races", function () {
         await races.uploadRace(9999,[
           "Race #1",
           address0,
-          [1,2,3],
+          [],
           queue.arena,
           queue.entryFee,
           12,
           [
-            [owner.address,owner.address,owner.address],
-            [owner.address,owner.address,owner.address],
-            [address0,address0,address0],
             [],
-            [
-              Number(race.entryFee) * 2,
-              Number(race.entryFee) * 1.5,
-              Number(race.entryFee) * .5
-            ],
-            [3,3,3]
+            [],
+            [],
+            [[]],
+            [[]],
+            []
           ],
           i,
           "0x3333"

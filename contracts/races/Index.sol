@@ -18,12 +18,7 @@ contract Races is Params {
     }
 
     function handleRaceLoot(
-        address[] memory from,
-        address[] memory to,
-        address[] memory currency,
-        uint256[][] memory id,
-        uint256[][] memory amount,
-        uint32[] memory paymentType
+        Payment.Struct memory payment
     ) public payable {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);

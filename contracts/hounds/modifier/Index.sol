@@ -27,13 +27,6 @@ contract HoundsModifier is Params {
         emit HoundQueueStatusUpdate(theId, queueId);
     }
 
-    function setHoundIdling(uint256 theId) external {
-        require(theId < id);
-        require(allowed[msg.sender]);
-        hounds[theId].queueId = 0;
-        emit HoundQueueStatusUpdate(theId, 0);
-    }
-
     function boostHoundStamina(uint256 theId, address user) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);

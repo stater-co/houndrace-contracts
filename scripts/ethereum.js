@@ -395,7 +395,6 @@ async function main() {
       address0,
       address0,
       address0,
-      address0,
       [],
       500000000,
       false
@@ -408,7 +407,6 @@ async function main() {
 
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
-      address0,
       address0,
       address0,
       address0,
@@ -437,7 +435,6 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
-      address0,
       owner.address,
       address0,
       [],
@@ -627,7 +624,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        queues.address,
         owner.address,
         queues.address,
         [
@@ -653,7 +649,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        queues.address,
         owner.address,
         queues.address,
         [
@@ -679,7 +674,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        queues.address,
         owner.address,
         queues.address,
         [
@@ -1259,7 +1253,6 @@ async function main() {
             address0,
             address0,
             address0,
-            address0,
             [],
             500000000,
             false
@@ -1278,7 +1271,6 @@ async function main() {
         address: racesMethods.address,
         constructorArguments: [
           [
-            address0,
             address0,
             address0,
             address0,
@@ -1313,7 +1305,6 @@ async function main() {
             address0,
             payments.address,
             racesRestricted.address,
-            address0,
             owner.address,
             address0,
             [],

@@ -13,7 +13,6 @@ contract QueuesRestricted is Params {
             arena = IArena(control.arenas).arena(theQueues[i].arena);
             require(arena.fee < theQueues[i].entryFee / 2);
             require(arena.feeCurrency == theQueues[i].currency);
-            require(theQueues[i].payments.from.length > 0);
 
             queues[id] = theQueues[i];
             ++id;

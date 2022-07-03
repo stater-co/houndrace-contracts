@@ -10,7 +10,7 @@ import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
-import '../../hounds/interfaces/ISetHoundIdling.sol';
+import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 
