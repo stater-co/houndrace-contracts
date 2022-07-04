@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.14;
+pragma solidity <=0.8.15;
 
 library QueuesConstructor {
     struct Struct {
@@ -9,5 +9,6 @@ library QueuesConstructor {
         address payments;
         address restricted;
         address races;
+        address[] allowedCallers;
     }
 }

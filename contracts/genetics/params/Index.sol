@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '../IIndex.sol';
 import './Constructor.sol';
 
 
@@ -16,8 +15,5 @@ contract Params is Ownable {
     function setGlobalParameters(GeneticsConstructor.Struct memory globalParameters) external {
         control = globalParameters;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

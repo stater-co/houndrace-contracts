@@ -1,12 +1,16 @@
 //SPDX-License-Identifier: MIT
-pragma solidity <=0.8.14;
+pragma solidity <=0.8.15;
 
 library Hound {
 
     struct Breeding {
-        uint256 breedCooldown;
+        uint256 lastBreed;
+        uint256 breedingCooldown;
+        address breedingFeeCurrency;
         uint256 breedingFee;
-        uint256 breedLastUpdate;
+        uint256 secondsToMaturity;
+        uint256 breedingPeriod;
+        uint256 breedingStart;
         bool availableToBreed;
     }
 
@@ -19,6 +23,7 @@ library Hound {
     }
 
     struct Stamina {
+        address staminaRefill1xCurrency;
         uint256 staminaLastUpdate;
         uint256 staminaRefill1x;
         uint32 staminaValue;
@@ -40,7 +45,7 @@ library Hound {
         Identity identity;
         string title;
         string token_uri;
+        uint256 queueId;
         bool custom;
-        bool running;
     }
 }

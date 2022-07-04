@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 import '../params/Index.sol';
 
 
@@ -23,7 +23,7 @@ contract GeneratorZerocost is Params {
 
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {
 
-            hound = IHounds(control.hounds).hound(participants[i]);
+            hound = IHound(control.hounds).hound(participants[i]);
 
             stats[i] = uint256((hound.identity.geneticSequence[30] + hound.identity.geneticSequence[31] + hound.identity.geneticSequence[32] + hound.identity.geneticSequence[33]) * 99);
             uint256 tmp = stats[i];
@@ -56,7 +56,7 @@ contract GeneratorZerocost is Params {
         uint256[] memory
     ) {
         
-        Arena.Struct memory theTerrain = IArenas(control.arenas).arena(terrain);
+        Arena.Struct memory theTerrain = IArena(control.arenas).arena(terrain);
         
         uint256[] memory houndsPower = computeHoundsStats(participants, theTerrain);
         

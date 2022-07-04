@@ -1,23 +1,20 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.14;
+pragma solidity 0.8.15;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
-import '../IIndex.sol';
+import '../interfaces/ISimulateClassicRace.sol';
 import '../../queues/params/Queue.sol';
 import '../../races/params/Race.sol';
-import '../../hounds/IIndex.sol';
-import '../../randomness/IIndex.sol';
+import '../../hounds/interfaces/IHound.sol';
+import '../../randomness/IGetRandomNumber.sol';
 import '../../arenas/params/Arena.sol';
-import '../../arenas/IIndex.sol';
-import '../../payments/IIndex.sol';
+import '../../arenas/interfaces/IArena.sol';
 import '../../utils/Converters.sol';
 import '../../utils/Sortings.sol';
-import '../zerocost/IIndex.sol';
 
 
 contract Params is Ownable {
 
-    event NewRace(Queue.Struct queue, Race.Struct race);
     GeneratorConstructor.Struct public control;
 
     constructor(GeneratorConstructor.Struct memory input) {

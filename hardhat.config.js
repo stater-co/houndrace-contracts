@@ -6,15 +6,6 @@ require("hardhat-gas-reporter");
 require("solidity-coverage");
 
 
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
-
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
-
-
 module.exports = {
   networks: {
     hardhat: {
@@ -29,12 +20,19 @@ module.exports = {
     apiKey: process.env.RINKEBY_ETHERSCAN_API_KEY
   },
   mocha: {
-    reporter: 'eth-gas-reporter'
+    reporter: 'eth-gas-reporter',
+    timeout: 80000
   },
   solidity: {
     compilers: [
       {
-        version: "0.8.14"
+        version: "0.8.15",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 1,
+          },
+        }
       }
     ]
   },
