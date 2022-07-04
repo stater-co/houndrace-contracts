@@ -44,8 +44,8 @@ contract HoundsModifier is Params {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
-        hounds[theId].breeding.lastBreed += msg.value / refillBreedingCooldownCost;
-        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.availableToBreed);
+        hounds[theId].breeding.lastBreed -= msg.value / refillBreedingCooldownCost;
+        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.lastBreed + hounds[theId].breeding.breedingCooldown < block.timestamp);
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
