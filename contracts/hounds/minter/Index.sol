@@ -68,10 +68,7 @@ contract HoundsMinter is Params {
         }
 
         hounds[hound2].breeding.lastBreed = block.timestamp;
-        emit HoundBreedingStatusUpdate(hound2,false);
-
         hounds[hound1].breeding.lastBreed = block.timestamp;
-        emit HoundBreedingStatusUpdate(hound1,false);
 
         Hound.Struct memory offspring = IBreedHounds(control.boilerplate.incubator).breedHounds(
             hound1, 
