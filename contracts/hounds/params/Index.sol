@@ -23,6 +23,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
     event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);
     Constructor.Struct public control;
+    bool matingSeason;
 
     constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
         handleAllowedCallers(input.allowedCallers);
@@ -32,6 +33,10 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
         handleAllowedCallers(globalParameters.allowedCallers);
         control = globalParameters;
+    }
+
+    function setMatingSeason(bool _matingSeason) external onlyOwner {
+        matingSeason = _matingSeason;
     }
 
     function houndOwner(uint256 tokenId) external view returns(address) {

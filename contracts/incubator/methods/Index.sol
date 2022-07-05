@@ -40,8 +40,6 @@ contract IncubatorMethods is Params {
             hound1.breeding.breedingFeeCurrency,
             hound1.breeding.breedingFee,
             genetics[1] == 1 ? hound1.breeding.secondsToMaturity : hound2.breeding.secondsToMaturity,
-            genetics[1] == 1 ? hound1.breeding.breedingPeriod : hound2.breeding.breedingPeriod,
-            genetics[1] == 1 ? hound2.breeding.breedingStart : hound1.breeding.breedingStart,
             false
         );
 

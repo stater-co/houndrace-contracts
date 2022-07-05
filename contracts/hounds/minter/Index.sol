@@ -9,14 +9,13 @@ contract HoundsMinter is Params {
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
         require(
+            matingSeason && 
             hounds[hound2].breeding.lastBreed + hounds[hound2].breeding.breedingCooldown < block.timestamp && 
             hounds[hound1].breeding.lastBreed + hounds[hound1].breeding.breedingCooldown < block.timestamp && 
             hounds[hound1].queueId == 0 && 
             hounds[hound2].queueId == 0 && 
             hounds[hound2].breeding.secondsToMaturity + hounds[hound2].identity.birthDate < block.timestamp && 
-            hounds[hound1].breeding.secondsToMaturity + hounds[hound1].identity.birthDate < block.timestamp &&
-            block.timestamp % hounds[hound1].breeding.breedingStart < hounds[hound1].breeding.breedingPeriod && 
-            block.timestamp % hounds[hound2].breeding.breedingStart < hounds[hound2].breeding.breedingPeriod && 
+            hounds[hound1].breeding.secondsToMaturity + hounds[hound1].identity.birthDate < block.timestamp && 
             ( ( hounds[hound1].identity.geneticSequence[1] == 1 && hounds[hound2].identity.geneticSequence[1] == 2 ) || 
             ( hounds[hound1].identity.geneticSequence[1] == 2 && hounds[hound2].identity.geneticSequence[1] == 1 ) ) && 
             ownerOf(hound1) == msg.sender

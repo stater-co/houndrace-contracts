@@ -9,8 +9,6 @@ library Hound {
         address breedingFeeCurrency;
         uint256 breedingFee;
         uint256 secondsToMaturity;
-        uint256 breedingPeriod;
-        uint256 breedingStart;
         bool availableToBreed;
     }
 

@@ -543,6 +543,7 @@ describe("Setting up the Houndrace contracts", function () {
         "0x2386F26FC10000"
       ]
     ]);
+    await hounds.setMatingSeason(true);
   });
 
   it("Deploy the race contracts", async function () {
