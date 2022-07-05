@@ -11,7 +11,7 @@ contract QueuesRestricted is Params {
         Arena.Struct memory arena;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
             arena = IArena(control.arenas).arena(theQueues[i].arena);
-            require(arena.fee < theQueues[i].entryFee / 2);
+            require(arena.fee < theQueues[i].entryFee / theQueues[i].totalParticipants);
             require(arena.feeCurrency == theQueues[i].currency);
 
             queues[id] = theQueues[i];
