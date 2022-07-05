@@ -56,11 +56,6 @@ contract QueuesMethods is Params {
 
         Hound.Struct memory houndObj = IHound(control.hounds).hound(hound);
 
-        require(
-            houndObj.queueId == 0 && 
-            houndObj.breeding.secondsToMaturity + houndObj.identity.birthDate < block.timestamp
-        );
-        
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
             require(queues[theId].participants[i] != hound);
         }
