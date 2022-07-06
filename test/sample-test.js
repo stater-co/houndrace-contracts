@@ -21,8 +21,10 @@ const defaultQueue = [
   5000000000,
   0,
   0,
+  0,
   [],
   10,
+  14400,
   false
 ];
 let currentDiscountId = 1;
@@ -398,9 +400,10 @@ describe("Setting up the Houndrace contracts", function () {
   });
 
   it("Deploy the arenas contracts", async function () {
-    arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0, address0, []]);
-    arenasMethods = await getContractInstance("ArenasMethods", ["HoundRace Arenas", "HRA", address0, address0, address0, []]);
-    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
+    const [owner] = await ethers.getSigners();
+    arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
+    arenasMethods = await getContractInstance("ArenasMethods", ["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
+    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, []]);
   });
 
   it("Genetics methods", async function () {
@@ -557,13 +560,11 @@ describe("Setting up the Houndrace contracts", function () {
       address0,
       address0,
       address0,
-      address0,
       [],
       500000000,
       true
     ]);
     racesMethods = await getContractInstance("RacesMethods",[
-      address0,
       address0,
       address0,
       address0,
@@ -585,7 +586,6 @@ describe("Setting up the Houndrace contracts", function () {
       payments.address,
       racesRestricted.address,
       otherOwner.address,
-      address0,
       [],
       500000000,
       true
@@ -693,17 +693,19 @@ describe("Setting up the Houndrace contracts global parameters", function () {
 
   it("Setting up arenas contracts dependencies", async function () {
 
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+    const [owner] = await ethers.getSigners();
+    
+    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
       racesRestricted.address,racesMethods.address,races.address,
       queuesRestricted.address,queuesMethods.address,queues.address
     ]]);
 
-    await arenasMethods.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+    await arenasMethods.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
       racesRestricted.address,racesMethods.address,races.address,
       queuesRestricted.address,queuesMethods.address,queues.address
     ]]);
 
-    await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address,[
+    await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
       racesRestricted.address,racesMethods.address,races.address,
       queuesRestricted.address,queuesMethods.address,queues.address
     ]]);
@@ -881,7 +883,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
-      otherOwner.address,
       queues.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
@@ -900,7 +901,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
-      otherOwner.address,
       queues.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
@@ -919,7 +919,6 @@ describe("Setting up the Houndrace contracts global parameters", function () {
       generator.address,
       payments.address,
       racesRestricted.address,
-      otherOwner.address,
       queues.address,
       [
         racesRestricted.address,racesMethods.address,races.address,
@@ -1097,7 +1096,7 @@ describe("Races", function () {
     let queueToUse = defaultQueue;
 
     queueToUse[4] = 5000000000;
-    queueToUse[7] = [
+    queueToUse[8] = [
       [
         address0, address0, address0
       ],
