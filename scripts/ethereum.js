@@ -158,7 +158,7 @@ async function main() {
     }
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
-    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, []]);
+    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
     await arenasRestricted.deployed();
     deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
     deployments.update(10, {
@@ -166,7 +166,7 @@ async function main() {
     });
 
     const ArenasMethods = await hre.ethers.getContractFactory("ArenasMethods");
-    const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, []]);
+    const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
     await arenasMethods.deployed();
     deployment('export ARENAS_METHODS=' + arenasMethods.address);
     deployments.update(10, {
@@ -174,7 +174,7 @@ async function main() {
     });
 
     const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
+    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]);
     await arenas.deployed();
     deployment('export ARENAS=' + arenas.address);
     deployments.update(11, {
@@ -182,7 +182,7 @@ async function main() {
     });
 
     try {
-      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []]);
+      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -394,7 +394,6 @@ async function main() {
       address0,
       address0,
       address0,
-      address0,
       [],
       500000000,
       false
@@ -407,7 +406,6 @@ async function main() {
 
     const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
-      address0,
       address0,
       address0,
       address0,
@@ -435,7 +433,6 @@ async function main() {
       address0,
       payments.address,
       racesRestricted.address,
-      owner.address,
       address0,
       [],
       500000000,
@@ -624,7 +621,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        owner.address,
         queues.address,
         [
           racesRestricted.address,racesMethods.address,races.address,
@@ -649,7 +645,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        owner.address,
         queues.address,
         [
           racesRestricted.address,racesMethods.address,races.address,
@@ -674,7 +669,6 @@ async function main() {
         generator.address,
         payments.address,
         racesRestricted.address,
-        owner.address,
         queues.address,
         [
           racesRestricted.address,racesMethods.address,races.address,
@@ -691,7 +685,7 @@ async function main() {
     }
 
     try {
-      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, [races.address]]);
+      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [races.address]]);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -976,7 +970,7 @@ async function main() {
         address: arenasRestricted.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0, address0, address0, []
+            "HoundRace Arenas", "HRA", address0, address0, address0, address0, []
           ]
         ]
       });
@@ -992,7 +986,7 @@ async function main() {
         address: arenasMethods.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0, address0, address0, []
+            "HoundRace Arenas", "HRA", address0, address0, address0, address0, []
           ]
         ]
       });
@@ -1008,7 +1002,7 @@ async function main() {
         address: arenas.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, []
+            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []
           ]
         ]
       });
@@ -1252,7 +1246,6 @@ async function main() {
             address0,
             address0,
             address0,
-            address0,
             [],
             500000000,
             false
@@ -1271,7 +1264,6 @@ async function main() {
         address: racesMethods.address,
         constructorArguments: [
           [
-            address0,
             address0,
             address0,
             address0,
@@ -1305,7 +1297,6 @@ async function main() {
             address0,
             payments.address,
             racesRestricted.address,
-            owner.address,
             address0,
             [],
             500000000,
