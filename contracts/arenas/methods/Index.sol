@@ -11,13 +11,24 @@ contract ArenasMethods is Params {
         require(allowed[msg.sender]);
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = arenas[theId].fee;
+        amounts[0] = arenas[theId].fee / 2;
         
         IPay(control.payments).pay{
-            value: arenas[theId].feeCurrency == address(0) ? msg.value : 0
+            value: arenas[theId].feeCurrency == address(0) ? amounts[0] : 0
         }(
                 msg.sender,
                 ownerOf(theId),
+                arenas[theId].feeCurrency,
+                new uint256[](0),
+                amounts,
+                arenas[theId].feeCurrency == address(0) ? 3 : 2
+        );
+
+        IPay(control.payments).pay{
+            value: arenas[theId].feeCurrency == address(0) ? amounts[0] : 0
+        }(
+                msg.sender,
+                control.alphadune,
                 arenas[theId].feeCurrency,
                 new uint256[](0),
                 amounts,

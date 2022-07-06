@@ -10,7 +10,6 @@ library RacesConstructor {
         address generator;
         address payments;
         address restricted;
-        address staterApi;
         address queues;
         address[] allowedCallers;
         uint256 raceFee;
