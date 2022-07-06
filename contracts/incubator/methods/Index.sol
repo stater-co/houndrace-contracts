@@ -36,10 +36,9 @@ contract IncubatorMethods is Params {
 
         Hound.Breeding memory breeding = Hound.Breeding(
             0, 
-            genetics[1] == 1 ? hound2.breeding.breedingCooldown : hound1.breeding.breedingCooldown,
+            block.timestamp + control.secondsToMaturity,
             hound1.breeding.breedingFeeCurrency,
-            hound1.breeding.breedingFee,
-            genetics[1] == 1 ? hound1.breeding.secondsToMaturity : hound2.breeding.secondsToMaturity,
+            0,
             false
         );
 
