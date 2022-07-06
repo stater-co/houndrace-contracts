@@ -8,8 +8,6 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function unenqueue(uint256 theId, uint256 hound) external {
-        Hound.Struct memory houndObj = IHound(control.hounds).hound(hound);
-        require(houndObj.queueId == theId);
         Queue.Struct memory _queue = queues[theId];
 
         uint256[] memory replacedParticipants = _queue.participants;
@@ -25,7 +23,7 @@ contract QueuesMethods is Params {
         }
         require(exists);
 
-        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) != 0);
+        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
 
         uint256[] memory amounts = new uint256[](1);
@@ -53,8 +51,6 @@ contract QueuesMethods is Params {
             msg.value >= queues[theId].entryFee && 
             IHoundOwner(control.hounds).houndOwner(hound) == msg.sender
         );
-
-        Hound.Struct memory houndObj = IHound(control.hounds).hound(hound);
 
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
             require(queues[theId].participants[i] != hound);
