@@ -20,9 +20,13 @@ library Queue {
 
         uint256 endDate;
 
+        uint256 lastCompletion;
+
         Payment.Struct payments;
 
         uint32 totalParticipants;
+
+        uint32 cooldown;
 
         bool closed;
 

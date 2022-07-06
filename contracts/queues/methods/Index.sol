@@ -49,7 +49,8 @@ contract QueuesMethods is Params {
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
             ((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
             msg.value >= queues[theId].entryFee && 
-            IHoundOwner(control.hounds).houndOwner(hound) == msg.sender
+            IHoundOwner(control.hounds).houndOwner(hound) == msg.sender && 
+            queues[theId].lastCompletion + queues[theId].cooldown > block.timestamp
         );
 
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
@@ -66,6 +67,8 @@ contract QueuesMethods is Params {
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].participants;
+
+            queues[theId].lastCompletion = block.timestamp;
 
         }
     
