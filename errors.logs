@@ -7,44 +7,22 @@
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
   errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-07-06T09:31:19.838Z'
+  timestamp: '2022-07-07T12:35:52.275Z'
 }
 {
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
+  reason: 'replacement fee too low',
+  code: 'REPLACEMENT_UNDERPRICED',
+  error: ProviderError: replacement transaction underpriced
+      at HttpProvider.request (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/http.ts:78:19)
+      at LocalAccountsProvider.request (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/providers/accounts.ts:182:36)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at EthersProviderWrapper.send (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-ethers/src/internal/ethers-provider-wrapper.ts:13:20),
+  method: 'sendTransaction',
+  transaction: undefined,
   level: 'error',
-  errorMessage: 'The selected network is hardhat. Please select a network supported by Etherscan.',
-  timestamp: '2022-07-06T09:32:10.269Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-07-06T09:43:32.393Z'
-}
-{
-  parent: undefined,
-  name: 'NomicLabsHardhatPluginError',
-  pluginName: '@nomiclabs/hardhat-etherscan',
-  _isHardhatPluginError: true,
-  shouldBeReported: false,
-  _isNomicLabsHardhatPluginError: true,
-  level: 'error',
-  errorMessage: 'The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  timestamp: '2022-07-06T09:44:06.607Z'
+  errorMessage: 'replacement fee too low [ See: https://links.ethers.org/v5-errors-REPLACEMENT_UNDERPRICED ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=REPLACEMENT_UNDERPRICED, version=providers/5.6.8)',
+  timestamp: '2022-07-07T12:41:07.376Z'
 }
 {
   parent: undefined,
@@ -57,7 +35,33 @@
   errorMessage: 'The Etherscan API responded with a failure status.\n' +
     'The verification may still succeed but should be checked manually.\n' +
     'Reason: Already Verified',
-  timestamp: '2022-07-06T09:44:37.817Z'
+  timestamp: '2022-07-07T13:24:12.939Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:24:34.308Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:25:03.410Z'
 }
 {
   parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
@@ -88,7 +92,7 @@
   level: 'error',
   errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-07-06T09:44:57.872Z'
+  timestamp: '2022-07-07T13:25:19.657Z'
 }
 {
   parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
@@ -119,7 +123,7 @@
   level: 'error',
   errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-07-06T09:45:19.753Z'
+  timestamp: '2022-07-07T13:25:38.095Z'
 }
 {
   parent: undefined,
@@ -132,7 +136,7 @@
   errorMessage: 'The Etherscan API responded with a failure status.\n' +
     'The verification may still succeed but should be checked manually.\n' +
     'Reason: Already Verified',
-  timestamp: '2022-07-06T09:45:49.971Z'
+  timestamp: '2022-07-07T13:26:04.425Z'
 }
 {
   parent: undefined,
@@ -145,7 +149,114 @@
   errorMessage: 'The Etherscan API responded with a failure status.\n' +
     'The verification may still succeed but should be checked manually.\n' +
     'Reason: Already Verified',
-  timestamp: '2022-07-06T09:49:12.381Z'
+  timestamp: '2022-07-07T13:26:37.140Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:27:02.931Z'
+}
+{
+  parent: NomicLabsHardhatPluginError: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>403 - Forbidden: Access is denied.</title>
+  <style type="text/css">
+  <!--
+  body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+  fieldset{padding:0 15px 10px 15px;} 
+  h1{font-size:2.4em;margin:0;color:#FFF;}
+  h2{font-size:1.7em;margin:0;color:#CC0000;} 
+  h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+  #header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+  background-color:#555555;}
+  #content{margin:0 0 0 2%;position:relative;}
+  .content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+  -->
+  </style>
+  </head>
+  <body>
+  <div id="header"><h1>Server Error</h1></div>
+  <div id="content">
+  <div class="content-container"><fieldset>
+  <h2>403 - Forbidden: Access is denied.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+  </fieldset></div>
+  </div>
+  <script >(function(){var js = "window['__CF$cv$params']={r:'7270eb1dcaaa68af',m:'lilmiqkKjBgyyxVl4mAUgQg54Rt1Uuhig_vDhvZGk5s-1657200455-0-AWpn2oOMyUzIp/n8yY2S2cTxlx9LDCTc/FZk/Kl2em34W/R/0SlpRMETyLACKDcgjuu1PZuNdJrDTzCjhnFkpTT26JzAkVw+QoAm5v4SjdC5vDeLDWsa3o6DCtPr99BNr+AZP4GZmeSh9HORIyk113D4a//Lf8LS9DSZTiiCcfwlodvfzLHLfPmU5s0FAFpM8x5Z6sNtNEm4rNZM1Q+zDJpWoGkmJEpfQ3pZo9DNvSH3Itojq9i5/Yh2PUi2fcg2TEUI4ps8c8FhpGMkDH54+F0e+pkyDupZhUQLhbI63c3l',s:[0x100a27a744,0xcf3452a173],u:'/cdn-cgi/challenge-platform/h/g'};var _cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/cb/invisible.js?cb=7270eb1dcaaa68af',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+  </html>
+  
+      at getVerificationStatus (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/etherscan/EtherscanService.ts:97:13)
+      at runMicrotasks (<anonymous>)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at attemptVerification (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:477:30)
+      at SimpleTaskDefinition.action (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:765:48)
+      at Environment._runTaskDefinition (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:219:14)
+      at Environment.run (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:131:14)
+      at SimpleTaskDefinition.verifySubtask [as action] (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:299:28)
+      at Environment._runTaskDefinition (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:219:14)
+      at Environment.run (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:131:14),
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=KXUZPTIKZ1G3N4ZQEAKFQXK3S912CYF7WP&module=contract&action=checkverifystatus&guid=gwizssdzs5tuv1s93k5mepbusn69uv16xj8x9vnydshesu866a\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script >(function(){var js = "window['__CF$cv$params']={r:'7270eb1dcaaa68af',m:'lilmiqkKjBgyyxVl4mAUgQg54Rt1Uuhig_vDhvZGk5s-1657200455-0-AWpn2oOMyUzIp/n8yY2S2cTxlx9LDCTc/FZk/Kl2em34W/R/0SlpRMETyLACKDcgjuu1PZuNdJrDTzCjhnFkpTT26JzAkVw+QoAm5v4SjdC5vDeLDWsa3o6DCtPr99BNr+AZP4GZmeSh9HORIyk113D4a//Lf8LS9DSZTiiCcfwlodvfzLHLfPmU5s0FAFpM8x5Z6sNtNEm4rNZM1Q+zDJpWoGkmJEpfQ3pZo9DNvSH3Itojq9i5/Yh2PUi2fcg2TEUI4ps8c8FhpGMkDH54+F0e+pkyDupZhUQLhbI63c3l',s:[0x100a27a744,0xcf3452a173],u:'/cdn-cgi/challenge-platform/h/g'};var _cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/cb/invisible.js?cb=7270eb1dcaaa68af',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  timestamp: '2022-07-07T13:27:35.547Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:28:10.267Z'
 }
 {
   parent: Error: types/value length mismatch (argument="tuple", value=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000","0x67657452",1800,2419200,"300000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
@@ -180,10 +291,10 @@
   level: 'error',
   errorMessage: 'Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x67657452,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-07-06T09:49:32.341Z'
+  timestamp: '2022-07-07T13:28:26.570Z'
 }
 {
-  parent: Error: types/value length mismatch (argument="tuple", value=["0x616b4Dc8acfD5EA3bc61CABAd398e7dfcd00ef10","0xD31643AAB7CDE14a2b0181C6DE9Dc24bAa88Eeeb","0xd49FE0038cD4cf46De0351b59a9bF75f2200219F","0x67657452",1800,2419200,"300000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
+  parent: Error: types/value length mismatch (argument="tuple", value=["0x635d2CA25B2109d62eA35203fFeF8C2c67427D7E","0xAC48E054049A3385ca05748E0bf86A31597BabB3","0x7E6E135E7A52a3E221f48AE3d1475064fB26aB39","0x67657452",1800,2419200,"300000000000000000"], code=INVALID_ARGUMENT, version=abi/5.6.4)
       at Logger.makeError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:261:28)
       at Logger.throwError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:273:20)
       at Logger.throwArgumentError (/home/diimiim/houndrace-contracts/node_modules/@ethersproject/logger/src.ts/index.ts:277:21)
@@ -198,9 +309,9 @@
     code: 'INVALID_ARGUMENT',
     argument: 'tuple',
     value: [
-      '0x616b4Dc8acfD5EA3bc61CABAd398e7dfcd00ef10',
-      '0xD31643AAB7CDE14a2b0181C6DE9Dc24bAa88Eeeb',
-      '0xd49FE0038cD4cf46De0351b59a9bF75f2200219F',
+      '0x635d2CA25B2109d62eA35203fFeF8C2c67427D7E',
+      '0xAC48E054049A3385ca05748E0bf86A31597BabB3',
+      '0x7E6E135E7A52a3E221f48AE3d1475064fB26aB39',
       '0x67657452',
       1800,
       2419200,
@@ -213,7 +324,231 @@
   shouldBeReported: false,
   _isNomicLabsHardhatPluginError: true,
   level: 'error',
-  errorMessage: 'Value 0x616b4Dc8acfD5EA3bc61CABAd398e7dfcd00ef10,0xD31643AAB7CDE14a2b0181C6DE9Dc24bAa88Eeeb,0xd49FE0038cD4cf46De0351b59a9bF75f2200219F,0x67657452,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+  errorMessage: 'Value 0x635d2CA25B2109d62eA35203fFeF8C2c67427D7E,0xAC48E054049A3385ca05748E0bf86A31597BabB3,0x7E6E135E7A52a3E221f48AE3d1475064fB26aB39,0x67657452,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
-  timestamp: '2022-07-06T09:49:54.899Z'
+  timestamp: '2022-07-07T13:28:44.186Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:29:26.428Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:30:05.974Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:30:29.057Z'
+}
+{
+  parent: NomicLabsHardhatPluginError: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>403 - Forbidden: Access is denied.</title>
+  <style type="text/css">
+  <!--
+  body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
+  fieldset{padding:0 15px 10px 15px;} 
+  h1{font-size:2.4em;margin:0;color:#FFF;}
+  h2{font-size:1.7em;margin:0;color:#CC0000;} 
+  h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} 
+  #header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;
+  background-color:#555555;}
+  #content{margin:0 0 0 2%;position:relative;}
+  .content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}
+  -->
+  </style>
+  </head>
+  <body>
+  <div id="header"><h1>Server Error</h1></div>
+  <div id="content">
+  <div class="content-container"><fieldset>
+  <h2>403 - Forbidden: Access is denied.</h2>
+  <h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>
+  </fieldset></div>
+  </div>
+  <script>(function(){var js = "window['__CF$cv$params']={r:'7270f0693e0d1ce0',m:'j3H.hwrwWbBaB8WFDZttDyoDdL7eTheuRtaSyKt1vlY-1657200672-0-AThNrhPN0NC1QcS8o+rod9Hzd6Wg2MY2jtaYTr44eDhQ59kTB7tMIfUb7aW74BzQsNxKz/CeGbCAVtROn3vyKClTtJLoqLTTXgiCIPQAPM2c6odrIEiqX86gfIfuI4nEFzHAvbvLHijuQA50VT+ofW4BTn3lVUK1Gafw/wNwSVGsJUlj161u427lV1AQiEJckfHLs+pRs5LmqWYzXgMVGJmKcfBHX7gl5TjHkHTee1trPEzoSYlJEro2s3aAF5D2QetFF5S2NmU+wAXe2tUgBjzdcUfJdrGh+TMk1JPStnCn',s:[0x9409e782bf,0xb111dbff5a],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>
+  </html>
+  
+      at getVerificationStatus (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/etherscan/EtherscanService.ts:97:13)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at attemptVerification (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:477:30)
+      at SimpleTaskDefinition.action (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:765:48)
+      at Environment._runTaskDefinition (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:219:14)
+      at Environment.run (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:131:14)
+      at SimpleTaskDefinition.verifySubtask [as action] (/home/diimiim/houndrace-contracts/node_modules/@nomiclabs/hardhat-etherscan/src/index.ts:299:28)
+      at Environment._runTaskDefinition (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:219:14)
+      at Environment.run (/home/diimiim/houndrace-contracts/node_modules/hardhat/src/internal/core/runtime-environment.ts:131:14)
+      at main (/home/diimiim/houndrace-contracts/scripts/ethereum.js:1190:7),
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=KXUZPTIKZ1G3N4ZQEAKFQXK3S912CYF7WP&module=contract&action=checkverifystatus&guid=qrhp2p9gjreah2hkxsrsgij9zkhtgkazqyiij1cg2fscw19tur\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'7270f0693e0d1ce0',m:'j3H.hwrwWbBaB8WFDZttDyoDdL7eTheuRtaSyKt1vlY-1657200672-0-AThNrhPN0NC1QcS8o+rod9Hzd6Wg2MY2jtaYTr44eDhQ59kTB7tMIfUb7aW74BzQsNxKz/CeGbCAVtROn3vyKClTtJLoqLTTXgiCIPQAPM2c6odrIEiqX86gfIfuI4nEFzHAvbvLHijuQA50VT+ofW4BTn3lVUK1Gafw/wNwSVGsJUlj161u427lV1AQiEJckfHLs+pRs5LmqWYzXgMVGJmKcfBHX7gl5TjHkHTee1trPEzoSYlJEro2s3aAF5D2QetFF5S2NmU+wAXe2tUgBjzdcUfJdrGh+TMk1JPStnCn',s:[0x9409e782bf,0xb111dbff5a],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  timestamp: '2022-07-07T13:31:12.411Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:31:51.044Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:32:23.760Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:33:08.414Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:33:39.721Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:34:08.220Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:34:34.311Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:35:06.825Z'
+}
+{
+  parent: undefined,
+  name: 'NomicLabsHardhatPluginError',
+  pluginName: '@nomiclabs/hardhat-etherscan',
+  _isHardhatPluginError: true,
+  shouldBeReported: false,
+  _isNomicLabsHardhatPluginError: true,
+  level: 'error',
+  errorMessage: 'The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  timestamp: '2022-07-07T13:35:26.192Z'
 }
