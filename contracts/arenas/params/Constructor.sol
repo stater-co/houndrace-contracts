@@ -9,6 +9,7 @@ library ArenasConstructor {
         address restricted;
         address methods;
         address payments;
+        address alphadune;
         address[] allowedCallers;
     }
 }
