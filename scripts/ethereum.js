@@ -212,7 +212,7 @@ async function main() {
       address0,
       address0,
       address0,
-      '0x67657452'
+      345600
     ]);
     await incubatorMethods.deployed();
     deployment('export INCUBATOR_METHODS=' + incubatorMethods.address);
@@ -225,7 +225,7 @@ async function main() {
       incubatorMethods.address,
       randomness.address,
       genetics.address,
-      '0x67657452'
+      345600
     ]);
     await incubator.deployed();
     deployment('export INCUBATOR=' + incubator.address);
@@ -238,7 +238,7 @@ async function main() {
         incubatorMethods.address,
         randomness.address,
         genetics.address,
-        '0x67657452'
+        345600
       ]);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
@@ -1035,7 +1035,7 @@ async function main() {
             address0,
             address0,
             address0,
-            '0x67657452',
+            345600,
             1800,
             2419200,
             '300000000000000000'
@@ -1057,7 +1057,7 @@ async function main() {
             incubatorMethods.address,
             randomness.address,
             genetics.address,
-            '0x67657452',
+            345600,
             1800,
             2419200,
             '300000000000000000'
