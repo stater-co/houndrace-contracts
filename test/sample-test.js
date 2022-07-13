@@ -324,10 +324,10 @@ describe("Setting up the Payments System", function () {
   });
 
   it("Deploy the erc721 test contract", async function () {
-    const TestingErc721 = await hre.ethers.getContractFactory("TestingErc721");
+    const TestingErc721 = await hre.ethers.getContractFactory("AlphaERC721");
     testErc721 = await TestingErc721.deploy("test","t");
     await testErc721.deployed();
-    deploymentMessage("TestingErc721",testErc721.address);
+    deploymentMessage("ERC721",testErc721.address);
   });
 
   it("Mint erc721 nfts", async function () {
