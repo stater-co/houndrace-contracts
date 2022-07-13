@@ -1,4 +1,4 @@
-function deployedAt(name,address) {
+function deployedAt(name: string, address: string) {
     return name + " deployed at: " + address;
 }
 

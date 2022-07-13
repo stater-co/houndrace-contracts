@@ -1,5 +1,5 @@
-import DeploymentLogger from '../logs/deployments/printers/deployment';
-import DeploymentError from '../logs/deployments/printers/errors';
+import DeploymentLogger from '../logs/deployment/printers/deployment';
+import DeploymentError from '../logs/deployment/printers/errors';
 
 const cliProgress = require('cli-progress');
 const opt = {
@@ -147,7 +147,7 @@ async function main() {
         step: "Set global parameters for shop methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -156,7 +156,7 @@ async function main() {
         step: "Set global parameters for arenas restricted"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
@@ -189,7 +189,7 @@ async function main() {
         step: "Set global parameters for incubator methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     const Genetics = await hre.ethers.getContractFactory("Genetics");
@@ -246,7 +246,7 @@ async function main() {
         step: "Set global parameters for generator methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
@@ -503,7 +503,7 @@ async function main() {
         step: "Set global parameters for generator zerocost"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -520,7 +520,7 @@ async function main() {
         step: "Set global parameters for queues methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
@@ -585,7 +585,7 @@ async function main() {
         step: "Set global parameters for queues restricted"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -602,7 +602,7 @@ async function main() {
         step: "Set global parameters for races restricted"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -626,7 +626,7 @@ async function main() {
         step: "Set global parameters for races methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -650,7 +650,7 @@ async function main() {
         step: "Set global parameters for races"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -674,7 +674,7 @@ async function main() {
         step: "Set global parameters hounds"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -683,7 +683,7 @@ async function main() {
         step: "Set global parameters for incubator methods"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -725,7 +725,7 @@ async function main() {
         step: "Set global parameters hounds modifier"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -767,7 +767,7 @@ async function main() {
         step: "Set global parameters hounds restricted"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -809,7 +809,7 @@ async function main() {
         step: "Set global parameters hounds minter"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -851,7 +851,7 @@ async function main() {
         step: "Finished!"
       });
     } catch(err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
@@ -859,7 +859,7 @@ async function main() {
         address: converters.address
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(1, {
       step: "Verify sortings"
@@ -870,7 +870,7 @@ async function main() {
         address: sortings.address
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(2, {
       step: "Verify randomness"
@@ -881,7 +881,7 @@ async function main() {
         address: randomness.address
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(3, {
       step: "Verify payment methods"
@@ -892,7 +892,7 @@ async function main() {
         address: payments.address
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(5, {
       step: "Verify houndrace potions"
@@ -904,7 +904,7 @@ async function main() {
         constructorArguments: ["HoundracePotions", "HP"]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(6, {
       step: "Verify shop restricted"
@@ -920,7 +920,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(7, {
       step: "Verify shop methods"
@@ -936,7 +936,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(8, {
       step: "Verify shop"
@@ -952,7 +952,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(9, {
       step: "Verify arenas restricted"
@@ -968,7 +968,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(10, {
       step: "Verify arenas"
@@ -984,7 +984,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(10, {
       step: "Verify arenas"
@@ -1000,7 +1000,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(11, {
       step: "Verify genetics"
@@ -1023,7 +1023,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(12, {
       step: "Verify incubator methods"
@@ -1045,7 +1045,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(13, {
       step: "Verify incubator"
@@ -1067,7 +1067,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(14, {
       step: "Verify hounds restricted"
@@ -1105,7 +1105,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(15, {
       step: "Verify hounds modifier"
@@ -1144,7 +1144,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(16, {
       step: "Verify hounds minter"
@@ -1182,7 +1182,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(17, {
       step: "Verify hounds"
@@ -1220,7 +1220,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(18, {
       step: "Verify races restricted"
@@ -1246,7 +1246,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(19, {
       step: "Verify races methods"
@@ -1272,7 +1272,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(20, {
       step: "Verify races"
@@ -1298,7 +1298,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(21, {
       step: "Verify generator methods"
@@ -1320,7 +1320,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(22, {
       step: "Verify generator"
@@ -1342,7 +1342,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(23, {
       step: "Verify queues restricted"
@@ -1364,7 +1364,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(24, {
       step: "Verify queues methods"
@@ -1386,7 +1386,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(25, {
       step: "Verify queues"
@@ -1408,7 +1408,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      DeploymentError(err as string);
+      DeploymentError((err as NodeJS.ErrnoException).message);
     }
     verifications.update(26, {
       step: "Finished!"
@@ -1416,7 +1416,7 @@ async function main() {
 
   } catch(err) {
     console.error(err);
-    DeploymentError(err as string);
+    DeploymentError((err as NodeJS.ErrnoException).message);
   }
 
 }
