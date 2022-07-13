@@ -1,4 +1,6 @@
-const { deployment, errors } = require("../plugins/logger.js");
+import DeploymentLogger from '../logs/deployments/printers/deployment';
+import DeploymentError from '../logs/deployments/printers/errors';
+
 const cliProgress = require('cli-progress');
 const opt = {
   format: '{step} [{bar}] {percentage}% | ETA: {eta}s | {value}/{total}'
@@ -73,12 +75,12 @@ async function main() {
 
   try {
 
-    deployment('##############################################');
+    DeploymentLogger('##############################################');
     const [owner] = await hre.ethers.getSigners();
 
     const Converters = await hre.ethers.getContractFactory("Converters");
     const converters = await Converters.deploy();
-    deployment('export CONVERTERS=' + converters.address);
+    DeploymentLogger('export CONVERTERS=' + converters.address);
     deployments.update(1, {
       step: "Deploy sortings"
     });
@@ -86,7 +88,7 @@ async function main() {
     const Sortings = await hre.ethers.getContractFactory("Sortings");
     const sortings = await Sortings.deploy();
     await sortings.deployed();
-    deployment('export SORTINGS=' + sortings.address);
+    DeploymentLogger('export SORTINGS=' + sortings.address);
     deployments.update(2, {
       step: "Deploy randomness"
     });
@@ -94,7 +96,7 @@ async function main() {
     const Randomness = await hre.ethers.getContractFactory("Randomness");
     const randomness = await Randomness.deploy();
     await randomness.deployed();
-    deployment('export RANDOMNESS=' + randomness.address);
+    DeploymentLogger('export RANDOMNESS=' + randomness.address);
     deployments.update(3, {
       step: "Deploy payment methods"
     });
@@ -102,7 +104,7 @@ async function main() {
     const Payments = await hre.ethers.getContractFactory("Payments");
     const payments = await Payments.deploy();
     await payments.deployed();
-    deployment('export PAYMENTS=' + payments.address);
+    DeploymentLogger('export PAYMENTS=' + payments.address);
     deployments.update(5, {
       step: "Deploy houndrace potions"
     });
@@ -110,7 +112,7 @@ async function main() {
     const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
     const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
     await houndracePotions.deployed();
-    deployment('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+    DeploymentLogger('export HOUNDRACE_POTIONS=' + houndracePotions.address);
     deployments.update(6, {
       step: "Deploy shop restricted"
     });
@@ -118,7 +120,7 @@ async function main() {
     const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
     const shopRestricted = await ShopRestricted.deploy([address0,address0]);
     await shopRestricted.deployed();
-    deployment('export SHOP_RESTRICTED=' + shopRestricted.address);
+    DeploymentLogger('export SHOP_RESTRICTED=' + shopRestricted.address);
     deployments.update(7, {
       step: "Deploy shop methods"
     });
@@ -126,7 +128,7 @@ async function main() {
     const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
     const shopMethods = await ShopMethods.deploy([address0,address0]);
     await shopMethods.deployed();
-    deployment('export SHOP_METHODS=' + shopMethods.address);
+    DeploymentLogger('export SHOP_METHODS=' + shopMethods.address);
     deployments.update(8, {
       step: "Deploy shop"
     });
@@ -134,7 +136,7 @@ async function main() {
     const Shop = await hre.ethers.getContractFactory("Shop");
     const shop = await Shop.deploy([shopMethods.address,shopRestricted.address]);
     await shop.deployed();
-    deployment('export SHOP=' + shop.address);
+    DeploymentLogger('export SHOP=' + shop.address);
     deployments.update(9, {
       step: "Deploy arenas restricted"
     });
@@ -145,7 +147,7 @@ async function main() {
         step: "Set global parameters for shop methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -154,13 +156,13 @@ async function main() {
         step: "Set global parameters for arenas restricted"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
     const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
     await arenasRestricted.deployed();
-    deployment('export ARENAS_RESTRICTED=' + arenasRestricted.address);
+    DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
     deployments.update(10, {
       step: "Deploy arenas"
     });
@@ -168,7 +170,7 @@ async function main() {
     const ArenasMethods = await hre.ethers.getContractFactory("ArenasMethods");
     const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
     await arenasMethods.deployed();
-    deployment('export ARENAS_METHODS=' + arenasMethods.address);
+    DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
     deployments.update(10, {
       step: "Deploy arenas"
     });
@@ -176,7 +178,7 @@ async function main() {
     const Arenas = await hre.ethers.getContractFactory("Arenas");
     const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]);
     await arenas.deployed();
-    deployment('export ARENAS=' + arenas.address);
+    DeploymentLogger('export ARENAS=' + arenas.address);
     deployments.update(11, {
       step: "Deploy genetics"
     });
@@ -187,7 +189,7 @@ async function main() {
         step: "Set global parameters for incubator methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     const Genetics = await hre.ethers.getContractFactory("Genetics");
@@ -202,7 +204,7 @@ async function main() {
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     ]);
     await genetics.deployed();
-    deployment('export GENETICS=' + genetics.address);
+    DeploymentLogger('export GENETICS=' + genetics.address);
     deployments.update(12, {
       step: "Deploy incubator methods"
     });
@@ -215,7 +217,7 @@ async function main() {
       345600
     ]);
     await incubatorMethods.deployed();
-    deployment('export INCUBATOR_METHODS=' + incubatorMethods.address);
+    DeploymentLogger('export INCUBATOR_METHODS=' + incubatorMethods.address);
     deployments.update(13, {
       step: "Deploy incubator"
     });
@@ -228,7 +230,7 @@ async function main() {
       345600
     ]);
     await incubator.deployed();
-    deployment('export INCUBATOR=' + incubator.address);
+    DeploymentLogger('export INCUBATOR=' + incubator.address);
     deployments.update(14, {
       step: "Deploy hounds restricted"
     });
@@ -244,7 +246,7 @@ async function main() {
         step: "Set global parameters for generator methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
@@ -274,7 +276,7 @@ async function main() {
       ]
     ]);
     await houndsRestricted.deployed();
-    deployment('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+    DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
     deployments.update(15, {
       step: "Deploy hounds modifier"
     });
@@ -306,7 +308,7 @@ async function main() {
       ]
     ]);
     await houndsModifier.deployed();
-    deployment('export HOUNDS_MODIFIER=' + houndsModifier.address);
+    DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
     deployments.update(16, {
       step: "Deploy hounds minter"
     });
@@ -338,7 +340,7 @@ async function main() {
       ]
     ]);
     await houndsMinter.deployed();
-    deployment('export HOUNDS_MINTER=' + houndsMinter.address);
+    DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
     deployments.update(17, {
       step: "Deploy hounds"
     });
@@ -370,7 +372,7 @@ async function main() {
       ]
     ]);
     await hounds.deployed();
-    deployment('export HOUNDS=' + hounds.address);
+    DeploymentLogger('export HOUNDS=' + hounds.address);
     deployments.update(18, {
       step: "Deploy races restricted"
     });
@@ -390,7 +392,7 @@ async function main() {
       false
     ]);
     await racesRestricted.deployed();
-    deployment('export RACE_RESTRICTED=' + racesRestricted.address);
+    DeploymentLogger('export RACE_RESTRICTED=' + racesRestricted.address);
     deployments.update(19, {
       step: "Deploy races methods"
     });
@@ -410,7 +412,7 @@ async function main() {
       false
     ]);
     await racesMethods.deployed();
-    deployment('export RACE_METHODS=' + racesMethods.address);
+    DeploymentLogger('export RACE_METHODS=' + racesMethods.address);
     deployments.update(20, {
       step: "Deploy races"
     });
@@ -430,7 +432,7 @@ async function main() {
       false
     ]);
     await races.deployed();
-    deployment('export RACE=' + races.address);
+    DeploymentLogger('export RACE=' + races.address);
     deployments.update(21, {
       step: "Deploy generator methods"
     });
@@ -446,7 +448,7 @@ async function main() {
       address0
     ]);
     await generatorMethods.deployed();
-    deployment('export GENERATOR_METHODS=' + generatorMethods.address);
+    DeploymentLogger('export GENERATOR_METHODS=' + generatorMethods.address);
     deployments.update(22, {
       step: "Deploy generator zerocost"
     });
@@ -466,7 +468,7 @@ async function main() {
       address0
     ]);
     await generatorZerocost.deployed();
-    deployment('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+    DeploymentLogger('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
     deployments.update(23, {
       step: "Deploy generator"
     });
@@ -482,7 +484,7 @@ async function main() {
       generatorZerocost.address
     ]);
     await generator.deployed();
-    deployment('export GENERATOR=' + generator.address);
+    DeploymentLogger('export GENERATOR=' + generator.address);
     deployments.update(24, {
       step: "Deploy queues methods"
     });
@@ -501,7 +503,7 @@ async function main() {
         step: "Set global parameters for generator zerocost"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -518,7 +520,7 @@ async function main() {
         step: "Set global parameters for queues methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
@@ -532,7 +534,7 @@ async function main() {
       []
     ]);
     await queuesMethods.deployed();
-    deployment('export QUEUES_METHODS=' + queuesMethods.address);
+    DeploymentLogger('export QUEUES_METHODS=' + queuesMethods.address);
     deployments.update(25, {
       step: "Deploy queues restricted"
     });
@@ -548,7 +550,7 @@ async function main() {
       []
     ]);
     await queuesRestricted.deployed();
-    deployment('export QUEUES_RESTRICTED=' + queuesRestricted.address);
+    DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
     deployments.update(26, {
       step: "Deploy queues"
     });
@@ -564,7 +566,7 @@ async function main() {
       []
     ]);
     await queues.deployed();
-    deployment('export QUEUES=' + queues.address);
+    DeploymentLogger('export QUEUES=' + queues.address);
     deployments.update(27, {
       step: "Finished!"
     });
@@ -583,7 +585,7 @@ async function main() {
         step: "Set global parameters for queues restricted"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -600,7 +602,7 @@ async function main() {
         step: "Set global parameters for races restricted"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -624,7 +626,7 @@ async function main() {
         step: "Set global parameters for races methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -648,7 +650,7 @@ async function main() {
         step: "Set global parameters for races"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -672,7 +674,7 @@ async function main() {
         step: "Set global parameters hounds"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -681,7 +683,7 @@ async function main() {
         step: "Set global parameters for incubator methods"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -723,7 +725,7 @@ async function main() {
         step: "Set global parameters hounds modifier"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -765,7 +767,7 @@ async function main() {
         step: "Set global parameters hounds restricted"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -807,7 +809,7 @@ async function main() {
         step: "Set global parameters hounds minter"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -849,7 +851,7 @@ async function main() {
         step: "Finished!"
       });
     } catch(err) {
-      errors(err);
+      DeploymentError(err as string);
     }
 
     try {
@@ -857,7 +859,7 @@ async function main() {
         address: converters.address
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(1, {
       step: "Verify sortings"
@@ -868,7 +870,7 @@ async function main() {
         address: sortings.address
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(2, {
       step: "Verify randomness"
@@ -879,7 +881,7 @@ async function main() {
         address: randomness.address
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(3, {
       step: "Verify payment methods"
@@ -890,7 +892,7 @@ async function main() {
         address: payments.address
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(5, {
       step: "Verify houndrace potions"
@@ -902,7 +904,7 @@ async function main() {
         constructorArguments: ["HoundracePotions", "HP"]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(6, {
       step: "Verify shop restricted"
@@ -918,7 +920,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(7, {
       step: "Verify shop methods"
@@ -934,7 +936,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(8, {
       step: "Verify shop"
@@ -950,7 +952,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(9, {
       step: "Verify arenas restricted"
@@ -966,7 +968,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(10, {
       step: "Verify arenas"
@@ -982,7 +984,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(10, {
       step: "Verify arenas"
@@ -998,7 +1000,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(11, {
       step: "Verify genetics"
@@ -1021,7 +1023,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(12, {
       step: "Verify incubator methods"
@@ -1043,7 +1045,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(13, {
       step: "Verify incubator"
@@ -1065,7 +1067,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(14, {
       step: "Verify hounds restricted"
@@ -1103,7 +1105,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(15, {
       step: "Verify hounds modifier"
@@ -1142,7 +1144,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(16, {
       step: "Verify hounds minter"
@@ -1180,7 +1182,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(17, {
       step: "Verify hounds"
@@ -1218,7 +1220,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(18, {
       step: "Verify races restricted"
@@ -1244,7 +1246,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(19, {
       step: "Verify races methods"
@@ -1270,7 +1272,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(20, {
       step: "Verify races"
@@ -1296,7 +1298,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(21, {
       step: "Verify generator methods"
@@ -1318,7 +1320,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(22, {
       step: "Verify generator"
@@ -1340,7 +1342,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(23, {
       step: "Verify queues restricted"
@@ -1362,7 +1364,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(24, {
       step: "Verify queues methods"
@@ -1384,7 +1386,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(25, {
       step: "Verify queues"
@@ -1406,7 +1408,7 @@ async function main() {
         ]
       });
     } catch (err) {
-      errors(err);
+      DeploymentError(err as string);
     }
     verifications.update(26, {
       step: "Finished!"
@@ -1414,7 +1416,7 @@ async function main() {
 
   } catch(err) {
     console.error(err);
-    errors(err);
+    DeploymentError(err as string);
   }
 
 }
@@ -1426,6 +1428,6 @@ async function main() {
 main()
   .then(() => process.exit(0))
   .catch((error) => {
-    errors(error);
+    DeploymentError(error);
     process.exit(1);
 });

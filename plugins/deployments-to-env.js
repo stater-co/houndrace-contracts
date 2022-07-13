@@ -1,5 +1,5 @@
 const fs = require('fs');
-fs.readFile('../deployments.logs', 'utf8' , (err, rawData) => {
+fs.readFile('../logs/deployments/deployments.logs', 'utf8' , (err, rawData) => {
     if (err) {
       console.error(err)
       return;
