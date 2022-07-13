@@ -8,9 +8,7 @@ library Constructor {
         string symbol;
         string lootBoxURI;
         string secondLootBoxURI;
-        address mintCostCurrency;
         address hounds;
-        uint256 mintCost;
         bool canBeOpened;
     }
 }
