@@ -1,9 +1,12 @@
 import { ethers } from "ethers";
-import { DeployedLibraries } from "../common/dto/test/librariesDeployment.dto";
+import { PaymentEcosystem } from "../common/dto/test/paymentEcosystem";
 import { getContractInstance } from "../plugins/contractDeployer";
 import { createDiscount } from "../plugins/createDiscount";
+import { editDiscount } from "../plugins/editDiscount";
 import { mintERC1155Batch } from "../plugins/mintERC1155Batch";
 import { mintERC721 } from "../plugins/mintERC721";
+import { ShopConstructor, ParamsInterface } from '../typechain-types/contracts/shop/params/Index.sol/Params';
+import { AlphaERC721 } from "../typechain-types/contracts/erc721/Index.sol/AlphaERC721";
 const ethersHardhat = require("ethers").ethers;
 const address0 = "0x0000000000000000000000000000000000000000";
 
@@ -17,14 +20,17 @@ let shopMethods: ethers.Contract;
 let shop: ethers.Contract;
 
 
-async function run(): Promise<DeployedLibraries> {
+export async function run(): Promise<PaymentEcosystem> {
   return new Promise((resolve, reject) => {
     describe("Setting up the Payments System", function () {
   
       it("Deploy the HoundRace Potions contract", async function () {
-        const HoundracePotions = await getContractInstance("HoundracePotions");
-        houndracePotions = await HoundracePotions.deploy("Ogars","OG");
-        await houndracePotions.deployed();
+        console.log("Deploy the HoundRace Potions contract");
+        let constructor: AlphaERC721.ConstructorStruct = {
+          name: "Ogars",
+          symbol: "OG"
+        };
+        houndracePotions = await getContractInstance("HoundracePotions",constructor);
       });
     
       it("Deploy the payments contract", async function () {
@@ -45,7 +51,7 @@ async function run(): Promise<DeployedLibraries> {
       });
     
       it("Deploy the erc1155 test contract", async function () {
-        testErc1155 = await getContractInstance("TestingErc1155","test");
+        testErc1155 = await getContractInstance("TestingErc1155",["test"]);
       });
     
       it("Mint erc1155 nfts", async function () {
@@ -54,26 +60,35 @@ async function run(): Promise<DeployedLibraries> {
       });
     
       it("Deploy the Payments methods contract", async function () {
-        shopRestricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
-        shopMethods = await getContractInstance("ShopMethods",[address0,address0,address0]);
-        shop = await getContractInstance("Shop",[shopMethods.address,shopRestricted.address]);
+        let shopConstructor: ShopConstructor.StructStruct = {
+          methods: address0,
+          restricted: address0
+        };
+        shopRestricted = await getContractInstance("ShopRestricted", shopConstructor);
+        shopConstructor.restricted = shopRestricted.address;
+        shopMethods = await getContractInstance("ShopMethods", shopConstructor);
+        shopConstructor.methods = shopMethods.address;
+        shop = await getContractInstance("Shop", shopConstructor);
       });
     
+      /*
       it("Add discounts", async function () {
     
         // Add erc721 nfts
         for ( let i = 1 ; i < 100 ; ++i ) {
-          await createDiscount(testErc721.address,[i],0,0,5,0,false);
+          await createDiscount(shop,testErc721.address,[i],0,0,5,0,false);
         }
     
         // Add erc1155 nfts
         for ( let i = 1 ; i < 100 ; ++i ) {
-          await createDiscount(testErc1155.address,[i],0,0,10,1,false);
+          await createDiscount(shop,testErc1155.address,[i],0,0,10,1,false);
         }
     
         // Edit erc721 nfts
         for ( let i = 1 ; i < 100 ; ++i ) {
-          await editDiscount(i,
+          await editDiscount(
+            shop,
+            i,
             testErc721.address,
             [i],
             0,
@@ -86,7 +101,9 @@ async function run(): Promise<DeployedLibraries> {
     
         // Edit erc1155 nfts
         for ( let i = 1 ; i < 100 ; ++i ) {
-          await editDiscount(i,
+          await editDiscount(
+            shop,
+            i,
             testErc1155.address,
             [i],
             0,
@@ -96,11 +113,17 @@ async function run(): Promise<DeployedLibraries> {
             false
           );
         }
-    
+        resolve({
+          houndracePotions: houndracePotions,
+          payments: payments,
+          testErc721: testErc721,
+          testErc1155: testErc1155,
+          shopRestricted: shopRestricted,
+          shopMethods: shopMethods,
+          shop: shop
+        });
       });
-    */
+      */
     });
   });
 }
-
-export default run;

@@ -27,6 +27,18 @@ import type {
   PromiseOrValue,
 } from "../../../common";
 
+export declare namespace AlphaERC721 {
+  export type ConstructorStruct = {
+    name: PromiseOrValue<string>;
+    symbol: PromiseOrValue<string>;
+  };
+
+  export type ConstructorStructOutput = [string, string] & {
+    name: string;
+    symbol: string;
+  };
+}
+
 export interface AlphaERC721Interface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;

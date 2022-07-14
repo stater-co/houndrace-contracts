@@ -6,7 +6,7 @@ let convertersLibrary: ethers.Contract;
 let sortingsLibrary: ethers.Contract;
 
 
-async function run(): Promise<DeployedLibraries> {
+export async function run(): Promise<DeployedLibraries> {
   return new Promise((resolve, reject) => {
     describe("Setting up the used libraries", () => {
       it("Deploy the Converters", async function () {
@@ -22,5 +22,3 @@ async function run(): Promise<DeployedLibraries> {
     });
   });
 }
-
-export default run;
