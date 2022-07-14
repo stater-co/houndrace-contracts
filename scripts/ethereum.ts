@@ -1,5 +1,7 @@
 import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
+import { ethers, run } from "hardhat";
+
 
 const cliProgress = require('cli-progress');
 const opt = {
@@ -30,11 +32,10 @@ verifications.update(0, {
 });
 
 
-const hre = require("hardhat");
-const address0 = "0x0000000000000000000000000000000000000000";
-const maleBoilerplateGene = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
-const femaleBoilerplateGene = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
-const defaultHound = [
+const address0: string = "0x0000000000000000000000000000000000000000";
+const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
+const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
+const defaultHound: Array<any> = [
   [ 0, 0, 0, 0],
   [ 10000000, 10000000, 100, 1, 100 ],
   [ 0, 100000, 1000, true ],
@@ -44,7 +45,7 @@ const defaultHound = [
   true,
   false
 ];
-const defaultQueues = [[
+const defaultQueues: Array<any> = [[
   "Test queue",
   address0,
   [],
@@ -59,7 +60,7 @@ const defaultQueues = [[
   0,
   false
 ]];
-const defaultRace = [
+const defaultRace: Array<any> = [
   "race name",
   address0,
   [1,2,3,4,5,6,7,8,9,10],
@@ -76,16 +77,16 @@ async function main() {
   try {
 
     DeploymentLogger('##############################################');
-    const [owner] = await hre.ethers.getSigners();
+    const [owner] = await ethers.getSigners();
 
-    const Converters = await hre.ethers.getContractFactory("Converters");
+    const Converters = await ethers.getContractFactory("Converters");
     const converters = await Converters.deploy();
     DeploymentLogger('export CONVERTERS=' + converters.address);
     deployments.update(1, {
       step: "Deploy sortings"
     });
 
-    const Sortings = await hre.ethers.getContractFactory("Sortings");
+    const Sortings = await ethers.getContractFactory("Sortings");
     const sortings = await Sortings.deploy();
     await sortings.deployed();
     DeploymentLogger('export SORTINGS=' + sortings.address);
@@ -93,7 +94,7 @@ async function main() {
       step: "Deploy randomness"
     });
 
-    const Randomness = await hre.ethers.getContractFactory("Randomness");
+    const Randomness = await ethers.getContractFactory("Randomness");
     const randomness = await Randomness.deploy();
     await randomness.deployed();
     DeploymentLogger('export RANDOMNESS=' + randomness.address);
@@ -101,7 +102,7 @@ async function main() {
       step: "Deploy payment methods"
     });
 
-    const Payments = await hre.ethers.getContractFactory("Payments");
+    const Payments = await ethers.getContractFactory("Payments");
     const payments = await Payments.deploy();
     await payments.deployed();
     DeploymentLogger('export PAYMENTS=' + payments.address);
@@ -109,7 +110,7 @@ async function main() {
       step: "Deploy houndrace potions"
     });
 
-    const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
+    const HoundracePotions = await ethers.getContractFactory("HoundracePotions");
     const houndracePotions = await HoundracePotions.deploy("HoundracePotions", "HP");
     await houndracePotions.deployed();
     DeploymentLogger('export HOUNDRACE_POTIONS=' + houndracePotions.address);
@@ -117,24 +118,24 @@ async function main() {
       step: "Deploy shop restricted"
     });
 
-    const ShopRestricted = await hre.ethers.getContractFactory("ShopRestricted");
-    const shopRestricted = await ShopRestricted.deploy([address0,address0]);
+    const ShopRestricted = await ethers.getContractFactory("ShopRestricted");
+    const shopRestricted = await ShopRestricted.deploy([address0,address0] as any);
     await shopRestricted.deployed();
     DeploymentLogger('export SHOP_RESTRICTED=' + shopRestricted.address);
     deployments.update(7, {
       step: "Deploy shop methods"
     });
 
-    const ShopMethods = await hre.ethers.getContractFactory("ShopMethods");
-    const shopMethods = await ShopMethods.deploy([address0,address0]);
+    const ShopMethods = await ethers.getContractFactory("ShopMethods");
+    const shopMethods = await ShopMethods.deploy([address0,address0] as any);
     await shopMethods.deployed();
     DeploymentLogger('export SHOP_METHODS=' + shopMethods.address);
     deployments.update(8, {
       step: "Deploy shop"
     });
 
-    const Shop = await hre.ethers.getContractFactory("Shop");
-    const shop = await Shop.deploy([shopMethods.address,shopRestricted.address]);
+    const Shop = await ethers.getContractFactory("Shop");
+    const shop = await Shop.deploy([shopMethods.address,shopRestricted.address] as any);
     await shop.deployed();
     DeploymentLogger('export SHOP=' + shop.address);
     deployments.update(9, {
@@ -142,7 +143,7 @@ async function main() {
     });
 
     try {
-      await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address]);
+      await shopRestricted.setGlobalParameters([shopMethods.address,shopRestricted.address] as any);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -151,7 +152,7 @@ async function main() {
     }
 
     try {
-      await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address]);
+      await shopMethods.setGlobalParameters([shopMethods.address,shopRestricted.address] as any);
       configurations.update(3, {
         step: "Set global parameters for arenas restricted"
       });
@@ -159,24 +160,24 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const ArenasRestricted = await hre.ethers.getContractFactory("ArenasRestricted");
-    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
+    const ArenasRestricted = await ethers.getContractFactory("ArenasRestricted");
+    const arenasRestricted = await ArenasRestricted.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []] as any);
     await arenasRestricted.deployed();
     DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
     deployments.update(10, {
       step: "Deploy arenas"
     });
 
-    const ArenasMethods = await hre.ethers.getContractFactory("ArenasMethods");
-    const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
+    const ArenasMethods = await ethers.getContractFactory("ArenasMethods");
+    const arenasMethods = await ArenasMethods.deploy(["HoundRace Arenas", "HRA", address0, address0, address0, address0, []] as any);
     await arenasMethods.deployed();
     DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
     deployments.update(10, {
       step: "Deploy arenas"
     });
 
-    const Arenas = await hre.ethers.getContractFactory("Arenas");
-    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]);
+    const Arenas = await ethers.getContractFactory("Arenas");
+    const arenas = await Arenas.deploy(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []] as any);
     await arenas.deployed();
     DeploymentLogger('export ARENAS=' + arenas.address);
     deployments.update(11, {
@@ -184,7 +185,7 @@ async function main() {
     });
 
     try {
-      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]);
+      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []] as any);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -192,7 +193,7 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const Genetics = await hre.ethers.getContractFactory("Genetics");
+    const Genetics = await ethers.getContractFactory("Genetics");
     const genetics = await Genetics.deploy([
       randomness.address,
       arenas.address,
@@ -202,33 +203,33 @@ async function main() {
       40,
       [2,6,10,14,18,22,26,30,34,38,42,46,50],
       [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    ]);
+    ] as any);
     await genetics.deployed();
     DeploymentLogger('export GENETICS=' + genetics.address);
     deployments.update(12, {
       step: "Deploy incubator methods"
     });
 
-    const IncubatorMethods = await hre.ethers.getContractFactory("IncubatorMethods");
+    const IncubatorMethods = await ethers.getContractFactory("IncubatorMethods");
     const incubatorMethods = await IncubatorMethods.deploy([
       address0,
       address0,
       address0,
       345600
-    ]);
+    ] as any);
     await incubatorMethods.deployed();
     DeploymentLogger('export INCUBATOR_METHODS=' + incubatorMethods.address);
     deployments.update(13, {
       step: "Deploy incubator"
     });
 
-    const Incubator = await hre.ethers.getContractFactory("Incubator");
+    const Incubator = await ethers.getContractFactory("Incubator");
     const incubator = await Incubator.deploy([
       incubatorMethods.address,
       randomness.address,
       genetics.address,
       345600
-    ]);
+    ] as any);
     await incubator.deployed();
     DeploymentLogger('export INCUBATOR=' + incubator.address);
     deployments.update(14, {
@@ -241,7 +242,7 @@ async function main() {
         randomness.address,
         genetics.address,
         345600
-      ]);
+      ] as any);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
       });
@@ -249,7 +250,7 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const HoundsRestricted = await hre.ethers.getContractFactory("HoundsRestricted");
+    const HoundsRestricted = await ethers.getContractFactory("HoundsRestricted");
     const houndsRestricted = await HoundsRestricted.deploy([
       "HoundRace",
       "HR",
@@ -274,14 +275,14 @@ async function main() {
         "0x2386F26FC10000",
         "0x2386F26FC10000"
       ]
-    ]);
+    ] as any);
     await houndsRestricted.deployed();
     DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
     deployments.update(15, {
       step: "Deploy hounds modifier"
     });
 
-    const HoundsModifier = await hre.ethers.getContractFactory("HoundsModifier");
+    const HoundsModifier = await ethers.getContractFactory("HoundsModifier");
     const houndsModifier = await HoundsModifier.deploy([
       "HoundRace",
       "HR",
@@ -306,14 +307,14 @@ async function main() {
         "0x2386F26FC10000",
         "0x2386F26FC10000"
       ]
-    ]);
+    ] as any);
     await houndsModifier.deployed();
     DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
     deployments.update(16, {
       step: "Deploy hounds minter"
     });
 
-    const HoundsMinter = await hre.ethers.getContractFactory("HoundsMinter");
+    const HoundsMinter = await ethers.getContractFactory("HoundsMinter");
     const houndsMinter = await HoundsMinter.deploy([
       "HoundRace",
       "HR",
@@ -338,14 +339,14 @@ async function main() {
         "0x2386F26FC10000",
         "0x2386F26FC10000"
       ]
-    ]);
+    ] as any);
     await houndsMinter.deployed();
     DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
     deployments.update(17, {
       step: "Deploy hounds"
     });
 
-    const Hounds = await hre.ethers.getContractFactory("Hounds");
+    const Hounds = await ethers.getContractFactory("Hounds");
     const hounds = await Hounds.deploy([
       "HoundRace",
       "HR",
@@ -370,14 +371,14 @@ async function main() {
         "0x2386F26FC10000",
         "0x2386F26FC10000"
       ]
-    ]);
+    ] as any);
     await hounds.deployed();
     DeploymentLogger('export HOUNDS=' + hounds.address);
     deployments.update(18, {
       step: "Deploy races restricted"
     });
 
-    const RacesRestricted = await hre.ethers.getContractFactory("RacesRestricted");
+    const RacesRestricted = await ethers.getContractFactory("RacesRestricted");
     const racesRestricted = await RacesRestricted.deploy([
       address0,
       address0,
@@ -390,14 +391,14 @@ async function main() {
       [],
       500000000,
       false
-    ]);
+    ] as any);
     await racesRestricted.deployed();
     DeploymentLogger('export RACE_RESTRICTED=' + racesRestricted.address);
     deployments.update(19, {
       step: "Deploy races methods"
     });
 
-    const RacesMethods = await hre.ethers.getContractFactory("RacesMethods");
+    const RacesMethods = await ethers.getContractFactory("RacesMethods");
     const racesMethods = await RacesMethods.deploy([
       address0,
       address0,
@@ -410,14 +411,14 @@ async function main() {
       [],
       500000000,
       false
-    ]);
+    ] as any);
     await racesMethods.deployed();
     DeploymentLogger('export RACE_METHODS=' + racesMethods.address);
     deployments.update(20, {
       step: "Deploy races"
     });
 
-    const Races = await hre.ethers.getContractFactory("Races");
+    const Races = await ethers.getContractFactory("Races");
     const races = await Races.deploy([
       randomness.address,
       arenas.address,
@@ -430,14 +431,14 @@ async function main() {
       [],
       500000000,
       false
-    ]);
+    ] as any);
     await races.deployed();
     DeploymentLogger('export RACE=' + races.address);
     deployments.update(21, {
       step: "Deploy generator methods"
     });
 
-    const GeneratorMethods = await hre.ethers.getContractFactory("GeneratorMethods");
+    const GeneratorMethods = await ethers.getContractFactory("GeneratorMethods");
     const generatorMethods = await GeneratorMethods.deploy([
       address0,
       address0,
@@ -446,14 +447,14 @@ async function main() {
       address0,
       address0,
       address0
-    ]);
+    ] as any);
     await generatorMethods.deployed();
     DeploymentLogger('export GENERATOR_METHODS=' + generatorMethods.address);
     deployments.update(22, {
       step: "Deploy generator zerocost"
     });
 
-    const GeneratorZerocost = await hre.ethers.getContractFactory("GeneratorZerocost",{
+    const GeneratorZerocost = await ethers.getContractFactory("GeneratorZerocost",{
       libraries: {
         Sortings: sortings.address
       }
@@ -466,14 +467,14 @@ async function main() {
       address0,
       address0,
       address0
-    ]);
+    ] as any);
     await generatorZerocost.deployed();
     DeploymentLogger('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
     deployments.update(23, {
       step: "Deploy generator"
     });
 
-    const Generator = await hre.ethers.getContractFactory("Generator");
+    const Generator = await ethers.getContractFactory("Generator");
     const generator = await Generator.deploy([
       randomness.address,
       arenas.address,
@@ -482,7 +483,7 @@ async function main() {
       generatorMethods.address,
       payments.address,
       generatorZerocost.address
-    ]);
+    ] as any);
     await generator.deployed();
     DeploymentLogger('export GENERATOR=' + generator.address);
     deployments.update(24, {
@@ -498,7 +499,7 @@ async function main() {
         generatorMethods.address,
         payments.address,
         generatorZerocost.address
-      ]);
+      ] as any);
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
       });
@@ -515,7 +516,7 @@ async function main() {
         generatorMethods.address,
         payments.address,
         generatorZerocost.address
-      ]);
+      ] as any);
       configurations.update(7, {
         step: "Set global parameters for queues methods"
       });
@@ -523,7 +524,7 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const QueuesMethods = await hre.ethers.getContractFactory("QueuesMethods");
+    const QueuesMethods = await ethers.getContractFactory("QueuesMethods");
     const queuesMethods = await QueuesMethods.deploy([
       arenas.address,
       hounds.address,
@@ -532,14 +533,14 @@ async function main() {
       address0,
       races.address,
       []
-    ]);
+    ] as any);
     await queuesMethods.deployed();
     DeploymentLogger('export QUEUES_METHODS=' + queuesMethods.address);
     deployments.update(25, {
       step: "Deploy queues restricted"
     });
 
-    const QueuesRestricted = await hre.ethers.getContractFactory("QueuesRestricted");
+    const QueuesRestricted = await ethers.getContractFactory("QueuesRestricted");
     const queuesRestricted = await QueuesRestricted.deploy([
       arenas.address,
       hounds.address,
@@ -548,14 +549,14 @@ async function main() {
       address0,
       races.address,
       []
-    ]);
+    ] as any);
     await queuesRestricted.deployed();
     DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
     deployments.update(26, {
       step: "Deploy queues"
     });
 
-    const Queues = await hre.ethers.getContractFactory("Queues");
+    const Queues = await ethers.getContractFactory("Queues");
     const queues = await Queues.deploy([
       arenas.address,
       hounds.address,
@@ -564,7 +565,7 @@ async function main() {
       queuesRestricted.address,
       races.address,
       []
-    ]);
+    ] as any);
     await queues.deployed();
     DeploymentLogger('export QUEUES=' + queues.address);
     deployments.update(27, {
@@ -580,7 +581,7 @@ async function main() {
         queuesRestricted.address,
         races.address,
         []
-      ]);
+      ] as any);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
       });
@@ -597,7 +598,7 @@ async function main() {
         queuesRestricted.address,
         races.address,
         []
-      ]);
+      ] as any);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
       });
@@ -621,7 +622,7 @@ async function main() {
         ],
         500000000,
         false
-      ]);
+      ] as any);
       configurations.update(10, {
         step: "Set global parameters for races methods"
       });
@@ -645,7 +646,7 @@ async function main() {
         ],
         500000000,
         false
-      ]);
+      ] as any);
       configurations.update(11, {
         step: "Set global parameters for races"
       });
@@ -669,7 +670,7 @@ async function main() {
         ],
         500000000,
         false
-      ]);
+      ] as any);
       configurations.update(12, {
         step: "Set global parameters hounds"
       });
@@ -678,7 +679,7 @@ async function main() {
     }
 
     try {
-      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [races.address]]);
+      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [races.address]] as any);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -720,7 +721,7 @@ async function main() {
           "0x2386F26FC10000",
           "0x2386F26FC10000"
         ]
-      ]);
+      ] as any);
       configurations.update(13, {
         step: "Set global parameters hounds modifier"
       });
@@ -762,7 +763,7 @@ async function main() {
           "0x2386F26FC10000",
           "0x2386F26FC10000"
         ]
-      ]);
+      ] as any);
       configurations.update(14, {
         step: "Set global parameters hounds restricted"
       });
@@ -804,7 +805,7 @@ async function main() {
           "0x2386F26FC10000",
           "0x2386F26FC10000"
         ]
-      ]);
+      ] as any);
       configurations.update(15, {
         step: "Set global parameters hounds minter"
       });
@@ -846,7 +847,7 @@ async function main() {
           "0x2386F26FC10000",
           "0x2386F26FC10000"
         ]
-      ]);
+      ] as any);
       configurations.update(16, {
         step: "Finished!"
       });
@@ -855,7 +856,7 @@ async function main() {
     }
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: converters.address
       });
     } catch (err) {
@@ -866,7 +867,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: sortings.address
       });
     } catch (err) {
@@ -877,7 +878,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: randomness.address
       });
     } catch (err) {
@@ -888,7 +889,7 @@ async function main() {
     });
     
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: payments.address
       });
     } catch (err) {
@@ -899,7 +900,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: houndracePotions.address,
         constructorArguments: ["HoundracePotions", "HP"]
       });
@@ -911,7 +912,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: shopRestricted.address,
         constructorArguments: [
           [
@@ -927,7 +928,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: shopMethods.address,
         constructorArguments: [
           [
@@ -943,7 +944,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: shop.address,
         constructorArguments: [
           [
@@ -959,7 +960,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: arenasRestricted.address,
         constructorArguments: [
           [
@@ -975,7 +976,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: arenasMethods.address,
         constructorArguments: [
           [
@@ -991,7 +992,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: arenas.address,
         constructorArguments: [
           [
@@ -1007,7 +1008,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: genetics.address,
         constructorArguments: [
           [
@@ -1030,7 +1031,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: incubatorMethods.address,
         constructorArguments: [
           [
@@ -1052,7 +1053,7 @@ async function main() {
     });
     
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: incubator.address,
         constructorArguments: [
           [
@@ -1074,7 +1075,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: houndsRestricted.address,
         constructorArguments: [
           [
@@ -1113,7 +1114,7 @@ async function main() {
 
     
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: houndsModifier.address,
         constructorArguments: [
           [
@@ -1151,7 +1152,7 @@ async function main() {
     });
     
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: houndsMinter.address,
         constructorArguments: [
           [
@@ -1189,7 +1190,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: hounds.address,
         constructorArguments: [
           [
@@ -1227,7 +1228,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: racesRestricted.address,
         constructorArguments: [
           [
@@ -1253,7 +1254,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: racesMethods.address,
         constructorArguments: [
           [
@@ -1279,7 +1280,7 @@ async function main() {
     });
     
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: races.address,
         constructorArguments: [
           [
@@ -1305,7 +1306,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: generatorMethods.address, 
         constructorArguments: [
           [
@@ -1327,7 +1328,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: generator.address,
         constructorArguments: [
           [
@@ -1349,7 +1350,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: queuesRestricted.address,
         constructorArguments: [
           [
@@ -1371,7 +1372,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: queuesMethods.address,
         constructorArguments: [
           [
@@ -1393,7 +1394,7 @@ async function main() {
     });
 
     try {
-      await hre.run("verify:verify", {
+      await run("verify:verify", {
         address: queues.address,
         constructorArguments: [
           [

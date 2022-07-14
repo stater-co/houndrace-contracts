@@ -1,5 +1,7 @@
 import '@nomiclabs/hardhat-etherscan';
 import '@typechain/hardhat';
+import "@nomicfoundation/hardhat-chai-matchers";
+import "@nomiclabs/hardhat-ethers";
 import 'solidity-coverage';
 import '@nomicfoundation/hardhat-toolbox';
 import { HardhatUserConfig } from 'hardhat/config';
