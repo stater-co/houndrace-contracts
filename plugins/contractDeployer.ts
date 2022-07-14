@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ethers as hardhatEthers } from "hardhat";
+const hardhatEthers = require("ethers").ethers;
 import { deploymentMessage } from "./deploymentMessage";
 
 

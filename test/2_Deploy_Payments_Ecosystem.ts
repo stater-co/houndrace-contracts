@@ -1,14 +1,20 @@
 import { ethers } from "ethers";
 import { DeployedLibraries } from "../common/dto/test/librariesDeployment.dto";
 import { getContractInstance } from "../plugins/contractDeployer";
-import { ethers as ethersHardhat } from "hardhat";
+import { createDiscount } from "../plugins/createDiscount";
+import { mintERC1155Batch } from "../plugins/mintERC1155Batch";
 import { mintERC721 } from "../plugins/mintERC721";
+const ethersHardhat = require("ethers").ethers;
+const address0 = "0x0000000000000000000000000000000000000000";
 
 
 let houndracePotions: ethers.Contract;
 let payments: ethers.Contract;
 let testErc721: ethers.Contract;
-//let payments: ethers.Contract;
+let testErc1155: ethers.Contract;
+let shopRestricted: ethers.Contract;
+let shopMethods: ethers.Contract;
+let shop: ethers.Contract;
 
 
 async function run(): Promise<DeployedLibraries> {
@@ -32,19 +38,19 @@ async function run(): Promise<DeployedLibraries> {
       });
     
       it("Mint erc721 nfts", async function () {
-        const [owner] = await ethers.getSigners();
+        const [owner] = await ethersHardhat.getSigners();
         for ( let i = 0 ; i < 100 ; ++i ) {
           await mintERC721(testErc721,owner.address,i,'0x00');
         }
       });
     
-      /*
       it("Deploy the erc1155 test contract", async function () {
         testErc1155 = await getContractInstance("TestingErc1155","test");
       });
     
       it("Mint erc1155 nfts", async function () {
-        await mintERC1155Batch(undefined,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
+        const [owner] = await ethersHardhat.getSigners();
+        await mintERC1155Batch(testErc1155,owner.address,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
       });
     
       it("Deploy the Payments methods contract", async function () {

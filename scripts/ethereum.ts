@@ -1,6 +1,7 @@
 import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
-import { ethers, run } from "hardhat";
+import { run } from "hardhat";
+const { ethers } = require("ethers");
 
 
 const cliProgress = require('cli-progress');
