@@ -1,3 +1,4 @@
+/*
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 const address0 = "0x0000000000000000000000000000000000000000";
@@ -1150,7 +1151,6 @@ describe("Races", function () {
   it("Join queue x300", async function () {
     await joinQueueAutomatically(1,300);
   });
-  */
 
   it("Hounds stamina check x2", async function () {
     let queue = await queues.queues(1);
@@ -1217,3 +1217,4 @@ describe("Races", function () {
   });
 
 });
+*/
