@@ -16,12 +16,14 @@ export async function run(): Promise<RandomnessSystem> {
           constructor: [],
           props: {}
         });
+
+        resolve({
+          randomness: randomness
+        });
+
       });
 
     });
 
-    resolve({
-      randomness: randomness
-    });
   });
 }

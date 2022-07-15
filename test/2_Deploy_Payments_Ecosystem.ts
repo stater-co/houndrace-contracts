@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
+import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
-const address0 = '0x0000000000000000000000000000000000000000';
 
 
 let houndracePotions: ethers.Contract;
@@ -10,6 +10,7 @@ let testErc721: ethers.Contract;
 let testErc1155: ethers.Contract;
 let shopRestricted: ethers.Contract;
 let shopMethods: ethers.Contract;
+let shopZerocost: ethers.Contract;
 let shop: ethers.Contract;
 
 
@@ -43,7 +44,7 @@ export async function run(): Promise<PaymentEcosystem> {
             'ANFT',
             'loot box uri',
             'second loot box uri',
-            address0,
+            params.address0,
             false
           ]],
           props: {}
@@ -61,12 +62,17 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Payments methods contract', async function () {
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[address0,address0]],
+          constructor: [[params.address0,params.address0]],
           props: {}
         });
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[address0,shopRestricted.address]],
+          constructor: [[params.address0,shopRestricted.address]],
+          props: {}
+        });
+        shopZerocost = await deployContract({
+          name: 'ShopZerocost',
+          constructor: [[params.address0,shopRestricted.address]],
           props: {}
         });
         shop = await deployContract({
@@ -74,18 +80,21 @@ export async function run(): Promise<PaymentEcosystem> {
           constructor: [[shopMethods.address,shopRestricted.address]],
           props: {}
         });
+
+        resolve({
+          houndracePotions: houndracePotions,
+          payments: payments,
+          shop: shop,
+          shopMethods: shopMethods,
+          shopRestricted: shopRestricted,
+          shopZerocost: shopZerocost,
+          testErc1155: testErc1155,
+          testErc721: testErc721
+        });
+
       });
 
     });
 
-    resolve({
-      houndracePotions: houndracePotions,
-      payments: payments,
-      shop: shop,
-      shopMethods: shopMethods,
-      shopRestricted: shopRestricted,
-      testErc1155: testErc1155,
-      testErc721: testErc721
-    });
   });
 }

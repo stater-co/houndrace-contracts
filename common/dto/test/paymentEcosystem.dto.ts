@@ -7,5 +7,6 @@ export interface PaymentEcosystem {
     testErc1155: ethers.Contract;
     shopRestricted: ethers.Contract;
     shopMethods: ethers.Contract;
+    shopZerocost: ethers.Contract;
     shop: ethers.Contract;
 }

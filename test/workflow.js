@@ -354,10 +354,6 @@ describe("Setting up the Payments System", function () {
 
 
 describe("Setting up the Houndrace contracts", function () {
-  
-  it("Deploy the randomness contracts", async function () {
-    randomness = await getContractInstance("Randomness",[]);
-  });
 
   it("Deploy the arenas contracts", async function () {
     const [owner] = await ethers.getSigners();
