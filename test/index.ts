@@ -6,10 +6,9 @@ import { run as runLibraries } from './1_Deploy_Libraries';
 import { run as runPayments } from './2_Deploy_Payments_Ecosystem';
 import { run as runRandomness } from './3_Deploy_Randomness';
 import { run as runArenas } from './4_Deploy_Arenas';
-import { ethers } from 'hardhat';
+
 
 async function main() {
-    const [deployer] = await ethers.getSigners();
 
     const libraries: DeployedLibraries = await runLibraries();
     console.log("Test deployed: " + 
@@ -23,10 +22,10 @@ async function main() {
         payments.houndracePotions.address + " , " + 
         payments.payments.address + " , " + 
         payments.shop.address + " ," + 
-        payments.shopMethods + " , " + 
-        payments.shopRestricted + " , " + 
-        payments.testErc1155 + " , " + 
-        payments.testErc721
+        payments.shopMethods.address + " , " + 
+        payments.shopRestricted.address + " , " + 
+        payments.testErc1155.address + " , " + 
+        payments.testErc721.address
     );
     
     const randomness: RandomnessSystem = await runRandomness();
@@ -36,7 +35,6 @@ async function main() {
 
     const arenas: ArenasSystem = await runArenas({
         paymentsAddress: payments.payments.address,
-        alphaduneAccountAddress: deployer.address,
         allowedCallers: []
     });
     console.log("Arenas deployed: " + 

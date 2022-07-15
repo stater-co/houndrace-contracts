@@ -1,21 +1,23 @@
-import { ethers } from 'ethers';
+import { Contract } from 'ethers';
 import { ArenasExternalDependencies } from '../common/dto/test/arenasExternalDependencies.dto';
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+const { ethers } = require("hardhat");
 
-
-let arenasRestricted: ethers.Contract;
-let arenasMethods: ethers.Contract;
-let arenas: ethers.Contract;
+let arenasRestricted: Contract;
+let arenasMethods: Contract;
+let arenas: Contract;
 
 
 export async function run(
   dependencies: ArenasExternalDependencies
 ): Promise<ArenasSystem> {
   return new Promise((resolve, ) => {
-    describe('Setting up the Randomness System', function () {
-      
+    describe('Setting up the Randomness System', async function () {
+      const [deployer] = await ethers.getSigners();
+      console.log("Deployer: " + deployer.address);
+
       it("Deploy the arenas contracts", async function () {
         arenasRestricted = await deployContract({
           name: 'ArenasRestricted',
@@ -25,7 +27,7 @@ export async function run(
             params.address0, 
             params.address0, 
             dependencies.paymentsAddress, 
-            dependencies.alphaduneAccountAddress, 
+            deployer.address, 
             dependencies.allowedCallers
           ],
           props: {}
@@ -41,7 +43,7 @@ export async function run(
             params.address0, 
             params.address0, 
             dependencies.paymentsAddress, 
-            dependencies.alphaduneAccountAddress, 
+            deployer.address, 
             dependencies.allowedCallers
           ],
           props: {}
@@ -57,7 +59,7 @@ export async function run(
             arenasRestricted.address, 
             arenasMethods.address, 
             dependencies.paymentsAddress, 
-            dependencies.alphaduneAccountAddress, 
+            deployer.address, 
             dependencies.allowedCallers
           ],
           props: {}
