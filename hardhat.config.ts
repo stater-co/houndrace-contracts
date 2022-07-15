@@ -4,6 +4,7 @@ import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomiclabs/hardhat-ethers";
 import 'solidity-coverage';
 import '@nomicfoundation/hardhat-toolbox';
+import "hardhat-deploy-ethers"
 import { HardhatUserConfig } from 'hardhat/config';
 
 
