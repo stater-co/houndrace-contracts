@@ -297,39 +297,8 @@ async function joinQueueAutomatically(queueId, totalJoins) {
 }
 
 
-describe("Setting up the used libraries", function () {
-  
-  it("Deploy the Converters", async function () {
-    convertersLibrary = await getContractInstance("Converters");
-  });
-
-  it("Deploy the Sortings", async function () {
-    sortingsLibrary = await getContractInstance("Sortings");
-  });
-
-});
-
-
 
 describe("Setting up the Payments System", function () {
-  
-  it("Deploy the HoundRace Potions contract", async function () {
-    const HoundracePotions = await hre.ethers.getContractFactory("HoundracePotions");
-    houndracePotions = await HoundracePotions.deploy("Ogars","OG");
-    await houndracePotions.deployed();
-    deploymentMessage("HoundracePotions",houndracePotions.address);
-  });
-
-  it("Deploy the payments contract", async function () {
-    payments = await getContractInstance("Payments");
-  });
-
-  it("Deploy the erc721 test contract", async function () {
-    const TestingErc721 = await hre.ethers.getContractFactory("AlphaERC721");
-    testErc721 = await TestingErc721.deploy("test","t");
-    await testErc721.deployed();
-    deploymentMessage("ERC721",testErc721.address);
-  });
 
   it("Mint erc721 nfts", async function () {
     for ( let i = 0 ; i < 100 ; ++i ) {
@@ -337,18 +306,8 @@ describe("Setting up the Payments System", function () {
     }
   });
 
-  it("Deploy the erc1155 test contract", async function () {
-    testErc1155 = await getContractInstance("TestingErc1155","test");
-  });
-
   it("Mint erc1155 nfts", async function () {
     await mintERC1155Batch(undefined,Array.from(Array(100).keys()),Array(100).fill(5000),'0x00');
-  });
-
-  it("Deploy the Payments methods contract", async function () {
-    shopRestricted = await getContractInstance("ShopRestricted",[address0,address0,address0]);
-    shopMethods = await getContractInstance("ShopMethods",[address0,address0,address0]);
-    shop = await getContractInstance("Shop",[shopMethods.address,shopRestricted.address]);
   });
 
   it("Add discounts", async function () {
