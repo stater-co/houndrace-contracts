@@ -14,14 +14,13 @@ export async function run(
   dependencies: ArenasExternalDependencies
 ): Promise<ArenasSystem> {
   return new Promise((resolve, ) => {
-    describe('Setting up the Randomness System', async function () {
-      const [deployer] = await ethers.getSigners();
-      console.log("Deployer: " + deployer.address);
+    describe('Setting up the Arenas System', async function () {
 
       it("Deploy the arenas contracts", async function () {
+        const [deployer] = await ethers.getSigners();
         arenasRestricted = await deployContract({
           name: 'ArenasRestricted',
-          constructor: [
+          constructor: [[
             "HoundRace Arenas", 
             "HRA", 
             params.address0, 
@@ -29,15 +28,16 @@ export async function run(
             dependencies.paymentsAddress, 
             deployer.address, 
             dependencies.allowedCallers
-          ],
+          ]],
           props: {}
         });
       });
 
       it("Deploy the arenas contracts", async function () {
+        const [deployer] = await ethers.getSigners();
         arenasMethods = await deployContract({
           name: 'ArenasMethods',
-          constructor: [
+          constructor: [[
             "HoundRace Arenas", 
             "HRA", 
             params.address0, 
@@ -45,15 +45,16 @@ export async function run(
             dependencies.paymentsAddress, 
             deployer.address, 
             dependencies.allowedCallers
-          ],
+          ]],
           props: {}
         });
       });
 
       it("Deploy the arenas contracts", async function () {
+        const [deployer] = await ethers.getSigners();
         arenas = await deployContract({
           name: 'Arenas',
-          constructor: [
+          constructor: [[
             "HoundRace Arenas", 
             "HRA", 
             arenasRestricted.address, 
@@ -61,7 +62,7 @@ export async function run(
             dependencies.paymentsAddress, 
             deployer.address, 
             dependencies.allowedCallers
-          ],
+          ]],
           props: {}
         });
 

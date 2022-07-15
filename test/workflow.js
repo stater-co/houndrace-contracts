@@ -355,13 +355,6 @@ describe("Setting up the Payments System", function () {
 
 describe("Setting up the Houndrace contracts", function () {
 
-  it("Deploy the arenas contracts", async function () {
-    const [owner] = await ethers.getSigners();
-    arenasRestricted = await getContractInstance("ArenasRestricted", ["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
-    arenasMethods = await getContractInstance("ArenasMethods", ["HoundRace Arenas", "HRA", address0, address0, address0, address0, []]);
-    arenas = await getContractInstance("Arenas",["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, []]);
-  });
-
   it("Genetics methods", async function () {
     genetics = await getContractInstance("Genetics",[
       randomness.address,

@@ -7,7 +7,7 @@ let randomness: ethers.Contract;
 
 
 export async function run(): Promise<RandomnessSystem> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, ) => {
     describe('Setting up the Randomness System', function () {
       
       it('Deploy the randomness contracts', async function () {
