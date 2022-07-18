@@ -1,5 +1,6 @@
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
+import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
 import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
@@ -10,6 +11,7 @@ import { run as runRandomness } from './3_Deploy_Randomness';
 import { run as runArenas } from './4_Deploy_Arenas';
 import { run as runGenetics } from './5_Deploy_Genetics';
 import { run as runIncubators } from './6_Deploy_Incubator';
+import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
 
 
 async function main() {
@@ -37,6 +39,12 @@ async function main() {
     const incubators: IncubatorSystem = await runIncubators({
         geneticsAddress: genetics.genetics.address,
         randomnessAddress: randomness.randomness.address
+    });
+
+    const hounds: HoundsSystem = await runHounds({
+        shopsAddress: payments.shop.address,
+        paymentsAddress: payments.payments.address,
+        incubatorAddress: incubators.incubator.address
     });
     
 }
