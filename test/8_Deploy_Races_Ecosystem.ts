@@ -76,6 +76,12 @@ export async function run(
           ]],
           props: {}
         });
+        
+        resolve({
+          racesRestricted: racesRestricted,
+          racesMethods: racesMethods,
+          races: races
+        });
       });
 
     });
