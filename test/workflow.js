@@ -360,7 +360,9 @@ describe("Setting up the Houndrace contracts global parameters", function () {
 
     const [owner] = await ethers.getSigners();
     
-    await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
+    await arenasRestricted.setGlobalParameters([
+      "HoundRace Arenas", "HRA", arenasRestricted.address, 
+      arenasMethods.address, payments.address, owner.address, [
       racesRestricted.address,racesMethods.address,races.address,
       queuesRestricted.address,queuesMethods.address,queues.address
     ]]);
