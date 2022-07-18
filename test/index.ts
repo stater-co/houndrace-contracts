@@ -18,6 +18,8 @@ import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from './8_Deploy_Races_Ecosystem';
 import { run as runQueues } from './9_Deploy_Queues_Ecosystem';
 import { run as runGenerator } from './10_Deploy_Generator';
+import { set as setQueues } from './11_Setup_Queues_Contracts';
+import { set as setShop } from './12_Setup_Shop_Contracts';
 
 
 async function main() {
@@ -74,6 +76,24 @@ async function main() {
         racesAddress: races.races.address,
         randomnessAddress: randomness.randomness.address,
         sortingsLibraryAddress: libraries.sortings.address
+    });
+
+    await setQueues({
+        queuesRestricted: queues.queuesRestricted,
+        queuesMethods: queues.queueMethods,
+        arenasAddress: arenas.arenas.address,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
+        allowed: [
+            races.races.address
+        ]
+    });
+
+    await setShop({
+        shopMethods: payments.shopMethods,
+        shopRestricted: payments.shopRestricted
     });
 }
 
