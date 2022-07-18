@@ -1,4 +1,5 @@
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
+import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
@@ -16,6 +17,7 @@ import { run as runIncubators } from './6_Deploy_Incubator';
 import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from './8_Deploy_Races_Ecosystem';
 import { run as runQueues } from './9_Deploy_Queues_Ecosystem';
+import { run as runGenerator } from './10_Deploy_Generator';
 
 
 async function main() {
@@ -65,6 +67,14 @@ async function main() {
         paymentsAddress: payments.payments.address
     });
     
+    const generator: GeneratorSystem = await runGenerator({
+        arenasAddress: arenas.arenas.address,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address,
+        racesAddress: races.races.address,
+        randomnessAddress: randomness.randomness.address,
+        sortingsLibraryAddress: libraries.sortings.address
+    });
 }
 
 main();
