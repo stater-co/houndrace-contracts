@@ -1,6 +1,7 @@
-import { ethers } from "ethers";
+import { Converters } from '../../../typechain-types/contracts/utils/Converters';
+import { Sortings } from '../../../typechain-types/contracts/utils/Sortings';
 
 export interface DeployedLibraries {
-    converters: ethers.Contract;
-    sortings: ethers.Contract;
+    converters: Converters;
+    sortings: Sortings;
 }

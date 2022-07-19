@@ -3,7 +3,7 @@ import { GeneticsBasicTests } from "../../common/dto/test/geneticsBasicTests.dto
 import { params } from "../../common/params";
 
 
-export async function test(
+async function basicTest(
   dependencies: GeneticsBasicTests
 ): Promise<void> {
   describe('Genetics Basic Tests', async function () {
@@ -47,3 +47,11 @@ export async function test(
 
   });
 }
+
+export interface TestInterface {
+    basicTest: Function;
+}
+
+export const test: TestInterface = {
+    basicTest: basicTest
+};

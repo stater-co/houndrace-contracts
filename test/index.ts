@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
@@ -27,18 +28,18 @@ import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { params } from '../common/params';
-const { ethers } = require("hardhat");
+import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 
 
 async function main() {
 
-    const libraries: DeployedLibraries = await runLibraries();
-    console.log("Test deployed: " + 
-        libraries.converters.address + " , " + 
-        libraries.sortings.address
-    );
+    const signerDependency: SignerDependency = {
+        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY))
+    };
+
+    const libraries: DeployedLibraries = await runLibraries(signerDependency);
     
-    const payments: PaymentEcosystem = await runPayments();
+    const payments: PaymentEcosystem = await runPayments(signerDependency);
     
     const randomness: RandomnessSystem = await runRandomness();
 
@@ -106,10 +107,10 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address
-        }
+        },
+        ...signerDependency
     });
 
-    const [owner, otherOwner] = await ethers.getSigners();
     await setArenas({
         arenas: arenas.arenas,
         arenasMethods: arenas.arenasMethods,
@@ -117,7 +118,7 @@ async function main() {
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
-            alphadune: owner.address,
+            alphadune: signerDependency.signer,
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
@@ -151,7 +152,7 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: owner.address,
+            staterApi: String((await provider.getNetwork()).ensAddress),
             houndModifier: hounds.houndsModifier.address,
             hounds: hounds.hounds.address,
             minter: hounds.houndsMinter.address,
@@ -191,7 +192,7 @@ async function main() {
             allowedCallers: [
                 races.races.address,
                 queues.queues.address,
-                owner.address
+                String((await provider.getNetwork()).ensAddress)
             ]
         }
     });
@@ -210,7 +211,7 @@ async function main() {
         }
     });
 
-    await testGenetics({
+    await testGenetics.basicTest({
         genetics: genetics.genetics
     });
 
