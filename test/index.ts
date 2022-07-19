@@ -23,6 +23,7 @@ import { set as setShop } from './12_Setup_Shop_Contracts';
 import { set as setArenas } from './13_Setup_Arenas_Contracts';
 import { set as setIncubators } from './14_Setup_Incubator_Contracts';
 import { set as setHounds } from './15_Setup_Hounds_Contracts';
+import { set as setRaces } from './16_Setup_Races_Contracts';
 import { params } from '../common/params';
 const { ethers } = require("hardhat");
 
@@ -167,6 +168,29 @@ async function main() {
             refillBreedingCooldownCost: "0x2386F26FC10000",
             refillStaminaCooldownCost: "0x2386F26FC10000"
            }
+        }
+    });
+
+    await setRaces({
+        races: races.races,
+        racesMethods: races.racesMethods,
+        racesRestricted: races.racesRestricted,
+        constructor: {
+            arenas: arenas.arenas.address,
+            generator: generator.generator.address,
+            hounds: hounds.hounds.address,
+            methods: races.racesMethods.address,
+            payments: payments.payments.address,
+            queues: queues.queues.address,
+            randomness: randomness.randomness.address,
+            restricted: queues.queuesRestricted.address,
+            raceFee: 500000000,
+            callable: false,
+            allowedCallers: [
+                races.races.address,
+                queues.queues.address,
+                owner.address
+            ]
         }
     });
 
