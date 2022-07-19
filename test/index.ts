@@ -24,6 +24,7 @@ import { set as setArenas } from './13_Setup_Arenas_Contracts';
 import { set as setIncubators } from './14_Setup_Incubator_Contracts';
 import { set as setHounds } from './15_Setup_Hounds_Contracts';
 import { set as setRaces } from './16_Setup_Races_Contracts';
+import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { params } from '../common/params';
 const { ethers } = require("hardhat");
 
@@ -191,6 +192,20 @@ async function main() {
                 queues.queues.address,
                 owner.address
             ]
+        }
+    });
+
+    await setGenerator({
+        generatorMethods: generator.generatorMethods,
+        generatorZerocost: generator.generatorZerocost,
+        constructor: {
+            arenas: arenas.arenas.address,
+            hounds: hounds.hounds.address,
+            methods: generator.generatorMethods.address,
+            payments: payments.payments.address,
+            randomness: randomness.randomness.address,
+            zerocost: generator.generatorZerocost.address,
+            allowed: races.races.address
         }
     });
 

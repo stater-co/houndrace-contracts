@@ -354,35 +354,6 @@ describe("Setting up the Payments System", function () {
 
 
 
-describe("Setting up the Houndrace contracts global parameters", function () {
-
-  it("Setting up generator contracts dependencies", async function () {
-  
-    await generatorMethods.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-
-    await generatorZerocost.setGlobalParameters([
-      randomness.address,
-      arenas.address,
-      hounds.address,
-      races.address,
-      generatorMethods.address,
-      payments.address,
-      generatorZerocost.address
-    ]);
-
-  });
-
-});
-
-
 describe("Genetics methods", function () {
 
   it("Genetics - wholeArithmeticRecombination", async function () {
