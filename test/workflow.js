@@ -356,20 +356,6 @@ describe("Setting up the Payments System", function () {
 
 describe("Setting up the Houndrace contracts global parameters", function () {
 
-  it("Setting up incubator contracts dependencies", async function () {
-    
-    await incubatorMethods.setGlobalParameters([
-      incubatorMethods.address,
-      randomness.address,
-      genetics.address,
-      "0x67657452",
-      1800,
-      2419200,
-      '300000000000000000'
-    ]);
-
-  });
-
   it("Setting up hounds contracts dependencies", async function () {
     
     const [,otherOwner] = await ethers.getSigners();

@@ -22,6 +22,8 @@ import { set as setQueues } from './11_Setup_Queues_Contracts';
 import { set as setShop } from './12_Setup_Shop_Contracts';
 import { set as setArenas } from './13_Setup_Arenas_Contracts';
 import { set as setIncubators } from './14_Setup_Incubator_Contracts';
+import { set as setHounds } from './15_Setup_Hounds_Contracts';
+import { params } from '../common/params';
 const { ethers } = require("hardhat");
 
 
@@ -128,6 +130,43 @@ async function main() {
             methods: incubators.incubatorMethods.address,
             randomness: randomness.randomness.address,
             secondsToMaturity: 345600
+        }
+    });
+
+    await setHounds({
+        hounds: hounds.hounds,
+        houndsMinter: hounds.houndsMinter,
+        houndsModifier: hounds.houndsModifier,
+        houndsRestricted: hounds.houndsRestricted,
+        constructor: {
+           name: "HoundRace",
+           symbol: "HR",
+           allowedCallers: [
+            hounds.hounds.address,
+            races.races.address,
+            queues.queues.address
+           ],
+           boilerplate: {
+            incubator: incubators.incubator.address,
+            staterApi: owner.address,
+            houndModifier: hounds.houndsModifier.address,
+            hounds: hounds.hounds.address,
+            minter: hounds.houndsMinter.address,
+            restricted: hounds.houndsRestricted.address,
+            payments: payments.payments.address,
+            shop: payments.shop.address
+           },
+           fees: {
+            breedCostCurrency: params.address0,
+            breedFeeCurrency: params.address0,
+            refillStaminaCostCurrency: params.address0,
+            refillBreedingCostCurrency: params.address0,
+            breedCost: "0xB1A2BC2EC50000",
+            breedFee: "0x2386F26FC10000",
+            refillCost: "0x2386F26FC10000",
+            refillBreedingCooldownCost: "0x2386F26FC10000",
+            refillStaminaCooldownCost: "0x2386F26FC10000"
+           }
         }
     });
 
