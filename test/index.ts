@@ -25,6 +25,7 @@ import { set as setIncubators } from './14_Setup_Incubator_Contracts';
 import { set as setHounds } from './15_Setup_Hounds_Contracts';
 import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
+import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { params } from '../common/params';
 const { ethers } = require("hardhat");
 
@@ -207,6 +208,10 @@ async function main() {
             zerocost: generator.generatorZerocost.address,
             allowed: races.races.address
         }
+    });
+
+    await testGenetics({
+        genetics: genetics.genetics
     });
 
 }

@@ -354,48 +354,6 @@ describe("Setting up the Payments System", function () {
 
 
 
-describe("Genetics methods", function () {
-
-  it("Genetics - wholeArithmeticRecombination", async function () {
-    let newGeneticSequence = await genetics.wholeArithmeticRecombination(maleBoilerplateGene,femaleBoilerplateGene);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-
-  it("Genetics - swapMutation", async function () {
-    let newGeneticSequence = await genetics.swapMutation(maleBoilerplateGene,5);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-
-  it("Genetics - inversionMutation", async function () {
-    let newGeneticSequence = await genetics.inversionMutation(maleBoilerplateGene,5);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-
-  it("Genetics - scrambleMutation", async function () {
-    let newGeneticSequence = await genetics.scrambleMutation(maleBoilerplateGene,9);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-
-  it("Genetics - arithmeticMutation", async function () {
-    let newGeneticSequence = await genetics.arithmeticMutation(maleBoilerplateGene,9);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-
-  it("Genetics - uniformCrossover", async function () {
-    let newGeneticSequence = await genetics.uniformCrossover(maleBoilerplateGene,femaleBoilerplateGene,9);
-    expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-  });
-  
-  it("Genetics - mixGenes 100x", async function () {
-    for ( let i = 0 ; i < 100 ; ++i ) {
-      let newGeneticSequence = await genetics.mixGenes(maleBoilerplateGene,femaleBoilerplateGene,i);
-      expect(maleBoilerplateGene !== newGeneticSequence && femaleBoilerplateGene !== newGeneticSequence, "Failed to generate a valid genetic sequence via whole arithmetic recombination");
-    }
-  });
-
-});
-
-
 describe("Hounds", function () {
   
   it("Mint", async function () {
