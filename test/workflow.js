@@ -356,29 +356,6 @@ describe("Setting up the Payments System", function () {
 
 describe("Setting up the Houndrace contracts global parameters", function () {
 
-  it("Setting up arenas contracts dependencies", async function () {
-
-    const [owner] = await ethers.getSigners();
-    
-    await arenasRestricted.setGlobalParameters([
-      "HoundRace Arenas", "HRA", arenasRestricted.address, 
-      arenasMethods.address, payments.address, owner.address, [
-      racesRestricted.address,racesMethods.address,races.address,
-      queuesRestricted.address,queuesMethods.address,queues.address
-    ]]);
-
-    await arenasMethods.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
-      racesRestricted.address,racesMethods.address,races.address,
-      queuesRestricted.address,queuesMethods.address,queues.address
-    ]]);
-
-    await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
-      racesRestricted.address,racesMethods.address,races.address,
-      queuesRestricted.address,queuesMethods.address,queues.address
-    ]]);
-
-  });
-
   it("Setting up incubator contracts dependencies", async function () {
     
     await incubatorMethods.setGlobalParameters([

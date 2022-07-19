@@ -21,6 +21,7 @@ import { run as runGenerator } from './10_Deploy_Generator';
 import { set as setQueues } from './11_Setup_Queues_Contracts';
 import { set as setShop } from './12_Setup_Shop_Contracts';
 import { set as setArenas } from './13_Setup_Arenas_Contracts';
+import { set as setIncubators } from './14_Setup_Incubator_Contracts';
 const { ethers } = require("hardhat");
 
 
@@ -119,6 +120,17 @@ async function main() {
         }
     });
     
+    await setIncubators({
+        incubator: incubators.incubator,
+        incubatorMethods: incubators.incubatorMethods,
+        constructor: {
+            genetics: genetics.genetics.address,
+            methods: incubators.incubatorMethods.address,
+            randomness: randomness.randomness.address,
+            secondsToMaturity: 345600
+        }
+    });
+
 }
 
 main();
