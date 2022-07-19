@@ -8,19 +8,13 @@ export async function set(
 
     it("Setup shop restricted contract controller", async function () {
 
-      await dependencies.shopRestricted.setGlobalParameters([
-        dependencies.shopMethods.address,
-        dependencies.shopRestricted.address
-      ]);
+      await dependencies.shopRestricted.setGlobalParameters(dependencies.constructor);
   
     });
 
     it("Setup shop methods contract controller", async function () {
 
-      await dependencies.shopMethods.setGlobalParameters([
-        dependencies.shopMethods.address,
-        dependencies.shopRestricted.address
-      ]);
+      await dependencies.shopMethods.setGlobalParameters(dependencies.constructor);
   
     });
 

@@ -1,33 +1,17 @@
-import { GeneratorSystemController } from '../common/dto/test/generatorSystemController.dto';
+import { QueuesSystemController } from '../common/dto/test/queuesSystemController.dto';
 
 
 export async function set(
-  dependencies: GeneratorSystemController
+  dependencies: QueuesSystemController
 ): Promise<void> {
   describe('Setting up the Queues Contracts Controller', async function () {
 
     it("Setup queues restricted contract controller", async function () {
-      await dependencies.queuesRestricted.setGlobalParameters([
-        dependencies.arenasAddress,
-        dependencies.houndsAddress,
-        dependencies.queuesMethods.address,
-        dependencies.paymentsAddress,
-        dependencies.queuesRestricted.address,
-        dependencies.racesAddress,
-        dependencies.allowed
-      ]);
+      await dependencies.queuesRestricted.setGlobalParameters(dependencies.constructor);
     });
 
     it("Setup queues methods contract controller", async function () {
-      await dependencies.queuesMethods.setGlobalParameters([
-        dependencies.arenasAddress,
-        dependencies.houndsAddress,
-        dependencies.queuesMethods.address,
-        dependencies.paymentsAddress,
-        dependencies.queuesRestricted.address,
-        dependencies.racesAddress,
-        dependencies.allowed
-      ]);
+      await dependencies.queuesMethods.setGlobalParameters(dependencies.constructor);
     });
 
   });

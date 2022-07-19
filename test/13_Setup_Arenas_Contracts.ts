@@ -1,44 +1,27 @@
-import { ShopSystemController } from '../common/dto/test/shopSystemController.dto';
-const { ethers } = require("hardhat");
+import { ArenasSystemController } from '../common/dto/test/arenasSystemController.dto';
+
 
 export async function set(
-  dependencies: ShopSystemController
+  dependencies: ArenasSystemController
 ): Promise<void> {
   describe('Setting up the Arena Contracts Controller', async function () {
 
     it("Setup arena restricted contract controller", async function () {
       
-      await dependencies.shopRestricted.setGlobalParameters([
-        dependencies.shopMethods.address,
-        dependencies.shopRestricted.address
-      ]);
+      await dependencies.arenasRestricted.setGlobalParameters(dependencies.constructor);
 
-      const [owner] = await ethers.getSigners();
-    
-      await arenasRestricted.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
-        racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
-      ]]);
-  
-      await arenasMethods.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
-        racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
-      ]]);
-  
-      await arenas.setGlobalParameters(["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, owner.address, [
-        racesRestricted.address,racesMethods.address,races.address,
-        queuesRestricted.address,queuesMethods.address,queues.address
-      ]]);
-  
     });
 
-    it("Setup shop methods contract controller", async function () {
+    it("Setup arena methods contract controller", async function () {
+      
+      await dependencies.arenasMethods.setGlobalParameters(dependencies.constructor);
 
-      await dependencies.shopMethods.setGlobalParameters([
-        dependencies.shopMethods.address,
-        dependencies.shopRestricted.address
-      ]);
-  
+    });
+
+    it("Setup arena contract controller", async function () {
+      
+      await dependencies.arenas.setGlobalParameters(dependencies.constructor);
+
     });
 
   });
