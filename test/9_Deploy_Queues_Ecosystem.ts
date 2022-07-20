@@ -1,13 +1,15 @@
-import { Contract } from 'ethers';
 import { QueuesExternalDependencies } from '../common/dto/test/queuesExternalDependencies.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { Queues } from '../typechain-types/contracts/queues/Index.sol/Queues';
+import { QueuesMethods } from '../typechain-types/contracts/queues/methods/Index.sol/QueuesMethods';
+import { QueuesRestricted } from '../typechain-types/contracts/queues/restricted/Index.sol/QueuesRestricted';
 
 
-let queuesRestricted: Contract;
-let queuesMethods: Contract;
-let queues: Contract;
+let queuesRestricted: QueuesRestricted;
+let queuesMethods: QueuesMethods;
+let queues: Queues;
 
 
 export async function run(
@@ -29,7 +31,7 @@ export async function run(
             []
           ]],
           props: {}
-        });
+        }) as QueuesRestricted;
       });
 
       it("Deploy the queues methods contract", async function () {
@@ -45,7 +47,7 @@ export async function run(
             []
           ]],
           props: {}
-        });
+        }) as QueuesMethods;
       });
 
       it("Deploy the queues contract", async function () {
@@ -61,7 +63,7 @@ export async function run(
             []
           ]],
           props: {}
-        });
+        }) as Queues;
 
         resolve({
           queuesRestricted: queuesRestricted,

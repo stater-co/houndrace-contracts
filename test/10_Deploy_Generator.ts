@@ -1,13 +1,15 @@
-import { Contract } from 'ethers';
 import { GeneratorExternalDependencies } from '../common/dto/test/generatorExternalDependencies.dto';
 import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { Generator } from '../typechain-types/contracts/generator/Index.sol/Generator';
+import { GeneratorMethods } from '../typechain-types/contracts/generator/methods/Index.sol/GeneratorMethods';
+import { GeneratorZerocost } from '../typechain-types/contracts/generator/zerocost/Index.sol/GeneratorZerocost';
 
 
-let generatorMethods: Contract;
-let generatorZerocost: Contract;
-let generator: Contract;
+let generatorMethods: GeneratorMethods;
+let generatorZerocost: GeneratorZerocost;
+let generator: Generator;
 
 
 export async function run(
@@ -29,7 +31,7 @@ export async function run(
             params.address0
           ]],
           props: {}
-        });
+        }) as GeneratorMethods;
       });
 
       it("Deploy the generator zerocost contract", async function () {
@@ -49,7 +51,7 @@ export async function run(
               Sortings: dependencies.sortingsLibraryAddress
             }
           }
-        });
+        }) as GeneratorZerocost;
       });
 
       it("Deploy the generator contract", async function () {
@@ -65,7 +67,7 @@ export async function run(
             generatorZerocost.address
           ]],
           props: {}
-        });
+        }) as Generator;
 
         resolve({
           generatorZerocost: generatorZerocost,

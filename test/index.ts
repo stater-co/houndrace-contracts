@@ -27,6 +27,7 @@ import { set as setHounds } from './15_Setup_Hounds_Contracts';
 import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
+import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
 import { params } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 
@@ -213,6 +214,10 @@ async function main() {
 
     await testGenetics.basicTest({
         genetics: genetics.genetics
+    });
+
+    await testHounds.basicTest({
+        hounds: hounds.hounds
     });
 
 }

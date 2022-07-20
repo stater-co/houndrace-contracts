@@ -1,18 +1,22 @@
-import { expect } from "chai";
-import { GeneticsBasicTests } from "../../common/dto/test/geneticsBasicTests.dto";
-import { params } from "../../common/params";
+import { HoundsBasicTests } from "../../common/dto/test/houndsBasicTests.dto";
+import { hound } from "../../common/params";
+import { safeMintHound } from "../../plugins/mintHound";
+import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
 
 
 async function basicTest(
-  dependencies: GeneticsBasicTests
+  dependencies: HoundsBasicTests
 ): Promise<void> {
   describe('Hounds Basic Tests', async function () {
 
     it("Mint", async function () {
-        /*
-        await safelyMintHoundByAdmin(undefined,false);
+      await safeMintHound({
+        contract: dependencies.hounds,
+        hound: hound as Hound.StructStructOutput
       });
+    });
     
+    /*
       it("Update hound stamina after creation", async function() {
         await safelyUpdateHoundStamina();
       });
@@ -55,7 +59,7 @@ async function basicTest(
         await breed2Hounds();
       });
     */
-    });
+    
   });
 }
 
