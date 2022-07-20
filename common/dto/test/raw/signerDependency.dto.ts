@@ -1,5 +1,5 @@
-import { Signer, providers } from 'ethers';
+import { Signer } from 'ethers';
 
 export interface SignerDependency {
-    signer: Signer | providers.Provider
+    signer: Signer
 }

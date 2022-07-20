@@ -3,11 +3,14 @@ import { ArenasExternalDependencies } from '../common/dto/test/arenasExternalDep
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { ArenasRestricted } from '../typechain-types/contracts/arenas/restricted/Index.sol/ArenasRestricted';
+import { ArenasMethods } from '../typechain-types/contracts/arenas/methods/Index.sol/ArenasMethods';
+import { Arenas } from '../typechain-types/contracts/arenas/Index.sol/Arenas';
 const { ethers } = require("hardhat");
 
-let arenasRestricted: Contract;
-let arenasMethods: Contract;
-let arenas: Contract;
+let arenasRestricted: ArenasRestricted;
+let arenasMethods: ArenasMethods;
+let arenas: Arenas;
 
 
 export async function run(
@@ -30,7 +33,7 @@ export async function run(
             dependencies.allowedCallers
           ]],
           props: {}
-        });
+        }) as ArenasRestricted;
       });
 
       it("Deploy the arenas contracts", async function () {
@@ -47,7 +50,7 @@ export async function run(
             dependencies.allowedCallers
           ]],
           props: {}
-        });
+        }) as ArenasMethods;
       });
 
       it("Deploy the arenas contracts", async function () {
@@ -64,7 +67,7 @@ export async function run(
             dependencies.allowedCallers
           ]],
           props: {}
-        });
+        }) as Arenas;
 
         resolve({
           arenasRestricted: arenasRestricted,

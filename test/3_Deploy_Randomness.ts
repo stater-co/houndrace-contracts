@@ -1,9 +1,9 @@
-import { ethers } from 'ethers';
 import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
 import { deployContract } from '../plugins/deployContract';
+import { Randomness } from '../typechain-types/contracts/randomness/Index.sol/Randomness';
 
 
-let randomness: ethers.Contract;
+let randomness: Randomness;
 
 
 export async function run(): Promise<RandomnessSystem> {
@@ -15,7 +15,7 @@ export async function run(): Promise<RandomnessSystem> {
           name: 'Randomness',
           constructor: [],
           props: {}
-        });
+        }) as Randomness;
 
         resolve({
           randomness: randomness

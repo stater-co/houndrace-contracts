@@ -37,9 +37,9 @@ async function main() {
         signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY))
     };
 
-    const libraries: DeployedLibraries = await runLibraries(signerDependency);
+    const libraries: DeployedLibraries = await runLibraries();
     
-    const payments: PaymentEcosystem = await runPayments(signerDependency);
+    const payments: PaymentEcosystem = await runPayments();
     
     const randomness: RandomnessSystem = await runRandomness();
 
@@ -118,7 +118,7 @@ async function main() {
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
-            alphadune: signerDependency.signer,
+            alphadune: await signerDependency.signer.getAddress(),
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
@@ -152,7 +152,7 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: String((await provider.getNetwork()).ensAddress),
+            staterApi: await signerDependency.signer.getAddress(),
             houndModifier: hounds.houndsModifier.address,
             hounds: hounds.hounds.address,
             minter: hounds.houndsMinter.address,
@@ -192,7 +192,7 @@ async function main() {
             allowedCallers: [
                 races.races.address,
                 queues.queues.address,
-                String((await provider.getNetwork()).ensAddress)
+                await signerDependency.signer.getAddress()
             ]
         }
     });

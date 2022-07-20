@@ -1,5 +1,5 @@
-import { ethers } from "ethers";
+import { Genetics } from '../../../typechain-types/contracts/genetics/Index.sol/Genetics';
 
 export interface GeneticsSystem {
-    genetics: ethers.Contract;
+    genetics: Genetics;
 }

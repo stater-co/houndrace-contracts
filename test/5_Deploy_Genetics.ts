@@ -1,11 +1,11 @@
-import { Contract } from 'ethers';
 import { GeneticsExternalDependencies } from '../common/dto/test/geneticsExternalDependencies.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { Genetics } from '../typechain-types/contracts/genetics/Index.sol/Genetics';
 
 
-let genetics: Contract;
+let genetics: Genetics;
 
 
 export async function run(
@@ -28,7 +28,7 @@ export async function run(
             [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
           ]],
           props: {}
-        });
+        }) as Genetics;
 
         resolve({
           genetics: genetics

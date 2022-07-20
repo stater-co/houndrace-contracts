@@ -1,6 +1,7 @@
-import { ethers } from "ethers";
+import { IncubatorMethods } from '../../../typechain-types/contracts/incubator/methods/Index.sol/IncubatorMethods';
+import { Incubator } from '../../../typechain-types/contracts/incubator/Index.sol/Incubator';
 
 export interface IncubatorSystem {
-    incubatorMethods: ethers.Contract;
-    incubator: ethers.Contract;
+    incubatorMethods: IncubatorMethods;
+    incubator: Incubator;
 }

@@ -1,18 +1,14 @@
-import { ethers } from 'ethers';
 import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
-import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { deployContract } from '../plugins/deployContract';
-import { Converters__factory } from '../typechain-types/factories/contracts/utils/Converters__factory';
-import { Sortings__factory } from '../typechain-types/factories/contracts/utils/Sortings__factory';
+import { Converters } from '../typechain-types/contracts/utils/Converters';
+import { Sortings } from '../typechain-types/contracts/utils/Sortings';
 
 
-let convertersLibrary: ethers.Contract;
-let sortingsLibrary: ethers.Contract;
+let convertersLibrary: Converters;
+let sortingsLibrary: Sortings;
 
 
-export async function run(
-  dependencies: SignerDependency
-): Promise<DeployedLibraries> {
+export async function run(): Promise<DeployedLibraries> {
   return new Promise((resolve, ) => {
     describe('Setting up the used libraries', () => {
       it('Deploy the Converters', async function () {
@@ -20,17 +16,17 @@ export async function run(
           name: 'Converters',
           constructor: [],
           props: {}
-        });
+        }) as Converters;
       });
       it('Deploy the Sortings', async function () {
         sortingsLibrary = await deployContract({
           name: 'Sortings',
           constructor: [],
           props: {}
-        });
+        }) as Sortings;
         resolve({
-          converters: Converters__factory.connect(convertersLibrary.address,dependencies.signer),
-          sortings: Sortings__factory.connect(sortingsLibrary.address,dependencies.signer)
+          converters: convertersLibrary,
+          sortings: sortingsLibrary
         });
       });
     });

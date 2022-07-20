@@ -1,12 +1,13 @@
-import { Contract } from 'ethers';
 import { IncubatorExternalDependencies } from '../common/dto/test/incubatorExternalDependencies.dto';
 import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { Incubator } from '../typechain-types/contracts/incubator/Index.sol/Incubator';
+import { IncubatorMethods } from '../typechain-types/contracts/incubator/methods/Index.sol/IncubatorMethods';
 
 
-let incubatorMethods: Contract;
-let incubator: Contract;
+let incubatorMethods: IncubatorMethods;
+let incubator: Incubator;
 
 
 export async function run(
@@ -28,7 +29,7 @@ export async function run(
             '300000000000000000'
           ]],
           props: {}
-        });
+        }) as IncubatorMethods;
 
       });
 
@@ -45,7 +46,7 @@ export async function run(
             '300000000000000000'
           ]],
           props: {}
-        });
+        }) as Incubator;
 
         resolve({
           incubatorMethods: incubatorMethods,
