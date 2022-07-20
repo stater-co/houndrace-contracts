@@ -1,15 +1,18 @@
-import { Contract } from 'ethers';
 import { HoundExternalDependencies } from '../common/dto/test/houndsExternalDependencies.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { params } from '../common/params';
 import { deployContract } from '../plugins/deployContract';
+import { Hounds } from '../typechain-types/contracts/hounds/Index.sol/Hounds';
+import { HoundsMinter } from '../typechain-types/contracts/hounds/minter/Index.sol/HoundsMinter';
+import { HoundsModifier } from '../typechain-types/contracts/hounds/modifier/Index.sol/HoundsModifier';
+import { HoundsRestricted } from '../typechain-types/contracts/hounds/restricted/Index.sol/HoundsRestricted';
 const { ethers } = require("hardhat");
 
 
-let houndsRestricted: Contract;
-let houndsModifier: Contract;
-let houndsMinter: Contract;
-let hounds: Contract;
+let houndsRestricted: HoundsRestricted;
+let houndsModifier: HoundsModifier;
+let houndsMinter: HoundsMinter;
+let hounds: Hounds;
 
 
 export async function run(
@@ -48,7 +51,7 @@ export async function run(
             ]
           ]],
           props: {}
-        });
+        }) as HoundsRestricted;
       });
 
       it("Deploy the hounds modifier contract", async function () {
@@ -81,7 +84,7 @@ export async function run(
             ]
           ]],
           props: {}
-        });
+        }) as HoundsModifier;
       });
     
       it("Deploy the hounds minter contract", async function () {
@@ -114,7 +117,7 @@ export async function run(
             ]
           ]],
           props: {}
-        });
+        }) as HoundsMinter;
       });
 
       it("Deploy the hounds contract", async function () {
@@ -147,7 +150,7 @@ export async function run(
             ]
           ]],
           props: {}
-        });
+        }) as Hounds;
 
         resolve({
           houndsRestricted: houndsRestricted,
