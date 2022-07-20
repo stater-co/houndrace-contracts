@@ -1,7 +1,7 @@
 import { HoundExternalDependencies } from '../common/dto/test/houndsExternalDependencies.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { params } from '../common/params';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { Hounds } from '../typechain-types/contracts/hounds/Index.sol/Hounds';
 import { HoundsMinter } from '../typechain-types/contracts/hounds/minter/Index.sol/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/contracts/hounds/modifier/Index.sol/HoundsModifier';

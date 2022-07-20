@@ -73,60 +73,6 @@ async function getContractInstance(name,constructor,props) {
   return contract;
 }
 
-// @DIIMIIM: Admin mint hound, no safety checks
-async function mintHoundByAdmin(hound,isFemale) {
-  let houndToMint;
-  if ( hound ) {
-    houndToMint = hound;
-  } else {
-    houndToMint = defaultHound;
-    if ( isFemale ) {
-      houndToMint[3][4][1] = 2;
-    }
-  }
-  const [owner] = await ethers.getSigners();
-  const contractOwner = await hounds.owner();
-  expect(owner.address === contractOwner, "You're not the owner of the hounds data contract");
-  await hounds.initializeHound(0,houndToMint);
-}
-
-async function safelyMintHoundByAdmin(hound,isFemale) {
-  const houndIdBefore = await hounds.id();
-  await mintHoundByAdmin(hound,isFemale);
-  const houndIdAfter = await hounds.id();
-  expect(houndIdBefore !== houndIdAfter, "Hound creation problem");
-  await safelyUpdateHoundBreeding(houndIdBefore);
-}
-
-async function safelyUpdateHoundStamina(houndId) {
-  let houndIdBefore;
-  let houndToWorkWith;
-  if ( houndId ) {
-    houndToWorkWith = houndId;
-  } else {
-    houndIdBefore = await hounds.id();
-    houndToWorkWith = Number(houndIdBefore)-1;
-  }
-  const houndBefore = await hounds.hound(houndToWorkWith);
-  await hounds.updateHoundStamina(houndToWorkWith);
-  const houndAfter = await hounds.hound(houndToWorkWith);
-  expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
-}
-
-async function safelyUpdateHoundBreeding(houndId) {
-  let houndIdBefore;
-  let houndToWorkWith;
-  if ( houndId ) {
-    houndToWorkWith = houndId;
-  } else {
-    houndIdBefore = await hounds.id();
-    houndToWorkWith = Number(houndIdBefore)-1;
-  }
-  const houndBefore = await hounds.hound(houndToWorkWith);
-  const houndAfter = await hounds.hound(houndToWorkWith);
-  expect(JSON.stringify(houndBefore) === JSON.stringify(houndAfter), "Hound stamin update on creation problem");
-}
-
 async function checkHoundStructure(houndId) {
   const hound = await hounds.hound(houndId ? houndId : 1);
 
@@ -355,40 +301,6 @@ describe("Setting up the Payments System", function () {
 
 
 describe("Hounds", function () {
-  
-  it("Mint", async function () {
-    await safelyMintHoundByAdmin(undefined,false);
-  });
-
-  it("Update hound stamina after creation", async function() {
-    await safelyUpdateHoundStamina();
-  });
-
-  it("Update hound breeding status after creation", async function() {
-    await safelyUpdateHoundBreeding();
-  });
-
-  it("Mint again", async function () {
-    await safelyMintHoundByAdmin(undefined,false);
-  });
-
-  it("Mint 10x hounds", async function () {
-    for ( let i = 0 ; i < 10 ; ++i ) {
-      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-    }
-  });
-
-  it("Mint 40x hounds", async function () {
-    for ( let i = 0 ; i < 40 ; ++i ) {
-      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-    }
-  });
-
-  it("Mint 100x hounds", async function () {
-    for ( let i = 0 ; i < 100 ; ++i ) {
-      await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-    }
-  });
 
   it("Receiving hound data", async function () {
     await checkHoundStructure();
@@ -406,14 +318,6 @@ describe("Hounds", function () {
 
 
 describe("Breed with other hounds", function () {
-
-  it("Mint your hound", async function () {
-    await safelyMintHoundByAdmin(undefined,false);
-  });
-
-  it("Mint another hound", async function () {
-    await safelyMintHoundByAdmin(undefined,true);
-  });
 
   it("Breed again", async function () {
     await breed2Hounds();

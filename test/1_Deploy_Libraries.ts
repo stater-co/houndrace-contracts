@@ -1,5 +1,5 @@
 import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { Converters } from '../typechain-types/contracts/utils/Converters';
 import { Sortings } from '../typechain-types/contracts/utils/Sortings';
 

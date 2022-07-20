@@ -1,7 +1,7 @@
 import { GeneticsExternalDependencies } from '../common/dto/test/geneticsExternalDependencies.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { params } from '../common/params';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { Genetics } from '../typechain-types/contracts/genetics/Index.sol/Genetics';
 
 

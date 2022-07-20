@@ -1,7 +1,8 @@
 import { HoundsBasicTests } from "../../common/dto/test/houndsBasicTests.dto";
 import { hound } from "../../common/params";
-import { safeMintHound } from "../../plugins/mintHound";
-import { safeUpdateStamina } from "../../plugins/updateStamina";
+import { safeMintHound } from "../../plugins/test/mintHound";
+import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
+import { safeUpdateStamina } from "../../plugins/test/updateStamina";
 import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
 
 
@@ -26,36 +27,13 @@ async function basicTest(
       });
     });
     
+    it("Verifying hound data", async function () {
+      await checkHoundStructure(
+        await dependencies.hounds.hound(createdHoundId)
+      );
+    });
+
       /*
-      it("Update hound breeding status after creation", async function() {
-        await safelyUpdateHoundBreeding();
-      });
-    
-      it("Mint again", async function () {
-        await safelyMintHoundByAdmin(undefined,false);
-      });
-    
-      it("Mint 10x hounds", async function () {
-        for ( let i = 0 ; i < 10 ; ++i ) {
-          await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-        }
-      });
-    
-      it("Mint 40x hounds", async function () {
-        for ( let i = 0 ; i < 40 ; ++i ) {
-          await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-        }
-      });
-    
-      it("Mint 100x hounds", async function () {
-        for ( let i = 0 ; i < 100 ; ++i ) {
-          await safelyMintHoundByAdmin(undefined,i % 2 === 1);
-        }
-      });
-    
-      it("Receiving hound data", async function () {
-        await checkHoundStructure();
-      });
     
       it("Breed", async function () {
         await breed2Hounds();

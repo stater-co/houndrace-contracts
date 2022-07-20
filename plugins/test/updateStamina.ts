@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { UpdateHoundStaminaParams } from "../common/dto/test/updateHoundStaminaParams";
-import { Hound } from '../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { UpdateHoundStaminaParams } from "../../common/dto/test/updateHoundStaminaParams";
+import { Hound } from '../../typechain-types/contracts/hounds/params/Index.sol/Params';
 
 export async function updateStamina(
   params: UpdateHoundStaminaParams

@@ -2,7 +2,7 @@ import { Contract } from 'ethers';
 import { ArenasExternalDependencies } from '../common/dto/test/arenasExternalDependencies.dto';
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { params } from '../common/params';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { ArenasRestricted } from '../typechain-types/contracts/arenas/restricted/Index.sol/ArenasRestricted';
 import { ArenasMethods } from '../typechain-types/contracts/arenas/methods/Index.sol/ArenasMethods';
 import { Arenas } from '../typechain-types/contracts/arenas/Index.sol/Arenas';

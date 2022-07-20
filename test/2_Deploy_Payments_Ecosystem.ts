@@ -1,6 +1,6 @@
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { params } from '../common/params';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { ShopRestricted } from '../typechain-types/contracts/shop/restricted/Index.sol/ShopRestricted';
 import { ShopMethods } from '../typechain-types/contracts/shop/methods/Index.sol/ShopMethods';
 import { HoundracePotions } from '../typechain-types/contracts/ogars/Data.sol/HoundracePotions';

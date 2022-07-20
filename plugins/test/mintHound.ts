@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { MintHoundParams } from "../common/dto/test/mintHoundsParams.dto";
+import { MintHoundParams } from "../../common/dto/test/mintHoundsParams.dto";
 
 export async function mintHound(
   params: MintHoundParams

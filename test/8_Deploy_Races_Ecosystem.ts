@@ -1,7 +1,7 @@
 import { RacesExternalDependencies } from '../common/dto/test/racesExternalDependencies.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
 import { params } from '../common/params';
-import { deployContract } from '../plugins/deployContract';
+import { deployContract } from '../plugins/test/deployContract';
 import { Races } from '../typechain-types/contracts/races/Index.sol/Races';
 import { RacesMethods } from '../typechain-types/contracts/races/methods/Index.sol/RacesMethods';
 import { RacesRestricted } from '../typechain-types/contracts/races/restricted/Index.sol/RacesRestricted';

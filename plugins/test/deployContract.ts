@@ -1,7 +1,7 @@
 import hre from 'hardhat'
 import { ethers } from "ethers";
-import { deploymentMessage } from "./deploymentMessage";
-import { ContractParams } from '../common/dto/contracts/contractParams.dto';
+import { deploymentMessage } from "../deploymentMessage";
+import { ContractParams } from '../../common/dto/contracts/contractParams.dto';
 
 
 export async function deployContract(contractParams: ContractParams): Promise<ethers.Contract> {
