@@ -1,6 +1,7 @@
 import { HoundsBasicTests } from "../../common/dto/test/houndsBasicTests.dto";
 import { hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/mintHound";
+import { safeUpdateStamina } from "../../plugins/updateStamina";
 import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
 
 
@@ -9,18 +10,23 @@ async function basicTest(
 ): Promise<void> {
   describe('Hounds Basic Tests', async function () {
 
+    let createdHoundId: string | number;
+
     it("Mint", async function () {
-      await safeMintHound({
+      createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
         hound: hound as Hound.StructStructOutput
       });
     });
     
-    /*
-      it("Update hound stamina after creation", async function() {
-        await safelyUpdateHoundStamina();
+    it("Update hound stamina after creation", async function() {
+      await safeUpdateStamina({
+        contract: dependencies.hounds,
+        houndId: createdHoundId
       });
+    });
     
+      /*
       it("Update hound breeding status after creation", async function() {
         await safelyUpdateHoundBreeding();
       });
