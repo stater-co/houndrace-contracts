@@ -73,28 +73,6 @@ async function getContractInstance(name,constructor,props) {
   return contract;
 }
 
-async function checkHoundStructure(houndId) {
-  const hound = await hounds.hound(houndId ? houndId : 1);
-
-  // Check the hound statistics field
-  expect(hound[0] && hound[0].length === defaultHound[0].length, "Not all hound statistics are received from contract");
-
-  // Check the hound stamina field
-  expect(hound[1] && hound[1].length === defaultHound[1].length, "Not all hound stamina data has been received from contract");
-
-  // Check the hound breeding field
-  expect(hound[2] && hound[2].length === defaultHound[2].length, "Not all hound breeding data has been received from contract");
-
-  // Check the hound identity field
-  expect(hound[3] && hound[3].length === defaultHound[3].length, "Not all hound identity data has been received from contract");
-
-  // Check the hound total fields
-  expect(hound.length === defaultHound.length, "Hound has been partially received from contract");
-
-  const houndGene = hound[3][4];
-  expect(houndGene.length === defaultHound[3][4].length, "Hound getter mechanism problems");
-}
-
 async function findMaleAndFemaleAvailableForBreed() {
   const houndIdBefore = await hounds.id();
 
@@ -301,10 +279,6 @@ describe("Setting up the Payments System", function () {
 
 
 describe("Hounds", function () {
-
-  it("Receiving hound data", async function () {
-    await checkHoundStructure();
-  });
 
   it("Breed", async function () {
     await breed2Hounds();
