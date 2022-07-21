@@ -247,6 +247,8 @@ async function main() {
 
     await testQueues.basicTest({
         contract: queues.queues,
+        houndsContract: hounds.hounds,
+        houndIdToEnqueue: 1,
         queue: {
             "0": "Queue #",
             "1": globalParams.address0,

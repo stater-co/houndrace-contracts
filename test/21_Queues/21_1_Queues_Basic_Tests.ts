@@ -1,4 +1,5 @@
 import { QueuesBasicTests } from "../../common/dto/test/queuesBasicTests";
+import { safeJoinQueue } from "../../plugins/test/joinQueue";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 
 
@@ -13,6 +14,16 @@ async function basicTest(
       createdQueueId = await safeMintQueue({
         contract: dependencies.contract,
         queue: dependencies.queue
+      });
+    });
+
+    it("Enqueue", async function() {
+      await safeJoinQueue({
+        contract: dependencies.contract,
+        queueId: createdQueueId,
+        houndId: dependencies.houndIdToEnqueue,
+        houndsContract: dependencies.houndsContract,
+        entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
       });
     });
 

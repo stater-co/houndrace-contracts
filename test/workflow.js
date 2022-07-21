@@ -198,41 +198,6 @@ describe("Setting up the Payments System", function () {
 
 describe("Races", function () {
 
-  it("Create queue", async function () {
-
-    let queueToUse = defaultQueue;
-
-    queueToUse[4] = 5000000000;
-    queueToUse[8] = [
-      [
-        address0, address0, address0
-      ],
-      [
-        address0, address0, address0
-      ],
-      [
-        address0, address0, address0
-      ],
-      [],
-      [],
-      [3,3,3]
-    ];
-    await queues.createQueues([
-      defaultQueue
-    ]);
-
-    queueToUse[4] = 3000000000;
-    await queues.createQueues([
-      defaultQueue
-    ]);
-
-    queueToUse[4] = 8000000000;
-    await queues.createQueues([
-      defaultQueue
-    ]);
-
-  });
-
   let houndsStamina = [];
 
   it("Hounds stamina check x1", async function () {

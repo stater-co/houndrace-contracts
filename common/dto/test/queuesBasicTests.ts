@@ -4,4 +4,6 @@ import { Queue } from "../../../typechain-types/contracts/queues/Index.sol/Queue
 export interface QueuesBasicTests {
     contract: ethers.Contract;
     queue: Queue.StructStructOutput;
+    houndIdToEnqueue: number | string;
+    houndsContract: ethers.Contract;
 }
