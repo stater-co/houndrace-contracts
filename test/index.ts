@@ -29,6 +29,7 @@ import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
 import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
+import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { BigNumber } from 'ethers';
@@ -242,6 +243,64 @@ async function main() {
             distance: 1,
             weather: 1
         } as Arena.StructStructOutput
+    });
+
+    await testQueues.basicTest({
+        contract: queues.queues,
+        queue: {
+            "0": "Queue #",
+            "1": globalParams.address0,
+            "2": [],
+            "3": 1,
+            "4": 1000,
+            "5": 0,
+            "6": 0,
+            "7": 0,
+            "8": {
+                "0": [],
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [[]],
+                "5": [[]],
+                "6": [],
+                from: [],
+                to: [],
+                currency: [],
+                ids: [[]],
+                amounts: [[]],
+                paymentType: []
+            },
+            "9": 3,
+            "10": 0,
+            "11": false,
+            name: "Queue #",
+            currency: globalParams.address0,
+            participants: [],
+            arena: 1,
+            entryFee: 1000,
+            startDate: 0,
+            endDate: 0,
+            lastCompletion: 0,
+            payments: {
+                "0": [],
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [[]],
+                "5": [[]],
+                "6": [],
+                from: [],
+                to: [],
+                currency: [],
+                ids: [[]],
+                amounts: [[]],
+                paymentType: []
+            },
+            totalParticipants: 3,
+            cooldown: 0,
+            closed: false
+        }
     });
 
 }

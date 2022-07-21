@@ -195,15 +195,6 @@ describe("Setting up the Payments System", function () {
 });
 
 
-describe("Breed with other hounds", function () {
-
-  it("Make hound available to breed", async function () {
-    const houndId = await hounds.id();
-    await hounds.putHoundForBreed(houndId-2,0,true);
-  });
-
-});
-
 
 describe("Races", function () {
 
