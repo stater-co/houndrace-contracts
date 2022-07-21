@@ -6,6 +6,7 @@ import { safeUpdateStamina } from "../../plugins/test/updateStamina";
 import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
+import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 
 
 async function basicTest(
@@ -57,6 +58,15 @@ async function basicTest(
       });
     });
     
+    it("Set hound available to breed externally", async function () {
+      await safeSetAvailableToBreed({
+        status: true,
+        fee: 50000,
+        houndId: createdHoundId,
+        contract: dependencies.hounds
+      });
+    });
+
   });
 }
 

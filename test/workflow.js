@@ -58,88 +58,6 @@ function deploymentMessage(name,address) {
   console.log(name + " deployed at: " + address);
 }
 
-// @DIIMIIM: Get smart contract instance
-async function getContractInstance(name,constructor,props) {
-  let Contract;
-  if ( props ) {
-    Contract = await hre.ethers.getContractFactory(name,props);
-  } else {
-    Contract = await hre.ethers.getContractFactory(name);
-  }
-   
-  let contract = constructor ? await Contract.deploy(constructor) : await Contract.deploy();
-  await contract.deployed();
-  deploymentMessage(name,contract.address);
-  return contract;
-}
-
-async function findMaleAndFemaleAvailableForBreed() {
-  const houndIdBefore = await hounds.id();
-
-  let maleId , femaleId ;
-  for ( let i = 1 , l = houndIdBefore ; i < l ; ++i ) {
-
-    const hound = await hounds.hound(i);
-    const houndGene = hound[3][4];
-
-    expect(houndGene.length > 0, "Getting hounds gender problem");
-
-    if ( houndGene[1] === 1 && !maleId && hound[2][3] && hound[2][0]*1000 <= new Date().getTime() && !hound[7] ) {
-      maleId = i;
-    }
-
-    if ( houndGene[1] === 2 && !femaleId && hound[2][3] && hound[2][0]*1000 <= new Date().getTime() && !hound[7] ) {
-      femaleId = i;
-    }
-
-  }
-
-  expect(maleId && femaleId, "No partners found for breeding");
-  return { maleId, femaleId };
-}
-
-async function breed2Hounds() {
-  const houndIdBefore = await hounds.id();
-  const availableHounds = await findMaleAndFemaleAvailableForBreed();
-
-  const maleId = availableHounds.maleId;
-  const femaleId = availableHounds.femaleId; 
-
-  if ( maleId && femaleId ) {
-
-    const houndMaleBefore = await hounds.hound(maleId);
-    const houndFemaleBefore = await hounds.hound(femaleId);
-
-    const [owner] = await ethers.getSigners();
-    const ownerOfMale = await hounds.ownerOf(maleId);
-    const ownerOfFemale = await hounds.ownerOf(femaleId);
-
-    let hound1 = maleId , hound2 = femaleId;
-    if ( ownerOfFemale !== owner && ownerOfMale === owner ) {
-      hound1 = maleId;
-      hound2 = femaleId;
-    } else if ( ownerOfMale !== owner && ownerOfFemale === owner ) {
-      hound1 = femaleId;
-      hound2 = maleId;
-    }
-
-    const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    let houndToFillUp = await hounds.id();
-    await hounds.breedHounds(hound1, hound2, { value : totalToPay });
-    await hounds.initializeHound(houndToFillUp,defaultHound);
-
-    const houndMaleAfter = await hounds.hound(maleId);
-    const houndFemaleAfter = await hounds.hound(femaleId);
-    expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-    expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
-    
-  }
-
-  const houndIdAfter = await hounds.id();
-  expect(houndIdBefore !== houndIdAfter, "Owned hound breeding problem");
-
-}
-
 async function createDiscount(erc721Address, ids, dateStart, dateStop, discount, tokenType, usable) {
   const shopOwner = await shop.owner();
   const [owner] = await ethers.getSigners();
@@ -277,25 +195,7 @@ describe("Setting up the Payments System", function () {
 });
 
 
-
-describe("Hounds", function () {
-
-  it("Breed", async function () {
-    await breed2Hounds();
-  });
-
-  it("Breed again", async function () {
-    await breed2Hounds();
-  });
-
-});
-
-
 describe("Breed with other hounds", function () {
-
-  it("Breed again", async function () {
-    await breed2Hounds();
-  });
 
   it("Make hound available to breed", async function () {
     const houndId = await hounds.id();
