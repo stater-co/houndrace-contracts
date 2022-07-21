@@ -28,8 +28,9 @@
     "url": "https://github.com/stater-co/houndrace-contracts/issues"
   },
   "homepage": "https://github.com/stater-co/houndrace-contracts#readme",
-  "devDependencies": {
+  "dependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.3",
     "@nomicfoundation/hardhat-toolbox": "^1.0.2",
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
