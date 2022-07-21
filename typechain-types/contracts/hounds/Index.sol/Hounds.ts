@@ -259,6 +259,7 @@ export interface HoundsInterface extends utils.Interface {
     "id()": FunctionFragment;
     "initializeHound(uint256,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(uint256,uint256,address,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54]),string,string,uint256,bool))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -298,6 +299,7 @@ export interface HoundsInterface extends utils.Interface {
       | "id"
       | "initializeHound"
       | "isApprovedForAll"
+      | "matingSeason"
       | "name"
       | "onERC721Received"
       | "owner"
@@ -373,6 +375,10 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "matingSeason",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -502,6 +508,10 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "matingSeason",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -861,6 +871,8 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    matingSeason(overrides?: CallOverrides): Promise<[boolean]>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
 
     onERC721Received(
@@ -1077,6 +1089,8 @@ export interface Hounds extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  matingSeason(overrides?: CallOverrides): Promise<boolean>;
+
   name(overrides?: CallOverrides): Promise<string>;
 
   onERC721Received(
@@ -1292,6 +1306,8 @@ export interface Hounds extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    matingSeason(overrides?: CallOverrides): Promise<boolean>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -1585,6 +1601,8 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    matingSeason(overrides?: CallOverrides): Promise<BigNumber>;
+
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     onERC721Received(
@@ -1767,6 +1785,8 @@ export interface Hounds extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    matingSeason(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

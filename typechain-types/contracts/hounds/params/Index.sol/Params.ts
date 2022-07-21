@@ -253,6 +253,7 @@ export interface ParamsInterface extends utils.Interface {
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -283,6 +284,7 @@ export interface ParamsInterface extends utils.Interface {
       | "hounds"
       | "id"
       | "isApprovedForAll"
+      | "matingSeason"
       | "name"
       | "onERC721Received"
       | "owner"
@@ -334,6 +336,10 @@ export interface ParamsInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [PromiseOrValue<string>, PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "matingSeason",
+    values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -423,6 +429,10 @@ export interface ParamsInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "matingSeason",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -736,6 +746,8 @@ export interface Params extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    matingSeason(overrides?: CallOverrides): Promise<[boolean]>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
 
     onERC721Received(
@@ -898,6 +910,8 @@ export interface Params extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  matingSeason(overrides?: CallOverrides): Promise<boolean>;
+
   name(overrides?: CallOverrides): Promise<string>;
 
   onERC721Received(
@@ -1059,6 +1073,8 @@ export interface Params extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    matingSeason(overrides?: CallOverrides): Promise<boolean>;
 
     name(overrides?: CallOverrides): Promise<string>;
 
@@ -1298,6 +1314,8 @@ export interface Params extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    matingSeason(overrides?: CallOverrides): Promise<BigNumber>;
+
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     onERC721Received(
@@ -1426,6 +1444,8 @@ export interface Params extends BaseContract {
       operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    matingSeason(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

@@ -5,6 +5,7 @@ import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
 import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
+import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 
 
 async function basicTest(
@@ -34,10 +35,19 @@ async function basicTest(
       );
     });
 
+    it("Set mating season true", async function () {
+      await safeSetMatingSeason({
+        season: true,
+        contract: dependencies.hounds
+      });
+    });
+
     it("Mint & Breed", async function () {
+      let femaleHound: Hound.StructStruct = hound;
+      femaleHound.identity.geneticSequence[1] = 2;
       let newCreatedHoundId: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: hound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput
       });
       await safeBreed({
         contract: dependencies.hounds,

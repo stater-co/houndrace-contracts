@@ -220,7 +220,8 @@ async function main() {
     });
 
     await testHounds.basicTest({
-        hounds: hounds.hounds
+        hounds: hounds.hounds,
+        ...signerDependency
     });
 
     await testArenas.basicTest({

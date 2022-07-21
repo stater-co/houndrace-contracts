@@ -53,7 +53,7 @@ export async function safeBreed(
 
     const totalToPay = await params.contract.getBreedCost(hound1,hound2);
     const houndToFillUp = await params.contract.id();
-    console.log("Hound to fill up: " + houndToFillUp);
+
     await params.contract.breedHounds(hound1, hound2, { value : totalToPay });
     await params.contract.initializeHound(houndToFillUp,hound);
 
