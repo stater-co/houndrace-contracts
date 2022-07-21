@@ -12,7 +12,7 @@ jobs:
           node-version: '14'
           cache: 'npm'
       - name: Location set-up
-        run: npm install
+        run: npm install && npm install --save-dev typechain
       - name: Location set-up verifications
         run: node --version && npm --version && npx --version && echo "Deployer address ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}"
       - name: Unit tests
