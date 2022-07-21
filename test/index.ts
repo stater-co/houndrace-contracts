@@ -30,6 +30,7 @@ import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
 import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
 import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
+import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { BigNumber } from 'ethers';
@@ -302,6 +303,58 @@ async function main() {
             totalParticipants: 3,
             cooldown: 0,
             closed: false
+        }
+    });
+
+    await testRaces.basicTest({
+        contract: races.races,
+        race: {
+            "0": "Race #",
+            "1": globalParams.address0,
+            "2": [],
+            "3": 1,
+            "4": 0,
+            "5": 34,
+            "6": {
+                "0": [],
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [[]],
+                "5": [[]],
+                "6": [],
+                from: [],
+                to: [],
+                currency: [],
+                ids: [[]],
+                amounts: [[]],
+                paymentType: []
+            },
+            "7": 1,
+            "8": "0x00",
+            "name": "Race #",
+            "currency": globalParams.address0,
+            "participants": [],
+            "arena": 1,
+            "entryFee": 0,
+            "randomness": 34,
+            "payments": {
+                "0": [],
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [[]],
+                "5": [[]],
+                "6": [],
+                from: [],
+                to: [],
+                currency: [],
+                ids: [[]],
+                amounts: [[]],
+                paymentType: []
+            },
+            "queueId": 1,
+            "seed": "0x00"
         }
     });
 

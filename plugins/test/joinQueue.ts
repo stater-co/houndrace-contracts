@@ -1,6 +1,5 @@
 import { expect } from "chai";
 import { JoinQueueParams } from "../../common/dto/test/joinQueueParams.dto";
-import { Queue } from "../../typechain-types/contracts/generator/Index.sol/Generator";
 
 
 export async function joinQueue(
@@ -15,7 +14,7 @@ export async function safeJoinQueue(
   params: JoinQueueParams
 ): Promise<void> {
   const before: string | number = await params.houndsContract.hound(params.houndId);
-  //await joinQueue(params);
-  //const after: string | number = await params.houndsContract.hound(params.houndId);
-  //expect(Number(before) === Number(after) - 1);
+  await joinQueue(params);
+  const after: string | number = await params.houndsContract.hound(params.houndId);
+  expect(Number(before) === Number(after) - 1);
 }

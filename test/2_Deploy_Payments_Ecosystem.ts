@@ -26,7 +26,6 @@ export async function run(): Promise<PaymentEcosystem> {
     describe('Setting up the Payments System', function () {
   
       it('Deploy the HoundRace Potions contract', async function () {
-        console.log('Deploy the HoundRace Potions contract');
         houndracePotions = await deployContract({
           name: 'HoundracePotions',
           constructor: ['Ogars', 'OG'],
