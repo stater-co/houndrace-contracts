@@ -1,5 +1,5 @@
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { ShopRestricted } from '../typechain-types/contracts/shop/restricted/Index.sol/ShopRestricted';
 import { ShopMethods } from '../typechain-types/contracts/shop/methods/Index.sol/ShopMethods';
@@ -51,7 +51,7 @@ export async function run(): Promise<PaymentEcosystem> {
             'ANFT',
             'loot box uri',
             'second loot box uri',
-            params.address0,
+            globalParams.address0,
             false
           ]],
           props: {}
@@ -69,17 +69,17 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Payments methods contract', async function () {
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[params.address0,params.address0]],
+          constructor: [[globalParams.address0,globalParams.address0]],
           props: {}
         }) as ShopRestricted;
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[params.address0,shopRestricted.address]],
+          constructor: [[globalParams.address0,shopRestricted.address]],
           props: {}
         }) as ShopMethods;
         shopZerocost = await deployContract({
           name: 'ShopZerocost',
-          constructor: [[params.address0,shopRestricted.address]],
+          constructor: [[globalParams.address0,shopRestricted.address]],
           props: {}
         }) as ShopZerocost;
         shop = await deployContract({

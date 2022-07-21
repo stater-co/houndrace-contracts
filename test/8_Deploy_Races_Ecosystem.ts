@@ -1,6 +1,6 @@
 import { RacesExternalDependencies } from '../common/dto/test/racesExternalDependencies.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { Races } from '../typechain-types/contracts/races/Index.sol/Races';
 import { RacesMethods } from '../typechain-types/contracts/races/methods/Index.sol/RacesMethods';
@@ -23,14 +23,14 @@ export async function run(
         racesRestricted = await deployContract({
           name: 'RacesRestricted',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             [],
             500000000,
             true
@@ -43,14 +43,14 @@ export async function run(
         racesMethods = await deployContract({
           name: 'RacesMethods',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             [],
             500000000,
             true
@@ -68,7 +68,7 @@ export async function run(
             dependencies.arenasAddress,
             dependencies.houndsAddress,
             racesMethods.address,
-            params.address0,
+            globalParams.address0,
             dependencies.paymentsAddress,
             racesRestricted.address,
             otherOwner.address,

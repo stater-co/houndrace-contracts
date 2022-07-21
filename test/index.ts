@@ -28,8 +28,11 @@ import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
-import { params } from '../common/params';
+import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
+import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
+import { BigNumber } from 'ethers';
+import { Arena } from '../typechain-types/contracts/arenas/Index.sol/Arenas';
 
 
 async function main() {
@@ -162,10 +165,10 @@ async function main() {
             shop: payments.shop.address
            },
            fees: {
-            breedCostCurrency: params.address0,
-            breedFeeCurrency: params.address0,
-            refillStaminaCostCurrency: params.address0,
-            refillBreedingCostCurrency: params.address0,
+            breedCostCurrency: globalParams.address0,
+            breedFeeCurrency: globalParams.address0,
+            refillStaminaCostCurrency: globalParams.address0,
+            refillBreedingCostCurrency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
             refillCost: "0x2386F26FC10000",
@@ -218,6 +221,26 @@ async function main() {
 
     await testHounds.basicTest({
         hounds: hounds.hounds
+    });
+
+    await testArenas.basicTest({
+        arenas: arenas.arenas,
+        arena: {
+            "0": "Arena #",
+            "1": "arena_token_uri",
+            "2": globalParams.address0,
+            "3": BigNumber.from(100),
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            name: "Arena #",
+            token_uri: "arena_token_uri",
+            feeCurrency: globalParams.address0,
+            fee: BigNumber.from(100),
+            surface: 1,
+            distance: 1,
+            weather: 1
+        } as Arena.StructStructOutput
     });
 
 }

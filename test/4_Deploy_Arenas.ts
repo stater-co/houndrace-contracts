@@ -1,7 +1,6 @@
-import { Contract } from 'ethers';
 import { ArenasExternalDependencies } from '../common/dto/test/arenasExternalDependencies.dto';
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { ArenasRestricted } from '../typechain-types/contracts/arenas/restricted/Index.sol/ArenasRestricted';
 import { ArenasMethods } from '../typechain-types/contracts/arenas/methods/Index.sol/ArenasMethods';
@@ -26,8 +25,8 @@ export async function run(
           constructor: [[
             "HoundRace Arenas", 
             "HRA", 
-            params.address0, 
-            params.address0, 
+            globalParams.address0, 
+            globalParams.address0, 
             dependencies.paymentsAddress, 
             deployer.address, 
             dependencies.allowedCallers
@@ -43,8 +42,8 @@ export async function run(
           constructor: [[
             "HoundRace Arenas", 
             "HRA", 
-            params.address0, 
-            params.address0, 
+            globalParams.address0, 
+            globalParams.address0, 
             dependencies.paymentsAddress, 
             deployer.address, 
             dependencies.allowedCallers

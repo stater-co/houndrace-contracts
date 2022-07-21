@@ -1,6 +1,6 @@
 import { GeneratorExternalDependencies } from '../common/dto/test/generatorExternalDependencies.dto';
 import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { Generator } from '../typechain-types/contracts/generator/Index.sol/Generator';
 import { GeneratorMethods } from '../typechain-types/contracts/generator/methods/Index.sol/GeneratorMethods';
@@ -22,13 +22,13 @@ export async function run(
         generatorMethods = await deployContract({
           name: 'GeneratorMethods',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0
           ]],
           props: {}
         }) as GeneratorMethods;
@@ -38,13 +38,13 @@ export async function run(
         generatorZerocost = await deployContract({
           name: 'GeneratorZerocost',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0
           ]],
           props: {
             libraries: {

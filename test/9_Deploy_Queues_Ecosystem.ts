@@ -1,6 +1,6 @@
 import { QueuesExternalDependencies } from '../common/dto/test/queuesExternalDependencies.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { Queues } from '../typechain-types/contracts/queues/Index.sol/Queues';
 import { QueuesMethods } from '../typechain-types/contracts/queues/methods/Index.sol/QueuesMethods';
@@ -22,12 +22,12 @@ export async function run(
         queuesRestricted = await deployContract({
           name: 'QueuesRestricted',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             []
           ]],
           props: {}
@@ -38,12 +38,12 @@ export async function run(
         queuesMethods = await deployContract({
           name: 'QueuesMethods',
           constructor: [[
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
-            params.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             []
           ]],
           props: {}

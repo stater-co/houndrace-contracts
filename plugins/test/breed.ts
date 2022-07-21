@@ -1,19 +1,20 @@
 import { expect } from "chai";
 import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
 import { Hound } from '../../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { hound } from '../../common/params';
 
 export async function breed(
   params: BreedHoundsParams
 ) {
-  await params.contract.boostHoundBreeding(params.houndId, await params.contract.signer.getAddress());
+  await params.contract.breedHounds(params.hound1,params.hound2);
 }
 
 export async function safeBreed(
   params: BreedHoundsParams
 ) {
   const before: number = Number(await params.contract.id());
-  let houndMaleBefore: number;
-  let houndFemaleBefore: number;
+  let houndMaleBefore: Hound.StructStructOutput;
+  let houndFemaleBefore: Hound.StructStructOutput;
 
   let maleId: number = 0;
   let femaleId: number = 0;
@@ -34,30 +35,30 @@ export async function safeBreed(
 
   expect(maleId > 0 && femaleId > 0);
 
-  if ( maleId > 0 && femaleId > 0 ) {
+  houndMaleBefore = await params.contract.hound(maleId);
+  houndFemaleBefore = await params.contract.hound(femaleId);
 
-    houndMaleBefore = Number(await params.contract.hound(maleId));
-    houndFemaleBefore = Number(await params.contract.hound(femaleId));
+  const ownerOfMale: string = await params.contract.ownerOf(maleId);
+  const ownerOfFemale: string = await params.contract.ownerOf(femaleId);
+  const signer = await params.signer.getAddress();
 
-    const ownerOfMale = await params.contract.ownerOf(maleId);
-    const ownerOfFemale = await params.contract.ownerOf(femaleId);
+  let hound1 = maleId , hound2 = femaleId;
+  if ( ownerOfFemale !== signer && ownerOfMale === signer ) {
+    hound1 = maleId;
+    hound2 = femaleId;
+  } else if ( ownerOfMale !== signer && ownerOfFemale === signer ) {
+    hound1 = femaleId;
+    hound2 = maleId;
+  }
 
-    let hound1 = maleId , hound2 = femaleId;
-    if ( ownerOfFemale !== params.signer && ownerOfMale === owner ) {
-      hound1 = maleId;
-      hound2 = femaleId;
-    } else if ( ownerOfMale !== owner && ownerOfFemale === owner ) {
-      hound1 = femaleId;
-      hound2 = maleId;
-    }
+    const totalToPay = await params.contract.getBreedCost(hound1,hound2);
+    const houndToFillUp = await params.contract.id();
+    console.log("Hound to fill up: " + houndToFillUp);
+    await params.contract.breedHounds(hound1, hound2, { value : totalToPay });
+    await params.contract.initializeHound(houndToFillUp,hound);
 
-    const totalToPay = await hounds.getBreedCost(hound1,hound2);
-    let houndToFillUp = await hounds.id();
-    await hounds.breedHounds(hound1, hound2, { value : totalToPay });
-    await hounds.initializeHound(houndToFillUp,defaultHound);
-
-    const houndMaleAfter = await hounds.hound(maleId);
-    const houndFemaleAfter = await hounds.hound(femaleId);
-    expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter), "Hound male breeding status should be changed after breeding");
-    expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter), "Hound female breeding status should be changed after breeding");
+    const houndMaleAfter = await params.contract.hound(maleId);
+    const houndFemaleAfter = await params.contract.hound(femaleId);
+    expect(JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter));
+    expect(JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter));
 }

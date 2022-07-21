@@ -307,22 +307,6 @@ describe("Breed with other hounds", function () {
 
 describe("Races", function () {
 
-  it("Create terrain", async function () {
-    const [owner] = await ethers.getSigners();
-    let createTerrain = await arenas.createArena([
-      "name",
-      "token_url",
-      address0,
-      1000000,
-      1,
-      2,
-      3
-    ]);
-    let arenaOwner = await arenas.arenaOwner(1);
-
-    expect(createTerrain !== undefined, "Create terrain problem");
-  });
-
   it("Create queue", async function () {
 
     let queueToUse = defaultQueue;

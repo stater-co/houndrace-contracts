@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { params } from "../../common/params";
+import { globalParams } from "../../common/params";
 import { Hound } from '../../typechain-types/contracts/hounds/params/Index.sol/Params';
 
 export function checkHoundStructure(
@@ -10,7 +10,7 @@ export function checkHoundStructure(
     ( hound.breeding.availableToBreed === false || hound.breeding.availableToBreed === true ) && 
     ( hound.breeding.breedingCooldown >= 0 ) && 
     ( hound.breeding.breedingFee >= 0 ) && 
-    ( hound.breeding.breedingFeeCurrency === params.address0 || String(hound.breeding.breedingFeeCurrency).length > 0 ) && 
+    ( hound.breeding.breedingFeeCurrency === globalParams.address0 || String(hound.breeding.breedingFeeCurrency).length > 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
     ( hound.custom === true || hound.custom === false ) && 
     ( String(hound.title).length > 0 ) && 
@@ -29,7 +29,7 @@ export function checkHoundStructure(
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
     ( hound.stamina.staminaPerHour >= 0 ) && 
     ( hound.stamina.staminaRefill1x >= 0 ) && 
-    ( hound.stamina.staminaRefill1xCurrency === params.address0 || String(hound.stamina.staminaRefill1xCurrency).length > 0 ) && 
+    ( hound.stamina.staminaRefill1xCurrency === globalParams.address0 || String(hound.stamina.staminaRefill1xCurrency).length > 0 ) && 
     ( hound.stamina.staminaValue >= 0 )
   );
 

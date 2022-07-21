@@ -1,6 +1,6 @@
 import { HoundExternalDependencies } from '../common/dto/test/houndsExternalDependencies.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
-import { params } from '../common/params';
+import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { Hounds } from '../typechain-types/contracts/hounds/Index.sol/Hounds';
 import { HoundsMinter } from '../typechain-types/contracts/hounds/minter/Index.sol/HoundsMinter';
@@ -30,19 +30,19 @@ export async function run(
             "HR",
             [owner.address],
             [
-              params.address0,
+              globalParams.address0,
               otherOwner.address,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -63,19 +63,19 @@ export async function run(
             "HR",
             [owner.address],
             [
-              params.address0,
+              globalParams.address0,
               otherOwner.address,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -96,19 +96,19 @@ export async function run(
             "HR",
             [owner.address],
             [
-              params.address0,
+              globalParams.address0,
               otherOwner.address,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -134,14 +134,14 @@ export async function run(
               dependencies.paymentsAddress,
               houndsRestricted.address,
               houndsMinter.address,
-              params.address0,
+              globalParams.address0,
               houndsModifier.address,
               dependencies.shopsAddress
             ],[
-              params.address0,
-              params.address0,
-              params.address0,
-              params.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",

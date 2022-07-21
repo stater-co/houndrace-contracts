@@ -4,6 +4,7 @@ import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
 import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
+import { safeBreed } from "../../plugins/test/breed";
 
 
 async function basicTest(
@@ -33,16 +34,18 @@ async function basicTest(
       );
     });
 
-      /*
-    
-      it("Breed", async function () {
-        await breed2Hounds();
+    it("Mint & Breed", async function () {
+      let newCreatedHoundId: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: hound as Hound.StructStructOutput
       });
-    
-      it("Breed again", async function () {
-        await breed2Hounds();
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: createdHoundId,
+        hound2: newCreatedHoundId,
+        signer: dependencies.signer
       });
-    */
+    });
     
   });
 }

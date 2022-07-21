@@ -1,5 +1,6 @@
-import { ethers } from "ethers";
+import { Contract, Signer } from "ethers";
 
 export interface HoundsBasicTests {
-    hounds: ethers.Contract;
+    hounds: Contract;
+    signer: Signer;
 }
