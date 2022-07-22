@@ -1510,9 +1510,9 @@ async function main() {
           [
             arenas.address,
             hounds.address,
-            queuesMethods.address,
+            address0,
             payments.address,
-            queuesRestricted.address,
+            address0,
             races.address,
             []
           ]
