@@ -11,14 +11,18 @@ contract QueuesMethods is Params {
         Queue.Struct memory _queue = queues[theId];
 
         uint256[] memory replacedParticipants = _queue.participants;
+        uint256[] memory replacedEnqueueDates = _queue.enqueueDates;
         delete queues[theId].participants;
+        delete queues[theId].enqueueDates;
 
         bool exists;
         for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
             if ( replacedParticipants[i] == hound ) {
                 exists = true;
+                require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
             } else {
                 queues[theId].participants.push(replacedParticipants[i]);
+                queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
             }
         }
         require(exists);
@@ -58,6 +62,7 @@ contract QueuesMethods is Params {
         }
 
         queues[theId].participants.push(hound);
+        queues[theId].enqueueDates.push(block.timestamp);
 
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);

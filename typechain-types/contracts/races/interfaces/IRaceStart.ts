@@ -55,6 +55,7 @@ export declare namespace Queue {
     name: PromiseOrValue<string>;
     currency: PromiseOrValue<string>;
     participants: PromiseOrValue<BigNumberish>[];
+    enqueueDates: PromiseOrValue<BigNumberish>[];
     arena: PromiseOrValue<BigNumberish>;
     entryFee: PromiseOrValue<BigNumberish>;
     startDate: PromiseOrValue<BigNumberish>;
@@ -70,6 +71,7 @@ export declare namespace Queue {
     string,
     string,
     BigNumber[],
+    BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
@@ -83,6 +85,7 @@ export declare namespace Queue {
     name: string;
     currency: string;
     participants: BigNumber[];
+    enqueueDates: BigNumber[];
     arena: BigNumber;
     entryFee: BigNumber;
     startDate: BigNumber;
@@ -97,7 +100,7 @@ export declare namespace Queue {
 
 export interface IRaceStartInterface extends utils.Interface {
   functions: {
-    "raceStart((string,address,uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart((string,address,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
   };
 
   getFunction(nameOrSignatureOrTopic: "raceStart"): FunctionFragment;

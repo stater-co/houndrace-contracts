@@ -38,6 +38,11 @@ const _abi = [
             type: "uint256[]",
           },
           {
+            internalType: "uint256[]",
+            name: "enqueueDates",
+            type: "uint256[]",
+          },
+          {
             internalType: "uint256",
             name: "arena",
             type: "uint256",

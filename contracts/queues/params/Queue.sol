@@ -12,6 +12,8 @@ library Queue {
 
         uint256[] participants;
 
+        uint256[] enqueueDates;
+
         uint256 arena;
 
         uint256 entryFee;

@@ -90,6 +90,7 @@ export declare namespace Queue {
     name: PromiseOrValue<string>;
     currency: PromiseOrValue<string>;
     participants: PromiseOrValue<BigNumberish>[];
+    enqueueDates: PromiseOrValue<BigNumberish>[];
     arena: PromiseOrValue<BigNumberish>;
     entryFee: PromiseOrValue<BigNumberish>;
     startDate: PromiseOrValue<BigNumberish>;
@@ -105,6 +106,7 @@ export declare namespace Queue {
     string,
     string,
     BigNumber[],
+    BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
@@ -118,6 +120,7 @@ export declare namespace Queue {
     name: string;
     currency: string;
     participants: BigNumber[];
+    enqueueDates: BigNumber[];
     arena: BigNumber;
     entryFee: BigNumber;
     startDate: BigNumber;
