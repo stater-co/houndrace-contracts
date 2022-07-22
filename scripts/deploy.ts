@@ -1,6 +1,10 @@
 import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
 import { run } from "hardhat";
+import { deployContract } from '../plugins/test/deployContract';
+import { Sortings } from '../typechain-types/contracts/utils/Sortings';
+import { Converters } from '../typechain-types/contracts/utils/Converters';
+import { Randomness } from '../typechain-types/contracts/randomness/Index.sol/Randomness';
 const { ethers } = require("ethers");
 
 
@@ -36,68 +40,38 @@ verifications.update(0, {
 const address0: string = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
-const defaultHound: Array<any> = [
-  [ 0, 0, 0, 0],
-  [ 10000000, 10000000, 100, 1, 100 ],
-  [ 0, 100000, 1000, true ],
-  [ 1, 1, 0, 0, maleBoilerplateGene ],
-  "",
-  "",
-  true,
-  false
-];
-const defaultQueues: Array<any> = [[
-  "Test queue",
-  address0,
-  [],
-  1, // terrain
-  5000000000,
-  address0,
-  0,
-  0,
-  1,
-  1,
-  10,
-  0,
-  false
-]];
-const defaultRace: Array<any> = [
-  "race name",
-  address0,
-  [1,2,3,4,5,6,7,8,9,10],
-  1,
-  500,
-  1,
-  55,
-  '0x00'
-];
-
 
 async function main() {
 
   try {
 
     DeploymentLogger('##############################################');
-    const [owner] = await ethers.getSigners();
 
-    const Converters = await ethers.getContractFactory("Converters");
-    const converters = await Converters.deploy();
+    const converters = await deployContract({
+      name: 'Converters',
+      constructor: [],
+      props: {}
+    }) as Converters;
     DeploymentLogger('export CONVERTERS=' + converters.address);
     deployments.update(1, {
       step: "Deploy sortings"
     });
 
-    const Sortings = await ethers.getContractFactory("Sortings");
-    const sortings = await Sortings.deploy();
-    await sortings.deployed();
+    const sortings = await deployContract({
+      name: 'Sortings',
+      constructor: [],
+      props: {}
+    }) as Sortings;
     DeploymentLogger('export SORTINGS=' + sortings.address);
     deployments.update(2, {
       step: "Deploy randomness"
     });
 
-    const Randomness = await ethers.getContractFactory("Randomness");
-    const randomness = await Randomness.deploy();
-    await randomness.deployed();
+    const randomness = await deployContract({
+      name: 'Randomness',
+      constructor: [],
+      props: {}
+    }) as Randomness;
     DeploymentLogger('export RANDOMNESS=' + randomness.address);
     deployments.update(3, {
       step: "Deploy payment methods"
