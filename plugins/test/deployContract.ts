@@ -10,6 +10,8 @@ export async function deployContract(contractParams: ContractParams): Promise<et
     const contract: ethers.Contract = await Contract.deploy(...contractParams.constructor);
     await contract.deployed();
   
-    deploymentMessage(contractParams.name,contract.address);
+    if ( contractParams.logs ) {
+      deploymentMessage(contractParams.name,contract.address);
+    }
     return contract;
   }

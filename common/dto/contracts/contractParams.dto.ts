@@ -3,5 +3,6 @@
 export interface ContractParams {
     name: string;
     constructor: Array<any>;
-    props: object
+    props: object;
+    logs?: boolean;
 }
