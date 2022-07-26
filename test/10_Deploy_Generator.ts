@@ -2,9 +2,9 @@ import { GeneratorExternalDependencies } from '../common/dto/test/generatorExter
 import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Generator } from '../typechain-types/contracts/generator/Index.sol/Generator';
-import { GeneratorMethods } from '../typechain-types/contracts/generator/methods/Index.sol/GeneratorMethods';
-import { GeneratorZerocost } from '../typechain-types/contracts/generator/zerocost/Index.sol/GeneratorZerocost';
+import { Generator } from '../typechain-types/Generator';
+import { GeneratorMethods } from '../typechain-types/GeneratorMethods';
+import { GeneratorZerocost } from '../typechain-types/GeneratorZerocost';
 
 
 let generatorMethods: GeneratorMethods;

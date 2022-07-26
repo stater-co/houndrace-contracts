@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { globalParams } from "../../common/params";
-import { Hound } from '../../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { Hound } from '../../typechain-types/Hounds';
 
 export function checkHoundStructure(
   hound: Hound.StructStruct

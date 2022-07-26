@@ -2,9 +2,9 @@ import { QueuesExternalDependencies } from '../common/dto/test/queuesExternalDep
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Queues } from '../typechain-types/contracts/queues/Index.sol/Queues';
-import { QueuesMethods } from '../typechain-types/contracts/queues/methods/Index.sol/QueuesMethods';
-import { QueuesRestricted } from '../typechain-types/contracts/queues/restricted/Index.sol/QueuesRestricted';
+import { Queues } from '../typechain-types/Queues';
+import { QueuesMethods } from '../typechain-types/QueuesMethods';
+import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 
 
 let queuesRestricted: QueuesRestricted;

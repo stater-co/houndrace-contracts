@@ -2,9 +2,9 @@ import { ArenasExternalDependencies } from '../common/dto/test/arenasExternalDep
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { ArenasRestricted } from '../typechain-types/contracts/arenas/restricted/Index.sol/ArenasRestricted';
-import { ArenasMethods } from '../typechain-types/contracts/arenas/methods/Index.sol/ArenasMethods';
-import { Arenas } from '../typechain-types/contracts/arenas/Index.sol/Arenas';
+import { ArenasRestricted } from '../typechain-types/ArenasRestricted';
+import { ArenasMethods } from '../typechain-types/ArenasMethods';
+import { Arenas } from '../typechain-types/Arenas';
 const { ethers } = require("hardhat");
 
 let arenasRestricted: ArenasRestricted;

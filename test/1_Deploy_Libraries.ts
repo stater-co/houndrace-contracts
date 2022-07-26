@@ -1,7 +1,7 @@
 import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
 import { deployContract } from '../plugins/test/deployContract';
-import { Converters } from '../typechain-types/contracts/utils/Converters';
-import { Sortings } from '../typechain-types/contracts/utils/Sortings';
+import { Converters } from '../typechain-types/Converters';
+import { Sortings } from '../typechain-types/Sortings';
 
 
 let convertersLibrary: Converters;

@@ -2,8 +2,8 @@ import { IncubatorExternalDependencies } from '../common/dto/test/incubatorExter
 import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Incubator } from '../typechain-types/contracts/incubator/Index.sol/Incubator';
-import { IncubatorMethods } from '../typechain-types/contracts/incubator/methods/Index.sol/IncubatorMethods';
+import { Incubator } from '../typechain-types/Incubator';
+import { IncubatorMethods } from '../typechain-types/IncubatorMethods';
 
 
 let incubatorMethods: IncubatorMethods;

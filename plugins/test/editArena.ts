@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { EditArenaParams } from "../../common/dto/test/editArenaParams.dto";
-import { Arena } from "../../typechain-types/contracts/arenas/Index.sol/Arenas";
+import { Arena } from "../../typechain-types/Arenas";
 
 export async function editArena(
   params: EditArenaParams

@@ -2,9 +2,9 @@ import { RacesExternalDependencies } from '../common/dto/test/racesExternalDepen
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Races } from '../typechain-types/contracts/races/Index.sol/Races';
-import { RacesMethods } from '../typechain-types/contracts/races/methods/Index.sol/RacesMethods';
-import { RacesRestricted } from '../typechain-types/contracts/races/restricted/Index.sol/RacesRestricted';
+import { Races } from '../typechain-types/Races';
+import { RacesMethods } from '../typechain-types/RacesMethods';
+import { RacesRestricted } from '../typechain-types/RacesRestricted';
 const { ethers } = require("hardhat");
 
 

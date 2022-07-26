@@ -2,7 +2,7 @@ import { GeneticsExternalDependencies } from '../common/dto/test/geneticsExterna
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Genetics } from '../typechain-types/contracts/genetics/Index.sol/Genetics';
+import { Genetics } from '../typechain-types/Genetics';
 
 
 let genetics: Genetics;

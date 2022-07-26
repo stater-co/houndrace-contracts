@@ -3,7 +3,7 @@ import { hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Hound } from "../../typechain-types/contracts/hounds/Index.sol/Hounds";
+import { Hound } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";

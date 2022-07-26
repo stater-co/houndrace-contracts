@@ -1,6 +1,6 @@
 import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
 import { deployContract } from '../plugins/test/deployContract';
-import { Randomness } from '../typechain-types/contracts/randomness/Index.sol/Randomness';
+import { Randomness } from '../typechain-types/Randomness';
 
 
 let randomness: Randomness;

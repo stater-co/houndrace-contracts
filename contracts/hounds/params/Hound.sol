@@ -17,6 +17,7 @@ library Hound {
         uint256 generation;
         uint256 birthDate;
         uint32[54] geneticSequence;
+        string extensionTraits;
     }
 
     struct Stamina {

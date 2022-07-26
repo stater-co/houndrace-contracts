@@ -2,10 +2,10 @@ import { HoundExternalDependencies } from '../common/dto/test/houndsExternalDepe
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { Hounds } from '../typechain-types/contracts/hounds/Index.sol/Hounds';
-import { HoundsMinter } from '../typechain-types/contracts/hounds/minter/Index.sol/HoundsMinter';
-import { HoundsModifier } from '../typechain-types/contracts/hounds/modifier/Index.sol/HoundsModifier';
-import { HoundsRestricted } from '../typechain-types/contracts/hounds/restricted/Index.sol/HoundsRestricted';
+import { Hounds } from '../typechain-types/Hounds';
+import { HoundsMinter } from '../typechain-types/HoundsMinter';
+import { HoundsModifier } from '../typechain-types/HoundsModifier';
+import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
 const { ethers } = require("hardhat");
 
 

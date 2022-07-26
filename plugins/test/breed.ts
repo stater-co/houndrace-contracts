@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
-import { Hound } from '../../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { Hound } from '../../typechain-types/Hounds';
 import { hound } from '../../common/params';
 
 export async function breed(

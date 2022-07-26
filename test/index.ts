@@ -34,7 +34,6 @@ import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { BigNumber } from 'ethers';
-import { Arena } from '../typechain-types/contracts/arenas/Index.sol/Arenas';
 
 
 async function main() {
@@ -243,7 +242,7 @@ async function main() {
             surface: 1,
             distance: 1,
             weather: 1
-        } as Arena.StructStructOutput
+        }
     });
 
     await testQueues.basicTest({

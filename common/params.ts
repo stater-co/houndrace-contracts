@@ -1,4 +1,4 @@
-import { Hound } from '../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { Hound } from '../typechain-types/Hounds';
 import { BigNumber } from 'ethers';
 
 interface GlobalParams {
@@ -42,7 +42,8 @@ export const houndIdentity: Hound.IdentityStruct = {
     femaleParent: 0,
     generation: 1,
     geneticSequence: globalParams.maleBoilerplateGene,
-    maleParent: 0
+    maleParent: 0,
+    extensionTraits: ""
 }
 
 export const hound: Hound.StructStruct = {
