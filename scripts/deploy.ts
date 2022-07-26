@@ -4,6 +4,7 @@ import { run } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
+import { Loot } from '../typechain-types/Loot';
 import { Randomness } from '../typechain-types/Randomness';
 import { Payments } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
@@ -69,6 +70,7 @@ async function main() {
 
   try {
 
+    /*
     DeploymentLogger('##############################################');
 
     const converters = await deployContract({
@@ -664,7 +666,19 @@ async function main() {
     deployments.update(27, {
       step: "Finished!"
     });
-      
+    */  
+
+    const lootboxes = await deployContract({
+      name: 'Loot',
+      constructor: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6D1DA9E23204D331aa1643Ad670F86aeD929C8CA", true]],
+      props: {}
+    }) as Loot;
+    DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
+    deployments.update(1, {
+      step: "Deploy sortings"
+    });
+
+    /*
     try {
       await queuesMethods.setGlobalParameters({
         arenas: arenas.address,
@@ -1523,6 +1537,16 @@ async function main() {
     verifications.update(26, {
       step: "Finished!"
     });
+    */
+
+    try {
+      await run("verify:verify", {
+        address: lootboxes.address,
+        constructorArguments: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6D1DA9E23204D331aa1643Ad670F86aeD929C8CA", true]]
+      });
+    } catch (err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
 
   } catch(err) {
     console.error(err);
