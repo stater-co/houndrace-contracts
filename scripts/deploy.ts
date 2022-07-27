@@ -71,6 +71,7 @@ async function main() {
   try {
 
     /*
+
     DeploymentLogger('##############################################');
 
     const converters = await deployContract({
@@ -402,7 +403,7 @@ async function main() {
     });
 
     const hounds = await deployContract({
-      name: 'HoundsMinter',
+      name: 'Hounds',
       constructor: [
         [
           "HoundRace",
@@ -414,7 +415,7 @@ async function main() {
             payments.address,
             houndsRestricted.address,
             houndsMinter.address,
-            address0,
+            globalParams.address0,
             houndsModifier.address,
             shop.address
           ],[
@@ -493,10 +494,10 @@ async function main() {
           arenas.address,
           hounds.address,
           racesMethods.address,
-          address0,
+          globalParams.address0,
           payments.address,
           racesRestricted.address,
-          address0,
+          globalParams.address0,
           [],
           500000000,
           false
@@ -613,9 +614,9 @@ async function main() {
         [
           arenas.address,
           hounds.address,
-          address0,
+          globalParams.address0,
           payments.address,
-          address0,
+          globalParams.address0,
           races.address,
           []
         ]
@@ -633,9 +634,9 @@ async function main() {
         [
           arenas.address,
           hounds.address,
-          address0,
+          globalParams.address0,
           payments.address,
-          address0,
+          globalParams.address0,
           races.address,
           []
         ]
@@ -653,9 +654,9 @@ async function main() {
         [
           arenas.address,
           hounds.address,
-          address0,
+          globalParams.address0,
           payments.address,
-          address0,
+          globalParams.address0,
           races.address,
           []
         ]
@@ -666,11 +667,11 @@ async function main() {
     deployments.update(27, {
       step: "Finished!"
     });
-    */  
+    */
 
     const lootboxes = await deployContract({
       name: 'Loot',
-      constructor: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6D1DA9E23204D331aa1643Ad670F86aeD929C8CA", true]],
+      constructor: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6cA847D208c476bEbB0eBdb09EAE351642C40c78", true]],
       props: {}
     }) as Loot;
     DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
@@ -1039,7 +1040,7 @@ async function main() {
         address: shopRestricted.address,
         constructorArguments: [
           [
-            address0,address0,address0
+            globalParams.address0, globalParams.address0, globalParams.address0
           ]
         ]
       });
@@ -1055,7 +1056,7 @@ async function main() {
         address: shopMethods.address,
         constructorArguments: [
           [
-            address0,address0,address0
+            globalParams.address0, globalParams.address0, globalParams.address0
           ]
         ]
       });
@@ -1087,7 +1088,7 @@ async function main() {
         address: arenasRestricted.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0, address0, address0, address0, []
+            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []
           ]
         ]
       });
@@ -1103,7 +1104,7 @@ async function main() {
         address: arenasMethods.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", address0, address0, address0, address0, []
+            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []
           ]
         ]
       });
@@ -1158,9 +1159,9 @@ async function main() {
         address: incubatorMethods.address,
         constructorArguments: [
           [
-            address0,
-            address0,
-            address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             345600,
             1800,
             2419200,
@@ -1206,19 +1207,19 @@ async function main() {
             "HR",
             [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
             [
-              address0,
+              globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              address0,
-              address0,
-              address0,
-              address0,
-              address0,
-              address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              address0,
-              address0,
-              address0,
-              address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1245,19 +1246,19 @@ async function main() {
             "HR",
             [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
             [
-              address0,
+              globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              address0,
-              address0,
-              address0,
-              address0,
-              address0,
-              address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              address0,
-              address0,
-              address0,
-              address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1283,19 +1284,19 @@ async function main() {
             "HR",
             [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
             [
-              address0,
+              globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              address0,
-              address0,
-              address0,
-              address0,
-              address0,
-              address0
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              address0,
-              address0,
-              address0,
-              address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1326,14 +1327,14 @@ async function main() {
               payments.address,
               houndsRestricted.address,
               houndsMinter.address,
-              address0,
+              globalParams.address0,
               houndsModifier.address,
               shop.address
             ],[
-              address0,
-              address0,
-              address0,
-              address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               "0x38D7EA4C68000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1355,14 +1356,14 @@ async function main() {
         address: racesRestricted.address,
         constructorArguments: [
           [
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             [],
             500000000,
             false
@@ -1381,14 +1382,14 @@ async function main() {
         address: racesMethods.address,
         constructorArguments: [
           [
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             [],
             500000000,
             false
@@ -1411,10 +1412,10 @@ async function main() {
             arenas.address,
             hounds.address,
             racesMethods.address,
-            address0,
+            globalParams.address0,
             payments.address,
             racesRestricted.address,
-            address0,
+            globalParams.address0,
             [],
             500000000,
             false
@@ -1433,13 +1434,13 @@ async function main() {
         address: generatorMethods.address, 
         constructorArguments: [
           [
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0,
-            address0
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0
           ]
         ]
       });
@@ -1479,9 +1480,9 @@ async function main() {
           [
             arenas.address,
             hounds.address,
-            address0,
+            globalParams.address0,
             payments.address,
-            address0,
+            globalParams.address0,
             races.address,
             []
           ]
@@ -1501,9 +1502,9 @@ async function main() {
           [
             arenas.address,
             hounds.address,
-            address0,
+            globalParams.address0,
             payments.address,
-            address0,
+            globalParams.address0,
             races.address,
             []
           ]
@@ -1523,9 +1524,9 @@ async function main() {
           [
             arenas.address,
             hounds.address,
-            address0,
+            globalParams.address0,
             payments.address,
-            address0,
+            globalParams.address0,
             races.address,
             []
           ]
@@ -1542,7 +1543,7 @@ async function main() {
     try {
       await run("verify:verify", {
         address: lootboxes.address,
-        constructorArguments: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6D1DA9E23204D331aa1643Ad670F86aeD929C8CA", true]]
+        constructorArguments: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6cA847D208c476bEbB0eBdb09EAE351642C40c78", true]]
       });
     } catch (err) {
       DeploymentError((err as NodeJS.ErrnoException).message);

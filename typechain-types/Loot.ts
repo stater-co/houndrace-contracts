@@ -76,6 +76,7 @@ export interface LootInterface extends utils.Interface {
     "lootboxes(uint256)": FunctionFragment;
     "mint((uint256,address,uint256[])[])": FunctionFragment;
     "name()": FunctionFragment;
+    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
@@ -113,6 +114,10 @@ export interface LootInterface extends utils.Interface {
     values: [Box.StructStruct[]]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "onERC721Received",
+    values: [string, string, BigNumberish, BytesLike]
+  ): string;
   encodeFunctionData(functionFragment: "open", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -164,6 +169,10 @@ export interface LootInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "lootboxes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC721Received",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "open", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
@@ -316,6 +325,14 @@ export interface Loot extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<[string]>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     open(
       boxId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -424,6 +441,14 @@ export interface Loot extends BaseContract {
 
   name(overrides?: CallOverrides): Promise<string>;
 
+  onERC721Received(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    arg3: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   open(
     boxId: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -522,6 +547,14 @@ export interface Loot extends BaseContract {
     mint(boxes: Box.StructStruct[], overrides?: CallOverrides): Promise<void>;
 
     name(overrides?: CallOverrides): Promise<string>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     open(boxId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -657,6 +690,14 @@ export interface Loot extends BaseContract {
 
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     open(
       boxId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -757,6 +798,14 @@ export interface Loot extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    onERC721Received(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     open(
       boxId: BigNumberish,
