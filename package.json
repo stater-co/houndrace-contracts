@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx hardhat test",
     "typegenall": "typechain artifacts/contracts/payments/methods/Index.sol/Payments.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/hounds/Index.sol/Hounds.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/arenas/Index.sol/Arenas.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/genetics/Index.sol/Genetics.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/incubator/Index.sol/Incubator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/ogars/Data.sol/HoundracePotions.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/queues/Index.sol/Queues.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/races/Index.sol/Races.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/generator/Index.sol/Generator.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads && typechain artifacts/contracts/randomness/Index.sol/Randomness.json --target=ethers-v5 --out-dir=$TYPEGEN_ALL_PATH --always-generate-overloads",
     "compile": "hardhat compile",
     "safe-hardhat-test": "echo 'Recommended for node > 16.x' && export SET NODE_OPTIONS=--openssl-legacy-provider && hardhat test",
-    "deployments-to-env": "cd plugins && node deployments-to-env.js",
-    "deployments-to-yml": "cd plugins && node deployments-to-yml.js"
+    "deployments-to-env": "cd plugins && ts-node deployments-to-env.ts",
+    "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts"
   },
   "repository": {
     "type": "git",
@@ -28,26 +28,30 @@
     "url": "https://github.com/stater-co/houndrace-contracts/issues"
   },
   "homepage": "https://github.com/stater-co/houndrace-contracts#readme",
-  "dependencies": {
-    "cli-progress": "^3.10.0",
-    "ethereumjs-tx": "^2.1.2",
-    "winston": "^3.6.0"
-  },
   "devDependencies": {
-    "@typechain/ethers-v5": "^9.0.0",
-    "typechain": "^8.0.0",
-    "@nomiclabs/hardhat-etherscan": "^3.0.0",
-    "hardhat": "^2.8.3",
-    "hardhat-contract-sizer": "^2.4.0",
-    "hardhat-gas-reporter": "^1.0.7",
-    "hardhat-tracer": "^1.0.0-alpha.6",
-    "@nomiclabs/hardhat-ethers": "^2.0.4",
-    "@nomiclabs/hardhat-waffle": "^2.0.2",
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.2",
+    "@nomicfoundation/hardhat-network-helpers": "^1.0.3",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
+    "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers@^0.3.0-beta.13",
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@openzeppelin/contracts": "^4.4.2",
+    "@typechain/ethers-v5": "^9.0.0",
+    "@typechain/hardhat": "^6.1.2",
+    "typechain": "^8.0.0",
+    "@types/chai": "^4.3.1",
+    "@types/git-user-name": "^2.0.1",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.0.3",
     "chai": "^4.3.6",
-    "eth-gas-reporter": "^0.2.25",
-    "ethereum-waffle": "^3.4.0",
-    "ethers": "^5.5.4",
-    "solidity-coverage": "^0.7.20"
+    "cli-progress": "^3.11.2",
+    "git-user-name": "^2.0.0",
+    "hardhat": "^2.10.0",
+    "hardhat-deploy": "^0.11.11",
+    "hardhat-deploy-ethers": "^0.3.0-beta.13",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.7.21",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4",
+    "winston": "^3.8.1"
   }
 }

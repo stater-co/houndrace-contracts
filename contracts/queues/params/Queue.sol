@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity <=0.8.15;
+pragma solidity 0.8.15;
 import '../../payments/params/Payment.sol';
 
 library Queue {
@@ -11,6 +11,8 @@ library Queue {
         address currency;
 
         uint256[] participants;
+
+        uint256[] enqueueDates;
 
         uint256 arena;
 

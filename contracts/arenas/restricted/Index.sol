@@ -22,7 +22,11 @@ contract ArenasRestricted is Params {
     
     function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
         require(ownerOf(theId) == owner());
+        uint256 oldFee = arenas[theId].fee;
+        address oldFeeCurrency = arenas[theId].feeCurrency;
         arenas[theId] = arena;
+        arenas[theId].fee = oldFee;
+        arenas[theId].feeCurrency = oldFeeCurrency;
         emit EditArena(theId,msg.sender,arena);
     }
 

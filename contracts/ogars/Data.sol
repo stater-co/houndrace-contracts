@@ -38,6 +38,8 @@ contract HoundracePotions is Context, Ownable, IERC20, IERC20Metadata {
 
     uint256 private _totalSupply;
 
+
+
     string private _name;
     string private _symbol;
 

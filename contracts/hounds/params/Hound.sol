@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity <=0.8.15;
+pragma solidity 0.8.15;
 
 library Hound {
 
@@ -17,6 +17,7 @@ library Hound {
         uint256 generation;
         uint256 birthDate;
         uint32[54] geneticSequence;
+        string extensionTraits;
     }
 
     struct Stamina {

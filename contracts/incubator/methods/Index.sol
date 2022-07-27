@@ -47,7 +47,8 @@ contract IncubatorMethods is Params {
             hound2Id,
             hound1.identity.generation + hound2.identity.generation,
             block.timestamp, // evm timestamps are in seconds
-            genetics // preferences will be extracted from this 
+            genetics, // preferences will be extracted from this 
+            ""
         );
 
         return Hound.Struct(
