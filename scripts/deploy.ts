@@ -70,8 +70,6 @@ async function main() {
 
   try {
 
-    /*
-
     DeploymentLogger('##############################################');
 
     const converters = await deployContract({
@@ -667,7 +665,6 @@ async function main() {
     deployments.update(27, {
       step: "Finished!"
     });
-    */
 
     const lootboxes = await deployContract({
       name: 'Loot',
@@ -679,7 +676,6 @@ async function main() {
       step: "Deploy sortings"
     });
 
-    /*
     try {
       await queuesMethods.setGlobalParameters({
         arenas: arenas.address,
@@ -1538,7 +1534,6 @@ async function main() {
     verifications.update(26, {
       step: "Finished!"
     });
-    */
 
     try {
       await run("verify:verify", {
