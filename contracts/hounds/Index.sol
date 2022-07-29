@@ -48,9 +48,4 @@ contract Hounds is Params {
         oldQueueId = abi.decode(output,(uint256)); 
     }
 
-    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
-        require(ownerOf(hound1) == msg.sender);
-        return (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
-    }
-
 }

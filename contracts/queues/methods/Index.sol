@@ -49,6 +49,7 @@ contract QueuesMethods is Params {
     }
 
     function enqueue(uint256 theId, uint256 hound) external payable {
+
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
             ((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
@@ -69,6 +70,16 @@ contract QueuesMethods is Params {
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
+            Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
+
+            IHandleArenaUsage(control.arenas).handleArenaUsage{ 
+                value: arena.feeCurrency == address(0) ? arena.fee : 0
+            }(queues[theId].arena);
+
+            IHandleRaceLoot(control.races).handleRaceLoot(
+                queues[theId].payments
+            );
+
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].participants;
@@ -78,6 +89,7 @@ contract QueuesMethods is Params {
         }
     
         emit PlayerEnqueue(theId,hound,msg.sender);
+
     }
 
 }

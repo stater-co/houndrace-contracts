@@ -19,10 +19,17 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
+        console.log(msg.sender);
+        console.log(matingSeason, ownerOf(hound1));
+
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.fees.breedCost;
+        amounts[0] = (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
         
+        console.log("OK !!");
+
+        console.log(control.fees.breedCostCurrency);
+
         IPay(control.boilerplate.payments).pay{
             value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
@@ -38,7 +45,7 @@ contract HoundsMinter is Params {
         IPay(control.boilerplate.payments).pay{
             value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
         }(
-            msg.sender,
+            address(this),
             control.boilerplate.staterApi,
             control.fees.breedFeeCurrency,
             new uint256[](0),
@@ -54,7 +61,7 @@ contract HoundsMinter is Params {
             IPay(control.boilerplate.payments).pay{
                 value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
             }(
-                msg.sender,
+                address(this),
                 ownerOf(hound2),
                 control.fees.breedCostCurrency,
                 new uint256[](0),
@@ -76,6 +83,7 @@ contract HoundsMinter is Params {
 
         emit BreedHound(id,msg.sender,offspring);
         ++id;
+
     } 
 
 }

@@ -28,6 +28,7 @@ import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
+import { test as testHoundsAdvanced } from './19_Hounds/19_2_Hounds_Custom_Token_Tests';
 import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
 import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
@@ -39,7 +40,9 @@ import { BigNumber } from 'ethers';
 async function main() {
 
     const signerDependency: SignerDependency = {
-        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY))
+        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY)),
+        signer2: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY2)),
+        signer3: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY3))
     };
 
     const libraries: DeployedLibraries = await runLibraries();
@@ -357,6 +360,50 @@ async function main() {
             "queueId": 1,
             "seed": "0x00"
         }
+    });
+
+    await setHounds({
+        hounds: hounds.hounds,
+        houndsMinter: hounds.houndsMinter,
+        houndsModifier: hounds.houndsModifier,
+        houndsRestricted: hounds.houndsRestricted,
+        constructor: {
+           name: "HoundRace",
+           symbol: "HR",
+           allowedCallers: [
+            hounds.hounds.address,
+            races.races.address,
+            queues.queues.address
+           ],
+           boilerplate: {
+            incubator: incubators.incubator.address,
+            staterApi: await signerDependency.signer.getAddress(),
+            houndModifier: hounds.houndsModifier.address,
+            hounds: hounds.hounds.address,
+            minter: hounds.houndsMinter.address,
+            restricted: hounds.houndsRestricted.address,
+            payments: payments.payments.address,
+            shop: payments.shop.address
+           },
+           fees: {
+            breedCostCurrency: payments.houndracePotions.address,
+            breedFeeCurrency: payments.houndracePotions.address,
+            refillStaminaCostCurrency: payments.houndracePotions.address,
+            refillBreedingCostCurrency: payments.houndracePotions.address,
+            breedCost: "0xB1A2BC2EC50000",
+            breedFee: "0x2386F26FC10000",
+            refillCost: "0x2386F26FC10000",
+            refillBreedingCooldownCost: "0x2386F26FC10000",
+            refillStaminaCooldownCost: "0x2386F26FC10000"
+           }
+        }
+    });
+
+    await testHoundsAdvanced.advancedTests({
+        hounds: hounds.hounds,
+        erc20: payments.houndracePotions,
+        payments: payments.payments,
+        ...signerDependency
     });
 
 }

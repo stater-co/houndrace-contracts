@@ -9,6 +9,7 @@ import '../../payments/interfaces/IPay.sol';
 import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../utils/Withdrawable.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -54,6 +55,11 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
+    }
+
+    function getBreedCost(uint256 hound1, uint256 hound2) public view returns(uint256) {
+        require(ownerOf(hound1) == msg.sender);
+        return (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
     }
 
     fallback() external payable {}

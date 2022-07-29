@@ -247,6 +247,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getBreedCost(uint256,uint256)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
@@ -282,6 +283,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBreedCost",
+    values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -367,6 +372,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBreedCost",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
@@ -599,6 +608,12 @@ export interface HoundsRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getBreedCost(
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
     hound(
       theId: BigNumberish,
       overrides?: CallOverrides
@@ -769,6 +784,12 @@ export interface HoundsRestricted extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getBreedCost(
+    hound1: BigNumberish,
+    hound2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
   hound(
     theId: BigNumberish,
     overrides?: CallOverrides
@@ -929,6 +950,12 @@ export interface HoundsRestricted extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getBreedCost(
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     hound(
       theId: BigNumberish,
@@ -1190,6 +1217,12 @@ export interface HoundsRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getBreedCost(
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     hound(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     houndOwner(
@@ -1324,6 +1357,12 @@ export interface HoundsRestricted extends BaseContract {
 
     getApproved(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getBreedCost(
+      hound1: BigNumberish,
+      hound2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
