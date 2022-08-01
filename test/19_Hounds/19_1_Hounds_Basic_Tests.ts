@@ -7,6 +7,7 @@ import { Hound } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
+const { ethers } = require('hardhat');
 
 
 async function basicTest(
@@ -50,11 +51,13 @@ async function basicTest(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput
       });
+      let [sig1] = await ethers.getSigners();
+
       await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,
         hound2: newCreatedHoundId,
-        signer: dependencies.signer
+        signer: sig1
       });
     });
     

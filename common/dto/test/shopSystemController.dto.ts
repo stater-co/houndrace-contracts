@@ -1,9 +1,8 @@
-import { ShopConstructor } from '../../../typechain-types/contracts/shop/params/Index.sol/Params';
-import { SignerDependency } from "./raw/signerDependency.dto";
-import { ShopMethods } from '../../../typechain-types/contracts/shop/methods/Index.sol/ShopMethods';
-import { ShopRestricted } from '../../../typechain-types/contracts/shop/restricted/Index.sol/ShopRestricted';
+import { ShopConstructor } from '../../../typechain-types/Shop';
+import { ShopMethods } from '../../../typechain-types/ShopMethods';
+import { ShopRestricted } from '../../../typechain-types/ShopRestricted';
 
-export interface ShopSystemController extends SignerDependency {
+export interface ShopSystemController {
     shopRestricted: ShopRestricted;
     shopMethods: ShopMethods;
     constructor: ShopConstructor.StructStruct;

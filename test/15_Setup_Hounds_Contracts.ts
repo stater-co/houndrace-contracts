@@ -1,4 +1,5 @@
 import { HoundsSystemController } from '../common/dto/test/houndsSystemController.dto';
+const { ethers } = require('hardhat');
 
 
 export async function set(
@@ -8,25 +9,57 @@ export async function set(
 
     it("Setup hounds minter controller", async function () {
     
-      await dependencies.houndsMinter.setGlobalParameters(dependencies.constructor);
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.houndsMinter.setGlobalParameters({
+        ...dependencies.constructor,
+        boilerplate: {
+          ...dependencies.constructor.boilerplate,
+          staterApi: sig1.address
+        }
+      });
     
     });
 
     it("Setup hounds modifier controller", async function () {
     
-      await dependencies.houndsModifier.setGlobalParameters(dependencies.constructor);
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.houndsModifier.setGlobalParameters({
+        ...dependencies.constructor,
+        boilerplate: {
+          ...dependencies.constructor.boilerplate,
+          staterApi: sig1.address
+        }
+      });
 
     });
 
     it("Setup hounds restricted controller", async function () {
     
-      await dependencies.houndsRestricted.setGlobalParameters(dependencies.constructor);
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.houndsRestricted.setGlobalParameters({
+        ...dependencies.constructor,
+        boilerplate: {
+          ...dependencies.constructor.boilerplate,
+          staterApi: sig1.address
+        }
+      });
 
     });
 
     it("Setup hounds controller", async function () {
     
-      await dependencies.hounds.setGlobalParameters(dependencies.constructor);
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.hounds.setGlobalParameters({
+        ...dependencies.constructor,
+        boilerplate: {
+          ...dependencies.constructor.boilerplate,
+          staterApi: sig1.address
+        }
+      });
 
     });
 

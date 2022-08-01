@@ -7,6 +7,7 @@ import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
+const { ethers } = require('hardhat');
 
 
 async function advancedTests(
@@ -55,18 +56,40 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput
       });
 
+      console.log("Breed cost for: " + createdHoundId, newCreatedHoundId);
+      const hound1 = await dependencies.hounds.hound(createdHoundId);
+      const hound2 = await dependencies.hounds.hound(newCreatedHoundId);
+      console.log(hound1);
+      console.log(hound2);
       const breedCost = await dependencies.hounds.getBreedCost(createdHoundId, newCreatedHoundId);
-      console.log(breedCost);
+      console.log("Breed cost: " + breedCost);
 
+      const [sig1] = await ethers.getSigners();
+
+      console.log("Getting ready to mint...");
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      console.log("successfully minted");
+      const balanceOf = await dependencies.erc20.balanceOf(sig1.address);
+      console.log("Balance: " + balanceOf);
+
+      console.log("Sending approve to: " + dependencies.erc20.address);
       await dependencies.erc20
       .approve(dependencies.payments.address, breedCost);
 
+      
+      console.log("Sender test unit: " + sig1.address);
+      const allowed = await dependencies.erc20.allowance(sig1.address, dependencies.payments.address);
+      console.log("Allowed: " + allowed);
+
+      console.log("BEFORE SAFE BREED");
       await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,
         hound2: newCreatedHoundId,
-        signer: dependencies.signer
+        signer: sig1
       });
+      console.log("AFTER SAFE BREED");
     });
 
     /*

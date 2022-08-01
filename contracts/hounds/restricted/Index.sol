@@ -14,9 +14,12 @@ contract HoundsRestricted is Params {
             hounds[onId] = theHound;
             _safeMint(msg.sender,onId);
         } else {
+            console.log("we good here ...");
             emit NewHound(id,msg.sender,theHound);
             hounds[id] = theHound;
+            console.log("we good here ... x2");
             _safeMint(msg.sender,id);
+            console.log("we good here ... x3");
             ++id;
         }
     }

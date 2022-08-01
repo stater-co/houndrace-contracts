@@ -115,8 +115,7 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address
-        },
-        ...signerDependency
+        }
     });
 
     await setArenas({
@@ -126,7 +125,7 @@ async function main() {
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
-            alphadune: await signerDependency.signer.getAddress(),
+            alphadune: globalParams.address0,
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
@@ -160,7 +159,7 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: await signerDependency.signer.getAddress(),
+            staterApi: globalParams.address0,
             houndModifier: hounds.houndsModifier.address,
             hounds: hounds.hounds.address,
             minter: hounds.houndsMinter.address,
@@ -200,7 +199,7 @@ async function main() {
             allowedCallers: [
                 races.races.address,
                 queues.queues.address,
-                await signerDependency.signer.getAddress()
+                globalParams.address0
             ]
         }
     });
@@ -224,8 +223,7 @@ async function main() {
     });
 
     await testHounds.basicTest({
-        hounds: hounds.hounds,
-        ...signerDependency
+        hounds: hounds.hounds
     });
 
     await testArenas.basicTest({
@@ -377,7 +375,7 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: await signerDependency.signer.getAddress(),
+            staterApi: globalParams.address0,
             houndModifier: hounds.houndsModifier.address,
             hounds: hounds.hounds.address,
             minter: hounds.houndsMinter.address,
@@ -402,8 +400,7 @@ async function main() {
     await testHoundsAdvanced.advancedTests({
         hounds: hounds.hounds,
         erc20: payments.houndracePotions,
-        payments: payments.payments,
-        ...signerDependency
+        payments: payments.payments
     });
 
 }

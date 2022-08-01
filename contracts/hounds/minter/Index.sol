@@ -24,17 +24,19 @@ contract HoundsMinter is Params {
 
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
+        amounts[0] = control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee;
         
-        console.log("OK !!");
+        console.log("OK !! from");
+        console.log(msg.sender);
+        console.log(amounts[0]);
 
-        console.log(control.fees.breedCostCurrency);
+        console.log("this: ", control.fees.breedCostCurrency);
 
         IPay(control.boilerplate.payments).pay{
             value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
         }(
             msg.sender,
-            address(this),
+            control.boilerplate.payments,
             control.fees.breedCostCurrency,
             new uint256[](0),
             amounts,
@@ -42,10 +44,11 @@ contract HoundsMinter is Params {
         );
 
         amounts[0] = control.fees.breedFee;
+        console.log("then sending: ", amounts[0]);
         IPay(control.boilerplate.payments).pay{
             value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
         }(
-            address(this),
+            control.boilerplate.payments,
             control.boilerplate.staterApi,
             control.fees.breedFeeCurrency,
             new uint256[](0),
@@ -61,7 +64,7 @@ contract HoundsMinter is Params {
             IPay(control.boilerplate.payments).pay{
                 value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
             }(
-                address(this),
+                control.boilerplate.payments,
                 ownerOf(hound2),
                 control.fees.breedCostCurrency,
                 new uint256[](0),

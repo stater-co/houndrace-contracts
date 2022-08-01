@@ -34,6 +34,7 @@ contract QueuesMethods is Params {
         amounts[0] = _queue.entryFee;
         uint256 value = _queue.currency == address(0) ? _queue.entryFee : 0;
         
+        /*
         IPay(control.payments).pay{
             value: value
         }(
@@ -44,6 +45,7 @@ contract QueuesMethods is Params {
             amounts,
             _queue.currency == address(0) ? 3 : 2
         );
+        */
 
         emit Unenqueue(theId, hound);
     }
