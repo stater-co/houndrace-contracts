@@ -27,12 +27,27 @@ contract HoundsModifier is Params {
         emit HoundQueueStatusUpdate(theId, queueId);
     }
 
-    function boostHoundStamina(uint256 theId, address user) external payable {
+    function boostHoundStamina(uint256 theId, address user, uint256 payed) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
-        hounds[theId].stamina.staminaValue += uint32(msg.value / refillStaminaCooldownCost);
-        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - hounds[theId].stamina.staminaLastUpdate ) / 3600 ) * hounds[theId].stamina.staminaPerHour );
+        Hound.Stamina memory stamina = hounds[theId].stamina;
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = stamina.staminaRefill1xCurrency == address(0) ? msg.value : payed;
+        IPay(control.boilerplate.payments).pay{
+            value: stamina.staminaRefill1xCurrency == address(0) ? amounts[0] : 0
+        }(
+            msg.sender,
+            control.boilerplate.payments,
+            stamina.staminaRefill1xCurrency,
+            new uint256[](0),
+            amounts,
+            stamina.staminaRefill1xCurrency == address(0) ? 3 : 2
+        );
+
+        hounds[theId].stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
+        hounds[theId].stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerHour );
         hounds[theId].stamina.staminaLastUpdate = block.timestamp;
         if ( hounds[theId].stamina.staminaValue > hounds[theId].stamina.staminaCap ) {
             hounds[theId].stamina.staminaValue = hounds[theId].stamina.staminaCap;
@@ -40,12 +55,27 @@ contract HoundsModifier is Params {
         emit HoundStaminaUpdate(theId,hounds[theId].stamina.staminaValue);
     }
 
-    function boostHoundBreeding(uint256 theId, address user) external payable {
+    function boostHoundBreeding(uint256 theId, address user, uint256 payed) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
-        hounds[theId].breeding.lastBreed -= msg.value / refillBreedingCooldownCost;
-        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.lastBreed + hounds[theId].breeding.breedingCooldown < block.timestamp);
+        Hound.Breeding memory breeding = hounds[theId].breeding;
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = breeding.breedingFeeCurrency == address(0) ? msg.value : payed;
+        IPay(control.boilerplate.payments).pay{
+            value: breeding.breedingFeeCurrency == address(0) ? amounts[0] : 0
+        }(
+            msg.sender,
+            control.boilerplate.payments,
+            breeding.breedingFeeCurrency,
+            new uint256[](0),
+            amounts,
+            breeding.breedingFeeCurrency == address(0) ? 3 : 2
+        );
+
+        hounds[theId].breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;
+        emit HoundBreedingStatusUpdate(theId,hounds[theId].breeding.lastBreed + breeding.breedingCooldown < block.timestamp);
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {

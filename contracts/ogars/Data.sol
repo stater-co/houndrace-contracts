@@ -4,7 +4,6 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
-import "hardhat/console.sol";
 
 
 /**
@@ -154,8 +153,6 @@ contract HoundracePotions is Context, Ownable, IERC20, IERC20Metadata {
         override
         returns (bool)
     {
-        console.log("Sender: ");
-        console.log(msg.sender);
         _approve(_msgSender(), spender, amount);
         return true;
     }
@@ -299,9 +296,6 @@ contract HoundracePotions is Context, Ownable, IERC20, IERC20Metadata {
      */
     function mint(address account, uint256 amount) external onlyOwner {
         require(account != address(0), "ERC20: mint to the zero address");
-
-        console.log("ERC20 mint sender: ");
-        console.log(msg.sender);
 
         _beforeTokenTransfer(address(0), account, amount);
 

@@ -8,19 +8,16 @@ contract Hounds is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
 
     function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
-        console.log("Initialize hound ", onId, control.boilerplate.restricted);
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
     }
 
     function setTokenURI(uint256 _tokenId, string memory token_uri) external onlyOwner {
-        console.log("Set token uri ", _tokenId, token_uri, control.boilerplate.restricted);
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
-        console.log("Breed hounds ", hound1, hound2, control.boilerplate.minter);
         (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);
         require(success);
     }
