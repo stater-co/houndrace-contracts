@@ -10,7 +10,7 @@ export async function breed(
 
 export async function safeBreed(
   params: BreedHoundsParams
-): Promise<boolean> {
+) {
   const before: number = Number(await params.contract.id());
   let houndMaleBefore: Hound.StructStructOutput;
   let houndFemaleBefore: Hound.StructStructOutput;
@@ -30,11 +30,6 @@ export async function safeBreed(
       femaleId = i;
     }
 
-  }
-
-  console.log("IDS to use: " + maleId, femaleId);
-  if ( maleId == 0 || femaleId == 0 ) {
-    return false;
   }
 
   houndMaleBefore = await params.contract.hound(maleId);
@@ -69,7 +64,4 @@ export async function safeBreed(
   await params.contract.breedHounds(hound1, hound2, { value : totalToPay });
   await params.contract.initializeHound(houndToFillUp,hound);
 
-  const houndMaleAfter = await params.contract.hound(maleId);
-  const houndFemaleAfter = await params.contract.hound(femaleId);
-  return JSON.stringify(houndMaleBefore) !== JSON.stringify(houndMaleAfter) && JSON.stringify(houndFemaleBefore) !== JSON.stringify(houndFemaleAfter);
 }

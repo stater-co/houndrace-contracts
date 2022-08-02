@@ -5,9 +5,7 @@ import { safeUpdateStamina } from "../../plugins/test/updateStamina";
 import { Hound } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
-import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
-import { expect } from "chai";
 const { ethers } = require('hardhat');
 
 
@@ -48,89 +46,261 @@ async function advancedTests(
         contract: dependencies.hounds
       });
     });
-
-    it("Mint & Breed ETH hound with custom token hound", async function () {
+    
+    it("Mint & Breed 2 female hounds using custom tokens for both", async function () {
       let femaleHound: Hound.StructStruct = hound;
       femaleHound.identity.geneticSequence[1] = 2;
-      let newCreatedHoundId: string | number = await safeMintHound({
+      femaleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput
       });
 
-      const hound1 = await dependencies.hounds.hound(createdHoundId);
-      const hound2 = await dependencies.hounds.hound(newCreatedHoundId);
-      const breedCost = await dependencies.hounds.getBreedCost(createdHoundId, newCreatedHoundId);
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: femaleHound as Hound.StructStructOutput
+      });
 
-      console.log(hound1.breeding.breedingFeeCurrency + " == " + globalParams.address0);
-      console.log(hound1.stamina.staminaRefill1xCurrency + " == " + globalParams.address0);
-      console.log(hound2.breeding.breedingFeeCurrency + " == " + globalParams.address0);
-      console.log(hound2.stamina.staminaRefill1xCurrency + " == " + globalParams.address0);
-      expect(hound1.breeding.breedingFeeCurrency == dependencies.erc20.address);
-      expect(hound1.stamina.staminaRefill1xCurrency == dependencies.erc20.address);
-      expect(hound2.breeding.breedingFeeCurrency == dependencies.erc20.address);
-      expect(hound2.stamina.staminaRefill1xCurrency == dependencies.erc20.address);
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
 
       const [sig1] = await ethers.getSigners();
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
-      const balanceOf = await dependencies.erc20.balanceOf(sig1.address);
-      expect(balanceOf > 0);
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
+      });
+
+    });
+
+    it("Mint & Breed 2 female hounds using custom tokens for first and ETH for second", async function () {
+      let femaleHound: Hound.StructStruct = hound;
+      femaleHound.identity.geneticSequence[1] = 2;
+      femaleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound1Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: femaleHound as Hound.StructStructOutput
+      });
+
+      femaleHound.breeding.breedingFeeCurrency = globalParams.address0;
+      femaleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: femaleHound as Hound.StructStructOutput
+      });
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, breedCost);
 
-      const allowed = await dependencies.erc20.allowance(sig1.address, dependencies.payments.address);
-      expect(allowed == breedCost);
-
-      let breeding: boolean = await safeBreed({
+      await safeBreed({
         contract: dependencies.hounds,
-        hound1: createdHoundId,
-        hound2: newCreatedHoundId,
+        hound1: hound1Id,
+        hound2: hound2Id,
         signer: sig1
       });
 
-      expect(breeding);
+    });
+
+    it("Mint & Breed 2 female hounds using ETH for first and custom token for second", async function () {
+      let femaleHound: Hound.StructStruct = hound;
+      femaleHound.identity.geneticSequence[1] = 2;
+      femaleHound.breeding.breedingFeeCurrency = globalParams.address0;
+      femaleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+
+      let hound1Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: femaleHound as Hound.StructStructOutput
+      });
+
+      femaleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: femaleHound as Hound.StructStructOutput
+      });
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
+      });
+
+    });
+
+    it("Mint & Breed 2 male hounds using custom tokens for both", async function () {
+      let maleHound: Hound.StructStruct = hound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound1Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
+      });
+
+    });
+
+    it("Mint & Breed 2 male hounds using custom tokens for first and ETH for second", async function () {
+      let maleHound: Hound.StructStruct = hound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound1Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      maleHound.breeding.breedingFeeCurrency = globalParams.address0;
+      maleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
+      });
+
+    });
+
+    it("Mint & Breed 2 male hounds using ETH for first and custom token for second", async function () {
+      let maleHound: Hound.StructStruct = hound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingFeeCurrency = globalParams.address0;
+      maleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+
+      let hound1Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      maleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      const [sig1] = await ethers.getSigners();
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
+      await safeBreed({
+        contract: dependencies.hounds,
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
+      });
+
     });
 
     /*
-    it("Mint & Breed custom token hound with custom token hound", async function () {
-      let femaleHound: Hound.StructStruct = hound;
-      femaleHound.identity.geneticSequence[1] = 2;
-      let newCreatedHoundId: string | number = await safeMintHound({
-        contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
-      });
-      await safeBreed({
-        contract: dependencies.hounds,
-        hound1: createdHoundId,
-        hound2: newCreatedHoundId,
-        signer: dependencies.signer
-      });
-    });
+    // @DIIMIIM: For some reason Hardhat ethers doesn't seem to be able to find the .transfer() method inherited in the hounds contract
+    it("Mint & Breed 2 male hounds using custom tokens for both, second one being external", async function () {
+      let maleHound: Hound.StructStruct = hound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingFeeCurrency = dependencies.erc20.address;
+      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
 
-    it("Mint & Breed custom token hound with ETH hound", async function () {
-      let femaleHound: Hound.StructStruct = hound;
-      femaleHound.identity.geneticSequence[1] = 2;
-      let newCreatedHoundId: string | number = await safeMintHound({
+      let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: maleHound as Hound.StructStructOutput
       });
+
+      let hound2Id: string | number = await safeMintHound({
+        contract: dependencies.hounds,
+        hound: maleHound as Hound.StructStructOutput
+      });
+
+      const [sig1, sig2] = await ethers.getSigners();
+
+      await dependencies.transferableHounds.transfer(sig2.address,hound2Id);
+
+      await dependencies.hounds.connect(sig2).putHoundForBreed(hound2Id, 10000000, true);
+
+      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+
+      await dependencies.erc20.mint(sig1.address,breedCost);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, breedCost);
+
       await safeBreed({
         contract: dependencies.hounds,
-        hound1: createdHoundId,
-        hound2: newCreatedHoundId,
-        signer: dependencies.signer
+        hound1: hound1Id,
+        hound2: hound2Id,
+        signer: sig1
       });
-    });
-    
-    it("Set hound available to breed externally", async function () {
-      await safeSetAvailableToBreed({
-        status: true,
-        fee: 50000,
-        houndId: createdHoundId,
-        contract: dependencies.hounds
-      });
+
     });
     */
 

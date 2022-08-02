@@ -69,7 +69,8 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address
+        incubatorAddress: incubators.incubator.address,
+        transferrableRoot: payments.testErc721
     });
 
     const races: RacesSystem = await runRaces({
@@ -399,6 +400,7 @@ async function main() {
 
     await testHoundsAdvanced.advancedTests({
         hounds: hounds.hounds,
+        transferableHounds: hounds.transferrableRoot,
         erc20: payments.houndracePotions,
         payments: payments.payments
     });
