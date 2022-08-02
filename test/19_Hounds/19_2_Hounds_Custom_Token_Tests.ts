@@ -1,4 +1,4 @@
-import { hound } from "../../common/params";
+import { globalParams, hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
@@ -7,6 +7,7 @@ import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
+import { expect } from "chai";
 const { ethers } = require('hardhat');
 
 
@@ -56,40 +57,40 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput
       });
 
-      console.log("Breed cost for: " + createdHoundId, newCreatedHoundId);
       const hound1 = await dependencies.hounds.hound(createdHoundId);
       const hound2 = await dependencies.hounds.hound(newCreatedHoundId);
-      console.log(hound1);
-      console.log(hound2);
       const breedCost = await dependencies.hounds.getBreedCost(createdHoundId, newCreatedHoundId);
-      console.log("Breed cost: " + breedCost);
+
+      console.log(hound1.breeding.breedingFeeCurrency + " == " + globalParams.address0);
+      console.log(hound1.stamina.staminaRefill1xCurrency + " == " + globalParams.address0);
+      console.log(hound2.breeding.breedingFeeCurrency + " == " + globalParams.address0);
+      console.log(hound2.stamina.staminaRefill1xCurrency + " == " + globalParams.address0);
+      expect(hound1.breeding.breedingFeeCurrency == dependencies.erc20.address);
+      expect(hound1.stamina.staminaRefill1xCurrency == dependencies.erc20.address);
+      expect(hound2.breeding.breedingFeeCurrency == dependencies.erc20.address);
+      expect(hound2.stamina.staminaRefill1xCurrency == dependencies.erc20.address);
 
       const [sig1] = await ethers.getSigners();
 
-      console.log("Getting ready to mint...");
       await dependencies.erc20.mint(sig1.address,breedCost);
 
-      console.log("successfully minted");
       const balanceOf = await dependencies.erc20.balanceOf(sig1.address);
-      console.log("Balance: " + balanceOf);
+      expect(balanceOf > 0);
 
-      console.log("Sending approve to: " + dependencies.erc20.address);
       await dependencies.erc20
       .approve(dependencies.payments.address, breedCost);
 
-      
-      console.log("Sender test unit: " + sig1.address);
       const allowed = await dependencies.erc20.allowance(sig1.address, dependencies.payments.address);
-      console.log("Allowed: " + allowed);
+      expect(allowed == breedCost);
 
-      console.log("BEFORE SAFE BREED");
-      await safeBreed({
+      let breeding: boolean = await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,
         hound2: newCreatedHoundId,
         signer: sig1
       });
-      console.log("AFTER SAFE BREED");
+
+      expect(breeding);
     });
 
     /*

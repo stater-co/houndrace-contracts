@@ -35,10 +35,17 @@ contract Payments is Params {
 		} else if ( paymentType == 3 ) {
 			console.log(amount[0]);
 			console.log("to address: ", to);
+			console.log("msg.value");
 			console.log(msg.value);
+			console.log("amount[0]");
 			console.log(amount[0]);
 			console.log(Address.isContract(to));
-			require(payable(to).send(amount[0]));
+			if ( Address.isContract(to) ) {
+				(bool success, )= to.call{ value: amount[0] }("");
+				require(success);
+			} else {
+				require(payable(to).send(amount[0]));
+			}
 		}
 		console.log("DONE");
 	}

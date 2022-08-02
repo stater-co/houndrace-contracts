@@ -29,11 +29,15 @@ contract HoundsMinter is Params {
         console.log("OK !! from");
         console.log(msg.sender);
         console.log(amounts[0]);
+        console.log("OK !! value");
+        console.log(msg.value);
 
         console.log("this: ", control.fees.breedCostCurrency);
 
+        console.log("=============== 1 ===============");
+
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
+            value: control.fees.breedCostCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
@@ -43,11 +47,17 @@ contract HoundsMinter is Params {
             control.fees.breedCostCurrency == address(0) ? 3 : 2
         );
 
+        console.log("=============== 1 ===============");
+
         amounts[0] = control.fees.breedFee;
         console.log("then sending: ", amounts[0]);
-        IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
-        }(
+
+        console.log("=============== 2 ===============");
+        console.log(control.fees.breedFeeCurrency);
+        console.log(msg.value);
+        console.log(address(this).balance);
+        console.log(amounts[0] <= msg.value);
+        IPay(control.boilerplate.payments).pay(
             control.boilerplate.payments,
             control.boilerplate.staterApi,
             control.fees.breedFeeCurrency,
@@ -55,15 +65,16 @@ contract HoundsMinter is Params {
             amounts,
             control.fees.breedFeeCurrency == address(0) ? 3 : 2
         );
+        console.log("=============== 2 ===============");
 
         require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0));
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
             require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
             
             amounts[0] = hounds[hound2].breeding.breedingFee;
-            IPay(control.boilerplate.payments).pay{
-                value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
-            }(
+
+            console.log("=============== 3 ===============");
+            IPay(control.boilerplate.payments).pay(
                 control.boilerplate.payments,
                 ownerOf(hound2),
                 control.fees.breedCostCurrency,
@@ -71,8 +82,11 @@ contract HoundsMinter is Params {
                 amounts,
                 control.fees.breedCostCurrency == address(0) ? 3 : 2
             );
+            console.log("=============== 3 ===============");
                 
         }
+
+        console.log("=============== 4 ===============");
 
         hounds[hound2].breeding.lastBreed = block.timestamp;
         hounds[hound1].breeding.lastBreed = block.timestamp;
