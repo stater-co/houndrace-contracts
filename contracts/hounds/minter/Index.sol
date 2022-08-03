@@ -8,6 +8,7 @@ contract HoundsMinter is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
+        console.log("Breed hounds: ", hound1, hound2);
         console.log("1 Genes are: ", hounds[hound1].identity.geneticSequence[1]);
         console.log("2 Genes are: ", hounds[hound2].identity.geneticSequence[1]);
         require(

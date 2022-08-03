@@ -16,17 +16,20 @@ contract QueuesMethods is Params {
         delete queues[theId].participants;
         delete queues[theId].enqueueDates;
 
-        bool exists;
-        for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
-            if ( replacedParticipants[i] == hound ) {
-                exists = true;
-                require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
-            } else {
-                queues[theId].participants.push(replacedParticipants[i]);
-                queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
+        if ( replacedParticipants.length > 0 ) {
+            bool exists;
+            for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
+                console.log("Participant: ", replacedParticipants[i], " against ", hound);
+                if ( replacedParticipants[i] == hound ) {
+                    exists = true;
+                    require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
+                } else {
+                    queues[theId].participants.push(replacedParticipants[i]);
+                    queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
+                }
             }
+            require(exists);
         }
-        require(exists);
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
@@ -72,6 +75,8 @@ contract QueuesMethods is Params {
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
             Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
+
+            console.log("Enqueue using: ", arena.currency);
 
             IHandleArenaUsage(control.arenas).handleArenaUsage{ 
                 value: arena.currency == address(0) ? arena.fee : 0

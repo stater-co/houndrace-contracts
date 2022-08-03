@@ -15,22 +15,8 @@ export async function safeBreed(
   let houndMaleBefore: Hound.StructStructOutput;
   let houndFemaleBefore: Hound.StructStructOutput;
 
-  let maleId: number = 0;
-  let femaleId: number = 0;
-
-  for ( let i = 1 , l = Number(before) ; i < l ; ++i ) {
-
-    const hound: Hound.StructStructOutput = await params.contract.hound(i);
-
-    if ( hound.identity.geneticSequence[1] === 1 && maleId === 0 && (Number(hound.breeding.lastBreed) + Number(hound.breeding.breedingCooldown)) * 1000 < new Date().getTime() ) {
-      maleId = i;
-    }
-
-    if ( hound.identity.geneticSequence[1] === 2 && femaleId === 0 && (Number(hound.breeding.lastBreed) + Number(hound.breeding.breedingCooldown)) * 1000 < new Date().getTime() ) {
-      femaleId = i;
-    }
-
-  }
+  let maleId: string | number = params.hound1;
+  let femaleId: string | number = params.hound2;
 
   houndMaleBefore = await params.contract.hound(maleId);
   houndFemaleBefore = await params.contract.hound(femaleId);

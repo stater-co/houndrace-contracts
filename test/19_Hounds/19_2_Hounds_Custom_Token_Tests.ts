@@ -49,7 +49,7 @@ async function advancedTests(
       });
     });
     
-    it("Mint & Breed 2 female hounds using custom tokens for both", async function () {
+    it("Mint & Breed 2 hounds using custom tokens for both", async function () {
       let femaleHound: Hound.StructStruct = hound;
       femaleHound.identity.geneticSequence[1] = 2;
       femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
@@ -60,9 +60,12 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput
       });
 
+      let maleHound: Hound.StructStruct = femaleHound;
+      maleHound.identity.geneticSequence[1] = 1;
+
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: maleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -83,7 +86,7 @@ async function advancedTests(
 
     });
 
-    it("Mint & Breed 2 female hounds using custom tokens for first and ETH for second", async function () {
+    it("Mint & Breed 2 hounds using custom tokens for first and ETH for second", async function () {
       let femaleHound: Hound.StructStruct = hound;
       femaleHound.identity.geneticSequence[1] = 2;
       femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
@@ -94,12 +97,14 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput
       });
 
-      femaleHound.breeding.breedingcurrency = globalParams.address0;
-      femaleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+      let maleHound: Hound.StructStruct = femaleHound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingcurrency = globalParams.address0;
+      maleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
 
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: maleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -131,12 +136,14 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput
       });
 
-      femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
-      femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+      let maleHound: Hound.StructStruct = femaleHound;
+      maleHound.identity.geneticSequence[1] = 1;
+      maleHound.breeding.breedingcurrency = dependencies.erc20.address;
+      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
 
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: maleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -168,9 +175,12 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput
       });
 
+      let femaleHound: Hound.StructStruct = maleHound;
+      femaleHound.identity.geneticSequence[1] = 2;
+
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: maleHound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -202,12 +212,14 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput
       });
 
-      maleHound.breeding.breedingcurrency = globalParams.address0;
-      maleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
+      let femaleHound: Hound.StructStruct = maleHound;
+      femaleHound.identity.geneticSequence[1] = 2;
+      femaleHound.breeding.breedingcurrency = globalParams.address0;
+      femaleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
 
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: maleHound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -239,12 +251,14 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput
       });
 
-      maleHound.breeding.breedingcurrency = dependencies.erc20.address;
-      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
+      let femaleHound: Hound.StructStruct = maleHound;
+      femaleHound.identity.geneticSequence[1] = 2;
+      femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
+      femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
 
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: maleHound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);

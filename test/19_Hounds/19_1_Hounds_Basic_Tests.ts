@@ -46,8 +46,8 @@ async function basicTest(
       });
     });
 
-    it("Mint 10x females", async function () {
-      for ( let i = 0 ; i < 10 ; ++i ) {
+    it("Mint 20x females", async function () {
+      for ( let i = 0 ; i < 20 ; ++i ) {
         let houndToMint: Hound.StructStruct = hound;
         houndToMint.identity.geneticSequence[1] = 2;
         createdHoundId = await safeMintHound({
@@ -57,8 +57,8 @@ async function basicTest(
       }
     });
 
-    it("Mint 10x males", async function () {
-      for ( let i = 0 ; i < 10 ; ++i ) {
+    it("Mint 20x males", async function () {
+      for ( let i = 0 ; i < 20 ; ++i ) {
         let houndToMint: Hound.StructStruct = hound;
         houndToMint.identity.geneticSequence[1] = 1;
         createdHoundId = await safeMintHound({

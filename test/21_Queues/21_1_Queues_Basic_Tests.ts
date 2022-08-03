@@ -4,6 +4,8 @@ import { safeEditQueue } from "../../plugins/test/editQueue";
 import { safeJoinQueue } from "../../plugins/test/joinQueue";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
+import { Hound } from "../../typechain-types/Hounds";
+import { Queue } from "../../typechain-types/Queues";
 
 
 async function basicTest(
@@ -30,11 +32,40 @@ async function basicTest(
       });
     });
 
+    it("Enqueue 10x", async function() {
+      let totalHounds: number = Number(await dependencies.houndsContract.id());
+      let totalEnqueues: number = 0;
+      for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
+        let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
+        if ( Number(hound.queueId) === 0 ) {
+          await safeJoinQueue({
+            contract: dependencies.contract,
+            queueId: createdQueueId,
+            houndId: j,
+            houndsContract: dependencies.houndsContract,
+            entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
+          });
+          ++totalEnqueues;
+        }
+      }
+    });
+
     it("Unenqueue", async function() {
+      let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
+      if ( queue.participants.length === 0 ) {
+        await safeJoinQueue({
+          contract: dependencies.contract,
+          queueId: createdQueueId,
+          houndId: 1,
+          houndsContract: dependencies.houndsContract,
+          entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
+        });
+        queue = await dependencies.contract.queue(createdQueueId);
+      }
       await safeUnenqueue({
         contract: dependencies.contract,
         queueId: createdQueueId,
-        houndId: dependencies.houndIdToEnqueue
+        houndId: Number(queue.participants[0])
       });
     });
 

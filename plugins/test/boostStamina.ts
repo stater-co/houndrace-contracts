@@ -1,6 +1,5 @@
-import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
 import { Hound } from '../../typechain-types/Hounds';
-import { globalParams, hound } from '../../common/params';
+import { globalParams } from '../../common/params';
 import { BoostStaminaParams } from "../../common/dto/test/boostStaminaParams";
 import { expect } from "chai";
 
