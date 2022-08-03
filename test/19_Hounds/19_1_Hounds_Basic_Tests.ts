@@ -3,10 +3,11 @@ import { hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Hound } from "../../typechain-types/Hounds";
+import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
+import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
 const { ethers } = require('hardhat');
 
 
@@ -84,6 +85,28 @@ async function basicTest(
 
     });
     
+    it("Boost hound breeding cooldown using ETH", async function () {
+
+      const [sig1] = await ethers.getSigners();
+      await safeBoostHoundBreeding({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
+
+    it("Boost hound stamina cooldown using ETH", async function () {
+
+      const [sig1] = await ethers.getSigners();
+      await safeBoostHoundBreeding({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
+
     it("Set hound available to breed externally", async function () {
       await safeSetAvailableToBreed({
         status: true,

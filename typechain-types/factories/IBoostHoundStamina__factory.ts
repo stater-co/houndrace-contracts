@@ -22,6 +22,11 @@ const _abi = [
         name: "user",
         type: "address",
       },
+      {
+        internalType: "uint256",
+        name: "payed",
+        type: "uint256",
+      },
     ],
     name: "boostHoundStamina",
     outputs: [],

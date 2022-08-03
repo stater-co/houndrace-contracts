@@ -246,8 +246,8 @@ export interface HoundsInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "boostHoundBreeding(uint256,address)": FunctionFragment;
-    "boostHoundStamina(uint256,address)": FunctionFragment;
+    "boostHoundBreeding(uint256,address,uint256)": FunctionFragment;
+    "boostHoundStamina(uint256,address,uint256)": FunctionFragment;
     "breedHounds(uint256,uint256)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
@@ -288,11 +288,11 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(
     functionFragment: "boostHoundBreeding",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "boostHoundStamina",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "breedHounds",
@@ -645,12 +645,14 @@ export interface Hounds extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     boostHoundStamina(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -857,12 +859,14 @@ export interface Hounds extends BaseContract {
   boostHoundBreeding(
     theId: BigNumberish,
     user: string,
+    payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   boostHoundStamina(
     theId: BigNumberish,
     user: string,
+    payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1060,12 +1064,14 @@ export interface Hounds extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     boostHoundStamina(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1376,12 +1382,14 @@ export interface Hounds extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     boostHoundStamina(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1555,12 +1563,14 @@ export interface Hounds extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     boostHoundStamina(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
