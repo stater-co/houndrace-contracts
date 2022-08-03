@@ -8,7 +8,7 @@ import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
-import { boostHoundStamina } from "../../plugins/test/boostStamina";
+import { safeBoostHoundStamina } from "../../plugins/test/boostStamina";
 const { ethers } = require('hardhat');
 
 
@@ -100,7 +100,7 @@ async function basicTest(
     it("Boost hound stamina cooldown using ETH", async function () {
 
       const [sig1] = await ethers.getSigners();
-      await boostHoundStamina({
+      await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,
         hound1: createdHoundId,
         signer: sig1

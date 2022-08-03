@@ -2,10 +2,12 @@ import { globalParams, hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Hound } from "../../typechain-types/Hounds";
+import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
+import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
+import { safeBoostHoundStamina } from "../../plugins/test/boostStamina";
 const { ethers } = require('hardhat');
 
 
@@ -303,6 +305,44 @@ async function advancedTests(
 
     });
     */
+
+    it("Boost hound breeding cooldown using custom tokens", async function () {
+
+      const [sig1] = await ethers.getSigners();
+
+      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
+
+      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+
+      await safeBoostHoundBreeding({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
+
+    it("Boost hound stamina cooldown using custom tokens", async function () {
+
+      const [sig1] = await ethers.getSigners();
+      
+      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
+
+      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+
+      await safeBoostHoundStamina({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
 
   });
 }
