@@ -28,7 +28,7 @@ const _abi = [
           },
           {
             internalType: "address",
-            name: "feeCurrency",
+            name: "currency",
             type: "address",
           },
           {

@@ -33,7 +33,7 @@ export const houndBreeding: Hound.BreedingStruct = {
     availableToBreed: false,
     breedingCooldown: 0,
     breedingFee: 100000,
-    breedingFeeCurrency: globalParams.address0,
+    breedingcurrency: globalParams.address0,
     lastBreed: 0
 }
 

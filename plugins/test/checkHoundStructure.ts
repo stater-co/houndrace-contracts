@@ -10,7 +10,7 @@ export function checkHoundStructure(
     ( hound.breeding.availableToBreed === false || hound.breeding.availableToBreed === true ) && 
     ( hound.breeding.breedingCooldown >= 0 ) && 
     ( hound.breeding.breedingFee >= 0 ) && 
-    ( hound.breeding.breedingFeeCurrency === globalParams.address0 || String(hound.breeding.breedingFeeCurrency).length > 0 ) && 
+    ( hound.breeding.breedingcurrency === globalParams.address0 || String(hound.breeding.breedingcurrency).length > 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
     ( hound.custom === true || hound.custom === false ) && 
     ( String(hound.title).length > 0 ) && 

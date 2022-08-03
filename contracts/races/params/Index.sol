@@ -7,6 +7,7 @@ import '../../utils/Converters.sol';
 import '../../generator/interfaces/IGenerate.sol';
 import '../../arenas/interfaces/IHandleArenaUsage.sol';
 import '../../arenas/interfaces/IArena.sol';
+import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';

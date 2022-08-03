@@ -83,7 +83,6 @@ export declare namespace Payment {
 export declare namespace Queue {
   export type StructStruct = {
     name: string;
-    currency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
@@ -99,7 +98,6 @@ export declare namespace Queue {
 
   export type StructStructOutput = [
     string,
-    string,
     BigNumber[],
     BigNumber[],
     BigNumber,
@@ -113,7 +111,6 @@ export declare namespace Queue {
     boolean
   ] & {
     name: string;
-    currency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
@@ -134,8 +131,8 @@ export interface QueuesInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "createQueues((string,address,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool)[])": FunctionFragment;
-    "editQueue(uint256,(string,address,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool))": FunctionFragment;
+    "createQueues((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool)[])": FunctionFragment;
+    "editQueue(uint256,(string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool))": FunctionFragment;
     "enqueue(uint256,uint256)": FunctionFragment;
     "enqueueCost(uint256)": FunctionFragment;
     "id()": FunctionFragment;
@@ -402,7 +399,6 @@ export interface Queues extends BaseContract {
     ): Promise<
       [
         string,
-        string,
         BigNumber,
         BigNumber,
         BigNumber,
@@ -414,7 +410,6 @@ export interface Queues extends BaseContract {
         boolean
       ] & {
         name: string;
-        currency: string;
         arena: BigNumber;
         entryFee: BigNumber;
         startDate: BigNumber;
@@ -515,7 +510,6 @@ export interface Queues extends BaseContract {
   ): Promise<
     [
       string,
-      string,
       BigNumber,
       BigNumber,
       BigNumber,
@@ -527,7 +521,6 @@ export interface Queues extends BaseContract {
       boolean
     ] & {
       name: string;
-      currency: string;
       arena: BigNumber;
       entryFee: BigNumber;
       startDate: BigNumber;
@@ -622,7 +615,6 @@ export interface Queues extends BaseContract {
     ): Promise<
       [
         string,
-        string,
         BigNumber,
         BigNumber,
         BigNumber,
@@ -634,7 +626,6 @@ export interface Queues extends BaseContract {
         boolean
       ] & {
         name: string;
-        currency: string;
         arena: BigNumber;
         entryFee: BigNumber;
         startDate: BigNumber;

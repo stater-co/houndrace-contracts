@@ -8,8 +8,6 @@ library Queue {
 
         string name;
 
-        address currency;
-
         uint256[] participants;
 
         uint256[] enqueueDates;

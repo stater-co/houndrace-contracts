@@ -62,16 +62,16 @@ contract HoundsModifier is Params {
         Hound.Breeding memory breeding = hounds[theId].breeding;
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = breeding.breedingFeeCurrency == address(0) ? msg.value : payed;
+        amounts[0] = breeding.breedingcurrency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
-            value: breeding.breedingFeeCurrency == address(0) ? amounts[0] : 0
+            value: breeding.breedingcurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            breeding.breedingFeeCurrency,
+            breeding.breedingcurrency,
             new uint256[](0),
             amounts,
-            breeding.breedingFeeCurrency == address(0) ? 3 : 2
+            breeding.breedingcurrency == address(0) ? 3 : 2
         );
 
         hounds[theId].breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;

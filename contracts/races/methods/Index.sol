@@ -24,7 +24,7 @@ contract RacesMethods is Params {
 
             emit NewRace(id, Race.Struct(
                 queue.name,
-                queue.currency,
+                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
                 queue.participants,
                 queue.arena,
                 queue.entryFee,

@@ -97,7 +97,7 @@ const _abi = [
               },
               {
                 internalType: "address",
-                name: "breedingFeeCurrency",
+                name: "breedingcurrency",
                 type: "address",
               },
               {

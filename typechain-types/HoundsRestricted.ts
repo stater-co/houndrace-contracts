@@ -58,7 +58,7 @@ export declare namespace ConstructorBoilerplate {
 export declare namespace ConstructorFees {
   export type StructStruct = {
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    breedCurrency: string;
     refillStaminaCostCurrency: string;
     refillBreedingCostCurrency: string;
     breedCost: BigNumberish;
@@ -80,7 +80,7 @@ export declare namespace ConstructorFees {
     BigNumber
   ] & {
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    breedCurrency: string;
     refillStaminaCostCurrency: string;
     refillBreedingCostCurrency: string;
     breedCost: BigNumber;
@@ -163,7 +163,7 @@ export declare namespace Hound {
   export type BreedingStruct = {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
-    breedingFeeCurrency: string;
+    breedingcurrency: string;
     breedingFee: BigNumberish;
     availableToBreed: boolean;
   };
@@ -177,7 +177,7 @@ export declare namespace Hound {
   ] & {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
-    breedingFeeCurrency: string;
+    breedingcurrency: string;
     breedingFee: BigNumber;
     availableToBreed: boolean;
   };

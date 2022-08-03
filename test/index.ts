@@ -170,7 +170,7 @@ async function main() {
            },
            fees: {
             breedCostCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
+            breedCurrency: globalParams.address0,
             refillStaminaCostCurrency: globalParams.address0,
             refillBreedingCostCurrency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
@@ -239,7 +239,7 @@ async function main() {
             "6": 1,
             name: "Arena #",
             token_uri: "arena_token_uri",
-            feeCurrency: globalParams.address0,
+            currency: globalParams.address0,
             fee: BigNumber.from(100),
             surface: 1,
             distance: 1,
@@ -386,7 +386,7 @@ async function main() {
            },
            fees: {
             breedCostCurrency: payments.houndracePotions.address,
-            breedFeeCurrency: payments.houndracePotions.address,
+            breedCurrency: payments.houndracePotions.address,
             refillStaminaCostCurrency: payments.houndracePotions.address,
             refillBreedingCostCurrency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",

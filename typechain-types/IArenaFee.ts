@@ -20,56 +20,29 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Arena {
-  export type StructStruct = {
-    name: string;
-    token_uri: string;
-    currency: string;
-    fee: BigNumberish;
-    surface: BigNumberish;
-    distance: BigNumberish;
-    weather: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    name: string;
-    token_uri: string;
-    currency: string;
-    fee: BigNumber;
-    surface: number;
-    distance: number;
-    weather: number;
-  };
-}
-
-export interface IArenaInterface extends utils.Interface {
-  contractName: "IArena";
+export interface IArenaFeeInterface extends utils.Interface {
+  contractName: "IArenaFee";
   functions: {
-    "arena(uint256)": FunctionFragment;
+    "arenaFee(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "arena", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "arenaFee",
+    values: [BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "arena", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "arenaFee", data: BytesLike): Result;
 
   events: {};
 }
 
-export interface IArena extends BaseContract {
-  contractName: "IArena";
+export interface IArenaFee extends BaseContract {
+  contractName: "IArenaFee";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IArenaInterface;
+  interface: IArenaFeeInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -91,32 +64,32 @@ export interface IArena extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    arena(
+    arenaFee(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[Arena.StructStructOutput]>;
+    ): Promise<[BigNumber]>;
   };
 
-  arena(
-    theId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<Arena.StructStructOutput>;
+  arenaFee(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
-    arena(
+    arenaFee(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<Arena.StructStructOutput>;
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
-    arena(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    arenaFee(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    arena(
+    arenaFee(
       theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

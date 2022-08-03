@@ -9,6 +9,7 @@ contract QueuesMethods is Params {
 
     function unenqueue(uint256 theId, uint256 hound) external {
         Queue.Struct memory _queue = queues[theId];
+        Arena.Struct memory arena = IArena(control.arenas).arena(_queue.arena);
 
         uint256[] memory replacedParticipants = _queue.participants;
         uint256[] memory replacedEnqueueDates = _queue.enqueueDates;
@@ -32,20 +33,18 @@ contract QueuesMethods is Params {
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = _queue.entryFee;
-        uint256 value = _queue.currency == address(0) ? _queue.entryFee : 0;
+        uint256 value = arena.currency == address(0) ? _queue.entryFee : 0;
         
-        /*
         IPay(control.payments).pay{
             value: value
         }(
             address(this),
             houndOwner,
-            _queue.currency,
+            arena.currency,
             new uint256[](0),
             amounts,
-            _queue.currency == address(0) ? 3 : 2
+            arena.currency == address(0) ? 3 : 2
         );
-        */
 
         emit Unenqueue(theId, hound);
     }
@@ -75,7 +74,7 @@ contract QueuesMethods is Params {
             Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
 
             IHandleArenaUsage(control.arenas).handleArenaUsage{ 
-                value: arena.feeCurrency == address(0) ? arena.fee : 0
+                value: arena.currency == address(0) ? arena.fee : 0
             }(queues[theId].arena);
 
             IHandleRaceLoot(control.races).handleRaceLoot(

@@ -8,6 +8,8 @@ import '../../arenas/params/Arena.sol';
 import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../arenas/interfaces/IHandleArenaUsage.sol';
+import '../../arenas/interfaces/IArenaFee.sol';
+import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';

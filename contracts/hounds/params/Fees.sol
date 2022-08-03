@@ -4,7 +4,7 @@ pragma solidity 0.8.15;
 library ConstructorFees {
     struct Struct {
         address breedCostCurrency;
-        address breedFeeCurrency;
+        address breedCurrency;
         address refillStaminaCostCurrency;
         address refillBreedingCostCurrency;
         uint256 breedCost;
