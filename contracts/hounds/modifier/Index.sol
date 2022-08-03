@@ -8,6 +8,8 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) external {
+        console.log("caller");
+        console.log(msg.sender);
         require(theId < id);
         require(allowed[msg.sender]);
         --hounds[theId].stamina.staminaValue;

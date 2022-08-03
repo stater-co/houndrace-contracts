@@ -1,20 +1,22 @@
 import { expect } from "chai";
 import { JoinQueueParams } from "../../common/dto/test/joinQueueParams.dto";
+import { Hound } from "../../typechain-types/Hounds";
 
 
 export async function joinQueue(
   params: JoinQueueParams
 ) {
+  console.log("Enqueue hound with: " + params.queueId,params.houndId);
   await params.contract.enqueue(params.queueId,params.houndId,{
-    value: params.entryFee
+    value: await (await params.contract.queue(params.queueId)).entryFee
   });
 }
 
 export async function safeJoinQueue(
   params: JoinQueueParams
 ): Promise<void> {
-  const before: string | number = await params.houndsContract.hound(params.houndId);
+  const before: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
   await joinQueue(params);
-  const after: string | number = await params.houndsContract.hound(params.houndId);
-  expect(Number(before) === Number(after) - 1);
+  const after: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
+  expect(Number(before.queueId) !== Number(after.queueId));
 }

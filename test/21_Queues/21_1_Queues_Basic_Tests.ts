@@ -4,8 +4,8 @@ import { safeEditQueue } from "../../plugins/test/editQueue";
 import { safeJoinQueue } from "../../plugins/test/joinQueue";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
-import { Hound } from "../../typechain-types/Hounds";
-import { Queue } from "../../typechain-types/Queues";
+import { Hound, Hounds } from "../../typechain-types/Hounds";
+import { Queue, Queues } from "../../typechain-types/Queues";
 
 
 async function basicTest(
@@ -24,11 +24,10 @@ async function basicTest(
 
     it("Enqueue", async function() {
       await safeJoinQueue({
-        contract: dependencies.contract,
+        contract: dependencies.contract as Queues,
         queueId: createdQueueId,
         houndId: dependencies.houndIdToEnqueue,
-        houndsContract: dependencies.houndsContract,
-        entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
+        houndsContract: dependencies.houndsContract as Hounds
       });
     });
 
@@ -39,11 +38,10 @@ async function basicTest(
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.queueId) === 0 ) {
           await safeJoinQueue({
-            contract: dependencies.contract,
+            contract: dependencies.contract as Queues,
             queueId: createdQueueId,
             houndId: j,
-            houndsContract: dependencies.houndsContract,
-            entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
+            houndsContract: dependencies.houndsContract as Hounds
           });
           ++totalEnqueues;
         }
@@ -54,11 +52,10 @@ async function basicTest(
       let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
       if ( queue.participants.length === 0 ) {
         await safeJoinQueue({
-          contract: dependencies.contract,
+          contract: dependencies.contract as Queues,
           queueId: createdQueueId,
           houndId: 1,
-          houndsContract: dependencies.houndsContract,
-          entryFee: (await dependencies.contract.queue(createdQueueId)).entryFee
+          houndsContract: dependencies.houndsContract as Hounds
         });
         queue = await dependencies.contract.queue(createdQueueId);
       }

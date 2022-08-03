@@ -1,5 +1,4 @@
 import { HoundsBasicTests } from "../../common/dto/test/houndsBasicTests.dto";
-import { hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
@@ -9,6 +8,7 @@ import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
 import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
 import { safeBoostHoundStamina } from "../../plugins/test/boostStamina";
+import { globalParams } from "../../common/params";
 const { ethers } = require('hardhat');
 
 
@@ -22,7 +22,7 @@ async function basicTest(
     it("Mint", async function () {
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
-        hound: hound as Hound.StructStructOutput
+        hound: globalParams.defaultHound
       });
     });
     
@@ -48,7 +48,7 @@ async function basicTest(
 
     it("Mint 20x females", async function () {
       for ( let i = 0 ; i < 20 ; ++i ) {
-        let houndToMint: Hound.StructStruct = hound;
+        let houndToMint: Hound.StructStruct = globalParams.defaultHound;
         houndToMint.identity.geneticSequence[1] = 2;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
@@ -59,7 +59,7 @@ async function basicTest(
 
     it("Mint 20x males", async function () {
       for ( let i = 0 ; i < 20 ; ++i ) {
-        let houndToMint: Hound.StructStruct = hound;
+        let houndToMint: Hound.StructStruct = globalParams.defaultHound;
         houndToMint.identity.geneticSequence[1] = 1;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
@@ -69,7 +69,7 @@ async function basicTest(
     });
 
     it("Mint & Breed", async function () {
-      let femaleHound: Hound.StructStruct = hound;
+      let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
       let newCreatedHoundId: string | number = await safeMintHound({
         contract: dependencies.hounds,

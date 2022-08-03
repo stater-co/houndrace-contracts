@@ -31,10 +31,10 @@ import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
 import { test as testHoundsAdvanced } from './19_Hounds/19_2_Hounds_Custom_Token_Tests';
 import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
 import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
+import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
-import { BigNumber } from 'ethers';
 
 
 async function main() {
@@ -229,136 +229,19 @@ async function main() {
 
     await testArenas.basicTest({
         arenas: arenas.arenas,
-        arena: {
-            "0": "Arena #",
-            "1": "arena_token_uri",
-            "2": globalParams.address0,
-            "3": BigNumber.from(100),
-            "4": 1,
-            "5": 1,
-            "6": 1,
-            name: "Arena #",
-            token_uri: "arena_token_uri",
-            currency: globalParams.address0,
-            fee: BigNumber.from(100),
-            surface: 1,
-            distance: 1,
-            weather: 1
-        }
+        arena: globalParams.defaultArena
     });
 
     await testQueues.basicTest({
         contract: queues.queues,
         houndsContract: hounds.hounds,
         houndIdToEnqueue: 1,
-        queue: {
-            "0": "Queue #",
-            "1": globalParams.address0,
-            "2": [],
-            "3": [],
-            "4": 1,
-            "5": 1000,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "10": 3,
-            "11": 0,
-            "12": false,
-            name: "Queue #",
-            currency: globalParams.address0,
-            participants: [],
-            enqueueDates: [],
-            arena: 1,
-            entryFee: 1000,
-            startDate: 0,
-            endDate: 0,
-            lastCompletion: 0,
-            payments: {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            totalParticipants: 3,
-            cooldown: 0,
-            closed: false
-        }
+        queue: globalParams.defaultQueue
     });
 
     await testRaces.basicTest({
         contract: races.races,
-        race: {
-            "0": "Race #",
-            "1": globalParams.address0,
-            "2": [],
-            "3": 1,
-            "4": 0,
-            "5": 34,
-            "6": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "7": 1,
-            "8": "0x00",
-            "name": "Race #",
-            "currency": globalParams.address0,
-            "participants": [],
-            "arena": 1,
-            "entryFee": 0,
-            "randomness": 34,
-            "payments": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "queueId": 1,
-            "seed": "0x00"
-        }
+        race: globalParams.defaultRace
     });
 
     await setHounds({
@@ -369,11 +252,7 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
-           allowedCallers: [
-            hounds.hounds.address,
-            races.races.address,
-            queues.queues.address
-           ],
+           allowedCallers: [],
            boilerplate: {
             incubator: incubators.incubator.address,
             staterApi: globalParams.address0,
@@ -403,6 +282,15 @@ async function main() {
         transferableHounds: hounds.transferrableRoot,
         erc20: payments.houndracePotions,
         payments: payments.payments
+    });
+
+    await testQueuesAdvanced.advancedTests({
+        queuesContract: queues.queues,
+        arenasContract: arenas.arenas,
+        erc20: payments.houndracePotions,
+        queue: globalParams.defaultQueue,
+        arena: globalParams.defaultArena,
+        houndsContract: hounds.hounds
     });
 
 }

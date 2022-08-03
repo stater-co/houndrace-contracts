@@ -1,4 +1,4 @@
-import { globalParams, hound } from "../../common/params";
+import { globalParams } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
@@ -19,7 +19,7 @@ async function advancedTests(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
-      let customERC20Hound = hound;
+      let customERC20Hound = globalParams.defaultHound;
       customERC20Hound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
       customERC20Hound.breeding.breedingcurrency = dependencies.erc20.address;
 
@@ -50,7 +50,7 @@ async function advancedTests(
     });
     
     it("Mint & Breed 2 hounds using custom tokens for both", async function () {
-      let femaleHound: Hound.StructStruct = hound;
+      let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
       femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
       femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
@@ -87,7 +87,7 @@ async function advancedTests(
     });
 
     it("Mint & Breed 2 hounds using custom tokens for first and ETH for second", async function () {
-      let femaleHound: Hound.StructStruct = hound;
+      let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
       femaleHound.breeding.breedingcurrency = dependencies.erc20.address;
       femaleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
@@ -126,7 +126,7 @@ async function advancedTests(
     });
 
     it("Mint & Breed 2 female hounds using ETH for first and custom token for second", async function () {
-      let femaleHound: Hound.StructStruct = hound;
+      let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
       femaleHound.breeding.breedingcurrency = globalParams.address0;
       femaleHound.stamina.staminaRefill1xCurrency = globalParams.address0;
@@ -165,7 +165,7 @@ async function advancedTests(
     });
 
     it("Mint & Breed 2 male hounds using custom tokens for both", async function () {
-      let maleHound: Hound.StructStruct = hound;
+      let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
       maleHound.breeding.breedingcurrency = dependencies.erc20.address;
       maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
@@ -202,7 +202,7 @@ async function advancedTests(
     });
 
     it("Mint & Breed 2 male hounds using custom tokens for first and ETH for second", async function () {
-      let maleHound: Hound.StructStruct = hound;
+      let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
       maleHound.breeding.breedingcurrency = dependencies.erc20.address;
       maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
@@ -241,7 +241,7 @@ async function advancedTests(
     });
 
     it("Mint & Breed 2 male hounds using ETH for first and custom token for second", async function () {
-      let maleHound: Hound.StructStruct = hound;
+      let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
       maleHound.breeding.breedingcurrency = globalParams.address0;
       maleHound.stamina.staminaRefill1xCurrency = globalParams.address0;

@@ -1,6 +1,7 @@
 import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
+import { globalParams } from "../../common/params";
 import { Hound } from '../../typechain-types/Hounds';
-import { hound } from '../../common/params';
+
 
 export async function breed(
   params: BreedHoundsParams
@@ -48,6 +49,6 @@ export async function safeBreed(
   const houndToFillUp = await params.contract.id();
 
   await params.contract.breedHounds(hound1, hound2, { value : totalToPay });
-  await params.contract.initializeHound(houndToFillUp,hound);
+  await params.contract.initializeHound(houndToFillUp,globalParams.defaultHound);
 
 }
