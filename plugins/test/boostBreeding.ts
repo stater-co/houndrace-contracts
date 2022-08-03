@@ -23,5 +23,5 @@ export async function safeBoostHoundBreeding(
   const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
   await boostHoundBreeding(params);
   const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  expect(before.breeding.lastBreed !== before.breeding.lastBreed);
+  expect(before.breeding.lastBreed !== after.breeding.lastBreed);
 }
