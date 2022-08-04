@@ -10,7 +10,6 @@ export function checkHoundStructure(
     ( hound.breeding.availableToBreed === false || hound.breeding.availableToBreed === true ) && 
     ( hound.breeding.breedingCooldown >= 0 ) && 
     ( hound.breeding.breedingFee >= 0 ) && 
-    ( hound.breeding.breedingcurrency === globalParams.address0 || String(hound.breeding.breedingcurrency).length > 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
     ( hound.custom === true || hound.custom === false ) && 
     ( String(hound.title).length > 0 ) && 
@@ -29,7 +28,6 @@ export function checkHoundStructure(
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
     ( hound.stamina.staminaPerHour >= 0 ) && 
     ( hound.stamina.staminaRefill1x >= 0 ) && 
-    ( hound.stamina.staminaRefill1xCurrency === globalParams.address0 || String(hound.stamina.staminaRefill1xCurrency).length > 0 ) && 
     ( hound.stamina.staminaValue >= 0 )
   );
 

@@ -36,16 +36,16 @@ contract HoundsModifier is Params {
         Hound.Stamina memory stamina = hounds[theId].stamina;
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = stamina.staminaRefill1xCurrency == address(0) ? msg.value : payed;
+        amounts[0] = control.fees.currency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
-            value: stamina.staminaRefill1xCurrency == address(0) ? amounts[0] : 0
+            value: control.fees.currency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            stamina.staminaRefill1xCurrency,
+            control.fees.currency,
             new uint256[](0),
             amounts,
-            stamina.staminaRefill1xCurrency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? 3 : 2
         );
 
         hounds[theId].stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
@@ -64,16 +64,16 @@ contract HoundsModifier is Params {
         Hound.Breeding memory breeding = hounds[theId].breeding;
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = breeding.breedingcurrency == address(0) ? msg.value : payed;
+        amounts[0] = control.fees.currency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
-            value: breeding.breedingcurrency == address(0) ? amounts[0] : 0
+            value: control.fees.currency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            breeding.breedingcurrency,
+            control.fees.currency,
             new uint256[](0),
             amounts,
-            breeding.breedingcurrency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? 3 : 2
         );
 
         hounds[theId].breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;

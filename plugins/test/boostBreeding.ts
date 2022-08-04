@@ -7,13 +7,12 @@ export async function boostHoundBreeding(
   params: BoostBreedingParams
 ) {
   const hound: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  console.log("Boost breeding for: " + hound.breeding.breedingcurrency + " and " + hound.breeding.breedingFee);
   
   await params.contract.boostHoundBreeding(
     params.hound1, 
     await params.contract.signer.getAddress(), 
     hound.breeding.breedingFee,{
-      value: hound.breeding.breedingcurrency === globalParams.address0 ? hound.breeding.breedingFee : 0
+      value: await (await params.contract.control()).fees.currency === globalParams.address0 ? hound.breeding.breedingFee : 0
     }
   );
 }

@@ -130,7 +130,8 @@ async function main() {
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            allowedCallers: [races.races.address,queues.queues.address]
+            allowedCallers: [races.races.address,queues.queues.address],
+            alhpadunePercentage: 60
         }
     });
     
@@ -169,10 +170,7 @@ async function main() {
             shop: payments.shop.address
            },
            fees: {
-            breedCostCurrency: globalParams.address0,
-            breedCurrency: globalParams.address0,
-            refillStaminaCostCurrency: globalParams.address0,
-            refillBreedingCostCurrency: globalParams.address0,
+            currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
             refillCost: "0x2386F26FC10000",
@@ -264,10 +262,7 @@ async function main() {
             shop: payments.shop.address
            },
            fees: {
-            breedCostCurrency: payments.houndracePotions.address,
-            breedCurrency: payments.houndracePotions.address,
-            refillStaminaCostCurrency: payments.houndracePotions.address,
-            refillBreedingCostCurrency: payments.houndracePotions.address,
+            currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
             refillCost: "0x2386F26FC10000",

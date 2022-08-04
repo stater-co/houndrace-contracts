@@ -7,12 +7,11 @@ export async function boostHoundStamina(
   params: BoostStaminaParams
 ) {
   const hound: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  console.log("Boost stamina for: " + hound.stamina.staminaRefill1xCurrency + " and " + hound.stamina.staminaRefill1x);
   await params.contract.boostHoundStamina(
     params.hound1, 
     await params.contract.signer.getAddress(), 
     hound.breeding.breedingFee,{
-      value: hound.stamina.staminaRefill1xCurrency === globalParams.address0 ? hound.stamina.staminaRefill1x : 0
+      value: await (await params.contract.control()).fees.currency === globalParams.address0 ? hound.stamina.staminaRefill1x : 0
     }
   );
 }

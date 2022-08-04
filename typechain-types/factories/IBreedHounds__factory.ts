@@ -46,11 +46,6 @@ const _abi = [
           {
             components: [
               {
-                internalType: "address",
-                name: "staminaRefill1xCurrency",
-                type: "address",
-              },
-              {
                 internalType: "uint256",
                 name: "staminaLastUpdate",
                 type: "uint256",
@@ -91,11 +86,6 @@ const _abi = [
                 internalType: "uint256",
                 name: "breedingCooldown",
                 type: "uint256",
-              },
-              {
-                internalType: "address",
-                name: "breedingcurrency",
-                type: "address",
               },
               {
                 internalType: "uint256",
@@ -211,11 +201,6 @@ const _abi = [
           {
             components: [
               {
-                internalType: "address",
-                name: "staminaRefill1xCurrency",
-                type: "address",
-              },
-              {
                 internalType: "uint256",
                 name: "staminaLastUpdate",
                 type: "uint256",
@@ -256,11 +241,6 @@ const _abi = [
                 internalType: "uint256",
                 name: "breedingCooldown",
                 type: "uint256",
-              },
-              {
-                internalType: "address",
-                name: "breedingcurrency",
-                type: "address",
               },
               {
                 internalType: "uint256",
@@ -374,11 +354,6 @@ const _abi = [
           {
             components: [
               {
-                internalType: "address",
-                name: "staminaRefill1xCurrency",
-                type: "address",
-              },
-              {
                 internalType: "uint256",
                 name: "staminaLastUpdate",
                 type: "uint256",
@@ -419,11 +394,6 @@ const _abi = [
                 internalType: "uint256",
                 name: "breedingCooldown",
                 type: "uint256",
-              },
-              {
-                internalType: "address",
-                name: "breedingcurrency",
-                type: "address",
               },
               {
                 internalType: "uint256",

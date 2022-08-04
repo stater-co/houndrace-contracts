@@ -45,7 +45,6 @@ const houndStamina: Hound.StaminaStruct = {
     staminaLastUpdate: 0,
     staminaPerHour: 1,
     staminaRefill1x: 100000,
-    staminaRefill1xCurrency: address0,
     staminaValue: 100
 };
 
@@ -60,7 +59,6 @@ const houndBreeding: Hound.BreedingStruct = {
     availableToBreed: false,
     breedingCooldown: 0,
     breedingFee: 100000,
-    breedingcurrency: address0,
     lastBreed: 0
 };
 

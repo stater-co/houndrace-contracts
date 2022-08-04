@@ -58,10 +58,7 @@ export declare namespace ConstructorBoilerplate {
 
 export declare namespace ConstructorFees {
   export type StructStruct = {
-    breedCostCurrency: string;
-    breedCurrency: string;
-    refillStaminaCostCurrency: string;
-    refillBreedingCostCurrency: string;
+    currency: string;
     breedCost: BigNumberish;
     breedFee: BigNumberish;
     refillCost: BigNumberish;
@@ -71,19 +68,13 @@ export declare namespace ConstructorFees {
 
   export type StructStructOutput = [
     string,
-    string,
-    string,
-    string,
     BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
     BigNumber
   ] & {
-    breedCostCurrency: string;
-    breedCurrency: string;
-    refillStaminaCostCurrency: string;
-    refillBreedingCostCurrency: string;
+    currency: string;
     breedCost: BigNumber;
     breedFee: BigNumber;
     refillCost: BigNumber;
@@ -137,7 +128,6 @@ export declare namespace Hound {
   };
 
   export type StaminaStruct = {
-    staminaRefill1xCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
@@ -146,14 +136,12 @@ export declare namespace Hound {
   };
 
   export type StaminaStructOutput = [
-    string,
     BigNumber,
     BigNumber,
     number,
     number,
     number
   ] & {
-    staminaRefill1xCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
     staminaValue: number;
@@ -164,7 +152,6 @@ export declare namespace Hound {
   export type BreedingStruct = {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
-    breedingcurrency: string;
     breedingFee: BigNumberish;
     availableToBreed: boolean;
   };
@@ -172,13 +159,11 @@ export declare namespace Hound {
   export type BreedingStructOutput = [
     BigNumber,
     BigNumber,
-    string,
     BigNumber,
     boolean
   ] & {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
-    breedingcurrency: string;
     breedingFee: BigNumber;
     availableToBreed: boolean;
   };
@@ -266,7 +251,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address),(address,address,address,address,uint256,uint256,uint256,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address),(address,uint256,uint256,uint256,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;

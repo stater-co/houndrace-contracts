@@ -49,6 +49,11 @@ const _abi = [
             name: "allowedCallers",
             type: "address[]",
           },
+          {
+            internalType: "uint256",
+            name: "alhpadunePercentage",
+            type: "uint256",
+          },
         ],
         internalType: "struct ArenasConstructor.Struct",
         name: "globalParameters",

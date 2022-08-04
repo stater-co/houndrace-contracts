@@ -11,7 +11,7 @@ contract ArenasMethods is Params {
         require(allowed[msg.sender]);
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = arenas[theId].fee / 2;
+        amounts[0] = arenas[theId].fee * ( 100 / ( 100 - control.alhpadunePercentage ) );
         
         IPay(control.payments).pay(
                 control.payments,
@@ -21,6 +21,8 @@ contract ArenasMethods is Params {
                 amounts,
                 arenas[theId].currency == address(0) ? 3 : 2
         );
+
+        amounts[0] = arenas[theId].fee * ( 100 / control.alhpadunePercentage );
 
         IPay(control.payments).pay(
                 control.payments,

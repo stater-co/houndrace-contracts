@@ -6,7 +6,6 @@ library Hound {
     struct Breeding {
         uint256 lastBreed;
         uint256 breedingCooldown;
-        address breedingcurrency;
         uint256 breedingFee;
         bool availableToBreed;
     }
@@ -21,7 +20,6 @@ library Hound {
     }
 
     struct Stamina {
-        address staminaRefill1xCurrency;
         uint256 staminaLastUpdate;
         uint256 staminaRefill1x;
         uint32 staminaValue;

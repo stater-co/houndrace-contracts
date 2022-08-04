@@ -11,5 +11,6 @@ library ArenasConstructor {
         address payments;
         address alphadune;
         address[] allowedCallers;
+        uint256 alhpadunePercentage;
     }
 }

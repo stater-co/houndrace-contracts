@@ -32,6 +32,7 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     allowedCallers: string[];
+    alhpadunePercentage: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -41,7 +42,8 @@ export declare namespace ArenasConstructor {
     string,
     string,
     string,
-    string[]
+    string[],
+    BigNumber
   ] & {
     name: string;
     symbol: string;
@@ -50,6 +52,7 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     allowedCallers: string[];
+    alhpadunePercentage: BigNumber;
   };
 }
 
@@ -109,7 +112,7 @@ export interface ArenasInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((string,string,address,address,address,address,address[],uint256))": FunctionFragment;
     "setTokenUri(uint256,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -433,13 +436,14 @@ export interface Arenas extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string] & {
+      [string, string, string, string, string, string, BigNumber] & {
         name: string;
         symbol: string;
         restricted: string;
         methods: string;
         payments: string;
         alphadune: string;
+        alhpadunePercentage: BigNumber;
       }
     >;
 
@@ -597,13 +601,14 @@ export interface Arenas extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, BigNumber] & {
       name: string;
       symbol: string;
       restricted: string;
       methods: string;
       payments: string;
       alphadune: string;
+      alhpadunePercentage: BigNumber;
     }
   >;
 
@@ -761,13 +766,14 @@ export interface Arenas extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string] & {
+      [string, string, string, string, string, string, BigNumber] & {
         name: string;
         symbol: string;
         restricted: string;
         methods: string;
         payments: string;
         alphadune: string;
+        alhpadunePercentage: BigNumber;
       }
     >;
 

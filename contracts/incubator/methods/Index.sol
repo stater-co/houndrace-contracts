@@ -26,7 +26,6 @@ contract IncubatorMethods is Params {
         );
 
         Hound.Stamina memory stamina = Hound.Stamina(
-            randomness % 2 == 0 ? hound1.stamina.staminaRefill1xCurrency : hound2.stamina.staminaRefill1xCurrency,
             0,
             .1 ether,
             100,
@@ -37,7 +36,6 @@ contract IncubatorMethods is Params {
         Hound.Breeding memory breeding = Hound.Breeding(
             0, 
             block.timestamp + control.secondsToMaturity,
-            hound1.breeding.breedingcurrency,
             0,
             false
         );
