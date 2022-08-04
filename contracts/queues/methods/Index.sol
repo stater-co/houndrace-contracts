@@ -19,35 +19,25 @@ contract QueuesMethods is Params {
         if ( replacedParticipants.length > 0 ) {
             bool exists;
             for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
-                console.log("Participant: ", replacedParticipants[i], " against ", hound);
                 if ( replacedParticipants[i] == hound ) {
-                    console.log("yeaaas");
                     exists = true;
-                    console.log("yeaaas 2 ", replacedEnqueueDates[i]);
-                    console.log(block.timestamp);
-                    console.log(_queue.cooldown);
                     require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
-                    console.log("ok...");
                 } else {
                     queues[theId].participants.push(replacedParticipants[i]);
                     queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
                 }
             }
             require(exists);
-            console.log("perfect");
         }
 
-        console.log("now...");
-        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
-        console.log("ok agains");
-        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
 
-        console.log("ok agains x2");
+        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
+
+        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = _queue.entryFee;
         uint256 value = arena.currency == address(0) ? _queue.entryFee : 0;
         
-        console.log("ok agains x3");
         IPay(control.payments).pay{
             value: value
         }(
@@ -59,13 +49,10 @@ contract QueuesMethods is Params {
             arena.currency == address(0) ? 3 : 2
         );
 
-        console.log("ok agains x4");
         emit Unenqueue(theId, hound);
     }
 
     function enqueue(uint256 theId, uint256 hound) external payable {
-
-        console.log("OK 1");
 
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
@@ -75,31 +62,20 @@ contract QueuesMethods is Params {
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
 
-        console.log("OK 2");
-
         for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
             require(queues[theId].participants[i] != hound);
         }
 
-        console.log("OK 3 ", hound);
-
         queues[theId].participants.push(hound);
         queues[theId].enqueueDates.push(block.timestamp);
 
-        console.log("OK 3.5 ");
-
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
-        console.log("OK 3.6 ");
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
-
-        console.log("OK 4");
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
             Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
-
-            console.log("Enqueue using: ", arena.currency);
 
             IHandleArenaUsage(control.arenas).handleArenaUsage{ 
                 value: arena.currency == address(0) ? arena.fee : 0

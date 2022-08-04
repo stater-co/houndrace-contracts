@@ -22,19 +22,11 @@ export async function safeBreed(
   houndMaleBefore = await params.contract.hound(maleId);
   houndFemaleBefore = await params.contract.hound(femaleId);
 
-  console.log("OK 1 ... " + maleId, femaleId);
-
   const ownerOfMale: string = await params.contract.ownerOf(maleId);
-
-  console.log("OK 2 ...");
 
   const ownerOfFemale: string = await params.contract.ownerOf(femaleId);
 
-  console.log("OK 3 ...");
-
   const signer = await params.signer.getAddress();
-
-  console.log("OK 4 ...");
 
   let hound1 = maleId , hound2 = femaleId;
   if ( ownerOfFemale !== signer && ownerOfMale === signer ) {

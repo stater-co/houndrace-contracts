@@ -6,7 +6,6 @@ import { Hound } from "../../typechain-types/Hounds";
 export async function joinQueue(
   params: JoinQueueParams
 ) {
-  console.log("Enqueue hound with: " + params.queueId,params.houndId);
   await params.contract.enqueue(params.queueId,params.houndId,{
     value: await (await params.contract.queue(params.queueId)).entryFee
   });

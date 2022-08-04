@@ -20,7 +20,6 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
