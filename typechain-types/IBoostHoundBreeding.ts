@@ -25,12 +25,12 @@ import type {
 export interface IBoostHoundBreedingInterface extends utils.Interface {
   contractName: "IBoostHoundBreeding";
   functions: {
-    "boostHoundBreeding(uint256,address)": FunctionFragment;
+    "boostHoundBreeding(uint256,address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "boostHoundBreeding",
-    values: [BigNumberish, string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -72,6 +72,7 @@ export interface IBoostHoundBreeding extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -79,6 +80,7 @@ export interface IBoostHoundBreeding extends BaseContract {
   boostHoundBreeding(
     theId: BigNumberish,
     user: string,
+    payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -86,6 +88,7 @@ export interface IBoostHoundBreeding extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -96,6 +99,7 @@ export interface IBoostHoundBreeding extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -104,6 +108,7 @@ export interface IBoostHoundBreeding extends BaseContract {
     boostHoundBreeding(
       theId: BigNumberish,
       user: string,
+      payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

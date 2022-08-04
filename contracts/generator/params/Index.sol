@@ -9,6 +9,7 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../randomness/IGetRandomNumber.sol';
 import '../../arenas/params/Arena.sol';
 import '../../arenas/interfaces/IArena.sol';
+import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../utils/Sortings.sol';
 

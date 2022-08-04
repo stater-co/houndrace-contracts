@@ -28,18 +28,21 @@ import { set as setRaces } from './16_Setup_Races_Contracts';
 import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
+import { test as testHoundsAdvanced } from './19_Hounds/19_2_Hounds_Custom_Token_Tests';
 import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
 import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
+import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
-import { BigNumber } from 'ethers';
 
 
 async function main() {
 
     const signerDependency: SignerDependency = {
-        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY))
+        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY)),
+        signer2: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY2)),
+        signer3: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY3))
     };
 
     const libraries: DeployedLibraries = await runLibraries();
@@ -66,7 +69,8 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address
+        incubatorAddress: incubators.incubator.address,
+        transferrableRoot: payments.testErc721
     });
 
     const races: RacesSystem = await runRaces({
@@ -112,8 +116,7 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address
-        },
-        ...signerDependency
+        }
     });
 
     await setArenas({
@@ -123,11 +126,12 @@ async function main() {
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
-            alphadune: await signerDependency.signer.getAddress(),
+            alphadune: globalParams.address0,
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            allowedCallers: [races.races.address,queues.queues.address]
+            allowedCallers: [races.races.address,queues.queues.address],
+            alhpadunePercentage: 60
         }
     });
     
@@ -157,7 +161,7 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: await signerDependency.signer.getAddress(),
+            staterApi: globalParams.address0,
             houndModifier: hounds.houndsModifier.address,
             hounds: hounds.hounds.address,
             minter: hounds.houndsMinter.address,
@@ -166,10 +170,7 @@ async function main() {
             shop: payments.shop.address
            },
            fees: {
-            breedCostCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
-            refillStaminaCostCurrency: globalParams.address0,
-            refillBreedingCostCurrency: globalParams.address0,
+            currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
             refillCost: "0x2386F26FC10000",
@@ -197,7 +198,7 @@ async function main() {
             allowedCallers: [
                 races.races.address,
                 queues.queues.address,
-                await signerDependency.signer.getAddress()
+                globalParams.address0
             ]
         }
     });
@@ -221,142 +222,70 @@ async function main() {
     });
 
     await testHounds.basicTest({
-        hounds: hounds.hounds,
-        ...signerDependency
+        hounds: hounds.hounds
     });
 
     await testArenas.basicTest({
         arenas: arenas.arenas,
-        arena: {
-            "0": "Arena #",
-            "1": "arena_token_uri",
-            "2": globalParams.address0,
-            "3": BigNumber.from(100),
-            "4": 1,
-            "5": 1,
-            "6": 1,
-            name: "Arena #",
-            token_uri: "arena_token_uri",
-            feeCurrency: globalParams.address0,
-            fee: BigNumber.from(100),
-            surface: 1,
-            distance: 1,
-            weather: 1
-        }
+        arena: globalParams.defaultArena
     });
 
     await testQueues.basicTest({
         contract: queues.queues,
         houndsContract: hounds.hounds,
         houndIdToEnqueue: 1,
-        queue: {
-            "0": "Queue #",
-            "1": globalParams.address0,
-            "2": [],
-            "3": [],
-            "4": 1,
-            "5": 1000,
-            "6": 0,
-            "7": 0,
-            "8": 0,
-            "9": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "10": 3,
-            "11": 0,
-            "12": false,
-            name: "Queue #",
-            currency: globalParams.address0,
-            participants: [],
-            enqueueDates: [],
-            arena: 1,
-            entryFee: 1000,
-            startDate: 0,
-            endDate: 0,
-            lastCompletion: 0,
-            payments: {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            totalParticipants: 3,
-            cooldown: 0,
-            closed: false
-        }
+        queue: globalParams.defaultQueue
     });
 
     await testRaces.basicTest({
         contract: races.races,
-        race: {
-            "0": "Race #",
-            "1": globalParams.address0,
-            "2": [],
-            "3": 1,
-            "4": 0,
-            "5": 34,
-            "6": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "7": 1,
-            "8": "0x00",
-            "name": "Race #",
-            "currency": globalParams.address0,
-            "participants": [],
-            "arena": 1,
-            "entryFee": 0,
-            "randomness": 34,
-            "payments": {
-                "0": [],
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [[]],
-                "5": [[]],
-                "6": [],
-                from: [],
-                to: [],
-                currency: [],
-                ids: [[]],
-                amounts: [[]],
-                paymentType: []
-            },
-            "queueId": 1,
-            "seed": "0x00"
+        race: globalParams.defaultRace
+    });
+
+    await setHounds({
+        hounds: hounds.hounds,
+        houndsMinter: hounds.houndsMinter,
+        houndsModifier: hounds.houndsModifier,
+        houndsRestricted: hounds.houndsRestricted,
+        constructor: {
+           name: "HoundRace",
+           symbol: "HR",
+           allowedCallers: [],
+           boilerplate: {
+            incubator: incubators.incubator.address,
+            staterApi: globalParams.address0,
+            houndModifier: hounds.houndsModifier.address,
+            hounds: hounds.hounds.address,
+            minter: hounds.houndsMinter.address,
+            restricted: hounds.houndsRestricted.address,
+            payments: payments.payments.address,
+            shop: payments.shop.address
+           },
+           fees: {
+            currency: payments.houndracePotions.address,
+            breedCost: "0xB1A2BC2EC50000",
+            breedFee: "0x2386F26FC10000",
+            refillCost: "0x2386F26FC10000",
+            refillBreedingCooldownCost: "0x2386F26FC10000",
+            refillStaminaCooldownCost: "0x2386F26FC10000"
+           }
         }
+    });
+
+    await testHoundsAdvanced.advancedTests({
+        hounds: hounds.hounds,
+        transferableHounds: hounds.transferrableRoot,
+        erc20: payments.houndracePotions,
+        payments: payments.payments
+    });
+
+    await testQueuesAdvanced.advancedTests({
+        queuesContract: queues.queues,
+        arenasContract: arenas.arenas,
+        erc20: payments.houndracePotions,
+        queue: globalParams.defaultQueue,
+        arena: globalParams.defaultArena,
+        houndsContract: hounds.hounds
     });
 
 }

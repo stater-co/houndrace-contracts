@@ -1,12 +1,15 @@
 import { HoundsBasicTests } from "../../common/dto/test/houndsBasicTests.dto";
-import { hound } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Hound } from "../../typechain-types/Hounds";
+import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { safeSetAvailableToBreed } from "../../plugins/test/setAvailableToBreed";
+import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
+import { safeBoostHoundStamina } from "../../plugins/test/boostStamina";
+import { globalParams } from "../../common/params";
+const { ethers } = require('hardhat');
 
 
 async function basicTest(
@@ -19,7 +22,7 @@ async function basicTest(
     it("Mint", async function () {
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
-        hound: hound as Hound.StructStructOutput
+        hound: globalParams.defaultHound
       });
     });
     
@@ -43,21 +46,68 @@ async function basicTest(
       });
     });
 
+    it("Mint 20x females", async function () {
+      for ( let i = 0 ; i < 20 ; ++i ) {
+        let houndToMint: Hound.StructStruct = globalParams.defaultHound;
+        houndToMint.identity.geneticSequence[1] = 2;
+        createdHoundId = await safeMintHound({
+          contract: dependencies.hounds,
+          hound: houndToMint as Hound.StructStructOutput
+        });
+      }
+    });
+
+    it("Mint 20x males", async function () {
+      for ( let i = 0 ; i < 20 ; ++i ) {
+        let houndToMint: Hound.StructStruct = globalParams.defaultHound;
+        houndToMint.identity.geneticSequence[1] = 1;
+        createdHoundId = await safeMintHound({
+          contract: dependencies.hounds,
+          hound: houndToMint as Hound.StructStructOutput
+        });
+      }
+    });
+
     it("Mint & Breed", async function () {
-      let femaleHound: Hound.StructStruct = hound;
+      let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
       let newCreatedHoundId: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput
       });
+      let [sig1] = await ethers.getSigners();
+
       await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,
         hound2: newCreatedHoundId,
-        signer: dependencies.signer
+        signer: sig1
       });
+
     });
     
+    it("Boost hound breeding cooldown using ETH", async function () {
+
+      const [sig1] = await ethers.getSigners();
+      await safeBoostHoundBreeding({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
+
+    it("Boost hound stamina cooldown using ETH", async function () {
+
+      const [sig1] = await ethers.getSigners();
+      await safeBoostHoundStamina({
+        contract: dependencies.hounds as Hounds,
+        hound1: createdHoundId,
+        signer: sig1
+      });
+
+    });
+
     it("Set hound available to breed externally", async function () {
       await safeSetAvailableToBreed({
         status: true,

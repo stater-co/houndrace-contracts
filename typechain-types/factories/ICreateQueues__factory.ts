@@ -17,11 +17,6 @@ const _abi = [
             type: "string",
           },
           {
-            internalType: "address",
-            name: "currency",
-            type: "address",
-          },
-          {
             internalType: "uint256[]",
             name: "participants",
             type: "uint256[]",

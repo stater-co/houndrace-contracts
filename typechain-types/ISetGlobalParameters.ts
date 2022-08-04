@@ -4,6 +4,7 @@
 import {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -30,6 +31,7 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     allowedCallers: string[];
+    alhpadunePercentage: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -39,7 +41,8 @@ export declare namespace ArenasConstructor {
     string,
     string,
     string,
-    string[]
+    string[],
+    BigNumber
   ] & {
     name: string;
     symbol: string;
@@ -48,13 +51,14 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     allowedCallers: string[];
+    alhpadunePercentage: BigNumber;
   };
 }
 
 export interface ISetGlobalParametersInterface extends utils.Interface {
   contractName: "ISetGlobalParameters";
   functions: {
-    "setGlobalParameters((string,string,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((string,string,address,address,address,address,address[],uint256))": FunctionFragment;
   };
 
   encodeFunctionData(

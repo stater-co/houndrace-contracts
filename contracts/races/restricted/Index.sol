@@ -12,7 +12,7 @@ contract RacesRestricted is Params {
         Arena.Struct memory arena = IArena(control.arenas).arena(race.arena);
 
         IHandleArenaUsage(control.arenas).handleArenaUsage{ 
-            value: arena.feeCurrency == address(0) ? arena.fee : 0
+            value: arena.currency == address(0) ? arena.fee : 0
         }(race.arena);
 
         (bool success, ) = control.payments.delegatecall(

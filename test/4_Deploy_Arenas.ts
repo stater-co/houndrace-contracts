@@ -29,7 +29,8 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             deployer.address, 
-            dependencies.allowedCallers
+            dependencies.allowedCallers,
+            60
           ]],
           props: {}
         }) as ArenasRestricted;
@@ -46,7 +47,8 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             deployer.address, 
-            dependencies.allowedCallers
+            dependencies.allowedCallers,
+            60
           ]],
           props: {}
         }) as ArenasMethods;
@@ -63,7 +65,8 @@ export async function run(
             arenasMethods.address, 
             dependencies.paymentsAddress, 
             deployer.address, 
-            dependencies.allowedCallers
+            dependencies.allowedCallers,
+            60
           ]],
           props: {}
         }) as Arenas;

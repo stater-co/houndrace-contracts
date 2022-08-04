@@ -19,47 +19,42 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.fees.breedCost;
-        
+        amounts[0] = control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee;
+
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0
+            value: control.fees.currency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
-            address(this),
-            control.fees.breedCostCurrency,
+            control.boilerplate.payments,
+            control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.breedCostCurrency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? 3 : 2
         );
 
         amounts[0] = control.fees.breedFee;
-        IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0
-        }(
-            msg.sender,
+        IPay(control.boilerplate.payments).pay(
+            control.boilerplate.payments,
             control.boilerplate.staterApi,
-            control.fees.breedFeeCurrency,
+            control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.breedFeeCurrency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? 3 : 2
         );
 
-        require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0));
+        require(msg.value >= (control.fees.currency == address(0) ? control.fees.breedCost : 0) + (control.fees.currency == address(0) ? control.fees.breedFee : 0));
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
-            require(msg.value >= (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
+            require(msg.value >= (control.fees.currency == address(0) ? control.fees.breedCost : 0) + (control.fees.currency == address(0) ? control.fees.breedFee : 0) + (control.fees.currency == address(0) ? hounds[hound2].breeding.breedingFee : 0));
             
             amounts[0] = hounds[hound2].breeding.breedingFee;
-            IPay(control.boilerplate.payments).pay{
-                value: control.fees.breedCostCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0
-            }(
-                msg.sender,
+            IPay(control.boilerplate.payments).pay(
+                control.boilerplate.payments,
                 ownerOf(hound2),
-                control.fees.breedCostCurrency,
+                control.fees.currency,
                 new uint256[](0),
                 amounts,
-                control.fees.breedCostCurrency == address(0) ? 3 : 2
+                control.fees.currency == address(0) ? 3 : 2
             );
                 
         }
@@ -76,6 +71,7 @@ contract HoundsMinter is Params {
 
         emit BreedHound(id,msg.sender,offspring);
         ++id;
+
     } 
 
 }

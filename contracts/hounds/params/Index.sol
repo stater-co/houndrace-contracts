@@ -56,6 +56,11 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
 
+    function getBreedCost(uint256 hound1, uint256 hound2) public view returns(uint256) {
+        require(ownerOf(hound1) == msg.sender);
+        return control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee;
+    }
+
     fallback() external payable {}
     receive() external payable {}
 

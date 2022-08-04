@@ -14,16 +14,6 @@ contract RacesMethods is Params {
 
             races[id] = IGenerate(control.generator).generate(queue,theId);
 
-            Arena.Struct memory arena = IArena(control.arenas).arena(races[id].arena);
-
-            IHandleArenaUsage(control.arenas).handleArenaUsage{ 
-                value: arena.feeCurrency == address(0) ? arena.fee : 0
-            }(races[id].arena);
-
-            handleRaceLoot(
-                queue.payments
-            );
-
             for ( uint256 i = 0 ; i < queue.participants.length ; ++i ) {
                 require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.participants[i], theId) != 0);
             }
@@ -34,7 +24,7 @@ contract RacesMethods is Params {
 
             emit NewRace(id, Race.Struct(
                 queue.name,
-                queue.currency,
+                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
                 queue.participants,
                 queue.arena,
                 queue.entryFee,

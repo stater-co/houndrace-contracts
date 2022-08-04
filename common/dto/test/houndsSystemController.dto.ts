@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Constructor } from '../../../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { Constructor } from '../../../typechain-types/Hounds';
 
 export interface HoundsSystemController {
     houndsRestricted: ethers.Contract;

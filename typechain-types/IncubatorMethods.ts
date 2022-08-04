@@ -59,7 +59,6 @@ export declare namespace Hound {
   };
 
   export type StaminaStruct = {
-    staminaRefill1xCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
@@ -68,14 +67,12 @@ export declare namespace Hound {
   };
 
   export type StaminaStructOutput = [
-    string,
     BigNumber,
     BigNumber,
     number,
     number,
     number
   ] & {
-    staminaRefill1xCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
     staminaValue: number;
@@ -86,7 +83,6 @@ export declare namespace Hound {
   export type BreedingStruct = {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
-    breedingFeeCurrency: string;
     breedingFee: BigNumberish;
     availableToBreed: boolean;
   };
@@ -94,13 +90,11 @@ export declare namespace Hound {
   export type BreedingStructOutput = [
     BigNumber,
     BigNumber,
-    string,
     BigNumber,
     boolean
   ] & {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
-    breedingFeeCurrency: string;
     breedingFee: BigNumber;
     availableToBreed: boolean;
   };
@@ -165,7 +159,7 @@ export declare namespace Hound {
 export interface IncubatorMethodsInterface extends utils.Interface {
   contractName: "IncubatorMethods";
   functions: {
-    "breedHounds(uint256,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(uint256,uint256,address,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool),uint256,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(uint256,uint256,address,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
+    "breedHounds(uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool),uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
     "control()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;

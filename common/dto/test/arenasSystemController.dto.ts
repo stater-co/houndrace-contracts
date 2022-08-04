@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ArenasConstructor } from '../../../typechain-types/contracts/arenas/params/Index.sol/Params';
+import { ArenasConstructor } from '../../../typechain-types/Arenas';
 
 export interface ArenasSystemController {
     arenasRestricted: ethers.Contract;

@@ -18,7 +18,7 @@ contract GeneratorMethods is Params {
 
         return Race.Struct(
             queue.name,
-            queue.currency,
+            IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
             participants,
             queue.arena,
             queue.entryFee,

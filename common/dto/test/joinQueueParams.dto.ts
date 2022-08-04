@@ -1,9 +1,10 @@
 import { ethers } from "ethers";
+import { Hounds } from "../../../typechain-types/Hounds";
+import { Queues } from "../../../typechain-types/Queues";
 
 export interface JoinQueueParams {
-    contract: ethers.Contract;
+    contract: Queues;
     queueId: string | number;
     houndId: string | number;
-    entryFee: string | number;
-    houndsContract: ethers.Contract;
+    houndsContract: Hounds;
   }

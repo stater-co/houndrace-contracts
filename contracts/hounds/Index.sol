@@ -27,12 +27,12 @@ contract Hounds is Params {
         require(success);
     }
 
-    function boostHoundStamina(uint256 theId, address user) external payable {
+    function boostHoundStamina(uint256 theId, address user, uint256 payed) external payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function boostHoundBreeding(uint256 theId, address user) external payable {
+    function boostHoundBreeding(uint256 theId, address user, uint256 payed) external payable {
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }
@@ -46,11 +46,6 @@ contract Hounds is Params {
         (bool success, bytes memory output) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
         oldQueueId = abi.decode(output,(uint256)); 
-    }
-
-    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256) {
-        require(ownerOf(hound1) == msg.sender);
-        return (control.fees.breedCostCurrency == address(0) ? control.fees.breedCost : 0) + (control.fees.breedFeeCurrency == address(0) ? control.fees.breedFee : 0) + (hounds[hound2].breeding.breedingFeeCurrency == address(0) ? hounds[hound2].breeding.breedingFee : 0);
     }
 
 }

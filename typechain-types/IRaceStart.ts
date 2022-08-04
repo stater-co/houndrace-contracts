@@ -52,7 +52,6 @@ export declare namespace Payment {
 export declare namespace Queue {
   export type StructStruct = {
     name: string;
-    currency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
@@ -68,7 +67,6 @@ export declare namespace Queue {
 
   export type StructStructOutput = [
     string,
-    string,
     BigNumber[],
     BigNumber[],
     BigNumber,
@@ -82,7 +80,6 @@ export declare namespace Queue {
     boolean
   ] & {
     name: string;
-    currency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
@@ -100,7 +97,7 @@ export declare namespace Queue {
 export interface IRaceStartInterface extends utils.Interface {
   contractName: "IRaceStart";
   functions: {
-    "raceStart((string,address,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

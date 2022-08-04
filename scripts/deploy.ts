@@ -178,7 +178,7 @@ async function main() {
 
     const arenasRestricted = await deployContract({
       name: 'ArenasRestricted',
-      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []]],
+      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60]],
       props: {}
     }) as ArenasRestricted;
     DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
@@ -188,7 +188,7 @@ async function main() {
 
     const arenasMethods = await deployContract({
       name: 'ArenasMethods',
-      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []]],
+      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60]],
       props: {}
     }) as ArenasMethods;
     DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
@@ -198,7 +198,7 @@ async function main() {
 
     const arenas = await deployContract({
       name: 'Arenas',
-      constructor: [["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []]],
+      constructor: [["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60]],
       props: {}
     }) as Arenas;
     DeploymentLogger('export ARENAS=' + arenas.address);
@@ -214,7 +214,8 @@ async function main() {
         methods: arenasMethods.address, 
         payments: payments.address, 
         alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-        allowedCallers: []
+        allowedCallers: [],
+        alhpadunePercentage: 60
       });
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
@@ -790,7 +791,8 @@ async function main() {
         methods: arenasMethods.address, 
         payments: payments.address, 
         alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-        allowedCallers: [races.address]
+        allowedCallers: [races.address],
+        alhpadunePercentage: 60
       });
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
@@ -825,10 +827,7 @@ async function main() {
           shop: shop.address
         },
         fees: {
-          breedCostCurrency: globalParams.address0,
-          breedFeeCurrency: globalParams.address0,
-          refillBreedingCostCurrency: globalParams.address0,
-          refillStaminaCostCurrency: globalParams.address0,
+          currency: globalParams.address0,
           breedCost: "0xB1A2BC2EC50000",
           breedFee: "0x2386F26FC10000",
           refillBreedingCooldownCost: "0x2386F26FC10000",
@@ -869,10 +868,7 @@ async function main() {
           shop: shop.address
         },
         fees: {
-          breedCostCurrency: globalParams.address0,
-          breedFeeCurrency: globalParams.address0,
-          refillBreedingCostCurrency: globalParams.address0,
-          refillStaminaCostCurrency: globalParams.address0,
+          currency: globalParams.address0,
           breedCost: "0xB1A2BC2EC50000",
           breedFee: "0x2386F26FC10000",
           refillBreedingCooldownCost: "0x2386F26FC10000",
@@ -913,10 +909,7 @@ async function main() {
           shop: shop.address
         },
         fees: {
-          breedCostCurrency: globalParams.address0,
-          breedFeeCurrency: globalParams.address0,
-          refillBreedingCostCurrency: globalParams.address0,
-          refillStaminaCostCurrency: globalParams.address0,
+          currency: globalParams.address0,
           breedCost: "0xB1A2BC2EC50000",
           breedFee: "0x2386F26FC10000",
           refillBreedingCooldownCost: "0x2386F26FC10000",
@@ -957,10 +950,7 @@ async function main() {
           shop: shop.address
         },
         fees: {
-          breedCostCurrency: globalParams.address0,
-          breedFeeCurrency: globalParams.address0,
-          refillBreedingCostCurrency: globalParams.address0,
-          refillStaminaCostCurrency: globalParams.address0,
+          currency: globalParams.address0,
           breedCost: "0xB1A2BC2EC50000",
           breedFee: "0x2386F26FC10000",
           refillBreedingCooldownCost: "0x2386F26FC10000",
@@ -1084,7 +1074,7 @@ async function main() {
         address: arenasRestricted.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []
+            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
           ]
         ]
       });
@@ -1100,7 +1090,7 @@ async function main() {
         address: arenasMethods.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, []
+            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
           ]
         ]
       });
@@ -1116,7 +1106,7 @@ async function main() {
         address: arenas.address,
         constructorArguments: [
           [
-            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), []
+            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60
           ]
         ]
       });

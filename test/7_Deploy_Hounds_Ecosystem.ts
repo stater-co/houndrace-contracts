@@ -6,6 +6,7 @@ import { Hounds } from '../typechain-types/Hounds';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
+import { AlphaERC721, AlphaERC721Interface } from '../typechain-types/AlphaERC721';
 const { ethers } = require("hardhat");
 
 
@@ -152,11 +153,14 @@ export async function run(
           props: {}
         }) as Hounds;
 
+        const transferrableRoot: AlphaERC721 = dependencies.transferrableRoot.attach(hounds.address);
+
         resolve({
           houndsRestricted: houndsRestricted,
           houndsModifier: houndsModifier,
           houndsMinter: houndsMinter,
-          hounds: hounds
+          hounds: hounds,
+          transferrableRoot: transferrableRoot
         });
       });
 

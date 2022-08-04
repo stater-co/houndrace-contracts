@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Queue } from "../../../typechain-types/contracts/queues/Index.sol/Queues";
+import { Queue } from "../../../typechain-types/Queues";
 
 export interface QueuesBasicTests {
     contract: ethers.Contract;

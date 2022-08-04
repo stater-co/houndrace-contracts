@@ -1,18 +1,27 @@
 import { expect } from "chai";
-import { UpdateHoundStaminaParams } from "../../common/dto/test/updateHoundStaminaParams";
+import { BoostBreedingParams } from "../../common/dto/test/boostBreedingParams";
+import { globalParams } from "../../common/params";
 import { Hound } from '../../typechain-types/Hounds';
 
 export async function boostHoundBreeding(
-  params: UpdateHoundStaminaParams
+  params: BoostBreedingParams
 ) {
-  await params.contract.boostHoundBreeding(params.houndId, await params.contract.signer.getAddress());
+  const hound: Hound.StructStructOutput = await params.contract.hound(params.hound1);
+  
+  await params.contract.boostHoundBreeding(
+    params.hound1, 
+    await params.contract.signer.getAddress(), 
+    hound.breeding.breedingFee,{
+      value: await (await params.contract.control()).fees.currency === globalParams.address0 ? hound.breeding.breedingFee : 0
+    }
+  );
 }
 
 export async function safeBoostHoundBreeding(
-  params: UpdateHoundStaminaParams
+  params: BoostBreedingParams
 ) {
-  const before: Hound.StructStructOutput = await params.contract.hound(params.houndId);
+  const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
   await boostHoundBreeding(params);
-  const after: string | number = await params.contract.id();
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
+  expect(before.breeding.lastBreed !== after.breeding.lastBreed);
 }

@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { RacesConstructor } from '../../../typechain-types/contracts/races/params/Index.sol/Params';
+import { RacesConstructor } from '../../../typechain-types/Races';
 
 export interface RacesSystemController {
     racesRestricted: ethers.Contract;
