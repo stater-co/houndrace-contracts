@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -430,7 +429,7 @@ export interface ArenasMethods extends BaseContract {
 
     handleArenaUsage(
       theId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -578,7 +577,7 @@ export interface ArenasMethods extends BaseContract {
 
   handleArenaUsage(
     theId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -917,7 +916,7 @@ export interface ArenasMethods extends BaseContract {
 
     handleArenaUsage(
       theId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1056,7 +1055,7 @@ export interface ArenasMethods extends BaseContract {
 
     handleArenaUsage(
       theId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;

@@ -8,7 +8,7 @@ import { safeMintHound } from "../../plugins/test/mintHound";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
 import { Hound, Hounds } from "../../typechain-types/Hounds";
-import { Queue, Queues } from "../../typechain-types/Queues";
+import { Queues, QueuesConstructor } from "../../typechain-types/Queues";
 const { ethers } = require('hardhat');
 
 
@@ -56,8 +56,18 @@ async function advancedTests(
 
       await dependencies.erc20.mint(sig1.address, entryFee);
 
+      const paymentsAddress: [string, string, string, string, string, string] & {
+        arenas: string;
+        hounds: string;
+        methods: string;
+        payments: string;
+        restricted: string;
+        races: string;
+    } = await dependencies.queuesContract.control();
+
+      console.log("Approved for payments: ", paymentsAddress.payments);
       await dependencies.erc20
-      .approve((await dependencies.queuesContract.control()).payments, entryFee);
+      .approve(paymentsAddress.payments, String(entryFee));
 
       await safeJoinQueue({
         contract: dependencies.queuesContract as Queues,
@@ -73,6 +83,25 @@ async function advancedTests(
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.queueId) === 0 ) {
+
+          const [sig1] = await ethers.getSigners();
+          const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
+    
+          await dependencies.erc20.mint(sig1.address, entryFee);
+    
+          const paymentsAddress: [string, string, string, string, string, string] & {
+            arenas: string;
+            hounds: string;
+            methods: string;
+            payments: string;
+            restricted: string;
+            races: string;
+        } = await dependencies.queuesContract.control();
+    
+          console.log("Approved for payments: ", paymentsAddress.payments);
+          await dependencies.erc20
+          .approve(paymentsAddress.payments, String(entryFee));
+
           await safeJoinQueue({
             contract: dependencies.queuesContract as Queues,
             queueId: createdQueueId,
@@ -92,6 +121,24 @@ async function advancedTests(
     });
 
     it("Unenqueue", async function() {
+      const [sig1] = await ethers.getSigners();
+      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
+
+      await dependencies.erc20.mint(sig1.address, entryFee);
+
+      const paymentsAddress: [string, string, string, string, string, string] & {
+        arenas: string;
+        hounds: string;
+        methods: string;
+        payments: string;
+        restricted: string;
+        races: string;
+    } = await dependencies.queuesContract.control();
+
+      console.log("Approved for payments: ", paymentsAddress.payments);
+      await dependencies.erc20
+      .approve(paymentsAddress.payments, String(entryFee));
+
       await safeJoinQueue({
         contract: dependencies.queuesContract as Queues,
         queueId: createdQueueId,

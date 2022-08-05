@@ -8,8 +8,9 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function unenqueue(uint256 theId, uint256 hound) external {
+        /*
         Queue.Struct memory _queue = queues[theId];
-        Arena.Struct memory arena = IArena(control.arenas).arena(_queue.arena);
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(_queue.arena);
 
         uint256[] memory replacedParticipants = _queue.participants;
         uint256[] memory replacedEnqueueDates = _queue.enqueueDates;
@@ -36,18 +37,18 @@ contract QueuesMethods is Params {
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = _queue.entryFee;
-        uint256 value = arena.currency == address(0) ? _queue.entryFee : 0;
+        */
         
-        IPay(control.payments).pay{
-            value: value
-        }(
+        /*
+        IPay(control.payments).pay(
             control.payments,
             houndOwner,
-            arena.currency,
+            arenaCurrency,
             new uint256[](0),
             amounts,
-            arena.currency == address(0) ? 3 : 2
+            arenaCurrency == address(0) ? 3 : 2
         );
+        */
 
         emit Unenqueue(theId, hound);
     }
@@ -73,13 +74,26 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
+        uint256 arenaFee = IArenaFee(control.arenas).arenaFee(queues[theId].arena);
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = queues[theId].entryFee;
+
+        IPay(control.payments).pay{
+            value: arenaCurrency == address(0) ? amounts[0] : 0
+        }(
+            msg.sender,
+            control.payments,
+            arenaCurrency,
+            new uint256[](0),
+            amounts,
+            arenaCurrency == address(0) ? 3 : 2
+        );
+
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 
-            Arena.Struct memory arena = IArena(control.arenas).arena(queues[theId].arena);
-
-            IHandleArenaUsage(control.arenas).handleArenaUsage{ 
-                value: arena.currency == address(0) ? arena.fee : 0
-            }(queues[theId].arena);
+            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].arena);
 
             IHandleRaceLoot(control.races).handleRaceLoot(
                 queues[theId].payments

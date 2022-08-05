@@ -11,9 +11,7 @@ contract RacesRestricted is Params {
 
         Arena.Struct memory arena = IArena(control.arenas).arena(race.arena);
 
-        IHandleArenaUsage(control.arenas).handleArenaUsage{ 
-            value: arena.currency == address(0) ? arena.fee : 0
-        }(race.arena);
+        IHandleArenaUsage(control.arenas).handleArenaUsage(race.arena);
 
         (bool success, ) = control.payments.delegatecall(
             abi.encodeWithSignature(

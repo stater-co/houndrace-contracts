@@ -20,7 +20,7 @@ const _abi = [
     ],
     name: "handleArenaUsage",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];

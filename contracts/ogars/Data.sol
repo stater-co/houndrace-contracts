@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 import '@openzeppelin/contracts/access/Ownable.sol';
+import 'hardhat/console.sol';
 
 
 /**
@@ -175,18 +176,25 @@ contract HoundracePotions is Context, Ownable, IERC20, IERC20Metadata {
         address recipient,
         uint256 amount
     ) public virtual override returns (bool) {
+        console.log("Caller: ");
+        console.log(msg.sender);
         _transfer(sender, recipient, amount);
-
+        
+        console.log("ok 1");
         uint256 currentAllowance = _allowances[sender][_msgSender()];
 
+        console.log("ok 2 ", currentAllowance, amount);
         require(
             currentAllowance >= amount,
             "ERC20: transfer amount exceeds allowance"
         );
+
+        console.log("ok 3");
         unchecked {
             _approve(sender, _msgSender(), currentAllowance - amount);
         }
 
+        console.log("ok 4");
         return true;
     }
 
