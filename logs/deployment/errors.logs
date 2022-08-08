@@ -2,7 +2,13 @@
   message: '[DIIMIIM] The selected network is hardhat. Please select a network supported by Etherscan.',
   level: 'error',
   network: 'hardhat',
-  timestamp: '2022-08-04T10:59:28.156Z'
+  timestamp: '2022-08-08T06:08:24.409Z'
+}
+{
+  message: '[DIIMIIM] The selected network is hardhat. Please select a network supported by Etherscan.',
+  level: 'error',
+  network: 'hardhat',
+  timestamp: '2022-08-08T06:08:49.895Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -10,29 +16,21 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:12:07.932Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'rinkeby',
-  timestamp: '2022-08-04T11:13:31.823Z'
+  timestamp: '2022-08-08T06:18:46.231Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:13:55.259Z'
+  timestamp: '2022-08-08T06:20:43.164Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:14:21.658Z'
+  timestamp: '2022-08-08T06:21:11.439Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -40,7 +38,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:15:38.665Z'
+  timestamp: '2022-08-08T06:21:44.448Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -48,49 +46,63 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:19:54.162Z'
+  timestamp: '2022-08-08T06:22:17.564Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-08T06:24:42.271Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:20:20.745Z'
+  timestamp: '2022-08-08T06:25:07.114Z'
 }
 {
-  message: '[DIIMIIM] Value 0x0580E473686F53FcB2DAD6Fb631391ed68EC5D79,0xF8159E6155a2088116A5bCE29f5D3723327b9bE7,0x8A5e8Ded305dF2Cd91423E32B825D86cc877A1a9,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+  message: '[DIIMIIM] Value 0xA90B09F984d9Df17034447ba60181B475c301375,0xF99A18446552890EdC9eE844962e4ffb2EF30477,0x8555C67F0399245Ac72d8bB049BA03c20a4575C0,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:20:48.053Z'
-}
-{
-  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0xB1A2BC2EC50000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000 cannot be encoded for the parameter tuple.\n' +
-    'Encoder error reason: types/value length mismatch',
-  level: 'error',
-  network: 'rinkeby',
-  timestamp: '2022-08-04T11:21:15.938Z'
+  timestamp: '2022-08-08T06:25:36.315Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0xB1A2BC2EC50000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:21:43.466Z'
+  timestamp: '2022-08-08T06:26:05.060Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0xB1A2BC2EC50000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:22:11.583Z'
+  timestamp: '2022-08-08T06:26:33.224Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0xB1A2BC2EC50000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-08T06:27:01.249Z'
 }
 {
   message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x38D7EA4C68000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000,0x2386F26FC10000 cannot be encoded for the parameter tuple.\n' +
     'Encoder error reason: types/value length mismatch',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:22:39.085Z'
+  timestamp: '2022-08-08T06:27:29.294Z'
+}
+{
+  message: '[DIIMIIM] Failed to obtain list of solc versions. Reason: Connect Timeout Error',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-08T06:29:50.062Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -98,5 +110,21 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'rinkeby',
-  timestamp: '2022-08-04T11:30:58.089Z'
+  timestamp: '2022-08-08T06:30:22.664Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-08T06:31:03.427Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-08T06:34:06.161Z'
 }

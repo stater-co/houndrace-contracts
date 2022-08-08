@@ -7,6 +7,8 @@ import {
   BigNumberish,
   BytesLike,
   CallOverrides,
+  ContractTransaction,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -20,133 +22,15 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Hound {
-  export type StatisticsStruct = {
-    totalRuns: BigNumberish;
-    firstPlace: BigNumberish;
-    secondPlace: BigNumberish;
-    thirdPlace: BigNumberish;
-  };
-
-  export type StatisticsStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    totalRuns: BigNumber;
-    firstPlace: BigNumber;
-    secondPlace: BigNumber;
-    thirdPlace: BigNumber;
-  };
-
-  export type StaminaStruct = {
-    staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
-    staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
-    staminaCap: BigNumberish;
-  };
-
-  export type StaminaStructOutput = [
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
-    staminaValue: number;
-    staminaPerHour: number;
-    staminaCap: number;
-  };
-
-  export type BreedingStruct = {
-    lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    availableToBreed: boolean;
-  };
-
-  export type BreedingStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    availableToBreed: boolean;
-  };
-
-  export type IdentityStruct = {
-    maleParent: BigNumberish;
-    femaleParent: BigNumberish;
-    generation: BigNumberish;
-    birthDate: BigNumberish;
-    geneticSequence: BigNumberish[];
-    extensionTraits: string;
-  };
-
-  export type IdentityStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    number[],
-    string
-  ] & {
-    maleParent: BigNumber;
-    femaleParent: BigNumber;
-    generation: BigNumber;
-    birthDate: BigNumber;
-    geneticSequence: number[];
-    extensionTraits: string;
-  };
-
-  export type StructStruct = {
-    statistics: Hound.StatisticsStruct;
-    stamina: Hound.StaminaStruct;
-    breeding: Hound.BreedingStruct;
-    identity: Hound.IdentityStruct;
-    title: string;
-    token_uri: string;
-    queueId: BigNumberish;
-    custom: boolean;
-  };
-
-  export type StructStructOutput = [
-    Hound.StatisticsStructOutput,
-    Hound.StaminaStructOutput,
-    Hound.BreedingStructOutput,
-    Hound.IdentityStructOutput,
-    string,
-    string,
-    BigNumber,
-    boolean
-  ] & {
-    statistics: Hound.StatisticsStructOutput;
-    stamina: Hound.StaminaStructOutput;
-    breeding: Hound.BreedingStructOutput;
-    identity: Hound.IdentityStructOutput;
-    title: string;
-    token_uri: string;
-    queueId: BigNumber;
-    custom: boolean;
-  };
-}
-
 export interface IBreedHoundsInterface extends utils.Interface {
   contractName: "IBreedHounds";
   functions: {
-    "breedHounds(uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool),uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
+    "breedHounds(uint256,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "breedHounds",
-    values: [BigNumberish, Hound.StructStruct, BigNumberish, Hound.StructStruct]
+    values: [BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -186,51 +70,41 @@ export interface IBreedHounds extends BaseContract {
 
   functions: {
     breedHounds(
-      hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
-      hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
-      overrides?: CallOverrides
-    ): Promise<[Hound.StructStructOutput]>;
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   breedHounds(
-    hound1Id: BigNumberish,
-    hound1: Hound.StructStruct,
-    hound2Id: BigNumberish,
-    hound2: Hound.StructStruct,
-    overrides?: CallOverrides
-  ): Promise<Hound.StructStructOutput>;
+    hound1: BigNumberish,
+    hound2: BigNumberish,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   callStatic: {
     breedHounds(
-      hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
-      hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
+      hound1: BigNumberish,
+      hound2: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<Hound.StructStructOutput>;
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
     breedHounds(
-      hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
-      hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
-      overrides?: CallOverrides
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     breedHounds(
-      hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
-      hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
-      overrides?: CallOverrides
+      hound1: BigNumberish,
+      hound2: BigNumberish,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
