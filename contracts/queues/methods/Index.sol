@@ -8,7 +8,6 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function unenqueue(uint256 theId, uint256 hound) external {
-        /*
         Queue.Struct memory _queue = queues[theId];
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(_queue.arena);
 
@@ -37,9 +36,7 @@ contract QueuesMethods is Params {
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = _queue.entryFee;
-        */
         
-        /*
         IPay(control.payments).pay(
             control.payments,
             houndOwner,
@@ -48,7 +45,6 @@ contract QueuesMethods is Params {
             amounts,
             arenaCurrency == address(0) ? 3 : 2
         );
-        */
 
         emit Unenqueue(theId, hound);
     }

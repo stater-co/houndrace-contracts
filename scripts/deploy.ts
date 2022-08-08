@@ -653,9 +653,9 @@ async function main() {
         [
           arenas.address,
           hounds.address,
-          globalParams.address0,
+          queuesMethods.address,
           payments.address,
-          globalParams.address0,
+          queuesRestricted.address,
           races.address,
           []
         ]
