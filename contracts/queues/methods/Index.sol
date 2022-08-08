@@ -71,7 +71,6 @@ contract QueuesMethods is Params {
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
-        uint256 arenaFee = IArenaFee(control.arenas).arenaFee(queues[theId].arena);
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = queues[theId].entryFee;
