@@ -18,13 +18,9 @@ contract Payments is Params {
 		} else if ( paymentType == 1 ) {
 			IERC1155(currency).safeBatchTransferFrom(from, to, id, amount, "");
 		} else if ( paymentType == 2 ) {
-			console.log("Allowed: ", IERC20(currency).allowance(from,address(this)));
-			console.log(from, to, address(this));
 			if ( from != address(this) ) {
-				console.log("We do x1 ", amount[0]);
 				require(IERC20(currency).transferFrom(from, to, amount[0]));
 			} else {
-				console.log("We do x2");
 				require(IERC20(currency).transfer(to, amount[0]));
 			}
 		} else if ( paymentType == 3 ) {
@@ -35,7 +31,6 @@ contract Payments is Params {
 				require(payable(to).send(amount[0]));
 			}
 		}
-		console.log("SUCCESSFUL PAYMENT");
 	}
 
 }

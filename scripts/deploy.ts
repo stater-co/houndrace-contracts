@@ -401,6 +401,7 @@ async function main() {
       step: "Deploy hounds"
     });
 
+
     const hounds = await deployContract({
       name: 'Hounds',
       constructor: [
@@ -418,10 +419,7 @@ async function main() {
             houndsModifier.address,
             shop.address
           ],[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
+            payments.address,
             "0xB1A2BC2EC50000",
             "0x2386F26FC10000",
             "0x2386F26FC10000",
@@ -1202,10 +1200,7 @@ async function main() {
               globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              payments.address,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1241,10 +1236,7 @@ async function main() {
               globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              payments.address,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1279,10 +1271,7 @@ async function main() {
               globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              payments.address,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
@@ -1317,11 +1306,8 @@ async function main() {
               houndsModifier.address,
               shop.address
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              "0x38D7EA4C68000",
+              payments.address,
+              "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000",

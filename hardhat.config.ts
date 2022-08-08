@@ -16,6 +16,10 @@ const config: HardhatUserConfig = {
     rinkeby: {
       url: process.env.RINKEBY_URL,
       accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
+    },
+    mumbai: {
+      url: process.env.MUMBAI_URL,
+      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
     }
   },
   etherscan: {
