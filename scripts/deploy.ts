@@ -789,7 +789,7 @@ async function main() {
         methods: arenasMethods.address, 
         payments: payments.address, 
         alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-        allowedCallers: [races.address],
+        allowedCallers: [races.address,queues.address],
         alhpadunePercentage: 60
       });
       configurations.update(4, {
@@ -1496,9 +1496,9 @@ async function main() {
           [
             arenas.address,
             hounds.address,
-            globalParams.address0,
+            queuesMethods.address,
             payments.address,
-            globalParams.address0,
+            queuesRestricted.address,
             races.address,
             []
           ]
