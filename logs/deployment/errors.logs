@@ -1,0 +1,362 @@
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'mumbai',
+  timestamp: '2022-08-08T14:05:19.619Z'
+}
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'mumbai',
+  timestamp: '2022-08-08T14:10:36.704Z'
+}
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-08T14:11:49.935Z'
+}
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-08T14:26:51.357Z'
+}
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-08T14:34:37.953Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:08:41.275Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:09:24.121Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:09:51.011Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:10:18.407Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:10:45.401Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:11:10.812Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:11:36.935Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:12:03.674Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:12:31.469Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:13:00.470Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:13:30.489Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:13:56.869Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:14:23.125Z'
+}
+{
+  message: '[DIIMIIM] Value 0xd2B36F30e4624FB249568bA0B4073a9Aa6DAC4d7,0xB47ED78788c665488Edf7521AcEc21e097db28ea,0xc7C4cFb23c3750c5937B6195Ae5C9DA7531C1E5f,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:14:50.085Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:15:20.762Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:15:49.588Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:16:17.962Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:16:46.361Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:17:13.556Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:17:41.255Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:18:08.648Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:18:35.844Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:19:03.238Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:19:32.040Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:20:01.244Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:20:30.246Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T06:20:58.743Z'
+}
+{
+  message: '[DIIMIIM] could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.6.8)',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-09T06:27:18.777Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:34:35.665Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:36:56.764Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:37:22.493Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:37:59.374Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:38:32.490Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:39:02.897Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:39:47.052Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:40:16.522Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:40:41.083Z'
+}
+{
+  message: '[DIIMIIM] Value 0x6992c657CA3b4654A282591402B83Ca8696a18D4,0xf1d22BC746Ed0336CEC6A282c8A4b218943F018f,0x84cD6AE67fd8D96354F9F9c829a954352c32c9b0,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:41:06.579Z'
+}
+{
+  message: '[DIIMIIM] The contract verification failed.\n' +
+    'Reason: Fail - Unable to verify',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:43:04.744Z'
+}
+{
+  message: '[DIIMIIM] The contract verification failed.\n' +
+    'Reason: Fail - Unable to verify',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:45:20.221Z'
+}
+{
+  message: '[DIIMIIM] The contract verification failed.\n' +
+    'Reason: Fail - Unable to verify',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:47:10.608Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:48:29.284Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:49:05.812Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:49:42.340Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:50:24.501Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:51:05.633Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:51:40.456Z'
+}
+{
+  message: '[DIIMIIM] The contract verification failed.\n' +
+    'Reason: Fail - Unable to verify',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:55:09.053Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-09T07:55:37.286Z'
+}
