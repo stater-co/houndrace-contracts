@@ -19,9 +19,10 @@ contract Payments is Params {
 			IERC1155(currency).safeBatchTransferFrom(from, to, id, amount, "");
 		} else if ( paymentType == 2 ) {
 			if ( from != address(this) ) {
-				require(IERC20(currency).transferFrom(from, address(this), amount[0]));
+				require(IERC20(currency).transferFrom(from, to, amount[0]));
+			} else {
+				require(IERC20(currency).transfer(to, amount[0]));
 			}
-			require(IERC20(currency).transfer(to, amount[0]));
 		} else if ( paymentType == 3 ) {
 			if ( Address.isContract(to) ) {
 				(bool success, )= to.call{ value: amount[0] }("");

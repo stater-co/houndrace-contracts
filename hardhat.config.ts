@@ -14,7 +14,11 @@ const config: HardhatUserConfig = {
       initialBaseFeePerGas: 0
     },
     rinkeby: {
-      url: process.env.RINKEBY_URL,
+      url: String(process.env.RINKEBY_URL),
+      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
+    },
+    polygonMumbai: {
+      url: String(process.env.MUMBAI_URL),
       accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
     }
   },
