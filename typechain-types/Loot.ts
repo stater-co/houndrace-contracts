@@ -52,15 +52,17 @@ export declare namespace Constructor {
 
 export declare namespace Box {
   export type StructStruct = {
-    cost: BigNumberish;
+    token_uri: string;
     currency: string;
     hounds: BigNumberish[];
+    cost: BigNumberish;
   };
 
-  export type StructStructOutput = [BigNumber, string, BigNumber[]] & {
-    cost: BigNumber;
+  export type StructStructOutput = [string, string, BigNumber[], BigNumber] & {
+    token_uri: string;
     currency: string;
     hounds: BigNumber[];
+    cost: BigNumber;
   };
 }
 
@@ -74,7 +76,7 @@ export interface LootInterface extends utils.Interface {
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "lootboxes(uint256)": FunctionFragment;
-    "mint((uint256,address,uint256[])[])": FunctionFragment;
+    "mint((string,address,uint256[],uint256)[])": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
@@ -316,7 +318,13 @@ export interface Loot extends BaseContract {
     lootboxes(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, string] & { cost: BigNumber; currency: string }>;
+    ): Promise<
+      [string, string, BigNumber] & {
+        token_uri: string;
+        currency: string;
+        cost: BigNumber;
+      }
+    >;
 
     mint(
       boxes: Box.StructStruct[],
@@ -432,7 +440,13 @@ export interface Loot extends BaseContract {
   lootboxes(
     arg0: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<[BigNumber, string] & { cost: BigNumber; currency: string }>;
+  ): Promise<
+    [string, string, BigNumber] & {
+      token_uri: string;
+      currency: string;
+      cost: BigNumber;
+    }
+  >;
 
   mint(
     boxes: Box.StructStruct[],
@@ -542,7 +556,13 @@ export interface Loot extends BaseContract {
     lootboxes(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber, string] & { cost: BigNumber; currency: string }>;
+    ): Promise<
+      [string, string, BigNumber] & {
+        token_uri: string;
+        currency: string;
+        cost: BigNumber;
+      }
+    >;
 
     mint(boxes: Box.StructStruct[], overrides?: CallOverrides): Promise<void>;
 

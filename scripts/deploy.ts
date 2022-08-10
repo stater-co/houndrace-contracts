@@ -667,7 +667,16 @@ async function main() {
 
     const lootboxes = await deployContract({
       name: 'Loot',
-      constructor: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6cA847D208c476bEbB0eBdb09EAE351642C40c78", true]],
+      constructor: [
+        [
+          "HoundRace Lootboxes", 
+          "HRLB", 
+          "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
+          "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
+          hounds.address, 
+          true
+        ]
+      ],
       props: {}
     }) as Loot;
     DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
@@ -1514,7 +1523,16 @@ async function main() {
     try {
       await run("verify:verify", {
         address: lootboxes.address,
-        constructorArguments: [["HoundRace Lootboxes", "HRLB", "lootbox_uri1", "lootbox_uri2", "0x6cA847D208c476bEbB0eBdb09EAE351642C40c78", true]]
+        constructorArguments: [
+          [
+            "HoundRace Lootboxes", 
+            "HRLB", 
+            "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
+            "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
+            hounds.address, 
+            true
+          ]
+        ]
       });
     } catch (err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
