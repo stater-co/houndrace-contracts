@@ -4,8 +4,9 @@ pragma solidity 0.8.15;
 library Box {
 
     struct Struct {
-        uint256 cost;
+        string token_uri;
         address currency;
         uint256[] hounds;
+        uint256 cost;
     }
 }
