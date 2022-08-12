@@ -22,7 +22,8 @@ async function basicTest(
     it("Mint", async function () {
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: await dependencies.hounds.owner()
       });
     });
     
@@ -52,7 +53,8 @@ async function basicTest(
         houndToMint.identity.geneticSequence[1] = 2;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
-          hound: houndToMint as Hound.StructStructOutput
+          hound: houndToMint as Hound.StructStructOutput,
+          owner: await dependencies.hounds.owner()
         });
       }
     });
@@ -63,7 +65,8 @@ async function basicTest(
         houndToMint.identity.geneticSequence[1] = 1;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
-          hound: houndToMint as Hound.StructStructOutput
+          hound: houndToMint as Hound.StructStructOutput,
+          owner: await dependencies.hounds.owner()
         });
       }
     });
@@ -73,7 +76,8 @@ async function basicTest(
       femaleHound.identity.geneticSequence[1] = 2;
       let newCreatedHoundId: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput,
+        owner: await dependencies.hounds.owner()
       });
       let [sig1] = await ethers.getSigners();
 

@@ -22,9 +22,11 @@ async function advancedTests(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
+      const [sig1] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.houndsContract,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: sig1.address
       });
     });
 
@@ -65,7 +67,6 @@ async function advancedTests(
         races: string;
     } = await dependencies.queuesContract.control();
 
-      console.log("Approved for payments: ", paymentsAddress.payments);
       await dependencies.erc20
       .approve(paymentsAddress.payments, String(entryFee));
 
@@ -98,7 +99,6 @@ async function advancedTests(
             races: string;
         } = await dependencies.queuesContract.control();
     
-          console.log("Approved for payments: ", paymentsAddress.payments);
           await dependencies.erc20
           .approve(paymentsAddress.payments, String(entryFee));
 
@@ -114,9 +114,11 @@ async function advancedTests(
     });
 
     it("Mint", async function () {
+      const [sig1] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.houndsContract,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: sig1.address
       });
     });
 
@@ -135,7 +137,6 @@ async function advancedTests(
         races: string;
     } = await dependencies.queuesContract.control();
 
-      console.log("Approved for payments: ", paymentsAddress.payments);
       await dependencies.erc20
       .approve(paymentsAddress.payments, String(entryFee));
 

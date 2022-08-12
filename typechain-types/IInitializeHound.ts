@@ -143,12 +143,12 @@ export declare namespace Hound {
 export interface IInitializeHoundInterface extends utils.Interface {
   contractName: "IInitializeHound";
   functions: {
-    "initializeHound(uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "initializeHound",
-    values: [BigNumberish, Hound.StructStruct]
+    values: [BigNumberish, string, Hound.StructStruct]
   ): string;
 
   decodeFunctionResult(
@@ -189,6 +189,7 @@ export interface IInitializeHound extends BaseContract {
   functions: {
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -196,6 +197,7 @@ export interface IInitializeHound extends BaseContract {
 
   initializeHound(
     onId: BigNumberish,
+    owner: string,
     theHound: Hound.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -203,6 +205,7 @@ export interface IInitializeHound extends BaseContract {
   callStatic: {
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -213,6 +216,7 @@ export interface IInitializeHound extends BaseContract {
   estimateGas: {
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -221,6 +225,7 @@ export interface IInitializeHound extends BaseContract {
   populateTransaction: {
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

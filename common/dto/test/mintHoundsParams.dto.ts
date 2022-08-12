@@ -4,4 +4,5 @@ import { Hound } from '../../../typechain-types/contracts/hounds/params/Index.so
 export interface MintHoundParams {
     contract: ethers.Contract;
     hound: Hound.StructStructOutput;
+    owner: string;
   }

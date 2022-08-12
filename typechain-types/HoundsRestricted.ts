@@ -237,7 +237,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
@@ -285,7 +285,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "initializeHound",
-    values: [BigNumberish, Hound.StructStruct]
+    values: [BigNumberish, string, Hound.StructStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
@@ -638,6 +638,7 @@ export interface HoundsRestricted extends BaseContract {
 
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -811,6 +812,7 @@ export interface HoundsRestricted extends BaseContract {
 
   initializeHound(
     onId: BigNumberish,
+    owner: string,
     theHound: Hound.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -981,6 +983,7 @@ export interface HoundsRestricted extends BaseContract {
 
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1221,6 +1224,7 @@ export interface HoundsRestricted extends BaseContract {
 
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1370,6 +1374,7 @@ export interface HoundsRestricted extends BaseContract {
 
     initializeHound(
       onId: BigNumberish,
+      owner: string,
       theHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
