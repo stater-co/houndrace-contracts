@@ -360,3 +360,458 @@
   network: 'rinkeby',
   timestamp: '2022-08-09T07:55:37.286Z'
 }
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=nxap4q3acenxke324wepwrxmak27r8iry5gqk8x9mxwrtgvasb\n' +
+    'Reason: The HTTP server response is not ok. Status code: 302 Response text: <html><head><title>Object moved</title></head><body>\n' +
+    '<h2>Object moved to <a href="//api-rinkeby.etherscan.io/apierror.html?aspxerrorpath=/api">here</a>.</h2>\n' +
+    '</body></html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T08:39:34.022Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T10:24:24.527Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T10:44:54.729Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=pb6cxaxygycaaddw5c4mmzlu2y3ipfj9i3ims6fepzmicefl31\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'7390aacdba811ce0',m:'Ntu18mat0PZI440_ewS6FlYojiAgOvAbOFmM9CL0tmI-1660217720-0-Af79qLHfxe4xusijKUDX5YZbgdSg6ZrkzDuDQKbSgqWRQCdEnmkBwoyFR53BezwluabBo2YPXhA3Ql3Ks9zOat87kW+4Fid7UvcrWVK211QDan5goMqgZIpSL2MAFJXwVaF5ccBZw6B9sUVf3t19SCA5TzpXQOCKZJrB2CDImrvgEcZCA0cCj6i0a9d4vgHf8PKa/5y9XYHonA3IA/kYUlLUVM0vIMvWYiv71dDw16juZoAFsiOyBVt2OufQtFmBG/UaTmGG2M6aHxjYSpXDto9LwHQzx1uW0shEEJ0xK4VY',s:[0xeafcbb9335,0x0b26cfa671],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T11:35:20.116Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T12:21:03.202Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T12:41:37.448Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:02:50.917Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:03:10.201Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:03:29.872Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=fjjbnserxb4ikzgyhnvt4txs29mbp6nhqbwmhjdpakunifpbit\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'73912d482a9568b5',m:'LJ_03goKX6qCPahCLSsJXzCB_aiDuSsA184eOQrGrGc-1660223064-0-AULVub6r9Inet8CrXDKhe6BJYdfiYM48zB12DyKOxedtws1YDnzWMb4mWZNT5as7MsQnsUWgVeKM0u4kUisDttzjP5RJ4osFrQzfykhliuRXPejn3q7p66nRuLHB8yWUIXBjBGJMJJDRROw4CzwKoaN99WZk0Opll1KZF4bXy2Gwyx5DGoOd9vMD14ekHOKMqGWJaf/44WYGwirZtH1R2h0BGnq0sdqMSd9LoRpl1oNwwtJkg/MJR4vodLvg2MtITyXSDBDVf/ydXaDlW6A7eswhQopcDzw+Ru/QjOEAGMm+',s:[0xe9e013e837,0x3a38d44e67],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:04:24.545Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=mdyp45ydhtmcipulm6d9qdvsm2ecncanbdy8mtsafjynpn6kxx\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'73914a2b7f66684d',m:'i7Iaw_DA_CTeKWlvFgnZXLUe8FU.v6gM7hAks_19eOg-1660224247-0-ATpekYj2ALxT0fuSlvQIij7bZnQ9C358MM9pZD5wb/GsvRpp0wZgFVaGJUaZJrGhrsDAGbvbMZBEcWSQTNc4f74T0lXHzQBfdG/cF+6YHGOzax628oB9Ngqt6xdkrlsgyqzfX6z09w1j+lm3Omw/kTBgDlZ17g8lbwIoXHcsncn8czvjnzQSihFAzYlQ4FD6pD4VtACXNVBjCQP64LMv6OVwHhpcA9+lJWEwn9mB1n1Cv+t7idTnjmeeFh4inEQ6UtgO7PF8c1IxEEuhsu8zEWpiKWhxdALw97J6oDUa7R5I',s:[0xd9b38a1a2c,0xfeca62b5aa],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:24:07.797Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:43:30.273Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=rdbsfeffkmkxu9uw7f2jnkdbi7c32kn9tcc3nctudqhaays8es\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'73916d71faa2c1cb',m:'mRsE7j3j44GpNwKeYURvMPOJQQg64TvqlVCEk3LB_uY-1660225692-0-AYEDkvHwen7Oi6LFsa/ep7c7GwEwglj8B4d5b+PsJryyN2VS0rqz/yOS/KiIBiOSopVYVGvbykdb527rKyww3NJth7XSeIU2dXHvZY5moE0zD6/9YLeZ4paNZEtbkfBNvRb+fWoZFVDxUuoawQeEN/cOMCl/9yXv22p0WfNxAxH7wxjMi7CKYRDOCZo0IfizpONg9d275sKB2KaWIYCfSuA3khMGEEqyIu0qNQnYbLL+RFiXigXv1zwPgaf8YY98m1trnuSpKZcc9TPTBFFWl9UIg4EzkQuHI+1c/l7RgdCh',s:[0x708e2dd808,0xf3df967dd4],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T13:48:12.664Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T14:12:23.752Z'
+}
+{
+  message: '[DIIMIIM] Value 0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,0x0000000000000000000000000000000000000000,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T14:12:47.313Z'
+}
+{
+  message: '[DIIMIIM] Value 0x2355223cD591566CFE9208F8911234745608C4d7,0xf5740150a6A5B8e5F5E9A482Fd239EcEa40498Fd,0xe4F355FcbE45D2C8185f1139bB412A9F0D5F9149,345600,1800,2419200,300000000000000000 cannot be encoded for the parameter tuple.\n' +
+    'Encoder error reason: types/value length mismatch',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T14:13:14.070Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=jika715c3bc2d8nfzgsdzqdql69q59riszujx9etiwskqsxnws\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'7391b725e9326847',m:'aSpGXwqxZbG0uDp9z88fNN0m7kgSjjCSJ9AF.j3WUsA-1660228711-0-AfarhptFCFk9hslAGuuL0xKLip8Aa1ihXPvHG+xkB1e22dTzQDvAS2yaTJo0RHD/LNSB9ywKG6IFFBgAz4yTQTbL1eTMIn8MJSynpUYTcMR+u6sbfr4s+GwNTnuoogpoAC01XeyzXQFRNS7FpFDisBzNWOnNTz9r0vKQJ48Cfh2mtxneIkBkQexdDLh+a2keNuyOdwguU2JvpoeihnVK+Kf53mMnFYnEk5JFty8H8YnS3A+LZmc//IaCMmAgI4yKpz1komSWicGll11RFQSFqqUXrVm0vHW/5HLEE2q3gF1J',s:[0xb93b10ff9f,0x76c9090560],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T14:38:31.555Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=b6j1zz9kdpaqrd8an7uqaitlkcqwstd1wmutvqyqivnumes6sk\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'7391fdb5bc67c1be',m:'JC4HTCqkagn6ws548v3SmF010DSeBB0p6u.hxRs9p1U-1660231601-0-AbOed4fHKzoPMOCC6d28SfW5PgOfwr9yWYcU2/83Tq9YB6Pygaul9q7Gd5EkFDDatXTEItUJHb0oKvb+yLiWUtIOhoeI0p1NcOFFTmg1EuzzaKMi1rBtX5DrR60/0uKhHUoVhxTowv8s2KiF1Y4TtQjIH3je4oUShibEPepm/2t7qSLBAjjLxH3AiOueESNKZI+SIwGsSXid84pV9G9ecAzCMTR5HykRunUOZ89AeaCZLVc86c1mlgdP5kT71NGW41QsZZ75YhC/z8QF/KuI7to4xlmC5pXs/x47ewwO2brv',s:[0x4995ab6344,0xde9e88f77a],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T15:26:41.792Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=pfzrq1a2xnamcytjuxgfjkchycqxqcrautkuxsiw1thwxdauxy\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    ' </fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'739206a058211cc4',m:'4AqYV_DngR_yJSMR0xxEkA3b9lVkNsXUZvhltfPANP4-1660231966-0-AR1Fms4mLYfI0SYALMYyDNDWbkw2CpTQtnv3JEIQ/i9C74BIm6+8kBTHgy1AqCLYH/nvjEO7S9Emx9vxq3SAn/k/H5Hq+uOlkgchetvDWibvI5y5GI/ynTXAKmOEcNE4JTcCdP8HOE9Nd4jA+JJDyuPNfX5gYDa1joSotV4bx2FxzrJia36pq49yDp2KsiCB3ev9SMq9bqLpIq+vnj6ZtaRVlt8//dOFIVmF0CXfn1uj4qj+P2evNyuqh3HPNixSGhs2OBnnE3qWLpvSF1ExqW0UfH8R4xZ+g1X7euWGPqmD',s:[0x76575dc26c,0xfd04b76018],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T15:32:46.930Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T16:09:26.288Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T16:51:00.839Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T17:23:06.692Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T17:59:07.366Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T18:38:23.841Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T19:20:24.783Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T19:54:25.844Z'
+}
+{
+  message: '[DIIMIIM] Failure during etherscan status polling. The verification may still succeed but\n' +
+    'should be checked manually.\n' +
+    'Endpoint URL: https://api-rinkeby.etherscan.io/api?apikey=2CYIJUYUKFS7A58XH8G4Z5SMK6DIYFRYNZ&module=contract&action=checkverifystatus&guid=ydu69jbpsy8mwgxpzfbku7qn6rlbdwfywxca8a13vdixstnkxw\n' +
+    'Reason: The HTTP server response is not ok. Status code: 403 Response text: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n' +
+    '<html xmlns="http://www.w3.org/1999/xhtml">\n' +
+    '<head>\n' +
+    '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />\n' +
+    '<title>403 - Forbidden: Access is denied.</title>\n' +
+    '<style type="text/css">\r\n' +
+    '<!--\r\n' +
+    'body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}\r\n' +
+    'fieldset{padding:0 15px 10px 15px;} \r\n' +
+    'h1{font-size:2.4em;margin:0;color:#FFF;}\r\n' +
+    'h2{font-size:1.7em;margin:0;color:#CC0000;} \r\n' +
+    'h3{font-size:1.2em;margin:10px 0 0 0;color:#000000;} \r\n' +
+    '#header{width:96%;margin:0 0 0 0;padding:6px 2% 6px 2%;font-family:"trebuchet MS", Verdana, sans-serif;color:#FFF;\r\n' +
+    'background-color:#555555;}\r\n' +
+    '#content{margin:0 0 0 2%;position:relative;}\r\n' +
+    '.content-container{background:#FFF;width:96%;margin-top:8px;padding:10px;position:relative;}\r\n' +
+    '-->\r\n' +
+    '</style>\n' +
+    '</head>\n' +
+    '<body>\n' +
+    '<div id="header"><h1>Server Error</h1></div>\n' +
+    '<div id="content">\n' +
+    '<div class="content-container"><fieldset>\n' +
+    '<h2>403 - Forbidden: Access is denied.</h2>\n' +
+    '<h3>You do not have permission to view this directory or page using the credentials that you supplied.</h3>\n' +
+    '</fieldset></div>\n' +
+    '</div>\n' +
+    `<script>(function(){var js = "window['__CF$cv$params']={r:'7393924fac79c1aa',m:'4Q6ZInUQysHMzcXW76hf3Im2Z.HUZZbr4ceCzEMlC7Y-1660248174-0-AWr6qEWZ9BcCEiHvtNyUyOAswkfyiZJ+ntHCgsBJ/bKnq/x0RPPt6aknNkAm4awx6wykI+0yzX9apn29LYTaBKFJRZSEusMeKv84r4ruPo4Kpb8eFPoaoilBrGsirNJ3DVX3UqEFhtGIpq+neAm6i9nGMRp8fBZNpbYfrwgcQjbdQe8F6+6s2pR9twJmuecYiHbWfCM8pvp7jlNCrDqyDP7zBqZopau2Ef+RVFhZV1f8IiPihUJWGZJ9pfQy2uZWemJMM5akCGWNJ5pmtEXUOrsV9v62lr7FCSIT3XpR2sDM',s:[0xc9496ff79f,0x183263304b],u:'/cdn-cgi/challenge-platform/h/g'};var now=Date.now()/1000,offset=14400,ts=''+(Math.floor(now)-Math.floor(now%offset)),_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/h/g/scripts/alpha/invisible.js?ts='+ts,document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.nonce = '';_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script></body>\n` +
+    '</html>\n',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T20:02:54.225Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'rinkeby',
+  timestamp: '2022-08-11T20:32:51.834Z'
+}

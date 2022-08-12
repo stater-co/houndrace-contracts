@@ -32,6 +32,7 @@ contract HoundsMinter is Params {
             amounts,
             control.fees.currency == address(0) ? 3 : 2
         );
+        
 
         amounts[0] = control.fees.breedFee;
         IPay(control.boilerplate.payments).pay(
