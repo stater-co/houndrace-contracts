@@ -1,6 +1,6 @@
 import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
-import { run } from "hardhat";
+import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
@@ -972,570 +972,574 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    try {
-      await run("verify:verify", {
-        address: converters.address
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(1, {
-      step: "Verify sortings"
-    });
+    if ( network.name !== "hardhat" ) {
 
-    try {
-      await run("verify:verify", {
-        address: sortings.address
+      try {
+        await run("verify:verify", {
+          address: converters.address
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(1, {
+        step: "Verify sortings"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(2, {
-      step: "Verify randomness"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: randomness.address
+      try {
+        await run("verify:verify", {
+          address: sortings.address
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(2, {
+        step: "Verify randomness"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(3, {
-      step: "Verify payment methods"
-    });
-    
-    try {
-      await run("verify:verify", {
-        address: payments.address
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(5, {
-      step: "Verify houndrace potions"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: houndracePotions.address,
-        constructorArguments: ["HoundracePotions", "HP"]
+      try {
+        await run("verify:verify", {
+          address: randomness.address
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(3, {
+        step: "Verify payment methods"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(6, {
-      step: "Verify shop restricted"
-    });
+      
+      try {
+        await run("verify:verify", {
+          address: payments.address
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(5, {
+        step: "Verify houndrace potions"
+      });
 
-    try {
-      await run("verify:verify", {
-        address: shopRestricted.address,
-        constructorArguments: [
-          [
-            globalParams.address0, globalParams.address0, globalParams.address0
+      try {
+        await run("verify:verify", {
+          address: houndracePotions.address,
+          constructorArguments: ["HoundracePotions", "HP"]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(6, {
+        step: "Verify shop restricted"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: shopRestricted.address,
+          constructorArguments: [
+            [
+              globalParams.address0, globalParams.address0, globalParams.address0
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(7, {
+        step: "Verify shop methods"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(7, {
-      step: "Verify shop methods"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: shopMethods.address,
-        constructorArguments: [
-          [
-            globalParams.address0, globalParams.address0, globalParams.address0
+      try {
+        await run("verify:verify", {
+          address: shopMethods.address,
+          constructorArguments: [
+            [
+              globalParams.address0, globalParams.address0, globalParams.address0
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(8, {
+        step: "Verify shop"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(8, {
-      step: "Verify shop"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: shop.address,
-        constructorArguments: [
-          [
-            shopMethods.address,shopRestricted.address
+      try {
+        await run("verify:verify", {
+          address: shop.address,
+          constructorArguments: [
+            [
+              shopMethods.address,shopRestricted.address
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(9, {
+        step: "Verify arenas restricted"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(9, {
-      step: "Verify arenas restricted"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: arenasRestricted.address,
-        constructorArguments: [
-          [
-            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
+      try {
+        await run("verify:verify", {
+          address: arenasRestricted.address,
+          constructorArguments: [
+            [
+              "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(10, {
+        step: "Verify arenas"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(10, {
-      step: "Verify arenas"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: arenasMethods.address,
-        constructorArguments: [
-          [
-            "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
+      try {
+        await run("verify:verify", {
+          address: arenasMethods.address,
+          constructorArguments: [
+            [
+              "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(10, {
+        step: "Verify arenas"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(10, {
-      step: "Verify arenas"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: arenas.address,
-        constructorArguments: [
-          [
-            "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60
+      try {
+        await run("verify:verify", {
+          address: arenas.address,
+          constructorArguments: [
+            [
+              "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(11, {
+        step: "Verify genetics"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(11, {
-      step: "Verify genetics"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: genetics.address,
-        constructorArguments: [
-          [
-            randomness.address,
-            arenas.address,
-            maleBoilerplateGene,
-            femaleBoilerplateGene,
-            60,
-            40,
-            [2,6,10,14,18,22,26,30,34,38,42,46,50],
-            [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+      try {
+        await run("verify:verify", {
+          address: genetics.address,
+          constructorArguments: [
+            [
+              randomness.address,
+              arenas.address,
+              maleBoilerplateGene,
+              femaleBoilerplateGene,
+              60,
+              40,
+              [2,6,10,14,18,22,26,30,34,38,42,46,50],
+              [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(12, {
+        step: "Verify incubator methods"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(12, {
-      step: "Verify incubator methods"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: incubatorMethods.address,
-        constructorArguments: [
-          [
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            345600,
-            1800,
-            2419200,
-            '300000000000000000'
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(13, {
-      step: "Verify incubator"
-    });
-    
-    try {
-      await run("verify:verify", {
-        address: incubator.address,
-        constructorArguments: [
-          [
-            incubatorMethods.address,
-            randomness.address,
-            genetics.address,
-            345600,
-            1800,
-            2419200,
-            '300000000000000000'
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(14, {
-      step: "Verify hounds restricted"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: houndsRestricted.address,
-        constructorArguments: [
-          [
-            "HoundRace",
-            "HR",
-            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      try {
+        await run("verify:verify", {
+          address: incubatorMethods.address,
+          constructorArguments: [
             [
               globalParams.address0,
-              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+              globalParams.address0,
+              globalParams.address0,
+              345600,
+              1800,
+              2419200,
+              '300000000000000000'
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(13, {
+        step: "Verify incubator"
+      });
+      
+      try {
+        await run("verify:verify", {
+          address: incubator.address,
+          constructorArguments: [
+            [
+              incubatorMethods.address,
+              randomness.address,
+              genetics.address,
+              345600,
+              1800,
+              2419200,
+              '300000000000000000'
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(14, {
+        step: "Verify hounds restricted"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: houndsRestricted.address,
+          constructorArguments: [
+            [
+              "HoundRace",
+              "HR",
+              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+              [
+                globalParams.address0,
+                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0
+              ],[
+                payments.address,
+                "0xB1A2BC2EC50000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000"
+              ]
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(15, {
+        step: "Verify hounds modifier"
+      });
+
+      
+      try {
+        await run("verify:verify", {
+          address: houndsModifier.address,
+          constructorArguments: [
+            [
+              "HoundRace",
+              "HR",
+              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+              [
+                globalParams.address0,
+                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0
+              ],[
+                payments.address,
+                "0xB1A2BC2EC50000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000"
+              ]
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(16, {
+        step: "Verify hounds minter"
+      });
+      
+      try {
+        await run("verify:verify", {
+          address: houndsMinter.address,
+          constructorArguments: [
+            [
+              "HoundRace",
+              "HR",
+              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+              [
+                globalParams.address0,
+                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0,
+                globalParams.address0
+              ],[
+                payments.address,
+                "0xB1A2BC2EC50000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000"
+              ]
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(17, {
+        step: "Verify hounds"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: hounds.address,
+          constructorArguments: [
+            [
+              "HoundRace",
+              "HR",
+              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+              [
+                incubator.address,
+                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+                payments.address,
+                houndsRestricted.address,
+                houndsMinter.address,
+                globalParams.address0,
+                houndsModifier.address,
+                shop.address
+              ],[
+                payments.address,
+                "0xB1A2BC2EC50000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000",
+                "0x2386F26FC10000"
+              ]
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(18, {
+        step: "Verify races restricted"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: racesRestricted.address,
+          constructorArguments: [
+            [
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              [],
+              500000000,
+              false
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(19, {
+        step: "Verify races methods"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: racesMethods.address,
+          constructorArguments: [
+            [
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              [],
+              500000000,
+              false
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(20, {
+        step: "Verify races"
+      });
+      
+      try {
+        await run("verify:verify", {
+          address: races.address,
+          constructorArguments: [
+            [
+              randomness.address,
+              arenas.address,
+              hounds.address,
+              racesMethods.address,
+              globalParams.address0,
+              payments.address,
+              racesRestricted.address,
+              globalParams.address0,
+              [],
+              500000000,
+              false
+            ]
+          ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(21, {
+        step: "Verify generator methods"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: generatorMethods.address, 
+          constructorArguments: [
+            [
+              globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0
-            ],[
-              payments.address,
-              "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
             ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(22, {
+        step: "Verify generator"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(15, {
-      step: "Verify hounds modifier"
-    });
 
-    
-    try {
-      await run("verify:verify", {
-        address: houndsModifier.address,
-        constructorArguments: [
-          [
-            "HoundRace",
-            "HR",
-            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      try {
+        await run("verify:verify", {
+          address: generator.address,
+          constructorArguments: [
             [
-              globalParams.address0,
-              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
-            ],[
+              randomness.address,
+              arenas.address,
+              hounds.address,
+              races.address,
+              generatorMethods.address,
               payments.address,
-              "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              generatorZerocost.address
             ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(23, {
+        step: "Verify queues restricted"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(16, {
-      step: "Verify hounds minter"
-    });
-    
-    try {
-      await run("verify:verify", {
-        address: houndsMinter.address,
-        constructorArguments: [
-          [
-            "HoundRace",
-            "HR",
-            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+
+      try {
+        await run("verify:verify", {
+          address: queuesRestricted.address,
+          constructorArguments: [
             [
+              arenas.address,
+              hounds.address,
               globalParams.address0,
-              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
-            ],[
               payments.address,
-              "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              globalParams.address0,
+              races.address,
+              []
             ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(24, {
+        step: "Verify queues methods"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(17, {
-      step: "Verify hounds"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: hounds.address,
-        constructorArguments: [
-          [
-            "HoundRace",
-            "HR",
-            [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      try {
+        await run("verify:verify", {
+          address: queuesMethods.address,
+          constructorArguments: [
             [
-              incubator.address,
-              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              payments.address,
-              houndsRestricted.address,
-              houndsMinter.address,
+              arenas.address,
+              hounds.address,
               globalParams.address0,
-              houndsModifier.address,
-              shop.address
-            ],[
               payments.address,
-              "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              globalParams.address0,
+              races.address,
+              []
             ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(25, {
+        step: "Verify queues"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(18, {
-      step: "Verify races restricted"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: racesRestricted.address,
-        constructorArguments: [
-          [
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            500000000,
-            false
+      try {
+        await run("verify:verify", {
+          address: queues.address,
+          constructorArguments: [
+            [
+              arenas.address,
+              hounds.address,
+              queuesMethods.address,
+              payments.address,
+              queuesRestricted.address,
+              races.address,
+              []
+            ]
           ]
-        ]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(26, {
+        step: "Finished!"
       });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(19, {
-      step: "Verify races methods"
-    });
 
-    try {
-      await run("verify:verify", {
-        address: racesMethods.address,
-        constructorArguments: [
-          [
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            500000000,
-            false
+      try {
+        await run("verify:verify", {
+          address: lootboxes.address,
+          constructorArguments: [
+            [
+              "HoundRace Lootboxes", 
+              "HRLB", 
+              "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
+              "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
+              hounds.address, 
+              true
+            ]
           ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(20, {
-      step: "Verify races"
-    });
-    
-    try {
-      await run("verify:verify", {
-        address: races.address,
-        constructorArguments: [
-          [
-            randomness.address,
-            arenas.address,
-            hounds.address,
-            racesMethods.address,
-            globalParams.address0,
-            payments.address,
-            racesRestricted.address,
-            globalParams.address0,
-            [],
-            500000000,
-            false
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(21, {
-      step: "Verify generator methods"
-    });
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
 
-    try {
-      await run("verify:verify", {
-        address: generatorMethods.address, 
-        constructorArguments: [
-          [
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(22, {
-      step: "Verify generator"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: generator.address,
-        constructorArguments: [
-          [
-            randomness.address,
-            arenas.address,
-            hounds.address,
-            races.address,
-            generatorMethods.address,
-            payments.address,
-            generatorZerocost.address
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(23, {
-      step: "Verify queues restricted"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: queuesRestricted.address,
-        constructorArguments: [
-          [
-            arenas.address,
-            hounds.address,
-            globalParams.address0,
-            payments.address,
-            globalParams.address0,
-            races.address,
-            []
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(24, {
-      step: "Verify queues methods"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: queuesMethods.address,
-        constructorArguments: [
-          [
-            arenas.address,
-            hounds.address,
-            globalParams.address0,
-            payments.address,
-            globalParams.address0,
-            races.address,
-            []
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(25, {
-      step: "Verify queues"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: queues.address,
-        constructorArguments: [
-          [
-            arenas.address,
-            hounds.address,
-            queuesMethods.address,
-            payments.address,
-            queuesRestricted.address,
-            races.address,
-            []
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-    verifications.update(26, {
-      step: "Finished!"
-    });
-
-    try {
-      await run("verify:verify", {
-        address: lootboxes.address,
-        constructorArguments: [
-          [
-            "HoundRace Lootboxes", 
-            "HRLB", 
-            "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
-            "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
-            hounds.address, 
-            true
-          ]
-        ]
-      });
-    } catch (err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
   } catch(err) {
