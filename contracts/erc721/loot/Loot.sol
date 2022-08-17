@@ -14,7 +14,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     uint256 public id;
     Constructor.Struct public control;
-    mapping(uint256 => Box.Struct) public lootboxes;
+    mapping(uint256 => Box.Struct) private lootboxes;
 
     event NewLootBox(uint256 indexed id);
 
@@ -26,20 +26,16 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     function mint(Box.Struct[] memory boxes) external onlyOwner {
         for ( uint256 i = 0; i < boxes.length; ++i ) {
-            _mint(boxes[i]);
+            IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),boxes[i].hound);
+
+            _mint(msg.sender, id);
+            _setTokenURI(id, control.token_uri);
+
+            lootboxes[id] = boxes[i];
+
+            emit NewLootBox(id);
+            ++id;
         }
-    }
-
-    function _mint(Box.Struct memory box) internal {
-        IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),box.hound);
-
-        _mint(msg.sender, id);
-        _setTokenURI(id, control.token_uri);
-
-        lootboxes[id] = box;
-
-        emit NewLootBox(id);
-        ++id;
     }
 
     function open(uint256 boxId) external payable {
@@ -60,6 +56,8 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         );
 
         IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hound);
+
+        _burn(boxId);
     }
 
 }

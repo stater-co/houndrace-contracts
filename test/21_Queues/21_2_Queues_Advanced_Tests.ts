@@ -8,7 +8,7 @@ import { safeMintHound } from "../../plugins/test/mintHound";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
 import { Hound, Hounds } from "../../typechain-types/Hounds";
-import { Queues, QueuesConstructor } from "../../typechain-types/Queues";
+import { Queues } from "../../typechain-types/Queues";
 const { ethers } = require('hardhat');
 
 
@@ -22,9 +22,12 @@ async function advancedTests(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
+      const [sig1] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.houndsContract,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: sig1.address,
+        position: 0
       });
     });
 
@@ -112,9 +115,12 @@ async function advancedTests(
     });
 
     it("Mint", async function () {
+      const [sig1] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.houndsContract,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: sig1.address,
+        position: 0
       });
     });
 

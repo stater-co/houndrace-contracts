@@ -1,7 +1,9 @@
 import { ethers } from "ethers";
-import { Hound } from '../../../typechain-types/contracts/hounds/params/Index.sol/Params';
+import { Hound } from '../../../typechain-types/Hounds';
 
 export interface MintHoundParams {
     contract: ethers.Contract;
     hound: Hound.StructStructOutput;
+    owner: string;
+    position: number;
   }

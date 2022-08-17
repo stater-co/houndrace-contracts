@@ -4,7 +4,7 @@ import { MintHoundParams } from "../../common/dto/test/mintHoundsParams.dto";
 export async function mintHound(
   params: MintHoundParams
 ) {
-  await params.contract.initializeHound(0, params.hound);
+  await params.contract.initializeHound(params.position, params.owner, params.hound);
 }
 
 export async function safeMintHound(
