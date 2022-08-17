@@ -44,6 +44,34 @@ contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
         ++id;
     }
 
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public override {
+        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
+        super.transferFrom(from, to, tokenId);
+    }
+
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public override {
+        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
+        super.safeTransferFrom(from, to, tokenId, "");
+    }
+
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) public override {
+        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
+        super.safeTransferFrom(from, to, tokenId, data);
+    }
+
     function open(uint256 boxId) external payable {
         require(control.canBeOpened && lootboxes[boxId].hounds.length > 0);
         

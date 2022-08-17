@@ -8,5 +8,6 @@ library Box {
         address currency;
         uint256[] hounds;
         uint256 cost;
+        uint32 totalHounds;
     }
 }
