@@ -35,6 +35,8 @@ import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tes
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
+import { run as runLootboxes } from './23_Deploy_Lootboxes';
+import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 
 
 async function main() {
@@ -286,6 +288,12 @@ async function main() {
         queue: globalParams.defaultQueue,
         arena: globalParams.defaultArena,
         houndsContract: hounds.hounds
+    });
+
+    const lootboxes: LootboxesSystem = await runLootboxes({
+        canBeOpened: false,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address
     });
 
 }

@@ -7,11 +7,10 @@ import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './Box.sol';
-import '../../randomness/IGetRandomNumber.sol';
 import '../../payments/interfaces/IPay.sol';
 
 
-contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
+contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     uint256 public id;
     Constructor.Struct public control;
@@ -48,7 +47,7 @@ contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
         
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = lootboxes[boxId].purchasePrice;
-        
+
         IPay(control.payments).pay{
             value: lootboxes[boxId].currency == address(0) ? lootboxes[boxId].purchasePrice : 0
         }(

@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Arena } from '../../../typechain-types/contracts/arenas/params/Index.sol/Params';
+import { Arena } from '../../../typechain-types/Arenas';
 
 export interface MintArenaParams {
     contract: ethers.Contract;
