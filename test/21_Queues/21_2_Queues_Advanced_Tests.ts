@@ -65,7 +65,6 @@ async function advancedTests(
         races: string;
     } = await dependencies.queuesContract.control();
 
-      console.log("Approved for payments: ", paymentsAddress.payments);
       await dependencies.erc20
       .approve(paymentsAddress.payments, String(entryFee));
 
@@ -98,7 +97,6 @@ async function advancedTests(
             races: string;
         } = await dependencies.queuesContract.control();
     
-          console.log("Approved for payments: ", paymentsAddress.payments);
           await dependencies.erc20
           .approve(paymentsAddress.payments, String(entryFee));
 
@@ -135,7 +133,6 @@ async function advancedTests(
         races: string;
     } = await dependencies.queuesContract.control();
 
-      console.log("Approved for payments: ", paymentsAddress.payments);
       await dependencies.erc20
       .approve(paymentsAddress.payments, String(entryFee));
 

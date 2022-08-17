@@ -56,13 +56,21 @@ export declare namespace Box {
     currency: string;
     hounds: BigNumberish[];
     cost: BigNumberish;
+    totalHounds: BigNumberish;
   };
 
-  export type StructStructOutput = [string, string, BigNumber[], BigNumber] & {
+  export type StructStructOutput = [
+    string,
+    string,
+    BigNumber[],
+    BigNumber,
+    number
+  ] & {
     token_uri: string;
     currency: string;
     hounds: BigNumber[];
     cost: BigNumber;
+    totalHounds: number;
   };
 }
 
@@ -76,7 +84,7 @@ export interface LootInterface extends utils.Interface {
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "lootboxes(uint256)": FunctionFragment;
-    "mint((string,address,uint256[],uint256)[])": FunctionFragment;
+    "mint((string,address,uint256[],uint256,uint32)[])": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
@@ -319,10 +327,11 @@ export interface Loot extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber] & {
+      [string, string, BigNumber, number] & {
         token_uri: string;
         currency: string;
         cost: BigNumber;
+        totalHounds: number;
       }
     >;
 
@@ -441,10 +450,11 @@ export interface Loot extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, BigNumber] & {
+    [string, string, BigNumber, number] & {
       token_uri: string;
       currency: string;
       cost: BigNumber;
+      totalHounds: number;
     }
   >;
 
@@ -557,10 +567,11 @@ export interface Loot extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber] & {
+      [string, string, BigNumber, number] & {
         token_uri: string;
         currency: string;
         cost: BigNumber;
+        totalHounds: number;
       }
     >;
 
