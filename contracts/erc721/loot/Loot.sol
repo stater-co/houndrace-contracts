@@ -8,6 +8,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './Box.sol';
 import '../../randomness/IGetRandomNumber.sol';
+import '../../payments/interfaces/IPay.sol';
 
 
 contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
@@ -20,7 +21,7 @@ contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
 
     constructor(
         Constructor.Struct memory input
-    ) ERC721(input.name, input.symbol) {
+    ) ERC721("HoundRace Lootboxes", "HRLB") {
         control = input;
     }
 
@@ -31,12 +32,10 @@ contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
     }
 
     function _mint(Box.Struct memory box) internal {
-        for ( uint256 i = 0; i < box.hounds.length; ++i ) {
-            IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),box.hounds[i]);
-        }
+        IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),box.hound);
 
         _mint(msg.sender, id);
-        _setTokenURI(id, control.lootBoxURI);
+        _setTokenURI(id, control.token_uri);
 
         lootboxes[id] = box;
 
@@ -44,53 +43,24 @@ contract Loot is Ownable, ERC721URIStorage, ERC721Holder {
         ++id;
     }
 
-    function transferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public override {
-        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
-        super.transferFrom(from, to, tokenId);
-    }
-
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId
-    ) public override {
-        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
-        super.safeTransferFrom(from, to, tokenId, "");
-    }
-
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory data
-    ) public override {
-        require(lootboxes[tokenId].hounds.length == lootboxes[tokenId].totalHounds, "This NFT has been partially used. No longer transferable");
-        super.safeTransferFrom(from, to, tokenId, data);
-    }
-
     function open(uint256 boxId) external payable {
-        require(control.canBeOpened && lootboxes[boxId].hounds.length > 0);
+        require(control.canBeOpened);
         
-        // Payment
-        require(lootboxes[boxId].currency == address(0) ? msg.value >= lootboxes[boxId].cost : IERC20(lootboxes[boxId].currency).transferFrom(msg.sender, address(this), lootboxes[boxId].cost));
-
-        IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hounds[lootboxes[boxId].hounds.length-1]);
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = lootboxes[boxId].purchasePrice;
         
-        if ( lootboxes[boxId].hounds.length - 1 >= 1 ) {
-            uint256[] memory tmpHounds = lootboxes[boxId].hounds;
-            delete lootboxes[boxId].hounds;
-            for ( uint256 i = 0 ; i < tmpHounds.length - 1 ; ++i ) {
-                lootboxes[boxId].hounds.push(tmpHounds[i]);
-            }
-        } else {
-            delete lootboxes[boxId].hounds;
-        }
+        IPay(control.payments).pay{
+            value: lootboxes[boxId].currency == address(0) ? lootboxes[boxId].purchasePrice : 0
+        }(
+                control.payments,
+                control.alphadune,
+                lootboxes[boxId].currency,
+                new uint256[](0),
+                amounts,
+                lootboxes[boxId].currency == address(0) ? 3 : 2
+        );
 
-        _setTokenURI(boxId, control.secondLootBoxURI);
+        IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hound);
     }
 
 }

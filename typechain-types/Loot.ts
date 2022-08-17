@@ -25,27 +25,18 @@ import type {
 
 export declare namespace Constructor {
   export type StructStruct = {
-    name: string;
-    symbol: string;
-    lootBoxURI: string;
-    secondLootBoxURI: string;
+    token_uri: string;
     hounds: string;
+    payments: string;
+    alphadune: string;
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    boolean
-  ] & {
-    name: string;
-    symbol: string;
-    lootBoxURI: string;
-    secondLootBoxURI: string;
+  export type StructStructOutput = [string, string, string, string, boolean] & {
+    token_uri: string;
     hounds: string;
+    payments: string;
+    alphadune: string;
     canBeOpened: boolean;
   };
 }
@@ -54,23 +45,15 @@ export declare namespace Box {
   export type StructStruct = {
     token_uri: string;
     currency: string;
-    hounds: BigNumberish[];
-    cost: BigNumberish;
-    totalHounds: BigNumberish;
+    hound: BigNumberish;
+    purchasePrice: BigNumberish;
   };
 
-  export type StructStructOutput = [
-    string,
-    string,
-    BigNumber[],
-    BigNumber,
-    number
-  ] & {
+  export type StructStructOutput = [string, string, BigNumber, BigNumber] & {
     token_uri: string;
     currency: string;
-    hounds: BigNumber[];
-    cost: BigNumber;
-    totalHounds: number;
+    hound: BigNumber;
+    purchasePrice: BigNumber;
   };
 }
 
@@ -84,7 +67,7 @@ export interface LootInterface extends utils.Interface {
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "lootboxes(uint256)": FunctionFragment;
-    "mint((string,address,uint256[],uint256,uint32)[])": FunctionFragment;
+    "mint((string,address,uint256,uint256)[])": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
@@ -300,12 +283,11 @@ export interface Loot extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, boolean] & {
-        name: string;
-        symbol: string;
-        lootBoxURI: string;
-        secondLootBoxURI: string;
+      [string, string, string, string, boolean] & {
+        token_uri: string;
         hounds: string;
+        payments: string;
+        alphadune: string;
         canBeOpened: boolean;
       }
     >;
@@ -327,11 +309,11 @@ export interface Loot extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, number] & {
+      [string, string, BigNumber, BigNumber] & {
         token_uri: string;
         currency: string;
-        cost: BigNumber;
-        totalHounds: number;
+        hound: BigNumber;
+        purchasePrice: BigNumber;
       }
     >;
 
@@ -423,12 +405,11 @@ export interface Loot extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, boolean] & {
-      name: string;
-      symbol: string;
-      lootBoxURI: string;
-      secondLootBoxURI: string;
+    [string, string, string, string, boolean] & {
+      token_uri: string;
       hounds: string;
+      payments: string;
+      alphadune: string;
       canBeOpened: boolean;
     }
   >;
@@ -450,11 +431,11 @@ export interface Loot extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, BigNumber, number] & {
+    [string, string, BigNumber, BigNumber] & {
       token_uri: string;
       currency: string;
-      cost: BigNumber;
-      totalHounds: number;
+      hound: BigNumber;
+      purchasePrice: BigNumber;
     }
   >;
 
@@ -540,12 +521,11 @@ export interface Loot extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, boolean] & {
-        name: string;
-        symbol: string;
-        lootBoxURI: string;
-        secondLootBoxURI: string;
+      [string, string, string, string, boolean] & {
+        token_uri: string;
         hounds: string;
+        payments: string;
+        alphadune: string;
         canBeOpened: boolean;
       }
     >;
@@ -567,11 +547,11 @@ export interface Loot extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, number] & {
+      [string, string, BigNumber, BigNumber] & {
         token_uri: string;
         currency: string;
-        cost: BigNumber;
-        totalHounds: number;
+        hound: BigNumber;
+        purchasePrice: BigNumber;
       }
     >;
 
