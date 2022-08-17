@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import { LootboxesBasicTests } from "../../common/dto/test/lootboxesBasicTests";
 import { globalParams } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
@@ -26,6 +27,8 @@ async function basicTest(
 
       await dependencies.houndsContract.approve(dependencies.lootboxesContract.address, houndIdToUse);
 
+      let houndsBalanceBefore = await dependencies.houndsContract.balanceOf(sig1.address);
+
       lootboxId = Number(await dependencies.lootboxesContract.id());
 
       await dependencies.lootboxesContract.mint([
@@ -36,6 +39,11 @@ async function basicTest(
           token_uri: "token_uri"
         }
       ]);
+
+      let houndsBalanceAfter = await dependencies.houndsContract.balanceOf(sig1.address);
+
+      expect(Number(houndsBalanceBefore) === Number(houndsBalanceAfter) - 1);
+
     });
 
     it("Open lootbox ", async function() {
