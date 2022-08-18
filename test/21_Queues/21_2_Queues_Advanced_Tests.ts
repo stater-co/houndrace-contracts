@@ -7,6 +7,7 @@ import { safeMintArena } from "../../plugins/test/mintArena";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
+import { Arena } from "../../typechain-types/Arenas";
 import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { Queues } from "../../typechain-types/Queues";
 const { ethers } = require('hardhat');
@@ -75,19 +76,20 @@ async function advancedTests(
         contract: dependencies.queuesContract as Queues,
         queueId: createdQueueId,
         houndId: createdHoundId,
-        houndsContract: dependencies.houndsContract as Hounds
+        houndsContract: dependencies.houndsContract as Hounds,
+        sender: sig1
       });
     });
 
     it("Enqueue 10x", async function() {
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
+      const [sig1] = await ethers.getSigners();
+      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
+
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
-        if ( Number(hound.queueId) === 0 ) {
-
-          const [sig1] = await ethers.getSigners();
-          const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
+        if ( Number(hound.queueId) === 0 ) {    
     
           await dependencies.erc20.mint(sig1.address, entryFee);
     
@@ -107,11 +109,62 @@ async function advancedTests(
             contract: dependencies.queuesContract as Queues,
             queueId: createdQueueId,
             houndId: j,
-            houndsContract: dependencies.houndsContract as Hounds
+            houndsContract: dependencies.houndsContract as Hounds,
+            sender: sig1
           });
           ++totalEnqueues;
         }
       }
+    });
+
+    it("Enqueue 10x from another account", async function() {
+      let totalHounds: number = Number(await dependencies.houndsContract.id());
+      let totalEnqueues: number = 0;
+      const [sig1, sig2] = await ethers.getSigners();
+      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
+      const arenaOwner: string = await dependencies.arenasContract.arenaOwner(createdArenaId);
+      const arenaOwnerBalanceBefore = await dependencies.erc20.balanceOf(arenaOwner);
+      console.log("Arena owner balance before: ", arenaOwnerBalanceBefore);
+
+      for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
+        let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
+        if ( Number(hound.queueId) === 0 ) {
+    
+          await dependencies.erc20.mint(sig1.address, entryFee);
+
+          await dependencies.erc20.transfer(sig2.address, entryFee);
+    
+          const paymentsAddress: [string, string, string, string, string, string] & {
+            arenas: string;
+            hounds: string;
+            methods: string;
+            payments: string;
+            restricted: string;
+            races: string;
+        } = await dependencies.queuesContract.control();
+    
+          await dependencies.erc20.connect(sig2)
+          .approve(paymentsAddress.payments, String(entryFee));
+
+          const balanceBefore: string = String(await dependencies.erc20.balanceOf(sig2.address));
+          console.log("Balance before: ", balanceBefore);
+
+          await safeJoinQueue({
+            contract: dependencies.queuesContract as Queues,
+            queueId: createdQueueId,
+            houndId: j,
+            houndsContract: dependencies.houndsContract as Hounds,
+            sender: sig2
+          });
+
+          const balanceAfter: string = String(await dependencies.erc20.balanceOf(sig2.address));
+          console.log("Balance after: ", balanceAfter);
+          ++totalEnqueues;
+        }
+      }
+
+      const arenaOwnerBalanceAfter = await dependencies.erc20.balanceOf(arenaOwner);
+      console.log("Arena owner balance after: ", arenaOwnerBalanceAfter);
     });
 
     it("Mint", async function () {
@@ -146,7 +199,8 @@ async function advancedTests(
         contract: dependencies.queuesContract as Queues,
         queueId: createdQueueId,
         houndId: createdHoundId,
-        houndsContract: dependencies.houndsContract as Hounds
+        houndsContract: dependencies.houndsContract as Hounds,
+        sender: sig1
       });
       await safeUnenqueue({
         contract: dependencies.queuesContract,

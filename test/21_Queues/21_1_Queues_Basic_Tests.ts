@@ -6,6 +6,7 @@ import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
 import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { Queue, Queues } from "../../typechain-types/Queues";
+const { ethers } = require('hardhat');
 
 
 async function basicTest(
@@ -23,17 +24,20 @@ async function basicTest(
     });
 
     it("Enqueue", async function() {
+      const [sig1] = await ethers.getSigners();
       await safeJoinQueue({
         contract: dependencies.contract as Queues,
         queueId: createdQueueId,
         houndId: dependencies.houndIdToEnqueue,
-        houndsContract: dependencies.houndsContract as Hounds
+        houndsContract: dependencies.houndsContract as Hounds,
+        sender: sig1
       });
     });
 
     it("Enqueue 10x", async function() {
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
+      const [sig1] = await ethers.getSigners();
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.queueId) === 0 ) {
@@ -41,7 +45,8 @@ async function basicTest(
             contract: dependencies.contract as Queues,
             queueId: createdQueueId,
             houndId: j,
-            houndsContract: dependencies.houndsContract as Hounds
+            houndsContract: dependencies.houndsContract as Hounds,
+            sender: sig1
           });
           ++totalEnqueues;
         }
@@ -51,11 +56,13 @@ async function basicTest(
     it("Unenqueue", async function() {
       let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
       if ( queue.participants.length === 0 ) {
+        const [sig1] = await ethers.getSigners();
         await safeJoinQueue({
           contract: dependencies.contract as Queues,
           queueId: createdQueueId,
           houndId: 1,
-          houndsContract: dependencies.houndsContract as Hounds
+          houndsContract: dependencies.houndsContract as Hounds,
+          sender: sig1
         });
         queue = await dependencies.contract.queue(createdQueueId);
       }
