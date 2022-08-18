@@ -4,7 +4,7 @@ import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
-import { Loot } from '../typechain-types/Loot';
+import { Lootboxes } from '../typechain-types/Lootboxes';
 import { Randomness } from '../typechain-types/Randomness';
 import { Payments } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
@@ -666,7 +666,7 @@ async function main() {
     });
 
     const lootboxes = await deployContract({
-      name: 'Loot',
+      name: 'Lootboxes',
       constructor: [
         [
           "HoundRace Lootboxes", 
@@ -678,7 +678,7 @@ async function main() {
         ]
       ],
       props: {}
-    }) as Loot;
+    }) as Lootboxes;
     DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
     deployments.update(1, {
       step: "Deploy sortings"
