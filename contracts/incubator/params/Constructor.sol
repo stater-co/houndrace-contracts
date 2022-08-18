@@ -8,6 +8,8 @@ library IncubatorConstructor {
         address methods;
         address randomness;
         address genetics;
+        address gamification;
+        address races;
         uint32 secondsToMaturity;
     }
 

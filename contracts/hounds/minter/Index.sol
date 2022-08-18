@@ -66,7 +66,8 @@ contract HoundsMinter is Params {
             hound1, 
             hounds[hound1], 
             hound2, 
-            hounds[hound2]
+            hounds[hound2],
+            id
         );
 
         emit BreedHound(id,msg.sender,offspring);

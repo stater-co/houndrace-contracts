@@ -1,44 +1,17 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
+import '../../races/params/HoundStatistics.sol';
+import '../../gamification/params/HoundStamina.sol';
+import '../../gamification/params/HoundBreeding.sol';
+import './HoundIdentity.sol';
 
 library Hound {
 
-    struct Breeding {
-        uint256 lastBreed;
-        uint256 breedingCooldown;
-        uint256 breedingFee;
-        bool availableToBreed;
-    }
-
-    struct Identity {
-        uint256 maleParent;
-        uint256 femaleParent;
-        uint256 generation;
-        uint256 birthDate;
-        uint32[54] geneticSequence;
-        string extensionTraits;
-    }
-
-    struct Stamina {
-        uint256 staminaLastUpdate;
-        uint256 staminaRefill1x;
-        uint32 staminaValue;
-        uint32 staminaPerHour;
-        uint32 staminaCap;
-    }
-
-    struct Statistics {
-        uint64 totalRuns;
-        uint64 firstPlace;
-        uint64 secondPlace;
-        uint64 thirdPlace;
-    }
-
     struct Struct {
-        Statistics statistics;
-        Stamina stamina;
-        Breeding breeding;
-        Identity identity;
+        HoundStatistics.Struct statistics;
+        HoundStamina.Struct stamina;
+        HoundBreeding.Struct breeding;
+        HoundIdentity.Struct identity;
         string title;
         string token_uri;
         uint256 queueId;

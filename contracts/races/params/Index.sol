@@ -12,6 +12,7 @@ import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
+import './HoundStatistics.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 
@@ -26,6 +27,7 @@ contract Params is Ownable, Withdrawable {
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
     mapping(address => bool) public allowed;
+    mapping(uint256 => HoundStatistics.Struct) public houndsStatistic;
 
     constructor(RacesConstructor.Struct memory input) {
         control = input;
@@ -49,7 +51,8 @@ contract Params is Ownable, Withdrawable {
         return races[theId].participants;
     }
 
-    fallback() external payable {}
-    receive() external payable {}
+    function getStatistics(uint256 theId) external view returns(HoundStatistics.Struct memory) {
+        return houndsStatistic[theId];
+    }
 
 }

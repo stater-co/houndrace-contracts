@@ -31,7 +31,7 @@ contract HoundsModifier is Params {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
         uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
-        Hound.Stamina memory stamina = hounds[theId].stamina;
+        HoundStamina.Struct memory stamina = hounds[theId].stamina;
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = control.fees.currency == address(0) ? msg.value : payed;
