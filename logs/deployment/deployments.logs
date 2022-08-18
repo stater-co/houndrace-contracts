@@ -75076,3 +75076,21 @@
   network: 'polygonMumbai',
   timestamp: '2022-08-16T06:51:31.810Z'
 }
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:18.681Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x430246915aA287c5651BEF9ce74784DaD413d8a6',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:30.084Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0xF4e15E5d2a47F3F2235CEC1BC69537548aa632E5',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:40.657Z'
+}

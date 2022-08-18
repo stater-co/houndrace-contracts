@@ -1,6 +1,0 @@
-{
-  message: '[DIIMIIM] insufficient funds for intrinsic transaction cost [ See: https://links.ethers.org/v5-errors-INSUFFICIENT_FUNDS ] (error={"name":"ProviderError","code":-32000,"_isProviderError":true}, method="sendTransaction", transaction=undefined, code=INSUFFICIENT_FUNDS, version=providers/5.6.8)',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-08-16T06:51:32.821Z'
-}

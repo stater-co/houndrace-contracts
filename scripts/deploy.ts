@@ -503,6 +503,7 @@ async function main() {
       props: {}
     }) as Races;
     DeploymentLogger('export RACE=' + races.address);
+
     deployments.update(21, {
       step: "Deploy generator methods"
     });
@@ -669,11 +670,10 @@ async function main() {
       name: 'Lootboxes',
       constructor: [
         [
-          "HoundRace Lootboxes", 
-          "HRLB", 
           "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
-          "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
           hounds.address, 
+          payments.address,
+          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
           true
         ]
       ],
@@ -1527,11 +1527,10 @@ async function main() {
           address: lootboxes.address,
           constructorArguments: [
             [
-              "HoundRace Lootboxes", 
-              "HRLB", 
               "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
-              "https://gateway.pinata.cloud/ipfs/QmT2w5bjHvKqKQE3GHDB9oitd4siiM3UG6S6LTpaP7LEQ3", 
               hounds.address, 
+              payments.address,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               true
             ]
           ]
