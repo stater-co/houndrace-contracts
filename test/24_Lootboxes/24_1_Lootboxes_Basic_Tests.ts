@@ -22,7 +22,8 @@ async function basicTest(
         contract: dependencies.houndsContract,
         hound: globalParams.defaultHound,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       await dependencies.houndsContract.approve(dependencies.lootboxesContract.address, houndIdToUse);

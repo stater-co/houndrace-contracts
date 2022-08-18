@@ -24,7 +24,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: globalParams.defaultHound,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
     });
     
@@ -58,7 +59,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -68,7 +70,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -97,7 +100,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -107,7 +111,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -136,7 +141,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -146,7 +152,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -175,7 +182,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -185,7 +193,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -214,7 +223,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -224,7 +234,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -253,7 +264,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -263,7 +275,8 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);

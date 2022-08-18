@@ -25,7 +25,8 @@ async function basicTest(
         contract: dependencies.hounds,
         hound: globalParams.defaultHound,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
     });
     
@@ -58,7 +59,8 @@ async function basicTest(
           contract: dependencies.hounds,
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
-          position: 0
+          position: 0,
+          signer: sig1.address
         });
       }
     });
@@ -72,7 +74,8 @@ async function basicTest(
           contract: dependencies.hounds,
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
-          position: 0
+          position: 0,
+          signer: sig1.address
         });
       }
     });
@@ -85,7 +88,8 @@ async function basicTest(
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
-        position: 0
+        position: 0,
+        signer: sig1.address
       });
 
       await safeBreed({

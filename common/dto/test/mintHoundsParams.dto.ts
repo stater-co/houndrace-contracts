@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, Signer } from "ethers";
 import { Hound } from '../../../typechain-types/Hounds';
 
 export interface MintHoundParams {
@@ -6,4 +6,5 @@ export interface MintHoundParams {
     hound: Hound.StructStructOutput;
     owner: string;
     position: number;
+    signer: Signer;
   }

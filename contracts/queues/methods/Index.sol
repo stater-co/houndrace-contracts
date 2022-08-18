@@ -50,11 +50,9 @@ contract QueuesMethods is Params {
     }
 
     function enqueue(uint256 theId, uint256 hound) external payable {
-
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
-            ((queues[theId].endDate == 0 && queues[theId].startDate ==0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
-            msg.value >= queues[theId].entryFee && 
+            ((queues[theId].endDate == 0 && queues[theId].startDate == 0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
             IHoundOwner(control.hounds).houndOwner(hound) == msg.sender && 
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
