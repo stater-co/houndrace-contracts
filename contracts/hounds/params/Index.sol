@@ -12,11 +12,13 @@ import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IGetStatistics.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
+import '../../incubator/interfaces/IGetIdentity.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
+    mapping(uint256 => Hound.Struct) public hounds;
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event NewTokenUri(uint256 indexed id, string token_uri);
@@ -50,7 +52,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
             IGetStatistics(control.races).getStatistics(theId),
             IGetStamina(control.gamification).getStamina(theId),
             IGetBreeding(control.gamification).getBreeding(theId),
-            houndsIdentity[theId],
+            IGetIdentity(control.incubator).getIdentity(theId),
             "",
             "",
             0,
