@@ -25,27 +25,18 @@ import type {
 
 export declare namespace Constructor {
   export type StructStruct = {
-    name: string;
-    symbol: string;
-    lootBoxURI: string;
-    secondLootBoxURI: string;
+    token_uri: string;
     hounds: string;
+    payments: string;
+    alphadune: string;
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    boolean
-  ] & {
-    name: string;
-    symbol: string;
-    lootBoxURI: string;
-    secondLootBoxURI: string;
+  export type StructStructOutput = [string, string, string, string, boolean] & {
+    token_uri: string;
     hounds: string;
+    payments: string;
+    alphadune: string;
     canBeOpened: boolean;
   };
 }
@@ -54,20 +45,20 @@ export declare namespace Box {
   export type StructStruct = {
     token_uri: string;
     currency: string;
-    hounds: BigNumberish[];
-    cost: BigNumberish;
+    hound: BigNumberish;
+    purchasePrice: BigNumberish;
   };
 
-  export type StructStructOutput = [string, string, BigNumber[], BigNumber] & {
+  export type StructStructOutput = [string, string, BigNumber, BigNumber] & {
     token_uri: string;
     currency: string;
-    hounds: BigNumber[];
-    cost: BigNumber;
+    hound: BigNumber;
+    purchasePrice: BigNumber;
   };
 }
 
-export interface LootInterface extends utils.Interface {
-  contractName: "Loot";
+export interface LootboxesInterface extends utils.Interface {
+  contractName: "Lootboxes";
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -75,8 +66,7 @@ export interface LootInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "lootboxes(uint256)": FunctionFragment;
-    "mint((string,address,uint256[],uint256)[])": FunctionFragment;
+    "mint((string,address,uint256,uint256)[])": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
@@ -106,10 +96,6 @@ export interface LootInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "lootboxes",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
@@ -168,7 +154,6 @@ export interface LootInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "lootboxes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -253,13 +238,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface Loot extends BaseContract {
-  contractName: "Loot";
+export interface Lootboxes extends BaseContract {
+  contractName: "Lootboxes";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: LootInterface;
+  interface: LootboxesInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -292,12 +277,11 @@ export interface Loot extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, boolean] & {
-        name: string;
-        symbol: string;
-        lootBoxURI: string;
-        secondLootBoxURI: string;
+      [string, string, string, string, boolean] & {
+        token_uri: string;
         hounds: string;
+        payments: string;
+        alphadune: string;
         canBeOpened: boolean;
       }
     >;
@@ -314,17 +298,6 @@ export interface Loot extends BaseContract {
       operator: string,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    lootboxes(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, BigNumber] & {
-        token_uri: string;
-        currency: string;
-        cost: BigNumber;
-      }
-    >;
 
     mint(
       boxes: Box.StructStruct[],
@@ -414,12 +387,11 @@ export interface Loot extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, boolean] & {
-      name: string;
-      symbol: string;
-      lootBoxURI: string;
-      secondLootBoxURI: string;
+    [string, string, string, string, boolean] & {
+      token_uri: string;
       hounds: string;
+      payments: string;
+      alphadune: string;
       canBeOpened: boolean;
     }
   >;
@@ -436,17 +408,6 @@ export interface Loot extends BaseContract {
     operator: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
-
-  lootboxes(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string, BigNumber] & {
-      token_uri: string;
-      currency: string;
-      cost: BigNumber;
-    }
-  >;
 
   mint(
     boxes: Box.StructStruct[],
@@ -530,12 +491,11 @@ export interface Loot extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, boolean] & {
-        name: string;
-        symbol: string;
-        lootBoxURI: string;
-        secondLootBoxURI: string;
+      [string, string, string, string, boolean] & {
+        token_uri: string;
         hounds: string;
+        payments: string;
+        alphadune: string;
         canBeOpened: boolean;
       }
     >;
@@ -552,17 +512,6 @@ export interface Loot extends BaseContract {
       operator: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    lootboxes(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, BigNumber] & {
-        token_uri: string;
-        currency: string;
-        cost: BigNumber;
-      }
-    >;
 
     mint(boxes: Box.StructStruct[], overrides?: CallOverrides): Promise<void>;
 
@@ -698,11 +647,6 @@ export interface Loot extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    lootboxes(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     mint(
       boxes: Box.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -804,11 +748,6 @@ export interface Loot extends BaseContract {
     isApprovedForAll(
       owner: string,
       operator: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    lootboxes(
-      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

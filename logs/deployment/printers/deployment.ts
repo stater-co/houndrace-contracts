@@ -41,7 +41,9 @@ const loggerOptions: LoggerOptions = {
 const logger: Logger = createLogger(loggerOptions);
 
 const DeploymentLogger = async (msg: string) => {
-  logger.info(msg);
+  if ( network.name !== "hardhat" ) {
+    logger.info(msg);
+  }
 }
 
 export default DeploymentLogger;

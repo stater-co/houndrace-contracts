@@ -74602,3 +74602,495 @@
   network: 'polygonMumbai',
   timestamp: '2022-08-09T08:01:17.269Z'
 }
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:32.740Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:33.879Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:33.938Z'
+}
+{
+  message: '[DIIMIIM] export RANDOMNESS=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:33.993Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS=0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.058Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDRACE_POTIONS=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.139Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_RESTRICTED=0x5FC8d32690cc91D4c39d9d3abcBD16989F875707',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.198Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_METHODS=0x0165878A594ca255338adfa4d48449f69242Eb8F',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.259Z'
+}
+{
+  message: '[DIIMIIM] export SHOP=0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.308Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_RESTRICTED=0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.416Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_METHODS=0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.489Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS=0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.563Z'
+}
+{
+  message: '[DIIMIIM] export GENETICS=0x9A676e781A523b5d0C0e43731313A708CB607508',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:34.973Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR_METHODS=0x0B306BF915C4d645ff596e518fAf3F9669b97016',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.014Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR=0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.055Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_RESTRICTED=0x68B1D87F95878fE05B998F19b66F4baba5De1aed',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.143Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MODIFIER=0x3Aa5ebB10DC797CAC828524e59A333d0A371443c',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.215Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MINTER=0xc6e7DF5E7b4f2A278906862b61205850344D4e7d',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.294Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS=0x59b670e9fA9D0A427751Af201D676719a970857b',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.370Z'
+}
+{
+  message: '[DIIMIIM] export RACE_RESTRICTED=0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.420Z'
+}
+{
+  message: '[DIIMIIM] export RACE_METHODS=0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.470Z'
+}
+{
+  message: '[DIIMIIM] export RACE=0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.520Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_METHODS=0x4A679253410272dd5232B3Ff7cF5dbB88f295319',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.561Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_ZEROCOST=0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.602Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR=0x09635F643e140090A9A8Dcd712eD6285858ceBef',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.647Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_METHODS=0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.715Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_RESTRICTED=0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.763Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES=0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.811Z'
+}
+{
+  message: '[DIIMIIM] export LOOTBOXES=0x9E545E3C0baAB3E08CdfD552C960A1050f373042',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:42:35.876Z'
+}
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:03.173Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x5FbDB2315678afecb367f032d93F642f64180aa3',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.339Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.398Z'
+}
+{
+  message: '[DIIMIIM] export RANDOMNESS=0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.453Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS=0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.518Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDRACE_POTIONS=0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.598Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_RESTRICTED=0x5FC8d32690cc91D4c39d9d3abcBD16989F875707',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.656Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_METHODS=0x0165878A594ca255338adfa4d48449f69242Eb8F',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.714Z'
+}
+{
+  message: '[DIIMIIM] export SHOP=0xa513E6E4b8f2a923D98304ec87F64353C4D5C853',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.763Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_RESTRICTED=0x610178dA211FEF7D417bC0e6FeD39F05609AD788',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.870Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_METHODS=0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:04.941Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS=0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.014Z'
+}
+{
+  message: '[DIIMIIM] export GENETICS=0x9A676e781A523b5d0C0e43731313A708CB607508',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.407Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR_METHODS=0x0B306BF915C4d645ff596e518fAf3F9669b97016',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.447Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR=0x959922bE3CAee4b8Cd9a407cc3ac1C251C2007B1',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.488Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_RESTRICTED=0x68B1D87F95878fE05B998F19b66F4baba5De1aed',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.574Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MODIFIER=0x3Aa5ebB10DC797CAC828524e59A333d0A371443c',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.648Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MINTER=0xc6e7DF5E7b4f2A278906862b61205850344D4e7d',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.720Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS=0x59b670e9fA9D0A427751Af201D676719a970857b',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.798Z'
+}
+{
+  message: '[DIIMIIM] export RACE_RESTRICTED=0x4ed7c70F96B99c776995fB64377f0d4aB3B0e1C1',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.852Z'
+}
+{
+  message: '[DIIMIIM] export RACE_METHODS=0x322813Fd9A801c5507c9de605d63CEA4f2CE6c44',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.900Z'
+}
+{
+  message: '[DIIMIIM] export RACE=0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.952Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_METHODS=0x4A679253410272dd5232B3Ff7cF5dbB88f295319',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:05.992Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_ZEROCOST=0x7a2088a1bFc9d81c55368AE168C2C02570cB814F',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.038Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR=0x09635F643e140090A9A8Dcd712eD6285858ceBef',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.079Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_METHODS=0xE6E340D132b5f46d1e472DebcD681B2aBc16e57E',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.144Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_RESTRICTED=0xc3e53F4d16Ae77Db1c982e75a937B9f60FE63690',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.191Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES=0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.239Z'
+}
+{
+  message: '[DIIMIIM] export LOOTBOXES=0x9E545E3C0baAB3E08CdfD552C960A1050f373042',
+  level: 'info',
+  network: 'hardhat',
+  timestamp: '2022-08-16T06:44:06.300Z'
+}
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:47:01.795Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x0d6438C827Af2f56D25f101eeF3FCC4E23F7d98E',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:47:17.016Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0x1B56208454c60880529F07D0b90dc4ECdF0aaE75',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:47:31.463Z'
+}
+{
+  message: '[DIIMIIM] export RANDOMNESS=0x336D4deD695140C4a24b8755C2010ABefC93035d',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:47:46.315Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS=0xDC427BA3a8f03208426cc083Cf025467A370B6F1',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:47:57.179Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDRACE_POTIONS=0xaced08F3Ea1791E1500338491357b881282033BD',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:48:11.624Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_RESTRICTED=0xCC7FdD9a585C38a0C721Ab515B4480E3ee3adEFD',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:48:22.246Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_METHODS=0x91571670b0eEFC25964e3b8a2b5D21a0b8Aa77b8',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:48:48.548Z'
+}
+{
+  message: '[DIIMIIM] export SHOP=0x3eF7B859ed43512815Aa413B392466c32509FC51',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:48:59.080Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_RESTRICTED=0x9d47Cd26b1dEc2bf1D7Ebc82199764dAdB4c16Bf',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:49:12.421Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_METHODS=0x9ed3F2A50e51Cf0a8cc9ad4fC1cf28aa19c2BB76',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:49:22.958Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS=0x04203389783A503C626458b3B42d14f66FA8ce56',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:49:33.695Z'
+}
+{
+  message: '[DIIMIIM] export GENETICS=0xd804b5ddcD5A0cfC6F2B04d6AE033b57021A42B5',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:49:45.584Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR_METHODS=0x6c97D94bC0C6D00F4455EFB549996258811f04DD',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:49:56.071Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR=0x76407298B9bd5a3c7Ee9f0608529f1b9241a14d4',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:50:10.528Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_RESTRICTED=0x02BFD39522fb82b34De54b0d25925Cf1ff6de335',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:50:26.684Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MODIFIER=0x6261A17001DA82ac804E6395F7d7088Dd1366324',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:50:37.217Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MINTER=0x279faB905D2d971CBc468a5B1Ac1aAEfAE1aaE7b',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:50:55.593Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS=0x2A6BB61b9FAfd9E31b3a7F99772F92e8582dA6aD',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:51:06.220Z'
+}
+{
+  message: '[DIIMIIM] export RACE_RESTRICTED=0xECfc81A1701F5F8633036E4541eaE59E305e0107',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:51:17.168Z'
+}
+{
+  message: '[DIIMIIM] export RACE_METHODS=0x6718506d320d3dC8f5fFeF47ccC0D4727aeAa52C',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-16T06:51:31.810Z'
+}
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:18.681Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x430246915aA287c5651BEF9ce74784DaD413d8a6',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:30.084Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0xF4e15E5d2a47F3F2235CEC1BC69537548aa632E5',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-18T11:23:40.657Z'
+}

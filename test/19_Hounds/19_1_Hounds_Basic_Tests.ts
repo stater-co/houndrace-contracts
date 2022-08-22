@@ -20,9 +20,13 @@ async function basicTest(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
+      let [sig1] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
-        hound: globalParams.defaultHound
+        hound: globalParams.defaultHound,
+        owner: sig1.address,
+        position: 0,
+        signer: sig1.address
       });
     });
     
@@ -47,23 +51,31 @@ async function basicTest(
     });
 
     it("Mint 20x females", async function () {
+      let [sig1] = await ethers.getSigners();
       for ( let i = 0 ; i < 20 ; ++i ) {
         let houndToMint: Hound.StructStruct = globalParams.defaultHound;
         houndToMint.identity.geneticSequence[1] = 2;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
-          hound: houndToMint as Hound.StructStructOutput
+          hound: houndToMint as Hound.StructStructOutput,
+          owner: sig1.address,
+          position: 0,
+          signer: sig1.address
         });
       }
     });
 
     it("Mint 20x males", async function () {
+      let [sig1] = await ethers.getSigners();
       for ( let i = 0 ; i < 20 ; ++i ) {
         let houndToMint: Hound.StructStruct = globalParams.defaultHound;
         houndToMint.identity.geneticSequence[1] = 1;
         createdHoundId = await safeMintHound({
           contract: dependencies.hounds,
-          hound: houndToMint as Hound.StructStructOutput
+          hound: houndToMint as Hound.StructStructOutput,
+          owner: sig1.address,
+          position: 0,
+          signer: sig1.address
         });
       }
     });
@@ -71,11 +83,14 @@ async function basicTest(
     it("Mint & Breed", async function () {
       let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
+      let [sig1] = await ethers.getSigners();
       let newCreatedHoundId: string | number = await safeMintHound({
         contract: dependencies.hounds,
-        hound: femaleHound as Hound.StructStructOutput
+        hound: femaleHound as Hound.StructStructOutput,
+        owner: sig1.address,
+        position: 0,
+        signer: sig1.address
       });
-      let [sig1] = await ethers.getSigners();
 
       await safeBreed({
         contract: dependencies.hounds,

@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.15;
+pragma solidity 0.8.16;
 import './params/Index.sol';
 
 
@@ -7,7 +7,7 @@ contract Hounds is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
-    function initializeHound(uint256 onId, Hound.Struct memory theHound) external onlyOwner {
+    function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external onlyOwner {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
     }

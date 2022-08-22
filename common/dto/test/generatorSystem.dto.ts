@@ -1,7 +1,6 @@
-import { ethers } from "ethers";
-import { GeneratorMethods } from '../../../typechain-types/contracts/generator/methods/Index.sol/GeneratorMethods';
-import { GeneratorZerocost } from '../../../typechain-types/contracts/generator/zerocost/Index.sol/GeneratorZerocost';
-import { Generator } from '../../../typechain-types/contracts/generator/Index.sol/Generator';
+import { GeneratorMethods } from '../../../typechain-types/GeneratorMethods';
+import { GeneratorZerocost } from '../../../typechain-types/GeneratorZerocost';
+import { Generator } from '../../../typechain-types/Generator';
 
 export interface GeneratorSystem {
     generatorMethods: GeneratorMethods;

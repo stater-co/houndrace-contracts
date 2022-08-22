@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { Signer } from "ethers";
 import { Hounds } from "../../../typechain-types/Hounds";
 import { Queues } from "../../../typechain-types/Queues";
 
@@ -7,4 +7,5 @@ export interface JoinQueueParams {
     queueId: string | number;
     houndId: string | number;
     houndsContract: Hounds;
+    sender: Signer | string;
   }

@@ -9,7 +9,10 @@
     "compile": "hardhat compile",
     "safe-hardhat-test": "echo 'Recommended for node > 16.x' && export SET NODE_OPTIONS=--openssl-legacy-provider && hardhat test",
     "deployments-to-env": "cd plugins && ts-node deployments-to-env.ts",
-    "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts"
+    "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts",
+    "deploy-rinkeby": "hardhat run scripts/deploy.ts --network rinkeby",
+    "deploy-polygonMumbai": "hardhat run scripts/deploy.ts --network polygonMumbai",
+    "deploy": "hardhat run scripts/deploy.ts"
   },
   "repository": {
     "type": "git",
