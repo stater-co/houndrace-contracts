@@ -12,6 +12,10 @@ import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../utils/Sortings.sol';
+import '../../incubator/params/HoundIdentity.sol';
+import '../../incubator/interfaces/IGetIdentity.sol';
+import '../../gamification/params/HoundStamina.sol';
+import '../../gamification/interfaces/IGetStamina.sol';
 
 
 contract Params is Ownable {

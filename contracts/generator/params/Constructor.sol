@@ -12,6 +12,8 @@ library GeneratorConstructor {
         address methods;
         address payments;
         address zerocost;
+        address incubator;
+        address gamification;
     }
 
 }

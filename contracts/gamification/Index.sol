@@ -7,7 +7,7 @@ contract Gamification is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
-    function setDefault(uint256 id) external {
+    function initializeHoundGamingStats(uint256 id, uint32[54] memory genetics) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

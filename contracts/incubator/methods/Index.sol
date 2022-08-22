@@ -9,37 +9,31 @@ contract IncubatorMethods is Params {
 
     function breedHounds(
         uint256 hound1Id, 
-        Hound.Struct memory hound1, 
+        HoundIdentity.Struct memory hound1, 
         uint256 hound2Id, 
-        Hound.Struct memory hound2, 
+        HoundIdentity.Struct memory hound2, 
         uint256 theId
-    ) public view returns(Hound.Struct memory) {
+    ) public {
+        require(allowed[msg.sender]);
         
         uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
-            abi.encode(hound1Id > hound2Id ? hound1.identity.geneticSequence : hound2.identity.geneticSequence)
+            abi.encode(hound1Id > hound2Id ? hound1.geneticSequence : hound2.geneticSequence)
         );
         uint32[54] memory genetics = IMixGenes(control.genetics).mixGenes(
-            hound1.identity.geneticSequence, 
-            hound2.identity.geneticSequence,
+            hound1.geneticSequence, 
+            hound2.geneticSequence,
             randomness
         );
 
-        return Hound.Struct(
-            IGetStatistics(control.races).getStatistics(theId),
-            IGetStamina(control.gamification).getStamina(theId),
-            IGetBreeding(control.gamification).getBreeding(theId),
-            HoundIdentity.Struct(
-                hound1Id,
-                hound2Id,
-                hound1.identity.generation + hound2.identity.generation,
-                block.timestamp,
-                genetics,
-                ""
-            ),
-            "",
-            "",
-            0,
-            false
+        IInitializeHoundGamingStats(control.gamification).initializeHoundGamingStats(theId, genetics);
+
+        houndsIdentity[theId] = HoundIdentity.Struct(
+            hound1Id,
+            hound2Id,
+            hound1.generation + hound2.generation,
+            block.timestamp,
+            genetics,
+            ""
         );
     }
 

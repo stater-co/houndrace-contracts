@@ -10,9 +10,14 @@ import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IGetStatistics.sol';
+import '../../gamification/params/HoundBreeding.sol';
+import '../../incubator/params/HoundIdentity.sol';
+import '../../gamification/params/HoundStamina.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
+import '../../gamification/interfaces/ISetStamina.sol';
+import '../../gamification/interfaces/ISetBreeding.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -48,16 +53,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     }
 
     function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return Hound.Struct(
-            IGetStatistics(control.races).getStatistics(theId),
-            IGetStamina(control.gamification).getStamina(theId),
-            IGetBreeding(control.gamification).getBreeding(theId),
-            IGetIdentity(control.incubator).getIdentity(theId),
-            "",
-            "",
-            0,
-            false
-        );
+        return hounds[theId];
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
@@ -71,10 +67,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
 
     function getBreedCost(uint256 hound1, uint256 hound2) public view returns(uint256) {
         require(ownerOf(hound1) == msg.sender);
-        return control.fees.breedCost + control.fees.breedFee + hounds[hound2].breeding.breedingFee;
+        return control.fees.breedCost + control.fees.breedFee + IGetBreeding(control.boilerplate.gamification).getBreeding(hound2).breedingFee;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

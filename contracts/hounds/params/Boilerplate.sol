@@ -11,5 +11,7 @@ library ConstructorBoilerplate {
         address hounds;
         address houndModifier;
         address shop;
+        address races;
+        address gamification;
     }
 }

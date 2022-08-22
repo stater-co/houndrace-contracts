@@ -18,24 +18,25 @@ contract GeneratorZerocost is Params {
     ) {
 
         uint256[] memory stats = new uint256[](participants.length);
-
-        Hound.Struct memory hound;
+        HoundIdentity.Struct memory identity;
+        HoundStamina.Struct memory stamina;
 
         for ( uint256 i = 0 ; i < participants.length ; ++i ) {
 
-            hound = IHound(control.hounds).hound(participants[i]);
+            identity = IGetIdentity(control.incubator).getIdentity(participants[i]);
+            stamina = IGetStamina(control.gamification).getStamina(participants[i]);
 
-            stats[i] = uint256((hound.identity.geneticSequence[30] + hound.identity.geneticSequence[31] + hound.identity.geneticSequence[32] + hound.identity.geneticSequence[33]) * 99);
+            stats[i] = uint256((identity.geneticSequence[30] + identity.geneticSequence[31] + identity.geneticSequence[32] + identity.geneticSequence[33]) * 99);
             uint256 tmp = stats[i];
 
-            if ( hound.identity.geneticSequence[9] == terrain.surface )
+            if ( identity.geneticSequence[9] == terrain.surface )
                 stats[i] += tmp / 20;
-            if ( hound.identity.geneticSequence[10] == terrain.distance )
+            if ( identity.geneticSequence[10] == terrain.distance )
                 stats[i] += tmp / 20;
-            if ( hound.identity.geneticSequence[11] == terrain.weather )
+            if ( identity.geneticSequence[11] == terrain.weather )
                 stats[i] += tmp / 20;
 
-            if ( hound.stamina.staminaCap / 2 > hound.stamina.staminaValue )
+            if ( stamina.staminaCap / 2 > stamina.staminaValue )
                 stats[i] = stats[i] * 90 / 100;
 
         }

@@ -10,7 +10,7 @@ interface IBreedHounds {
         Hound.Struct memory hound1, 
         uint256 hound2Id, 
         Hound.Struct memory hound2,
-        uint256 theId
+        uint256 onId
     ) external view returns(Hound.Struct memory);
 
 }
