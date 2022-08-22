@@ -40,7 +40,7 @@ async function basicTest(
       const [sig1] = await ethers.getSigners();
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
-        if ( Number(hound.queueId) === 0 ) {
+        if ( Number(hound.profile.queueId) === 0 ) {
           await safeJoinQueue({
             contract: dependencies.contract as Queues,
             queueId: createdQueueId,

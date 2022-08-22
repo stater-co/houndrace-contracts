@@ -12,5 +12,11 @@ export async function set(
   
     });
 
+    it("Setup incubator controller", async function () {
+    
+      await dependencies.incubator.setGlobalParameters(dependencies.constructor);
+  
+    });
+
   });
 }

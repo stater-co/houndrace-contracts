@@ -9,5 +9,6 @@ library Constructor {
         HoundStamina.Struct defaultStamina;
         address[] allowed;
         address restricted;
+        address methods;
     }
 }

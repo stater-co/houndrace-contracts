@@ -1,9 +1,11 @@
-import { Hound } from '../typechain-types/Hounds';
+import { Hound, HoundProfile } from '../typechain-types/Hounds';
 import { BigNumber } from 'ethers';
 import { Queue } from '../typechain-types/Queues';
 import { Payment } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
-import { Race } from '../typechain-types/Races';
+import { Race, HoundStatistics } from '../typechain-types/Races';
+import { HoundStamina, HoundBreeding } from '../typechain-types/Gamification';
+import { HoundIdentity } from '../typechain-types/Incubator';
 
 
 const address0: string = '0x0000000000000000000000000000000000000000';
@@ -40,7 +42,7 @@ const defaultRace: Race.StructStruct = {
     seed: "0x00"
 };
 
-const houndStamina: Hound.StaminaStruct = {
+const houndStamina: HoundStamina.StructStruct = {
     staminaCap: 100,
     staminaLastUpdate: 0,
     staminaPerHour: 1,
@@ -48,21 +50,21 @@ const houndStamina: Hound.StaminaStruct = {
     staminaValue: 100
 };
 
-const houndStatistics: Hound.StatisticsStruct = {
+const houndStatistics: HoundStatistics.StructStruct = {
     firstPlace: 0,
     secondPlace: 0,
     thirdPlace: 0,
     totalRuns: 0
 };
 
-const houndBreeding: Hound.BreedingStruct = {
+const houndBreeding: HoundBreeding.StructStruct = {
     availableToBreed: false,
     breedingCooldown: 0,
     breedingFee: 100000,
     lastBreed: 0
 };
 
-const houndIdentity: Hound.IdentityStruct = {
+const houndIdentity: HoundIdentity.StructStruct = {
     birthDate: 0,
     femaleParent: 0,
     generation: 1,
@@ -71,14 +73,18 @@ const houndIdentity: Hound.IdentityStruct = {
     extensionTraits: ""
 };
 
-const defaultHound: Hound.StructStruct = {
+const houndProfile: HoundProfile.StructStruct = {
     title: "Hound #1",
     custom: true,
     queueId: BigNumber.from(0),
-    token_uri: "hound_token_uri",
+    token_uri: "hound_token_uri"
+};
+
+const defaultHound: Hound.StructStruct = {
     statistics: houndStatistics,
     breeding: houndBreeding,
     identity: houndIdentity,
+    profile: houndProfile,
     stamina: houndStamina
 };
 
@@ -105,6 +111,8 @@ interface GlobalParams {
     defaultHound: Hound.StructStructOutput;
     defaultArena: Arena.StructStructOutput;
     defaultRace: Race.StructStructOutput;
+    houndBreeding: HoundBreeding.StructStruct;
+    houndStamina: HoundStamina.StructStruct;
 };
 
 export const globalParams: GlobalParams = {
@@ -114,5 +122,7 @@ export const globalParams: GlobalParams = {
     defaultQueue: defaultQueue as Queue.StructStructOutput,
     defaultHound: defaultHound as Hound.StructStructOutput,
     defaultArena: defaultArena as Arena.StructStructOutput,
-    defaultRace: defaultRace as Race.StructStructOutput
+    defaultRace: defaultRace as Race.StructStructOutput,
+    houndBreeding: houndBreeding,
+    houndStamina: houndStamina
 };

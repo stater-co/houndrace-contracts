@@ -78,14 +78,14 @@ contract HoundsMinter is Params {
         ISetBreeding(control.boilerplate.gamification).setBreeding(hound1, breeding1);
         ISetBreeding(control.boilerplate.gamification).setBreeding(hound2, breeding2);
 
-        hounds[id] = Hound.Struct(
+        hounds[id] = HoundProfile.Struct(
             "",
             "",
             0,
             false
         );
 
-        emit BreedHound(id,msg.sender,offspring);
+        emit BreedHound(id,msg.sender,this.hound(id));
         ++id;
 
     } 

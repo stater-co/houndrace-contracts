@@ -10,9 +10,6 @@ import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IGetStatistics.sol';
-import '../../gamification/params/HoundBreeding.sol';
-import '../../incubator/params/HoundIdentity.sol';
-import '../../gamification/params/HoundStamina.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
@@ -23,7 +20,7 @@ import '../../gamification/interfaces/ISetBreeding.sol';
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
-    mapping(uint256 => Hound.Struct) public hounds;
+    mapping(uint256 => HoundProfile.Struct) public hounds;
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event NewTokenUri(uint256 indexed id, string token_uri);
@@ -53,7 +50,13 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     }
 
     function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
+        return Hound.Struct(
+            IGetStatistics(control.boilerplate.races).getStatistics(theId),
+            IGetStamina(control.boilerplate.gamification).getStamina(theId),
+            IGetBreeding(control.boilerplate.gamification).getBreeding(theId),
+            IGetIdentity(control.boilerplate.incubator).getIdentity(theId),
+            hounds[theId]
+        );
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {

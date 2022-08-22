@@ -17,5 +17,5 @@ export async function safeJoinQueue(
   const before: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
   await joinQueue(params);
   const after: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
-  expect(Number(before.queueId) !== Number(after.queueId));
+  expect(Number(before.profile.queueId) !== Number(after.profile.queueId));
 }

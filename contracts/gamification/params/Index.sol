@@ -18,6 +18,11 @@ contract Params is Ownable {
         handleAllowedCallers(input.allowed);
     }
 
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+        handleAllowedCallers(globalParameters.allowed);
+        control = globalParameters;
+    }
+
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];

@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import { globalParams } from "../../common/params";
 import { Hound } from '../../typechain-types/Hounds';
 
 export function checkHoundStructure(
@@ -11,15 +10,15 @@ export function checkHoundStructure(
     ( hound.breeding.breedingCooldown >= 0 ) && 
     ( hound.breeding.breedingFee >= 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
-    ( hound.custom === true || hound.custom === false ) && 
-    ( String(hound.title).length > 0 ) && 
-    ( String(hound.token_uri).length > 0 ) && 
+    ( hound.profile.custom === true || hound.profile.custom === false ) && 
+    ( String(hound.profile.title).length > 0 ) && 
+    ( String(hound.profile.token_uri).length > 0 ) && 
     ( hound.identity.birthDate >= 0 ) && 
     ( hound.identity.femaleParent >= 0 ) && 
     ( hound.identity.maleParent >= 0 ) && 
     ( hound.identity.generation >= 0 ) && 
     ( hound.identity.geneticSequence.length > 0 ) && 
-    ( hound.queueId >= 0 ) && 
+    ( hound.profile.queueId >= 0 ) && 
     ( hound.statistics.firstPlace >= 0 ) && 
     ( hound.statistics.secondPlace >= 0 ) && 
     ( hound.statistics.thirdPlace >= 0 ) && 

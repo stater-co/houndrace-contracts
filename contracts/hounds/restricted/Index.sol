@@ -9,15 +9,13 @@ contract HoundsRestricted is Params {
     
     function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external {
         if ( onId > 0 ) {
-            HoundIdentity.Struct memory identity = IGetIdentity(control.boilerplate.incubator).getIdentity(onId);
-            HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(onId);
-            require(identity.maleParent == 0 && stamina.staminaCap == 0 && onId < id);
+            require(theHound.identity.maleParent == 0 && theHound.stamina.staminaCap == 0 && onId < id);
             emit NewHound(onId,msg.sender,theHound);
-            hounds[onId] = theHound;
+            hounds[onId] = theHound.profile;
             _safeMint(owner,onId);
         } else {
             emit NewHound(id,msg.sender,theHound);
-            hounds[id] = theHound;
+            hounds[id] = theHound.profile;
             _safeMint(owner,id);
             ++id;
         }

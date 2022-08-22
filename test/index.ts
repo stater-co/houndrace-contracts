@@ -37,6 +37,9 @@ import { globalParams } from '../common/params';
 import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { run as runLootboxes } from './23_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
+import { run as runGamification } from './25_Deploy_Gamification';
+import { set as setGamification } from './26_Setup_Gamification';
+import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
 
 
 async function main() {
@@ -95,7 +98,8 @@ async function main() {
         paymentsAddress: payments.payments.address,
         racesAddress: races.races.address,
         randomnessAddress: randomness.randomness.address,
-        sortingsLibraryAddress: libraries.sortings.address
+        sortingsLibraryAddress: libraries.sortings.address,
+        incubatorAddress: incubators.incubator.address
     });
 
     await setQueues({
@@ -136,7 +140,26 @@ async function main() {
             alhpadunePercentage: 60
         }
     });
-    
+
+    const gamification: GamificationSystem = await runGamification({
+        allowed: [],
+        defaultBreeding: globalParams.houndBreeding,
+        defaultStamina: globalParams.houndStamina
+    });
+
+    await setGamification({
+        constructor: {
+            allowed: [incubators.incubator.address],
+            defaultBreeding: globalParams.houndBreeding,
+            defaultStamina: globalParams.houndStamina,
+            methods: gamification.methods.address,
+            restricted: gamification.restricted.address
+        },
+        methods: gamification.methods,
+        restricted: gamification.restricted,
+        gamification: gamification.gamification
+    });
+
     await setIncubators({
         incubator: incubators.incubator,
         incubatorMethods: incubators.incubatorMethods,
@@ -144,7 +167,10 @@ async function main() {
             genetics: genetics.genetics.address,
             methods: incubators.incubatorMethods.address,
             randomness: randomness.randomness.address,
-            secondsToMaturity: 345600
+            secondsToMaturity: 345600,
+            gamification: gamification.gamification.address,
+            races: races.races.address,
+            allowed: [incubators.incubator.address]
         }
     });
 
@@ -169,7 +195,9 @@ async function main() {
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
-            shop: payments.shop.address
+            shop: payments.shop.address,
+            gamification: gamification.gamification.address,
+            races: races.races.address
            },
            fees: {
             currency: globalParams.address0,
@@ -215,7 +243,9 @@ async function main() {
             payments: payments.payments.address,
             randomness: randomness.randomness.address,
             zerocost: generator.generatorZerocost.address,
-            allowed: races.races.address
+            allowed: races.races.address,
+            incubator: incubators.incubator.address,
+            gamification: gamification.gamification.address
         }
     });
 
@@ -261,7 +291,9 @@ async function main() {
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
-            shop: payments.shop.address
+            shop: payments.shop.address,
+            gamification: gamification.gamification.address,
+            races: races.races.address
            },
            fees: {
             currency: payments.houndracePotions.address,

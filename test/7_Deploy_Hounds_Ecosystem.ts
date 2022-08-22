@@ -6,7 +6,7 @@ import { Hounds } from '../typechain-types/Hounds';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
-import { AlphaERC721, AlphaERC721Interface } from '../typechain-types/AlphaERC721';
+import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 const { ethers } = require("hardhat");
 
 
@@ -38,11 +38,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
@@ -71,11 +70,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
@@ -104,11 +102,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
@@ -137,11 +134,10 @@ export async function run(
               houndsMinter.address,
               globalParams.address0,
               houndsModifier.address,
-              dependencies.shopsAddress
+              dependencies.shopsAddress,
+              globalParams.address0,
+              globalParams.address0
             ],[
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",

@@ -28,6 +28,8 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
             globalParams.address0
           ]],
           props: {}
@@ -38,6 +40,8 @@ export async function run(
         generatorZerocost = await deployContract({
           name: 'GeneratorZerocost',
           constructor: [[
+            globalParams.address0,
+            globalParams.address0,
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
@@ -64,7 +68,9 @@ export async function run(
             dependencies.racesAddress,
             generatorMethods.address,
             dependencies.paymentsAddress,
-            generatorZerocost.address
+            generatorZerocost.address,
+            dependencies.incubatorAddress,
+            globalParams.address0
           ]],
           props: {}
         }) as Generator;
