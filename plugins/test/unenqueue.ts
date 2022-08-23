@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { UnenqueueParams } from "../../common/dto/test/unenqueueParams.dto";
+import { expecting } from "../expecting";
 
 
 export async function unenqueue(
@@ -14,5 +14,5 @@ export async function safeUnenqueue(
   const before: string | number = await params.contract.queue(params.queueId);
   await unenqueue(params);
   const after: string | number = await params.contract.queue(params.queueId);
-  expect(JSON.stringify(before) === JSON.stringify(after));
+  expecting(JSON.stringify(before) === JSON.stringify(after), "Unenqueue method bugged");
 }

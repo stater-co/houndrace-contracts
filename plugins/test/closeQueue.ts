@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { CloseQueueParams } from "../../common/dto/test/closeQueueParams.dto";
+import { expecting } from "../expecting";
 
 
 export async function closeQueue(
@@ -14,5 +14,5 @@ export async function safeCloseQueue(
   const before: string | number = await params.contract.queue(params.queueId);
   await closeQueue(params);
   const after: string | number = await params.contract.queue(params.queueId);
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Close queue method bugged");
 }

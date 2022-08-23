@@ -1,6 +1,6 @@
-import { expect } from "chai";
 import { EditArenaParams } from "../../common/dto/test/editArenaParams.dto";
 import { Arena } from "../../typechain-types/Arenas";
+import { expecting } from "../expecting";
 
 export async function editArena(
   params: EditArenaParams
@@ -14,5 +14,5 @@ export async function safeEditArena(
   const before: Arena.StructStructOutput = await params.contract.arena(params.arenaId);
   await editArena(params);
   const after: Arena.StructStructOutput = await params.contract.arena(params.arenaId);
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Edit arena method bugged");
 }

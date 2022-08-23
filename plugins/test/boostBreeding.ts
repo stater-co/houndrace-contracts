@@ -1,7 +1,7 @@
-import { expect } from "chai";
 import { BoostBreedingParams } from "../../common/dto/test/boostBreedingParams";
 import { globalParams } from "../../common/params";
 import { Hound } from '../../typechain-types/Hounds';
+import { expecting } from "../expecting";
 
 export async function boostHoundBreeding(
   params: BoostBreedingParams
@@ -23,5 +23,5 @@ export async function safeBoostHoundBreeding(
   const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
   await boostHoundBreeding(params);
   const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  expect(before.breeding.lastBreed !== after.breeding.lastBreed);
+  expecting(before.breeding.lastBreed !== after.breeding.lastBreed, "Boost hound breeding cooldown method bugged");
 }

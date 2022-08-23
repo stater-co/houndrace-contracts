@@ -1,6 +1,6 @@
-import { expect } from "chai";
 import { JoinQueueParams } from "../../common/dto/test/joinQueueParams.dto";
 import { Hound } from "../../typechain-types/Hounds";
+import { expecting } from "../expecting";
 
 
 export async function joinQueue(
@@ -17,5 +17,5 @@ export async function safeJoinQueue(
   const before: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
   await joinQueue(params);
   const after: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
-  expect(Number(before.profile.queueId) !== Number(after.profile.queueId));
+  expecting(Number(before.profile.queueId) !== Number(after.profile.queueId), "Join Queue method bugged");
 }

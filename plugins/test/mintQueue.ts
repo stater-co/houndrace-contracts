@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { MintQueueParams } from "../../common/dto/test/mintQueueParams.dto";
+import { expecting } from "../expecting";
 
 export async function mintQueue(
   params: MintQueueParams
@@ -13,6 +13,6 @@ export async function safeMintQueue(
   const before: string | number = await params.contract.id();
   await mintQueue(params);
   const after: string | number = await params.contract.id();
-  expect(before !== after && Number(before) === Number(after) - 1);
+  expecting(before !== after && Number(before) === Number(after) - 1, "Mint queue method bugged");
   return before;
 }

@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { SetAvailableToBreedParams } from "../../common/dto/test/setAvailableToBreedParams";
+import { expecting } from "../expecting";
 
 
 export async function setAvailableToBreed(
@@ -14,5 +14,5 @@ export async function safeSetAvailableToBreed(
   const before: boolean = await params.contract.hound(params.houndId);
   await setAvailableToBreed(params);
   const after: boolean = await params.contract.hound(params.houndId);
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");
 }

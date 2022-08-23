@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { UploadRaceParams } from "../../common/dto/test/uploadRaceParams.dto";
+import { expecting } from "../expecting";
 
 export async function uploadRace(
   params: UploadRaceParams
@@ -13,5 +14,5 @@ export async function safeUploadRace(
   const before: string | number = await params.contract.id();
   await uploadRace(params);
   const after: string | number = await params.contract.id();
-  expect(before !== after && Number(before) === Number(after) - 1);
+  expecting(before !== after && Number(before) === Number(after) - 1, "Upload race method bugged");
 }

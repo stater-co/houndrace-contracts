@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { MintHoundParams } from "../../common/dto/test/mintHoundsParams.dto";
+import { expecting } from "../expecting";
 
 export async function mintHound(
   params: MintHoundParams
@@ -13,6 +13,6 @@ export async function safeMintHound(
   const before: string | number = await params.contract.id();
   await mintHound(params);
   const after: string | number = await params.contract.id();
-  expect(before !== after && Number(before) === Number(after) - 1);
+  expecting(before !== after && Number(before) === Number(after) - 1, "Mint hound method bugged");
   return before;
 }

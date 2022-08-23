@@ -1,6 +1,6 @@
-import { expect } from "chai";
 import { UpdateHoundStaminaParams } from "../../common/dto/test/updateHoundStaminaParams";
 import { Hound } from '../../typechain-types/Hounds';
+import { expecting } from "../expecting";
 
 export async function updateStamina(
   params: UpdateHoundStaminaParams
@@ -14,5 +14,5 @@ export async function safeUpdateStamina(
   const before: Hound.StructStructOutput = await params.contract.hound(params.houndId);
   await updateStamina(params);
   const after: string | number = await params.contract.id();
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Update stamina method bugged");
 }

@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { SetMatingSeasonParams } from "../../common/dto/test/setMatingSeasonParams";
+import { expecting } from "../expecting";
 
 
 export async function setMatingSeason(
@@ -14,5 +14,5 @@ export async function safeSetMatingSeason(
   const before: boolean = await params.contract.matingSeason();
   await setMatingSeason(params);
   const after: boolean = await params.contract.matingSeason();
-  expect(before !== after);
+  expecting(before !== after, "Set mating season method bugged");
 }

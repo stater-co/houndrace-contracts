@@ -1,11 +1,11 @@
-import { expect } from "chai";
 import { Hound } from '../../typechain-types/Hounds';
+import { expecting } from "../expecting";
 
 export function checkHoundStructure(
   hound: Hound.StructStruct
 ): boolean {
 
-  expect(
+  expecting(
     ( hound.breeding.availableToBreed === false || hound.breeding.availableToBreed === true ) && 
     ( hound.breeding.breedingCooldown >= 0 ) && 
     ( hound.breeding.breedingFee >= 0 ) && 
@@ -27,7 +27,8 @@ export function checkHoundStructure(
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
     ( hound.stamina.staminaPerHour >= 0 ) && 
     ( hound.stamina.staminaRefill1x >= 0 ) && 
-    ( hound.stamina.staminaValue >= 0 )
+    ( hound.stamina.staminaValue >= 0 ),
+    "Hound structure has not been entirely retreiven from contract"
   );
 
   return true;
