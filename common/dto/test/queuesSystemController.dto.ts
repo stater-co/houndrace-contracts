@@ -1,8 +1,7 @@
-import { ethers } from "ethers";
-import { QueuesConstructor } from '../../../typechain-types/contracts/queues/params/Index.sol/Params';
+import { QueuesConstructor, Queues } from '../../../typechain-types/Queues';
 
 export interface QueuesSystemController {
-    queuesRestricted: ethers.Contract;
-    queuesMethods: ethers.Contract;
+    queuesRestricted: Queues;
+    queuesMethods: Queues;
     constructor: QueuesConstructor.StructStruct;
 }

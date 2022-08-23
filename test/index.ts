@@ -254,7 +254,8 @@ async function main() {
     });
 
     await testHounds.basicTest({
-        hounds: hounds.hounds
+        hounds: hounds.hounds,
+        gamification: gamification.gamification
     });
 
     await testArenas.basicTest({

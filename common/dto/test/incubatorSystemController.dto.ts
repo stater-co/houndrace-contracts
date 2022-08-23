@@ -1,8 +1,7 @@
-import { ethers } from "ethers";
-import { IncubatorConstructor } from '../../../typechain-types/contracts/incubator/params/Index.sol/Params';
+import { IncubatorConstructor, Incubator } from '../../../typechain-types/Incubator';
 
 export interface IncubatorSystemController {
-    incubatorMethods: ethers.Contract;
-    incubator: ethers.Contract;
+    incubatorMethods: Incubator;
+    incubator: Incubator;
     constructor: IncubatorConstructor.StructStruct;
 }

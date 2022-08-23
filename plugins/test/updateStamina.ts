@@ -11,8 +11,8 @@ export async function updateStamina(
 export async function safeUpdateStamina(
   params: UpdateHoundStaminaParams
 ) {
-  //const before: Hound.StructStructOutput = await params.contract.hound(params.houndId);
+  const before: Hound.StructStructOutput = await params.contract.hound(params.houndId);
   await updateStamina(params);
-  //const after: string | number = await params.contract.id();
-  //expect(JSON.stringify(before) !== JSON.stringify(after));
+  const after: string | number = await params.contract.id();
+  expect(JSON.stringify(before) !== JSON.stringify(after));
 }

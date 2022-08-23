@@ -1,9 +1,11 @@
 import { Gamification, Constructor } from '../../../typechain-types/Gamification';
+import { GamificationRestricted } from '../../../typechain-types/GamificationRestricted';
+import { GamificationMethods } from '../../../typechain-types/GamificationMethods';
 
 
 export interface GamificationSystemController {
-    restricted: Gamification;
-    methods: Gamification;
+    restricted: GamificationRestricted;
+    methods: GamificationMethods;
     gamification: Gamification;
     constructor: Constructor.StructStruct;
 }

@@ -3,10 +3,12 @@ import { deployContract } from '../plugins/test/deployContract';
 import { Gamification } from '../typechain-types/Gamification';
 import { globalParams } from '../common/params';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
+import { GamificationRestricted } from '../typechain-types/GamificationRestricted';
+import { GamificationMethods } from '../typechain-types/GamificationMethods';
 
 
-let methods: Gamification;
-let restricted: Gamification;
+let methods: GamificationMethods;
+let restricted: GamificationRestricted;
 let gamification: Gamification;
 
 export async function run(
@@ -26,7 +28,7 @@ export async function run(
             globalParams.address0
           ]],
           props: {}
-        }) as Gamification;
+        }) as GamificationMethods;
       });
 
       it('Deploy the restricted', async function () {
@@ -40,7 +42,7 @@ export async function run(
             methods.address
           ]],
           props: {}
-        }) as Gamification;
+        }) as GamificationRestricted;
       });
 
       it('Deploy the gamification', async function () {

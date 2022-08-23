@@ -1,8 +1,10 @@
 import { Gamification } from '../../../typechain-types/Gamification';
+import { GamificationMethods } from '../../../typechain-types/GamificationMethods';
+import { GamificationRestricted } from '../../../typechain-types/GamificationRestricted';
 
 
 export interface GamificationSystem {
-    restricted: Gamification;
-    methods: Gamification;
+    restricted: GamificationRestricted;
+    methods: GamificationMethods;
     gamification: Gamification;
 }

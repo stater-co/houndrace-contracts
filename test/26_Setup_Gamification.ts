@@ -1,4 +1,5 @@
 import { GamificationSystemController } from '../common/dto/test/gamificationSystemController.dto';
+import { expecting } from '../plugins/expecting';
 
 
 export async function set(
@@ -8,6 +9,7 @@ export async function set(
     describe('Setting up the gamification controllers', () => {
 
       it('Setup gamification methods controller', async function () {
+        const before = await dependencies.methods.control();
         await dependencies.methods.setGlobalParameters({
           allowed: dependencies.constructor.allowed,
           defaultBreeding: dependencies.constructor.defaultBreeding,
@@ -15,9 +17,12 @@ export async function set(
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address
         });
+        const after = await dependencies.methods.control();
+        expecting(JSON.stringify(before) !== JSON.stringify(after), "Gamification methods params setter bugged");
       });
 
       it('Setup gamification restricted controller', async function () {
+        const before = await dependencies.restricted.control();
         await dependencies.restricted.setGlobalParameters({
           allowed: dependencies.constructor.allowed,
           defaultBreeding: dependencies.constructor.defaultBreeding,
@@ -25,6 +30,8 @@ export async function set(
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address
         });
+        const after = await dependencies.restricted.control();
+        expecting(JSON.stringify(before) !== JSON.stringify(after), "Gamification restricted params setter bugged");
       });
 
       it('Setup gamification controller', async function () {
