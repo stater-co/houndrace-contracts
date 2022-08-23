@@ -26,14 +26,17 @@ async function basicTest(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
     });
     
     it("Update hound stamina after creation", async function() {
       await safeUpdateStamina({
         contract: dependencies.hounds,
-        houndId: createdHoundId
+        houndId: createdHoundId,
+        gamification: dependencies.gamification
       });
     });
     
@@ -60,7 +63,9 @@ async function basicTest(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
           position: 0,
-          signer: sig1.address
+          signer: sig1.address,
+          gamification: dependencies.gamification,
+          races: dependencies.races
         });
       }
     });
@@ -75,7 +80,9 @@ async function basicTest(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
           position: 0,
-          signer: sig1.address
+          signer: sig1.address,
+          gamification: dependencies.gamification,
+          races: dependencies.races
         });
       }
     });
@@ -89,7 +96,9 @@ async function basicTest(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       await safeBreed({

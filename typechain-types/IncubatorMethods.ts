@@ -90,6 +90,7 @@ export interface IncubatorMethodsInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address[],uint32))": FunctionFragment;
+    "setIdentity(uint256,(uint256,uint256,uint256,uint256,uint32[54],string))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -123,6 +124,10 @@ export interface IncubatorMethodsInterface extends utils.Interface {
     values: [IncubatorConstructor.StructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "setIdentity",
+    values: [BigNumberish, HoundIdentity.StructStruct]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
@@ -148,6 +153,10 @@ export interface IncubatorMethodsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIdentity",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -251,6 +260,12 @@ export interface IncubatorMethods extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -307,6 +322,12 @@ export interface IncubatorMethods extends BaseContract {
 
   setGlobalParameters(
     globalParameters: IncubatorConstructor.StructStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setIdentity(
+    theId: BigNumberish,
+    identity: HoundIdentity.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -367,6 +388,12 @@ export interface IncubatorMethods extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     transferOwnership(
       newOwner: string,
       overrides?: CallOverrides
@@ -419,6 +446,12 @@ export interface IncubatorMethods extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -460,6 +493,12 @@ export interface IncubatorMethods extends BaseContract {
 
     setGlobalParameters(
       globalParameters: IncubatorConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

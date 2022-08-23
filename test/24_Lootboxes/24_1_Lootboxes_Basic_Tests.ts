@@ -23,7 +23,9 @@ async function basicTest(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       await dependencies.houndsContract.approve(dependencies.lootboxesContract.address, houndIdToUse);

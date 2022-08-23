@@ -7,13 +7,9 @@ contract GamificationRestricted is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
-    function initializeHoundGamingStats(uint256 id) external {
-        require(allowed[msg.sender]);
-        houndsStamina[id] = control.defaultStamina;
-        houndsBreeding[id] = control.defaultBreeding;
-    }
-
     function setStamina(uint256 id, HoundStamina.Struct memory stamina) external {
+        console.log("Setting stamina");
+        console.log(allowed[msg.sender]);
         require(allowed[msg.sender]);
         houndsStamina[id] = stamina;
     }

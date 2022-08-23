@@ -11,8 +11,8 @@ export async function uploadRace(
 export async function safeUploadRace(
   params: UploadRaceParams
 ): Promise<void> {
-  const before: string | number = await params.contract.id();
+  const before = await params.contract.id();
   await uploadRace(params);
-  const after: string | number = await params.contract.id();
+  const after = await params.contract.id();
   expecting(before !== after && Number(before) === Number(after) - 1, "Upload race method bugged");
 }

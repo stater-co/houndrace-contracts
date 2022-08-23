@@ -29,7 +29,9 @@ async function advancedTests(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
     });
 
@@ -92,7 +94,9 @@ async function advancedTests(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
           position: 0,
-          signer: sig1.address
+          signer: sig1.address,
+          gamification: dependencies.gamification,
+          races: dependencies.races
         });
       }
     });
@@ -107,7 +111,9 @@ async function advancedTests(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig2.address,
           position: 0,
-          signer: sig1.address
+          signer: sig1.address,
+          gamification: dependencies.gamification,
+          races: dependencies.races
         });
       }
     });
@@ -200,7 +206,9 @@ async function advancedTests(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
     });
 

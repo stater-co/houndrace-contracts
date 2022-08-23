@@ -4,6 +4,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './HoundBreeding.sol';
 import './HoundStamina.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable {

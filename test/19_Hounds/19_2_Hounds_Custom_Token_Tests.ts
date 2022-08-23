@@ -25,14 +25,17 @@ async function advancedTests(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
     });
     
     it("Update hound stamina after creation", async function() {
       await safeUpdateStamina({
         contract: dependencies.hounds,
-        houndId: createdHoundId
+        houndId: createdHoundId,
+        gamification: dependencies.gamification
       });
     });
     
@@ -60,7 +63,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -71,7 +76,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -101,7 +108,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -112,7 +121,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -142,7 +153,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let maleHound: Hound.StructStruct = femaleHound;
@@ -153,7 +166,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -183,7 +198,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -194,7 +211,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -224,7 +243,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -235,7 +256,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -265,7 +288,9 @@ async function advancedTests(
         hound: maleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       let femaleHound: Hound.StructStruct = maleHound;
@@ -276,7 +301,9 @@ async function advancedTests(
         hound: femaleHound as Hound.StructStructOutput,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address
+        signer: sig1.address,
+        gamification: dependencies.gamification,
+        races: dependencies.races
       });
 
       const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
@@ -294,47 +321,6 @@ async function advancedTests(
       });
 
     });
-
-    /*
-    // @DIIMIIM: For some reason Hardhat ethers doesn't seem to be able to find the .transfer() method inherited in the hounds contract
-    it("Mint & Breed 2 male hounds using custom tokens for both, second one being external", async function () {
-      let maleHound: Hound.StructStruct = hound;
-      maleHound.identity.geneticSequence[1] = 1;
-      maleHound.breeding.breedingcurrency = dependencies.erc20.address;
-      maleHound.stamina.staminaRefill1xCurrency = dependencies.erc20.address;
-
-      let hound1Id: string | number = await safeMintHound({
-        contract: dependencies.hounds,
-        hound: maleHound as Hound.StructStructOutput
-      });
-
-      let hound2Id: string | number = await safeMintHound({
-        contract: dependencies.hounds,
-        hound: maleHound as Hound.StructStructOutput
-      });
-
-      const [sig1, sig2] = await ethers.getSigners();
-
-      await dependencies.transferableHounds.transfer(sig2.address,hound2Id);
-
-      await dependencies.hounds.connect(sig2).putHoundForBreed(hound2Id, 10000000, true);
-
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
-
-      await dependencies.erc20.mint(sig1.address,breedCost);
-
-      await dependencies.erc20
-      .approve(dependencies.payments.address, breedCost);
-
-      await safeBreed({
-        contract: dependencies.hounds,
-        hound1: hound1Id,
-        hound2: hound2Id,
-        signer: sig1
-      });
-
-    });
-    */
 
     it("Boost hound breeding cooldown using custom tokens", async function () {
 

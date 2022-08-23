@@ -14,7 +14,10 @@ import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../gamification/interfaces/ISetStamina.sol';
+import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../gamification/interfaces/ISetBreeding.sol';
+import '../../incubator/interfaces/ISetIdentity.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {

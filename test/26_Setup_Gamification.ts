@@ -42,6 +42,7 @@ export async function set(
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address
         });
+        resolve();
       });
 
     });

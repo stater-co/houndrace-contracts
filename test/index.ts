@@ -39,7 +39,9 @@ import { run as runLootboxes } from './23_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { run as runGamification } from './25_Deploy_Gamification';
 import { set as setGamification } from './26_Setup_Gamification';
+import { test as testLootboxes } from './24_Lootboxes/24_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
+import { test as testRacesAdvanced } from './22_Races/22_2_Races_Advanced_Tests';
 
 
 async function main() {
@@ -149,7 +151,7 @@ async function main() {
 
     await setGamification({
         constructor: {
-            allowed: [incubators.incubator.address],
+            allowed: [incubators.incubator.address, hounds.hounds.address],
             defaultBreeding: globalParams.houndBreeding,
             defaultStamina: globalParams.houndStamina,
             methods: gamification.methods.address,
@@ -170,7 +172,7 @@ async function main() {
             secondsToMaturity: 345600,
             gamification: gamification.gamification.address,
             races: races.races.address,
-            allowed: [incubators.incubator.address]
+            allowed: [incubators.incubator.address, hounds.hounds.address]
         }
     });
 
@@ -255,7 +257,8 @@ async function main() {
 
     await testHounds.basicTest({
         hounds: hounds.hounds,
-        gamification: gamification.gamification
+        gamification: gamification.gamification,
+        races: races.races
     });
 
     await testArenas.basicTest({
@@ -311,7 +314,9 @@ async function main() {
         hounds: hounds.hounds,
         transferableHounds: hounds.transferrableRoot,
         erc20: payments.houndracePotions,
-        payments: payments.payments
+        payments: payments.payments,
+        gamification: gamification.gamification,
+        races: races.races
     });
 
     await testQueuesAdvanced.advancedTests({
@@ -320,13 +325,27 @@ async function main() {
         erc20: payments.houndracePotions,
         queue: globalParams.defaultQueue,
         arena: globalParams.defaultArena,
-        houndsContract: hounds.hounds
+        houndsContract: hounds.hounds,
+        races: races.races,
+        gamification: gamification.gamification
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
         canBeOpened: false,
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address
+    });
+
+    await testLootboxes.basicTest({
+        lootboxesContract: lootboxes.lootboxes,
+        houndsContract: hounds.hounds,
+        gamification: gamification.gamification,
+        races: races.races
+    });
+
+    await testRacesAdvanced.advancedTests({
+        contract: races.races,
+        race: globalParams.defaultRace
     });
 
 }

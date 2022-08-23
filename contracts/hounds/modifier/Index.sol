@@ -8,15 +8,22 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) external {
+        console.log("ok 1");
         require(allowed[msg.sender]);
+        console.log("ok 2", theId, id);
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
+        console.log("ok 3 ", stamina.staminaValue);
         --stamina.staminaValue;
+        console.log("ok 4");
         stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerHour );
         stamina.staminaLastUpdate = block.timestamp;
+        console.log("ok 5");
         if ( stamina.staminaValue > stamina.staminaCap ) {
             stamina.staminaValue = stamina.staminaCap;
         }
+        console.log("ok 6");
         ISetStamina(control.boilerplate.gamification).setStamina(theId, stamina);
+        console.log("ok 7");
         emit HoundStaminaUpdate(theId, stamina.staminaValue);
     }
 

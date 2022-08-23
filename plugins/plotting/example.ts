@@ -105,7 +105,7 @@ export interface PlottingConfiguration {
 	chartConfiguration: ChartConfiguration;
 }
 
-async function main(
+export async function plot(
 	config: PlottingConfiguration
 ): Promise<void> {
 

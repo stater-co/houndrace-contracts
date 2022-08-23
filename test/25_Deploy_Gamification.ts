@@ -33,7 +33,7 @@ export async function run(
 
       it('Deploy the restricted', async function () {
         restricted = await deployContract({
-          name: 'GamificationMethods',
+          name: 'GamificationRestricted',
           constructor: [[
             dependencies.defaultBreeding,
             dependencies.defaultStamina,

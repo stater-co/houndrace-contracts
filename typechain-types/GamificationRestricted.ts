@@ -101,7 +101,6 @@ export interface GamificationRestrictedInterface extends utils.Interface {
     "getStaminaBreeding(uint256)": FunctionFragment;
     "houndsBreeding(uint256)": FunctionFragment;
     "houndsStamina(uint256)": FunctionFragment;
-    "initializeHoundGamingStats(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setBreeding(uint256,(uint256,uint256,uint256,bool))": FunctionFragment;
@@ -130,10 +129,6 @@ export interface GamificationRestrictedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "houndsStamina",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "initializeHoundGamingStats",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -175,10 +170,6 @@ export interface GamificationRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "houndsStamina",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "initializeHoundGamingStats",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -303,11 +294,6 @@ export interface GamificationRestricted extends BaseContract {
       }
     >;
 
-    initializeHoundGamingStats(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
@@ -396,11 +382,6 @@ export interface GamificationRestricted extends BaseContract {
       staminaCap: number;
     }
   >;
-
-  initializeHoundGamingStats(
-    id: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -491,11 +472,6 @@ export interface GamificationRestricted extends BaseContract {
       }
     >;
 
-    initializeHoundGamingStats(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
@@ -561,11 +537,6 @@ export interface GamificationRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    initializeHoundGamingStats(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
@@ -626,11 +597,6 @@ export interface GamificationRestricted extends BaseContract {
     houndsStamina(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    initializeHoundGamingStats(
-      id: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
