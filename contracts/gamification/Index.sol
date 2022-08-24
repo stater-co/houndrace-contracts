@@ -20,6 +20,7 @@ contract Gamification is Params {
     }
 
     function setBreeding(uint256 id, HoundBreeding.Struct memory breeding) external {
+        console.log("set breeding here !!");
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

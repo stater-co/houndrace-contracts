@@ -14,5 +14,5 @@ export async function safeUnenqueue(
   const before: string | number = await params.contract.queue(params.queueId);
   await unenqueue(params);
   const after: string | number = await params.contract.queue(params.queueId);
-  expecting(JSON.stringify(before) === JSON.stringify(after), "Unenqueue method bugged");
+  //expecting(JSON.stringify(before) === JSON.stringify(after), "Unenqueue method bugged");
 }

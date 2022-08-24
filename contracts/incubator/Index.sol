@@ -13,7 +13,8 @@ contract Incubator is Params {
         HoundIdentity.Struct memory hound2, 
         uint256 onId
     ) public {
-        return IBreedHounds(control.methods).breedHounds(hound1Id, hound1, hound2Id, hound2, onId);
+        (bool success, ) = control.methods.delegatecall(msg.data);
+        require(success);
     }
 
 }

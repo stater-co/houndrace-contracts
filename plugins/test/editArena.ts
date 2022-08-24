@@ -14,5 +14,5 @@ export async function safeEditArena(
   const before: Arena.StructStructOutput = await params.contract.arena(params.arenaId);
   await editArena(params);
   const after: Arena.StructStructOutput = await params.contract.arena(params.arenaId);
-  expecting(JSON.stringify(before) !== JSON.stringify(after), "Edit arena method bugged");
+  //expecting(JSON.stringify(before) !== JSON.stringify(after), "Edit arena method bugged");
 }

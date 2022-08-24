@@ -91,13 +91,20 @@ contract HoundsModifier is Params {
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
+        console.log("put hound for breed 2");
         require(ownerOf(theId) == msg.sender);
         
+        console.log("put hound for breed 3");
         HoundBreeding.Struct memory breeding = IGetBreeding(control.boilerplate.gamification).getBreeding(theId);
+
+        console.log("put hound for breed 4 >> ", theId, fee, status);
         breeding.breedingFee = fee;
         breeding.availableToBreed = status;
 
+        console.log("put hound for breed 5 ", control.boilerplate.gamification);
         ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
+
+        console.log("put hound for breed 6: ", breeding.breedingFee, breeding.availableToBreed);
         emit HoundBreedable(theId,fee);
     }
 

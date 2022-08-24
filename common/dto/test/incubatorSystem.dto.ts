@@ -1,5 +1,5 @@
-import { IncubatorMethods } from '../../../typechain-types/contracts/incubator/methods/Index.sol/IncubatorMethods';
-import { Incubator } from '../../../typechain-types/contracts/incubator/Index.sol/Incubator';
+import { IncubatorMethods } from '../../../typechain-types/IncubatorMethods';
+import { Incubator } from '../../../typechain-types/Incubator';
 
 export interface IncubatorSystem {
     incubatorMethods: IncubatorMethods;

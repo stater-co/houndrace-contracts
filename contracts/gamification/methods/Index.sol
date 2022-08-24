@@ -12,6 +12,8 @@ contract GamificationMethods is Params {
     }
 
     function initializeHoundGamingStats(uint256 onId, uint32[54] memory genetics) external {
+        console.log("Allowed x1: ", allowed[msg.sender]);
+        console.log(msg.sender);
         require(allowed[msg.sender]);
         houndsStamina[onId] = HoundStamina.Struct(
             0, // staminaLastUpdate

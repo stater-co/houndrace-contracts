@@ -31,10 +31,11 @@ export async function run(
           ]],
           props: {}
         }) as Lootboxes;
-      });
 
-      resolve({
-        lootboxes: lootboxes
+        resolve({
+          lootboxes: lootboxes
+        });
+
       });
 
     });

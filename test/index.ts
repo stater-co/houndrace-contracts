@@ -151,7 +151,7 @@ async function main() {
 
     await setGamification({
         constructor: {
-            allowed: [incubators.incubator.address, hounds.hounds.address],
+            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
             defaultBreeding: globalParams.houndBreeding,
             defaultStamina: globalParams.houndStamina,
             methods: gamification.methods.address,
@@ -172,7 +172,7 @@ async function main() {
             secondsToMaturity: 345600,
             gamification: gamification.gamification.address,
             races: races.races.address,
-            allowed: [incubators.incubator.address, hounds.hounds.address]
+            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address]
         }
     });
 
@@ -336,6 +336,7 @@ async function main() {
         paymentsAddress: payments.payments.address
     });
 
+    console.log("HERE #### " + lootboxes.lootboxes.address);
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,
         houndsContract: hounds.hounds,

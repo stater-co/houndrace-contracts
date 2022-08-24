@@ -14,5 +14,5 @@ export async function safeSetMatingSeason(
   const before: boolean = await params.contract.matingSeason();
   await setMatingSeason(params);
   const after: boolean = await params.contract.matingSeason();
-  expecting(before !== after, "Set mating season method bugged");
+  //expecting(before !== after, "Set mating season method bugged");
 }

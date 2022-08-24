@@ -8,6 +8,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './Box.sol';
 import '../../payments/interfaces/IPay.sol';
+import 'hardhat/console.sol';
 
 
 contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
@@ -38,12 +39,22 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         }
     }
 
+    function setOpenStatus(bool status) external onlyOwner {
+        control.canBeOpened = status;
+    }
+
     function open(uint256 boxId) external payable {
         require(control.canBeOpened);
         
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = lootboxes[boxId].purchasePrice;
 
+        console.log(msg.value);
+        console.log(lootboxes[boxId].currency);
+        console.log(lootboxes[boxId].purchasePrice);
+        console.log(control.payments);
+        console.log(control.alphadune);
+        console.log(amounts[0]);
         IPay(control.payments).pay{
             value: lootboxes[boxId].currency == address(0) ? lootboxes[boxId].purchasePrice : 0
         }(

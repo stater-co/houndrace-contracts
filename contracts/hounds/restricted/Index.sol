@@ -8,12 +8,16 @@ contract HoundsRestricted is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external {
-        console.log("Gamification: ", control.boilerplate.gamification);
+        console.log("Gamification: ", control.boilerplate.gamification, onId, owner);
         if ( onId > 0 ) {
-            require(theHound.identity.maleParent == 0 && theHound.stamina.staminaCap == 0 && onId < id);
+            require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
+            console.log("ok 1");
             IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(onId, theHound.identity.geneticSequence);
+            console.log("ok 2");
             ISetIdentity(control.boilerplate.incubator).setIdentity(onId, theHound.identity);
+            console.log("ok 3");
             emit NewHound(onId,msg.sender,theHound);
+            console.log("ok 4");
             hounds[onId] = theHound.profile;
             _safeMint(owner,onId);
         } else {
