@@ -1,9 +1,9 @@
-import { RacesAdvancedTests } from "../../common/dto/test/racesAdvancedTests";
-import { safeUploadRace } from "../../plugins/test/uploadRace";
+import axios from 'axios';
+import { RacesGenerationTests } from "../../common/dto/test/racesGenerationTests";
 
 
-async function advancedTests(
-  dependencies: RacesAdvancedTests
+async function generationTests(
+  dependencies: RacesGenerationTests
 ): Promise<void> {
   const initialDummyGenerations: number = 1000;
   describe('Races Generation: ' + initialDummyGenerations + ' dummy races', async function () {
@@ -11,10 +11,9 @@ async function advancedTests(
     for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
     
       it("Generate race " + i, async function () {
-        await safeUploadRace({
-          contract: dependencies.contract,
+        axios.post("http://localhost:3000/races/generate", {
           race: dependencies.race
-        });
+        })
       });
 
     }
@@ -24,9 +23,9 @@ async function advancedTests(
 }
 
 export interface TestInterface {
-  advancedTests: Function;
+  generationTests: Function;
 }
 
 export const test: TestInterface = {
-  advancedTests: advancedTests
+  generationTests: generationTests
 };

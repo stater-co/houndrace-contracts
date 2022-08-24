@@ -38,7 +38,6 @@ contract Hounds is Params {
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
-        console.log("put hound for breed 1");
         (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
         require(success);
     }

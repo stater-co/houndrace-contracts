@@ -10,7 +10,6 @@ import '../../races/interfaces/IGetStatistics.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import './HoundIdentity.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable {
@@ -34,9 +33,6 @@ contract Params is Ownable {
     }
 
     function setIdentity(uint256 theId, HoundIdentity.Struct memory identity) external {
-        console.log("Set identity, from : ");
-        console.log(msg.sender);
-        console.log(allowed[msg.sender]);
         require(allowed[msg.sender]);
         houndsIdentity[theId] = identity;
     }

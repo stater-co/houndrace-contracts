@@ -8,19 +8,16 @@ contract Gamification is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
 
     function initializeHoundGamingStats(uint256 id, uint32[54] memory genetics) external {
-        console.log("initializeHoundGamingStats to: ", control.restricted);
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
     }
 
     function setStamina(uint256 id, HoundStamina.Struct memory stamina) external {
-        console.log("Setting stamina ... x1 ", control.restricted);
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
     function setBreeding(uint256 id, HoundBreeding.Struct memory breeding) external {
-        console.log("set breeding here !!");
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

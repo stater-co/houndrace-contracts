@@ -8,22 +8,21 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(uint256 theId) external {
-        console.log("ok 1");
         require(allowed[msg.sender]);
-        console.log("ok 2", theId, id);
+
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
-        console.log("ok 3 ", stamina.staminaValue);
+
         --stamina.staminaValue;
-        console.log("ok 4");
+
         stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerHour );
         stamina.staminaLastUpdate = block.timestamp;
-        console.log("ok 5");
+
         if ( stamina.staminaValue > stamina.staminaCap ) {
             stamina.staminaValue = stamina.staminaCap;
         }
-        console.log("ok 6");
+
         ISetStamina(control.boilerplate.gamification).setStamina(theId, stamina);
-        console.log("ok 7");
+
         emit HoundStaminaUpdate(theId, stamina.staminaValue);
     }
 
@@ -91,20 +90,15 @@ contract HoundsModifier is Params {
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
-        console.log("put hound for breed 2");
         require(ownerOf(theId) == msg.sender);
         
-        console.log("put hound for breed 3");
         HoundBreeding.Struct memory breeding = IGetBreeding(control.boilerplate.gamification).getBreeding(theId);
 
-        console.log("put hound for breed 4 >> ", theId, fee, status);
         breeding.breedingFee = fee;
         breeding.availableToBreed = status;
 
-        console.log("put hound for breed 5 ", control.boilerplate.gamification);
         ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
 
-        console.log("put hound for breed 6: ", breeding.breedingFee, breeding.availableToBreed);
         emit HoundBreedable(theId,fee);
     }
 

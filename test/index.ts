@@ -42,6 +42,7 @@ import { set as setGamification } from './26_Setup_Gamification';
 import { test as testLootboxes } from './24_Lootboxes/24_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
 import { test as testRacesAdvanced } from './22_Races/22_2_Races_Advanced_Tests';
+import { test as generationTests } from './22_Races/22_3_Races_Generation_Tests';
 
 
 async function main() {
@@ -346,6 +347,10 @@ async function main() {
 
     await testRacesAdvanced.advancedTests({
         contract: races.races,
+        race: globalParams.defaultRace
+    });
+
+    await generationTests.generationTests({
         race: globalParams.defaultRace
     });
 
