@@ -1,4 +1,4 @@
-import { ChartJSNodeCanvas, ChartCallback } from './';
+import { ChartJSNodeCanvas, ChartCallback } from '.';
 import { ChartConfiguration } from 'chart.js';
 import { promises as fs } from 'fs';
 
@@ -60,45 +60,66 @@ export const resolutions: AvailableResolutions = {
 	}
 };
 
-const configuration: ChartConfiguration = {
-	type: 'bar',
-	data: {
-		labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-		datasets: [{
-			label: '# of Votes',
-			data: [12, 19, 3, 5, 2, 3],
-			backgroundColor: [
-				'rgba(255, 99, 132, 1)',
-				'rgba(54, 162, 235, 1)',
-				'rgba(255, 206, 86, 1)',
-				'rgba(75, 192, 192, 1)',
-				'rgba(153, 102, 255, 1)',
-				'rgba(255, 159, 64, 1)'
-			],
-			borderColor: [
-				'rgba(255,99,132,1)',
-				'rgba(54, 162, 235, 1)',
-				'rgba(255, 206, 86, 1)',
-				'rgba(75, 192, 192, 1)',
-				'rgba(153, 102, 255, 1)',
-				'rgba(255, 159, 64, 1)'
-			],
-			borderWidth: 1
-		}]
+export interface Color {
+	r: number;
+	g: number;
+	b: number;
+	a: number;
+}
+
+export interface Colors {
+	red: Color;
+	blue: Color;
+	yellow: Color;
+	green: Color;
+	purple: Color;
+	orage: Color;
+}
+
+export const colors: Colors = {
+	red: {
+		r: 255, 
+		g: 99, 
+		b: 132, 
+		a: 1
 	},
-	options: {
+	blue: {
+		r: 54, 
+		g: 162, 
+		b: 235, 
+		a: 1
 	},
-	plugins: [{
-		id: 'background-colour',
-		beforeDraw: (chart) => {
-			const ctx = chart.ctx;
-			ctx.save();
-			ctx.fillStyle = 'white';
-			ctx.fillRect(0, 0, 9000, 9000);
-			ctx.restore();
-		}
-	}]
-};
+	yellow: {
+		r: 255, 
+		g: 206, 
+		b: 86, 
+		a: 1
+	},
+	green: {
+		r: 75, 
+		g: 192, 
+		b: 192, 
+		a: 1
+	},
+	purple: {
+		r: 153, 
+		g: 102, 
+		b: 255, 
+		a: 1
+	},
+	orage: {
+		r: 255, 
+		g: 159, 
+		b: 64, 
+		a: 1
+	}
+}
+
+export const arrayOfColors: Array<Color> = [
+	colors.red, colors.blue, colors.yellow, colors.green, colors.purple, colors.orage
+];
+
+export const stringifiedArrayOfColors: Array<string> = Array.from({length: arrayOfColors.length}, (_, id) => 'rgba(' + arrayOfColors[id].r + ', ' + arrayOfColors[id].g + ', ' + arrayOfColors[id].b + ', ' + arrayOfColors[id].a + ')');
 
 export interface PlottingConfiguration {
 	imageConfiguration: ImageConfiguration;
@@ -111,7 +132,7 @@ export async function plot(
 
 	config.chartConfiguration.plugins = [
 		{
-			id: 'background-colour',
+			id: 'background-color',
 			beforeDraw: (chart) => {
 				const ctx = chart.ctx;
 				ctx.save();
@@ -134,18 +155,5 @@ export async function plot(
 	});
 
 	const buffer = await chartJSNodeCanvas.renderToBuffer(config.chartConfiguration);
-	await fs.writeFile(config.imageConfiguration.path + config.imageConfiguration.name + config.imageConfiguration.extension, buffer, 'base64');
+	await fs.writeFile(config.imageConfiguration.path + config.imageConfiguration.name + "." + config.imageConfiguration.extension.toLowerCase(), buffer, 'base64');
 }
-
-
-/*
-main({
-	chartConfiguration: configuration,
-	imageConfiguration: {
-		resolution: resolutions.SXGA,
-		extension: ".jpg",
-		name: "testFile",
-		path: "../"
-	}
-});
-*/

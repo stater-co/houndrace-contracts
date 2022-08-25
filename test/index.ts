@@ -337,7 +337,6 @@ async function main() {
         paymentsAddress: payments.payments.address
     });
 
-    console.log("HERE #### " + lootboxes.lootboxes.address);
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,
         houndsContract: hounds.hounds,
@@ -351,7 +350,9 @@ async function main() {
     });
 
     await generationTests.generationTests({
-        race: globalParams.defaultRace
+        race: globalParams.defaultRace,
+        hounds: hounds.hounds,
+        arena: globalParams.defaultArena
     });
 
 }
