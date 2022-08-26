@@ -6,7 +6,6 @@ import { expecting } from "../expecting";
 export async function setAvailableToBreed(
   params: SetAvailableToBreedParams
 ) {
-  console.log(params.houndId,params.fee,params.status);
   await params.contract.putHoundForBreed(params.houndId,params.fee,params.status);
 }
 
@@ -16,9 +15,5 @@ export async function safeSetAvailableToBreed(
   const before: Hound.StructStruct = await params.contract.hound(params.houndId);
   await setAvailableToBreed(params);
   const after: Hound.StructStruct = await params.contract.hound(params.houndId);
-  console.log("####");
-  console.log(before.breeding);
-  console.log("#### x2");
-  console.log(after.breeding);
   //expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");
 }

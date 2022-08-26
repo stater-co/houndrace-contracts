@@ -155,5 +155,6 @@ export async function plot(
 	});
 
 	const buffer = await chartJSNodeCanvas.renderToBuffer(config.chartConfiguration);
+
 	await fs.writeFile(config.imageConfiguration.path + config.imageConfiguration.name + "." + config.imageConfiguration.extension.toLowerCase(), buffer, 'base64');
 }

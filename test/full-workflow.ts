@@ -1,4 +1,3 @@
-import { ethers } from 'ethers';
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
 import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
@@ -34,7 +33,6 @@ import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
 import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
-import { SignerDependency } from '../common/dto/test/raw/signerDependency.dto';
 import { run as runLootboxes } from './23_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { run as runGamification } from './25_Deploy_Gamification';
@@ -46,13 +44,7 @@ import { test as generationTests } from './22_Races/22_3_Races_Generation_Tests'
 
 
 async function main() {
-
-    const signerDependency: SignerDependency = {
-        signer: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY)),
-        signer2: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY2)),
-        signer3: new ethers.Wallet(String(process.env.ETH_ACCOUNT_PRIVATE_KEY3))
-    };
-
+    
     const libraries: DeployedLibraries = await runLibraries();
     
     const payments: PaymentEcosystem = await runPayments();
