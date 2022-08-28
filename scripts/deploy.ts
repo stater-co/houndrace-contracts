@@ -4,32 +4,32 @@ import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
-import { Lootboxes } from '../typechain-types/Lootboxes';
+import { Lootboxes, Constructor as LootboxesConstructor } from '../typechain-types/Lootboxes';
 import { Randomness } from '../typechain-types/Randomness';
 import { Payments } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
-import { Shop } from '../typechain-types/Shop';
-import { ArenasRestricted } from '../typechain-types/ArenasRestricted';
+import { Shop, ShopConstructor } from '../typechain-types/Shop';
+import { ArenasConstructor, ArenasRestricted } from '../typechain-types/ArenasRestricted';
 import { ArenasMethods } from '../typechain-types/ArenasMethods';
 import { Arenas } from '../typechain-types/Arenas';
-import { Genetics } from '../typechain-types/Genetics';
-import { IncubatorMethods } from '../typechain-types/IncubatorMethods';
+import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
+import { IncubatorConstructor, IncubatorMethods } from '../typechain-types/IncubatorMethods';
 import { Incubator } from '../typechain-types/Incubator';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
-import { Hounds } from '../typechain-types/Hounds';
+import { Hounds, Constructor as HoundsConstructor, ConstructorBoilerplate, ConstructorFees } from '../typechain-types/Hounds';
 import { RacesRestricted } from '../typechain-types/RacesRestricted';
 import { RacesMethods } from '../typechain-types/RacesMethods';
-import { Races } from '../typechain-types/Races';
+import { Races, RacesConstructor } from '../typechain-types/Races';
 import { GeneratorZerocost } from '../typechain-types/GeneratorZerocost';
 import { GeneratorMethods } from '../typechain-types/GeneratorMethods';
-import { Generator } from '../typechain-types/Generator';
+import { Generator, GeneratorConstructor } from '../typechain-types/Generator';
 import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
-import { Queues } from '../typechain-types/Queues';
+import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { globalParams } from '../common/params';
 
 
@@ -62,9 +62,12 @@ verifications.update(0, {
 });
 
 
-const address0: string = "0x0000000000000000000000000000000000000000";
 const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
+
+const arrayfy = (input: Object): Array<any> => {
+  return Object.keys(input).map((key) => [Number(key), input[key]]);
+}
 
 async function main() {
 
@@ -112,9 +115,12 @@ async function main() {
       step: "Deploy houndrace potions"
     });
 
+    let houndracePotionsConstructor: Array<string> = [
+      "HoundracePotions", "HP"
+    ];
     const houndracePotions = await deployContract({
       name: 'HoundracePotions',
-      constructor: ["HoundracePotions", "HP"],
+      constructor: houndracePotionsConstructor,
       props: {}
     }) as HoundracePotions;
     DeploymentLogger('export HOUNDRACE_POTIONS=' + houndracePotions.address);
@@ -122,9 +128,13 @@ async function main() {
       step: "Deploy shop restricted"
     });
 
+    let shopConstructor: ShopConstructor.StructStruct = {
+      methods: globalParams.address0,
+      restricted: globalParams.address0
+    };
     const shopRestricted = await deployContract({
       name: 'ShopRestricted',
-      constructor: [[globalParams.address0,globalParams.address0]],
+      constructor: [arrayfy(shopConstructor)],
       props: {}
     }) as ShopRestricted;
     DeploymentLogger('export SHOP_RESTRICTED=' + shopRestricted.address);
@@ -134,7 +144,7 @@ async function main() {
 
     const shopMethods = await deployContract({
       name: 'ShopMethods',
-      constructor: [[globalParams.address0,globalParams.address0]],
+      constructor: [arrayfy(shopConstructor)],
       props: {}
     }) as ShopMethods;
     DeploymentLogger('export SHOP_METHODS=' + shopMethods.address);
@@ -144,13 +154,358 @@ async function main() {
 
     const shop = await deployContract({
       name: 'Shop',
-      constructor: [[shopMethods.address,shopRestricted.address]],
+      constructor: [arrayfy(shopConstructor)],
       props: {}
     }) as Shop;
     DeploymentLogger('export SHOP=' + shop.address);
     deployments.update(9, {
       step: "Deploy arenas restricted"
     });
+
+    let arenasConstructor: ArenasConstructor.StructStruct = {
+      alhpadunePercentage: 60,
+      allowedCallers: [],
+      alphadune: globalParams.address0,
+      methods: globalParams.address0,
+      name: "HoundRace Arenas",
+      symbol: "HRA",
+      payments: globalParams.address0,
+      restricted: globalParams.address0
+    };
+    const arenasRestricted = await deployContract({
+      name: 'ArenasRestricted',
+      constructor: [arrayfy(arenasConstructor)],
+      props: {}
+    }) as ArenasRestricted;
+    DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
+    deployments.update(10, {
+      step: "Deploy arenas"
+    });
+
+    const arenasMethods = await deployContract({
+      name: 'ArenasMethods',
+      constructor: [arrayfy(arenasConstructor)],
+      props: {}
+    }) as ArenasMethods;
+    DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
+    deployments.update(10, {
+      step: "Deploy arenas"
+    });
+
+    const arenas = await deployContract({
+      name: 'Arenas',
+      constructor: [arrayfy(arenasConstructor)],
+      props: {}
+    }) as Arenas;
+    DeploymentLogger('export ARENAS=' + arenas.address);
+    deployments.update(11, {
+      step: "Deploy genetics"
+    });
+
+    let geneticsConstructor: GeneticsConstructor.StructStruct = {
+      randomness: globalParams.address0,
+      female: globalParams.femaleBoilerplateGene,
+      male: globalParams.maleBoilerplateGene,
+      femaleGenesProbability: 40,
+      maleGenesProbability: 60,
+      geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,42,46,50],
+      maxValues: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+      terrains: globalParams.address0
+    };
+    const genetics = await deployContract({
+      name: 'Genetics',
+      constructor: [arrayfy(geneticsConstructor)],
+      props: {}
+    }) as Genetics;
+    DeploymentLogger('export GENETICS=' + genetics.address);
+    deployments.update(12, {
+      step: "Deploy incubator methods"
+    });
+
+    let incubatorConstructor: IncubatorConstructor.StructStruct = {
+      allowed: [],
+      gamification: globalParams.address0,
+      genetics: globalParams.address0,
+      methods: globalParams.address0,
+      races: globalParams.address0,
+      randomness: globalParams.address0,
+      secondsToMaturity: 345600
+    };
+    const incubatorMethods = await deployContract({
+      name: 'IncubatorMethods',
+      constructor: [arrayfy(incubatorConstructor)],
+      props: {}
+    }) as IncubatorMethods;
+    DeploymentLogger('export INCUBATOR_METHODS=' + incubatorMethods.address);
+    deployments.update(13, {
+      step: "Deploy incubator"
+    });
+
+    const incubator = await deployContract({
+      name: 'Incubator',
+      constructor: [arrayfy(incubatorConstructor)],
+      props: {}
+    }) as Incubator;
+    DeploymentLogger('export INCUBATOR=' + incubator.address);
+    deployments.update(14, {
+      step: "Deploy hounds restricted"
+    });
+
+    let houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
+      gamification: globalParams.address0,
+      houndModifier: globalParams.address0,
+      hounds: globalParams.address0,
+      incubator: globalParams.address0,
+      minter: globalParams.address0,
+      payments: globalParams.address0,
+      races: globalParams.address0,
+      restricted: globalParams.address0,
+      shop: globalParams.address0,
+      staterApi: globalParams.address0
+    };
+    let houndsConstructorFees: ConstructorFees.StructStruct = {
+      breedCost: "0xB1A2BC2EC50000",
+      breedFee: "0x2386F26FC10000",
+      currency: globalParams.address0,
+      refillBreedingCooldownCost: "0x2386F26FC10000",
+      refillCost: "0x2386F26FC10000",
+      refillStaminaCooldownCost: "0x2386F26FC10000"
+    };
+    let houndsConstructor: HoundsConstructor.StructStruct = {
+      name: 'HoundRace',
+      symbol: 'HR',
+      allowedCallers: [],
+      boilerplate: houndsConstructorBoilerplate,
+      fees: houndsConstructorFees
+    }
+    const houndsRestricted = await deployContract({
+      name: 'HoundsRestricted',
+      constructor: [arrayfy(houndsConstructor)],
+      props: {}
+    }) as HoundsRestricted;
+    DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
+    deployments.update(15, {
+      step: "Deploy hounds modifier"
+    });
+
+    const houndsModifier = await deployContract({
+      name: 'HoundsModifier',
+      constructor: [arrayfy(houndsConstructor)],
+      props: {}
+    }) as HoundsModifier;
+    DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
+    deployments.update(16, {
+      step: "Deploy hounds minter"
+    });
+
+    const houndsMinter = await deployContract({
+      name: 'HoundsMinter',
+      constructor: [arrayfy(houndsConstructor)],
+      props: {}
+    }) as HoundsMinter;
+    DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
+    deployments.update(17, {
+      step: "Deploy hounds"
+    });
+
+    const hounds = await deployContract({
+      name: 'Hounds',
+      constructor: [arrayfy(houndsConstructor)],
+      props: {}
+    }) as Hounds;
+    DeploymentLogger('export HOUNDS=' + hounds.address);
+    deployments.update(18, {
+      step: "Deploy races restricted"
+    });
+
+    let racesConstructor: RacesConstructor.StructStruct = {
+      allowedCallers: [],
+      arenas: globalParams.address0,
+      callable: false,
+      generator: globalParams.address0,
+      hounds: globalParams.address0,
+      methods: globalParams.address0,
+      payments: globalParams.address0,
+      queues: globalParams.address0,
+      randomness: globalParams.address0,
+      restricted: globalParams.address0
+    }
+    const racesRestricted = await deployContract({
+      name: 'RacesRestricted',
+      constructor: [arrayfy(racesConstructor)],
+      props: {}
+    }) as RacesRestricted;
+    DeploymentLogger('export RACE_RESTRICTED=' + racesRestricted.address);
+    deployments.update(19, {
+      step: "Deploy races methods"
+    });
+
+    const racesMethods = await deployContract({
+      name: 'RacesMethods',
+      constructor: [arrayfy(racesConstructor)],
+      props: {}
+    }) as RacesMethods;
+    DeploymentLogger('export RACE_METHODS=' + racesMethods.address);
+    deployments.update(20, {
+      step: "Deploy races"
+    });
+
+    const races = await deployContract({
+      name: 'Races',
+      constructor: [arrayfy(racesConstructor)],
+      props: {}
+    }) as Races;
+    DeploymentLogger('export RACE=' + races.address);
+
+    deployments.update(21, {
+      step: "Deploy generator methods"
+    });
+
+    let generatorConstructor: GeneratorConstructor.StructStruct = {
+      allowed: globalParams.address0,
+      arenas: globalParams.address0,
+      gamification: globalParams.address0,
+      hounds: globalParams.address0,
+      incubator: globalParams.address0,
+      methods: globalParams.address0,
+      payments: globalParams.address0,
+      randomness: globalParams.address0,
+      zerocost: globalParams.address0
+    }
+    const generatorMethods = await deployContract({
+      name: 'GeneratorMethods',
+      constructor: [arrayfy(generatorConstructor)],
+      props: {}
+    }) as GeneratorMethods;
+    DeploymentLogger('export GENERATOR_METHODS=' + generatorMethods.address);
+    deployments.update(22, {
+      step: "Deploy generator zerocost"
+    });
+
+    const generatorZerocost = await deployContract({
+      name: 'GeneratorZerocost',
+      constructor: [arrayfy(generatorConstructor)],
+      props: {
+        libraries: {
+          Sortings: sortings.address
+        }
+      }
+    }) as GeneratorZerocost;
+    DeploymentLogger('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
+    deployments.update(23, {
+      step: "Deploy generator"
+    });
+
+    const generator = await deployContract({
+      name: 'Generator',
+      constructor: [arrayfy(generatorConstructor)],
+      props: {}
+    }) as Generator;
+    DeploymentLogger('export GENERATOR=' + generator.address);
+    deployments.update(24, {
+      step: "Deploy queues methods"
+    });
+
+    let queuesConstructor: QueuesConstructor.StructStruct = {
+      allowedCallers: [],
+      arenas: globalParams.address0,
+      hounds: globalParams.address0,
+      methods: globalParams.address0,
+      payments: globalParams.address0,
+      raceFee: "20000000000000000",
+      races: globalParams.address0,
+      restricted: globalParams.address0
+    }
+    const queuesMethods = await deployContract({
+      name: 'QueuesMethods',
+      constructor: [arrayfy(queuesConstructor)],
+      props: {}
+    }) as QueuesMethods;
+    DeploymentLogger('export QUEUES_METHODS=' + queuesMethods.address);
+    deployments.update(25, {
+      step: "Deploy queues restricted"
+    });
+
+    const queuesRestricted = await deployContract({
+      name: 'QueuesRestricted',
+      constructor: [arrayfy(queuesConstructor)],
+      props: {}
+    }) as QueuesRestricted;
+    DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
+    deployments.update(26, {
+      step: "Deploy queues"
+    });
+
+    const queues = await deployContract({
+      name: 'Queues',
+      constructor: [arrayfy(queuesConstructor)],
+      props: {}
+    }) as Queues;
+    DeploymentLogger('export QUEUES=' + queues.address);
+    deployments.update(27, {
+      step: "Finished!"
+    });
+
+    let lootboxesConstructor: LootboxesConstructor.StructStruct = {
+      alphadune: globalParams.address0,
+      canBeOpened: true,
+      hounds: globalParams.address0,
+      payments: globalParams.address0,
+      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
+    }
+    const lootboxes = await deployContract({
+      name: 'Lootboxes',
+      constructor: [arrayfy(lootboxesConstructor)],
+      props: {}
+    }) as Lootboxes;
+    DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
+    deployments.update(1, {
+      step: "Deploy sortings"
+    });
+
+
+
+    shopConstructor = {
+      methods: shopMethods.address,
+      restricted: shopRestricted.address
+    }
+
+    arenasConstructor = {
+      alhpadunePercentage: 60,
+      allowedCallers: [races.address,queues.address],
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      methods: arenasMethods.address,
+      name: "HoundRace Arenas", 
+      symbol: "HRA",
+      payments: payments.address,
+      restricted: arenasRestricted.address
+    }
+
+    geneticsConstructor = {
+      female: femaleBoilerplateGene,
+      male: maleBoilerplateGene,
+      femaleGenesProbability: 40,
+      maleGenesProbability: 60,
+      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
+      maxValues: geneticsConstructor.maxValues,
+      randomness: randomness.address,
+      terrains: arenas.address
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     try {
       await shopRestricted.setGlobalParameters({
@@ -176,36 +531,6 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const arenasRestricted = await deployContract({
-      name: 'ArenasRestricted',
-      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60]],
-      props: {}
-    }) as ArenasRestricted;
-    DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
-    deployments.update(10, {
-      step: "Deploy arenas"
-    });
-
-    const arenasMethods = await deployContract({
-      name: 'ArenasMethods',
-      constructor: [["HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60]],
-      props: {}
-    }) as ArenasMethods;
-    DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
-    deployments.update(10, {
-      step: "Deploy arenas"
-    });
-
-    const arenas = await deployContract({
-      name: 'Arenas',
-      constructor: [["HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60]],
-      props: {}
-    }) as Arenas;
-    DeploymentLogger('export ARENAS=' + arenas.address);
-    deployments.update(11, {
-      step: "Deploy genetics"
-    });
-
     try {
       await arenasRestricted.setGlobalParameters({
         name: "HoundRace Arenas", 
@@ -224,67 +549,15 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-    const genetics = await deployContract({
-      name: 'Genetics',
-      constructor: [
-        [
-          randomness.address,
-          arenas.address,
-          maleBoilerplateGene,
-          femaleBoilerplateGene,
-          60,
-          40,
-          [2,6,10,14,18,22,26,30,34,38,42,46,50],
-          [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-        ]
-      ],
-      props: {}
-    }) as Genetics;
-    DeploymentLogger('export GENETICS=' + genetics.address);
-    deployments.update(12, {
-      step: "Deploy incubator methods"
-    });
-
-    const incubatorMethods = await deployContract({
-      name: 'IncubatorMethods',
-      constructor: [
-        [
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          345600
-        ]
-      ],
-      props: {}
-    }) as IncubatorMethods;
-    DeploymentLogger('export INCUBATOR_METHODS=' + incubatorMethods.address);
-    deployments.update(13, {
-      step: "Deploy incubator"
-    });
-
-    const incubator = await deployContract({
-      name: 'Incubator',
-      constructor: [
-        [
-          incubatorMethods.address,
-          randomness.address,
-          genetics.address,
-          345600
-        ]
-      ],
-      props: {}
-    }) as Incubator;
-    DeploymentLogger('export INCUBATOR=' + incubator.address);
-    deployments.update(14, {
-      step: "Deploy hounds restricted"
-    });
-
     try {
       await incubatorMethods.setGlobalParameters({
         methods: incubatorMethods.address,
         secondsToMaturity: 345600,
         genetics: genetics.address,
-        randomness: randomness.address
+        randomness: randomness.address,
+        gamification: globalParams.address0,
+        races: globalParams.address0,
+        allowed: []
       });
       configurations.update(5, {
         step: "Set global parameters for generator methods"
@@ -292,285 +565,6 @@ async function main() {
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
-
-    const houndsRestricted = await deployContract({
-      name: 'HoundsRestricted',
-      constructor: [
-        [
-          "HoundRace",
-          "HR",
-          [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-          [
-            globalParams.address0,
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
-          ],[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            "0xB1A2BC2EC50000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000"
-          ]
-        ]
-      ],
-      props: {}
-    }) as HoundsRestricted;
-    DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
-    deployments.update(15, {
-      step: "Deploy hounds modifier"
-    });
-
-    const houndsModifier = await deployContract({
-      name: 'HoundsModifier',
-      constructor: [
-        [
-          "HoundRace",
-          "HR",
-          [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-          [
-            globalParams.address0,
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
-          ],[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            "0xB1A2BC2EC50000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000"
-          ]
-        ]
-      ],
-      props: {}
-    }) as HoundsModifier;
-    DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
-    deployments.update(16, {
-      step: "Deploy hounds minter"
-    });
-
-    const houndsMinter = await deployContract({
-      name: 'HoundsMinter',
-      constructor: [
-        [
-          "HoundRace",
-          "HR",
-          [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-          [
-            globalParams.address0,
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
-          ],[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            "0xB1A2BC2EC50000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000"
-          ]
-        ]
-      ],
-      props: {}
-    }) as HoundsMinter;
-    DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
-    deployments.update(17, {
-      step: "Deploy hounds"
-    });
-
-
-    const hounds = await deployContract({
-      name: 'Hounds',
-      constructor: [
-        [
-          "HoundRace",
-          "HR",
-          [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-          [
-            incubator.address,
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            payments.address,
-            houndsRestricted.address,
-            houndsMinter.address,
-            globalParams.address0,
-            houndsModifier.address,
-            shop.address
-          ],[
-            payments.address,
-            "0xB1A2BC2EC50000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000"
-          ]
-        ]
-      ],
-      props: {}
-    }) as Hounds;
-    DeploymentLogger('export HOUNDS=' + hounds.address);
-    deployments.update(18, {
-      step: "Deploy races restricted"
-    });
-
-    const racesRestricted = await deployContract({
-      name: 'RacesRestricted',
-      constructor: [
-        [
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          [],
-          500000000,
-          false
-        ]
-      ],
-      props: {}
-    }) as RacesRestricted;
-    DeploymentLogger('export RACE_RESTRICTED=' + racesRestricted.address);
-    deployments.update(19, {
-      step: "Deploy races methods"
-    });
-
-    const racesMethods = await deployContract({
-      name: 'RacesMethods',
-      constructor: [
-        [
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          [],
-          500000000,
-          false
-        ]
-      ],
-      props: {}
-    }) as RacesMethods;
-    DeploymentLogger('export RACE_METHODS=' + racesMethods.address);
-    deployments.update(20, {
-      step: "Deploy races"
-    });
-
-    const races = await deployContract({
-      name: 'Races',
-      constructor: [
-        [
-          randomness.address,
-          arenas.address,
-          hounds.address,
-          racesMethods.address,
-          globalParams.address0,
-          payments.address,
-          racesRestricted.address,
-          globalParams.address0,
-          [],
-          500000000,
-          false
-        ]
-      ],
-      props: {}
-    }) as Races;
-    DeploymentLogger('export RACE=' + races.address);
-
-    deployments.update(21, {
-      step: "Deploy generator methods"
-    });
-
-    const generatorMethods = await deployContract({
-      name: 'GeneratorMethods',
-      constructor: [
-        [
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0
-        ]
-      ],
-      props: {}
-    }) as GeneratorMethods;
-    DeploymentLogger('export GENERATOR_METHODS=' + generatorMethods.address);
-    deployments.update(22, {
-      step: "Deploy generator zerocost"
-    });
-
-    const generatorZerocost = await deployContract({
-      name: 'GeneratorZerocost',
-      constructor: [
-        [
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0,
-          globalParams.address0
-        ]
-      ],
-      props: {
-        libraries: {
-          Sortings: sortings.address
-        }
-      }
-    }) as GeneratorZerocost;
-    DeploymentLogger('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
-    deployments.update(23, {
-      step: "Deploy generator"
-    });
-
-    const generator = await deployContract({
-      name: 'Generator',
-      constructor: [
-        [
-          randomness.address,
-          arenas.address,
-          hounds.address,
-          races.address,
-          generatorMethods.address,
-          payments.address,
-          generatorZerocost.address
-        ]
-      ],
-      props: {}
-    }) as Generator;
-    DeploymentLogger('export GENERATOR=' + generator.address);
-    deployments.update(24, {
-      step: "Deploy queues methods"
-    });
 
     try {
       await generatorMethods.setGlobalParameters({
@@ -580,7 +574,9 @@ async function main() {
         methods: generatorMethods.address,
         payments: payments.address,
         zerocost: generatorZerocost.address,
-        allowed: races.address
+        allowed: races.address,
+        gamification: globalParams.address0,
+        incubator: incubator.address
       });
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
@@ -597,7 +593,9 @@ async function main() {
         methods: generatorMethods.address,
         payments: payments.address,
         zerocost: generatorZerocost.address,
-        allowed: races.address
+        allowed: races.address,
+        gamification: globalParams.address0,
+        incubator: incubator.address
       });
       configurations.update(7, {
         step: "Set global parameters for queues methods"
@@ -605,84 +603,6 @@ async function main() {
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
-
-    const queuesMethods = await deployContract({
-      name: 'QueuesMethods',
-      constructor: [
-        [
-          arenas.address,
-          hounds.address,
-          globalParams.address0,
-          payments.address,
-          globalParams.address0,
-          races.address,
-          []
-        ]
-      ],
-      props: {}
-    }) as QueuesMethods;
-    DeploymentLogger('export QUEUES_METHODS=' + queuesMethods.address);
-    deployments.update(25, {
-      step: "Deploy queues restricted"
-    });
-
-    const queuesRestricted = await deployContract({
-      name: 'QueuesRestricted',
-      constructor: [
-        [
-          arenas.address,
-          hounds.address,
-          globalParams.address0,
-          payments.address,
-          globalParams.address0,
-          races.address,
-          []
-        ]
-      ],
-      props: {}
-    }) as QueuesRestricted;
-    DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
-    deployments.update(26, {
-      step: "Deploy queues"
-    });
-
-    const queues = await deployContract({
-      name: 'Queues',
-      constructor: [
-        [
-          arenas.address,
-          hounds.address,
-          queuesMethods.address,
-          payments.address,
-          queuesRestricted.address,
-          races.address,
-          []
-        ]
-      ],
-      props: {}
-    }) as Queues;
-    DeploymentLogger('export QUEUES=' + queues.address);
-    deployments.update(27, {
-      step: "Finished!"
-    });
-
-    const lootboxes = await deployContract({
-      name: 'Lootboxes',
-      constructor: [
-        [
-          "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
-          hounds.address, 
-          payments.address,
-          String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-          true
-        ]
-      ],
-      props: {}
-    }) as Lootboxes;
-    DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
-    deployments.update(1, {
-      step: "Deploy sortings"
-    });
 
     try {
       await queuesMethods.setGlobalParameters({
@@ -692,7 +612,8 @@ async function main() {
         payments: payments.address,
         restricted: queuesRestricted.address,
         races: races.address,
-        allowedCallers: []
+        allowedCallers: [],
+        raceFee: "20000000000000000"
       });
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
@@ -709,7 +630,8 @@ async function main() {
         payments: payments.address,
         restricted: queuesRestricted.address,
         races: races.address,
-        allowedCallers: []
+        allowedCallers: [],
+        raceFee: "20000000000000000"
       });
       configurations.update(9, {
         step: "Set global parameters for races restricted"
@@ -732,7 +654,6 @@ async function main() {
           racesRestricted.address,racesMethods.address,races.address,
           queuesRestricted.address,queuesMethods.address,queues.address
         ],
-        raceFee: 500000000,
         callable: false
       });
       configurations.update(10, {
@@ -756,7 +677,6 @@ async function main() {
           racesRestricted.address,racesMethods.address,races.address,
           queuesRestricted.address,queuesMethods.address,queues.address
         ],
-        raceFee: 500000000,
         callable: false
       });
       configurations.update(11, {
@@ -780,7 +700,6 @@ async function main() {
           racesRestricted.address,racesMethods.address,races.address,
           queuesRestricted.address,queuesMethods.address,queues.address
         ],
-        raceFee: 500000000,
         callable: false
       });
       configurations.update(12, {
@@ -831,7 +750,9 @@ async function main() {
           minter: houndsMinter.address,
           hounds: hounds.address,
           houndModifier: houndsModifier.address,
-          shop: shop.address
+          shop: shop.address,
+          gamification: globalParams.address0,
+          races: races.address
         },
         fees: {
           currency: globalParams.address0,
@@ -872,7 +793,9 @@ async function main() {
           minter: houndsMinter.address,
           hounds: hounds.address,
           houndModifier: houndsModifier.address,
-          shop: shop.address
+          shop: shop.address,
+          gamification: globalParams.address0,
+          races: races.address
         },
         fees: {
           currency: globalParams.address0,
@@ -913,7 +836,9 @@ async function main() {
           minter: houndsMinter.address,
           hounds: hounds.address,
           houndModifier: houndsModifier.address,
-          shop: shop.address
+          shop: shop.address,
+          gamification: globalParams.address0,
+          races: races.address
         },
         fees: {
           currency: globalParams.address0,
@@ -954,7 +879,9 @@ async function main() {
           minter: houndsMinter.address,
           hounds: hounds.address,
           houndModifier: houndsModifier.address,
-          shop: shop.address
+          shop: shop.address,
+          gamification: globalParams.address0,
+          races: races.address
         },
         fees: {
           currency: globalParams.address0,
@@ -971,6 +898,25 @@ async function main() {
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if ( network.name !== "hardhat" ) {
 
