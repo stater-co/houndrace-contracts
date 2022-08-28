@@ -10,7 +10,8 @@ async function basicTest(
     it("Upload race", async function () {
       await safeUploadRace({
         contract: dependencies.contract,
-        race: dependencies.race
+        race: dependencies.race,
+        onId: 99999
       });
     });
 

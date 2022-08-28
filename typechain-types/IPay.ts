@@ -77,8 +77,8 @@ export interface IPay extends BaseContract {
       from: string,
       to: string,
       currency: string,
-      id: BigNumberish[],
-      amount: BigNumberish[],
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
       paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -88,8 +88,8 @@ export interface IPay extends BaseContract {
     from: string,
     to: string,
     currency: string,
-    id: BigNumberish[],
-    amount: BigNumberish[],
+    ids: BigNumberish[],
+    amounts: BigNumberish[],
     paymentType: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -99,8 +99,8 @@ export interface IPay extends BaseContract {
       from: string,
       to: string,
       currency: string,
-      id: BigNumberish[],
-      amount: BigNumberish[],
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
       paymentType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -113,8 +113,8 @@ export interface IPay extends BaseContract {
       from: string,
       to: string,
       currency: string,
-      id: BigNumberish[],
-      amount: BigNumberish[],
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
       paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -125,8 +125,8 @@ export interface IPay extends BaseContract {
       from: string,
       to: string,
       currency: string,
-      id: BigNumberish[],
-      amount: BigNumberish[],
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
       paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

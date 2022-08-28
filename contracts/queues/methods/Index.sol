@@ -35,7 +35,7 @@ contract QueuesMethods is Params {
 
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = _queue.entryFee;
+        amounts[0] = enqueueCost(theId);
         
         IPay(control.payments).pay(
             control.payments,
@@ -71,8 +71,11 @@ contract QueuesMethods is Params {
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[theId].entryFee;
+        amounts[0] = enqueueCost(theId);
 
+        console.log("msg.value: ");
+        console.log(msg.value);
+        console.log(arenaCurrency);
         IPay(control.payments).pay{
             value: arenaCurrency == address(0) ? amounts[0] : 0
         }(
@@ -95,6 +98,7 @@ contract QueuesMethods is Params {
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].participants;
+            delete queues[theId].enqueueDates;
 
             queues[theId].lastCompletion = block.timestamp;
 

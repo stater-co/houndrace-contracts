@@ -30,7 +30,10 @@ async function basicTest(
         queueId: createdQueueId,
         houndId: dependencies.houndIdToEnqueue,
         houndsContract: dependencies.houndsContract as Hounds,
-        sender: sig1
+        sender: sig1,
+        arenasContract: dependencies.arenasContract,
+        erc20: dependencies.erc20,
+        paymentsContract: dependencies.payments
       });
     });
 
@@ -46,7 +49,10 @@ async function basicTest(
             queueId: createdQueueId,
             houndId: j,
             houndsContract: dependencies.houndsContract as Hounds,
-            sender: sig1
+            sender: sig1,
+            arenasContract: dependencies.arenasContract,
+            erc20: dependencies.erc20,
+            paymentsContract: dependencies.payments
           });
           ++totalEnqueues;
         }
@@ -62,7 +68,10 @@ async function basicTest(
           queueId: createdQueueId,
           houndId: 1,
           houndsContract: dependencies.houndsContract as Hounds,
-          sender: sig1
+          sender: sig1,
+          arenasContract: dependencies.arenasContract,
+          erc20: dependencies.erc20,
+          paymentsContract: dependencies.payments
         });
         queue = await dependencies.contract.queue(createdQueueId);
       }

@@ -59,28 +59,16 @@ async function advancedTests(
     it("Enqueue using custom token", async function() {
 
       const [sig1] = await ethers.getSigners();
-      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
-
-      await dependencies.erc20.mint(sig1.address, entryFee);
-
-      const paymentsAddress: [string, string, string, string, string, string] & {
-        arenas: string;
-        hounds: string;
-        methods: string;
-        payments: string;
-        restricted: string;
-        races: string;
-    } = await dependencies.queuesContract.control();
-
-      await dependencies.erc20
-      .approve(paymentsAddress.payments, String(entryFee));
 
       await safeJoinQueue({
         contract: dependencies.queuesContract as Queues,
         queueId: createdQueueId,
         houndId: createdHoundId,
         houndsContract: dependencies.houndsContract as Hounds,
-        sender: sig1
+        sender: sig1,
+        arenasContract: dependencies.arenasContract,
+        erc20: dependencies.erc20,
+        paymentsContract: dependencies.payments
       });
     });
 
@@ -122,32 +110,20 @@ async function advancedTests(
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
       const [sig1] = await ethers.getSigners();
-      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
 
       for ( let j = 1 ; j < totalHounds && totalEnqueues < 10 ; ++j ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.profile.queueId) === 0 ) {    
-    
-          await dependencies.erc20.mint(sig1.address, entryFee);
-    
-          const paymentsAddress: [string, string, string, string, string, string] & {
-            arenas: string;
-            hounds: string;
-            methods: string;
-            payments: string;
-            restricted: string;
-            races: string;
-        } = await dependencies.queuesContract.control();
-    
-          await dependencies.erc20
-          .approve(paymentsAddress.payments, String(entryFee));
 
           await safeJoinQueue({
             contract: dependencies.queuesContract as Queues,
             queueId: createdQueueId,
             houndId: j,
             houndsContract: dependencies.houndsContract as Hounds,
-            sender: sig1
+            sender: sig1,
+            arenasContract: dependencies.arenasContract,
+            erc20: dependencies.erc20,
+            paymentsContract: dependencies.payments
           });
           ++totalEnqueues;
         }
@@ -158,8 +134,7 @@ async function advancedTests(
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
       const [sig1, sig2] = await ethers.getSigners();
-      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
-      const arenaOwner: string = await dependencies.arenasContract.arenaOwner(createdArenaId);
+      const entryFee = await dependencies.queuesContract.enqueueCost(createdQueueId);
 
       for ( let j = 1 ; j < totalHounds && totalEnqueues < 10 ; ++j ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
@@ -170,17 +145,8 @@ async function advancedTests(
 
           await dependencies.erc20.transfer(sig2.address, entryFee);
     
-          const paymentsAddress: [string, string, string, string, string, string] & {
-            arenas: string;
-            hounds: string;
-            methods: string;
-            payments: string;
-            restricted: string;
-            races: string;
-        } = await dependencies.queuesContract.control();
-    
           await dependencies.erc20.connect(sig2)
-          .approve(paymentsAddress.payments, String(entryFee));
+          .approve(dependencies.payments.address, String(entryFee));
 
           const balanceBefore: string = String(await dependencies.erc20.balanceOf(sig2.address));
 
@@ -189,7 +155,10 @@ async function advancedTests(
             queueId: createdQueueId,
             houndId: j,
             houndsContract: dependencies.houndsContract as Hounds,
-            sender: sig2
+            sender: sig2,
+            arenasContract: dependencies.arenasContract,
+            erc20: dependencies.erc20,
+            paymentsContract: dependencies.payments
           });
 
           const balanceAfter: string = String(await dependencies.erc20.balanceOf(sig2.address));
@@ -214,28 +183,16 @@ async function advancedTests(
 
     it("Unenqueue", async function() {
       const [sig1] = await ethers.getSigners();
-      const entryFee = await (await dependencies.queuesContract.queue(createdQueueId)).entryFee;
-
-      await dependencies.erc20.mint(sig1.address, entryFee);
-
-      const paymentsAddress: [string, string, string, string, string, string] & {
-        arenas: string;
-        hounds: string;
-        methods: string;
-        payments: string;
-        restricted: string;
-        races: string;
-    } = await dependencies.queuesContract.control();
-
-      await dependencies.erc20
-      .approve(paymentsAddress.payments, String(entryFee));
 
       await safeJoinQueue({
         contract: dependencies.queuesContract as Queues,
         queueId: createdQueueId,
         houndId: createdHoundId,
         houndsContract: dependencies.houndsContract as Hounds,
-        sender: sig1
+        sender: sig1,
+        arenasContract: dependencies.arenasContract,
+        erc20: dependencies.erc20,
+        paymentsContract: dependencies.payments
       });
       await safeUnenqueue({
         contract: dependencies.queuesContract,

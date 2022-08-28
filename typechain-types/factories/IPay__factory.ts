@@ -26,12 +26,12 @@ const _abi = [
       },
       {
         internalType: "uint256[]",
-        name: "id",
+        name: "ids",
         type: "uint256[]",
       },
       {
         internalType: "uint256[]",
-        name: "amount",
+        name: "amounts",
         type: "uint256[]",
       },
       {

@@ -22,113 +22,50 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace HoundBreeding {
+export declare namespace GeneticsConstructor {
   export type StructStruct = {
-    lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    availableToBreed: boolean;
+    randomness: string;
+    terrains: string;
+    male: BigNumberish[];
+    female: BigNumberish[];
+    maleGenesProbability: BigNumberish;
+    femaleGenesProbability: BigNumberish;
+    geneticSequenceSignature: BigNumberish[];
+    maxValues: BigNumberish[];
   };
 
   export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    availableToBreed: boolean;
-  };
-}
-
-export declare namespace HoundStamina {
-  export type StructStruct = {
-    staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
-    staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
-    staminaCap: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
-    staminaValue: number;
-    staminaPerHour: number;
-    staminaCap: number;
-  };
-}
-
-export declare namespace Constructor {
-  export type StructStruct = {
-    defaultBreeding: HoundBreeding.StructStruct;
-    defaultStamina: HoundStamina.StructStruct;
-    allowed: string[];
-    restricted: string;
-    methods: string;
-  };
-
-  export type StructStructOutput = [
-    HoundBreeding.StructStructOutput,
-    HoundStamina.StructStructOutput,
-    string[],
     string,
-    string
+    string,
+    number[],
+    number[],
+    number,
+    number,
+    number[],
+    number[]
   ] & {
-    defaultBreeding: HoundBreeding.StructStructOutput;
-    defaultStamina: HoundStamina.StructStructOutput;
-    allowed: string[];
-    restricted: string;
-    methods: string;
+    randomness: string;
+    terrains: string;
+    male: number[];
+    female: number[];
+    maleGenesProbability: number;
+    femaleGenesProbability: number;
+    geneticSequenceSignature: number[];
+    maxValues: number[];
   };
 }
 
 export interface ParamsInterface extends utils.Interface {
   contractName: "Params";
   functions: {
-    "allowed(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "getBreeding(uint256)": FunctionFragment;
-    "getStamina(uint256)": FunctionFragment;
-    "getStaminaBreeding(uint256)": FunctionFragment;
-    "houndsBreeding(uint256)": FunctionFragment;
-    "houndsStamina(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters(((uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setGlobalParameters((address,address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "getBreeding",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getStamina",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getStaminaBreeding",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "houndsBreeding",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "houndsStamina",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -136,32 +73,14 @@ export interface ParamsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [Constructor.StructStruct]
+    values: [GeneticsConstructor.StructStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
 
-  decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getBreeding",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "getStamina", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getStaminaBreeding",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "houndsBreeding",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "houndsStamina",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -219,63 +138,14 @@ export interface Params extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        HoundBreeding.StructStructOutput,
-        HoundStamina.StructStructOutput,
-        string,
-        string
-      ] & {
-        defaultBreeding: HoundBreeding.StructStructOutput;
-        defaultStamina: HoundStamina.StructStructOutput;
-        restricted: string;
-        methods: string;
-      }
-    >;
-
-    getBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[HoundBreeding.StructStructOutput]>;
-
-    getStamina(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[HoundStamina.StructStructOutput]>;
-
-    getStaminaBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [HoundStamina.StructStructOutput, HoundBreeding.StructStructOutput]
-    >;
-
-    houndsBreeding(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
-        lastBreed: BigNumber;
-        breedingCooldown: BigNumber;
-        breedingFee: BigNumber;
-        availableToBreed: boolean;
-      }
-    >;
-
-    houndsStamina(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, number, number, number] & {
-        staminaLastUpdate: BigNumber;
-        staminaRefill1x: BigNumber;
-        staminaValue: number;
-        staminaPerHour: number;
-        staminaCap: number;
+      [string, string, number, number] & {
+        randomness: string;
+        terrains: string;
+        maleGenesProbability: number;
+        femaleGenesProbability: number;
       }
     >;
 
@@ -286,7 +156,7 @@ export interface Params extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -296,63 +166,14 @@ export interface Params extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
   control(
     overrides?: CallOverrides
   ): Promise<
-    [
-      HoundBreeding.StructStructOutput,
-      HoundStamina.StructStructOutput,
-      string,
-      string
-    ] & {
-      defaultBreeding: HoundBreeding.StructStructOutput;
-      defaultStamina: HoundStamina.StructStructOutput;
-      restricted: string;
-      methods: string;
-    }
-  >;
-
-  getBreeding(
-    id: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<HoundBreeding.StructStructOutput>;
-
-  getStamina(
-    id: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<HoundStamina.StructStructOutput>;
-
-  getStaminaBreeding(
-    id: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [HoundStamina.StructStructOutput, HoundBreeding.StructStructOutput]
-  >;
-
-  houndsBreeding(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, boolean] & {
-      lastBreed: BigNumber;
-      breedingCooldown: BigNumber;
-      breedingFee: BigNumber;
-      availableToBreed: boolean;
-    }
-  >;
-
-  houndsStamina(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, number, number, number] & {
-      staminaLastUpdate: BigNumber;
-      staminaRefill1x: BigNumber;
-      staminaValue: number;
-      staminaPerHour: number;
-      staminaCap: number;
+    [string, string, number, number] & {
+      randomness: string;
+      terrains: string;
+      maleGenesProbability: number;
+      femaleGenesProbability: number;
     }
   >;
 
@@ -363,7 +184,7 @@ export interface Params extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setGlobalParameters(
-    globalParameters: Constructor.StructStruct,
+    globalParameters: GeneticsConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -373,63 +194,14 @@ export interface Params extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        HoundBreeding.StructStructOutput,
-        HoundStamina.StructStructOutput,
-        string,
-        string
-      ] & {
-        defaultBreeding: HoundBreeding.StructStructOutput;
-        defaultStamina: HoundStamina.StructStructOutput;
-        restricted: string;
-        methods: string;
-      }
-    >;
-
-    getBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<HoundBreeding.StructStructOutput>;
-
-    getStamina(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<HoundStamina.StructStructOutput>;
-
-    getStaminaBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [HoundStamina.StructStructOutput, HoundBreeding.StructStructOutput]
-    >;
-
-    houndsBreeding(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
-        lastBreed: BigNumber;
-        breedingCooldown: BigNumber;
-        breedingFee: BigNumber;
-        availableToBreed: boolean;
-      }
-    >;
-
-    houndsStamina(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, number, number, number] & {
-        staminaLastUpdate: BigNumber;
-        staminaRefill1x: BigNumber;
-        staminaValue: number;
-        staminaPerHour: number;
-        staminaCap: number;
+      [string, string, number, number] & {
+        randomness: string;
+        terrains: string;
+        maleGenesProbability: number;
+        femaleGenesProbability: number;
       }
     >;
 
@@ -438,7 +210,7 @@ export interface Params extends BaseContract {
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -460,31 +232,7 @@ export interface Params extends BaseContract {
   };
 
   estimateGas: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    getStamina(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    getStaminaBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    houndsBreeding(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    houndsStamina(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -493,7 +241,7 @@ export interface Params extends BaseContract {
     ): Promise<BigNumber>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -504,37 +252,7 @@ export interface Params extends BaseContract {
   };
 
   populateTransaction: {
-    allowed(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getStamina(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getStaminaBreeding(
-      id: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    houndsBreeding(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    houndsStamina(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -543,7 +261,7 @@ export interface Params extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

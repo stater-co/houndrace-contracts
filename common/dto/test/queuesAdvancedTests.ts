@@ -2,6 +2,7 @@ import { Arena, Arenas } from "../../../typechain-types/Arenas";
 import { Gamification } from "../../../typechain-types/Gamification";
 import { HoundracePotions } from "../../../typechain-types/HoundracePotions";
 import { Hounds } from "../../../typechain-types/Hounds";
+import { Payments } from "../../../typechain-types/Payments";
 import { Queue, Queues } from "../../../typechain-types/Queues";
 import { Races } from "../../../typechain-types/Races";
 
@@ -13,5 +14,6 @@ export interface QueuesAdvancedTests {
     arena: Arena.StructStructOutput;
     houndsContract: Hounds;
     gamification: Gamification;
+    payments: Payments
     races: Races;
 }

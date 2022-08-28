@@ -5,14 +5,14 @@ import { expecting } from "../expecting";
 export async function uploadRace(
   params: UploadRaceParams
 ) {
-  await params.contract.uploadRace(1,params.race);
+  await params.contract.uploadRace(params.onId,params.race);
 }
 
 export async function safeUploadRace(
   params: UploadRaceParams
 ): Promise<void> {
-  const before = await params.contract.id();
+  const before = await params.contract.races(params.onId);
   await uploadRace(params);
-  const after = await params.contract.id();
-  //expecting(before !== after && Number(before) === Number(after) - 1, "Upload race method bugged");
+  const after = await params.contract.races(params.onId);
+  //expecting(JSON.stringify(before) !== JSON.stringify(after), "Upload race method bugged");
 }

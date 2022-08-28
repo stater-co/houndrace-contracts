@@ -137,7 +137,8 @@ async function basicTest(
         status: true,
         fee: 50000,
         houndId: createdHoundId,
-        contract: dependencies.hounds
+        contract: dependencies.hounds,
+        gamification: dependencies.gamification
       });
     });
 

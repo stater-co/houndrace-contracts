@@ -8,8 +8,8 @@ interface IPay {
 		address from,
         address to,
         address currency,
-        uint256[] memory id, // for batch transfers
-        uint256[] memory amount, // for batch transfers
+        uint256[] memory ids, // for batch transfers
+        uint256[] memory amounts, // for batch transfers
         uint32 paymentType
 	) external payable;
 

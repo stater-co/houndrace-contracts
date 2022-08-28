@@ -28,7 +28,8 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            []
+            [],
+            5000000
           ]],
           props: {}
         }) as QueuesRestricted;
@@ -44,7 +45,8 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            []
+            [],
+            5000000
           ]],
           props: {}
         }) as QueuesMethods;
@@ -60,7 +62,8 @@ export async function run(
             dependencies.paymentsAddress,
             queuesRestricted.address,
             dependencies.racesAddress,
-            []
+            [],
+            5000000
           ]],
           props: {}
         }) as Queues;

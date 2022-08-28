@@ -107,7 +107,8 @@ async function main() {
             payments: payments.payments.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            allowedCallers: [ races.races.address]
+            allowedCallers: [ races.races.address],
+            raceFee: 5000000
         }
     });
 
@@ -218,7 +219,6 @@ async function main() {
             queues: queues.queues.address,
             randomness: randomness.randomness.address,
             restricted: queues.queuesRestricted.address,
-            raceFee: 500000000,
             callable: false,
             allowedCallers: [
                 races.races.address,
@@ -263,7 +263,10 @@ async function main() {
         contract: queues.queues,
         houndsContract: hounds.hounds,
         houndIdToEnqueue: 1,
-        queue: globalParams.defaultQueue
+        queue: globalParams.defaultQueue,
+        arenasContract: arenas.arenas,
+        erc20: payments.houndracePotions,
+        payments: payments.payments
     });
 
     await testRaces.basicTest({
@@ -320,7 +323,8 @@ async function main() {
         arena: globalParams.defaultArena,
         houndsContract: hounds.hounds,
         races: races.races,
-        gamification: gamification.gamification
+        gamification: gamification.gamification,
+        payments: payments.payments
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
@@ -341,11 +345,13 @@ async function main() {
         race: globalParams.defaultRace
     });
 
+    /*
     await generationTests.generationTests({
         race: globalParams.defaultRace,
         hounds: hounds.hounds,
         arena: globalParams.defaultArena
     });
+    */
 
 }
 

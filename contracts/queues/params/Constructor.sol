@@ -10,5 +10,6 @@ library QueuesConstructor {
         address restricted;
         address races;
         address[] allowedCallers;
+        uint256 raceFee;
     }
 }

@@ -34,7 +34,6 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     allowedCallers: string[];
-    raceFee: BigNumberish;
     callable: boolean;
   };
 
@@ -48,7 +47,6 @@ export declare namespace RacesConstructor {
     string,
     string,
     string[],
-    BigNumber,
     boolean
   ] & {
     randomness: string;
@@ -60,7 +58,6 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     allowedCallers: string[];
-    raceFee: BigNumber;
     callable: boolean;
   };
 }
@@ -210,7 +207,7 @@ export interface RacesInterface extends utils.Interface {
     "raceStart((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address[],uint256,bool))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uploadRace(uint256,(string,address,uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint256,bytes))": FunctionFragment;
   };
@@ -384,7 +381,6 @@ export interface Races extends BaseContract {
         string,
         string,
         string,
-        BigNumber,
         boolean
       ] & {
         randomness: string;
@@ -395,7 +391,6 @@ export interface Races extends BaseContract {
         payments: string;
         restricted: string;
         queues: string;
-        raceFee: BigNumber;
         callable: boolean;
       }
     >;
@@ -489,7 +484,7 @@ export interface Races extends BaseContract {
     uploadRace(
       theId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -507,7 +502,6 @@ export interface Races extends BaseContract {
       string,
       string,
       string,
-      BigNumber,
       boolean
     ] & {
       randomness: string;
@@ -518,7 +512,6 @@ export interface Races extends BaseContract {
       payments: string;
       restricted: string;
       queues: string;
-      raceFee: BigNumber;
       callable: boolean;
     }
   >;
@@ -612,7 +605,7 @@ export interface Races extends BaseContract {
   uploadRace(
     theId: BigNumberish,
     race: Race.StructStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -630,7 +623,6 @@ export interface Races extends BaseContract {
         string,
         string,
         string,
-        BigNumber,
         boolean
       ] & {
         randomness: string;
@@ -641,7 +633,6 @@ export interface Races extends BaseContract {
         payments: string;
         restricted: string;
         queues: string;
-        raceFee: BigNumber;
         callable: boolean;
       }
     >;
@@ -827,7 +818,7 @@ export interface Races extends BaseContract {
     uploadRace(
       theId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
@@ -901,7 +892,7 @@ export interface Races extends BaseContract {
     uploadRace(
       theId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

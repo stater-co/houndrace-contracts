@@ -20,6 +20,7 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
+import 'hardhat/console.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -51,7 +52,7 @@ contract Params is Ownable, Withdrawable {
     }
 
     function enqueueCost(uint256 theId) public view returns(uint256) {
-        return IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee + 1;
+        return ( ( IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants ) + queues[theId].totalParticipants ) + queues[theId].entryFee + ( ( control.raceFee / queues[theId].totalParticipants ) + queues[theId].totalParticipants );
     }
 
     function handleAllowedCallers(address[] memory allowedCallers) internal {

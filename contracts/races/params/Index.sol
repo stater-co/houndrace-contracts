@@ -15,6 +15,7 @@ import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import './HoundStatistics.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
+import '../../payments/interfaces/IPay.sol';
 
 
 contract Params is Ownable, Withdrawable {

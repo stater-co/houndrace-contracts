@@ -32,6 +32,7 @@ export declare namespace QueuesConstructor {
     restricted: string;
     races: string;
     allowedCallers: string[];
+    raceFee: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -41,7 +42,8 @@ export declare namespace QueuesConstructor {
     string,
     string,
     string,
-    string[]
+    string[],
+    BigNumber
   ] & {
     arenas: string;
     hounds: string;
@@ -50,6 +52,7 @@ export declare namespace QueuesConstructor {
     restricted: string;
     races: string;
     allowedCallers: string[];
+    raceFee: BigNumber;
   };
 }
 
@@ -142,7 +145,7 @@ export interface QueuesInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address[],uint256))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
   };
@@ -342,13 +345,14 @@ export interface Queues extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string] & {
+      [string, string, string, string, string, string, BigNumber] & {
         arenas: string;
         hounds: string;
         methods: string;
         payments: string;
         restricted: string;
         races: string;
+        raceFee: BigNumber;
       }
     >;
 
@@ -453,13 +457,14 @@ export interface Queues extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, BigNumber] & {
       arenas: string;
       hounds: string;
       methods: string;
       payments: string;
       restricted: string;
       races: string;
+      raceFee: BigNumber;
     }
   >;
 
@@ -561,13 +566,14 @@ export interface Queues extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string] & {
+      [string, string, string, string, string, string, BigNumber] & {
         arenas: string;
         hounds: string;
         methods: string;
         payments: string;
         restricted: string;
         races: string;
+        raceFee: BigNumber;
       }
     >;
 
