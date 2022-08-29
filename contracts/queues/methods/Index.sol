@@ -73,9 +73,6 @@ contract QueuesMethods is Params {
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = enqueueCost(theId);
 
-        console.log("msg.value: ");
-        console.log(msg.value);
-        console.log(arenaCurrency);
         IPay(control.payments).pay{
             value: arenaCurrency == address(0) ? amounts[0] : 0
         }(

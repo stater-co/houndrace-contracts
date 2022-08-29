@@ -1098,7 +1098,6 @@ async function main() {
         step: "Verify races restricted"
       });
 
-      /*
       try {
         await run("verify:verify", {
           address: racesRestricted.address,
@@ -1138,6 +1137,18 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generatorMethods.address, 
+          constructorArguments: arrayfy(generatorConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(22, {
+        step: "Verify generator"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: generatorZerocost.address, 
           constructorArguments: arrayfy(generatorConstructor)
         });
       } catch (err) {
@@ -1203,8 +1214,6 @@ async function main() {
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
       }
-
-      */
 
     }
 

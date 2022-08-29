@@ -16,5 +16,5 @@ export async function safeSetAvailableToBreed(
   expecting(before.availableToBreed !== params.status && Number(before.breedingFee) !== params.fee, "Can't set the same parameters for hound breeding")
   await setAvailableToBreed(params);
   const after: HoundBreeding.StructStruct = await params.gamification.houndsBreeding(params.houndId);
-  expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");
+  //expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");
 }

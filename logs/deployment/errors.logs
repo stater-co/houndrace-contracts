@@ -1,0 +1,187 @@
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T08:59:45.748Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:00:43.029Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:01:23.071Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:01:55.837Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:02:30.140Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/shop/restricted/Index.sol:ShopRestricted has 1 parameters\n' +
+    'but 2 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:03:06.745Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/shop/methods/Index.sol:ShopMethods has 1 parameters\n' +
+    'but 2 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:03:40.563Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/shop/Index.sol:Shop has 1 parameters\n' +
+    'but 2 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:04:14.535Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/arenas/restricted/Index.sol:ArenasRestricted has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:04:48.335Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/arenas/methods/Index.sol:ArenasMethods has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:05:22.143Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/arenas/Index.sol:Arenas has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:05:55.757Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/genetics/Index.sol:Genetics has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:06:29.609Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/incubator/methods/Index.sol:IncubatorMethods has 1 parameters\n' +
+    'but 7 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:07:03.491Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/incubator/Index.sol:Incubator has 1 parameters\n' +
+    'but 7 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:07:37.919Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:08:15.946Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:08:53.834Z'
+}
+{
+  message: '[DIIMIIM] Failed to obtain list of solc versions. Reason: Connect Timeout Error',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:09:37.655Z'
+}
+{
+  message: '[DIIMIIM] Invalid API Key',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:10:14.320Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/races/restricted/Index.sol:RacesRestricted has 1 parameters\n' +
+    'but 10 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:10:48.161Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/races/methods/Index.sol:RacesMethods has 1 parameters\n' +
+    'but 10 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:11:22.240Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/races/Index.sol:Races has 1 parameters\n' +
+    'but 10 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:11:56.469Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/generator/methods/Index.sol:GeneratorMethods has 1 parameters\n' +
+    'but 9 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:12:31.508Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/generator/zerocost/Index.sol:GeneratorZerocost has 1 parameters\n' +
+    'but 9 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:13:05.738Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/generator/Index.sol:Generator has 1 parameters\n' +
+    'but 9 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:13:40.269Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/queues/restricted/Index.sol:QueuesRestricted has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:14:14.570Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/queues/methods/Index.sol:QueuesMethods has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:14:49.208Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/queues/Index.sol:Queues has 1 parameters\n' +
+    'but 8 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:15:23.682Z'
+}
+{
+  message: '[DIIMIIM] The constructor for contracts/erc721/loot/Loot.sol:Lootboxes has 1 parameters\n' +
+    'but 5 arguments were provided instead.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-08-29T09:15:58.224Z'
+}
