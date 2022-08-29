@@ -31,6 +31,7 @@ import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { globalParams } from '../common/params';
+import { Gamification, Constructor as GamificationConstructor } from '../typechain-types/Gamification';
 
 
 const cliProgress = require('cli-progress');
@@ -65,8 +66,8 @@ verifications.update(0, {
 const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
 
-const arrayfy = (input: Object): Array<any> => {
-  return Object.keys(input).map((key) => [Number(key), input[key]]);
+const arrayfy = (input: any): Array<any> => {
+  return Object.keys(input).map((key) => input[key]);
 }
 
 async function main() {
@@ -163,14 +164,14 @@ async function main() {
     });
 
     let arenasConstructor: ArenasConstructor.StructStruct = {
-      alhpadunePercentage: 60,
-      allowedCallers: [],
-      alphadune: globalParams.address0,
-      methods: globalParams.address0,
       name: "HoundRace Arenas",
       symbol: "HRA",
+      restricted: globalParams.address0,
+      methods: globalParams.address0,
       payments: globalParams.address0,
-      restricted: globalParams.address0
+      alphadune: globalParams.address0,
+      allowedCallers: [],
+      alhpadunePercentage: 60
     };
     const arenasRestricted = await deployContract({
       name: 'ArenasRestricted',
@@ -204,13 +205,13 @@ async function main() {
 
     let geneticsConstructor: GeneticsConstructor.StructStruct = {
       randomness: globalParams.address0,
-      female: globalParams.femaleBoilerplateGene,
+      terrains: globalParams.address0,
       male: globalParams.maleBoilerplateGene,
-      femaleGenesProbability: 40,
+      female: globalParams.femaleBoilerplateGene,
       maleGenesProbability: 60,
+      femaleGenesProbability: 40,
       geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      maxValues: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
-      terrains: globalParams.address0
+      maxValues: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     };
     const genetics = await deployContract({
       name: 'Genetics',
@@ -223,12 +224,12 @@ async function main() {
     });
 
     let incubatorConstructor: IncubatorConstructor.StructStruct = {
-      allowed: [],
-      gamification: globalParams.address0,
-      genetics: globalParams.address0,
       methods: globalParams.address0,
-      races: globalParams.address0,
       randomness: globalParams.address0,
+      genetics: globalParams.address0,
+      gamification: globalParams.address0,
+      races: globalParams.address0,
+      allowed: [],
       secondsToMaturity: 345600
     };
     const incubatorMethods = await deployContract({
@@ -252,23 +253,23 @@ async function main() {
     });
 
     let houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
-      gamification: globalParams.address0,
-      houndModifier: globalParams.address0,
-      hounds: globalParams.address0,
       incubator: globalParams.address0,
-      minter: globalParams.address0,
+      staterApi: globalParams.address0,
       payments: globalParams.address0,
-      races: globalParams.address0,
       restricted: globalParams.address0,
+      minter: globalParams.address0,
+      hounds: globalParams.address0,
+      houndModifier: globalParams.address0,
       shop: globalParams.address0,
-      staterApi: globalParams.address0
+      races: globalParams.address0,
+      gamification: globalParams.address0
     };
     let houndsConstructorFees: ConstructorFees.StructStruct = {
+      currency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
       breedFee: "0x2386F26FC10000",
-      currency: globalParams.address0,
-      refillBreedingCooldownCost: "0x2386F26FC10000",
       refillCost: "0x2386F26FC10000",
+      refillBreedingCooldownCost: "0x2386F26FC10000",
       refillStaminaCooldownCost: "0x2386F26FC10000"
     };
     let houndsConstructor: HoundsConstructor.StructStruct = {
@@ -280,7 +281,11 @@ async function main() {
     }
     const houndsRestricted = await deployContract({
       name: 'HoundsRestricted',
-      constructor: [arrayfy(houndsConstructor)],
+      constructor: [arrayfy({
+        ...houndsConstructor,
+        boilerplate: arrayfy(houndsConstructorBoilerplate),
+        fees: arrayfy(houndsConstructorFees)
+      })],
       props: {}
     }) as HoundsRestricted;
     DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
@@ -290,7 +295,11 @@ async function main() {
 
     const houndsModifier = await deployContract({
       name: 'HoundsModifier',
-      constructor: [arrayfy(houndsConstructor)],
+      constructor: [arrayfy({
+        ...houndsConstructor,
+        boilerplate: arrayfy(houndsConstructorBoilerplate),
+        fees: arrayfy(houndsConstructorFees)
+      })],
       props: {}
     }) as HoundsModifier;
     DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
@@ -300,7 +309,11 @@ async function main() {
 
     const houndsMinter = await deployContract({
       name: 'HoundsMinter',
-      constructor: [arrayfy(houndsConstructor)],
+      constructor: [arrayfy({
+        ...houndsConstructor,
+        boilerplate: arrayfy(houndsConstructorBoilerplate),
+        fees: arrayfy(houndsConstructorFees)
+      })],
       props: {}
     }) as HoundsMinter;
     DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
@@ -310,7 +323,11 @@ async function main() {
 
     const hounds = await deployContract({
       name: 'Hounds',
-      constructor: [arrayfy(houndsConstructor)],
+      constructor: [arrayfy({
+        ...houndsConstructor,
+        boilerplate: arrayfy(houndsConstructorBoilerplate),
+        fees: arrayfy(houndsConstructorFees)
+      })],
       props: {}
     }) as Hounds;
     DeploymentLogger('export HOUNDS=' + hounds.address);
@@ -318,17 +335,62 @@ async function main() {
       step: "Deploy races restricted"
     });
 
+    let gamificationConstructor: GamificationConstructor.StructStruct = {
+      defaultBreeding: globalParams.houndBreeding,
+      defaultStamina: globalParams.houndStamina,
+      allowed: [],
+      methods: globalParams.address0,
+      restricted: globalParams.address0
+    }
+    const gamificationRestricted = await deployContract({
+      name: 'GamificationRestricted',
+      constructor: [arrayfy({
+        ...gamificationConstructor,
+        defaultBreeding: arrayfy(globalParams.houndBreeding),
+        defaultStamina: arrayfy(globalParams.houndStamina)
+      })],
+      props: {}
+    }) as Gamification;
+    DeploymentLogger('export GAMIFICATION_RESTRICTED=' + gamificationRestricted.address);
+    deployments.update(18, {
+      step: "Deploy races restricted"
+    });
+
+    const gamificationMethods = await deployContract({
+      name: 'GamificationMethods',
+      constructor: [arrayfy({
+        ...gamificationConstructor,
+        defaultBreeding: arrayfy(globalParams.houndBreeding),
+        defaultStamina: arrayfy(globalParams.houndStamina)
+      })],
+      props: {}
+    }) as Gamification;
+    DeploymentLogger('export GAMIFICATION_METHODS=' + gamificationRestricted.address);
+    deployments.update(18, {
+      step: "Deploy races restricted"
+    });
+
+    const gamification = await deployContract({
+      name: 'Gamification',
+      constructor: [arrayfy({
+        ...gamificationConstructor,
+        defaultBreeding: arrayfy(globalParams.houndBreeding),
+        defaultStamina: arrayfy(globalParams.houndStamina)
+      })],
+      props: {}
+    }) as Gamification;
+
     let racesConstructor: RacesConstructor.StructStruct = {
-      allowedCallers: [],
+      randomness: globalParams.address0,
       arenas: globalParams.address0,
-      callable: false,
-      generator: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
+      generator: globalParams.address0,
       payments: globalParams.address0,
+      restricted: globalParams.address0,
       queues: globalParams.address0,
-      randomness: globalParams.address0,
-      restricted: globalParams.address0
+      allowedCallers: [],
+      callable: false
     }
     const racesRestricted = await deployContract({
       name: 'RacesRestricted',
@@ -362,15 +424,15 @@ async function main() {
     });
 
     let generatorConstructor: GeneratorConstructor.StructStruct = {
-      allowed: globalParams.address0,
+      randomness: globalParams.address0,
       arenas: globalParams.address0,
-      gamification: globalParams.address0,
       hounds: globalParams.address0,
-      incubator: globalParams.address0,
+      allowed: globalParams.address0,
       methods: globalParams.address0,
       payments: globalParams.address0,
-      randomness: globalParams.address0,
-      zerocost: globalParams.address0
+      zerocost: globalParams.address0,
+      incubator: globalParams.address0,
+      gamification: globalParams.address0
     }
     const generatorMethods = await deployContract({
       name: 'GeneratorMethods',
@@ -407,14 +469,14 @@ async function main() {
     });
 
     let queuesConstructor: QueuesConstructor.StructStruct = {
-      allowedCallers: [],
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
       payments: globalParams.address0,
-      raceFee: "20000000000000000",
+      restricted: globalParams.address0,
       races: globalParams.address0,
-      restricted: globalParams.address0
+      allowedCallers: [],
+      raceFee: "20000000000000000"
     }
     const queuesMethods = await deployContract({
       name: 'QueuesMethods',
@@ -447,11 +509,11 @@ async function main() {
     });
 
     let lootboxesConstructor: LootboxesConstructor.StructStruct = {
-      alphadune: globalParams.address0,
-      canBeOpened: true,
+      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
       hounds: globalParams.address0,
       payments: globalParams.address0,
-      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
+      alphadune: globalParams.address0,
+      canBeOpened: true
     }
     const lootboxes = await deployContract({
       name: 'Lootboxes',
@@ -465,38 +527,131 @@ async function main() {
 
 
 
+
+
+
+
+
     shopConstructor = {
       methods: shopMethods.address,
       restricted: shopRestricted.address
     }
 
     arenasConstructor = {
-      alhpadunePercentage: 60,
-      allowedCallers: [races.address,queues.address],
-      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      methods: arenasMethods.address,
       name: "HoundRace Arenas", 
       symbol: "HRA",
+      restricted: arenasRestricted.address,
+      methods: arenasMethods.address,
       payments: payments.address,
-      restricted: arenasRestricted.address
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      allowedCallers: [races.address,queues.address],
+      alhpadunePercentage: 60
     }
 
     geneticsConstructor = {
-      female: femaleBoilerplateGene,
-      male: maleBoilerplateGene,
-      femaleGenesProbability: 40,
-      maleGenesProbability: 60,
-      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
-      maxValues: geneticsConstructor.maxValues,
       randomness: randomness.address,
-      terrains: arenas.address
+      terrains: arenas.address,
+      male: maleBoilerplateGene,
+      female: femaleBoilerplateGene,
+      maleGenesProbability: 60,
+      femaleGenesProbability: 40,
+      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
+      maxValues: geneticsConstructor.maxValues
     }
 
+    incubatorConstructor = {
+      methods: incubatorMethods.address,
+      randomness: randomness.address,
+      genetics: genetics.address,
+      gamification: gamification.address,
+      races: races.address,
+      allowed: [incubator.address, hounds.address, incubatorMethods.address],
+      secondsToMaturity: 345600
+    }
 
+    houndsConstructorBoilerplate = {
+      incubator: incubator.address,
+      staterApi: globalParams.address0,
+      payments: payments.address,
+      restricted: houndsRestricted.address,
+      minter: houndsMinter.address,
+      hounds: hounds.address,
+      houndModifier: houndsModifier.address,
+      shop: shop.address,
+      races: races.address,
+      gamification: gamification.address
+    };
+    houndsConstructorFees = {
+      currency: globalParams.address0,
+      breedCost: "0xB1A2BC2EC50000",
+      breedFee: "0x2386F26FC10000",
+      refillCost: "0x2386F26FC10000",
+      refillBreedingCooldownCost: "0x2386F26FC10000",
+      refillStaminaCooldownCost: "0x2386F26FC10000"
+    };
+    houndsConstructor = {
+      name: 'HoundRace',
+      symbol: 'HR',
+      allowedCallers: [
+        hounds.address,
+        races.address,
+        queues.address
+      ],
+      boilerplate: houndsConstructorBoilerplate,
+      fees: houndsConstructorFees
+    }
 
+    gamificationConstructor = {
+      defaultBreeding: globalParams.houndBreeding,
+      defaultStamina: globalParams.houndStamina,
+      allowed: [incubator.address, hounds.address, incubatorMethods.address],
+      restricted: globalParams.address0,
+      methods: globalParams.address0
+    }
 
+    racesConstructor = {
+      randomness: randomness.address,
+      arenas: arenas.address,
+      hounds: hounds.address,
+      methods: racesMethods.address,
+      generator: generator.address,
+      payments: payments.address,
+      restricted: racesRestricted.address,
+      queues: queues.address,
+      allowedCallers: [races.address, queues.address],
+      callable: false
+    }
 
+    generatorConstructor = {
+      randomness: randomness.address,
+      arenas: arenas.address,
+      hounds: hounds.address,
+      allowed: races.address,
+      methods: generatorMethods.address,
+      payments: payments.address,
+      zerocost: generatorZerocost.address,
+      incubator: incubator.address,
+      gamification: gamification.address
+    }
 
+    queuesConstructor = {
+      arenas: arenas.address,
+      hounds: hounds.address,
+      methods: queuesMethods.address,
+      payments: payments.address,
+      restricted: queuesRestricted.address,
+      races: races.address,
+      allowedCallers: [races.address],
+      raceFee: "20000000000000000"
+    }
+
+    lootboxesConstructor = {
+      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
+      hounds: hounds.address,
+      payments: payments.address,
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      canBeOpened: true
+    }
 
 
 
@@ -508,10 +663,7 @@ async function main() {
 
 
     try {
-      await shopRestricted.setGlobalParameters({
-        methods: shopMethods.address,
-        restricted: shopRestricted.address
-      });
+      await shopRestricted.setGlobalParameters(shopConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -520,10 +672,7 @@ async function main() {
     }
 
     try {
-      await shopMethods.setGlobalParameters({
-        methods: shopMethods.address,
-        restricted: shopRestricted.address
-      });
+      await shopMethods.setGlobalParameters(shopConstructor);
       configurations.update(3, {
         step: "Set global parameters for arenas restricted"
       });
@@ -532,16 +681,16 @@ async function main() {
     }
 
     try {
-      await arenasRestricted.setGlobalParameters({
-        name: "HoundRace Arenas", 
-        symbol: "HRA", 
-        restricted: arenasRestricted.address, 
-        methods: arenasMethods.address, 
-        payments: payments.address, 
-        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-        allowedCallers: [],
-        alhpadunePercentage: 60
+      await shop.setGlobalParameters(shopConstructor);
+      configurations.update(3, {
+        step: "Set global parameters for arenas restricted"
       });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await arenasRestricted.setGlobalParameters(arenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -550,15 +699,25 @@ async function main() {
     }
 
     try {
-      await incubatorMethods.setGlobalParameters({
-        methods: incubatorMethods.address,
-        secondsToMaturity: 345600,
-        genetics: genetics.address,
-        randomness: randomness.address,
-        gamification: globalParams.address0,
-        races: globalParams.address0,
-        allowed: []
+      await arenasMethods.setGlobalParameters(arenasConstructor);
+      configurations.update(4, {
+        step: "Set global parameters for incubator methods"
       });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await arenas.setGlobalParameters(arenasConstructor);
+      configurations.update(4, {
+        step: "Set global parameters for incubator methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await incubatorMethods.setGlobalParameters(incubatorConstructor);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
       });
@@ -567,17 +726,16 @@ async function main() {
     }
 
     try {
-      await generatorMethods.setGlobalParameters({
-        randomness: randomness.address,
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: generatorMethods.address,
-        payments: payments.address,
-        zerocost: generatorZerocost.address,
-        allowed: races.address,
-        gamification: globalParams.address0,
-        incubator: incubator.address
+      await incubator.setGlobalParameters(incubatorConstructor);
+      configurations.update(5, {
+        step: "Set global parameters for generator methods"
       });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await generatorMethods.setGlobalParameters(generatorConstructor);
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
       });
@@ -586,35 +744,25 @@ async function main() {
     }
 
     try {
-      await generatorZerocost.setGlobalParameters({
-        randomness: randomness.address,
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: generatorMethods.address,
-        payments: payments.address,
-        zerocost: generatorZerocost.address,
-        allowed: races.address,
-        gamification: globalParams.address0,
-        incubator: incubator.address
-      });
-      configurations.update(7, {
-        step: "Set global parameters for queues methods"
+      await generatorZerocost.setGlobalParameters(generatorConstructor);
+      configurations.update(6, {
+        step: "Set global parameters for generator zerocost"
       });
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
     try {
-      await queuesMethods.setGlobalParameters({
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: queuesMethods.address,
-        payments: payments.address,
-        restricted: queuesRestricted.address,
-        races: races.address,
-        allowedCallers: [],
-        raceFee: "20000000000000000"
+      await generator.setGlobalParameters(generatorConstructor);
+      configurations.update(6, {
+        step: "Set global parameters for generator zerocost"
       });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await queuesMethods.setGlobalParameters(queuesConstructor);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
       });
@@ -623,16 +771,7 @@ async function main() {
     }
 
     try {
-      await queuesRestricted.setGlobalParameters({
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: queuesMethods.address,
-        payments: payments.address,
-        restricted: queuesRestricted.address,
-        races: races.address,
-        allowedCallers: [],
-        raceFee: "20000000000000000"
-      });
+      await queuesRestricted.setGlobalParameters(queuesConstructor);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
       });
@@ -641,21 +780,16 @@ async function main() {
     }
 
     try {
-      await racesRestricted.setGlobalParameters({
-        randomness: randomness.address,
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: racesMethods.address,
-        generator: generator.address,
-        payments: payments.address,
-        restricted: racesRestricted.address,
-        queues: queues.address,
-        allowedCallers: [
-          racesRestricted.address,racesMethods.address,races.address,
-          queuesRestricted.address,queuesMethods.address,queues.address
-        ],
-        callable: false
+      await queues.setGlobalParameters(queuesConstructor);
+      configurations.update(9, {
+        step: "Set global parameters for races restricted"
       });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await racesRestricted.setGlobalParameters(racesConstructor);
       configurations.update(10, {
         step: "Set global parameters for races methods"
       });
@@ -664,21 +798,7 @@ async function main() {
     }
 
     try {
-      await racesMethods.setGlobalParameters({
-        randomness: randomness.address,
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: racesMethods.address,
-        generator: generator.address,
-        payments: payments.address,
-        restricted: racesRestricted.address,
-        queues: queues.address,
-        allowedCallers: [
-          racesRestricted.address,racesMethods.address,races.address,
-          queuesRestricted.address,queuesMethods.address,queues.address
-        ],
-        callable: false
-      });
+      await racesMethods.setGlobalParameters(racesConstructor);
       configurations.update(11, {
         step: "Set global parameters for races"
       });
@@ -687,21 +807,7 @@ async function main() {
     }
 
     try {
-      await races.setGlobalParameters({
-        randomness: randomness.address,
-        arenas: arenas.address,
-        hounds: hounds.address,
-        methods: racesMethods.address,
-        generator: generator.address,
-        payments: payments.address,
-        restricted: racesRestricted.address,
-        queues: queues.address,
-        allowedCallers: [
-          racesRestricted.address,racesMethods.address,races.address,
-          queuesRestricted.address,queuesMethods.address,queues.address
-        ],
-        callable: false
-      });
+      await races.setGlobalParameters(racesConstructor);
       configurations.update(12, {
         step: "Set global parameters hounds"
       });
@@ -710,102 +816,7 @@ async function main() {
     }
 
     try {
-      await arenas.setGlobalParameters({
-        name: "HoundRace Arenas", 
-        symbol: "HRA", 
-        restricted: arenasRestricted.address, 
-        methods: arenasMethods.address, 
-        payments: payments.address, 
-        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-        allowedCallers: [races.address,queues.address],
-        alhpadunePercentage: 60
-      });
-      configurations.update(4, {
-        step: "Set global parameters for incubator methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await hounds.setGlobalParameters({
-        name: "HoundRace",
-        symbol: "HR",
-        allowedCallers: [
-          hounds.address,
-          houndsRestricted.address,
-          houndsMinter.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address,
-          queues.address,
-          queuesMethods.address,
-          queuesRestricted.address
-        ],
-        boilerplate: {
-          incubator: incubator.address,
-          staterApi: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-          payments: payments.address,
-          restricted: houndsRestricted.address,
-          minter: houndsMinter.address,
-          hounds: hounds.address,
-          houndModifier: houndsModifier.address,
-          shop: shop.address,
-          gamification: globalParams.address0,
-          races: races.address
-        },
-        fees: {
-          currency: globalParams.address0,
-          breedCost: "0xB1A2BC2EC50000",
-          breedFee: "0x2386F26FC10000",
-          refillBreedingCooldownCost: "0x2386F26FC10000",
-          refillCost: "0x2386F26FC10000",
-          refillStaminaCooldownCost: "0x2386F26FC10000"
-        }
-      });
-      configurations.update(13, {
-        step: "Set global parameters hounds modifier"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await houndsModifier.setGlobalParameters({
-        name: "HoundRace",
-        symbol: "HR",
-        allowedCallers: [
-          hounds.address,
-          houndsRestricted.address,
-          houndsMinter.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address,
-          queues.address,
-          queuesMethods.address,
-          queuesRestricted.address
-        ],
-        boilerplate: {
-          incubator: incubator.address,
-          staterApi: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-          payments: payments.address,
-          restricted: houndsRestricted.address,
-          minter: houndsMinter.address,
-          hounds: hounds.address,
-          houndModifier: houndsModifier.address,
-          shop: shop.address,
-          gamification: globalParams.address0,
-          races: races.address
-        },
-        fees: {
-          currency: globalParams.address0,
-          breedCost: "0xB1A2BC2EC50000",
-          breedFee: "0x2386F26FC10000",
-          refillBreedingCooldownCost: "0x2386F26FC10000",
-          refillCost: "0x2386F26FC10000",
-          refillStaminaCooldownCost: "0x2386F26FC10000"
-        }
-      });
+      await houndsModifier.setGlobalParameters(houndsConstructor);
       configurations.update(14, {
         step: "Set global parameters hounds restricted"
       });
@@ -814,41 +825,7 @@ async function main() {
     }
 
     try {
-      await houndsRestricted.setGlobalParameters({
-        name: "HoundRace",
-        symbol: "HR",
-        allowedCallers: [
-          hounds.address,
-          houndsRestricted.address,
-          houndsMinter.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address,
-          queues.address,
-          queuesMethods.address,
-          queuesRestricted.address
-        ],
-        boilerplate: {
-          incubator: incubator.address,
-          staterApi: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-          payments: payments.address,
-          restricted: houndsRestricted.address,
-          minter: houndsMinter.address,
-          hounds: hounds.address,
-          houndModifier: houndsModifier.address,
-          shop: shop.address,
-          gamification: globalParams.address0,
-          races: races.address
-        },
-        fees: {
-          currency: globalParams.address0,
-          breedCost: "0xB1A2BC2EC50000",
-          breedFee: "0x2386F26FC10000",
-          refillBreedingCooldownCost: "0x2386F26FC10000",
-          refillCost: "0x2386F26FC10000",
-          refillStaminaCooldownCost: "0x2386F26FC10000"
-        }
-      });
+      await houndsRestricted.setGlobalParameters(houndsConstructor);
       configurations.update(15, {
         step: "Set global parameters hounds minter"
       });
@@ -857,41 +834,7 @@ async function main() {
     }
 
     try {
-      await houndsMinter.setGlobalParameters({
-        name: "HoundRace",
-        symbol: "HR",
-        allowedCallers: [
-          hounds.address,
-          houndsRestricted.address,
-          houndsMinter.address,
-          races.address,
-          racesMethods.address,
-          racesRestricted.address,
-          queues.address,
-          queuesMethods.address,
-          queuesRestricted.address
-        ],
-        boilerplate: {
-          incubator: incubator.address,
-          staterApi: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-          payments: payments.address,
-          restricted: houndsRestricted.address,
-          minter: houndsMinter.address,
-          hounds: hounds.address,
-          houndModifier: houndsModifier.address,
-          shop: shop.address,
-          gamification: globalParams.address0,
-          races: races.address
-        },
-        fees: {
-          currency: globalParams.address0,
-          breedCost: "0xB1A2BC2EC50000",
-          breedFee: "0x2386F26FC10000",
-          refillBreedingCooldownCost: "0x2386F26FC10000",
-          refillCost: "0x2386F26FC10000",
-          refillStaminaCooldownCost: "0x2386F26FC10000"
-        }
-      });
+      await houndsMinter.setGlobalParameters(houndsConstructor);
       configurations.update(16, {
         step: "Finished!"
       });
@@ -899,8 +842,14 @@ async function main() {
       DeploymentError((err as NodeJS.ErrnoException).message);
     }
 
-
-
+    try {
+      await hounds.setGlobalParameters(houndsConstructor);
+      configurations.update(13, {
+        step: "Set global parameters hounds modifier"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
 
 
 
@@ -967,7 +916,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: houndracePotions.address,
-          constructorArguments: ["HoundracePotions", "HP"]
+          constructorArguments: houndracePotionsConstructor
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -979,11 +928,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shopRestricted.address,
-          constructorArguments: [
-            [
-              globalParams.address0, globalParams.address0, globalParams.address0
-            ]
-          ]
+          constructorArguments: arrayfy(shopConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -995,11 +940,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shopMethods.address,
-          constructorArguments: [
-            [
-              globalParams.address0, globalParams.address0, globalParams.address0
-            ]
-          ]
+          constructorArguments: arrayfy(shopConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1011,11 +952,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shop.address,
-          constructorArguments: [
-            [
-              shopMethods.address,shopRestricted.address
-            ]
-          ]
+          constructorArguments: arrayfy(shopConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1027,11 +964,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenasRestricted.address,
-          constructorArguments: [
-            [
-              "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
-            ]
-          ]
+          constructorArguments: arrayfy(arenasConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1043,11 +976,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenasMethods.address,
-          constructorArguments: [
-            [
-              "HoundRace Arenas", "HRA", globalParams.address0, globalParams.address0, globalParams.address0, globalParams.address0, [], 60
-            ]
-          ]
+          constructorArguments: arrayfy(arenasConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1059,11 +988,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenas.address,
-          constructorArguments: [
-            [
-              "HoundRace Arenas", "HRA", arenasRestricted.address, arenasMethods.address, payments.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), [], 60
-            ]
-          ]
+          constructorArguments: arrayfy(arenasConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1075,18 +1000,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: genetics.address,
-          constructorArguments: [
-            [
-              randomness.address,
-              arenas.address,
-              maleBoilerplateGene,
-              femaleBoilerplateGene,
-              60,
-              40,
-              [2,6,10,14,18,22,26,30,34,38,42,46,50],
-              [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-            ]
-          ]
+          constructorArguments: arrayfy(geneticsConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1098,17 +1012,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: incubatorMethods.address,
-          constructorArguments: [
-            [
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              345600,
-              1800,
-              2419200,
-              '300000000000000000'
-            ]
-          ]
+          constructorArguments: arrayfy(incubatorConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1120,17 +1024,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: incubator.address,
-          constructorArguments: [
-            [
-              incubatorMethods.address,
-              randomness.address,
-              genetics.address,
-              345600,
-              1800,
-              2419200,
-              '300000000000000000'
-            ]
-          ]
+          constructorArguments: arrayfy(incubatorConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1142,30 +1036,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: houndsRestricted.address,
-          constructorArguments: [
-            [
-              "HoundRace",
-              "HR",
-              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-              [
-                globalParams.address0,
-                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0
-              ],[
-                payments.address,
-                "0xB1A2BC2EC50000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000"
-              ]
-            ]
-          ]
+          constructorArguments: [arrayfy({
+            ...houndsConstructor,
+            boilerplate: arrayfy(houndsConstructorBoilerplate),
+            fees: arrayfy(houndsConstructorFees)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1178,30 +1053,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: houndsModifier.address,
-          constructorArguments: [
-            [
-              "HoundRace",
-              "HR",
-              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-              [
-                globalParams.address0,
-                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0
-              ],[
-                payments.address,
-                "0xB1A2BC2EC50000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000"
-              ]
-            ]
-          ]
+          constructorArguments: [arrayfy({
+            ...houndsConstructor,
+            boilerplate: arrayfy(houndsConstructorBoilerplate),
+            fees: arrayfy(houndsConstructorFees)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1213,30 +1069,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: houndsMinter.address,
-          constructorArguments: [
-            [
-              "HoundRace",
-              "HR",
-              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-              [
-                globalParams.address0,
-                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0,
-                globalParams.address0
-              ],[
-                payments.address,
-                "0xB1A2BC2EC50000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000"
-              ]
-            ]
-          ]
+          constructorArguments: [arrayfy({
+            ...houndsConstructor,
+            boilerplate: arrayfy(houndsConstructorBoilerplate),
+            fees: arrayfy(houndsConstructorFees)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1248,30 +1085,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: hounds.address,
-          constructorArguments: [
-            [
-              "HoundRace",
-              "HR",
-              [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-              [
-                incubator.address,
-                String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-                payments.address,
-                houndsRestricted.address,
-                houndsMinter.address,
-                globalParams.address0,
-                houndsModifier.address,
-                shop.address
-              ],[
-                payments.address,
-                "0xB1A2BC2EC50000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000",
-                "0x2386F26FC10000"
-              ]
-            ]
-          ]
+          constructorArguments: [arrayfy({
+            ...houndsConstructor,
+            boilerplate: arrayfy(houndsConstructorBoilerplate),
+            fees: arrayfy(houndsConstructorFees)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1280,24 +1098,11 @@ async function main() {
         step: "Verify races restricted"
       });
 
+      /*
       try {
         await run("verify:verify", {
           address: racesRestricted.address,
-          constructorArguments: [
-            [
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              [],
-              500000000,
-              false
-            ]
-          ]
+          constructorArguments: arrayfy(racesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1309,21 +1114,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: racesMethods.address,
-          constructorArguments: [
-            [
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              [],
-              500000000,
-              false
-            ]
-          ]
+          constructorArguments: arrayfy(racesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1335,21 +1126,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: races.address,
-          constructorArguments: [
-            [
-              randomness.address,
-              arenas.address,
-              hounds.address,
-              racesMethods.address,
-              globalParams.address0,
-              payments.address,
-              racesRestricted.address,
-              globalParams.address0,
-              [],
-              500000000,
-              false
-            ]
-          ]
+          constructorArguments: arrayfy(racesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1361,17 +1138,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generatorMethods.address, 
-          constructorArguments: [
-            [
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
-            ]
-          ]
+          constructorArguments: arrayfy(generatorConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1383,17 +1150,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generator.address,
-          constructorArguments: [
-            [
-              randomness.address,
-              arenas.address,
-              hounds.address,
-              races.address,
-              generatorMethods.address,
-              payments.address,
-              generatorZerocost.address
-            ]
-          ]
+          constructorArguments: arrayfy(generatorConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1405,17 +1162,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesRestricted.address,
-          constructorArguments: [
-            [
-              arenas.address,
-              hounds.address,
-              globalParams.address0,
-              payments.address,
-              globalParams.address0,
-              races.address,
-              []
-            ]
-          ]
+          constructorArguments: arrayfy(queuesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1427,17 +1174,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesMethods.address,
-          constructorArguments: [
-            [
-              arenas.address,
-              hounds.address,
-              globalParams.address0,
-              payments.address,
-              globalParams.address0,
-              races.address,
-              []
-            ]
-          ]
+          constructorArguments: arrayfy(queuesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1449,17 +1186,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queues.address,
-          constructorArguments: [
-            [
-              arenas.address,
-              hounds.address,
-              queuesMethods.address,
-              payments.address,
-              queuesRestricted.address,
-              races.address,
-              []
-            ]
-          ]
+          constructorArguments: arrayfy(queuesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1471,19 +1198,13 @@ async function main() {
       try {
         await run("verify:verify", {
           address: lootboxes.address,
-          constructorArguments: [
-            [
-              "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK", 
-              hounds.address, 
-              payments.address,
-              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              true
-            ]
-          ]
+          constructorArguments: arrayfy(lootboxesConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
       }
+
+      */
 
     }
 
