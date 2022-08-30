@@ -18,6 +18,8 @@ library Race {
 
         uint256 randomness;
 
+        uint256 raceFee;
+
         Payment.Struct payments;
 
         uint256 queueId;

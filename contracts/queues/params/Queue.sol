@@ -8,6 +8,10 @@ library Queue {
 
         string name;
 
+        address feeCurrency;
+
+        address entryFeeCurrency;
+
         uint256[] participants;
 
         uint256[] enqueueDates;
@@ -21,6 +25,8 @@ library Queue {
         uint256 endDate;
 
         uint256 lastCompletion;
+
+        uint256 fee;
 
         Payment.Struct payments;
 

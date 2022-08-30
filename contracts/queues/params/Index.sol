@@ -12,6 +12,7 @@ import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
+import './EnqueueCost.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../races/interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
@@ -48,10 +49,6 @@ contract Params is Ownable, Withdrawable {
     
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
         return queues[theId];
-    }
-
-    function enqueueCost(uint256 theId) public view returns(uint256) {
-        return ( ( IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants ) + queues[theId].totalParticipants ) + queues[theId].entryFee + ( ( control.raceFee / queues[theId].totalParticipants ) + queues[theId].totalParticipants );
     }
 
     function handleAllowedCallers(address[] memory allowedCallers) internal {
