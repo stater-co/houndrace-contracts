@@ -116,3 +116,4 @@ typechain
 #Hardhat files
 cache
 artifacts
+statistics

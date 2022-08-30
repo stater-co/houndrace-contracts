@@ -33,14 +33,18 @@ import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
 import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
+import { run as runLootboxes } from './23_Deploy_Lootboxes';
+import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { run as runGamification } from './25_Deploy_Gamification';
 import { set as setGamification } from './26_Setup_Gamification';
+import { test as testLootboxes } from './24_Lootboxes/24_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
+import { test as testRacesAdvanced } from './22_Races/22_2_Races_Advanced_Tests';
 import { test as generationTests } from './22_Races/22_3_Races_Generation_Tests';
 
 
 async function main() {
-
+    
     const libraries: DeployedLibraries = await runLibraries();
     
     const payments: PaymentEcosystem = await runPayments();
@@ -103,7 +107,8 @@ async function main() {
             payments: payments.payments.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            allowedCallers: [ races.races.address]
+            allowedCallers: [ races.races.address],
+            raceFee: 5000000
         }
     });
 
@@ -214,7 +219,6 @@ async function main() {
             queues: queues.queues.address,
             randomness: randomness.randomness.address,
             restricted: queues.queuesRestricted.address,
-            raceFee: 500000000,
             callable: false,
             allowedCallers: [
                 races.races.address,
@@ -224,38 +228,14 @@ async function main() {
         }
     });
 
-    await setGenerator({
-        generatorMethods: generator.generatorMethods,
-        generatorZerocost: generator.generatorZerocost,
-        constructor: {
-            arenas: arenas.arenas.address,
-            hounds: hounds.hounds.address,
-            methods: generator.generatorMethods.address,
-            payments: payments.payments.address,
-            randomness: randomness.randomness.address,
-            zerocost: generator.generatorZerocost.address,
-            allowed: races.races.address,
-            incubator: incubators.incubator.address,
-            gamification: gamification.gamification.address
-        }
+    await testGenetics.basicTest({
+        genetics: genetics.genetics
     });
 
     await testHounds.basicTest({
         hounds: hounds.hounds,
         gamification: gamification.gamification,
         races: races.races
-    });
-
-    await testArenas.basicTest({
-        arenas: arenas.arenas,
-        arena: globalParams.defaultArena
-    });
-
-    await testQueues.basicTest({
-        contract: queues.queues,
-        houndsContract: hounds.hounds,
-        houndIdToEnqueue: 1,
-        queue: globalParams.defaultQueue
     });
 
     await testRaces.basicTest({
@@ -295,19 +275,12 @@ async function main() {
         }
     });
 
-    await testHoundsAdvanced.advancedTests({
-        hounds: hounds.hounds,
-        transferableHounds: hounds.transferrableRoot,
-        erc20: payments.houndracePotions,
-        payments: payments.payments,
-        gamification: gamification.gamification,
-        races: races.races
-    });
-
     await generationTests.generationTests({
         race: globalParams.defaultRace,
         hounds: hounds.hounds,
-        arena: globalParams.defaultArena
+        arena: globalParams.defaultArena,
+        gamification: gamification.gamification,
+        races: races.races
     });
 
 }

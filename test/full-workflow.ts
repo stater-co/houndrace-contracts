@@ -345,13 +345,13 @@ async function main() {
         race: globalParams.defaultRace
     });
 
-    /*
     await generationTests.generationTests({
         race: globalParams.defaultRace,
         hounds: hounds.hounds,
-        arena: globalParams.defaultArena
+        arena: globalParams.defaultArena,
+        gamification: gamification.gamification,
+        races: races.races
     });
-    */
 
 }
 
