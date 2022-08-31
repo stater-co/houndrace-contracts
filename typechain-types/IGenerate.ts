@@ -47,45 +47,66 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Queue {
+export declare namespace Core {
   export type StructStruct = {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
     entryFee: BigNumberish;
-    startDate: BigNumberish;
-    endDate: BigNumberish;
-    lastCompletion: BigNumberish;
+    fee: BigNumberish;
     payments: Payment.StructStruct;
-    totalParticipants: BigNumberish;
-    cooldown: BigNumberish;
-    closed: boolean;
   };
 
   export type StructStructOutput = [
+    string,
+    string,
     string,
     BigNumber[],
     BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput,
-    number,
-    number,
-    boolean
+    Payment.StructStructOutput
   ] & {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
     entryFee: BigNumber;
+    fee: BigNumber;
+    payments: Payment.StructStructOutput;
+  };
+}
+
+export declare namespace Queue {
+  export type StructStruct = {
+    core: Core.StructStruct;
+    startDate: BigNumberish;
+    endDate: BigNumberish;
+    lastCompletion: BigNumberish;
+    totalParticipants: BigNumberish;
+    cooldown: BigNumberish;
+    closed: boolean;
+  };
+
+  export type StructStructOutput = [
+    Core.StructStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number,
+    number,
+    boolean
+  ] & {
+    core: Core.StructStructOutput;
     startDate: BigNumber;
     endDate: BigNumber;
     lastCompletion: BigNumber;
-    payments: Payment.StructStructOutput;
     totalParticipants: number;
     cooldown: number;
     closed: boolean;
@@ -94,35 +115,20 @@ export declare namespace Queue {
 
 export declare namespace Race {
   export type StructStruct = {
-    name: string;
-    currency: string;
-    participants: BigNumberish[];
-    arena: BigNumberish;
-    entryFee: BigNumberish;
+    core: Core.StructStruct;
     randomness: BigNumberish;
-    payments: Payment.StructStruct;
     queueId: BigNumberish;
     seed: BytesLike;
   };
 
   export type StructStructOutput = [
-    string,
-    string,
-    BigNumber[],
+    Core.StructStructOutput,
     BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput,
     BigNumber,
     string
   ] & {
-    name: string;
-    currency: string;
-    participants: BigNumber[];
-    arena: BigNumber;
-    entryFee: BigNumber;
+    core: Core.StructStructOutput;
     randomness: BigNumber;
-    payments: Payment.StructStructOutput;
     queueId: BigNumber;
     seed: string;
   };
@@ -131,7 +137,7 @@ export declare namespace Race {
 export interface IGenerateInterface extends utils.Interface {
   contractName: "IGenerate";
   functions: {
-    "generate((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
+    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

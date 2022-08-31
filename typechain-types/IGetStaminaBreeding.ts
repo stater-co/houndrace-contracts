@@ -46,6 +46,7 @@ export declare namespace HoundStamina {
 
 export declare namespace HoundBreeding {
   export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
@@ -53,11 +54,13 @@ export declare namespace HoundBreeding {
   };
 
   export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;

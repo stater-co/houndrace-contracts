@@ -24,22 +24,13 @@ import { set as setArenas } from './13_Setup_Arenas_Contracts';
 import { set as setIncubators } from './14_Setup_Incubator_Contracts';
 import { set as setHounds } from './15_Setup_Hounds_Contracts';
 import { set as setRaces } from './16_Setup_Races_Contracts';
-import { set as setGenerator } from './17_Setup_Generator_Contracts';
 import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
 import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
-import { test as testHoundsAdvanced } from './19_Hounds/19_2_Hounds_Custom_Token_Tests';
-import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
-import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
-import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
 import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
-import { run as runLootboxes } from './23_Deploy_Lootboxes';
-import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { run as runGamification } from './25_Deploy_Gamification';
 import { set as setGamification } from './26_Setup_Gamification';
-import { test as testLootboxes } from './24_Lootboxes/24_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
-import { test as testRacesAdvanced } from './22_Races/22_2_Races_Advanced_Tests';
 import { test as generationTests } from './22_Races/22_3_Races_Generation_Tests';
 
 

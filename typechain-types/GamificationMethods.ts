@@ -24,6 +24,7 @@ import type {
 
 export declare namespace HoundBreeding {
   export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
@@ -31,11 +32,13 @@ export declare namespace HoundBreeding {
   };
 
   export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
@@ -104,7 +107,7 @@ export interface GamificationMethodsInterface extends utils.Interface {
     "initializeHoundGamingStats(uint256,uint32[54])": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters(((uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setGlobalParameters(((address,uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -267,7 +270,8 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
+      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+        breedingFeeCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;
@@ -350,7 +354,8 @@ export interface GamificationMethods extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, boolean] & {
+    [string, BigNumber, BigNumber, BigNumber, boolean] & {
+      breedingFeeCurrency: string;
       lastBreed: BigNumber;
       breedingCooldown: BigNumber;
       breedingFee: BigNumber;
@@ -433,7 +438,8 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, boolean] & {
+      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+        breedingFeeCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;

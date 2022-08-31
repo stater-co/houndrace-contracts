@@ -69,6 +69,7 @@ export declare namespace HoundStamina {
 
 export declare namespace HoundBreeding {
   export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
@@ -76,11 +77,13 @@ export declare namespace HoundBreeding {
   };
 
   export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
@@ -158,7 +161,7 @@ export declare namespace Hound {
 export interface IInitializeHoundInterface extends utils.Interface {
   contractName: "IInitializeHound";
   functions: {
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(address,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
   };
 
   encodeFunctionData(

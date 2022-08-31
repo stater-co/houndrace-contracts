@@ -8,7 +8,7 @@ import { safeMintArena } from "../../plugins/test/mintArena";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { safeMintQueue } from "../../plugins/test/mintQueue";
 import { safeUnenqueue } from "../../plugins/test/unenqueue";
-import { Hound, Hounds } from "../../typechain-types/Hounds";
+import { Hound, Hounds, MicroPayment } from "../../typechain-types/Hounds";
 import { Queues } from "../../typechain-types/Queues";
 const { ethers } = require('hardhat');
 
@@ -134,19 +134,24 @@ async function advancedTests(
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
       const [sig1, sig2] = await ethers.getSigners();
-      const entryFee = await dependencies.queuesContract.enqueueCost(createdQueueId);
+      const entryFee: MicroPayment.StructStructOutput[]  = await dependencies.queuesContract.enqueueCost(createdQueueId);
+
+      let totalValueToPay: number = 0;
+      for ( let i = 0 , l = entryFee.length ; i < l ; ++i ) {
+        totalValueToPay += Number(entryFee[i].amount);
+      }
 
       for ( let j = 1 ; j < totalHounds && totalEnqueues < 10 ; ++j ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         let houndOwner: string = await dependencies.houndsContract.houndOwner(j);
         if ( Number(hound.profile.queueId) === 0 && houndOwner === sig2.address) {
     
-          await dependencies.erc20.mint(sig1.address, entryFee);
+          await dependencies.erc20.mint(sig1.address, totalValueToPay);
 
-          await dependencies.erc20.transfer(sig2.address, entryFee);
+          await dependencies.erc20.transfer(sig2.address, totalValueToPay);
     
           await dependencies.erc20.connect(sig2)
-          .approve(dependencies.payments.address, String(entryFee));
+          .approve(dependencies.payments.address, String(totalValueToPay));
 
           const balanceBefore: string = String(await dependencies.erc20.balanceOf(sig2.address));
 

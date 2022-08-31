@@ -24,6 +24,7 @@ import type {
 
 export declare namespace HoundBreeding {
   export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
@@ -31,11 +32,13 @@ export declare namespace HoundBreeding {
   };
 
   export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
@@ -46,7 +49,7 @@ export declare namespace HoundBreeding {
 export interface ISetBreedingInterface extends utils.Interface {
   contractName: "ISetBreeding";
   functions: {
-    "setBreeding(uint256,(uint256,uint256,uint256,bool))": FunctionFragment;
+    "setBreeding(uint256,(address,uint256,uint256,uint256,bool))": FunctionFragment;
   };
 
   encodeFunctionData(

@@ -24,20 +24,20 @@ contract QueuesZerocost {
 
             // Alpha Dune fee
             MicroPayment.Struct(
-                queue.feeCurrency,
-                ( queue.fee / queue.totalParticipants ) + queue.totalParticipants 
+                queue.core.feeCurrency,
+                ( queue.core.fee / queue.totalParticipants ) + queue.totalParticipants 
             ),
 
             // Arena fee 
             MicroPayment.Struct(
-                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
-                ( IArenaFee(control.arenas).arenaFee(queue.arena) / queue.totalParticipants ) + queue.totalParticipants + queue.entryFee
+                IArenaCurrency(control.arenas).arenaCurrency(queue.core.arena),
+                ( IArenaFee(control.arenas).arenaFee(queue.core.arena) / queue.totalParticipants ) + queue.totalParticipants + queue.core.entryFee
             ),
 
             // Entry fee 
             MicroPayment.Struct(
-                queue.entryFeeCurrency,
-                queue.entryFee
+                queue.core.entryFeeCurrency,
+                queue.core.entryFee
             )
 
         );

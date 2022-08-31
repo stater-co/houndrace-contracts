@@ -10,21 +10,25 @@ contract GeneratorMethods is Params {
     function generate(Queue.Struct memory queue, uint256 queueId) external view returns(Race.Struct memory) {
 
         require(control.allowed == msg.sender);
-        require(queue.participants.length == queue.totalParticipants);
+        require(queue.core.participants.length == queue.totalParticipants);
         
         uint256 theRandomness = IGetRandomNumber(control.randomness).getRandomNumber(abi.encode(block.timestamp));
 
-        (uint256[] memory participants, uint256[] memory scores) = ISimulateClassicRace(control.zerocost).simulateClassicRace(queue.participants,queue.arena,theRandomness);
+        (uint256[] memory participants, uint256[] memory scores) = ISimulateClassicRace(control.zerocost).simulateClassicRace(queue.core.participants,queue.core.arena,theRandomness);
 
         return Race.Struct(
-            queue.name,
-            IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
-            participants,
-            queue.arena,
-            queue.entryFee,
+            Core.Struct(
+                queue.core.name,
+                queue.core.feeCurrency,
+                queue.core.entryFeeCurrency,
+                participants,
+                queue.core.enqueueDates,
+                queue.core.arena,
+                queue.core.entryFee,
+                queue.core.fee,
+                queue.core.payments
+            ),
             theRandomness,
-            queue.fee,
-            queue.payments,
             queueId,
             abi.encode(scores)
         );

@@ -49,45 +49,66 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Queue {
+export declare namespace Core {
   export type StructStruct = {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
     entryFee: BigNumberish;
-    startDate: BigNumberish;
-    endDate: BigNumberish;
-    lastCompletion: BigNumberish;
+    fee: BigNumberish;
     payments: Payment.StructStruct;
-    totalParticipants: BigNumberish;
-    cooldown: BigNumberish;
-    closed: boolean;
   };
 
   export type StructStructOutput = [
+    string,
+    string,
     string,
     BigNumber[],
     BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput,
-    number,
-    number,
-    boolean
+    Payment.StructStructOutput
   ] & {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
     entryFee: BigNumber;
+    fee: BigNumber;
+    payments: Payment.StructStructOutput;
+  };
+}
+
+export declare namespace Queue {
+  export type StructStruct = {
+    core: Core.StructStruct;
+    startDate: BigNumberish;
+    endDate: BigNumberish;
+    lastCompletion: BigNumberish;
+    totalParticipants: BigNumberish;
+    cooldown: BigNumberish;
+    closed: boolean;
+  };
+
+  export type StructStructOutput = [
+    Core.StructStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number,
+    number,
+    boolean
+  ] & {
+    core: Core.StructStructOutput;
     startDate: BigNumber;
     endDate: BigNumber;
     lastCompletion: BigNumber;
-    payments: Payment.StructStructOutput;
     totalParticipants: number;
     cooldown: number;
     closed: boolean;
@@ -97,7 +118,7 @@ export declare namespace Queue {
 export interface IRaceStartInterface extends utils.Interface {
   contractName: "IRaceStart";
   functions: {
-    "raceStart((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

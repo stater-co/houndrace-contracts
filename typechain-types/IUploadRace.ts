@@ -49,37 +49,58 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Race {
+export declare namespace Core {
   export type StructStruct = {
     name: string;
-    currency: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumberish[];
+    enqueueDates: BigNumberish[];
     arena: BigNumberish;
     entryFee: BigNumberish;
-    randomness: BigNumberish;
+    fee: BigNumberish;
     payments: Payment.StructStruct;
-    queueId: BigNumberish;
-    seed: BytesLike;
   };
 
   export type StructStructOutput = [
     string,
     string,
+    string,
+    BigNumber[],
     BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
-    Payment.StructStructOutput,
+    Payment.StructStructOutput
+  ] & {
+    name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
+    participants: BigNumber[];
+    enqueueDates: BigNumber[];
+    arena: BigNumber;
+    entryFee: BigNumber;
+    fee: BigNumber;
+    payments: Payment.StructStructOutput;
+  };
+}
+
+export declare namespace Race {
+  export type StructStruct = {
+    core: Core.StructStruct;
+    randomness: BigNumberish;
+    queueId: BigNumberish;
+    seed: BytesLike;
+  };
+
+  export type StructStructOutput = [
+    Core.StructStructOutput,
+    BigNumber,
     BigNumber,
     string
   ] & {
-    name: string;
-    currency: string;
-    participants: BigNumber[];
-    arena: BigNumber;
-    entryFee: BigNumber;
+    core: Core.StructStructOutput;
     randomness: BigNumber;
-    payments: Payment.StructStructOutput;
     queueId: BigNumber;
     seed: string;
   };
@@ -88,7 +109,7 @@ export declare namespace Race {
 export interface IUploadRaceInterface extends utils.Interface {
   contractName: "IUploadRace";
   functions: {
-    "uploadRace(uint256,(string,address,uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(

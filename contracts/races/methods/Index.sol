@@ -14,8 +14,8 @@ contract RacesMethods is Params {
 
             races[id] = IGenerate(control.generator).generate(queue,theId);
 
-            for ( uint256 i = 0 ; i < queue.participants.length ; ++i ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.participants[i], theId) != 0);
+            for ( uint256 i = 0 ; i < queue.core.participants.length ; ++i ) {
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], theId) != 0);
             }
 
             emit NewFinishedRace(id, races[id]);
@@ -23,14 +23,18 @@ contract RacesMethods is Params {
         } else {
 
             emit NewRace(id, Race.Struct(
-                queue.name,
-                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
-                queue.participants,
-                queue.arena,
-                queue.entryFee,
+                Core.Struct(
+                    queue.core.name,
+                    queue.core.feeCurrency,
+                    queue.core.entryFeeCurrency,
+                    queue.core.participants,
+                    queue.core.enqueueDates,
+                    queue.core.arena,
+                    queue.core.entryFee,
+                    queue.core.fee,
+                    queue.core.payments
+                ),
                 block.timestamp,
-                queue.fee,
-                queue.payments, // payments to be filled
                 theId,
                 '0x00'
             ));

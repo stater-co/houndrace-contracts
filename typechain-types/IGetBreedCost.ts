@@ -20,15 +20,24 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace MicroPayment {
+  export type StructStruct = { currency: string; amount: BigNumberish };
+
+  export type StructStructOutput = [string, BigNumber] & {
+    currency: string;
+    amount: BigNumber;
+  };
+}
+
 export interface IGetBreedCostInterface extends utils.Interface {
   contractName: "IGetBreedCost";
   functions: {
-    "getBreedCost(uint256,uint256)": FunctionFragment;
+    "getBreedCost(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "getBreedCost",
-    values: [BigNumberish, BigNumberish]
+    values: [BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -68,40 +77,53 @@ export interface IGetBreedCost extends BaseContract {
 
   functions: {
     getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
+      hound: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
   };
 
   getBreedCost(
-    hound1: BigNumberish,
-    hound2: BigNumberish,
+    hound: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<
+    [
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput
+    ]
+  >;
 
   callStatic: {
     getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
+      hound: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
   };
 
   filters: {};
 
   estimateGas: {
     getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
+      hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
+      hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

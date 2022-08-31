@@ -17,71 +17,93 @@ const _abi = [
       {
         components: [
           {
-            internalType: "string",
-            name: "name",
-            type: "string",
-          },
-          {
-            internalType: "address",
-            name: "currency",
-            type: "address",
-          },
-          {
-            internalType: "uint256[]",
-            name: "participants",
-            type: "uint256[]",
-          },
-          {
-            internalType: "uint256",
-            name: "arena",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "entryFee",
-            type: "uint256",
+            components: [
+              {
+                internalType: "string",
+                name: "name",
+                type: "string",
+              },
+              {
+                internalType: "address",
+                name: "feeCurrency",
+                type: "address",
+              },
+              {
+                internalType: "address",
+                name: "entryFeeCurrency",
+                type: "address",
+              },
+              {
+                internalType: "uint256[]",
+                name: "participants",
+                type: "uint256[]",
+              },
+              {
+                internalType: "uint256[]",
+                name: "enqueueDates",
+                type: "uint256[]",
+              },
+              {
+                internalType: "uint256",
+                name: "arena",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "entryFee",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "fee",
+                type: "uint256",
+              },
+              {
+                components: [
+                  {
+                    internalType: "address[]",
+                    name: "from",
+                    type: "address[]",
+                  },
+                  {
+                    internalType: "address[]",
+                    name: "to",
+                    type: "address[]",
+                  },
+                  {
+                    internalType: "address[]",
+                    name: "currency",
+                    type: "address[]",
+                  },
+                  {
+                    internalType: "uint256[][]",
+                    name: "ids",
+                    type: "uint256[][]",
+                  },
+                  {
+                    internalType: "uint256[][]",
+                    name: "amounts",
+                    type: "uint256[][]",
+                  },
+                  {
+                    internalType: "uint32[]",
+                    name: "paymentType",
+                    type: "uint32[]",
+                  },
+                ],
+                internalType: "struct Payment.Struct",
+                name: "payments",
+                type: "tuple",
+              },
+            ],
+            internalType: "struct Core.Struct",
+            name: "core",
+            type: "tuple",
           },
           {
             internalType: "uint256",
             name: "randomness",
             type: "uint256",
-          },
-          {
-            components: [
-              {
-                internalType: "address[]",
-                name: "from",
-                type: "address[]",
-              },
-              {
-                internalType: "address[]",
-                name: "to",
-                type: "address[]",
-              },
-              {
-                internalType: "address[]",
-                name: "currency",
-                type: "address[]",
-              },
-              {
-                internalType: "uint256[][]",
-                name: "ids",
-                type: "uint256[][]",
-              },
-              {
-                internalType: "uint256[][]",
-                name: "amounts",
-                type: "uint256[][]",
-              },
-              {
-                internalType: "uint32[]",
-                name: "paymentType",
-                type: "uint32[]",
-              },
-            ],
-            internalType: "struct Payment.Struct",
-            name: "payments",
-            type: "tuple",
           },
           {
             internalType: "uint256",

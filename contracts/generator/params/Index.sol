@@ -16,6 +16,7 @@ import '../../incubator/params/HoundIdentity.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../gamification/params/HoundStamina.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
+import '../../queues/params/Core.sol';
 
 
 contract Params is Ownable {

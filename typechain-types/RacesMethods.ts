@@ -89,37 +89,58 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Race {
+export declare namespace Core {
   export type StructStruct = {
     name: string;
-    currency: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumberish[];
+    enqueueDates: BigNumberish[];
     arena: BigNumberish;
     entryFee: BigNumberish;
-    randomness: BigNumberish;
+    fee: BigNumberish;
     payments: Payment.StructStruct;
-    queueId: BigNumberish;
-    seed: BytesLike;
   };
 
   export type StructStructOutput = [
     string,
     string,
+    string,
+    BigNumber[],
     BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
-    Payment.StructStructOutput,
+    Payment.StructStructOutput
+  ] & {
+    name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
+    participants: BigNumber[];
+    enqueueDates: BigNumber[];
+    arena: BigNumber;
+    entryFee: BigNumber;
+    fee: BigNumber;
+    payments: Payment.StructStructOutput;
+  };
+}
+
+export declare namespace Race {
+  export type StructStruct = {
+    core: Core.StructStruct;
+    randomness: BigNumberish;
+    queueId: BigNumberish;
+    seed: BytesLike;
+  };
+
+  export type StructStructOutput = [
+    Core.StructStructOutput,
+    BigNumber,
     BigNumber,
     string
   ] & {
-    name: string;
-    currency: string;
-    participants: BigNumber[];
-    arena: BigNumber;
-    entryFee: BigNumber;
+    core: Core.StructStructOutput;
     randomness: BigNumber;
-    payments: Payment.StructStructOutput;
     queueId: BigNumber;
     seed: string;
   };
@@ -148,43 +169,28 @@ export declare namespace HoundStatistics {
 
 export declare namespace Queue {
   export type StructStruct = {
-    name: string;
-    participants: BigNumberish[];
-    enqueueDates: BigNumberish[];
-    arena: BigNumberish;
-    entryFee: BigNumberish;
+    core: Core.StructStruct;
     startDate: BigNumberish;
     endDate: BigNumberish;
     lastCompletion: BigNumberish;
-    payments: Payment.StructStruct;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
     closed: boolean;
   };
 
   export type StructStructOutput = [
-    string,
-    BigNumber[],
-    BigNumber[],
+    Core.StructStructOutput,
     BigNumber,
     BigNumber,
     BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput,
     number,
     number,
     boolean
   ] & {
-    name: string;
-    participants: BigNumber[];
-    enqueueDates: BigNumber[];
-    arena: BigNumber;
-    entryFee: BigNumber;
+    core: Core.StructStructOutput;
     startDate: BigNumber;
     endDate: BigNumber;
     lastCompletion: BigNumber;
-    payments: Payment.StructStructOutput;
     totalParticipants: number;
     cooldown: number;
     closed: boolean;
@@ -204,7 +210,7 @@ export interface RacesMethodsInterface extends utils.Interface {
     "participantsOf(uint256)": FunctionFragment;
     "payout(uint256)": FunctionFragment;
     "race(uint256)": FunctionFragment;
-    "raceStart((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
@@ -440,22 +446,9 @@ export interface RacesMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        BigNumber,
-        BigNumber,
-        BigNumber,
-        Payment.StructStructOutput,
-        BigNumber,
-        string
-      ] & {
-        name: string;
-        currency: string;
-        arena: BigNumber;
-        entryFee: BigNumber;
+      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+        core: Core.StructStructOutput;
         randomness: BigNumber;
-        payments: Payment.StructStructOutput;
         queueId: BigNumber;
         seed: string;
       }
@@ -555,22 +548,9 @@ export interface RacesMethods extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [
-      string,
-      string,
-      BigNumber,
-      BigNumber,
-      BigNumber,
-      Payment.StructStructOutput,
-      BigNumber,
-      string
-    ] & {
-      name: string;
-      currency: string;
-      arena: BigNumber;
-      entryFee: BigNumber;
+    [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+      core: Core.StructStructOutput;
       randomness: BigNumber;
-      payments: Payment.StructStructOutput;
       queueId: BigNumber;
       seed: string;
     }
@@ -667,22 +647,9 @@ export interface RacesMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        BigNumber,
-        BigNumber,
-        BigNumber,
-        Payment.StructStructOutput,
-        BigNumber,
-        string
-      ] & {
-        name: string;
-        currency: string;
-        arena: BigNumber;
-        entryFee: BigNumber;
+      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+        core: Core.StructStructOutput;
         randomness: BigNumber;
-        payments: Payment.StructStructOutput;
         queueId: BigNumber;
         seed: string;
       }

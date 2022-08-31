@@ -81,7 +81,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
@@ -126,7 +126,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
@@ -171,7 +171,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
@@ -216,7 +216,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
@@ -261,7 +261,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 
@@ -306,7 +306,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound1Id, hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
 
       await dependencies.erc20.mint(sig1.address,breedCost);
 

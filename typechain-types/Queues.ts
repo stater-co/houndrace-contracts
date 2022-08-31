@@ -25,14 +25,15 @@ import type {
 
 export declare namespace QueuesConstructor {
   export type StructStruct = {
+    methods: string;
+    restricted: string;
+    queues: string;
+    zerocost: string;
     arenas: string;
     hounds: string;
-    methods: string;
     payments: string;
-    restricted: string;
     races: string;
     allowedCallers: string[];
-    raceFee: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -42,17 +43,19 @@ export declare namespace QueuesConstructor {
     string,
     string,
     string,
-    string[],
-    BigNumber
+    string,
+    string,
+    string[]
   ] & {
+    methods: string;
+    restricted: string;
+    queues: string;
+    zerocost: string;
     arenas: string;
     hounds: string;
-    methods: string;
     payments: string;
-    restricted: string;
     races: string;
     allowedCallers: string[];
-    raceFee: BigNumber;
   };
 }
 
@@ -83,48 +86,78 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Queue {
+export declare namespace Core {
   export type StructStruct = {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
     entryFee: BigNumberish;
-    startDate: BigNumberish;
-    endDate: BigNumberish;
-    lastCompletion: BigNumberish;
+    fee: BigNumberish;
     payments: Payment.StructStruct;
-    totalParticipants: BigNumberish;
-    cooldown: BigNumberish;
-    closed: boolean;
   };
 
   export type StructStructOutput = [
+    string,
+    string,
     string,
     BigNumber[],
     BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput,
-    number,
-    number,
-    boolean
+    Payment.StructStructOutput
   ] & {
     name: string;
+    feeCurrency: string;
+    entryFeeCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
     entryFee: BigNumber;
+    fee: BigNumber;
+    payments: Payment.StructStructOutput;
+  };
+}
+
+export declare namespace Queue {
+  export type StructStruct = {
+    core: Core.StructStruct;
+    startDate: BigNumberish;
+    endDate: BigNumberish;
+    lastCompletion: BigNumberish;
+    totalParticipants: BigNumberish;
+    cooldown: BigNumberish;
+    closed: boolean;
+  };
+
+  export type StructStructOutput = [
+    Core.StructStructOutput,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number,
+    number,
+    boolean
+  ] & {
+    core: Core.StructStructOutput;
     startDate: BigNumber;
     endDate: BigNumber;
     lastCompletion: BigNumber;
-    payments: Payment.StructStructOutput;
     totalParticipants: number;
     cooldown: number;
     closed: boolean;
+  };
+}
+
+export declare namespace MicroPayment {
+  export type StructStruct = { currency: string; amount: BigNumberish };
+
+  export type StructStructOutput = [string, BigNumber] & {
+    currency: string;
+    amount: BigNumber;
   };
 }
 
@@ -134,10 +167,11 @@ export interface QueuesInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "createQueues((string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool)[])": FunctionFragment;
-    "editQueue(uint256,(string,uint256[],uint256[],uint256,uint256,uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[]),uint32,uint32,bool))": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool)[])": FunctionFragment;
+    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool))": FunctionFragment;
     "enqueue(uint256,uint256)": FunctionFragment;
     "enqueueCost(uint256)": FunctionFragment;
+    "enqueueDatesOf(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
@@ -145,7 +179,7 @@ export interface QueuesInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address[],uint256))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
   };
@@ -170,6 +204,10 @@ export interface QueuesInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "enqueueCost",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "enqueueDatesOf",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
@@ -215,6 +253,10 @@ export interface QueuesInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "enqueue", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "enqueueCost",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "enqueueDatesOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
@@ -345,14 +387,15 @@ export interface Queues extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, BigNumber] & {
+      [string, string, string, string, string, string, string, string] & {
+        methods: string;
+        restricted: string;
+        queues: string;
+        zerocost: string;
         arenas: string;
         hounds: string;
-        methods: string;
         payments: string;
-        restricted: string;
         races: string;
-        raceFee: BigNumber;
       }
     >;
 
@@ -376,7 +419,18 @@ export interface Queues extends BaseContract {
     enqueueCost(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
+
+    enqueueDatesOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -402,24 +456,18 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [
-        string,
+        Core.StructStructOutput,
         BigNumber,
         BigNumber,
         BigNumber,
-        BigNumber,
-        BigNumber,
-        Payment.StructStructOutput,
         number,
         number,
         boolean
       ] & {
-        name: string;
-        arena: BigNumber;
-        entryFee: BigNumber;
+        core: Core.StructStructOutput;
         startDate: BigNumber;
         endDate: BigNumber;
         lastCompletion: BigNumber;
-        payments: Payment.StructStructOutput;
         totalParticipants: number;
         cooldown: number;
         closed: boolean;
@@ -457,14 +505,15 @@ export interface Queues extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, BigNumber] & {
+    [string, string, string, string, string, string, string, string] & {
+      methods: string;
+      restricted: string;
+      queues: string;
+      zerocost: string;
       arenas: string;
       hounds: string;
-      methods: string;
       payments: string;
-      restricted: string;
       races: string;
-      raceFee: BigNumber;
     }
   >;
 
@@ -488,7 +537,18 @@ export interface Queues extends BaseContract {
   enqueueCost(
     theId: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<
+    [
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput
+    ]
+  >;
+
+  enqueueDatesOf(
+    theId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -514,24 +574,18 @@ export interface Queues extends BaseContract {
     overrides?: CallOverrides
   ): Promise<
     [
-      string,
+      Core.StructStructOutput,
       BigNumber,
       BigNumber,
       BigNumber,
-      BigNumber,
-      BigNumber,
-      Payment.StructStructOutput,
       number,
       number,
       boolean
     ] & {
-      name: string;
-      arena: BigNumber;
-      entryFee: BigNumber;
+      core: Core.StructStructOutput;
       startDate: BigNumber;
       endDate: BigNumber;
       lastCompletion: BigNumber;
-      payments: Payment.StructStructOutput;
       totalParticipants: number;
       cooldown: number;
       closed: boolean;
@@ -566,14 +620,15 @@ export interface Queues extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, BigNumber] & {
+      [string, string, string, string, string, string, string, string] & {
+        methods: string;
+        restricted: string;
+        queues: string;
+        zerocost: string;
         arenas: string;
         hounds: string;
-        methods: string;
         payments: string;
-        restricted: string;
         races: string;
-        raceFee: BigNumber;
       }
     >;
 
@@ -597,7 +652,18 @@ export interface Queues extends BaseContract {
     enqueueCost(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
+
+    enqueueDatesOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -620,24 +686,18 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [
-        string,
+        Core.StructStructOutput,
         BigNumber,
         BigNumber,
         BigNumber,
-        BigNumber,
-        BigNumber,
-        Payment.StructStructOutput,
         number,
         number,
         boolean
       ] & {
-        name: string;
-        arena: BigNumber;
-        entryFee: BigNumber;
+        core: Core.StructStructOutput;
         startDate: BigNumber;
         endDate: BigNumber;
         lastCompletion: BigNumber;
-        payments: Payment.StructStructOutput;
         totalParticipants: number;
         cooldown: number;
         closed: boolean;
@@ -749,6 +809,11 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    enqueueDatesOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -819,6 +884,11 @@ export interface Queues extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     enqueueCost(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    enqueueDatesOf(
       theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

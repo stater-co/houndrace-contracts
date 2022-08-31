@@ -1,6 +1,6 @@
 import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
 import { globalParams } from "../../common/params";
-import { Hound } from '../../typechain-types/Hounds';
+import { Hound, MicroPayment } from '../../typechain-types/Hounds';
 import { expecting } from "../expecting";
 
 
@@ -40,10 +40,14 @@ export async function safeBreed(
     hound2 = maleId;
   }
 
-  const totalToPay = await params.contract.getBreedCost(hound1,hound2);
+  const totalToPay: MicroPayment.StructStructOutput[] = await params.contract.getBreedCost(hound2);
   const houndToFillUp = await params.contract.id();
+  let totalValueToPay: number = 0;
+  for ( let i = 0 , l = totalToPay.length ; i < l ; ++i ) {
+    totalValueToPay += Number(totalToPay[i].amount);
+  }
 
-  await params.contract.breedHounds(hound1, hound2, { value : totalToPay });
+  await params.contract.breedHounds(hound1, hound2, { value : totalValueToPay });
 
   await params.contract.initializeHound(houndToFillUp, signer, globalParams.defaultHound);
 

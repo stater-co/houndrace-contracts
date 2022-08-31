@@ -61,7 +61,7 @@ async function basicTest(
 
     it("Unenqueue", async function() {
       let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
-      if ( queue.participants.length === 0 ) {
+      if ( queue.core.participants.length === 0 ) {
         const [sig1] = await ethers.getSigners();
         await safeJoinQueue({
           contract: dependencies.contract as Queues,
@@ -78,7 +78,7 @@ async function basicTest(
       await safeUnenqueue({
         contract: dependencies.contract,
         queueId: createdQueueId,
-        houndId: Number(queue.participants[0])
+        houndId: Number(queue.core.participants[0])
       });
     });
 

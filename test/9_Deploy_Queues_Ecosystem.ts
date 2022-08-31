@@ -5,10 +5,12 @@ import { deployContract } from '../plugins/test/deployContract';
 import { Queues } from '../typechain-types/Queues';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
+import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 
 
 let queuesRestricted: QueuesRestricted;
 let queuesMethods: QueuesMethods;
+let queuesZerocost: QueuesZerocost;
 let queues: Queues;
 
 
@@ -33,6 +35,23 @@ export async function run(
           ]],
           props: {}
         }) as QueuesRestricted;
+      });
+
+      it("Deploy the queues zerocost contract", async function () {
+        queuesZerocost = await deployContract({
+          name: 'QueuesZerocost',
+          constructor: [[
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0,
+            [],
+            5000000
+          ]],
+          props: {}
+        }) as QueuesZerocost;
       });
 
       it("Deploy the queues methods contract", async function () {
@@ -71,6 +90,7 @@ export async function run(
         resolve({
           queuesRestricted: queuesRestricted,
           queueMethods: queuesMethods,
+          queueZerocost: queuesZerocost,
           queues: queues
         });
       });

@@ -31,15 +31,20 @@ const defaultArena: Arena.StructStruct = {
 };
 
 const defaultRace: Race.StructStruct = {
-    name: "Race #",
-    currency: address0,
-    participants: [],
-    arena: 1,
-    entryFee: 0,
-    randomness: 34,
-    payments: defaultQueuePayment,
+    core: {
+        arena: 1,
+        participants: [],
+        entryFee: 0,
+        enqueueDates: [],
+        feeCurrency: address0,
+        entryFeeCurrency: address0,
+        fee: 0,
+        name: "Race #",
+        payments: defaultQueuePayment
+    },
     queueId: 1,
-    seed: "0x00"
+    seed: "0x00",
+    randomness: 5
 };
 
 const houndStamina: HoundStamina.StructStruct = {
@@ -58,6 +63,7 @@ const houndStatistics: HoundStatistics.StructStruct = {
 };
 
 const houndBreeding: HoundBreeding.StructStruct = {
+    breedingFeeCurrency: address0,
     lastBreed: 0,
     breedingCooldown: 0,
     breedingFee: 100000,
@@ -89,15 +95,20 @@ const defaultHound: Hound.StructStruct = {
 };
 
 const defaultQueue: Queue.StructStruct = {
-    name: "Queue #",
-    participants: [],
-    enqueueDates: [],
-    arena: BigNumber.from(1),
-    entryFee: BigNumber.from(10000),
+    core: {
+        name: "Queue #",
+        arena: BigNumber.from(1),
+        participants: [],
+        enqueueDates: [],
+        entryFee: BigNumber.from(10000),
+        entryFeeCurrency: address0,
+        fee: BigNumber.from(10000),
+        feeCurrency: address0,
+        payments: defaultQueuePayment as Payment.StructStructOutput
+    },
     startDate: BigNumber.from(0),
     endDate: BigNumber.from(0),
     lastCompletion: BigNumber.from(0),
-    payments: defaultQueuePayment as Payment.StructStructOutput,
     totalParticipants: 3,
     cooldown: 0,
     closed: false

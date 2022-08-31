@@ -9,23 +9,23 @@ contract RacesRestricted is Params {
 
     function uploadRace(uint256 theId, Race.Struct memory race) external payable onlyOwner {
 
-        IHandleArenaUsage(control.arenas).handleArenaUsage(race.arena);
+        IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 
-        for ( uint256 i = 0 ; i < race.payments.from.length ; ++i ) {
+        for ( uint256 i = 0 ; i < race.core.payments.from.length ; ++i ) {
             IPay(control.payments).pay(
-                race.payments.from[i],
-                race.payments.to[i],
-                race.payments.currency[i],
-                race.payments.ids[i],
-                race.payments.amounts[i],
-                race.payments.paymentType[i]
+                race.core.payments.from[i],
+                race.core.payments.to[i],
+                race.core.payments.currency[i],
+                race.core.payments.ids[i],
+                race.core.payments.amounts[i],
+                race.core.payments.paymentType[i]
             );
         }
 
         races[theId] = race;
 
-        for ( uint256 i = 0 ; i < race.participants.length ; ++i ) {
-            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.participants[i], 0) != 0);
+        for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
+            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0) != 0);
         }
 
         emit UploadRace(theId, race);

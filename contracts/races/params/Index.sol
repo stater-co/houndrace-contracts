@@ -49,7 +49,7 @@ contract Params is Ownable, Withdrawable {
     }
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return races[theId].participants;
+        return races[theId].core.participants;
     }
 
     function getStatistics(uint256 theId) external view returns(HoundStatistics.Struct memory) {

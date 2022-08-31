@@ -20,6 +20,15 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace MicroPayment {
+  export type StructStruct = { currency: string; amount: BigNumberish };
+
+  export type StructStructOutput = [string, BigNumber] & {
+    currency: string;
+    amount: BigNumber;
+  };
+}
+
 export interface IEnqueueCostInterface extends utils.Interface {
   contractName: "IEnqueueCost";
   functions: {
@@ -70,19 +79,37 @@ export interface IEnqueueCost extends BaseContract {
     enqueueCost(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
   };
 
   enqueueCost(
     theId: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<
+    [
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput,
+      MicroPayment.StructStructOutput
+    ]
+  >;
 
   callStatic: {
     enqueueCost(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<
+      [
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput,
+        MicroPayment.StructStructOutput
+      ]
+    >;
   };
 
   filters: {};

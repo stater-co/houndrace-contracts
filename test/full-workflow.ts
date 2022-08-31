@@ -107,7 +107,8 @@ async function main() {
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
             allowedCallers: [ races.races.address],
-            raceFee: 5000000
+            queues: queues.queues.address,
+            zerocost: queues.queueZerocost.address
         }
     });
 
@@ -184,9 +185,9 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: globalParams.address0,
-            houndModifier: hounds.houndsModifier.address,
-            hounds: hounds.hounds.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsModifier: hounds.houndsModifier.address,
+            zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
@@ -195,6 +196,8 @@ async function main() {
             races: races.races.address
            },
            fees: {
+            breedCostCurrency: globalParams.address0,
+            breedFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
@@ -284,9 +287,9 @@ async function main() {
            allowedCallers: [],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: globalParams.address0,
-            houndModifier: hounds.houndsModifier.address,
-            hounds: hounds.hounds.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            zerocost: hounds.houndsZerocost.address,
+            houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
@@ -295,6 +298,8 @@ async function main() {
             races: races.races.address
            },
            fees: {
+            breedCostCurrency: payments.houndracePotions.address,
+            breedFeeCurrency: payments.houndracePotions.address,
             currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",

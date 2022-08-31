@@ -17,6 +17,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "address",
+            name: "breedingFeeCurrency",
+            type: "address",
+          },
+          {
             internalType: "uint256",
             name: "lastBreed",
             type: "uint256",

@@ -59,7 +59,11 @@ contract Params is Ownable, Withdrawable {
     }
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return queues[theId].participants;
+        return queues[theId].core.participants;
+    }
+
+    function enqueueDatesOf(uint256 theId) external view returns(uint256[] memory) {
+        return queues[theId].core.enqueueDates;
     }
 
     fallback() external payable {}

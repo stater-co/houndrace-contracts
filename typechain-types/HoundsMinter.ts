@@ -25,16 +25,16 @@ import type {
 
 export declare namespace ConstructorBoilerplate {
   export type StructStruct = {
-    incubator: string;
-    staterApi: string;
-    payments: string;
     restricted: string;
     minter: string;
-    hounds: string;
-    houndModifier: string;
+    houndsModifier: string;
+    zerocost: string;
+    incubator: string;
+    payments: string;
     shop: string;
     races: string;
     gamification: string;
+    alphadune: string;
   };
 
   export type StructStructOutput = [
@@ -49,22 +49,24 @@ export declare namespace ConstructorBoilerplate {
     string,
     string
   ] & {
-    incubator: string;
-    staterApi: string;
-    payments: string;
     restricted: string;
     minter: string;
-    hounds: string;
-    houndModifier: string;
+    houndsModifier: string;
+    zerocost: string;
+    incubator: string;
+    payments: string;
     shop: string;
     races: string;
     gamification: string;
+    alphadune: string;
   };
 }
 
 export declare namespace ConstructorFees {
   export type StructStruct = {
     currency: string;
+    breedCostCurrency: string;
+    breedFeeCurrency: string;
     breedCost: BigNumberish;
     breedFee: BigNumberish;
     refillCost: BigNumberish;
@@ -74,6 +76,8 @@ export declare namespace ConstructorFees {
 
   export type StructStructOutput = [
     string,
+    string,
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -81,6 +85,8 @@ export declare namespace ConstructorFees {
     BigNumber
   ] & {
     currency: string;
+    breedCostCurrency: string;
+    breedFeeCurrency: string;
     breedCost: BigNumber;
     breedFee: BigNumber;
     refillCost: BigNumber;
@@ -160,6 +166,7 @@ export declare namespace HoundStamina {
 
 export declare namespace HoundBreeding {
   export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
@@ -167,11 +174,13 @@ export declare namespace HoundBreeding {
   };
 
   export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
@@ -255,7 +264,6 @@ export interface HoundsMinterInterface extends utils.Interface {
     "breedHounds(uint256,uint256)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getBreedCost(uint256,uint256)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
@@ -270,7 +278,7 @@ export interface HoundsMinterInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,uint256,uint256,uint256,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256,uint256,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -293,10 +301,6 @@ export interface HoundsMinterInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getBreedCost",
-    values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -378,10 +382,6 @@ export interface HoundsMinterInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getBreedCost",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
@@ -612,12 +612,6 @@ export interface HoundsMinter extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     hound(
       theId: BigNumberish,
       overrides?: CallOverrides
@@ -769,12 +763,6 @@ export interface HoundsMinter extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getBreedCost(
-    hound1: BigNumberish,
-    hound2: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   hound(
     theId: BigNumberish,
     overrides?: CallOverrides
@@ -916,12 +904,6 @@ export interface HoundsMinter extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
 
     hound(
       theId: BigNumberish,
@@ -1164,12 +1146,6 @@ export interface HoundsMinter extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     hound(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     houndOwner(
@@ -1298,12 +1274,6 @@ export interface HoundsMinter extends BaseContract {
 
     getApproved(
       tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getBreedCost(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

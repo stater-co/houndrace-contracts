@@ -16,7 +16,7 @@ export async function set(
         ...dependencies.constructor,
         boilerplate: {
           ...dependencies.constructor.boilerplate,
-          staterApi: sig1.address
+          alphadune: sig1.address
         }
       });
       const after = await dependencies.houndsMinter.control();
@@ -31,7 +31,7 @@ export async function set(
         ...dependencies.constructor,
         boilerplate: {
           ...dependencies.constructor.boilerplate,
-          staterApi: sig1.address
+          alphadune: sig1.address
         }
       });
       const after = await dependencies.houndsModifier.control();
@@ -48,7 +48,7 @@ export async function set(
         ...dependencies.constructor,
         boilerplate: {
           ...dependencies.constructor.boilerplate,
-          staterApi: sig1.address
+          alphadune: sig1.address
         }
       });
       const after = await dependencies.houndsRestricted.control();
@@ -65,7 +65,7 @@ export async function set(
         ...dependencies.constructor,
         boilerplate: {
           ...dependencies.constructor.boilerplate,
-          staterApi: sig1.address
+          alphadune: sig1.address
         }
       });
       const after = await dependencies.hounds.control();

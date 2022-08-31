@@ -18,9 +18,55 @@ const _abi = [
     name: "enqueueCost",
     outputs: [
       {
-        internalType: "uint256",
+        components: [
+          {
+            internalType: "address",
+            name: "currency",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct MicroPayment.Struct",
         name: "",
-        type: "uint256",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "currency",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct MicroPayment.Struct",
+        name: "",
+        type: "tuple",
+      },
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "currency",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "amount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct MicroPayment.Struct",
+        name: "",
+        type: "tuple",
       },
     ],
     stateMutability: "view",

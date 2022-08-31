@@ -11,10 +11,10 @@ contract QueuesMethods is Params {
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         require(houndOwner == msg.sender);
 
-        uint256[] memory replacedParticipants = queues[theId].participants;
-        uint256[] memory replacedEnqueueDates = queues[theId].enqueueDates;
-        delete queues[theId].participants;
-        delete queues[theId].enqueueDates;
+        uint256[] memory replacedParticipants = queues[theId].core.participants;
+        uint256[] memory replacedEnqueueDates = queues[theId].core.enqueueDates;
+        delete queues[theId].core.participants;
+        delete queues[theId].core.enqueueDates;
 
         if ( replacedParticipants.length > 0 ) {
             bool exists;
@@ -23,8 +23,8 @@ contract QueuesMethods is Params {
                     exists = true;
                     require(replacedEnqueueDates[i] < block.timestamp - queues[theId].cooldown);
                 } else {
-                    queues[theId].participants.push(replacedParticipants[i]);
-                    queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
+                    queues[theId].core.participants.push(replacedParticipants[i]);
+                    queues[theId].core.enqueueDates.push(replacedEnqueueDates[i]);
                 }
             }
             require(exists);
@@ -59,18 +59,18 @@ contract QueuesMethods is Params {
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
 
-        for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
-            require(queues[theId].participants[i] != hound);
+        for ( uint256 i = 0 ; i < queues[theId].core.participants.length ; ++i ) {
+            require(queues[theId].core.participants[i] != hound);
         }
 
-        queues[theId].participants.push(hound);
-        queues[theId].enqueueDates.push(block.timestamp);
+        queues[theId].core.participants.push(hound);
+        queues[theId].core.enqueueDates.push(block.timestamp);
 
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
 
 
         (
@@ -118,18 +118,18 @@ contract QueuesMethods is Params {
         );
 
 
-        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
+        if ( queues[theId].core.participants.length == queues[theId].totalParticipants ) {
 
-            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].arena);
+            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].core.arena);
 
             IHandleRaceLoot(control.races).handleRaceLoot(
-                queues[theId].payments
+                queues[theId].core.payments
             );
 
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
-            delete queues[theId].participants;
-            delete queues[theId].enqueueDates;
+            delete queues[theId].core.participants;
+            delete queues[theId].core.enqueueDates;
 
             queues[theId].lastCompletion = block.timestamp;
 
