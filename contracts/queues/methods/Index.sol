@@ -8,11 +8,11 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function unenqueue(uint256 theId, uint256 hound) external {
-        Queue.Struct memory _queue = queues[theId];
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(_queue.arena);
+        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
+        require(houndOwner == msg.sender);
 
-        uint256[] memory replacedParticipants = _queue.participants;
-        uint256[] memory replacedEnqueueDates = _queue.enqueueDates;
+        uint256[] memory replacedParticipants = queues[theId].participants;
+        uint256[] memory replacedEnqueueDates = queues[theId].enqueueDates;
         delete queues[theId].participants;
         delete queues[theId].enqueueDates;
 
@@ -21,7 +21,7 @@ contract QueuesMethods is Params {
             for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
                 if ( replacedParticipants[i] == hound ) {
                     exists = true;
-                    require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
+                    require(replacedEnqueueDates[i] < block.timestamp - queues[theId].cooldown);
                 } else {
                     queues[theId].participants.push(replacedParticipants[i]);
                     queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
@@ -33,17 +33,19 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
 
-        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
-        uint256[] memory amounts = new uint256[](1);
-        amounts[0] = enqueueCost(theId);
         
+        ( , , MicroPayment.Struct memory entryFee) = IEnqueueCost(control.zerocost).enqueueCost(theId);
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = entryFee.amount;
+
         IPay(control.payments).pay(
             control.payments,
             houndOwner,
-            arenaCurrency,
+            entryFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            entryFee.currency == address(0) ? 3 : 2
         );
 
         emit Unenqueue(theId, hound);
@@ -70,19 +72,51 @@ contract QueuesMethods is Params {
 
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
 
+
+        (
+            MicroPayment.Struct memory alphaduneFee, 
+            MicroPayment.Struct memory arenaFee, 
+            MicroPayment.Struct memory entryFee
+        ) = IEnqueueCost(control.zerocost).enqueueCost(theId);
+
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = enqueueCost(theId);
+        amounts[0] = alphaduneFee.amount;
 
         IPay(control.payments).pay{
-            value: arenaCurrency == address(0) ? amounts[0] : 0
+            value: alphaduneFee.currency == address(0) ? alphaduneFee.amount : 0
         }(
             msg.sender,
             control.payments,
-            arenaCurrency,
+            alphaduneFee.currency,
             new uint256[](0),
             amounts,
             arenaCurrency == address(0) ? 3 : 2
         );
+
+        amounts[0] = arenaFee.amount;
+        IPay(control.payments).pay{
+            value: arenaFee.currency == address(0) ? arenaFee.amount : 0
+        }(
+            msg.sender,
+            control.payments,
+            arenaFee.currency,
+            new uint256[](0),
+            amounts,
+            arenaCurrency == address(0) ? 3 : 2
+        );
+
+        amounts[0] = entryFee.amount;
+        IPay(control.payments).pay{
+            value: entryFee.currency == address(0) ? entryFee.amount : 0
+        }(
+            msg.sender,
+            control.payments,
+            entryFee.currency,
+            new uint256[](0),
+            amounts,
+            arenaCurrency == address(0) ? 3 : 2
+        );
+
 
         if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
 

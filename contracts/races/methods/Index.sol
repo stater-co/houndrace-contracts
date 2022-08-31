@@ -28,7 +28,8 @@ contract RacesMethods is Params {
                 queue.participants,
                 queue.arena,
                 queue.entryFee,
-                0,
+                block.timestamp,
+                queue.fee,
                 queue.payments, // payments to be filled
                 theId,
                 '0x00'

@@ -17,6 +17,8 @@ import '../../gamification/interfaces/ISetStamina.sol';
 import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../gamification/interfaces/ISetBreeding.sol';
 import '../../incubator/interfaces/ISetIdentity.sol';
+import '../../payments/params/MicroPayment.sol';
+import '../interfaces/IGetBreedCost.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -68,11 +70,6 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
-    }
-
-    function getBreedCost(uint256 hound1, uint256 hound2) public view returns(uint256) {
-        require(ownerOf(hound1) == msg.sender);
-        return control.fees.breedCost + control.fees.breedFee + IGetBreeding(control.boilerplate.gamification).getBreeding(hound2).breedingFee;
     }
 
 }

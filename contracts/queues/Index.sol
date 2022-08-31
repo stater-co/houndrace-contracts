@@ -32,4 +32,12 @@ contract Queues is Params {
         require(success);
     }
 
+    function enqueueCost(uint256 theId) external view returns(
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory
+    ) {
+        return IEnqueueCost(control.zerocost).enqueueCost(theId);
+    }
+
 }

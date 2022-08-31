@@ -23,29 +23,33 @@ contract Hounds is Params {
     }
 
     function updateHoundStamina(uint256 theId) external {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
     function boostHoundStamina(uint256 theId, address user, uint256 payed) external payable {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
     function boostHoundBreeding(uint256 theId, address user, uint256 payed) external payable {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
     function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
-        (bool success, ) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
     function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
-        (bool success, bytes memory output) = control.boilerplate.houndModifier.delegatecall(msg.data);
+        (bool success, bytes memory output) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
         oldQueueId = abi.decode(output,(uint256)); 
+    }
+
+    function getBreedCost(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
+        return IGetBreedCost(control.boilerplate.zerocost).getBreedCost(hound);
     }
 
 }

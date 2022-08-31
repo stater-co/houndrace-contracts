@@ -31,6 +31,7 @@ contract GamificationMethods is Params {
         );
 
         houndsBreeding[onId] = HoundBreeding.Struct(
+            address(0), // breeding fee currency
             0, // lastBreed
             genetics[1] == 1 ? 
                 control.defaultBreeding.breedingCooldown - (

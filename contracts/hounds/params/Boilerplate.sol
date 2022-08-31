@@ -3,15 +3,22 @@ pragma solidity 0.8.16;
 
 library ConstructorBoilerplate {
     struct Struct {
-        address incubator;
-        address staterApi;
-        address payments;
+
+        // Contract modules 
         address restricted;
         address minter;
-        address hounds;
-        address houndModifier;
+        address houndsModifier;
+        address zerocost;
+
+        // External dependencies
+        address incubator;
+        address payments;
         address shop;
         address races;
         address gamification;
+
+        // Payout checkpoint
+        address alphadune;
+        
     }
 }

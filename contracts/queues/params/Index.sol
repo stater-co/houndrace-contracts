@@ -12,7 +12,7 @@ import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
-import './EnqueueCost.sol';
+import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../races/interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
@@ -21,6 +21,7 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
+import '../interfaces/IEnqueueCost.sol';
 
 
 contract Params is Ownable, Withdrawable {

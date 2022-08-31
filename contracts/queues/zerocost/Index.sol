@@ -1,37 +1,46 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
-import '../params/Index.sol';
+import '../params/Constructor.sol';
+import '../../payments/params/MicroPayment.sol';
+import '../../arenas/interfaces/IArenaFee.sol';
+import '../../arenas/interfaces/IArenaCurrency.sol';
+import '../params/Queue.sol';
+import '../interfaces/IQueue.sol';
 
+contract QueuesZerocost {
 
-contract QueuesZerocost is Params {
+    QueuesConstructor.Struct public control;
+    constructor(QueuesConstructor.Struct memory input) {}
 
-    constructor(QueuesConstructor.Struct memory input) Params(input) {}
+    function enqueueCost(uint256 id) external view returns(
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory
+    ) {
 
-    function enqueueCost(uint256 theId) external view returns(EnqueueCost.Struct memory, EnqueueCost.Struct memory, EnqueueCost.Struct memory) {
+        Queue.Struct memory queue = IQueue(control.queues).queue(id);
+
         return (
 
             // Alpha Dune fee
-            EnqueueCost.Struct(
-                queues[theId].feeCurrency,
-                ( queues[theId].fee / queues[theId].totalParticipants ) + queues[theId].totalParticipants 
+            MicroPayment.Struct(
+                queue.feeCurrency,
+                ( queue.fee / queue.totalParticipants ) + queue.totalParticipants 
             ),
 
             // Arena fee 
-            EnqueueCost.Struct(
-                IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena),
-                ( IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants ) + queues[theId].totalParticipants + queues[theId].entryFee
+            MicroPayment.Struct(
+                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
+                ( IArenaFee(control.arenas).arenaFee(queue.arena) / queue.totalParticipants ) + queue.totalParticipants + queue.entryFee
             ),
 
             // Entry fee 
-            EnqueueCost.Struct(
-                queues[theId].entryFeeCurrency,
-                queues[theId].entryFee
+            MicroPayment.Struct(
+                queue.entryFeeCurrency,
+                queue.entryFee
             )
 
         );
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

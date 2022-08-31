@@ -3,12 +3,20 @@ pragma solidity 0.8.16;
 
 library QueuesConstructor {
     struct Struct {
+
+        // Contract modules
+        address methods;
+        address restricted;
+        address queues;
+        address zerocost;
+
+        // External dependencies
         address arenas;
         address hounds;
-        address methods;
         address payments;
-        address restricted;
         address races;
+        
+        // Whitelist boilerplate
         address[] allowedCallers;
     }
 }
