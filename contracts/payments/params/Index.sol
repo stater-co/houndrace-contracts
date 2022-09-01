@@ -7,11 +7,14 @@ import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import '../../payments/params/Payment.sol';
+import './Reservoir.sol';
 import './Constructor.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
 
+    mapping(address => Reservoir.Struct) alphaduneReservoirs;
+    mapping(address => Reservoir.Struct) rewardsReservoirs;
     PaymentsConstructor.Struct public control;
 
     constructor(PaymentsConstructor.Struct memory input) {
