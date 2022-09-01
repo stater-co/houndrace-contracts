@@ -11,8 +11,8 @@ contract PaymentsRestricted is Params {
 	function fillRewardsReservoir(
 		address reservoirAddress,
 		Reservoir.Struct memory reservoir
-	) external payable onlyOwner {
-
+	) external payable {
+		require(allowedCallers[msg.sender]);
 		require(reservoir.paymentType > Payment.PaymentTypes.ERC721);
 		require(reservoir.ids.length == reservoir.amounts.length);
 
@@ -34,7 +34,7 @@ contract PaymentsRestricted is Params {
 						found = true;
 					}
 				}
-				
+
 				if ( !found ) {
 					rewardsReservoirs[reservoirAddress].ids.push(reservoir.ids[i]);
 					rewardsReservoirs[reservoirAddress].amounts.push(reservoir.amounts[i]);

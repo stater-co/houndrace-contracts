@@ -12,9 +12,9 @@ import './Constructor.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
-
-    mapping(address => Reservoir.Struct) alphaduneReservoirs;
-    mapping(address => Reservoir.Struct) rewardsReservoirs;
+    mapping(address => bool) public allowedCallers;
+    mapping(address => Reservoir.Struct) public alphaduneReservoirs;
+    mapping(address => Reservoir.Struct) public rewardsReservoirs;
     PaymentsConstructor.Struct public control;
 
     constructor(PaymentsConstructor.Struct memory input) {
