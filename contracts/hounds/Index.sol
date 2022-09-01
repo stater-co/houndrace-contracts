@@ -18,6 +18,7 @@ contract Hounds is Params {
     }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
+        console.log("Breed hounds: ", hound1, hound2, control.boilerplate.minter);
         (bool success, ) = control.boilerplate.minter.delegatecall(msg.data);
         require(success);
     }
@@ -49,6 +50,7 @@ contract Hounds is Params {
     }
 
     function getBreedCost(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
+        console.log("Get breed cost: ", control.boilerplate.zerocost);
         return IGetBreedCost(control.boilerplate.zerocost).getBreedCost(hound);
     }
 

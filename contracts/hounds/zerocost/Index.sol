@@ -1,11 +1,13 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
+import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../params/Constructor.sol';
+import 'hardhat/console.sol';
 
 
-contract HoundsZerocost {
+contract HoundsZerocost is Ownable {
 
     Constructor.Struct public control;
 
@@ -13,12 +15,16 @@ contract HoundsZerocost {
         control = input;
     }
 
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
+
     function getBreedCost(uint256 hound) external view returns(
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory
     ) {
-
+        console.log("ok here!! ", control.boilerplate.gamification);
         return (
 
             // Breed cost fee

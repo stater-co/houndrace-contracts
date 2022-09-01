@@ -21,5 +21,12 @@ export async function set(
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Methods global params setter bugged");
     });
 
+    it("Setup queues zerocost contract controller", async function () {
+      const before = await dependencies.queuesZerocost.control();
+      await dependencies.queuesZerocost.setGlobalParameters(dependencies.constructor);
+      const after = await dependencies.queuesZerocost.control();
+      expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Methods global params setter bugged");
+    });
+
   });
 }

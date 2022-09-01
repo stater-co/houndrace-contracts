@@ -39,6 +39,23 @@ export async function set(
 
     });
 
+    it("Setup hounds zerocost controller", async function () {
+    
+      const [sig1] = await ethers.getSigners();
+
+      const before = await dependencies.houndsZerocost.control();
+      await dependencies.houndsZerocost.setGlobalParameters({
+        ...dependencies.constructor,
+        boilerplate: {
+          ...dependencies.constructor.boilerplate,
+          alphadune: sig1.address
+        }
+      });
+      const after = await dependencies.houndsZerocost.control();
+      expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds zerocost global params setter bugged");
+
+    });
+
     it("Setup hounds restricted controller", async function () {
     
       const [sig1] = await ethers.getSigners();

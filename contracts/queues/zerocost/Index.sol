@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.16;
+import '@openzeppelin/contracts/access/Ownable.sol';
 import '../params/Constructor.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../arenas/interfaces/IArenaFee.sol';
@@ -7,10 +8,14 @@ import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../params/Queue.sol';
 import '../interfaces/IQueue.sol';
 
-contract QueuesZerocost {
+contract QueuesZerocost is Ownable {
 
     QueuesConstructor.Struct public control;
     constructor(QueuesConstructor.Struct memory input) {}
+
+    function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
 
     function enqueueCost(uint256 id) external view returns(
         MicroPayment.Struct memory, 

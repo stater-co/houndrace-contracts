@@ -99,6 +99,8 @@ async function main() {
     await setQueues({
         queuesRestricted: queues.queuesRestricted,
         queuesMethods: queues.queueMethods,
+        queuesZerocost: queues.queueZerocost,
+        queued: queues.queues,
         constructor: {
             arenas: arenas.arenas.address,
             hounds: hounds.hounds.address,
@@ -106,7 +108,7 @@ async function main() {
             payments: payments.payments.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            allowedCallers: [ races.races.address],
+            allowedCallers: [races.races.address],
             queues: queues.queues.address,
             zerocost: queues.queueZerocost.address
         }
@@ -175,6 +177,7 @@ async function main() {
         houndsMinter: hounds.houndsMinter,
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
+        houndsZerocost: hounds.houndsZerocost,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
@@ -281,6 +284,7 @@ async function main() {
         houndsMinter: hounds.houndsMinter,
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
+        houndsZerocost: hounds.houndsZerocost,
         constructor: {
            name: "HoundRace",
            symbol: "HR",

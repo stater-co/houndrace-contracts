@@ -2,6 +2,7 @@ import { BreedHoundsParams } from "../../common/dto/test/breedHoundsParams";
 import { globalParams } from "../../common/params";
 import { Hound, MicroPayment } from '../../typechain-types/Hounds';
 import { expecting } from "../expecting";
+import { BigNumber } from 'ethers';
 
 
 export async function breed(
@@ -22,15 +23,19 @@ export async function safeBreed(
   let maleId: string | number = params.hound1;
   let femaleId: string | number = params.hound2;
 
+  console.log("===== ok2");
   houndMaleBefore = await params.contract.hound(maleId);
   houndFemaleBefore = await params.contract.hound(femaleId);
 
+  console.log("===== ok3");
   const ownerOfMale: string = await params.contract.ownerOf(maleId);
 
   const ownerOfFemale: string = await params.contract.ownerOf(femaleId);
 
+  console.log("===== ok4");
   const signer = await params.signer.getAddress();
 
+  console.log("===== ok5");
   let hound1 = maleId , hound2 = femaleId;
   if ( ownerOfFemale !== signer && ownerOfMale === signer ) {
     hound1 = maleId;
@@ -40,17 +45,24 @@ export async function safeBreed(
     hound2 = maleId;
   }
 
+  console.log("ok x1 Get breed cost: ", hound2);
   const totalToPay: MicroPayment.StructStructOutput[] = await params.contract.getBreedCost(hound2);
+  console.log("ok x2");
   const houndToFillUp = await params.contract.id();
-  let totalValueToPay: number = 0;
+  let totalValueToPay: BigNumber = BigNumber.from(0);
   for ( let i = 0 , l = totalToPay.length ; i < l ; ++i ) {
-    totalValueToPay += Number(totalToPay[i].amount);
+    totalValueToPay = totalValueToPay.add(totalToPay[i].amount);
   }
 
+  console.log("ok x3 ", hound1, hound2);
+  console.log("ok x3 ", totalValueToPay);
+  console.log("to >>> ", params.contract.address);
   await params.contract.breedHounds(hound1, hound2, { value : totalValueToPay });
 
+  console.log("ok x4");
   await params.contract.initializeHound(houndToFillUp, signer, globalParams.defaultHound);
 
+  console.log("ok x5");
   houndMaleAfter = await params.contract.hound(maleId);
   houndFemaleAfter = await params.contract.hound(femaleId);
 
