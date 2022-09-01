@@ -7,9 +7,20 @@ import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import '../../payments/params/Payment.sol';
+import './Constructor.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {
+
+    PaymentsConstructor.Struct public control;
+
+    constructor(PaymentsConstructor.Struct memory input) {
+        control = input;
+    }
+    
+    function setGlobalParameters(PaymentsConstructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
 
     fallback() external payable {}
     receive() external payable {}

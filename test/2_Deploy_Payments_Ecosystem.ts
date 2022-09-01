@@ -36,7 +36,9 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the payments contract', async function () {
         payments = await deployContract({
           name: 'Payments',
-          constructor: [],
+          constructor: [[
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+          ]],
           props: {}
         }) as Payments;
       });

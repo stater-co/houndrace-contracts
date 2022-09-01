@@ -203,19 +203,19 @@ export interface RacesInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getStatistics(uint256)": FunctionFragment;
-    "handleRaceLoot((address[],address[],address[],uint256[][],uint256[][],uint32[]))": FunctionFragment;
+    "handleRaceLoot((address[],address[],address[],uint256[][],uint256[][],uint8[]))": FunctionFragment;
     "houndsStatistic(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
     "payout(uint256)": FunctionFragment;
     "race(uint256)": FunctionFragment;
-    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;

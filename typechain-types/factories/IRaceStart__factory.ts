@@ -81,9 +81,9 @@ const _abi = [
                     type: "uint256[][]",
                   },
                   {
-                    internalType: "uint32[]",
+                    internalType: "enum Payment.PaymentTypes[]",
                     name: "paymentType",
-                    type: "uint32[]",
+                    type: "uint8[]",
                   },
                 ],
                 internalType: "struct Payment.Struct",

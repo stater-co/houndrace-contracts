@@ -137,7 +137,7 @@ export declare namespace Race {
 export interface IGenerateInterface extends utils.Interface {
   contractName: "IGenerate";
   functions: {
-    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
+    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

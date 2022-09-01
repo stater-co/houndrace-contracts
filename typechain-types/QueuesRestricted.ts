@@ -157,9 +157,9 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool)[])": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool)[])": FunctionFragment;
     "deleteQueue(uint256)": FunctionFragment;
-    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool))": FunctionFragment;
+    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool))": FunctionFragment;
     "enqueueDatesOf(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;

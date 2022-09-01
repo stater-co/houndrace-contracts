@@ -23,15 +23,24 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace PaymentsConstructor {
+  export type StructStruct = { alphadune: string };
+
+  export type StructStructOutput = [string] & { alphadune: string };
+}
+
 export interface PaymentsInterface extends utils.Interface {
   contractName: "Payments";
   functions: {
+    "control()": FunctionFragment;
     "owner()": FunctionFragment;
-    "pay(address,address,address,uint256[],uint256[],uint32)": FunctionFragment;
+    "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "setGlobalParameters((address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pay",
@@ -49,14 +58,23 @@ export interface PaymentsInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "setGlobalParameters",
+    values: [PaymentsConstructor.StructStruct]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setGlobalParameters",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -107,6 +125,10 @@ export interface Payments extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    control(
+      overrides?: CallOverrides
+    ): Promise<[string] & { alphadune: string }>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     pay(
@@ -123,11 +145,18 @@ export interface Payments extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setGlobalParameters(
+      globalParameters: PaymentsConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  control(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -145,12 +174,19 @@ export interface Payments extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setGlobalParameters(
+    globalParameters: PaymentsConstructor.StructStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    control(overrides?: CallOverrides): Promise<string>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     pay(
@@ -164,6 +200,11 @@ export interface Payments extends BaseContract {
     ): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    setGlobalParameters(
+      globalParameters: PaymentsConstructor.StructStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     transferOwnership(
       newOwner: string,
@@ -183,6 +224,8 @@ export interface Payments extends BaseContract {
   };
 
   estimateGas: {
+    control(overrides?: CallOverrides): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     pay(
@@ -199,6 +242,11 @@ export interface Payments extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setGlobalParameters(
+      globalParameters: PaymentsConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -206,6 +254,8 @@ export interface Payments extends BaseContract {
   };
 
   populateTransaction: {
+    control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     pay(
@@ -219,6 +269,11 @@ export interface Payments extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setGlobalParameters(
+      globalParameters: PaymentsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

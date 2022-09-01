@@ -11,7 +11,7 @@ export function checkHoundStructure(
     ( hound.breeding.breedingFee >= 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
     ( hound.profile.custom === true || hound.profile.custom === false ) && 
-    ( String(hound.profile.title).length > 0 ) && 
+    ( String(hound.profile.name).length > 0 ) && 
     ( String(hound.profile.token_uri).length > 0 ) && 
     ( hound.identity.birthDate >= 0 ) && 
     ( hound.identity.femaleParent >= 0 ) && 

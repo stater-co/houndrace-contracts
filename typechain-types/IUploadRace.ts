@@ -109,7 +109,7 @@ export declare namespace Race {
 export interface IUploadRaceInterface extends utils.Interface {
   contractName: "IUploadRace";
   functions: {
-    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(

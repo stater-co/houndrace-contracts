@@ -50,7 +50,7 @@ contract HoundsModifier is Params {
             control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.currency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
@@ -80,7 +80,7 @@ contract HoundsModifier is Params {
             control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.currency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;

@@ -217,14 +217,14 @@ export declare namespace HoundIdentity {
 
 export declare namespace HoundProfile {
   export type StructStruct = {
-    title: string;
+    name: string;
     token_uri: string;
     queueId: BigNumberish;
     custom: boolean;
   };
 
   export type StructStructOutput = [string, string, BigNumber, boolean] & {
-    title: string;
+    name: string;
     token_uri: string;
     queueId: BigNumber;
     custom: boolean;
@@ -733,7 +733,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [string, string, BigNumber, boolean] & {
-        title: string;
+        name: string;
         token_uri: string;
         queueId: BigNumber;
         custom: boolean;
@@ -937,7 +937,7 @@ export interface Hounds extends BaseContract {
     overrides?: CallOverrides
   ): Promise<
     [string, string, BigNumber, boolean] & {
-      title: string;
+      name: string;
       token_uri: string;
       queueId: BigNumber;
       custom: boolean;
@@ -1138,7 +1138,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<
       [string, string, BigNumber, boolean] & {
-        title: string;
+        name: string;
         token_uri: string;
         queueId: BigNumber;
         custom: boolean;

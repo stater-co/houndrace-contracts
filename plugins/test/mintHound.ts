@@ -22,7 +22,7 @@ export async function safeMintHound(
   expecting(stamina.staminaCap > 0 && stamina.staminaPerHour > 0, "Bugged stamina setter");
   expecting(Number(breeding.breedingFee) > 0, "Bugged breeding setter")
   expecting(Number(statistics.firstPlace) === 0 && Number(statistics.totalRuns) === 0, "Bugged statistics setter");
-  expecting(profile.title.length > 0, "Bugged profile setter");
+  expecting(profile.name.length > 0, "Bugged profile setter");
   expecting(hound.identity.geneticSequence[1] > 0, "Bugged incubator setter");
   return Number(before);
 }

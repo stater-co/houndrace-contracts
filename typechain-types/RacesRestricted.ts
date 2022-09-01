@@ -183,7 +183,7 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;

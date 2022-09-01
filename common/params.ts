@@ -80,7 +80,7 @@ const houndIdentity: HoundIdentity.StructStruct = {
 };
 
 const houndProfile: HoundProfile.StructStruct = {
-    title: "Hound #1",
+    name: "Hound #1",
     custom: true,
     queueId: BigNumber.from(0),
     token_uri: "hound_token_uri"

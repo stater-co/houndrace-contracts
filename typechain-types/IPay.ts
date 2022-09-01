@@ -25,7 +25,7 @@ import type {
 export interface IPayInterface extends utils.Interface {
   contractName: "IPay";
   functions: {
-    "pay(address,address,address,uint256[],uint256[],uint32)": FunctionFragment;
+    "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
   };
 
   encodeFunctionData(

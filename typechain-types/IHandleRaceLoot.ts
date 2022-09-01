@@ -52,7 +52,7 @@ export declare namespace Payment {
 export interface IHandleRaceLootInterface extends utils.Interface {
   contractName: "IHandleRaceLoot";
   functions: {
-    "handleRaceLoot((address[],address[],address[],uint256[][],uint256[][],uint32[]))": FunctionFragment;
+    "handleRaceLoot((address[],address[],address[],uint256[][],uint256[][],uint8[]))": FunctionFragment;
   };
 
   encodeFunctionData(

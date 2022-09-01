@@ -20,7 +20,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     constructor(
         Constructor.Struct memory input
-    ) ERC721("HoundRace Lootboxes", "HRLB") {
+    ) ERC721("HoundRace Lootbox", "HRLB") {
         control = input;
     }
 
@@ -56,7 +56,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
                 lootboxes[boxId].currency,
                 new uint256[](0),
                 amounts,
-                lootboxes[boxId].currency == address(0) ? 3 : 2
+                lootboxes[boxId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hound);

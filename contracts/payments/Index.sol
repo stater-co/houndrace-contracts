@@ -5,25 +5,27 @@ import './params/Index.sol';
 
 contract Payments is Params {
 
+    constructor(PaymentsConstructor.Struct memory input) Params(input) {}
+
 	function pay(
 		address from,
         address to,
         address currency,
         uint256[] memory ids, // for batch transfers
         uint256[] memory amounts, // for batch transfers
-        uint32 paymentType
-	) public payable {
-		if ( paymentType == 0 ) {
+        Payment.PaymentTypes paymentType
+	) public payable nonReentrant {
+		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 			IERC721(currency).safeTransferFrom(from, to, ids[0]);
-		} else if ( paymentType == 1 ) {
+		} else if ( paymentType == Payment.PaymentTypes.ERC1155 ) {
 			IERC1155(currency).safeBatchTransferFrom(from, to, ids, amounts, "");
-		} else if ( paymentType == 2 ) {
+		} else if ( paymentType == Payment.PaymentTypes.ERC20 ) {
 			if ( from != address(this) ) {
 				require(IERC20(currency).transferFrom(from, to, amounts[0]));
 			} else {
 				require(IERC20(currency).transfer(to, amounts[0]));
 			}
-		} else if ( paymentType == 3 ) {
+		} else if ( paymentType == Payment.PaymentTypes.DEFAULT ) {
 			if ( Address.isContract(to) ) {
 				(bool success, )= to.call{ value: amounts[0] }("");
 				require(success);

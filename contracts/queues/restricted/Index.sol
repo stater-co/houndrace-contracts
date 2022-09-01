@@ -47,7 +47,7 @@ contract QueuesRestricted is Params {
                     arenaCurrency,
                     new uint256[](0),
                     amounts,
-                    arenaCurrency == address(0) ? 3 : 2
+                    arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
                 );
             }
         }
@@ -74,7 +74,7 @@ contract QueuesRestricted is Params {
                     arenaCurrency,
                     new uint256[](0),
                     amounts,
-                    arenaCurrency == address(0) ? 3 : 2
+                    arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
                 );
             }
         }

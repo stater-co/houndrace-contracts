@@ -19,7 +19,7 @@ contract ArenasMethods is Params {
                 arenas[theId].currency,
                 new uint256[](0),
                 amounts,
-                arenas[theId].currency == address(0) ? 3 : 2
+                arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         amounts[0] = arenas[theId].fee * ( 100 / control.alhpadunePercentage );
@@ -30,7 +30,7 @@ contract ArenasMethods is Params {
                 arenas[theId].currency,
                 new uint256[](0),
                 amounts,
-                arenas[theId].currency == address(0) ? 3 : 2
+                arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
     }

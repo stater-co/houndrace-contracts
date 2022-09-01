@@ -45,7 +45,7 @@ contract QueuesMethods is Params {
             entryFee.currency,
             new uint256[](0),
             amounts,
-            entryFee.currency == address(0) ? 3 : 2
+            entryFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         emit Unenqueue(theId, hound);
@@ -90,7 +90,7 @@ contract QueuesMethods is Params {
             alphaduneFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         amounts[0] = arenaFee.amount;
@@ -102,7 +102,7 @@ contract QueuesMethods is Params {
             arenaFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         amounts[0] = entryFee.amount;
@@ -114,7 +114,7 @@ contract QueuesMethods is Params {
             entryFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
 

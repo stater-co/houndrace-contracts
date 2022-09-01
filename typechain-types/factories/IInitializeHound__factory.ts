@@ -156,7 +156,7 @@ const _abi = [
             components: [
               {
                 internalType: "string",
-                name: "title",
+                name: "name",
                 type: "string",
               },
               {

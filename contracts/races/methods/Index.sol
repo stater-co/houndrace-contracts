@@ -51,18 +51,14 @@ contract RacesMethods is Params {
         require(allowed[msg.sender]);
 
         for ( uint256 i = 0 ; i < payment.from.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature(
-                    "pay(address,address,address,uint256[],uint256[],uint32)", 
-                    payment.from[i],
-                    payment.to[i],
-                    payment.currency[i],
-                    payment.ids[i],
-                    payment.amounts[i],
-                    payment.paymentType[i]
-                )
+            IPay(control.payments).pay(
+                payment.from[i],
+                payment.to[i],
+                payment.currency[i],
+                payment.ids[i],
+                payment.amounts[i],
+                payment.paymentType[i]
             );
-            require(success);
         }
 
     }

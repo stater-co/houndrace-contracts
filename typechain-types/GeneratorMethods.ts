@@ -176,7 +176,7 @@ export interface GeneratorMethodsInterface extends utils.Interface {
   contractName: "GeneratorMethods";
   functions: {
     "control()": FunctionFragment;
-    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint32[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
+    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address))": FunctionFragment;

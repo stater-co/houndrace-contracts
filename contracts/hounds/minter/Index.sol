@@ -38,7 +38,7 @@ contract HoundsMinter is Params {
             control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.currency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         console.log("breedHounds 3");
@@ -49,7 +49,7 @@ contract HoundsMinter is Params {
             control.fees.currency,
             new uint256[](0),
             amounts,
-            control.fees.currency == address(0) ? 3 : 2
+            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         console.log("breedHounds 4");
@@ -64,7 +64,7 @@ contract HoundsMinter is Params {
                 control.fees.currency,
                 new uint256[](0),
                 amounts,
-                control.fees.currency == address(0) ? 3 : 2
+                control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
             );
                 
         }
