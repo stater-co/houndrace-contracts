@@ -13,49 +13,18 @@ async function basicTest(
   return new Promise((resolve, ) => {
     describe('Lootboxes Basic Tests', async function () {
 
-      let houndIdToUse: string | number;
-      let lootboxId: string | number;
+      const totalLootboxesToCreate: number = 20;
 
       it("Create hounds for lootbox", async function () {
         const [sig1] = await ethers.getSigners();
 
-        houndIdToUse = Number(await dependencies.houndsContract.id()); 
+        let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(sig1.address);
 
-        await safeMintHound({
-          contract: dependencies.houndsContract,
-          hound: globalParams.defaultHound,
-          owner: sig1.address,
-          position: 0,
-          signer: sig1.address,
-          gamification: dependencies.gamification,
-          races: dependencies.races
-        });
+        await dependencies.lootboxesContract.mint(globalParams.address0, 5000, totalLootboxesToCreate);
 
-        await dependencies.houndsContract.approve(dependencies.lootboxesContract.address, houndIdToUse);
+        let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(sig1.address);
 
-        let houndsBalanceBefore = await dependencies.houndsContract.balanceOf(sig1.address);
-
-        lootboxId = Number(await dependencies.lootboxesContract.id());
-
-        const purchasePrice: number = 0;
-        const value: number = 40000;
-        const currency: string = globalParams.address0;
-
-        await dependencies.lootboxesContract.mint([
-          {
-            amounts: [1],
-            price: value,
-            priceCurrency: currency,
-            rewardContracts: [dependencies.houndsContract.address],
-            rewardTypes: [0],
-            tokenIds: [houndIdToUse],
-            token_uri: "token_uri"
-          }
-        ]);
-
-        let houndsBalanceAfter = await dependencies.houndsContract.balanceOf(sig1.address);
-
-        expecting(purchasePrice === 0 || ( purchasePrice > 0 && Number(houndsBalanceBefore) === Number(houndsBalanceAfter) - 1 ), "Lootboxes creation bugged");
+        expecting(Number(houndsBalanceBefore) < Number(houndsBalanceAfter), "Lootboxes creation bugged");
 
       });
 
@@ -67,7 +36,9 @@ async function basicTest(
       })
 
       it("Open lootbox ", async function() {
-        await dependencies.lootboxesContract.open(lootboxId);
+        await dependencies.lootboxesContract.open(Math.floor(Math.random() * totalLootboxesToCreate) + 1,{
+          value: 5000
+        });
         resolve();
       });
 

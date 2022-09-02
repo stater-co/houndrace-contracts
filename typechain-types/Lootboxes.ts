@@ -217,7 +217,7 @@ export interface LootboxesInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "LootboxOpened(uint256,tuple,address)": EventFragment;
-    "NewLootBox(uint256)": EventFragment;
+    "NewLootboxes(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -225,7 +225,7 @@ export interface LootboxesInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LootboxOpened"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewLootBox"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewLootboxes"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -251,9 +251,12 @@ export type LootboxOpenedEvent = TypedEvent<
 
 export type LootboxOpenedEventFilter = TypedEventFilter<LootboxOpenedEvent>;
 
-export type NewLootBoxEvent = TypedEvent<[BigNumber], { id: BigNumber }>;
+export type NewLootboxesEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  { idStart: BigNumber; idFinish: BigNumber }
+>;
 
-export type NewLootBoxEventFilter = TypedEventFilter<NewLootBoxEvent>;
+export type NewLootboxesEventFilter = TypedEventFilter<NewLootboxesEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -663,8 +666,14 @@ export interface Lootboxes extends BaseContract {
       owner?: string | null
     ): LootboxOpenedEventFilter;
 
-    "NewLootBox(uint256)"(id?: BigNumberish | null): NewLootBoxEventFilter;
-    NewLootBox(id?: BigNumberish | null): NewLootBoxEventFilter;
+    "NewLootboxes(uint256,uint256)"(
+      idStart?: BigNumberish | null,
+      idFinish?: BigNumberish | null
+    ): NewLootboxesEventFilter;
+    NewLootboxes(
+      idStart?: BigNumberish | null,
+      idFinish?: BigNumberish | null
+    ): NewLootboxesEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
