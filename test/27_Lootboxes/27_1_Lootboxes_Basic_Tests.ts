@@ -38,12 +38,17 @@ async function basicTest(
         lootboxId = Number(await dependencies.lootboxesContract.id());
 
         const purchasePrice: number = 0;
+        const value: number = 40000;
+        const currency: string = globalParams.address0;
 
         await dependencies.lootboxesContract.mint([
           {
-            currency: globalParams.address0,
-            hound: houndIdToUse,
-            purchasePrice: purchasePrice,
+            amounts: [1],
+            price: value,
+            priceCurrency: currency,
+            rewardContracts: [dependencies.houndsContract.address],
+            rewardTypes: [0],
+            tokenIds: [houndIdToUse],
             token_uri: "token_uri"
           }
         ]);

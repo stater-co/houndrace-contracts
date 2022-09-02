@@ -17,6 +17,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
     mapping(uint256 => Box.Struct) private lootboxes;
 
     event NewLootBox(uint256 indexed id);
+    event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
 
     constructor(
         Constructor.Struct memory input
@@ -24,18 +25,16 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         control = input;
     }
 
-    function mint(Box.Struct[] memory boxes) external onlyOwner {
-        for ( uint256 i = 0; i < boxes.length; ++i ) {
-            IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),boxes[i].hound);
-
+    function mint(address priceCurrency, uint256 price, uint256 amount) external onlyOwner {
+        for ( uint256 i = 0; i < amount; ++i ) {
             _mint(msg.sender, id);
             _setTokenURI(id, control.token_uri);
-
-            lootboxes[id] = boxes[i];
-
-            emit NewLootBox(id);
-            ++id;
+            lootboxes[id].priceCurrency = priceCurrency;
+            lootboxes[id].price = price;
         }
+
+        emit NewLootBox(id);
+        ++id;
     }
 
     function setOpenStatus(bool status) external onlyOwner {
@@ -44,22 +43,23 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     function open(uint256 boxId) external payable {
         require(control.canBeOpened);
+        require(ownerOf(boxId) == msg.sender);
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = lootboxes[boxId].purchasePrice;
+        amounts[0] = lootboxes[boxId].price;
 
         IPay(control.payments).pay{
-            value: lootboxes[boxId].currency == address(0) ? lootboxes[boxId].purchasePrice : 0
+            value: lootboxes[boxId].priceCurrency == address(0) ? lootboxes[boxId].price : 0
         }(
-                control.payments,
-                control.alphadune,
-                lootboxes[boxId].currency,
-                new uint256[](0),
-                amounts,
-                lootboxes[boxId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.payments,
+            control.alphadune,
+            lootboxes[boxId].priceCurrency,
+            new uint256[](0),
+            amounts,
+            lootboxes[boxId].priceCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hound);
+        emit LootboxOpened(boxId, lootboxes[boxId], msg.sender);
 
         _burn(boxId);
     }
