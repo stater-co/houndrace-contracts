@@ -18,28 +18,29 @@ import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from './8_Deploy_Races_Ecosystem';
 import { run as runQueues } from './9_Deploy_Queues_Ecosystem';
 import { run as runGenerator } from './10_Deploy_Generator';
-import { set as setQueues } from './11_Setup_Queues_Contracts';
-import { set as setShop } from './12_Setup_Shop_Contracts';
-import { set as setArenas } from './13_Setup_Arenas_Contracts';
-import { set as setIncubators } from './14_Setup_Incubator_Contracts';
-import { set as setHounds } from './15_Setup_Hounds_Contracts';
-import { set as setRaces } from './16_Setup_Races_Contracts';
-import { set as setGenerator } from './17_Setup_Generator_Contracts';
-import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
-import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
-import { test as testHoundsAdvanced } from './19_Hounds/19_2_Hounds_Custom_Token_Tests';
-import { test as testArenas } from './20_Arenas/20_1_Arenas_Basic_Tests';
-import { test as testQueues } from './21_Queues/21_1_Queues_Basic_Tests';
-import { test as testQueuesAdvanced } from './21_Queues/21_2_Queues_Advanced_Tests';
-import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
+import { set as setQueues } from './18_Setup_Queues_Contracts';
+import { set as setShop } from './14_Setup_Shop_Contracts';
+import { set as setArenas } from './15_Setup_Arenas_Contracts';
+import { set as setIncubators } from './16_Setup_Incubator_Contracts';
+import { set as setHounds } from './17_Setup_Hounds_Contracts';
+import { set as setRaces } from './20_Setup_Races_Contracts';
+import { set as setGenerator } from './19_Setup_Generator_Contracts';
+import { test as testGenetics } from './22_Genetics/22_1_Genetics_Basic_Tests';
+import { test as testHounds } from './23_Hounds/23_1_Hounds_Basic_Tests';
+import { test as testHoundsAdvanced } from './23_Hounds/23_2_Hounds_Custom_Token_Tests';
+import { test as testArenas } from './24_Arenas/24_1_Arenas_Basic_Tests';
+import { test as testQueues } from './25_Queues/25_1_Queues_Basic_Tests';
+import { test as testQueuesAdvanced } from './25_Queues/25_2_Queues_Advanced_Tests';
+import { test as testRaces } from './26_Races/26_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
-import { run as runLootboxes } from './23_Deploy_Lootboxes';
+import { run as runLootboxes } from './11_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
-import { run as runGamification } from './25_Deploy_Gamification';
-import { set as setGamification } from './26_Setup_Gamification';
-import { test as testLootboxes } from './24_Lootboxes/24_1_Lootboxes_Basic_Tests';
+import { run as runGamification } from './12_Deploy_Gamification';
+import { set as setGamification } from './21_Setup_Gamification';
+import { test as testLootboxes } from './27_Lootboxes/27_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
-import { test as testRacesAdvanced } from './22_Races/22_2_Races_Advanced_Tests';
+import { test as testRacesAdvanced } from './26_Races/26_2_Races_Advanced_Tests';
+import { set as setPayments } from './13_Setup_Payments_Ecosystem';
 
 
 async function main() {
@@ -96,6 +97,52 @@ async function main() {
         incubatorAddress: incubators.incubator.address
     });
 
+    const gamification: GamificationSystem = await runGamification({
+        allowed: [],
+        defaultBreeding: globalParams.houndBreeding,
+        defaultStamina: globalParams.houndStamina
+    });
+
+    const lootboxes: LootboxesSystem = await runLootboxes({
+        canBeOpened: false,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address
+    });
+
+    await setPayments({
+        payments: payments.payments,
+        paymentMethods: payments.paymentMethods,
+        paymentRestricted: payments.paymentRestricted,
+        constructor: {
+            restricted: payments.paymentRestricted.address,
+            methods: payments.paymentMethods.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            allowedCallers: []
+        }
+    });
+
+    await setShop({
+        shopMethods: payments.shopMethods,
+        shopRestricted: payments.shopRestricted,
+        constructor: {
+            methods: payments.shopMethods.address,
+            restricted: payments.shopRestricted.address
+        }
+    });
+
+    await setGamification({
+        constructor: {
+            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
+            defaultBreeding: globalParams.houndBreeding,
+            defaultStamina: globalParams.houndStamina,
+            methods: gamification.methods.address,
+            restricted: gamification.restricted.address
+        },
+        methods: gamification.methods,
+        restricted: gamification.restricted,
+        gamification: gamification.gamification
+    });
+
     await setQueues({
         queuesRestricted: queues.queuesRestricted,
         queuesMethods: queues.queueMethods,
@@ -114,15 +161,6 @@ async function main() {
         }
     });
 
-    await setShop({
-        shopMethods: payments.shopMethods,
-        shopRestricted: payments.shopRestricted,
-        constructor: {
-            methods: payments.shopMethods.address,
-            restricted: payments.shopRestricted.address
-        }
-    });
-
     await setArenas({
         arenas: arenas.arenas,
         arenasMethods: arenas.arenasMethods,
@@ -137,25 +175,6 @@ async function main() {
             allowedCallers: [races.races.address,queues.queues.address],
             alhpadunePercentage: 60
         }
-    });
-
-    const gamification: GamificationSystem = await runGamification({
-        allowed: [],
-        defaultBreeding: globalParams.houndBreeding,
-        defaultStamina: globalParams.houndStamina
-    });
-
-    await setGamification({
-        constructor: {
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
-            defaultBreeding: globalParams.houndBreeding,
-            defaultStamina: globalParams.houndStamina,
-            methods: gamification.methods.address,
-            restricted: gamification.restricted.address
-        },
-        methods: gamification.methods,
-        restricted: gamification.restricted,
-        gamification: gamification.gamification
     });
 
     await setIncubators({
@@ -335,11 +354,7 @@ async function main() {
         payments: payments.payments
     });
 
-    const lootboxes: LootboxesSystem = await runLootboxes({
-        canBeOpened: false,
-        houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address
-    });
+
 
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,

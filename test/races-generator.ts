@@ -18,20 +18,20 @@ import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from './8_Deploy_Races_Ecosystem';
 import { run as runQueues } from './9_Deploy_Queues_Ecosystem';
 import { run as runGenerator } from './10_Deploy_Generator';
-import { set as setQueues } from './11_Setup_Queues_Contracts';
-import { set as setShop } from './12_Setup_Shop_Contracts';
-import { set as setArenas } from './13_Setup_Arenas_Contracts';
-import { set as setIncubators } from './14_Setup_Incubator_Contracts';
-import { set as setHounds } from './15_Setup_Hounds_Contracts';
-import { set as setRaces } from './16_Setup_Races_Contracts';
-import { test as testGenetics } from './18_Genetics/18_1_Genetics_Basic_Tests';
-import { test as testHounds } from './19_Hounds/19_1_Hounds_Basic_Tests';
-import { test as testRaces } from './22_Races/22_1_Races_Basic_Tests';
+import { set as setQueues } from './18_Setup_Queues_Contracts';
+import { set as setShop } from './14_Setup_Shop_Contracts';
+import { set as setArenas } from './15_Setup_Arenas_Contracts';
+import { set as setIncubators } from './16_Setup_Incubator_Contracts';
+import { set as setHounds } from './17_Setup_Hounds_Contracts';
+import { set as setRaces } from './20_Setup_Races_Contracts';
+import { test as testGenetics } from './22_Genetics/22_1_Genetics_Basic_Tests';
+import { test as testHounds } from './23_Hounds/23_1_Hounds_Basic_Tests';
+import { test as testRaces } from './26_Races/26_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
-import { run as runGamification } from './25_Deploy_Gamification';
-import { set as setGamification } from './26_Setup_Gamification';
+import { run as runGamification } from './12_Deploy_Gamification';
+import { set as setGamification } from './21_Setup_Gamification';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
-import { test as generationTests } from './22_Races/22_3_Races_Generation_Tests';
+import { test as generationTests } from './26_Races/26_3_Races_Generation_Tests';
 
 
 async function main() {
