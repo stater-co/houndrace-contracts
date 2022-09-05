@@ -12,7 +12,6 @@ contract PaymentsRestricted is Params {
 		address reservoirAddress,
 		Reservoir.Struct memory reservoir
 	) external payable {
-		require(allowedCallers[msg.sender]);
 		require(reservoir.paymentType > Payment.PaymentTypes.ERC721);
 		require(reservoir.ids.length == reservoir.amounts.length);
 

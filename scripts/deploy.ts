@@ -5,8 +5,10 @@ import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
 import { Lootboxes, Constructor as LootboxesConstructor } from '../typechain-types/Lootboxes';
+import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
+import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Randomness } from '../typechain-types/Randomness';
-import { Payments } from '../typechain-types/Payments';
+import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
@@ -20,6 +22,7 @@ import { Incubator } from '../typechain-types/Incubator';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
+import { HoundsZerocost } from '../typechain-types/HoundsZerocost';
 import { Hounds, Constructor as HoundsConstructor, ConstructorBoilerplate, ConstructorFees } from '../typechain-types/Hounds';
 import { RacesRestricted } from '../typechain-types/RacesRestricted';
 import { RacesMethods } from '../typechain-types/RacesMethods';
@@ -28,6 +31,7 @@ import { GeneratorZerocost } from '../typechain-types/GeneratorZerocost';
 import { GeneratorMethods } from '../typechain-types/GeneratorMethods';
 import { Generator, GeneratorConstructor } from '../typechain-types/Generator';
 import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
+import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { globalParams } from '../common/params';
@@ -106,9 +110,34 @@ async function main() {
       step: "Deploy payment methods"
     });
 
+    let paymentsConstructor: PaymentsConstructor.StructStruct = {
+      alphadune: globalParams.address0,
+      methods: globalParams.address0,
+      restricted: globalParams.address0
+    };
+    const paymentsRestricted = await deployContract({
+      name: 'PaymentsRestricted',
+      constructor: [arrayfy(paymentsConstructor)],
+      props: {}
+    }) as PaymentsRestricted;
+    DeploymentLogger('export PAYMENTS_RESTRICTED=' + paymentsRestricted.address);
+    deployments.update(5, {
+      step: "Deploy houndrace potions"
+    });
+
+    const paymentsMethods = await deployContract({
+      name: 'PaymentsMethods',
+      constructor: [arrayfy(paymentsConstructor)],
+      props: {}
+    }) as PaymentsMethods;
+    DeploymentLogger('export PAYMENTS_METHODS=' + paymentsMethods.address);
+    deployments.update(5, {
+      step: "Deploy houndrace potions"
+    });
+
     const payments = await deployContract({
       name: 'Payments',
-      constructor: [],
+      constructor: [arrayfy(paymentsConstructor)],
       props: {}
     }) as Payments;
     DeploymentLogger('export PAYMENTS=' + payments.address);
@@ -254,18 +283,20 @@ async function main() {
 
     let houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       incubator: globalParams.address0,
-      staterApi: globalParams.address0,
+      alphadune: globalParams.address0,
       payments: globalParams.address0,
       restricted: globalParams.address0,
       minter: globalParams.address0,
-      hounds: globalParams.address0,
-      houndModifier: globalParams.address0,
+      houndsModifier: globalParams.address0,
+      zerocost: globalParams.address0,
       shop: globalParams.address0,
       races: globalParams.address0,
       gamification: globalParams.address0
     };
     let houndsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
+      breedCostCurrency: globalParams.address0,
+      breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
       breedFee: "0x2386F26FC10000",
       refillCost: "0x2386F26FC10000",
@@ -291,6 +322,20 @@ async function main() {
     DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
     deployments.update(15, {
       step: "Deploy hounds modifier"
+    });
+
+    const houndsZerocost = await deployContract({
+      name: 'HoundsZerocost',
+      constructor: [arrayfy({
+        ...houndsConstructor,
+        boilerplate: arrayfy(houndsConstructorBoilerplate),
+        fees: arrayfy(houndsConstructorFees)
+      })],
+      props: {}
+    }) as HoundsZerocost;
+    DeploymentLogger('export HOUNDS_ZEROCOST=' + houndsZerocost.address);
+    deployments.update(16, {
+      step: "Deploy hounds minter"
     });
 
     const houndsModifier = await deployContract({
@@ -475,8 +520,9 @@ async function main() {
       payments: globalParams.address0,
       restricted: globalParams.address0,
       races: globalParams.address0,
-      allowedCallers: [],
-      raceFee: "20000000000000000"
+      queues: globalParams.address0,
+      zerocost: globalParams.address0,
+      allowedCallers: []
     }
     const queuesMethods = await deployContract({
       name: 'QueuesMethods',
@@ -494,6 +540,16 @@ async function main() {
       props: {}
     }) as QueuesRestricted;
     DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
+    deployments.update(26, {
+      step: "Deploy queues"
+    });
+
+    const queuesZerocost = await deployContract({
+      name: 'QueuesZerocost',
+      constructor: [arrayfy(queuesConstructor)],
+      props: {}
+    }) as QueuesZerocost;
+    DeploymentLogger('export QUEUES_ZEROCOST=' + queuesZerocost.address);
     deployments.update(26, {
       step: "Deploy queues"
     });
@@ -531,7 +587,12 @@ async function main() {
 
 
 
-
+    paymentsConstructor = {
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      methods: paymentsMethods.address,
+      restricted: paymentsRestricted.address
+    }
+  
     shopConstructor = {
       methods: shopMethods.address,
       restricted: shopRestricted.address
@@ -571,18 +632,20 @@ async function main() {
 
     houndsConstructorBoilerplate = {
       incubator: incubator.address,
-      staterApi: globalParams.address0,
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       payments: payments.address,
       restricted: houndsRestricted.address,
       minter: houndsMinter.address,
-      hounds: hounds.address,
-      houndModifier: houndsModifier.address,
+      houndsModifier: houndsModifier.address,
+      zerocost: houndsZerocost.address,
       shop: shop.address,
       races: races.address,
       gamification: gamification.address
     };
     houndsConstructorFees = {
       currency: globalParams.address0,
+      breedCostCurrency: globalParams.address0,
+      breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
       breedFee: "0x2386F26FC10000",
       refillCost: "0x2386F26FC10000",
@@ -642,7 +705,8 @@ async function main() {
       restricted: queuesRestricted.address,
       races: races.address,
       allowedCallers: [races.address],
-      raceFee: "20000000000000000"
+      queues: queues.address,
+      zerocost: queuesZerocost.address
     }
 
     lootboxesConstructor = {
@@ -661,6 +725,32 @@ async function main() {
 
 
 
+    try {
+      await paymentsRestricted.setGlobalParameters(paymentsConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await paymentsMethods.setGlobalParameters(paymentsConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await payments.setGlobalParameters(paymentsConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
 
     try {
       await shopRestricted.setGlobalParameters(shopConstructor);

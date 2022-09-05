@@ -25,14 +25,12 @@ import type {
 
 export declare namespace PaymentsConstructor {
   export type StructStruct = {
-    allowedCallers: string[];
     alphadune: string;
     restricted: string;
     methods: string;
   };
 
-  export type StructStructOutput = [string[], string, string, string] & {
-    allowedCallers: string[];
+  export type StructStructOutput = [string, string, string] & {
     alphadune: string;
     restricted: string;
     methods: string;
@@ -56,7 +54,6 @@ export declare namespace Reservoir {
 export interface PaymentsInterface extends utils.Interface {
   contractName: "Payments";
   functions: {
-    "allowedCallers(address)": FunctionFragment;
     "alphaduneReservoirs(address)": FunctionFragment;
     "control()": FunctionFragment;
     "fillRewardsReservoir(address,(uint256[],uint256[],uint8))": FunctionFragment;
@@ -64,14 +61,10 @@ export interface PaymentsInterface extends utils.Interface {
     "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rewardsReservoirs(address)": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address))": FunctionFragment;
+    "setGlobalParameters((address,address,address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "allowedCallers",
-    values: [string]
-  ): string;
   encodeFunctionData(
     functionFragment: "alphaduneReservoirs",
     values: [string]
@@ -110,10 +103,6 @@ export interface PaymentsInterface extends utils.Interface {
     values: [string]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "allowedCallers",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "alphaduneReservoirs",
     data: BytesLike
@@ -185,8 +174,6 @@ export interface Payments extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowedCallers(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-
     alphaduneReservoirs(
       arg0: string,
       overrides?: CallOverrides
@@ -240,8 +227,6 @@ export interface Payments extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  allowedCallers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
   alphaduneReservoirs(arg0: string, overrides?: CallOverrides): Promise<number>;
 
   control(
@@ -289,8 +274,6 @@ export interface Payments extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowedCallers(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
     alphaduneReservoirs(
       arg0: string,
       overrides?: CallOverrides
@@ -351,8 +334,6 @@ export interface Payments extends BaseContract {
   };
 
   estimateGas: {
-    allowedCallers(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     alphaduneReservoirs(
       arg0: string,
       overrides?: CallOverrides
@@ -399,11 +380,6 @@ export interface Payments extends BaseContract {
   };
 
   populateTransaction: {
-    allowedCallers(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     alphaduneReservoirs(
       arg0: string,
       overrides?: CallOverrides

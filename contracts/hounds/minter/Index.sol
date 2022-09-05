@@ -13,7 +13,6 @@ contract HoundsMinter is Params {
         HoundIdentity.Struct memory identity1 = IGetIdentity(control.boilerplate.incubator).getIdentity(hound1);
         HoundIdentity.Struct memory identity2 = IGetIdentity(control.boilerplate.incubator).getIdentity(hound2);
 
-        console.log("breedHounds 0");
         require(
             matingSeason && 
             breeding2.lastBreed + breeding2.breedingCooldown < block.timestamp && 
@@ -25,11 +24,9 @@ contract HoundsMinter is Params {
             ownerOf(hound1) == msg.sender
         );
 
-        console.log("breedHounds 1");
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = control.fees.breedCost + control.fees.breedFee + breeding2.breedingFee;
 
-        console.log("breedHounds 2");
         IPay(control.boilerplate.payments).pay{
             value: control.fees.currency == address(0) ? amounts[0] : 0
         }(
@@ -41,7 +38,6 @@ contract HoundsMinter is Params {
             control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        console.log("breedHounds 3");
         amounts[0] = control.fees.breedFee;
         IPay(control.boilerplate.payments).pay(
             control.boilerplate.payments,
@@ -52,7 +48,6 @@ contract HoundsMinter is Params {
             control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        console.log("breedHounds 4");
         require(msg.value >= (control.fees.currency == address(0) ? control.fees.breedCost : 0) + (control.fees.currency == address(0) ? control.fees.breedFee : 0));
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
             require(msg.value >= (control.fees.currency == address(0) ? control.fees.breedCost : 0) + (control.fees.currency == address(0) ? control.fees.breedFee : 0) + (control.fees.currency == address(0) ? breeding2.breedingFee : 0));
@@ -69,7 +64,6 @@ contract HoundsMinter is Params {
                 
         }
 
-        console.log("breedHounds 5");
         breeding2.lastBreed = block.timestamp;
         breeding1.lastBreed = block.timestamp;
 
@@ -81,11 +75,9 @@ contract HoundsMinter is Params {
             id
         );
 
-        console.log("breedHounds 6");
         ISetBreeding(control.boilerplate.gamification).setBreeding(hound1, breeding1);
         ISetBreeding(control.boilerplate.gamification).setBreeding(hound2, breeding2);
 
-        console.log("breedHounds 7");
         hounds[id] = HoundProfile.Struct(
             "",
             "",

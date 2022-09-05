@@ -4,7 +4,6 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../params/Constructor.sol';
-import 'hardhat/console.sol';
 
 
 contract HoundsZerocost is Ownable {
@@ -24,7 +23,6 @@ contract HoundsZerocost is Ownable {
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory
     ) {
-        console.log("ok here!! ", control.boilerplate.gamification);
         return (
 
             // Breed cost fee
