@@ -110,7 +110,7 @@ async function main() {
       step: "Deploy payment methods"
     });
 
-    let paymentsConstructor: PaymentsConstructor.StructStruct = {
+    const paymentsConstructor: PaymentsConstructor.StructStruct = {
       alphadune: globalParams.address0,
       methods: globalParams.address0,
       restricted: globalParams.address0
@@ -145,7 +145,7 @@ async function main() {
       step: "Deploy houndrace potions"
     });
 
-    let houndracePotionsConstructor: Array<string> = [
+    const houndracePotionsConstructor: Array<string> = [
       "HoundracePotions", "HP"
     ];
     const houndracePotions = await deployContract({
@@ -158,7 +158,7 @@ async function main() {
       step: "Deploy shop restricted"
     });
 
-    let shopConstructor: ShopConstructor.StructStruct = {
+    const shopConstructor: ShopConstructor.StructStruct = {
       methods: globalParams.address0,
       restricted: globalParams.address0
     };
@@ -192,7 +192,7 @@ async function main() {
       step: "Deploy arenas restricted"
     });
 
-    let arenasConstructor: ArenasConstructor.StructStruct = {
+    const arenasConstructor: ArenasConstructor.StructStruct = {
       name: "HoundRace Arenas",
       symbol: "HRA",
       restricted: globalParams.address0,
@@ -232,7 +232,7 @@ async function main() {
       step: "Deploy genetics"
     });
 
-    let geneticsConstructor: GeneticsConstructor.StructStruct = {
+    const geneticsConstructor: GeneticsConstructor.StructStruct = {
       randomness: globalParams.address0,
       terrains: globalParams.address0,
       male: globalParams.maleBoilerplateGene,
@@ -252,7 +252,7 @@ async function main() {
       step: "Deploy incubator methods"
     });
 
-    let incubatorConstructor: IncubatorConstructor.StructStruct = {
+    const incubatorConstructor: IncubatorConstructor.StructStruct = {
       methods: globalParams.address0,
       randomness: globalParams.address0,
       genetics: globalParams.address0,
@@ -281,7 +281,7 @@ async function main() {
       step: "Deploy hounds restricted"
     });
 
-    let houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
+    const houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       incubator: globalParams.address0,
       alphadune: globalParams.address0,
       payments: globalParams.address0,
@@ -293,7 +293,7 @@ async function main() {
       races: globalParams.address0,
       gamification: globalParams.address0
     };
-    let houndsConstructorFees: ConstructorFees.StructStruct = {
+    const houndsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
       breedCostCurrency: globalParams.address0,
       breedFeeCurrency: globalParams.address0,
@@ -303,7 +303,7 @@ async function main() {
       refillBreedingCooldownCost: "0x2386F26FC10000",
       refillStaminaCooldownCost: "0x2386F26FC10000"
     };
-    let houndsConstructor: HoundsConstructor.StructStruct = {
+    const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
       allowedCallers: [],
@@ -380,7 +380,7 @@ async function main() {
       step: "Deploy races restricted"
     });
 
-    let gamificationConstructor: GamificationConstructor.StructStruct = {
+    const gamificationConstructor: GamificationConstructor.StructStruct = {
       defaultBreeding: globalParams.houndBreeding,
       defaultStamina: globalParams.houndStamina,
       allowed: [],
@@ -425,7 +425,7 @@ async function main() {
       props: {}
     }) as Gamification;
 
-    let racesConstructor: RacesConstructor.StructStruct = {
+    const racesConstructor: RacesConstructor.StructStruct = {
       randomness: globalParams.address0,
       arenas: globalParams.address0,
       hounds: globalParams.address0,
@@ -468,7 +468,7 @@ async function main() {
       step: "Deploy generator methods"
     });
 
-    let generatorConstructor: GeneratorConstructor.StructStruct = {
+    const generatorConstructor: GeneratorConstructor.StructStruct = {
       randomness: globalParams.address0,
       arenas: globalParams.address0,
       hounds: globalParams.address0,
@@ -513,7 +513,7 @@ async function main() {
       step: "Deploy queues methods"
     });
 
-    let queuesConstructor: QueuesConstructor.StructStruct = {
+    const queuesConstructor: QueuesConstructor.StructStruct = {
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
@@ -564,7 +564,7 @@ async function main() {
       step: "Finished!"
     });
 
-    let lootboxesConstructor: LootboxesConstructor.StructStruct = {
+    const lootboxesConstructor: LootboxesConstructor.StructStruct = {
       token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
       hounds: globalParams.address0,
       payments: globalParams.address0,
@@ -587,18 +587,18 @@ async function main() {
 
 
 
-    paymentsConstructor = {
+    const newPaymentsConstructor: PaymentsConstructor.StructStruct = {
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       methods: paymentsMethods.address,
       restricted: paymentsRestricted.address
     }
   
-    shopConstructor = {
+    const newShopConstructor: ShopConstructor.StructStruct = {
       methods: shopMethods.address,
       restricted: shopRestricted.address
     }
 
-    arenasConstructor = {
+    const newArenasConstructor: ArenasConstructor.StructStruct = {
       name: "HoundRace Arenas", 
       symbol: "HRA",
       restricted: arenasRestricted.address,
@@ -609,7 +609,7 @@ async function main() {
       alhpadunePercentage: 60
     }
 
-    geneticsConstructor = {
+    const newGeneticsConstructor: GeneticsConstructor.StructStruct = {
       randomness: randomness.address,
       terrains: arenas.address,
       male: maleBoilerplateGene,
@@ -620,7 +620,7 @@ async function main() {
       maxValues: geneticsConstructor.maxValues
     }
 
-    incubatorConstructor = {
+    const newIncubatorConstructor: IncubatorConstructor.StructStruct = {
       methods: incubatorMethods.address,
       randomness: randomness.address,
       genetics: genetics.address,
@@ -630,7 +630,17 @@ async function main() {
       secondsToMaturity: 345600
     }
 
-    houndsConstructorBoilerplate = {
+    const newHoundsConstructorFees: ConstructorFees.StructStruct = {
+      currency: globalParams.address0,
+      breedCostCurrency: globalParams.address0,
+      breedFeeCurrency: globalParams.address0,
+      breedCost: "0xB1A2BC2EC50000",
+      breedFee: "0x2386F26FC10000",
+      refillCost: "0x2386F26FC10000",
+      refillBreedingCooldownCost: "0x2386F26FC10000",
+      refillStaminaCooldownCost: "0x2386F26FC10000"
+    };
+    const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       incubator: incubator.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       payments: payments.address,
@@ -642,17 +652,7 @@ async function main() {
       races: races.address,
       gamification: gamification.address
     };
-    houndsConstructorFees = {
-      currency: globalParams.address0,
-      breedCostCurrency: globalParams.address0,
-      breedFeeCurrency: globalParams.address0,
-      breedCost: "0xB1A2BC2EC50000",
-      breedFee: "0x2386F26FC10000",
-      refillCost: "0x2386F26FC10000",
-      refillBreedingCooldownCost: "0x2386F26FC10000",
-      refillStaminaCooldownCost: "0x2386F26FC10000"
-    };
-    houndsConstructor = {
+    const newHoundsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
       allowedCallers: [
@@ -660,19 +660,19 @@ async function main() {
         races.address,
         queues.address
       ],
-      boilerplate: houndsConstructorBoilerplate,
-      fees: houndsConstructorFees
+      boilerplate: newHoundsConstructorBoilerplate,
+      fees: newHoundsConstructorFees
     }
 
-    gamificationConstructor = {
+    const newGamificationConstructor: GamificationConstructor.StructStruct = {
       defaultBreeding: globalParams.houndBreeding,
       defaultStamina: globalParams.houndStamina,
       allowed: [incubator.address, hounds.address, incubatorMethods.address],
-      restricted: globalParams.address0,
-      methods: globalParams.address0
+      restricted: gamificationRestricted.address,
+      methods: gamificationMethods.address
     }
 
-    racesConstructor = {
+    const newRacesConstructor: RacesConstructor.StructStruct = {
       randomness: randomness.address,
       arenas: arenas.address,
       hounds: hounds.address,
@@ -685,7 +685,7 @@ async function main() {
       callable: false
     }
 
-    generatorConstructor = {
+    const newGeneratorConstructor: GeneratorConstructor.StructStruct = {
       randomness: randomness.address,
       arenas: arenas.address,
       hounds: hounds.address,
@@ -697,7 +697,7 @@ async function main() {
       gamification: gamification.address
     }
 
-    queuesConstructor = {
+    const newQueuesConstructor: QueuesConstructor.StructStruct = {
       arenas: arenas.address,
       hounds: hounds.address,
       methods: queuesMethods.address,
@@ -709,7 +709,7 @@ async function main() {
       zerocost: queuesZerocost.address
     }
 
-    lootboxesConstructor = {
+    const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
       token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
       hounds: hounds.address,
       payments: payments.address,
@@ -726,7 +726,7 @@ async function main() {
 
 
     try {
-      await paymentsRestricted.setGlobalParameters(paymentsConstructor);
+      await paymentsRestricted.setGlobalParameters(newPaymentsConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -735,7 +735,7 @@ async function main() {
     }
 
     try {
-      await paymentsMethods.setGlobalParameters(paymentsConstructor);
+      await paymentsMethods.setGlobalParameters(newPaymentsConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -744,7 +744,7 @@ async function main() {
     }
 
     try {
-      await payments.setGlobalParameters(paymentsConstructor);
+      await payments.setGlobalParameters(newPaymentsConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -753,7 +753,7 @@ async function main() {
     }
 
     try {
-      await shopRestricted.setGlobalParameters(shopConstructor);
+      await shopRestricted.setGlobalParameters(newShopConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -762,7 +762,7 @@ async function main() {
     }
 
     try {
-      await shopMethods.setGlobalParameters(shopConstructor);
+      await shopMethods.setGlobalParameters(newShopConstructor);
       configurations.update(3, {
         step: "Set global parameters for arenas restricted"
       });
@@ -771,7 +771,7 @@ async function main() {
     }
 
     try {
-      await shop.setGlobalParameters(shopConstructor);
+      await shop.setGlobalParameters(newShopConstructor);
       configurations.update(3, {
         step: "Set global parameters for arenas restricted"
       });
@@ -780,7 +780,43 @@ async function main() {
     }
 
     try {
-      await arenasRestricted.setGlobalParameters(arenasConstructor);
+      await gamificationRestricted.setGlobalParameters(newGamificationConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await gamificationMethods.setGlobalParameters(newGamificationConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await gamification.setGlobalParameters(newGamificationConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await genetics.setGlobalParameters(newGeneticsConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await arenasRestricted.setGlobalParameters(newArenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -789,7 +825,7 @@ async function main() {
     }
 
     try {
-      await arenasMethods.setGlobalParameters(arenasConstructor);
+      await arenasMethods.setGlobalParameters(newArenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -798,7 +834,7 @@ async function main() {
     }
 
     try {
-      await arenas.setGlobalParameters(arenasConstructor);
+      await arenas.setGlobalParameters(newArenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
       });
@@ -807,7 +843,7 @@ async function main() {
     }
 
     try {
-      await incubatorMethods.setGlobalParameters(incubatorConstructor);
+      await incubatorMethods.setGlobalParameters(newIncubatorConstructor);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
       });
@@ -816,7 +852,7 @@ async function main() {
     }
 
     try {
-      await incubator.setGlobalParameters(incubatorConstructor);
+      await incubator.setGlobalParameters(newIncubatorConstructor);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
       });
@@ -825,7 +861,7 @@ async function main() {
     }
 
     try {
-      await generatorMethods.setGlobalParameters(generatorConstructor);
+      await generatorMethods.setGlobalParameters(newGeneratorConstructor);
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
       });
@@ -834,7 +870,7 @@ async function main() {
     }
 
     try {
-      await generatorZerocost.setGlobalParameters(generatorConstructor);
+      await generatorZerocost.setGlobalParameters(newGeneratorConstructor);
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
       });
@@ -843,7 +879,7 @@ async function main() {
     }
 
     try {
-      await generator.setGlobalParameters(generatorConstructor);
+      await generator.setGlobalParameters(newGeneratorConstructor);
       configurations.update(6, {
         step: "Set global parameters for generator zerocost"
       });
@@ -852,7 +888,7 @@ async function main() {
     }
 
     try {
-      await queuesMethods.setGlobalParameters(queuesConstructor);
+      await queuesMethods.setGlobalParameters(newQueuesConstructor);
       configurations.update(8, {
         step: "Set global parameters for queues restricted"
       });
@@ -861,7 +897,7 @@ async function main() {
     }
 
     try {
-      await queuesRestricted.setGlobalParameters(queuesConstructor);
+      await queuesRestricted.setGlobalParameters(newQueuesConstructor);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
       });
@@ -870,7 +906,7 @@ async function main() {
     }
 
     try {
-      await queues.setGlobalParameters(queuesConstructor);
+      await queues.setGlobalParameters(newQueuesConstructor);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
       });
@@ -879,7 +915,7 @@ async function main() {
     }
 
     try {
-      await racesRestricted.setGlobalParameters(racesConstructor);
+      await racesRestricted.setGlobalParameters(newRacesConstructor);
       configurations.update(10, {
         step: "Set global parameters for races methods"
       });
@@ -888,7 +924,7 @@ async function main() {
     }
 
     try {
-      await racesMethods.setGlobalParameters(racesConstructor);
+      await racesMethods.setGlobalParameters(newRacesConstructor);
       configurations.update(11, {
         step: "Set global parameters for races"
       });
@@ -897,7 +933,7 @@ async function main() {
     }
 
     try {
-      await races.setGlobalParameters(racesConstructor);
+      await races.setGlobalParameters(newRacesConstructor);
       configurations.update(12, {
         step: "Set global parameters hounds"
       });
@@ -906,7 +942,7 @@ async function main() {
     }
 
     try {
-      await houndsModifier.setGlobalParameters(houndsConstructor);
+      await houndsModifier.setGlobalParameters(newHoundsConstructor);
       configurations.update(14, {
         step: "Set global parameters hounds restricted"
       });
@@ -915,7 +951,7 @@ async function main() {
     }
 
     try {
-      await houndsRestricted.setGlobalParameters(houndsConstructor);
+      await houndsRestricted.setGlobalParameters(newHoundsConstructor);
       configurations.update(15, {
         step: "Set global parameters hounds minter"
       });
@@ -924,7 +960,7 @@ async function main() {
     }
 
     try {
-      await houndsMinter.setGlobalParameters(houndsConstructor);
+      await houndsMinter.setGlobalParameters(newHoundsConstructor);
       configurations.update(16, {
         step: "Finished!"
       });
@@ -933,7 +969,16 @@ async function main() {
     }
 
     try {
-      await hounds.setGlobalParameters(houndsConstructor);
+      await houndsZerocost.setGlobalParameters(newHoundsConstructor);
+      configurations.update(16, {
+        step: "Finished!"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await hounds.setGlobalParameters(newHoundsConstructor);
       configurations.update(13, {
         step: "Set global parameters hounds modifier"
       });
@@ -994,7 +1039,32 @@ async function main() {
       
       try {
         await run("verify:verify", {
-          address: payments.address
+          address: payments.address,
+          constructorArguments: arrayfy(paymentsConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(5, {
+        step: "Verify houndrace potions"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: paymentsRestricted.address,
+          constructorArguments: arrayfy(paymentsConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(5, {
+        step: "Verify houndrace potions"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: paymentsMethods.address,
+          constructorArguments: arrayfy(paymentsConstructor)
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1089,6 +1159,42 @@ async function main() {
 
       try {
         await run("verify:verify", {
+          address: gamificationRestricted.address,
+          constructorArguments: arrayfy(gamificationConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(10, {
+        step: "Verify arenas"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: gamificationMethods.address,
+          constructorArguments: arrayfy(gamificationConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(10, {
+        step: "Verify arenas"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: gamification.address,
+          constructorArguments: arrayfy(gamificationConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(10, {
+        step: "Verify arenas"
+      });
+
+      try {
+        await run("verify:verify", {
           address: genetics.address,
           constructorArguments: arrayfy(geneticsConstructor)
         });
@@ -1159,6 +1265,22 @@ async function main() {
       try {
         await run("verify:verify", {
           address: houndsMinter.address,
+          constructorArguments: [arrayfy({
+            ...houndsConstructor,
+            boilerplate: arrayfy(houndsConstructorBoilerplate),
+            fees: arrayfy(houndsConstructorFees)
+          })]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(17, {
+        step: "Verify hounds"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: houndsZerocost.address,
           constructorArguments: [arrayfy({
             ...houndsConstructor,
             boilerplate: arrayfy(houndsConstructorBoilerplate),
@@ -1275,6 +1397,18 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesMethods.address,
+          constructorArguments: arrayfy(queuesConstructor)
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(25, {
+        step: "Verify queues"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: queuesZerocost.address,
           constructorArguments: arrayfy(queuesConstructor)
         });
       } catch (err) {

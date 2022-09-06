@@ -116,8 +116,7 @@ async function main() {
         constructor: {
             restricted: payments.paymentRestricted.address,
             methods: payments.paymentMethods.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            allowedCallers: []
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 

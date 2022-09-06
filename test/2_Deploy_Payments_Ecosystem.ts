@@ -41,7 +41,6 @@ export async function run(): Promise<PaymentEcosystem> {
         paymentsRestricted = await deployContract({
           name: 'PaymentsRestricted',
           constructor: [[
-            [],
             globalParams.address0,
             globalParams.address0,
             globalParams.address0
@@ -54,7 +53,6 @@ export async function run(): Promise<PaymentEcosystem> {
         paymentsMethods = await deployContract({
           name: 'PaymentsMethods',
           constructor: [[
-            [],
             globalParams.address0,
             globalParams.address0,
             globalParams.address0
@@ -67,7 +65,6 @@ export async function run(): Promise<PaymentEcosystem> {
         payments = await deployContract({
           name: 'Payments',
           constructor: [[
-            [],
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             globalParams.address0,
             globalParams.address0
