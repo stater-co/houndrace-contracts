@@ -89,6 +89,7 @@ export interface LootboxesInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setGlobalParameters((string,address,address,address,bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -138,6 +139,10 @@ export interface LootboxesInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setGlobalParameters",
+    values: [Constructor.StructStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setOpenStatus",
@@ -192,6 +197,10 @@ export interface LootboxesInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setGlobalParameters",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -388,6 +397,11 @@ export interface Lootboxes extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setGlobalParameters(
+      globalParameters: Constructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     setOpenStatus(
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -502,6 +516,11 @@ export interface Lootboxes extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setGlobalParameters(
+    globalParameters: Constructor.StructStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   setOpenStatus(
     status: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -605,6 +624,11 @@ export interface Lootboxes extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setGlobalParameters(
+      globalParameters: Constructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -774,6 +798,11 @@ export interface Lootboxes extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setGlobalParameters(
+      globalParameters: Constructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     setOpenStatus(
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -882,6 +911,11 @@ export interface Lootboxes extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setGlobalParameters(
+      globalParameters: Constructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

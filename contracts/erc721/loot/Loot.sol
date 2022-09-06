@@ -25,6 +25,11 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         control = input;
     }
 
+
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
+
     function mint(address priceCurrency, uint256 price, uint256 amount) external onlyOwner {
         uint256 idStart = id;
         for ( uint256 i = 0; i < amount; ++i ) {

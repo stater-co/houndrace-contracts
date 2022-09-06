@@ -780,6 +780,15 @@ async function main() {
     }
 
     try {
+      await lootboxes.setGlobalParameters(newLootboxesConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
       await gamificationRestricted.setGlobalParameters(newGamificationConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
@@ -1040,7 +1049,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: payments.address,
-          constructorArguments: arrayfy(paymentsConstructor)
+          constructorArguments: [arrayfy(paymentsConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1052,7 +1061,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: paymentsRestricted.address,
-          constructorArguments: arrayfy(paymentsConstructor)
+          constructorArguments: [arrayfy(paymentsConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1064,7 +1073,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: paymentsMethods.address,
-          constructorArguments: arrayfy(paymentsConstructor)
+          constructorArguments: [arrayfy(paymentsConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1088,7 +1097,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shopRestricted.address,
-          constructorArguments: arrayfy(shopConstructor)
+          constructorArguments: [arrayfy(shopConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1100,7 +1109,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shopMethods.address,
-          constructorArguments: arrayfy(shopConstructor)
+          constructorArguments: [arrayfy(shopConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1112,7 +1121,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: shop.address,
-          constructorArguments: arrayfy(shopConstructor)
+          constructorArguments: [arrayfy(shopConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1124,7 +1133,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenasRestricted.address,
-          constructorArguments: arrayfy(arenasConstructor)
+          constructorArguments: [arrayfy(arenasConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1136,7 +1145,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenasMethods.address,
-          constructorArguments: arrayfy(arenasConstructor)
+          constructorArguments: [arrayfy(arenasConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1148,7 +1157,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: arenas.address,
-          constructorArguments: arrayfy(arenasConstructor)
+          constructorArguments: [arrayfy(arenasConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1160,7 +1169,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationRestricted.address,
-          constructorArguments: arrayfy(gamificationConstructor)
+          constructorArguments: [arrayfy(gamificationConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1172,7 +1181,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationMethods.address,
-          constructorArguments: arrayfy(gamificationConstructor)
+          constructorArguments: [arrayfy(gamificationConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1184,7 +1193,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamification.address,
-          constructorArguments: arrayfy(gamificationConstructor)
+          constructorArguments: [arrayfy(gamificationConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1196,7 +1205,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: genetics.address,
-          constructorArguments: arrayfy(geneticsConstructor)
+          constructorArguments: [arrayfy(geneticsConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1208,7 +1217,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: incubatorMethods.address,
-          constructorArguments: arrayfy(incubatorConstructor)
+          constructorArguments: [arrayfy(incubatorConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1220,7 +1229,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: incubator.address,
-          constructorArguments: arrayfy(incubatorConstructor)
+          constructorArguments: [arrayfy(incubatorConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1313,7 +1322,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: racesRestricted.address,
-          constructorArguments: arrayfy(racesConstructor)
+          constructorArguments: [arrayfy(racesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1325,7 +1334,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: racesMethods.address,
-          constructorArguments: arrayfy(racesConstructor)
+          constructorArguments: [arrayfy(racesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1337,7 +1346,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: races.address,
-          constructorArguments: arrayfy(racesConstructor)
+          constructorArguments: [arrayfy(racesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1349,7 +1358,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generatorMethods.address, 
-          constructorArguments: arrayfy(generatorConstructor)
+          constructorArguments: [arrayfy(generatorConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1361,7 +1370,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generatorZerocost.address, 
-          constructorArguments: arrayfy(generatorConstructor)
+          constructorArguments: [arrayfy(generatorConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1373,7 +1382,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: generator.address,
-          constructorArguments: arrayfy(generatorConstructor)
+          constructorArguments: [arrayfy(generatorConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1385,7 +1394,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesRestricted.address,
-          constructorArguments: arrayfy(queuesConstructor)
+          constructorArguments: [arrayfy(queuesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1397,7 +1406,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesMethods.address,
-          constructorArguments: arrayfy(queuesConstructor)
+          constructorArguments: [arrayfy(queuesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1409,7 +1418,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queuesZerocost.address,
-          constructorArguments: arrayfy(queuesConstructor)
+          constructorArguments: [arrayfy(queuesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1421,7 +1430,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: queues.address,
-          constructorArguments: arrayfy(queuesConstructor)
+          constructorArguments: [arrayfy(queuesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1433,7 +1442,7 @@ async function main() {
       try {
         await run("verify:verify", {
           address: lootboxes.address,
-          constructorArguments: arrayfy(lootboxesConstructor)
+          constructorArguments: [arrayfy(lootboxesConstructor)]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
