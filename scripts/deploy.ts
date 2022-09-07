@@ -906,6 +906,15 @@ async function main() {
     }
 
     try {
+      await queuesZerocost.setGlobalParameters(newQueuesConstructor);
+      configurations.update(8, {
+        step: "Set global parameters for queues restricted"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
       await queuesRestricted.setGlobalParameters(newQueuesConstructor);
       configurations.update(9, {
         step: "Set global parameters for races restricted"
