@@ -424,6 +424,10 @@ async function main() {
       })],
       props: {}
     }) as Gamification;
+    DeploymentLogger('export GAMIFICATIONS=' + gamificationRestricted.address);
+    deployments.update(18, {
+      step: "Deploy races restricted"
+    });
 
     const racesConstructor: RacesConstructor.StructStruct = {
       randomness: globalParams.address0,
@@ -565,7 +569,6 @@ async function main() {
     });
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
-      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
       hounds: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
@@ -710,7 +713,6 @@ async function main() {
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
-      token_uri: "https://gateway.pinata.cloud/ipfs/QmNe61kgPiDKgear1A5D219MoripTtSR39oJXMZ4mGgeVK",
       hounds: hounds.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),

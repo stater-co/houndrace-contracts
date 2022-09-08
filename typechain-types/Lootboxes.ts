@@ -25,15 +25,13 @@ import type {
 
 export declare namespace Constructor {
   export type StructStruct = {
-    token_uri: string;
     hounds: string;
     payments: string;
     alphadune: string;
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [string, string, string, string, boolean] & {
-    token_uri: string;
+  export type StructStructOutput = [string, string, string, boolean] & {
     hounds: string;
     payments: string;
     alphadune: string;
@@ -43,29 +41,23 @@ export declare namespace Constructor {
 
 export declare namespace Box {
   export type StructStruct = {
-    priceCurrency: string;
     rewardContracts: string[];
     tokenIds: BigNumberish[];
     amounts: BigNumberish[];
-    price: BigNumberish;
     rewardTypes: BigNumberish[];
     generated: boolean;
   };
 
   export type StructStructOutput = [
-    string,
     string[],
     BigNumber[],
     BigNumber[],
-    BigNumber,
     number[],
     boolean
   ] & {
-    priceCurrency: string;
     rewardContracts: string[];
     tokenIds: BigNumber[];
     amounts: BigNumber[];
-    price: BigNumber;
     rewardTypes: number[];
     generated: boolean;
   };
@@ -80,7 +72,7 @@ export interface LootboxesInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(address,uint256,uint256)": FunctionFragment;
+    "mint(uint256,string)": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
@@ -89,7 +81,7 @@ export interface LootboxesInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((address,address,address,bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -115,7 +107,7 @@ export interface LootboxesInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [string, BigNumberish, BigNumberish]
+    values: [BigNumberish, string]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -321,8 +313,7 @@ export interface Lootboxes extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, boolean] & {
-        token_uri: string;
+      [string, string, string, boolean] & {
         hounds: string;
         payments: string;
         alphadune: string;
@@ -344,9 +335,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<[boolean]>;
 
     mint(
-      priceCurrency: string,
-      price: BigNumberish,
       amount: BigNumberish,
+      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -443,8 +433,7 @@ export interface Lootboxes extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, boolean] & {
-      token_uri: string;
+    [string, string, string, boolean] & {
       hounds: string;
       payments: string;
       alphadune: string;
@@ -466,9 +455,8 @@ export interface Lootboxes extends BaseContract {
   ): Promise<boolean>;
 
   mint(
-    priceCurrency: string,
-    price: BigNumberish,
     amount: BigNumberish,
+    token_uri: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -559,8 +547,7 @@ export interface Lootboxes extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, boolean] & {
-        token_uri: string;
+      [string, string, string, boolean] & {
         hounds: string;
         payments: string;
         alphadune: string;
@@ -582,9 +569,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<boolean>;
 
     mint(
-      priceCurrency: string,
-      price: BigNumberish,
       amount: BigNumberish,
+      token_uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -745,9 +731,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<BigNumber>;
 
     mint(
-      priceCurrency: string,
-      price: BigNumberish,
       amount: BigNumberish,
+      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -861,9 +846,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     mint(
-      priceCurrency: string,
-      price: BigNumberish,
       amount: BigNumberish,
+      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

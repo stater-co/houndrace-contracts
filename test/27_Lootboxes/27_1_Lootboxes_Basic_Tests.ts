@@ -1,8 +1,5 @@
-import { expect } from "chai";
 import { LootboxesBasicTests } from "../../common/dto/test/lootboxesBasicTests";
-import { globalParams } from "../../common/params";
 import { expecting } from "../../plugins/expecting";
-import { safeMintHound } from "../../plugins/test/mintHound";
 import { Constructor } from '../../typechain-types/Lootboxes';
 const { ethers } = require('hardhat');
 
@@ -20,7 +17,7 @@ async function basicTest(
 
         let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(sig1.address);
 
-        await dependencies.lootboxesContract.mint(globalParams.address0, 5000, totalLootboxesToCreate);
+        await dependencies.lootboxesContract.mint(totalLootboxesToCreate, "token_uri");
 
         let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(sig1.address);
 
@@ -36,7 +33,7 @@ async function basicTest(
       })
 
       it("Open lootbox ", async function() {
-        await dependencies.lootboxesContract.open(Math.floor(Math.random() * totalLootboxesToCreate) + 1,{
+        await dependencies.lootboxesContract.open(1,{
           value: 5000
         });
         resolve();
