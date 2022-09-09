@@ -1,5 +1,14 @@
 name: Merge Guard
-on: merge
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+    types: 
+      - ready_for_review
+      - review_requested
 jobs:
   Compilation-status:
     name: Compilation status
