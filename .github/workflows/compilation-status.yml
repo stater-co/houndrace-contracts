@@ -1,0 +1,18 @@
+name: Compilation status
+on: push
+jobs:
+  Compilation-status:
+    name: Compilation status
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout set-up
+        uses: actions/checkout@v3
+      - name: Node set-up
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - name: Location set-up
+        run: npm install
+      - name: Compilation status
+        run: npm run compile

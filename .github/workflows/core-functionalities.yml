@@ -1,7 +1,8 @@
-name: Contracts functionality testing
+name: Core functionalities
 on: push
 jobs:
-  Hardhat-unit-tests:
+  Core-functionalities:
+    name: Core functionalities
     runs-on: ubuntu-latest
     steps:
       - name: Checkout set-up
@@ -13,10 +14,8 @@ jobs:
           cache: 'npm'
       - name: Location set-up
         run: npm install
-      - name: Location set-up verifications
-        run: node --version && npm --version && npx --version && echo "Deployer address ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}"
-      - name: Unit tests
-        run: npm run compile && npm run test
+      - name: Core functionalities
+        run: npm run compile && npm run core-workflow-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
           ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}

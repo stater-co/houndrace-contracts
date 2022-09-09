@@ -25,14 +25,19 @@ import { set as setIncubators } from '../test/16_Setup_Incubator_Contracts';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { set as setRaces } from '../test/20_Setup_Races_Contracts';
 import { set as setGenerator } from '../test/19_Setup_Generator_Contracts';
+import { test as testGenetics } from '../test/22_Genetics/22_1_Genetics_Basic_Tests';
+import { test as testHounds } from '../test/23_Hounds/23_1_Hounds_Basic_Tests';
+import { test as testArenas } from '../test/24_Arenas/24_1_Arenas_Basic_Tests';
+import { test as testQueues } from '../test/25_Queues/25_1_Queues_Basic_Tests';
+import { test as testRaces } from '../test/26_Races/26_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { run as runGamification } from '../test/12_Deploy_Gamification';
 import { set as setGamification } from '../test/21_Setup_Gamification';
+import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
 import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
-import { test as generationTests } from '../test/26_Races/26_3_Races_Generation_Tests';
 
 
 async function main() {
@@ -259,6 +264,36 @@ async function main() {
         }
     });
 
+    await testGenetics.basicTest({
+        genetics: genetics.genetics
+    });
+
+    await testHounds.basicTest({
+        hounds: hounds.hounds,
+        gamification: gamification.gamification,
+        races: races.races
+    });
+
+    await testArenas.basicTest({
+        arenas: arenas.arenas,
+        arena: globalParams.defaultArena
+    });
+
+    await testQueues.basicTest({
+        contract: queues.queues,
+        houndsContract: hounds.hounds,
+        houndIdToEnqueue: 1,
+        queue: globalParams.defaultQueue,
+        arenasContract: arenas.arenas,
+        erc20: payments.houndracePotions,
+        payments: payments.payments
+    });
+
+    await testRaces.basicTest({
+        contract: races.races,
+        race: globalParams.defaultRace
+    });
+
     await setHounds({
         hounds: hounds.hounds,
         houndsMinter: hounds.houndsMinter,
@@ -294,17 +329,11 @@ async function main() {
         }
     });
 
-    lootboxes.lootboxes.setGlobalParameters({
-        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-        canBeOpened: true,
-        hounds: hounds.hounds.address,
-        payments: payments.payments.address
-    });
 
-    await generationTests.generationTests({
-        race: globalParams.defaultRace,
-        hounds: hounds.hounds,
-        arena: globalParams.defaultArena,
+
+    await testLootboxes.basicTest({
+        lootboxesContract: lootboxes.lootboxes,
+        houndsContract: hounds.hounds,
         gamification: gamification.gamification,
         races: races.races
     });

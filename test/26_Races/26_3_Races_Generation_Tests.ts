@@ -14,9 +14,7 @@ async function generationTests(
 ): Promise<void> {
   return new Promise((resolve, ) => {
 
-    console.log(process.env.TEST);
-
-    const initialDummyGenerations: number = Number(process.env.TEST);
+    const initialDummyGenerations: number = Number(process.env.TOTAL_RACES);
 
     describe('Races Generation: ' + initialDummyGenerations + ' dummy races', async function () {
       
