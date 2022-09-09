@@ -16,6 +16,12 @@ jobs:
         run: npm install
       - name: Compilation status
         run: npm run compile
+        env: 
+          ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
+          ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
+          RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
   Deployment-functionalities:
     name: Deployment functionalities
     runs-on: ubuntu-latest
@@ -33,10 +39,9 @@ jobs:
         run: npm run compile && npm run deployment-workflow-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
           ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
   Core-functionalities:
     name: Core functionalities
@@ -55,10 +60,9 @@ jobs:
         run: npm run compile && npm run core-workflow-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
           ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
   Race-statistics-generation:
     name: Race statistics generation
@@ -77,10 +81,9 @@ jobs:
         run: npm run compile && npm run races-statistics-generation-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
           ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
   Full-deployment-functionalities:
     name: Full deployment functionalities
@@ -99,8 +102,7 @@ jobs:
         run: npm run compile && npm run full-deployment-workflow-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
-          ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
           ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
-          ETH_ACCOUNT_PUBLIC_KEY2: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY2 }}
-          RINKEBY_ETHERSCAN_API_KEY: ${{ secrets.RINKEBY_ETHERSCAN_API_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
           RINKEBY_URL: ${{ secrets.RINKEBY_URL }}
