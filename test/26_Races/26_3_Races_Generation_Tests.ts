@@ -93,7 +93,7 @@ async function generationTests(
       for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
       
         it("Generate race " + i, async function () {
-          const response: any = await axios.post("http://localhost:3000/races/generate", {
+          const response: any = await axios.post("https://houndrace.com/api/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,
             ids: ids,
