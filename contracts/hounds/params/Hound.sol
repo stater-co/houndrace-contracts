@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '../../incubator/params/HoundIdentity.sol';
 import '../../gamification/params/HoundBreeding.sol';
 import '../../gamification/params/HoundStamina.sol';
