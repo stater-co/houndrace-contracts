@@ -7,7 +7,7 @@
     "test": "npx hardhat test test/full-workflow.ts",
     "generate-races": "npx hardhat test test/races-generator.ts",
     "typegenall": "cp -r typechain-types/* $TYPEGEN_ALL_PATH",
-    "compile": "hardhat compile",
+    "compile": "npx hardhat compile",
     "safe-hardhat-test": "echo 'Recommended for node > 16.x' && export SET NODE_OPTIONS=--openssl-legacy-provider && hardhat test",
     "deployments-to-env": "cd plugins && ts-node deployments-to-env.ts",
     "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts",

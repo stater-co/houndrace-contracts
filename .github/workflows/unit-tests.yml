@@ -16,7 +16,7 @@ jobs:
       - name: Location set-up verifications
         run: node --version && npm --version && npx --version && echo "Deployer address ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}"
       - name: Unit tests
-        run: npm run test
+        run: npm run compile && npm run test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
           ETH_ACCOUNT_PRIVATE_KEY2: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY2 }}
