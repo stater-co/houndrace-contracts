@@ -7,6 +7,6 @@ export interface QueuesSystemController {
     queuesRestricted: QueuesRestricted;
     queuesMethods: QueuesMethods;
     queuesZerocost: QueuesZerocost;
-    queued: Queues;
+    queues: Queues;
     constructor: QueuesConstructor.StructStruct;
 }

@@ -8,30 +8,30 @@ import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
 import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
-import { run as runLibraries } from './1_Deploy_Libraries';
-import { run as runPayments } from './2_Deploy_Payments_Ecosystem';
-import { run as runRandomness } from './3_Deploy_Randomness';
-import { run as runArenas } from './4_Deploy_Arenas';
-import { run as runGenetics } from './5_Deploy_Genetics';
-import { run as runIncubators } from './6_Deploy_Incubator';
-import { run as runHounds } from './7_Deploy_Hounds_Ecosystem';
-import { run as runRaces } from './8_Deploy_Races_Ecosystem';
-import { run as runQueues } from './9_Deploy_Queues_Ecosystem';
-import { run as runGenerator } from './10_Deploy_Generator';
-import { set as setQueues } from './18_Setup_Queues_Contracts';
-import { set as setShop } from './14_Setup_Shop_Contracts';
-import { set as setArenas } from './15_Setup_Arenas_Contracts';
-import { set as setIncubators } from './16_Setup_Incubator_Contracts';
-import { set as setHounds } from './17_Setup_Hounds_Contracts';
-import { set as setRaces } from './20_Setup_Races_Contracts';
-import { test as testGenetics } from './22_Genetics/22_1_Genetics_Basic_Tests';
-import { test as testHounds } from './23_Hounds/23_1_Hounds_Basic_Tests';
-import { test as testRaces } from './26_Races/26_1_Races_Basic_Tests';
+import { run as runLibraries } from '../test/1_Deploy_Libraries';
+import { run as runPayments } from '../test/2_Deploy_Payments_Ecosystem';
+import { run as runRandomness } from '../test/3_Deploy_Randomness';
+import { run as runArenas } from '../test/4_Deploy_Arenas';
+import { run as runGenetics } from '../test/5_Deploy_Genetics';
+import { run as runIncubators } from '../test/6_Deploy_Incubator';
+import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
+import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
+import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
+import { run as runGenerator } from '../test/10_Deploy_Generator';
+import { set as setQueues } from '../test/18_Setup_Queues_Contracts';
+import { set as setShop } from '../test/14_Setup_Shop_Contracts';
+import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
+import { set as setIncubators } from '../test/16_Setup_Incubator_Contracts';
+import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
+import { set as setRaces } from '../test/20_Setup_Races_Contracts';
+import { set as setGenerator } from '../test/19_Setup_Generator_Contracts';
 import { globalParams } from '../common/params';
-import { run as runGamification } from './12_Deploy_Gamification';
-import { set as setGamification } from './21_Setup_Gamification';
+import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
+import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
+import { run as runGamification } from '../test/12_Deploy_Gamification';
+import { set as setGamification } from '../test/21_Setup_Gamification';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
-import { test as generationTests } from './26_Races/26_3_Races_Generation_Tests';
+import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
 
 
 async function main() {
@@ -88,18 +88,26 @@ async function main() {
         incubatorAddress: incubators.incubator.address
     });
 
-    await setQueues({
-        queuesRestricted: queues.queuesRestricted,
-        queuesMethods: queues.queueMethods,
+    const gamification: GamificationSystem = await runGamification({
+        allowed: [],
+        defaultBreeding: globalParams.houndBreeding,
+        defaultStamina: globalParams.houndStamina
+    });
+
+    const lootboxes: LootboxesSystem = await runLootboxes({
+        canBeOpened: false,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address
+    });
+
+    await setPayments({
+        payments: payments.payments,
+        paymentMethods: payments.paymentMethods,
+        paymentRestricted: payments.paymentRestricted,
         constructor: {
-            arenas: arenas.arenas.address,
-            hounds: hounds.hounds.address,
-            methods: queues.queueMethods.address,
-            payments: payments.payments.address,
-            restricted: queues.queuesRestricted.address,
-            races: races.races.address,
-            allowedCallers: [ races.races.address],
-            raceFee: 5000000
+            restricted: payments.paymentRestricted.address,
+            methods: payments.paymentMethods.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -109,6 +117,37 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address
+        }
+    });
+
+    await setGamification({
+        constructor: {
+            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
+            defaultBreeding: globalParams.houndBreeding,
+            defaultStamina: globalParams.houndStamina,
+            methods: gamification.methods.address,
+            restricted: gamification.restricted.address
+        },
+        methods: gamification.methods,
+        restricted: gamification.restricted,
+        gamification: gamification.gamification
+    });
+
+    await setQueues({
+        queuesRestricted: queues.queuesRestricted,
+        queuesMethods: queues.queueMethods,
+        queuesZerocost: queues.queueZerocost,
+        queues: queues.queues,
+        constructor: {
+            arenas: arenas.arenas.address,
+            hounds: hounds.hounds.address,
+            methods: queues.queueMethods.address,
+            payments: payments.payments.address,
+            restricted: queues.queuesRestricted.address,
+            races: races.races.address,
+            allowedCallers: [races.races.address],
+            queues: queues.queues.address,
+            zerocost: queues.queueZerocost.address
         }
     });
 
@@ -126,25 +165,6 @@ async function main() {
             allowedCallers: [races.races.address,queues.queues.address],
             alhpadunePercentage: 60
         }
-    });
-
-    const gamification: GamificationSystem = await runGamification({
-        allowed: [],
-        defaultBreeding: globalParams.houndBreeding,
-        defaultStamina: globalParams.houndStamina
-    });
-
-    await setGamification({
-        constructor: {
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
-            defaultBreeding: globalParams.houndBreeding,
-            defaultStamina: globalParams.houndStamina,
-            methods: gamification.methods.address,
-            restricted: gamification.restricted.address
-        },
-        methods: gamification.methods,
-        restricted: gamification.restricted,
-        gamification: gamification.gamification
     });
 
     await setIncubators({
@@ -166,6 +186,7 @@ async function main() {
         houndsMinter: hounds.houndsMinter,
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
+        houndsZerocost: hounds.houndsZerocost,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
@@ -176,9 +197,9 @@ async function main() {
            ],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: globalParams.address0,
-            houndModifier: hounds.houndsModifier.address,
-            hounds: hounds.hounds.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsModifier: hounds.houndsModifier.address,
+            zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
@@ -187,6 +208,8 @@ async function main() {
             races: races.races.address
            },
            fees: {
+            breedCostCurrency: globalParams.address0,
+            breedFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
@@ -219,19 +242,20 @@ async function main() {
         }
     });
 
-    await testGenetics.basicTest({
-        genetics: genetics.genetics
-    });
-
-    await testHounds.basicTest({
-        hounds: hounds.hounds,
-        gamification: gamification.gamification,
-        races: races.races
-    });
-
-    await testRaces.basicTest({
-        contract: races.races,
-        race: globalParams.defaultRace
+    await setGenerator({
+        generatorMethods: generator.generatorMethods,
+        generatorZerocost: generator.generatorZerocost,
+        constructor: {
+            arenas: arenas.arenas.address,
+            hounds: hounds.hounds.address,
+            methods: generator.generatorMethods.address,
+            payments: payments.payments.address,
+            randomness: randomness.randomness.address,
+            zerocost: generator.generatorZerocost.address,
+            allowed: races.races.address,
+            incubator: incubators.incubator.address,
+            gamification: gamification.gamification.address
+        }
     });
 
     await setHounds({
@@ -239,15 +263,16 @@ async function main() {
         houndsMinter: hounds.houndsMinter,
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
+        houndsZerocost: hounds.houndsZerocost,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
            allowedCallers: [],
            boilerplate: {
             incubator: incubators.incubator.address,
-            staterApi: globalParams.address0,
-            houndModifier: hounds.houndsModifier.address,
-            hounds: hounds.hounds.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            zerocost: hounds.houndsZerocost.address,
+            houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
@@ -256,6 +281,8 @@ async function main() {
             races: races.races.address
            },
            fees: {
+            breedCostCurrency: payments.houndracePotions.address,
+            breedFeeCurrency: payments.houndracePotions.address,
             currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000",
@@ -266,12 +293,11 @@ async function main() {
         }
     });
 
-    await generationTests.generationTests({
-        race: globalParams.defaultRace,
-        hounds: hounds.hounds,
-        arena: globalParams.defaultArena,
-        gamification: gamification.gamification,
-        races: races.races
+    lootboxes.lootboxes.setGlobalParameters({
+        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+        canBeOpened: true,
+        hounds: hounds.hounds.address,
+        payments: payments.payments.address
     });
 
 }

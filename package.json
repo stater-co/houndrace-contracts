@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test test/full-workflow.ts",
-    "generate-races": "npx hardhat test test/races-generator.ts",
+    "test": "npx hardhat test workflows/full-workflow.ts",
+    "deployment-workflow-test": "npx hardhat test workflows/deployment-workflow.ts",
+    "full-deployment-workflow-test": "npx hardhat test workflows/full-deployment-workflow.ts",
+    "full-workflow-test": "npx hardhat test workflows/full-workflow.ts",
+    "races-statistics-generation-test": "TEST=10 npx hardhat test workflows/races-generator.ts",
     "typegenall": "cp -r typechain-types/* $TYPEGEN_ALL_PATH",
     "compile": "npx hardhat compile",
     "safe-hardhat-test": "echo 'Recommended for node > 16.x' && export SET NODE_OPTIONS=--openssl-legacy-provider && hardhat test",

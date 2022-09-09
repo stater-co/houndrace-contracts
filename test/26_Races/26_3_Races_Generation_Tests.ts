@@ -13,7 +13,10 @@ async function generationTests(
   dependencies: RacesGenerationTests
 ): Promise<void> {
   return new Promise((resolve, ) => {
-    const initialDummyGenerations: number = 1000;
+
+    console.log(process.env.TEST);
+
+    const initialDummyGenerations: number = Number(process.env.TEST);
 
     describe('Races Generation: ' + initialDummyGenerations + ' dummy races', async function () {
       
