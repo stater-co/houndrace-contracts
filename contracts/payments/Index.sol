@@ -20,10 +20,12 @@ contract Payments is Params {
 	}
 
 	function fillRewardsReservoir(
-		address reservoirAddress,
-		Reservoir.Struct memory reservoir
+        address currency,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+		Payment.PaymentTypes paymentType
 	) external payable onlyOwner {
-		(bool success, ) = control.methods.delegatecall(msg.data);
+		(bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
 	}
 

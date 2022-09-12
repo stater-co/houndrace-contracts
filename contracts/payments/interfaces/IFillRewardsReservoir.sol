@@ -1,12 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '../params/Reservoir.sol';
+import '../params/Payment.sol';
 
 interface IFillRewardsReservoir {
 
 	function fillRewardsReservoir(
-		address reservoirAddress,
-		Reservoir.Struct memory reservoir
+        address currency,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+		Payment.PaymentTypes paymentType
 	) external payable;
 
 }

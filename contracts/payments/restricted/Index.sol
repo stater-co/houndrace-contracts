@@ -9,47 +9,28 @@ contract PaymentsRestricted is Params {
     constructor(PaymentsConstructor.Struct memory input) Params(input) {}
 
 	function fillRewardsReservoir(
-		address reservoirAddress,
-		Reservoir.Struct memory reservoir
+        address currency,
+        uint256[] memory ids, // for batch transfers
+        uint256[] memory amounts, // for batch transfers
+		Payment.PaymentTypes paymentType
 	) external payable {
-		require(reservoir.paymentType > Payment.PaymentTypes.ERC721);
-		require(reservoir.ids.length == reservoir.amounts.length);
 
-		uint256 total = 0;
-		for ( uint256 i = 0 ; i < reservoir.amounts.length ; ++i ) {
-			total += reservoir.amounts[i];
+		for ( uint256 i = 0 ; i < ids.length ; ++i ) {
+			alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];
 		}
 
-		if ( reservoir.paymentType == Payment.PaymentTypes.ERC1155 ) {
+		if ( paymentType == Payment.PaymentTypes.ERC1155 ) {
 
-			IERC1155(reservoirAddress).safeBatchTransferFrom(msg.sender, address(this), reservoir.ids, reservoir.amounts, '0x00');
+			IERC1155(currency).safeBatchTransferFrom(msg.sender, address(this), ids, amounts, '0x00');
 
-			for ( uint256 i = 0 ; i < reservoir.ids.length ; ++i ) {
+		} else if ( paymentType == Payment.PaymentTypes.ERC20 ) {
 
-				bool found;
-				for ( uint256 j = 0 ; j < rewardsReservoirs[reservoirAddress].ids.length ; ++j ) {
-					if ( rewardsReservoirs[reservoirAddress].ids[j] == reservoir.ids[i] ) {
-						rewardsReservoirs[reservoirAddress].amounts[j] += reservoir.amounts[i];
-						found = true;
-					}
-				}
-
-				if ( !found ) {
-					rewardsReservoirs[reservoirAddress].ids.push(reservoir.ids[i]);
-					rewardsReservoirs[reservoirAddress].amounts.push(reservoir.amounts[i]);
-				}
-
+			uint256 total = 0;
+			for ( uint256 i = 0 ; i < amounts.length ; ++i ) {
+				total += amounts[i];
 			}
 
-		} else if ( reservoir.paymentType == Payment.PaymentTypes.ERC20 ) {
-
-			IERC20(reservoirAddress).transferFrom(msg.sender, address(this), total);
-			rewardsReservoirs[reservoirAddress].amounts[0] += total;
-
-		} else if ( reservoir.paymentType == Payment.PaymentTypes.DEFAULT ) {
-
-			require(msg.value <= total);
-			rewardsReservoirs[reservoirAddress].amounts[0] += total;
+			IERC20(currency).transferFrom(msg.sender, address(this), total);
 
 		}
 

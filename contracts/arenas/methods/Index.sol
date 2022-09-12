@@ -11,22 +11,21 @@ contract ArenasMethods is Params {
         require(allowed[msg.sender]);
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = arenas[theId].fee * ( 100 / ( 100 - control.alhpadunePercentage ) );
         
+        amounts[0] = ( arenas[theId].fee / 100 ) * control.alhpadunePercentage;
         IPay(control.payments).pay(
                 control.payments,
-                ownerOf(theId),
+                control.alphadune,
                 arenas[theId].currency,
                 new uint256[](0),
                 amounts,
                 arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
-
-        amounts[0] = arenas[theId].fee * ( 100 / control.alhpadunePercentage );
-
+        
+        amounts[0] = arenas[theId].fee - amounts[0];
         IPay(control.payments).pay(
                 control.payments,
-                control.alphadune,
+                ownerOf(theId),
                 arenas[theId].currency,
                 new uint256[](0),
                 amounts,

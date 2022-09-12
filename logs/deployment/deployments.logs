@@ -76126,3 +76126,219 @@
   network: 'polygonMumbai',
   timestamp: '2022-09-08T21:47:18.627Z'
 }
+{
+  message: '[DIIMIIM] ##############################################',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:54:12.555Z'
+}
+{
+  message: '[DIIMIIM] export CONVERTERS=0x28036B51f839B2921Afec36a2f014e0472Fa8c8D',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:54:23.207Z'
+}
+{
+  message: '[DIIMIIM] export SORTINGS=0x5C5d0E232Dae96409EC6C5a15FC2018EBED7F4b4',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:54:37.460Z'
+}
+{
+  message: '[DIIMIIM] export RANDOMNESS=0x48C14b52069f0a7Db615690b7253EC291A9562d5',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:54:47.837Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS_RESTRICTED=0x11E5B9683c6Fc06A1d45e1825E563B046d48B665',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:54:58.109Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS_METHODS=0x10e728588b84923ce5A26F1508b0d3d3626f880d',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:55:08.570Z'
+}
+{
+  message: '[DIIMIIM] export PAYMENTS=0x63469acE7d6a3a4033b420dA8C6C975e83d8e4e7',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:55:19.012Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDRACE_POTIONS=0xfB2694dC7E7B7542CEC087e0fe1a2219E4acfDC6',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:55:29.343Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_RESTRICTED=0x1CAc962d0cb0A454393A51B05A90A4e50ccA7202',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:55:39.983Z'
+}
+{
+  message: '[DIIMIIM] export SHOP_METHODS=0xcf1C91fBc71082cA378059188878c39040817879',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:55:46.502Z'
+}
+{
+  message: '[DIIMIIM] export SHOP=0xc84B7b0e638D99844499836B72f38266A011865A',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:56:00.955Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_RESTRICTED=0xc7AF6b78eEc8c6D7916eB9d79424bA96Ecd45B82',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:56:15.508Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS_METHODS=0x8ad32D8e82a61d9ceCa3afd48D14061d80bA6829',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:56:30.156Z'
+}
+{
+  message: '[DIIMIIM] export ARENAS=0xAB515252FaF7BeA96c1F2FdCaB8b08f2Ce69A374',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:56:44.810Z'
+}
+{
+  message: '[DIIMIIM] export GENETICS=0x0445b94B61A209d6e691FbB1BBe6ff4d9f99FE78',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:56:59.658Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR_METHODS=0x95d523979DaC9D2D38afdFeF1C159C734F6F7EE6',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:57:14.209Z'
+}
+{
+  message: '[DIIMIIM] export INCUBATOR=0xFBF95565FB12769a9F350335A409243a064b3CAA',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:57:24.747Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_RESTRICTED=0x46D112B021b59c4D5e0c1e166782e741ac4Ba200',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:57:35.386Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_ZEROCOST=0x65a4ad3d5603B2d04a486d746620eCB5F5feD363',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:57:49.834Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MODIFIER=0x907A0B5D1FAD8da9bAB0Ad67697ecaD6C17d00cc',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:57:56.561Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS_MINTER=0x9ab530fa3A46c372E1FE10Ab2Bc62b858D841F09',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:07.106Z'
+}
+{
+  message: '[DIIMIIM] export HOUNDS=0x540D261689DC13f8a15E85072D8b9BA986EDdB56',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:17.737Z'
+}
+{
+  message: '[DIIMIIM] export GAMIFICATION_RESTRICTED=0xd93a626AF6caAeC5b414aF92443bd399fAaFDEa4',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:28.169Z'
+}
+{
+  message: '[DIIMIIM] export GAMIFICATION_METHODS=0x65F8F6e8D7B0De62022Ad10e5B9f23718ec61103',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:38.605Z'
+}
+{
+  message: '[DIIMIIM] export GAMIFICATIONS=0xd93a626AF6caAeC5b414aF92443bd399fAaFDEa4',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:49.161Z'
+}
+{
+  message: '[DIIMIIM] export RACE_RESTRICTED=0xbE6def4599CcA2c98Be80bb453456ABD93bF48E3',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:58:59.884Z'
+}
+{
+  message: '[DIIMIIM] export RACE_METHODS=0xb8452cD4D7E481390609dF82F7afE563331fd67C',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:59:14.738Z'
+}
+{
+  message: '[DIIMIIM] export RACE=0x51ff88d841D81631a124FcC8D5d224f510205E83',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:59:25.271Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_METHODS=0xBb2cE2843375a65795aa7403A75d87360460CDD1',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:59:35.713Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR_ZEROCOST=0xf0A04aDb3b6033a1E721096255f694CD4d699F7b',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T11:59:50.156Z'
+}
+{
+  message: '[DIIMIIM] export GENERATOR=0x23C7fECe64BfC41454923fc2101eaE898F816F50',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:00:00.594Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_METHODS=0x36218f507b358C3252e83a4c1ECeA1c9556a0337',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:00:07.422Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_RESTRICTED=0x46183bf751D2E19C67a5DDE8a00158d54e1A5210',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:00:22.171Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES_ZEROCOST=0x9A4aef622F694155550CACf6bbC4431b1F190Fe1',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:00:32.605Z'
+}
+{
+  message: '[DIIMIIM] export QUEUES=0xe12a52611eC9B534eb6aCCdb243D80D7E7936513',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:00:47.058Z'
+}
+{
+  message: '[DIIMIIM] export LOOTBOXES=0xB71A8cdd9523442Bd35c13e8c16590F97262ae39',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-12T12:01:01.811Z'
+}

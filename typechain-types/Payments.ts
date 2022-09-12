@@ -37,42 +37,28 @@ export declare namespace PaymentsConstructor {
   };
 }
 
-export declare namespace Reservoir {
-  export type StructStruct = {
-    ids: BigNumberish[];
-    amounts: BigNumberish[];
-    paymentType: BigNumberish;
-  };
-
-  export type StructStructOutput = [BigNumber[], BigNumber[], number] & {
-    ids: BigNumber[];
-    amounts: BigNumber[];
-    paymentType: number;
-  };
-}
-
 export interface PaymentsInterface extends utils.Interface {
   contractName: "Payments";
   functions: {
-    "alphaduneReservoirs(address)": FunctionFragment;
+    "alphaduneReservoirs(uint8,address,uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "fillRewardsReservoir(address,(uint256[],uint256[],uint8))": FunctionFragment;
+    "fillRewardsReservoir(address,uint256[],uint256[],uint8)": FunctionFragment;
     "owner()": FunctionFragment;
     "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "rewardsReservoirs(address)": FunctionFragment;
+    "rewardsReservoirs(uint8,address,uint256)": FunctionFragment;
     "setGlobalParameters((address,address,address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "alphaduneReservoirs",
-    values: [string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "fillRewardsReservoir",
-    values: [string, Reservoir.StructStruct]
+    values: [string, BigNumberish[], BigNumberish[], BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
@@ -92,7 +78,7 @@ export interface PaymentsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "rewardsReservoirs",
-    values: [string]
+    values: [BigNumberish, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
@@ -175,9 +161,11 @@ export interface Payments extends BaseContract {
 
   functions: {
     alphaduneReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[number] & { paymentType: number }>;
+    ): Promise<[BigNumber]>;
 
     control(
       overrides?: CallOverrides
@@ -190,8 +178,10 @@ export interface Payments extends BaseContract {
     >;
 
     fillRewardsReservoir(
-      reservoirAddress: string,
-      reservoir: Reservoir.StructStruct,
+      currency: string,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -212,9 +202,11 @@ export interface Payments extends BaseContract {
     ): Promise<ContractTransaction>;
 
     rewardsReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[number] & { paymentType: number }>;
+    ): Promise<[BigNumber]>;
 
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
@@ -227,7 +219,12 @@ export interface Payments extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  alphaduneReservoirs(arg0: string, overrides?: CallOverrides): Promise<number>;
+  alphaduneReservoirs(
+    arg0: BigNumberish,
+    arg1: string,
+    arg2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   control(
     overrides?: CallOverrides
@@ -240,8 +237,10 @@ export interface Payments extends BaseContract {
   >;
 
   fillRewardsReservoir(
-    reservoirAddress: string,
-    reservoir: Reservoir.StructStruct,
+    currency: string,
+    ids: BigNumberish[],
+    amounts: BigNumberish[],
+    paymentType: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -261,7 +260,12 @@ export interface Payments extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  rewardsReservoirs(arg0: string, overrides?: CallOverrides): Promise<number>;
+  rewardsReservoirs(
+    arg0: BigNumberish,
+    arg1: string,
+    arg2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   setGlobalParameters(
     globalParameters: PaymentsConstructor.StructStruct,
@@ -275,9 +279,11 @@ export interface Payments extends BaseContract {
 
   callStatic: {
     alphaduneReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<number>;
+    ): Promise<BigNumber>;
 
     control(
       overrides?: CallOverrides
@@ -290,8 +296,10 @@ export interface Payments extends BaseContract {
     >;
 
     fillRewardsReservoir(
-      reservoirAddress: string,
-      reservoir: Reservoir.StructStruct,
+      currency: string,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      paymentType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -309,7 +317,12 @@ export interface Payments extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    rewardsReservoirs(arg0: string, overrides?: CallOverrides): Promise<number>;
+    rewardsReservoirs(
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
@@ -335,15 +348,19 @@ export interface Payments extends BaseContract {
 
   estimateGas: {
     alphaduneReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     fillRewardsReservoir(
-      reservoirAddress: string,
-      reservoir: Reservoir.StructStruct,
+      currency: string,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -364,7 +381,9 @@ export interface Payments extends BaseContract {
     ): Promise<BigNumber>;
 
     rewardsReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -381,15 +400,19 @@ export interface Payments extends BaseContract {
 
   populateTransaction: {
     alphaduneReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     fillRewardsReservoir(
-      reservoirAddress: string,
-      reservoir: Reservoir.StructStruct,
+      currency: string,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -410,7 +433,9 @@ export interface Payments extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     rewardsReservoirs(
-      arg0: string,
+      arg0: BigNumberish,
+      arg1: string,
+      arg2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
