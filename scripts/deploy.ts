@@ -421,7 +421,7 @@ async function main() {
       })],
       props: {}
     }) as Gamification;
-    DeploymentLogger('export GAMIFICATIONS=' + gamificationRestricted.address);
+    DeploymentLogger('export GAMIFICATIONS=' + gamification.address);
     deployments.update(18, {
       step: "Deploy races restricted"
     });
