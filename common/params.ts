@@ -117,6 +117,7 @@ const defaultQueue: Queue.StructStruct = {
     lastCompletion: BigNumber.from(0),
     totalParticipants: 3,
     cooldown: 0,
+    speciesAllowed: [0,1],
     closed: false
 };
 

@@ -84,7 +84,8 @@ async function main() {
         racesAddress: races.races.address,
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address
+        paymentsAddress: payments.payments.address,
+        incubatorAddress: incubators.incubator.address
     });
     
     const generator: GeneratorSystem = await runGenerator({
@@ -156,7 +157,8 @@ async function main() {
             races: races.races.address,
             allowedCallers: [races.races.address],
             queues: queues.queues.address,
-            zerocost: queues.queueZerocost.address
+            zerocost: queues.queueZerocost.address,
+            incubator: incubators.incubator.address
         }
     });
 

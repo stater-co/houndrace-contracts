@@ -93,6 +93,7 @@ export declare namespace Queue {
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
+    speciesAllowed: BigNumberish[];
     closed: boolean;
   };
 
@@ -103,6 +104,7 @@ export declare namespace Queue {
     BigNumber,
     number,
     number,
+    number[],
     boolean
   ] & {
     core: Core.StructStructOutput;
@@ -111,6 +113,7 @@ export declare namespace Queue {
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
+    speciesAllowed: number[];
     closed: boolean;
   };
 }
@@ -118,7 +121,7 @@ export declare namespace Queue {
 export interface IRaceStartInterface extends utils.Interface {
   contractName: "IRaceStart";
   functions: {
-    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,bool),uint256)": FunctionFragment;
+    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

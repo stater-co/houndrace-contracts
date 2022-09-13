@@ -15,6 +15,7 @@ library QueuesConstructor {
         address hounds;
         address payments;
         address races;
+        address incubator;
         
         // Whitelist boilerplate
         address[] allowedCallers;

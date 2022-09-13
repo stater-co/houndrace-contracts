@@ -3,4 +3,5 @@ export interface QueuesExternalDependencies {
     houndsAddress: string;
     paymentsAddress: string;
     racesAddress: string;
+    incubatorAddress: string;
 }
