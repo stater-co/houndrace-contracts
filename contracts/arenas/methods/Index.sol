@@ -17,7 +17,7 @@ contract ArenasMethods is Params {
                 control.payments,
                 control.alphadune,
                 arenas[theId].currency,
-                new uint256[](0),
+                new uint256[](1),
                 amounts,
                 arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
@@ -27,7 +27,7 @@ contract ArenasMethods is Params {
                 control.payments,
                 ownerOf(theId),
                 arenas[theId].currency,
-                new uint256[](0),
+                new uint256[](1),
                 amounts,
                 arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );

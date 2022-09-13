@@ -22,22 +22,28 @@ import type {
 
 export declare namespace HoundStamina {
   export type StructStruct = {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
     staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
   export type StructStructOutput = [
+    string,
+    BigNumber,
     BigNumber,
     BigNumber,
     number,
     number,
     number
   ] & {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
     staminaPerTimeUnit: number;
     staminaCap: number;

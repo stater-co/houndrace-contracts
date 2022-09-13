@@ -6,22 +6,31 @@ import { expecting } from "../expecting";
 export async function boostHoundBreeding(
   params: BoostBreedingParams
 ) {
-  const hound: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  
-  await params.contract.boostHoundBreeding(
-    params.hound1, 
-    await params.contract.signer.getAddress(), 
-    hound.breeding.breedingFee,{
-      value: await (await params.contract.control()).fees.currency === globalParams.address0 ? hound.breeding.breedingFee : 0
+  const totalHounds: number = Number(await params.contract.id());
+  let hound: Hound.StructStructOutput = globalParams.defaultHound;
+  let exists: boolean = false;
+  let i = 1;
+  for ( ; i < totalHounds ; ++i ) {
+    hound = await params.contract.hound(i);
+    if ( Number(hound.breeding.lastBreed) > 0 && Number(hound.breeding.lastBreed) > new Date(new Date().getTime() - Number(hound.breeding.breedingCooldown)).getTime() ) {
+      exists = true;
+      break;
     }
-  );
+  }
+
+  if ( exists ) { 
+    await params.contract.boostHoundBreeding(
+      i, 
+      await params.contract.signer.getAddress(), 
+      hound.breeding.breedingCooldownCurrency === globalParams.address0 ? 0 : hound.breeding.breedingFee,{
+        value: hound.breeding.breedingCooldownCurrency === globalParams.address0 ? hound.breeding.breedingFee : 0
+      }
+    );
+  }
 }
 
 export async function safeBoostHoundBreeding(
   params: BoostBreedingParams
 ) {
-  const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
   await boostHoundBreeding(params);
-  const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  expecting(before.breeding.lastBreed !== after.breeding.lastBreed, "Boost hound breeding cooldown method bugged");
 }

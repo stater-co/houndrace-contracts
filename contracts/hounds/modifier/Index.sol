@@ -13,23 +13,15 @@ contract HoundsModifier is Params {
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
 
         --stamina.staminaValue;
-
-        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerTimeUnit );
-        stamina.staminaLastUpdate = block.timestamp;
-
-        if ( stamina.staminaValue > stamina.staminaCap ) {
-            stamina.staminaValue = stamina.staminaCap;
-        }
-
-        ISetStamina(control.boilerplate.gamification).setStamina(theId, stamina);
-
-        emit HoundStaminaUpdate(theId, stamina.staminaValue);
+        refreshStamina(theId, stamina);
     }
 
     function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
         require(allowed[msg.sender]);
+
         oldQueueId = hounds[theId].queueId;
         hounds[theId].queueId = queueId;
+        
         emit HoundQueueStatusUpdate(theId, queueId);
     }
 
@@ -37,54 +29,73 @@ contract HoundsModifier is Params {
         require(theId < id);
         
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
-        uint256 refillStaminaCooldownCost = control.fees.refillStaminaCooldownCost - ((control.fees.refillStaminaCooldownCost / 100) * discount);
-        HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
 
+        HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
+        require(stamina.staminaValue < stamina.staminaCap);
+        uint256 refillStaminaCooldownCost = stamina.refillStaminaCooldownCost - ((stamina.refillStaminaCooldownCost / 100) * discount);
+        
+        require(
+                ( stamina.staminaRefillCurrency == address(0) && payed == 0 && msg.value > 0 ) 
+            || 
+                ( stamina.staminaRefillCurrency != address(0) && payed > 0 && msg.value == 0 )
+        );
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.fees.currency == address(0) ? msg.value : payed;
+        amounts[0] = stamina.staminaRefillCurrency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.currency == address(0) ? amounts[0] : 0
+            value: stamina.staminaRefillCurrency == address(0) ? msg.value : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            control.fees.currency,
-            new uint256[](0),
+            stamina.staminaRefillCurrency,
+            new uint256[](1),
             amounts,
-            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            stamina.staminaRefillCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
+        
         stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
-        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerTimeUnit );
-        stamina.staminaLastUpdate = block.timestamp;
-        if ( stamina.staminaValue > stamina.staminaCap ) {
-            stamina.staminaValue = stamina.staminaCap;
-        }
-
-        ISetStamina(control.boilerplate.gamification).setStamina(theId, stamina);
-        emit HoundStaminaUpdate(theId, stamina.staminaValue);
+        refreshStamina(theId, stamina);
     }
 
     function boostHoundBreeding(uint256 theId, address user, uint256 payed) external payable {
         require(theId < id);
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
-        uint256 refillBreedingCooldownCost = control.fees.refillBreedingCooldownCost - ((control.fees.refillBreedingCooldownCost / 100) * discount);
-        HoundBreeding.Struct memory breeding = IGetBreeding(control.boilerplate.gamification).getBreeding(theId);
 
+        console.log("ok 0");
+        HoundBreeding.Struct memory breeding = IGetBreeding(control.boilerplate.gamification).getBreeding(theId);
+        require(breeding.lastBreed > 0);
+        uint256 refillBreedingCooldownCost = breeding.refillBreedingCooldownCost - ((breeding.refillBreedingCooldownCost / 100) * discount);
+        
+        console.log("ok 1");
+        require(
+                ( breeding.breedingCooldownCurrency == address(0) && payed == 0 && msg.value > 0 ) 
+            || 
+                ( breeding.breedingCooldownCurrency != address(0) && payed > 0 && msg.value == 0 )
+        );
+
+        console.log("ok 2");
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.fees.currency == address(0) ? msg.value : payed;
+        amounts[0] = breeding.breedingCooldownCurrency == address(0) ? msg.value : payed;
+        
+        console.log("ok 3");
+        console.log(msg.value);
+        console.log(breeding.breedingCooldownCurrency);
+        console.log(amounts[0]);
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.currency == address(0) ? amounts[0] : 0
+            value: breeding.breedingCooldownCurrency == address(0) ? msg.value : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            control.fees.currency,
+            breeding.breedingCooldownCurrency,
             new uint256[](0),
             amounts,
-            control.fees.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            breeding.breedingCooldownCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
+         console.log("ok.. 4");
         breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;
 
+        console.log("ok.. 5");
         ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
         emit HoundBreedingStatusUpdate(theId, breeding.lastBreed + breeding.breedingCooldown < block.timestamp);
     }
@@ -100,6 +111,18 @@ contract HoundsModifier is Params {
         ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
 
         emit HoundBreedable(theId,fee);
+    }
+
+    function refreshStamina(uint256 theId, HoundStamina.Struct memory stamina) internal {
+        stamina.staminaValue += uint32( ( block.timestamp - stamina.staminaLastUpdate ) / stamina.staminaPerTimeUnit );
+        stamina.staminaLastUpdate = block.timestamp;
+        if ( stamina.staminaValue > stamina.staminaCap ) {
+            stamina.staminaValue = stamina.staminaCap;
+        }
+
+        ISetStamina(control.boilerplate.gamification).setStamina(theId, stamina);
+
+        emit HoundStaminaUpdate(theId, stamina.staminaValue);
     }
 
 }

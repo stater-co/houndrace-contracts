@@ -221,10 +221,7 @@ async function main() {
             breedFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000",
-            refillCost: "0x2386F26FC10000",
-            refillBreedingCooldownCost: "0x2386F26FC10000",
-            refillStaminaCooldownCost: "0x2386F26FC10000"
+            breedFee: "0x2386F26FC10000"
            }
         }
     });
@@ -324,10 +321,7 @@ async function main() {
             breedFeeCurrency: payments.houndracePotions.address,
             currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000",
-            refillCost: "0x2386F26FC10000",
-            refillBreedingCooldownCost: "0x2386F26FC10000",
-            refillStaminaCooldownCost: "0x2386F26FC10000"
+            breedFee: "0x2386F26FC10000"
            }
         }
     });

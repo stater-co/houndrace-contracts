@@ -367,7 +367,6 @@ async function advancedTests(
 
       await safeBoostHoundBreeding({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 
@@ -386,7 +385,6 @@ async function advancedTests(
 
       await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 

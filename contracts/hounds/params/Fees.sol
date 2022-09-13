@@ -8,8 +8,5 @@ library ConstructorFees {
         address breedFeeCurrency;
         uint256 breedCost;
         uint256 breedFee;
-        uint256 refillCost;
-        uint256 refillBreedingCooldownCost;
-        uint256 refillStaminaCooldownCost;
     }
 }

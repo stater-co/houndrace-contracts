@@ -43,22 +43,28 @@ export declare namespace HoundStatistics {
 
 export declare namespace HoundStamina {
   export type StructStruct = {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
     staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
   export type StructStructOutput = [
+    string,
+    BigNumber,
     BigNumber,
     BigNumber,
     number,
     number,
     number
   ] & {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
     staminaPerTimeUnit: number;
     staminaCap: number;
@@ -68,15 +74,19 @@ export declare namespace HoundStamina {
 export declare namespace HoundBreeding {
   export type StructStruct = {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
     breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
     availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
     string,
+    string,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -84,10 +94,12 @@ export declare namespace HoundBreeding {
     boolean
   ] & {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
     breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
     availableToBreed: boolean;
   };
 }

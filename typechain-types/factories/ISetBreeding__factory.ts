@@ -22,6 +22,11 @@ const _abi = [
             type: "address",
           },
           {
+            internalType: "address",
+            name: "breedingCooldownCurrency",
+            type: "address",
+          },
+          {
             internalType: "uint256",
             name: "lastBreed",
             type: "uint256",
@@ -39,6 +44,11 @@ const _abi = [
           {
             internalType: "uint256",
             name: "breedingCooldownTimeUnit",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "refillBreedingCooldownCost",
             type: "uint256",
           },
           {

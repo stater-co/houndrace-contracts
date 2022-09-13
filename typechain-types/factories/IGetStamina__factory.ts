@@ -20,6 +20,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "address",
+            name: "staminaRefillCurrency",
+            type: "address",
+          },
+          {
             internalType: "uint256",
             name: "staminaLastUpdate",
             type: "uint256",
@@ -27,6 +32,11 @@ const _abi = [
           {
             internalType: "uint256",
             name: "staminaRefill1x",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "refillStaminaCooldownCost",
             type: "uint256",
           },
           {
