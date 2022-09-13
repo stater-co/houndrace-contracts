@@ -201,6 +201,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -209,7 +210,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -217,6 +219,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 
@@ -272,7 +275,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;

@@ -30,6 +30,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -38,7 +39,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -46,13 +48,14 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 
 export interface IBreedHoundsInterface extends utils.Interface {
   contractName: "IBreedHounds";
   functions: {
-    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256)": FunctionFragment;
+    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(

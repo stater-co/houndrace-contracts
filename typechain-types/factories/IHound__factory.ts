@@ -167,6 +167,11 @@ const _abi = [
                 name: "extensionTraits",
                 type: "string",
               },
+              {
+                internalType: "enum Specie.Enum",
+                name: "specie",
+                type: "uint8",
+              },
             ],
             internalType: "struct HoundIdentity.Struct",
             name: "identity",

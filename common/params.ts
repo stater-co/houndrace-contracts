@@ -81,7 +81,8 @@ const houndIdentity: HoundIdentity.StructStruct = {
     generation: 1,
     geneticSequence: maleBoilerplateGene,
     maleParent: 0,
-    extensionTraits: ""
+    extensionTraits: "",
+    specie: 0
 };
 
 const houndProfile: HoundProfile.StructStruct = {

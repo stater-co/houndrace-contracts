@@ -1,5 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
+import './Specie.sol';
 
 library HoundIdentity {
 
@@ -10,6 +11,7 @@ library HoundIdentity {
         uint256 birthDate;
         uint32[54] geneticSequence;
         string extensionTraits;
+        Specie.Enum specie;
     }
 
 }
