@@ -54,6 +54,10 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         return ownerOf(tokenId);
     }
 
+    function allowance(address sender, uint256 tokenId) external view returns(bool) {
+        return _isApprovedOrOwner(sender, tokenId);
+    }
+
     function hound(uint256 theId) external view returns(Hound.Struct memory) {
         return Hound.Struct(
             IGetStatistics(control.boilerplate.races).getStatistics(theId),

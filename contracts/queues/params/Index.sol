@@ -23,6 +23,7 @@ import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
+import '../../hounds/interfaces/IAllowance.sol';
 
 
 contract Params is Ownable, Withdrawable {

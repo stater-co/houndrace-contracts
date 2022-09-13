@@ -267,6 +267,7 @@ export declare namespace Hound {
 export interface HoundsMinterInterface extends utils.Interface {
   contractName: "HoundsMinter";
   functions: {
+    "allowance(address,uint256)": FunctionFragment;
     "allowed(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -296,6 +297,10 @@ export interface HoundsMinterInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "allowance",
+    values: [string, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -381,6 +386,7 @@ export interface HoundsMinterInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -584,6 +590,12 @@ export interface HoundsMinter extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     approve(
@@ -735,6 +747,12 @@ export interface HoundsMinter extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  allowance(
+    sender: string,
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   approve(
@@ -877,6 +895,12 @@ export interface HoundsMinter extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     approve(
@@ -1132,6 +1156,12 @@ export interface HoundsMinter extends BaseContract {
   };
 
   estimateGas: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
@@ -1257,6 +1287,12 @@ export interface HoundsMinter extends BaseContract {
   };
 
   populateTransaction: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     allowed(
       arg0: string,
       overrides?: CallOverrides
