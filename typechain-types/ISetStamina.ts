@@ -27,7 +27,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
@@ -41,7 +41,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerHour: number;
+    staminaPerTimeUnit: number;
     staminaCap: number;
   };
 }

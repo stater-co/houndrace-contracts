@@ -23,7 +23,7 @@ contract GamificationMethods is Params {
                 control.defaultStamina.staminaValue + genetics[52] - 6 
             : 
                 control.defaultStamina.staminaValue - genetics[52], // staminaValue
-            genetics[51] == 9 ? 2 : control.defaultStamina.staminaPerHour, // staminaPerHour
+            genetics[51] == 9 ? control.defaultStamina.staminaPerTimeUnit / 2 : control.defaultStamina.staminaPerTimeUnit, // staminaPerHour
             genetics[50] > 6 ? 
                 control.defaultStamina.staminaCap + ( ( genetics[50] - 6 ) * 5 ) 
             : 
@@ -51,6 +51,7 @@ contract GamificationMethods is Params {
                 control.defaultBreeding.breedingFee - ( control.defaultBreeding.breedingFee / 100 * genetics[53] ) 
             : 
                 control.defaultBreeding.breedingFee + ( control.defaultBreeding.breedingFee / 100 * genetics[53] ), // staminaRefill1x,
+            genetics[51] == 1 ? control.defaultBreeding.breedingCooldownTimeUnit / 2 : control.defaultBreeding.breedingCooldownTimeUnit, // staminaPerHour
             false // availableToBreed
         );
     }

@@ -37,6 +37,11 @@ const _abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "breedingCooldownTimeUnit",
+            type: "uint256",
+          },
+          {
             internalType: "bool",
             name: "availableToBreed",
             type: "bool",

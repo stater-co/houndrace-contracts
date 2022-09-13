@@ -28,11 +28,13 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
     availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
     string,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -42,6 +44,7 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
     availableToBreed: boolean;
   };
 }
@@ -51,7 +54,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
@@ -65,7 +68,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerHour: number;
+    staminaPerTimeUnit: number;
     staminaCap: number;
   };
 }
@@ -106,8 +109,8 @@ export interface GamificationRestrictedInterface extends utils.Interface {
     "houndsStamina(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setBreeding(uint256,(address,uint256,uint256,uint256,bool))": FunctionFragment;
-    "setGlobalParameters(((address,uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setBreeding(uint256,(address,uint256,uint256,uint256,uint256,bool))": FunctionFragment;
+    "setGlobalParameters(((address,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
     "setStamina(uint256,(uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -276,11 +279,12 @@ export interface GamificationRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+      [string, BigNumber, BigNumber, BigNumber, BigNumber, boolean] & {
         breedingFeeCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;
+        breedingCooldownTimeUnit: BigNumber;
         availableToBreed: boolean;
       }
     >;
@@ -293,7 +297,7 @@ export interface GamificationRestricted extends BaseContract {
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
         staminaValue: number;
-        staminaPerHour: number;
+        staminaPerTimeUnit: number;
         staminaCap: number;
       }
     >;
@@ -366,11 +370,12 @@ export interface GamificationRestricted extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, BigNumber, BigNumber, BigNumber, boolean] & {
+    [string, BigNumber, BigNumber, BigNumber, BigNumber, boolean] & {
       breedingFeeCurrency: string;
       lastBreed: BigNumber;
       breedingCooldown: BigNumber;
       breedingFee: BigNumber;
+      breedingCooldownTimeUnit: BigNumber;
       availableToBreed: boolean;
     }
   >;
@@ -383,7 +388,7 @@ export interface GamificationRestricted extends BaseContract {
       staminaLastUpdate: BigNumber;
       staminaRefill1x: BigNumber;
       staminaValue: number;
-      staminaPerHour: number;
+      staminaPerTimeUnit: number;
       staminaCap: number;
     }
   >;
@@ -456,11 +461,12 @@ export interface GamificationRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+      [string, BigNumber, BigNumber, BigNumber, BigNumber, boolean] & {
         breedingFeeCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;
+        breedingCooldownTimeUnit: BigNumber;
         availableToBreed: boolean;
       }
     >;
@@ -473,7 +479,7 @@ export interface GamificationRestricted extends BaseContract {
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
         staminaValue: number;
-        staminaPerHour: number;
+        staminaPerTimeUnit: number;
         staminaCap: number;
       }
     >;

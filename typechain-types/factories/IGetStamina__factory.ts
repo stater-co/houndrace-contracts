@@ -36,7 +36,7 @@ const _abi = [
           },
           {
             internalType: "uint32",
-            name: "staminaPerHour",
+            name: "staminaPerTimeUnit",
             type: "uint32",
           },
           {

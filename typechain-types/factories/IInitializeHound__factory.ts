@@ -70,7 +70,7 @@ const _abi = [
               },
               {
                 internalType: "uint32",
-                name: "staminaPerHour",
+                name: "staminaPerTimeUnit",
                 type: "uint32",
               },
               {
@@ -103,6 +103,11 @@ const _abi = [
               {
                 internalType: "uint256",
                 name: "breedingFee",
+                type: "uint256",
+              },
+              {
+                internalType: "uint256",
+                name: "breedingCooldownTimeUnit",
                 type: "uint256",
               },
               {

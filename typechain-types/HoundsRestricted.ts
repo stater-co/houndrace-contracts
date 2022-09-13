@@ -144,7 +144,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
@@ -158,7 +158,7 @@ export declare namespace HoundStamina {
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerHour: number;
+    staminaPerTimeUnit: number;
     staminaCap: number;
   };
 }
@@ -169,11 +169,13 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
     availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
     string,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -183,6 +185,7 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
     availableToBreed: boolean;
   };
 }
@@ -266,7 +269,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(address,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(address,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;

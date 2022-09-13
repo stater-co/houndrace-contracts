@@ -26,11 +26,13 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
     availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
     string,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
@@ -40,6 +42,7 @@ export declare namespace HoundBreeding {
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
     availableToBreed: boolean;
   };
 }

@@ -14,7 +14,7 @@ contract HoundsModifier is Params {
 
         --stamina.staminaValue;
 
-        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerHour );
+        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerTimeUnit );
         stamina.staminaLastUpdate = block.timestamp;
 
         if ( stamina.staminaValue > stamina.staminaCap ) {
@@ -54,7 +54,7 @@ contract HoundsModifier is Params {
         );
 
         stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
-        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerHour );
+        stamina.staminaValue += uint32( ( ( block.timestamp - stamina.staminaLastUpdate ) / 3600 ) * stamina.staminaPerTimeUnit );
         stamina.staminaLastUpdate = block.timestamp;
         if ( stamina.staminaValue > stamina.staminaCap ) {
             stamina.staminaValue = stamina.staminaCap;

@@ -7,7 +7,7 @@ library HoundStamina {
         uint256 staminaLastUpdate;
         uint256 staminaRefill1x;
         uint32 staminaValue;
-        uint32 staminaPerHour;
+        uint32 staminaPerTimeUnit;
         uint32 staminaCap;
     }
 
