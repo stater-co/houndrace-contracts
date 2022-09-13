@@ -298,10 +298,7 @@ async function main() {
       breedCostCurrency: globalParams.address0,
       breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
-      breedFee: "0x2386F26FC10000",
-      refillCost: "0x2386F26FC10000",
-      refillBreedingCooldownCost: "0x2386F26FC10000",
-      refillStaminaCooldownCost: "0x2386F26FC10000"
+      breedFee: "0x2386F26FC10000"
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
@@ -526,6 +523,7 @@ async function main() {
       races: globalParams.address0,
       queues: globalParams.address0,
       zerocost: globalParams.address0,
+      incubator: globalParams.address0,
       allowedCallers: []
     }
     const queuesMethods = await deployContract({
@@ -638,10 +636,7 @@ async function main() {
       breedCostCurrency: globalParams.address0,
       breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
-      breedFee: "0x2386F26FC10000",
-      refillCost: "0x2386F26FC10000",
-      refillBreedingCooldownCost: "0x2386F26FC10000",
-      refillStaminaCooldownCost: "0x2386F26FC10000"
+      breedFee: "0x2386F26FC10000"
     };
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       incubator: incubator.address,
@@ -709,7 +704,8 @@ async function main() {
       races: races.address,
       allowedCallers: [races.address],
       queues: queues.address,
-      zerocost: queuesZerocost.address
+      zerocost: queuesZerocost.address,
+      incubator: incubator.address
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
