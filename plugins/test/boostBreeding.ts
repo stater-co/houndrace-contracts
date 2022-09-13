@@ -5,11 +5,11 @@ import { expecting } from "../expecting";
 
 export async function boostHoundBreeding(
   params: BoostBreedingParams
-) {
+): Promise<[Hound.StructStructOutput,Hound.StructStructOutput]> {
   const totalHounds: number = Number(await params.contract.id());
-  let hound: Hound.StructStructOutput = globalParams.defaultHound;
   let exists: boolean = false;
   let i = 1;
+  let hound: Hound.StructStructOutput = await params.contract.hound(i);
   for ( ; i < totalHounds ; ++i ) {
     hound = await params.contract.hound(i);
     if ( Number(hound.breeding.lastBreed) > 0 && Number(hound.breeding.lastBreed) > new Date(new Date().getTime() - Number(hound.breeding.breedingCooldown)).getTime() ) {
@@ -27,10 +27,13 @@ export async function boostHoundBreeding(
       }
     );
   }
+
+  return [hound, await params.contract.hound(i)];
 }
 
 export async function safeBoostHoundBreeding(
   params: BoostBreedingParams
 ) {
-  await boostHoundBreeding(params);
+  const boostedHound: [Hound.StructStructOutput,Hound.StructStructOutput] = await boostHoundBreeding(params);
+  expecting(JSON.stringify(boostedHound[0]) !== JSON.stringify(boostedHound[1]),  "Boost hound breeding cooldown method bugged");
 }

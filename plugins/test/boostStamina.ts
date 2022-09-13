@@ -5,11 +5,11 @@ import { expecting } from '../expecting';
 
 export async function boostHoundStamina(
   params: BoostStaminaParams
-) {
+): Promise<[Hound.StructStructOutput,Hound.StructStructOutput]> {
   const totalHounds: number = Number(await params.contract.id());
-  let hound: Hound.StructStructOutput = globalParams.defaultHound;
   let exists: boolean = false;
   let i = 1;
+  let hound: Hound.StructStructOutput = await params.contract.hound(i);
   for (  ; i < totalHounds ; ++i ) {
     hound = await params.contract.hound(i);
     if ( Number(hound.stamina.staminaValue) < Number(hound.stamina.staminaCap) ) {
@@ -27,10 +27,13 @@ export async function boostHoundStamina(
       }
     );
   }
+
+  return [hound, await params.contract.hound(i)];
 }
 
 export async function safeBoostHoundStamina(
   params: BoostStaminaParams
 ) {
-  await boostHoundStamina(params);
+  const boostedHound: [Hound.StructStructOutput,Hound.StructStructOutput] = await boostHoundStamina(params);
+  expecting(JSON.stringify(boostedHound[0]) !== JSON.stringify(boostedHound[1]),  "Boost hound stamina method bugged");
 }
