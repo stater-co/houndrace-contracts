@@ -100,14 +100,13 @@ contract HoundsModifier is Params {
 
         breeding.lastBreed -= amounts[0] / refillBreedingCooldownCost;
 
-        ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
+        ISetBreeding(control.boilerplate.gamification).setBreeding(theId, breeding);
         emit HoundBreedingStatusUpdate(theId, breeding.lastBreed + breeding.breedingCooldown < block.timestamp);
     }
 
     function putHoundForBreed(
         uint256 theId, 
         uint256 fee, 
-        address currency,
         bool status
     ) external {
         require(ownerOf(theId) == msg.sender);
@@ -116,14 +115,12 @@ contract HoundsModifier is Params {
 
         breeding.breedingFee = fee;
         breeding.availableToBreed = status;
-        breeding.breedingFeeCurrency = currency;
 
-        ISetBreeding(control.boilerplate.gamification).setBreeding(id, breeding);
+        ISetBreeding(control.boilerplate.gamification).setBreeding(theId, breeding);
 
         emit HoundBreedable(
             theId,
             fee,
-            currency,
             status
         );
     }

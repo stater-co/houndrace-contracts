@@ -101,7 +101,6 @@ async function basicTest(
         races: dependencies.races
       });
 
-      console.log("===== ok1");
       await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,

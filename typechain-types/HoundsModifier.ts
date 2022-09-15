@@ -286,7 +286,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "payout(uint256)": FunctionFragment;
-    "putHoundForBreed(uint256,uint256,address,bool)": FunctionFragment;
+    "putHoundForBreed(uint256,uint256,bool)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -358,7 +358,7 @@ export interface HoundsModifierInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "putHoundForBreed",
-    values: [BigNumberish, BigNumberish, string, boolean]
+    values: [BigNumberish, BigNumberish, boolean]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -494,7 +494,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "BreedHound(uint256,address,tuple)": EventFragment;
-    "HoundBreedable(uint256,uint256,address,bool)": EventFragment;
+    "HoundBreedable(uint256,uint256,bool)": EventFragment;
     "HoundBreedingStatusUpdate(uint256,bool)": EventFragment;
     "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
     "HoundStaminaUpdate(uint256,uint32)": EventFragment;
@@ -539,8 +539,8 @@ export type BreedHoundEvent = TypedEvent<
 export type BreedHoundEventFilter = TypedEventFilter<BreedHoundEvent>;
 
 export type HoundBreedableEvent = TypedEvent<
-  [BigNumber, BigNumber, string, boolean],
-  { id: BigNumber; price: BigNumber; currency: string; status: boolean }
+  [BigNumber, BigNumber, boolean],
+  { id: BigNumber; price: BigNumber; status: boolean }
 >;
 
 export type HoundBreedableEventFilter = TypedEventFilter<HoundBreedableEvent>;
@@ -734,7 +734,6 @@ export interface HoundsModifier extends BaseContract {
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
-      currency: string,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -912,7 +911,6 @@ export interface HoundsModifier extends BaseContract {
   putHoundForBreed(
     theId: BigNumberish,
     fee: BigNumberish,
-    currency: string,
     status: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1087,7 +1085,6 @@ export interface HoundsModifier extends BaseContract {
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
-      currency: string,
       status: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1195,16 +1192,14 @@ export interface HoundsModifier extends BaseContract {
       hound?: null
     ): BreedHoundEventFilter;
 
-    "HoundBreedable(uint256,uint256,address,bool)"(
+    "HoundBreedable(uint256,uint256,bool)"(
       id?: BigNumberish | null,
       price?: null,
-      currency?: string | null,
       status?: null
     ): HoundBreedableEventFilter;
     HoundBreedable(
       id?: BigNumberish | null,
       price?: null,
-      currency?: string | null,
       status?: null
     ): HoundBreedableEventFilter;
 
@@ -1358,7 +1353,6 @@ export interface HoundsModifier extends BaseContract {
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
-      currency: string,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1528,7 +1522,6 @@ export interface HoundsModifier extends BaseContract {
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
-      currency: string,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
