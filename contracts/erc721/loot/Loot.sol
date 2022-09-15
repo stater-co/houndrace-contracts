@@ -44,7 +44,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         control.canBeOpened = status;
     }
 
-    function open(uint256 boxId) external payable {
+    function open(uint256 boxId) external {
         require(control.canBeOpened);
         require(ownerOf(boxId) == msg.sender);
 
