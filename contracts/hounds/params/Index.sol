@@ -19,7 +19,6 @@ import '../../gamification/interfaces/ISetBreeding.sol';
 import '../../incubator/interfaces/ISetIdentity.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../interfaces/IGetBreedCost.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
@@ -29,7 +28,7 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event BreedHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
     event NewTokenUri(uint256 indexed id, string token_uri);
-    event HoundBreedable(uint256 indexed id, uint256 price);
+    event HoundBreedable(uint256 indexed id, uint256 price, address indexed currency, bool status);
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
     event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);

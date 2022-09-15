@@ -16,20 +16,16 @@ contract PaymentsMethods is Params {
         Payment.PaymentTypes paymentType
 	) public payable {
 
-		console.log("ok");
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 
-			console.log("ok 1");
 			IERC721(currency).safeTransferFrom(from, to, ids[0]);
 
 		} else if ( paymentType == Payment.PaymentTypes.ERC1155 ) {
 
-			console.log("ok 2");
 			IERC1155(currency).safeBatchTransferFrom(from, to, ids, amounts, "");
 
 		} else if ( paymentType == Payment.PaymentTypes.ERC20 ) {
 
-			console.log("ok 3");
 			if ( from != address(this) ) {
 				require(IERC20(currency).transferFrom(from, to, amounts[0]));
 			} else {
@@ -38,7 +34,6 @@ contract PaymentsMethods is Params {
 
 		} else if ( paymentType == Payment.PaymentTypes.DEFAULT ) {
 
-			console.log("ok 4");
 			if ( Address.isContract(to) ) {
 				(bool success, )= to.call{ value: amounts[0] }("");
 				require(success);
@@ -48,13 +43,11 @@ contract PaymentsMethods is Params {
 
 		}
 
-		console.log("ok 5");
 		if ( to == control.alphadune ) {
 			for ( uint256 i = 0 ; i < ids.length ; ++i ) {
 				alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];
 			}
 		}
-		console.log("ok 6");
 
 	}
 

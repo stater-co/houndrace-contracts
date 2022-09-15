@@ -3,7 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import { Provider, TransactionRequest } from "@ethersproject/providers";
-import type { Params, ParamsInterface, Constructor } from "../Params";
+import type { Params, ParamsInterface, GeneticsConstructor } from "../Params";
 
 const _abi = [
   {
@@ -11,111 +11,47 @@ const _abi = [
       {
         components: [
           {
-            components: [
-              {
-                internalType: "address",
-                name: "breedingFeeCurrency",
-                type: "address",
-              },
-              {
-                internalType: "address",
-                name: "breedingCooldownCurrency",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "lastBreed",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingCooldown",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingFee",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingCooldownTimeUnit",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "refillBreedingCooldownCost",
-                type: "uint256",
-              },
-              {
-                internalType: "bool",
-                name: "availableToBreed",
-                type: "bool",
-              },
-            ],
-            internalType: "struct HoundBreeding.Struct",
-            name: "defaultBreeding",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "address",
-                name: "staminaRefillCurrency",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "staminaLastUpdate",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "staminaRefill1x",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "refillStaminaCooldownCost",
-                type: "uint256",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaValue",
-                type: "uint32",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaPerTimeUnit",
-                type: "uint32",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaCap",
-                type: "uint32",
-              },
-            ],
-            internalType: "struct HoundStamina.Struct",
-            name: "defaultStamina",
-            type: "tuple",
-          },
-          {
-            internalType: "address[]",
-            name: "allowed",
-            type: "address[]",
-          },
-          {
             internalType: "address",
-            name: "restricted",
+            name: "randomness",
             type: "address",
           },
           {
             internalType: "address",
-            name: "methods",
+            name: "terrains",
             type: "address",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "male",
+            type: "uint32[54]",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "female",
+            type: "uint32[54]",
+          },
+          {
+            internalType: "uint32",
+            name: "maleGenesProbability",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "femaleGenesProbability",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32[13]",
+            name: "geneticSequenceSignature",
+            type: "uint32[13]",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "maxValues",
+            type: "uint32[54]",
           },
         ],
-        internalType: "struct Constructor.Struct",
+        internalType: "struct GeneticsConstructor.Struct",
         name: "input",
         type: "tuple",
       },
@@ -143,448 +79,27 @@ const _abi = [
     type: "event",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    name: "allowed",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "control",
     outputs: [
       {
-        components: [
-          {
-            internalType: "address",
-            name: "breedingFeeCurrency",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "breedingCooldownCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "lastBreed",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldown",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingFee",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldownTimeUnit",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillBreedingCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "availableToBreed",
-            type: "bool",
-          },
-        ],
-        internalType: "struct HoundBreeding.Struct",
-        name: "defaultBreeding",
-        type: "tuple",
-      },
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "staminaRefillCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaLastUpdate",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaRefill1x",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillStaminaCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaValue",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaPerTimeUnit",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaCap",
-            type: "uint32",
-          },
-        ],
-        internalType: "struct HoundStamina.Struct",
-        name: "defaultStamina",
-        type: "tuple",
-      },
-      {
         internalType: "address",
-        name: "restricted",
+        name: "randomness",
         type: "address",
       },
       {
         internalType: "address",
-        name: "methods",
+        name: "terrains",
         type: "address",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-    ],
-    name: "getBreeding",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "breedingFeeCurrency",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "breedingCooldownCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "lastBreed",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldown",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingFee",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldownTimeUnit",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillBreedingCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "availableToBreed",
-            type: "bool",
-          },
-        ],
-        internalType: "struct HoundBreeding.Struct",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-    ],
-    name: "getStamina",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "staminaRefillCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaLastUpdate",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaRefill1x",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillStaminaCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaValue",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaPerTimeUnit",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaCap",
-            type: "uint32",
-          },
-        ],
-        internalType: "struct HoundStamina.Struct",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "id",
-        type: "uint256",
-      },
-    ],
-    name: "getStaminaBreeding",
-    outputs: [
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "staminaRefillCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaLastUpdate",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "staminaRefill1x",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillStaminaCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaValue",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaPerTimeUnit",
-            type: "uint32",
-          },
-          {
-            internalType: "uint32",
-            name: "staminaCap",
-            type: "uint32",
-          },
-        ],
-        internalType: "struct HoundStamina.Struct",
-        name: "",
-        type: "tuple",
-      },
-      {
-        components: [
-          {
-            internalType: "address",
-            name: "breedingFeeCurrency",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "breedingCooldownCurrency",
-            type: "address",
-          },
-          {
-            internalType: "uint256",
-            name: "lastBreed",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldown",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingFee",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "breedingCooldownTimeUnit",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "refillBreedingCooldownCost",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "availableToBreed",
-            type: "bool",
-          },
-        ],
-        internalType: "struct HoundBreeding.Struct",
-        name: "",
-        type: "tuple",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "houndsBreeding",
-    outputs: [
-      {
-        internalType: "address",
-        name: "breedingFeeCurrency",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "breedingCooldownCurrency",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "lastBreed",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "breedingCooldown",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "breedingFee",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "breedingCooldownTimeUnit",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "refillBreedingCooldownCost",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "availableToBreed",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "houndsStamina",
-    outputs: [
-      {
-        internalType: "address",
-        name: "staminaRefillCurrency",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "staminaLastUpdate",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "staminaRefill1x",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "refillStaminaCooldownCost",
-        type: "uint256",
       },
       {
         internalType: "uint32",
-        name: "staminaValue",
+        name: "maleGenesProbability",
         type: "uint32",
       },
       {
         internalType: "uint32",
-        name: "staminaPerTimeUnit",
-        type: "uint32",
-      },
-      {
-        internalType: "uint32",
-        name: "staminaCap",
+        name: "femaleGenesProbability",
         type: "uint32",
       },
     ],
@@ -616,111 +131,47 @@ const _abi = [
       {
         components: [
           {
-            components: [
-              {
-                internalType: "address",
-                name: "breedingFeeCurrency",
-                type: "address",
-              },
-              {
-                internalType: "address",
-                name: "breedingCooldownCurrency",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "lastBreed",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingCooldown",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingFee",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "breedingCooldownTimeUnit",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "refillBreedingCooldownCost",
-                type: "uint256",
-              },
-              {
-                internalType: "bool",
-                name: "availableToBreed",
-                type: "bool",
-              },
-            ],
-            internalType: "struct HoundBreeding.Struct",
-            name: "defaultBreeding",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
-                internalType: "address",
-                name: "staminaRefillCurrency",
-                type: "address",
-              },
-              {
-                internalType: "uint256",
-                name: "staminaLastUpdate",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "staminaRefill1x",
-                type: "uint256",
-              },
-              {
-                internalType: "uint256",
-                name: "refillStaminaCooldownCost",
-                type: "uint256",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaValue",
-                type: "uint32",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaPerTimeUnit",
-                type: "uint32",
-              },
-              {
-                internalType: "uint32",
-                name: "staminaCap",
-                type: "uint32",
-              },
-            ],
-            internalType: "struct HoundStamina.Struct",
-            name: "defaultStamina",
-            type: "tuple",
-          },
-          {
-            internalType: "address[]",
-            name: "allowed",
-            type: "address[]",
-          },
-          {
             internalType: "address",
-            name: "restricted",
+            name: "randomness",
             type: "address",
           },
           {
             internalType: "address",
-            name: "methods",
+            name: "terrains",
             type: "address",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "male",
+            type: "uint32[54]",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "female",
+            type: "uint32[54]",
+          },
+          {
+            internalType: "uint32",
+            name: "maleGenesProbability",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "femaleGenesProbability",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32[13]",
+            name: "geneticSequenceSignature",
+            type: "uint32[13]",
+          },
+          {
+            internalType: "uint32[54]",
+            name: "maxValues",
+            type: "uint32[54]",
           },
         ],
-        internalType: "struct Constructor.Struct",
+        internalType: "struct GeneticsConstructor.Struct",
         name: "globalParameters",
         type: "tuple",
       },
@@ -746,7 +197,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60806040523480156200001157600080fd5b50604051620016023803806200160283398101604081905262000034916200052b565b6200003f33620001ac565b80518051600180546001600160a01b039283166001600160a01b03199182161782556020808501516002805491861691841691909117905560408086015160035560608087015160045560808088015160055560a08089015160065560c0808a015160075560e0909901516008805491151560ff19909216919091179055848a015180516009805491909a1697169690961790975584840151600a5584830151600b5590840151600c55830151600d805496850151949097015163ffffffff908116680100000000000000000263ffffffff60401b19958216640100000000026001600160401b031990981691909216179590951792909216939093179093559183015180518493926200015992600e92910190620002bb565b506060820151600e820180546001600160a01b03199081166001600160a01b0393841617909155608090930151600f909201805490931691161790556040810151620001a590620001fc565b50620006af565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60005b8151811015620002b7576011600083838151811062000222576200022262000671565b60200260200101516001600160a01b03166001600160a01b0316815260200190815260200160002060009054906101000a900460ff16156011600084848151811062000272576200027262000671565b6020908102919091018101516001600160a01b03168252810191909152604001600020805460ff1916911515919091179055620002af8162000687565b9050620001ff565b5050565b82805482825590600052602060002090810192821562000313579160200282015b828111156200031357825182546001600160a01b0319166001600160a01b03909116178255602090920191600190910190620002dc565b506200032192915062000325565b5090565b5b8082111562000321576000815560010162000326565b634e487b7160e01b600052604160045260246000fd5b60405160a081016001600160401b03811182821017156200037757620003776200033c565b60405290565b60405161010081016001600160401b03811182821017156200037757620003776200033c565b80516001600160a01b0381168114620003bb57600080fd5b919050565b805163ffffffff81168114620003bb57600080fd5b600060e08284031215620003e857600080fd5b60405160e081016001600160401b03811182821017156200040d576200040d6200033c565b6040529050806200041e83620003a3565b81526020830151602082015260408301516040820152606083015160608201526200044c60808401620003c0565b60808201526200045f60a08401620003c0565b60a08201526200047260c08401620003c0565b60c08201525092915050565b600082601f8301126200049057600080fd5b815160206001600160401b0380831115620004af57620004af6200033c565b8260051b604051601f19603f83011681018181108482111715620004d757620004d76200033c565b604052938452858101830193838101925087851115620004f657600080fd5b83870191505b8482101562000520576200051082620003a3565b83529183019190830190620004fc565b979650505050505050565b6000602082840312156200053e57600080fd5b81516001600160401b03808211156200055657600080fd5b908301908185036102408112156200056d57600080fd5b6200057762000352565b610100808312156200058857600080fd5b620005926200037d565b92506200059f85620003a3565b8352620005af60208601620003a3565b602084015260408501516040840152606085015160608401526080850151608084015260a085015160a084015260c085015160c084015260e08501518015158114620005fa57600080fd5b60e08401528282526200061088868301620003d5565b6020830152506101e08401519150828211156200062c57600080fd5b6200063a878386016200047e565b60408201526200064e6102008501620003a3565b6060820152620006626102208501620003a3565b60808201529695505050505050565b634e487b7160e01b600052603260045260246000fd5b600060018201620006a857634e487b7160e01b600052601160045260246000fd5b5060010190565b610f4380620006bf6000396000f3fe608060405234801561001057600080fd5b50600436106100995760003560e01c80632c85e8631461009e578063408c3b2e146100c85780635815d8bf146100e85780636f27089f14610191578063715018a61461023f57806379720266146102495780638da5cb5b1461025c578063d63a8e111461027c578063d8de6587146102af578063e6225630146103a1578063f2fde38b146103c1575b600080fd5b6100b16100ac366004610a61565b6103d4565b6040516100bf929190610b2e565b60405180910390f35b6100db6100d6366004610a61565b6104dc565b6040516100bf9190610b51565b6101496100f6366004610a61565b601360205260009081526040902080546001820154600283015460038401546004850154600586015460068701546007909701546001600160a01b03968716979590961695939492939192909160ff1688565b604080516001600160a01b03998a168152989097166020890152958701949094526060860192909252608085015260a084015260c0830152151560e0820152610100016100bf565b6101f461019f366004610a61565b601260205260009081526040902080546001820154600283015460038401546004909401546001600160a01b0390931693919290919063ffffffff80821691600160201b8104821691600160401b9091041687565b604080516001600160a01b039098168852602088019690965294860193909352606085019190915263ffffffff908116608085015290811660a08401521660c082015260e0016100bf565b610247610563565b005b610247610257366004610d35565b610577565b6102646106dd565b6040516001600160a01b0390911681526020016100bf565b61029f61028a366004610e65565b60116020526000908152604090205460ff1681565b60405190151581526020016100bf565b60408051610100810182526001546001600160a01b03908116825260025481166020808401919091526003548385015260045460608085019190915260055460808086019190915260065460a08087019190915260075460c08088019190915260085460ff16151560e0808901919091528851908101895260095487168152600a5495810195909552600b5497850197909752600c5492840192909252600d5463ffffffff80821692850192909252600160201b8104821692840192909252600160401b9091041693810193909352600f546010546103919492918216911684565b6040516100bf9493929190610e80565b6103b46103af366004610a61565b6106ec565b6040516100bf9190610ec2565b6102476103cf366004610e65565b610770565b6103dc610952565b6103e461098e565b505060009081526012602090815260408083206013835292819020815160e0808201845285546001600160a01b03908116835260018088015484880152600280890154858801526003808a015460608088019190915260049a8b015463ffffffff8082166080808b0191909152600160201b8304821660a0808c0191909152600160401b90930490911660c0808b01919091528b5161010081018d528b5489168152968b01549097169b86019b909b5292880154988401989098528601549682019690965296840154958701959095526005830154938601939093526006820154938501939093526007015460ff1615159083015291565b6104e461098e565b5060009081526013602090815260409182902082516101008101845281546001600160a01b039081168252600183015416928101929092526002810154928201929092526003820154606082015260048201546080820152600582015460a0820152600682015460c082015260079091015460ff16151560e082015290565b61056b6107ee565b610575600061084d565b565b61057f6107ee565b61058c816040015161089d565b80518051600180546001600160a01b039283166001600160a01b03199182161782556020808501516002805491861691841691909117905560408086015160035560608087015160045560808088015160055560a08089015160065560c0808a015160075560e0909901516008805491151560ff19909216919091179055848a015180516009805491909a1697169690961790975584840151600a5584830151600b5590840151600c55830151600d805496850151949097015163ffffffff908116600160401b0263ffffffff60401b19958216600160201b026001600160401b0319909816919092161795909517929092169390931790935591830151805184939261069e92600e929101906109e7565b506060820151600e820180546001600160a01b03199081166001600160a01b0393841617909155608090930151600f9092018054909316911617905550565b6000546001600160a01b031690565b6106f4610952565b50600090815260126020908152604091829020825160e08101845281546001600160a01b031681526001820154928101929092526002810154928201929092526003820154606082015260049091015463ffffffff8082166080840152600160201b8204811660a0840152600160401b9091041660c082015290565b6107786107ee565b6001600160a01b0381166107e25760405162461bcd60e51b815260206004820152602660248201527f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160448201526564647265737360d01b60648201526084015b60405180910390fd5b6107eb8161084d565b50565b336107f76106dd565b6001600160a01b0316146105755760405162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e657260448201526064016107d9565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b60005b815181101561094e57601160008383815181106108bf576108bf610ed0565b60200260200101516001600160a01b03166001600160a01b0316815260200190815260200160002060009054906101000a900460ff16156011600084848151811061090c5761090c610ed0565b6020908102919091018101516001600160a01b03168252810191909152604001600020805460ff191691151591909117905561094781610ee6565b90506108a0565b5050565b6040805160e081018252600080825260208201819052918101829052606081018290526080810182905260a0810182905260c081019190915290565b60405180610100016040528060006001600160a01b0316815260200160006001600160a01b0316815260200160008152602001600081526020016000815260200160008152602001600081526020016000151581525090565b828054828255906000526020600020908101928215610a3c579160200282015b82811115610a3c57825182546001600160a01b0319166001600160a01b03909116178255602090920191600190910190610a07565b50610a48929150610a4c565b5090565b5b80821115610a485760008155600101610a4d565b600060208284031215610a7357600080fd5b5035919050565b80516001600160a01b0316825260208082015190830152604080820151908301526060808201519083015260808082015163ffffffff9081169184019190915260a08281015182169084015260c09182015116910152565b60018060a01b038082511683528060208301511660208401525060408101516040830152606081015160608301526080810151608083015260a081015160a083015260c081015160c083015260e0810151151560e08301525050565b6101e08101610b3d8285610a7a565b610b4a60e0830184610ad2565b9392505050565b6101008101610b608284610ad2565b92915050565b634e487b7160e01b600052604160045260246000fd5b60405160a081016001600160401b0381118282101715610b9e57610b9e610b66565b60405290565b60405161010081016001600160401b0381118282101715610b9e57610b9e610b66565b80356001600160a01b0381168114610bde57600080fd5b919050565b803563ffffffff81168114610bde57600080fd5b600060e08284031215610c0957600080fd5b60405160e081016001600160401b0381118282101715610c2b57610c2b610b66565b604052905080610c3a83610bc7565b8152602083013560208201526040830135604082015260608301356060820152610c6660808401610be3565b6080820152610c7760a08401610be3565b60a0820152610c8860c08401610be3565b60c08201525092915050565b600082601f830112610ca557600080fd5b813560206001600160401b0380831115610cc157610cc1610b66565b8260051b604051601f19603f83011681018181108482111715610ce657610ce6610b66565b604052938452858101830193838101925087851115610d0457600080fd5b83870191505b84821015610d2a57610d1b82610bc7565b83529183019190830190610d0a565b979650505050505050565b600060208284031215610d4757600080fd5b81356001600160401b0380821115610d5e57600080fd5b90830190818503610240811215610d7457600080fd5b610d7c610b7c565b61010080831215610d8c57600080fd5b610d94610ba4565b9250610d9f85610bc7565b8352610dad60208601610bc7565b602084015260408501356040840152606085013560608401526080850135608084015260a085013560a084015260c085013560c084015260e08501358015158114610df757600080fd5b60e0840152828252610e0b88868301610bf7565b6020830152506101e0840135915082821115610e2657600080fd5b610e3287838601610c94565b6040820152610e446102008501610bc7565b6060820152610e566102208501610bc7565b60808201529695505050505050565b600060208284031215610e7757600080fd5b610b4a82610bc7565b6102208101610e8f8287610ad2565b610e9d610100830186610a7a565b6001600160a01b039384166101e0830152919092166102009092019190915292915050565b60e08101610b608284610a7a565b634e487b7160e01b600052603260045260246000fd5b600060018201610f0657634e487b7160e01b600052601160045260246000fd5b506001019056fea26469706673582212206fc03411f56feee12200294d5441d0dcc7ec249ce5d532056ca3a8385c631b9164736f6c63430008110033";
+  "0x60806040523480156200001157600080fd5b506040516200138f3803806200138f8339818101604052810190620000379190620007ac565b620000576200004b620001a860201b60201c565b620001b060201b60201c565b80600160008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506040820151816002019060366200010192919062000274565b506060820151816009019060366200011b92919062000274565b5060808201518160100160006101000a81548163ffffffff021916908363ffffffff16021790555060a08201518160100160046101000a81548163ffffffff021916908363ffffffff16021790555060c08201518160110190600d620001839291906200031e565b5060e0820151816013019060366200019d92919062000274565b5090505050620007df565b600033905090565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508173ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a35050565b8260366007016008900481019282156200030b5791602002820160005b83821115620002d757835183826101000a81548163ffffffff021916908363ffffffff160217905550926020019260040160208160030104928301926001030262000291565b8015620003095782816101000a81549063ffffffff0219169055600401602081600301049283019260010302620002d7565b505b5090506200031a9190620003c8565b5090565b82600d600701600890048101928215620003b55791602002820160005b838211156200038157835183826101000a81548163ffffffff021916908363ffffffff16021790555092602001926004016020816003010492830192600103026200033b565b8015620003b35782816101000a81549063ffffffff021916905560040160208160030104928301926001030262000381565b505b509050620003c49190620003c8565b5090565b5b80821115620003e3576000816000905550600101620003c9565b5090565b6000604051905090565b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b6200044682620003fb565b810181811067ffffffffffffffff821117156200046857620004676200040c565b5b80604052505050565b60006200047d620003e7565b90506200048b82826200043b565b919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b6000620004bd8262000490565b9050919050565b620004cf81620004b0565b8114620004db57600080fd5b50565b600081519050620004ef81620004c4565b92915050565b600080fd5b600067ffffffffffffffff8211156200051857620005176200040c565b5b602082029050919050565b600080fd5b600063ffffffff82169050919050565b620005438162000528565b81146200054f57600080fd5b50565b600081519050620005638162000538565b92915050565b6000620005806200057a84620004fa565b62000471565b905080602084028301858111156200059d576200059c62000523565b5b835b81811015620005ca5780620005b5888262000552565b8452602084019350506020810190506200059f565b5050509392505050565b600082601f830112620005ec57620005eb620004f5565b5b6036620005fb84828562000569565b91505092915050565b600067ffffffffffffffff8211156200062257620006216200040c565b5b602082029050919050565b6000620006446200063e8462000604565b62000471565b9050806020840283018581111562000661576200066062000523565b5b835b818110156200068e578062000679888262000552565b84526020840193505060208101905062000663565b5050509392505050565b600082601f830112620006b057620006af620004f5565b5b600d620006bf8482856200062d565b91505092915050565b60006116608284031215620006e257620006e1620003f6565b5b620006ef61010062000471565b905060006200070184828501620004de565b60008301525060206200071784828501620004de565b60208301525060406200072d84828501620005d4565b6040830152506107006200074484828501620005d4565b606083015250610dc06200075b8482850162000552565b608083015250610de0620007728482850162000552565b60a083015250610e00620007898482850162000698565b60c083015250610fa0620007a084828501620005d4565b60e08301525092915050565b60006116608284031215620007c657620007c5620003f1565b5b6000620007d684828501620006c8565b91505092915050565b610ba080620007ef6000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c806356967ca81461005c578063715018a6146100785780638da5cb5b14610082578063d8de6587146100a0578063f2fde38b146100c1575b600080fd5b61007660048036038101906100719190610982565b6100dd565b005b610080610222565b005b61008a610236565b60405161009791906109bf565b60405180910390f35b6100a861025f565b6040516100b894939291906109e9565b60405180910390f35b6100db60048036038101906100d69190610a2e565b6102dd565b005b80600160008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506040820151816002019060366101859291906104aa565b5060608201518160090190603661019d9291906104aa565b5060808201518160100160006101000a81548163ffffffff021916908363ffffffff16021790555060a08201518160100160046101000a81548163ffffffff021916908363ffffffff16021790555060c08201518160110190600d61020392919061054d565b5060e08201518160130190603661021b9291906104aa565b5090505050565b61022a610360565b61023460006103de565b565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16905090565b60018060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060100160009054906101000a900463ffffffff16908060100160049054906101000a900463ffffffff16905084565b6102e5610360565b600073ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff1603610354576040517f08c379a000000000000000000000000000000000000000000000000000000000815260040161034b90610ade565b60405180910390fd5b61035d816103de565b50565b6103686104a2565b73ffffffffffffffffffffffffffffffffffffffff16610386610236565b73ffffffffffffffffffffffffffffffffffffffff16146103dc576040517f08c379a00000000000000000000000000000000000000000000000000000000081526004016103d390610b4a565b60405180910390fd5b565b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff169050816000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508173ffffffffffffffffffffffffffffffffffffffff168173ffffffffffffffffffffffffffffffffffffffff167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e060405160405180910390a35050565b600033905090565b82603660070160089004810192821561053c5791602002820160005b8382111561050a57835183826101000a81548163ffffffff021916908363ffffffff16021790555092602001926004016020816003010492830192600103026104c6565b801561053a5782816101000a81549063ffffffff021916905560040160208160030104928301926001030261050a565b505b50905061054991906105f0565b5090565b82600d6007016008900481019282156105df5791602002820160005b838211156105ad57835183826101000a81548163ffffffff021916908363ffffffff1602179055509260200192600401602081600301049283019260010302610569565b80156105dd5782816101000a81549063ffffffff02191690556004016020816003010492830192600103026105ad565b505b5090506105ec91906105f0565b5090565b5b808211156106095760008160009055506001016105f1565b5090565b6000604051905090565b600080fd5b600080fd5b6000601f19601f8301169050919050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b61066a82610621565b810181811067ffffffffffffffff8211171561068957610688610632565b5b80604052505050565b600061069c61060d565b90506106a88282610661565b919050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b60006106d8826106ad565b9050919050565b6106e8816106cd565b81146106f357600080fd5b50565b600081359050610705816106df565b92915050565b600080fd5b600067ffffffffffffffff82111561072b5761072a610632565b5b602082029050919050565b600080fd5b600063ffffffff82169050919050565b6107548161073b565b811461075f57600080fd5b50565b6000813590506107718161074b565b92915050565b600061078a61078584610710565b610692565b905080602084028301858111156107a4576107a3610736565b5b835b818110156107cd57806107b98882610762565b8452602084019350506020810190506107a6565b5050509392505050565b600082601f8301126107ec576107eb61070b565b5b60366107f9848285610777565b91505092915050565b600067ffffffffffffffff82111561081d5761081c610632565b5b602082029050919050565b600061083b61083684610802565b610692565b9050806020840283018581111561085557610854610736565b5b835b8181101561087e578061086a8882610762565b845260208401935050602081019050610857565b5050509392505050565b600082601f83011261089d5761089c61070b565b5b600d6108aa848285610828565b91505092915050565b600061166082840312156108ca576108c961061c565b5b6108d5610100610692565b905060006108e5848285016106f6565b60008301525060206108f9848285016106f6565b602083015250604061090d848285016107d7565b604083015250610700610922848285016107d7565b606083015250610dc061093784828501610762565b608083015250610de061094c84828501610762565b60a083015250610e0061096184828501610888565b60c083015250610fa0610976848285016107d7565b60e08301525092915050565b6000611660828403121561099957610998610617565b5b60006109a7848285016108b3565b91505092915050565b6109b9816106cd565b82525050565b60006020820190506109d460008301846109b0565b92915050565b6109e38161073b565b82525050565b60006080820190506109fe60008301876109b0565b610a0b60208301866109b0565b610a1860408301856109da565b610a2560608301846109da565b95945050505050565b600060208284031215610a4457610a43610617565b5b6000610a52848285016106f6565b91505092915050565b600082825260208201905092915050565b7f4f776e61626c653a206e6577206f776e657220697320746865207a65726f206160008201527f6464726573730000000000000000000000000000000000000000000000000000602082015250565b6000610ac8602683610a5b565b9150610ad382610a6c565b604082019050919050565b60006020820190508181036000830152610af781610abb565b9050919050565b7f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572600082015250565b6000610b34602083610a5b565b9150610b3f82610afe565b602082019050919050565b60006020820190508181036000830152610b6381610b27565b905091905056fea264697066735822122064cb670830c6c9fe9ad5f8bc28b8767f14f71e335b7b43dba9c40c90d56c06b164736f6c63430008110033";
 
 type ParamsConstructorParams =
   | [signer?: Signer]
@@ -767,13 +218,13 @@ export class Params__factory extends ContractFactory {
   }
 
   deploy(
-    input: Constructor.StructStruct,
+    input: GeneticsConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<Params> {
     return super.deploy(input, overrides || {}) as Promise<Params>;
   }
   getDeployTransaction(
-    input: Constructor.StructStruct,
+    input: GeneticsConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(input, overrides || {});

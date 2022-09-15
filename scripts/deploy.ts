@@ -1176,7 +1176,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationRestricted.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1188,7 +1192,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationMethods.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1200,7 +1208,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamification.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
