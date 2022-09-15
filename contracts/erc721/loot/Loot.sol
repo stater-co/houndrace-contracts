@@ -13,7 +13,7 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     uint256 public id;
     Constructor.Struct public control;
-    mapping(uint256 => Box.Struct) private lootboxes;
+    mapping(uint256 => Box.Struct) public lootboxes;
 
     event NewLootboxes(uint256 indexed idStart, uint256 indexed idFinish);
     event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
