@@ -68,7 +68,7 @@ const houndBreeding: HoundBreeding.StructStruct = {
     breedingCooldownCurrency: address0,
     breedingFeeCurrency: address0,
     lastBreed: 0,
-    breedingCooldown: 0,
+    breedingCooldown: 345_600,
     breedingFee: 100_000,
     breedingCooldownTimeUnit: 3600,
     refillBreedingCooldownCost: 100_000,

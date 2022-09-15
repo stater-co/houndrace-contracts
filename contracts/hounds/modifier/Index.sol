@@ -56,7 +56,7 @@ contract HoundsModifier is Params {
             msg.sender,
             control.boilerplate.payments,
             stamina.staminaRefillCurrency,
-            new uint256[](1),
+            new uint256[](0),
             amounts,
             stamina.staminaRefillCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );

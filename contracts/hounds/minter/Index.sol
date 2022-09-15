@@ -87,7 +87,7 @@ contract HoundsMinter is Params {
                 control.boilerplate.payments,
                 ownerOf(hound2),
                 breeding2.breedingFeeCurrency,
-                new uint256[](1),
+                new uint256[](0),
                 amounts,
                 breeding2.breedingFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
             );

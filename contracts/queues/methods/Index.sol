@@ -43,7 +43,7 @@ contract QueuesMethods is Params {
             control.payments,
             houndOwner,
             entryFee.currency,
-            new uint256[](1),
+            new uint256[](0),
             amounts,
             entryFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );

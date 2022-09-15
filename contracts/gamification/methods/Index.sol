@@ -53,11 +53,8 @@ contract GamificationMethods is Params {
                     : 
                         0
                 ), // breedingCooldown
-            genetics[53] < 3 ? 
-                control.defaultBreeding.breedingFee - ( control.defaultBreeding.breedingFee / 100 * genetics[53] ) 
-            : 
-                control.defaultBreeding.breedingFee + ( control.defaultBreeding.breedingFee / 100 * genetics[53] ), // staminaRefill1x,
-            genetics[51] == 1 ? control.defaultBreeding.breedingCooldownTimeUnit / 2 : control.defaultBreeding.breedingCooldownTimeUnit, // staminaPerHour
+            0, // breedingFee,
+            genetics[51] == 1 ? control.defaultBreeding.breedingCooldownTimeUnit / 2 : control.defaultBreeding.breedingCooldownTimeUnit, // breedingCooldownTimeUnit
             genetics[52] > 7 && genetics[52] <= 9 ? 
                 control.defaultBreeding.refillBreedingCooldownCost - ( ( control.defaultBreeding.refillBreedingCooldownCost / 100 ) * genetics[52] )
             : 
