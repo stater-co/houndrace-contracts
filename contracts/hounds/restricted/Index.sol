@@ -12,13 +12,13 @@ contract HoundsRestricted is Params {
             require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
             IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(onId, theHound.identity.geneticSequence);
             ISetIdentity(control.boilerplate.incubator).setIdentity(onId, theHound.identity);
-            emit NewHound(onId,msg.sender,theHound);
+            emit NewHound(onId,owner,theHound);
             hounds[onId] = theHound.profile;
             _safeMint(owner,onId);
         } else {
             IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(id, theHound.identity.geneticSequence);
             ISetIdentity(control.boilerplate.incubator).setIdentity(id, theHound.identity);
-            emit NewHound(id,msg.sender,theHound);
+            emit NewHound(id,owner,theHound);
             hounds[id] = theHound.profile;
             _safeMint(owner,id);
             ++id;
