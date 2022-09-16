@@ -24,13 +24,21 @@ import type {
 
 export declare namespace Constructor {
   export type StructStruct = {
+    allowedApprovals: string[];
     hounds: string;
     payments: string;
     alphadune: string;
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [string, string, string, boolean] & {
+  export type StructStructOutput = [
+    string[],
+    string,
+    string,
+    string,
+    boolean
+  ] & {
+    allowedApprovals: string[];
     hounds: string;
     payments: string;
     alphadune: string;
@@ -65,6 +73,7 @@ export declare namespace Box {
 export interface LootboxesInterface extends utils.Interface {
   contractName: "Lootboxes";
   functions: {
+    "allowedApprovals(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
@@ -81,7 +90,7 @@ export interface LootboxesInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -90,6 +99,10 @@ export interface LootboxesInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "allowedApprovals",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [string, BigNumberish]
@@ -162,6 +175,10 @@ export interface LootboxesInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "allowedApprovals",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -307,6 +324,11 @@ export interface Lootboxes extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -334,10 +356,10 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[boolean] & { isOperator: boolean }>;
 
     lootboxes(
       arg0: BigNumberish,
@@ -432,6 +454,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   approve(
     to: string,
     tokenId: BigNumberish,
@@ -459,8 +483,8 @@ export interface Lootboxes extends BaseContract {
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
   isApprovedForAll(
-    owner: string,
-    operator: string,
+    _owner: string,
+    _operator: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -548,6 +572,8 @@ export interface Lootboxes extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -575,8 +601,8 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -721,6 +747,11 @@ export interface Lootboxes extends BaseContract {
   };
 
   estimateGas: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -739,8 +770,8 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -838,6 +869,11 @@ export interface Lootboxes extends BaseContract {
   };
 
   populateTransaction: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -859,8 +895,8 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
