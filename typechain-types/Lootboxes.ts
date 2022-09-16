@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -72,6 +71,7 @@ export interface LootboxesInterface extends utils.Interface {
     "getApproved(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "lootboxes(uint256)": FunctionFragment;
     "mint(uint256,string)": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
@@ -104,6 +104,10 @@ export interface LootboxesInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lootboxes",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
@@ -170,6 +174,7 @@ export interface LootboxesInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "lootboxes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -334,6 +339,11 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    lootboxes(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { generated: boolean }>;
+
     mint(
       amount: BigNumberish,
       token_uri: string,
@@ -352,7 +362,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -454,6 +464,8 @@ export interface Lootboxes extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  lootboxes(arg0: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
+
   mint(
     amount: BigNumberish,
     token_uri: string,
@@ -472,7 +484,7 @@ export interface Lootboxes extends BaseContract {
 
   open(
     boxId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -567,6 +579,8 @@ export interface Lootboxes extends BaseContract {
       operator: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    lootboxes(arg0: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
 
     mint(
       amount: BigNumberish,
@@ -730,6 +744,11 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    lootboxes(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     mint(
       amount: BigNumberish,
       token_uri: string,
@@ -748,7 +767,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -845,6 +864,11 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    lootboxes(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     mint(
       amount: BigNumberish,
       token_uri: string,
@@ -863,7 +887,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
