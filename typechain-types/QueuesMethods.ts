@@ -133,6 +133,7 @@ export declare namespace Queue {
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
+    staminaCost: BigNumberish;
     speciesAllowed: BigNumberish[];
     closed: boolean;
   };
@@ -144,6 +145,7 @@ export declare namespace Queue {
     BigNumber,
     number,
     number,
+    number,
     number[],
     boolean
   ] & {
@@ -153,6 +155,7 @@ export declare namespace Queue {
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
+    staminaCost: number;
     speciesAllowed: number[];
     closed: boolean;
   };
@@ -173,6 +176,7 @@ export interface QueuesMethodsInterface extends utils.Interface {
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
   };
@@ -211,6 +215,10 @@ export interface QueuesMethodsInterface extends utils.Interface {
     values: [QueuesConstructor.StructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "staminaCostOf",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
@@ -241,6 +249,10 @@ export interface QueuesMethodsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "staminaCostOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -413,6 +425,7 @@ export interface QueuesMethods extends BaseContract {
         BigNumber,
         number,
         number,
+        number,
         boolean
       ] & {
         core: Core.StructStructOutput;
@@ -421,6 +434,7 @@ export interface QueuesMethods extends BaseContract {
         lastCompletion: BigNumber;
         totalParticipants: number;
         cooldown: number;
+        staminaCost: number;
         closed: boolean;
       }
     >;
@@ -433,6 +447,11 @@ export interface QueuesMethods extends BaseContract {
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     transferOwnership(
       newOwner: string,
@@ -505,6 +524,7 @@ export interface QueuesMethods extends BaseContract {
       BigNumber,
       number,
       number,
+      number,
       boolean
     ] & {
       core: Core.StructStructOutput;
@@ -513,6 +533,7 @@ export interface QueuesMethods extends BaseContract {
       lastCompletion: BigNumber;
       totalParticipants: number;
       cooldown: number;
+      staminaCost: number;
       closed: boolean;
     }
   >;
@@ -525,6 +546,11 @@ export interface QueuesMethods extends BaseContract {
     globalParameters: QueuesConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  staminaCostOf(
+    theId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
   transferOwnership(
     newOwner: string,
@@ -604,6 +630,7 @@ export interface QueuesMethods extends BaseContract {
         BigNumber,
         number,
         number,
+        number,
         boolean
       ] & {
         core: Core.StructStructOutput;
@@ -612,6 +639,7 @@ export interface QueuesMethods extends BaseContract {
         lastCompletion: BigNumber;
         totalParticipants: number;
         cooldown: number;
+        staminaCost: number;
         closed: boolean;
       }
     >;
@@ -622,6 +650,11 @@ export interface QueuesMethods extends BaseContract {
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     transferOwnership(
       newOwner: string,
@@ -732,6 +765,11 @@ export interface QueuesMethods extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -794,6 +832,11 @@ export interface QueuesMethods extends BaseContract {
     setGlobalParameters(
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(

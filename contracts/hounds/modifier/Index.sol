@@ -8,13 +8,14 @@ contract HoundsModifier is Params {
     constructor(Constructor.Struct memory input) Params(input) {}
     
     function updateHoundStamina(
-        uint256 theId
+        uint256 theId,
+        uint32 amount
     ) external {
         require(allowed[msg.sender]);
 
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
 
-        --stamina.staminaValue;
+        stamina.staminaValue -= amount;
         refreshStamina(theId, stamina);
     }
 

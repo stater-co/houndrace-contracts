@@ -133,6 +133,7 @@ export declare namespace Queue {
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
+    staminaCost: BigNumberish;
     speciesAllowed: BigNumberish[];
     closed: boolean;
   };
@@ -144,6 +145,7 @@ export declare namespace Queue {
     BigNumber,
     number,
     number,
+    number,
     number[],
     boolean
   ] & {
@@ -153,6 +155,7 @@ export declare namespace Queue {
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
+    staminaCost: number;
     speciesAllowed: number[];
     closed: boolean;
   };
@@ -173,8 +176,8 @@ export interface QueuesInterface extends utils.Interface {
     "allowed(address)": FunctionFragment;
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint8[],bool)[])": FunctionFragment;
-    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint8[],bool))": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool)[])": FunctionFragment;
+    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool))": FunctionFragment;
     "enqueue(uint256,uint256)": FunctionFragment;
     "enqueueCost(uint256)": FunctionFragment;
     "enqueueDatesOf(uint256)": FunctionFragment;
@@ -186,6 +189,7 @@ export interface QueuesInterface extends utils.Interface {
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
   };
@@ -240,6 +244,10 @@ export interface QueuesInterface extends utils.Interface {
     values: [QueuesConstructor.StructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "staminaCostOf",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
@@ -280,6 +288,10 @@ export interface QueuesInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "staminaCostOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -479,6 +491,7 @@ export interface Queues extends BaseContract {
         BigNumber,
         number,
         number,
+        number,
         boolean
       ] & {
         core: Core.StructStructOutput;
@@ -487,6 +500,7 @@ export interface Queues extends BaseContract {
         lastCompletion: BigNumber;
         totalParticipants: number;
         cooldown: number;
+        staminaCost: number;
         closed: boolean;
       }
     >;
@@ -499,6 +513,11 @@ export interface Queues extends BaseContract {
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[number]>;
 
     transferOwnership(
       newOwner: string,
@@ -598,6 +617,7 @@ export interface Queues extends BaseContract {
       BigNumber,
       number,
       number,
+      number,
       boolean
     ] & {
       core: Core.StructStructOutput;
@@ -606,6 +626,7 @@ export interface Queues extends BaseContract {
       lastCompletion: BigNumber;
       totalParticipants: number;
       cooldown: number;
+      staminaCost: number;
       closed: boolean;
     }
   >;
@@ -618,6 +639,11 @@ export interface Queues extends BaseContract {
     globalParameters: QueuesConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  staminaCostOf(
+    theId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
   transferOwnership(
     newOwner: string,
@@ -721,6 +747,7 @@ export interface Queues extends BaseContract {
         BigNumber,
         number,
         number,
+        number,
         boolean
       ] & {
         core: Core.StructStructOutput;
@@ -729,6 +756,7 @@ export interface Queues extends BaseContract {
         lastCompletion: BigNumber;
         totalParticipants: number;
         cooldown: number;
+        staminaCost: number;
         closed: boolean;
       }
     >;
@@ -739,6 +767,11 @@ export interface Queues extends BaseContract {
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     transferOwnership(
       newOwner: string,
@@ -870,6 +903,11 @@ export interface Queues extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -953,6 +991,11 @@ export interface Queues extends BaseContract {
     setGlobalParameters(
       globalParameters: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    staminaCostOf(
+      theId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     transferOwnership(

@@ -76,8 +76,6 @@ contract QueuesMethods is Params {
         queues[theId].core.participants.push(hound);
         queues[theId].core.enqueueDates.push(block.timestamp);
 
-        IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
-
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);

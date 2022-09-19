@@ -20,6 +20,8 @@ library Queue {
 
         uint32 cooldown;
 
+        uint32 staminaCost;
+
         Specie.Enum[] speciesAllowed;
 
         bool closed;

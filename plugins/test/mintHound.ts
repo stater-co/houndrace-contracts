@@ -20,7 +20,6 @@ export async function safeMintHound(
   const hound = await params.contract.hound(before);
   const profile = await params.contract.hounds(before);
   expecting(stamina.staminaCap > 0 && stamina.staminaPerTimeUnit > 0, "Bugged stamina setter");
-  expecting(Number(breeding.breedingFee) > 0, "Bugged breeding setter")
   expecting(Number(statistics.firstPlace) === 0 && Number(statistics.totalRuns) === 0, "Bugged statistics setter");
   expecting(profile.name.length > 0, "Bugged profile setter");
   expecting(hound.identity.geneticSequence[1] > 0, "Bugged incubator setter");

@@ -175,6 +175,7 @@ export declare namespace Queue {
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
+    staminaCost: BigNumberish;
     speciesAllowed: BigNumberish[];
     closed: boolean;
   };
@@ -186,6 +187,7 @@ export declare namespace Queue {
     BigNumber,
     number,
     number,
+    number,
     number[],
     boolean
   ] & {
@@ -195,6 +197,7 @@ export declare namespace Queue {
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
+    staminaCost: number;
     speciesAllowed: number[];
     closed: boolean;
   };
@@ -213,7 +216,7 @@ export interface RacesInterface extends utils.Interface {
     "participantsOf(uint256)": FunctionFragment;
     "payout(uint256)": FunctionFragment;
     "race(uint256)": FunctionFragment;
-    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
+    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;

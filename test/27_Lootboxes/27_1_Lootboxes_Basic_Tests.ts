@@ -26,16 +26,14 @@ async function basicTest(
       });
 
       it("Set open status to true", async function () {
-        const controlBefore: Constructor.StructStruct = await dependencies.lootboxesContract.control();
+        const controlBefore: any = await dependencies.lootboxesContract.control();
         await dependencies.lootboxesContract.setOpenStatus(true);
-        const controlAfter: Constructor.StructStruct = await dependencies.lootboxesContract.control();
+        const controlAfter: any = await dependencies.lootboxesContract.control();
         expecting(JSON.stringify(controlBefore) !== JSON.stringify(controlAfter), "Set open status method bugged");
       })
 
       it("Open lootbox ", async function() {
-        await dependencies.lootboxesContract.open(1,{
-          value: 5000
-        });
+        await dependencies.lootboxesContract.open(1);
         resolve();
       });
 

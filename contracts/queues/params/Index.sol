@@ -13,7 +13,6 @@ import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../payments/params/MicroPayment.sol';
-import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../races/interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';
@@ -52,6 +51,10 @@ contract Params is Ownable, Withdrawable {
     
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
         return queues[theId];
+    }
+
+    function staminaCostOf(uint256 theId) external view returns(uint32) {
+        return queues[theId].staminaCost;
     }
 
     function handleAllowedCallers(address[] memory allowedCallers) internal {

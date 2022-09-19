@@ -183,7 +183,7 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
@@ -222,7 +222,7 @@ export interface RacesRestrictedInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "uploadRace",
-    values: [BigNumberish, Race.StructStruct]
+    values: [BigNumberish, BigNumberish, Race.StructStruct]
   ): string;
 
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
@@ -420,6 +420,7 @@ export interface RacesRestricted extends BaseContract {
 
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -517,6 +518,7 @@ export interface RacesRestricted extends BaseContract {
 
   uploadRace(
     theId: BigNumberish,
+    queueId: BigNumberish,
     race: Race.StructStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -609,6 +611,7 @@ export interface RacesRestricted extends BaseContract {
 
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -695,6 +698,7 @@ export interface RacesRestricted extends BaseContract {
 
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -758,6 +762,7 @@ export interface RacesRestricted extends BaseContract {
 
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

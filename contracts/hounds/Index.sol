@@ -22,7 +22,7 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundStamina(uint256 theId) external {
+    function updateHoundStamina(uint256 theId, uint32 amount) external {
         (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }

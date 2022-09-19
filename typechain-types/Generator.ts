@@ -129,6 +129,7 @@ export declare namespace Queue {
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
+    staminaCost: BigNumberish;
     speciesAllowed: BigNumberish[];
     closed: boolean;
   };
@@ -140,6 +141,7 @@ export declare namespace Queue {
     BigNumber,
     number,
     number,
+    number,
     number[],
     boolean
   ] & {
@@ -149,6 +151,7 @@ export declare namespace Queue {
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
+    staminaCost: number;
     speciesAllowed: number[];
     closed: boolean;
   };
@@ -179,7 +182,7 @@ export interface GeneratorInterface extends utils.Interface {
   contractName: "Generator";
   functions: {
     "control()": FunctionFragment;
-    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
+    "generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address))": FunctionFragment;

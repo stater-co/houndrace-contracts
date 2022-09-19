@@ -298,7 +298,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateHoundRunning(uint256,uint256)": FunctionFragment;
-    "updateHoundStamina(uint256)": FunctionFragment;
+    "updateHoundStamina(uint256,uint32)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -403,7 +403,7 @@ export interface HoundsModifierInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "updateHoundStamina",
-    values: [BigNumberish]
+    values: [BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -805,6 +805,7 @@ export interface HoundsModifier extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -979,6 +980,7 @@ export interface HoundsModifier extends BaseContract {
 
   updateHoundStamina(
     theId: BigNumberish,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1154,6 +1156,7 @@ export interface HoundsModifier extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -1424,6 +1427,7 @@ export interface HoundsModifier extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -1593,6 +1597,7 @@ export interface HoundsModifier extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

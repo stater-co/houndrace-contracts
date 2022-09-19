@@ -118,7 +118,8 @@ const defaultQueue: Queue.StructStruct = {
     totalParticipants: 3,
     cooldown: 0,
     speciesAllowed: [0,1],
-    closed: false
+    closed: false,
+    staminaCost: 5
 };
 
 interface GlobalParams {
