@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import './params/Index.sol';
 
 
@@ -7,7 +7,7 @@ contract Races is Params {
     
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function uploadRace(uint256 theId, Race.Struct memory race) external payable {
+    function uploadRace(uint256 theId, Race.Struct memory race) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

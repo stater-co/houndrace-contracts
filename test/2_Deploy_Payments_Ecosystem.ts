@@ -9,10 +9,14 @@ import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
 import { ShopZerocost } from '../typechain-types/ShopZerocost';
 import { Shop } from '../typechain-types/Shop';
+import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
+import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 
 
 let houndracePotions: HoundracePotions;
 let payments: Payments;
+let paymentsRestricted: PaymentsRestricted;
+let paymentsMethods: PaymentsMethods;
 let testErc721: AlphaERC721;
 let testErc1155: TestingErc1155;
 let shopRestricted: ShopRestricted;
@@ -33,10 +37,38 @@ export async function run(): Promise<PaymentEcosystem> {
         }) as HoundracePotions;
       });
     
+      it('Deploy the payments restricted contract', async function () {
+        paymentsRestricted = await deployContract({
+          name: 'PaymentsRestricted',
+          constructor: [[
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0
+          ]],
+          props: {}
+        }) as PaymentsRestricted;
+      });
+
+      it('Deploy the payments methods contract', async function () {
+        paymentsMethods = await deployContract({
+          name: 'PaymentsMethods',
+          constructor: [[
+            globalParams.address0,
+            globalParams.address0,
+            globalParams.address0
+          ]],
+          props: {}
+        }) as PaymentsMethods;
+      });
+
       it('Deploy the payments contract', async function () {
         payments = await deployContract({
           name: 'Payments',
-          constructor: [],
+          constructor: [[
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            globalParams.address0,
+            globalParams.address0
+          ]],
           props: {}
         }) as Payments;
       });
@@ -90,6 +122,8 @@ export async function run(): Promise<PaymentEcosystem> {
         resolve({
           houndracePotions: houndracePotions,
           payments: payments,
+          paymentMethods: paymentsMethods,
+          paymentRestricted: paymentsRestricted,
           shop: shop,
           shopMethods: shopMethods,
           shopRestricted: shopRestricted,

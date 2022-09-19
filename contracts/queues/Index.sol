@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import './params/Index.sol';
 
 
@@ -30,6 +30,14 @@ contract Queues is Params {
     function unenqueue(uint256 theId, uint256 hound) external {
         (bool success,) = control.methods.delegatecall(msg.data);
         require(success);
+    }
+
+    function enqueueCost(uint256 theId) external view returns(
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory
+    ) {
+        return IEnqueueCost(control.zerocost).enqueueCost(theId);
     }
 
 }

@@ -1,10 +1,14 @@
-import { ethers } from "ethers";
-import { Constructor } from '../../../typechain-types/Hounds';
+import { Constructor, Hounds } from '../../../typechain-types/Hounds';
+import { HoundsMinter } from '../../../typechain-types/HoundsMinter';
+import { HoundsModifier } from '../../../typechain-types/HoundsModifier';
+import { HoundsRestricted } from '../../../typechain-types/HoundsRestricted';
+import { HoundsZerocost } from '../../../typechain-types/HoundsZerocost';
 
 export interface HoundsSystemController {
-    houndsRestricted: ethers.Contract;
-    houndsModifier: ethers.Contract;
-    houndsMinter: ethers.Contract;
-    hounds: ethers.Contract;
+    houndsRestricted: HoundsRestricted;
+    houndsModifier: HoundsModifier;
+    houndsMinter: HoundsMinter;
+    houndsZerocost: HoundsZerocost;
+    hounds: Hounds;
     constructor: Constructor.StructStruct;
 }

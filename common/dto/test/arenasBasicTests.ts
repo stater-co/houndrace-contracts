@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { Arena } from "../../../typechain-types/contracts/arenas/Index.sol/Arenas";
+import { Arena } from "../../../typechain-types/Arenas";
 
 export interface ArenasBasicTests {
     arenas: ethers.Contract;

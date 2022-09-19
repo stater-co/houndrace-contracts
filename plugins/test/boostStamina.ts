@@ -1,7 +1,7 @@
 import { Hound } from '../../typechain-types/Hounds';
 import { globalParams } from '../../common/params';
 import { BoostStaminaParams } from "../../common/dto/test/boostStaminaParams";
-import { expect } from "chai";
+import { expecting } from '../expecting';
 
 export async function boostHoundStamina(
   params: BoostStaminaParams
@@ -22,6 +22,6 @@ export async function safeBoostHoundStamina(
   const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
   await boostHoundStamina(params);
   const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  expect(before.breeding.lastBreed !== after.breeding.lastBreed);
+  expecting(before.breeding.lastBreed !== after.breeding.lastBreed, "Boost hound stamina method bugged");
 
 }

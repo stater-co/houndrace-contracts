@@ -26,18 +26,18 @@ const _abi = [
       },
       {
         internalType: "uint256[]",
-        name: "id",
+        name: "ids",
         type: "uint256[]",
       },
       {
         internalType: "uint256[]",
-        name: "amount",
+        name: "amounts",
         type: "uint256[]",
       },
       {
-        internalType: "uint32",
+        internalType: "enum Payment.PaymentTypes",
         name: "paymentType",
-        type: "uint32",
+        type: "uint8",
       },
     ],
     name: "pay",

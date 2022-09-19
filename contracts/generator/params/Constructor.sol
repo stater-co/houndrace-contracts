@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 
 
 library GeneratorConstructor {
@@ -12,6 +12,8 @@ library GeneratorConstructor {
         address methods;
         address payments;
         address zerocost;
+        address incubator;
+        address gamification;
     }
 
 }

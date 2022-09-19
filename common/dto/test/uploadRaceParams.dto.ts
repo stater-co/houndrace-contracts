@@ -1,7 +1,7 @@
-import { ethers } from "ethers";
-import { Race } from "../../../typechain-types/contracts/races/Index.sol/Races";
+import { Race, Races } from "../../../typechain-types/Races";
 
 export interface UploadRaceParams {
-    contract: ethers.Contract;
-    race: Race.StructStructOutput
+    contract: Races;
+    race: Race.StructStructOutput;
+    onId: number;
   }

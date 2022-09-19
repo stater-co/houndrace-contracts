@@ -1,8 +1,9 @@
-import { ethers } from "ethers";
-import { GeneratorConstructor } from '../../../typechain-types/contracts/generator/params/Index.sol/Params';
+import { GeneratorConstructor } from '../../../typechain-types/Generator';
+import { GeneratorZerocost } from '../../../typechain-types/GeneratorZerocost';
+import { GeneratorMethods } from '../../../typechain-types/GeneratorMethods';
 
 export interface GeneratorSystemController {
-    generatorZerocost: ethers.Contract;
-    generatorMethods: ethers.Contract;
+    generatorZerocost: GeneratorZerocost;
+    generatorMethods: GeneratorMethods;
     constructor: GeneratorConstructor.StructStruct;
 }

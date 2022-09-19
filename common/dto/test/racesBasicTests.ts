@@ -1,8 +1,7 @@
-import { ethers } from "ethers";
-import { Race } from "../../../typechain-types/contracts/races/Index.sol/Races";
+import { Race, Races } from "../../../typechain-types/Races";
 
 
 export interface RacesBasicTests {
-    contract: ethers.Contract;
+    contract: Races;
     race: Race.StructStructOutput;
 }

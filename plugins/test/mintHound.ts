@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { MintHoundParams } from "../../common/dto/test/mintHoundsParams.dto";
+import { expecting } from "../expecting";
 
 export async function mintHound(
   params: MintHoundParams
@@ -10,9 +10,19 @@ export async function mintHound(
 export async function safeMintHound(
   params: MintHoundParams
 ): Promise<string | number> {
-  const before: string | number = await params.contract.id();
+  const before = await params.contract.id();
   await mintHound(params);
-  const after: string | number = await params.contract.id();
-  expect(before !== after && Number(before) === Number(after) - 1);
-  return before;
+  const after = await params.contract.id();
+  expecting(before !== after && Number(before) === Number(after) - 1, "Mint hound method bugged");
+  const stamina = await params.gamification.houndsStamina(before);
+  const breeding = await params.gamification.houndsBreeding(before);
+  const statistics = await params.races.houndsStatistic(before);
+  const hound = await params.contract.hound(before);
+  const profile = await params.contract.hounds(before);
+  expecting(stamina.staminaCap > 0 && stamina.staminaPerHour > 0, "Bugged stamina setter");
+  expecting(Number(breeding.breedingFee) > 0, "Bugged breeding setter")
+  expecting(Number(statistics.firstPlace) === 0 && Number(statistics.totalRuns) === 0, "Bugged statistics setter");
+  expecting(profile.name.length > 0, "Bugged profile setter");
+  expecting(hound.identity.geneticSequence[1] > 0, "Bugged incubator setter");
+  return Number(before);
 }

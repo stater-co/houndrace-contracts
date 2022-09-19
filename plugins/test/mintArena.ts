@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { MintArenaParams } from "../../common/dto/test/mintArenaParams.dto";
+import { expecting } from "../expecting";
 
 export async function mintArena(
   params: MintArenaParams
@@ -13,6 +13,6 @@ export async function safeMintArena(
   const before: string | number = await params.contract.id();
   await mintArena(params);
   const after: string | number = await params.contract.id();
-  expect(before !== after && Number(before) === Number(after) - 1);
+  expecting(before !== after && Number(before) === Number(after) - 1, "Mint arena method bugged");
   return before;
 }

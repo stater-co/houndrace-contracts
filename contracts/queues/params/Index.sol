@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Queue.sol';
@@ -12,6 +12,7 @@ import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
+import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../races/interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
@@ -20,6 +21,7 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
+import '../interfaces/IEnqueueCost.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -50,10 +52,6 @@ contract Params is Ownable, Withdrawable {
         return queues[theId];
     }
 
-    function enqueueCost(uint256 theId) public view returns(uint256) {
-        return IArena(control.arenas).arena(queues[theId].arena).fee / queues[theId].totalParticipants + queues[theId].entryFee + 1;
-    }
-
     function handleAllowedCallers(address[] memory allowedCallers) internal {
         for ( uint256 i = 0 ; i < allowedCallers.length ; ++i ) {
             allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
@@ -61,7 +59,11 @@ contract Params is Ownable, Withdrawable {
     }
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return queues[theId].participants;
+        return queues[theId].core.participants;
+    }
+
+    function enqueueDatesOf(uint256 theId) external view returns(uint256[] memory) {
+        return queues[theId].core.enqueueDates;
     }
 
     fallback() external payable {}

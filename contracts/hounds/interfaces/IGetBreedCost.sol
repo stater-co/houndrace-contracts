@@ -1,9 +1,13 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
-
+pragma solidity 0.8.17;
+import '../../payments/params/MicroPayment.sol';
 
 interface IGetBreedCost {
 
-    function getBreedCost(uint256 hound1, uint256 hound2) external view returns(uint256);
+    function getBreedCost(uint256 hound) external view returns(
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory, 
+        MicroPayment.Struct memory
+    );
 
 }

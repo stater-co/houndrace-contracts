@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '../params/Index.sol';
 
 
@@ -8,23 +8,23 @@ contract QueuesMethods is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function unenqueue(uint256 theId, uint256 hound) external {
-        Queue.Struct memory _queue = queues[theId];
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(_queue.arena);
+        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
+        require(houndOwner == msg.sender);
 
-        uint256[] memory replacedParticipants = _queue.participants;
-        uint256[] memory replacedEnqueueDates = _queue.enqueueDates;
-        delete queues[theId].participants;
-        delete queues[theId].enqueueDates;
+        uint256[] memory replacedParticipants = queues[theId].core.participants;
+        uint256[] memory replacedEnqueueDates = queues[theId].core.enqueueDates;
+        delete queues[theId].core.participants;
+        delete queues[theId].core.enqueueDates;
 
         if ( replacedParticipants.length > 0 ) {
             bool exists;
             for ( uint256 i = 0 ; i < replacedParticipants.length ; ++i ) {
                 if ( replacedParticipants[i] == hound ) {
                     exists = true;
-                    require(replacedEnqueueDates[i] < block.timestamp - _queue.cooldown);
+                    require(replacedEnqueueDates[i] < block.timestamp - queues[theId].cooldown);
                 } else {
-                    queues[theId].participants.push(replacedParticipants[i]);
-                    queues[theId].enqueueDates.push(replacedEnqueueDates[i]);
+                    queues[theId].core.participants.push(replacedParticipants[i]);
+                    queues[theId].core.enqueueDates.push(replacedEnqueueDates[i]);
                 }
             }
             require(exists);
@@ -33,17 +33,19 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
 
-        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
-        uint256[] memory amounts = new uint256[](1);
-        amounts[0] = _queue.entryFee;
         
+        ( , , MicroPayment.Struct memory entryFee) = IEnqueueCost(control.zerocost).enqueueCost(theId);
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = entryFee.amount;
+
         IPay(control.payments).pay(
             control.payments,
             houndOwner,
-            arenaCurrency,
+            entryFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            entryFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         emit Unenqueue(theId, hound);
@@ -57,44 +59,77 @@ contract QueuesMethods is Params {
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
 
-        for ( uint256 i = 0 ; i < queues[theId].participants.length ; ++i ) {
-            require(queues[theId].participants[i] != hound);
+        for ( uint256 i = 0 ; i < queues[theId].core.participants.length ; ++i ) {
+            require(queues[theId].core.participants[i] != hound);
         }
 
-        queues[theId].participants.push(hound);
-        queues[theId].enqueueDates.push(block.timestamp);
+        queues[theId].core.participants.push(hound);
+        queues[theId].core.enqueueDates.push(block.timestamp);
 
         IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].arena);
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
+
+
+        (
+            MicroPayment.Struct memory alphaduneFee, 
+            MicroPayment.Struct memory arenaFee, 
+            MicroPayment.Struct memory entryFee
+        ) = IEnqueueCost(control.zerocost).enqueueCost(theId);
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[theId].entryFee;
+        amounts[0] = alphaduneFee.amount;
 
         IPay(control.payments).pay{
-            value: arenaCurrency == address(0) ? amounts[0] : 0
+            value: alphaduneFee.currency == address(0) ? alphaduneFee.amount : 0
         }(
             msg.sender,
             control.payments,
-            arenaCurrency,
+            alphaduneFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? 3 : 2
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        if ( queues[theId].participants.length == queues[theId].totalParticipants ) {
+        amounts[0] = arenaFee.amount;
+        IPay(control.payments).pay{
+            value: arenaFee.currency == address(0) ? arenaFee.amount : 0
+        }(
+            msg.sender,
+            control.payments,
+            arenaFee.currency,
+            new uint256[](0),
+            amounts,
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+        );
 
-            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].arena);
+        amounts[0] = entryFee.amount;
+        IPay(control.payments).pay{
+            value: entryFee.currency == address(0) ? entryFee.amount : 0
+        }(
+            msg.sender,
+            control.payments,
+            entryFee.currency,
+            new uint256[](0),
+            amounts,
+            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+        );
+
+
+        if ( queues[theId].core.participants.length == queues[theId].totalParticipants ) {
+
+            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].core.arena);
 
             IHandleRaceLoot(control.races).handleRaceLoot(
-                queues[theId].payments
+                queues[theId].core.payments
             );
 
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
-            delete queues[theId].participants;
+            delete queues[theId].core.participants;
+            delete queues[theId].core.enqueueDates;
 
             queues[theId].lastCompletion = block.timestamp;
 

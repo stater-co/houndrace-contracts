@@ -1,13 +1,14 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
-
+pragma solidity 0.8.17;
+import '../../payments/params/Payment.sol';
 
 library Box {
 
     struct Struct {
-        string token_uri;
-        address currency;
-        uint256 hound;
-        uint256 purchasePrice;
+        address[] rewardContracts;
+        uint256[] tokenIds;
+        uint256[] amounts;
+        Payment.PaymentTypes[] rewardTypes;
+        bool generated;
     }
 }

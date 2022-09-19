@@ -1,5 +1,5 @@
-import { expect } from "chai";
 import { EditQueueParams } from "../../common/dto/test/editQueueParams.dto";
+import { expecting } from "../expecting";
 
 
 export async function editQueue(
@@ -14,5 +14,5 @@ export async function safeEditQueue(
   const before: string | number = await params.contract.queue(params.queueId);
   await editQueue(params);
   const after: string | number = await params.contract.queue(params.queueId);
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Edit queue method bugged");
 }

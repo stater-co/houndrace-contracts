@@ -1,36 +1,32 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import './params/Index.sol';
 
 
 contract Payments is Params {
 
+    constructor(PaymentsConstructor.Struct memory input) Params(input) {}
+
 	function pay(
 		address from,
         address to,
         address currency,
-        uint256[] memory id, // for batch transfers
-        uint256[] memory amount, // for batch transfers
-        uint32 paymentType
-	) public payable {
-		if ( paymentType == 0 ) {
-			IERC721(currency).safeTransferFrom(from, to, id[0]);
-		} else if ( paymentType == 1 ) {
-			IERC1155(currency).safeBatchTransferFrom(from, to, id, amount, "");
-		} else if ( paymentType == 2 ) {
-			if ( from != address(this) ) {
-				require(IERC20(currency).transferFrom(from, to, amount[0]));
-			} else {
-				require(IERC20(currency).transfer(to, amount[0]));
-			}
-		} else if ( paymentType == 3 ) {
-			if ( Address.isContract(to) ) {
-				(bool success, )= to.call{ value: amount[0] }("");
-				require(success);
-			} else {
-				require(payable(to).send(amount[0]));
-			}
-		}
+        uint256[] memory ids, // for batch transfers
+        uint256[] memory amounts, // for batch transfers
+        Payment.PaymentTypes paymentType
+	) public payable nonReentrant {
+        (bool success, ) = control.methods.delegatecall(msg.data);
+        require(success);
+	}
+
+	function fillRewardsReservoir(
+        address currency,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+		Payment.PaymentTypes paymentType
+	) external payable onlyOwner {
+		(bool success, ) = control.restricted.delegatecall(msg.data);
+        require(success);
 	}
 
 }

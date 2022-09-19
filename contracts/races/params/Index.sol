@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
@@ -12,8 +12,10 @@ import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
+import './HoundStatistics.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
+import '../../payments/interfaces/IPay.sol';
 
 
 contract Params is Ownable, Withdrawable {
@@ -26,6 +28,7 @@ contract Params is Ownable, Withdrawable {
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
     mapping(address => bool) public allowed;
+    mapping(uint256 => HoundStatistics.Struct) public houndsStatistic;
 
     constructor(RacesConstructor.Struct memory input) {
         control = input;
@@ -46,10 +49,11 @@ contract Params is Ownable, Withdrawable {
     }
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return races[theId].participants;
+        return races[theId].core.participants;
     }
 
-    fallback() external payable {}
-    receive() external payable {}
+    function getStatistics(uint256 theId) external view returns(HoundStatistics.Struct memory) {
+        return houndsStatistic[theId];
+    }
 
 }

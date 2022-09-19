@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
@@ -7,7 +7,6 @@ import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import './Box.sol';
-import '../../payments/interfaces/IPay.sol';
 
 
 contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
@@ -16,46 +15,40 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
     Constructor.Struct public control;
     mapping(uint256 => Box.Struct) private lootboxes;
 
-    event NewLootBox(uint256 indexed id);
+    event NewLootboxes(uint256 indexed idStart, uint256 indexed idFinish);
+    event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
 
     constructor(
         Constructor.Struct memory input
-    ) ERC721("HoundRace Lootboxes", "HRLB") {
+    ) ERC721("HoundRace Lootbox", "HRLB") {
         control = input;
     }
 
-    function mint(Box.Struct[] memory boxes) external onlyOwner {
-        for ( uint256 i = 0; i < boxes.length; ++i ) {
-            IERC721(control.hounds).safeTransferFrom(msg.sender,address(this),boxes[i].hound);
 
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+        control = globalParameters;
+    }
+
+    function mint(uint256 amount, string memory token_uri) external onlyOwner {
+        uint256 idStart = id;
+        for ( uint256 i = 0; i < amount; ++i ) {
             _mint(msg.sender, id);
-            _setTokenURI(id, control.token_uri);
-
-            lootboxes[id] = boxes[i];
-
-            emit NewLootBox(id);
+            _setTokenURI(id, token_uri);
             ++id;
         }
+
+        emit NewLootboxes(idStart, id);
+    }
+
+    function setOpenStatus(bool status) external onlyOwner {
+        control.canBeOpened = status;
     }
 
     function open(uint256 boxId) external payable {
         require(control.canBeOpened);
-        
-        uint256[] memory amounts = new uint256[](1);
-        amounts[0] = lootboxes[boxId].purchasePrice;
+        require(ownerOf(boxId) == msg.sender);
 
-        IPay(control.payments).pay{
-            value: lootboxes[boxId].currency == address(0) ? lootboxes[boxId].purchasePrice : 0
-        }(
-                control.payments,
-                control.alphadune,
-                lootboxes[boxId].currency,
-                new uint256[](0),
-                amounts,
-                lootboxes[boxId].currency == address(0) ? 3 : 2
-        );
-
-        IERC721(control.hounds).transferFrom(address(this),msg.sender,lootboxes[boxId].hound);
+        emit LootboxOpened(boxId, lootboxes[boxId], msg.sender);
 
         _burn(boxId);
     }

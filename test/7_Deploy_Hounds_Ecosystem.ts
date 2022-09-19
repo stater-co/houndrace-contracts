@@ -6,13 +6,15 @@ import { Hounds } from '../typechain-types/Hounds';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
-import { AlphaERC721, AlphaERC721Interface } from '../typechain-types/AlphaERC721';
+import { AlphaERC721 } from '../typechain-types/AlphaERC721';
+import { HoundsZerocost } from '../typechain-types/HoundsZerocost';
 const { ethers } = require("hardhat");
 
 
 let houndsRestricted: HoundsRestricted;
 let houndsModifier: HoundsModifier;
 let houndsMinter: HoundsMinter;
+let houndsZerocost: HoundsZerocost;
 let hounds: Hounds;
 
 
@@ -38,9 +40,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
@@ -71,9 +74,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
@@ -86,6 +90,40 @@ export async function run(
           ]],
           props: {}
         }) as HoundsModifier;
+      });
+
+      it("Deploy the hounds zerocost contract", async function () {
+        const [owner, otherOwner] = await ethers.getSigners();
+        houndsZerocost = await deployContract({
+          name: 'HoundsZerocost',
+          constructor: [[
+            "HoundRace",
+            "HR",
+            [owner.address],
+            [
+              globalParams.address0,
+              otherOwner.address,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0
+            ],[
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              "0xB1A2BC2EC50000",
+              "0x2386F26FC10000",
+              "0x2386F26FC10000",
+              "0x2386F26FC10000",
+              "0x2386F26FC10000"
+            ]
+          ]],
+          props: {}
+        }) as HoundsZerocost;
       });
     
       it("Deploy the hounds minter contract", async function () {
@@ -104,9 +142,10 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
               globalParams.address0
             ],[
-              globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
@@ -137,9 +176,10 @@ export async function run(
               houndsMinter.address,
               globalParams.address0,
               houndsModifier.address,
-              dependencies.shopsAddress
-            ],[
+              dependencies.shopsAddress,
               globalParams.address0,
+              globalParams.address0
+            ],[
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
@@ -159,6 +199,7 @@ export async function run(
           houndsRestricted: houndsRestricted,
           houndsModifier: houndsModifier,
           houndsMinter: houndsMinter,
+          houndsZerocost: houndsZerocost,
           hounds: hounds,
           transferrableRoot: transferrableRoot
         });

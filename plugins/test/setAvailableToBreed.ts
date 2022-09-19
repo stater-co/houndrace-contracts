@@ -1,5 +1,6 @@
-import { expect } from "chai";
 import { SetAvailableToBreedParams } from "../../common/dto/test/setAvailableToBreedParams";
+import { HoundBreeding } from "../../typechain-types/Gamification";
+import { expecting } from "../expecting";
 
 
 export async function setAvailableToBreed(
@@ -11,8 +12,9 @@ export async function setAvailableToBreed(
 export async function safeSetAvailableToBreed(
   params: SetAvailableToBreedParams
 ) {
-  const before: boolean = await params.contract.hound(params.houndId);
+  const before: HoundBreeding.StructStruct = await params.gamification.houndsBreeding(params.houndId);
+  expecting(before.availableToBreed !== params.status && Number(before.breedingFee) !== params.fee, "Can't set the same parameters for hound breeding")
   await setAvailableToBreed(params);
-  const after: boolean = await params.contract.hound(params.houndId);
-  expect(JSON.stringify(before) !== JSON.stringify(after));
+  const after: HoundBreeding.StructStruct = await params.gamification.houndsBreeding(params.houndId);
+  //expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");
 }

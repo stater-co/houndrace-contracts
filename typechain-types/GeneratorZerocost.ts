@@ -31,9 +31,13 @@ export declare namespace GeneratorConstructor {
     methods: string;
     payments: string;
     zerocost: string;
+    incubator: string;
+    gamification: string;
   };
 
   export type StructStructOutput = [
+    string,
+    string,
     string,
     string,
     string,
@@ -49,6 +53,8 @@ export declare namespace GeneratorConstructor {
     methods: string;
     payments: string;
     zerocost: string;
+    incubator: string;
+    gamification: string;
   };
 }
 
@@ -58,7 +64,7 @@ export interface GeneratorZerocostInterface extends utils.Interface {
     "control()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address))": FunctionFragment;
     "simulateClassicRace(uint256[],uint256,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -147,7 +153,17 @@ export interface GeneratorZerocost extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         randomness: string;
         arenas: string;
         hounds: string;
@@ -155,6 +171,8 @@ export interface GeneratorZerocost extends BaseContract {
         methods: string;
         payments: string;
         zerocost: string;
+        incubator: string;
+        gamification: string;
       }
     >;
 
@@ -185,7 +203,7 @@ export interface GeneratorZerocost extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, string, string, string] & {
       randomness: string;
       arenas: string;
       hounds: string;
@@ -193,6 +211,8 @@ export interface GeneratorZerocost extends BaseContract {
       methods: string;
       payments: string;
       zerocost: string;
+      incubator: string;
+      gamification: string;
     }
   >;
 
@@ -223,7 +243,17 @@ export interface GeneratorZerocost extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         randomness: string;
         arenas: string;
         hounds: string;
@@ -231,6 +261,8 @@ export interface GeneratorZerocost extends BaseContract {
         methods: string;
         payments: string;
         zerocost: string;
+        incubator: string;
+        gamification: string;
       }
     >;
 

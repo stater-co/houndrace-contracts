@@ -1,5 +1,5 @@
 //SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '../params/Index.sol';
 
 
@@ -9,13 +9,17 @@ contract HoundsRestricted is Params {
     
     function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external {
         if ( onId > 0 ) {
-            require(hounds[onId].identity.maleParent == 0 && hounds[onId].stamina.staminaCap == 0 && onId < id);
+            require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
+            IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(onId, theHound.identity.geneticSequence);
+            ISetIdentity(control.boilerplate.incubator).setIdentity(onId, theHound.identity);
             emit NewHound(onId,msg.sender,theHound);
-            hounds[onId] = theHound;
+            hounds[onId] = theHound.profile;
             _safeMint(owner,onId);
         } else {
+            IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(id, theHound.identity.geneticSequence);
+            ISetIdentity(control.boilerplate.incubator).setIdentity(id, theHound.identity);
             emit NewHound(id,msg.sender,theHound);
-            hounds[id] = theHound;
+            hounds[id] = theHound.profile;
             _safeMint(owner,id);
             ++id;
         }

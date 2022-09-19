@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import '../interfaces/ISimulateClassicRace.sol';
@@ -12,6 +12,11 @@ import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../utils/Converters.sol';
 import '../../utils/Sortings.sol';
+import '../../incubator/params/HoundIdentity.sol';
+import '../../incubator/interfaces/IGetIdentity.sol';
+import '../../gamification/params/HoundStamina.sol';
+import '../../gamification/interfaces/IGetStamina.sol';
+import '../../queues/params/Core.sol';
 
 
 contract Params is Ownable {

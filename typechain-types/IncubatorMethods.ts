@@ -27,79 +27,33 @@ export declare namespace IncubatorConstructor {
     methods: string;
     randomness: string;
     genetics: string;
+    gamification: string;
+    races: string;
+    allowed: string[];
     secondsToMaturity: BigNumberish;
   };
 
-  export type StructStructOutput = [string, string, string, number] & {
+  export type StructStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string[],
+    number
+  ] & {
     methods: string;
     randomness: string;
     genetics: string;
+    gamification: string;
+    races: string;
+    allowed: string[];
     secondsToMaturity: number;
   };
 }
 
-export declare namespace Hound {
-  export type StatisticsStruct = {
-    totalRuns: BigNumberish;
-    firstPlace: BigNumberish;
-    secondPlace: BigNumberish;
-    thirdPlace: BigNumberish;
-  };
-
-  export type StatisticsStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    totalRuns: BigNumber;
-    firstPlace: BigNumber;
-    secondPlace: BigNumber;
-    thirdPlace: BigNumber;
-  };
-
-  export type StaminaStruct = {
-    staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
-    staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
-    staminaCap: BigNumberish;
-  };
-
-  export type StaminaStructOutput = [
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
-    staminaValue: number;
-    staminaPerHour: number;
-    staminaCap: number;
-  };
-
-  export type BreedingStruct = {
-    lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    availableToBreed: boolean;
-  };
-
-  export type BreedingStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    availableToBreed: boolean;
-  };
-
-  export type IdentityStruct = {
+export declare namespace HoundIdentity {
+  export type StructStruct = {
     maleParent: BigNumberish;
     femaleParent: BigNumberish;
     generation: BigNumberish;
@@ -108,7 +62,7 @@ export declare namespace Hound {
     extensionTraits: string;
   };
 
-  export type IdentityStructOutput = [
+  export type StructStructOutput = [
     BigNumber,
     BigNumber,
     BigNumber,
@@ -123,55 +77,43 @@ export declare namespace Hound {
     geneticSequence: number[];
     extensionTraits: string;
   };
-
-  export type StructStruct = {
-    statistics: Hound.StatisticsStruct;
-    stamina: Hound.StaminaStruct;
-    breeding: Hound.BreedingStruct;
-    identity: Hound.IdentityStruct;
-    title: string;
-    token_uri: string;
-    queueId: BigNumberish;
-    custom: boolean;
-  };
-
-  export type StructStructOutput = [
-    Hound.StatisticsStructOutput,
-    Hound.StaminaStructOutput,
-    Hound.BreedingStructOutput,
-    Hound.IdentityStructOutput,
-    string,
-    string,
-    BigNumber,
-    boolean
-  ] & {
-    statistics: Hound.StatisticsStructOutput;
-    stamina: Hound.StaminaStructOutput;
-    breeding: Hound.BreedingStructOutput;
-    identity: Hound.IdentityStructOutput;
-    title: string;
-    token_uri: string;
-    queueId: BigNumber;
-    custom: boolean;
-  };
 }
 
 export interface IncubatorMethodsInterface extends utils.Interface {
   contractName: "IncubatorMethods";
   functions: {
-    "breedHounds(uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool),uint256,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),string,string,uint256,bool))": FunctionFragment;
+    "allowed(address)": FunctionFragment;
+    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256)": FunctionFragment;
     "control()": FunctionFragment;
+    "getIdentity(uint256)": FunctionFragment;
+    "houndsIdentity(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,uint32))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address[],uint32))": FunctionFragment;
+    "setIdentity(uint256,(uint256,uint256,uint256,uint256,uint32[54],string))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(
     functionFragment: "breedHounds",
-    values: [BigNumberish, Hound.StructStruct, BigNumberish, Hound.StructStruct]
+    values: [
+      BigNumberish,
+      HoundIdentity.StructStruct,
+      BigNumberish,
+      HoundIdentity.StructStruct,
+      BigNumberish
+    ]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getIdentity",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "houndsIdentity",
+    values: [BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -182,15 +124,28 @@ export interface IncubatorMethodsInterface extends utils.Interface {
     values: [IncubatorConstructor.StructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "setIdentity",
+    values: [BigNumberish, HoundIdentity.StructStruct]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "breedHounds",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getIdentity",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "houndsIdentity",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -198,6 +153,10 @@ export interface IncubatorMethodsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setIdentity",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -248,22 +207,45 @@ export interface IncubatorMethods extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
     breedHounds(
       hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
+      hound1: HoundIdentity.StructStruct,
       hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
-      overrides?: CallOverrides
-    ): Promise<[Hound.StructStructOutput]>;
+      hound2: HoundIdentity.StructStruct,
+      theId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, number] & {
+      [string, string, string, string, string, number] & {
         methods: string;
         randomness: string;
         genetics: string;
+        gamification: string;
+        races: string;
         secondsToMaturity: number;
+      }
+    >;
+
+    getIdentity(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[HoundIdentity.StructStructOutput]>;
+
+    houndsIdentity(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+        maleParent: BigNumber;
+        femaleParent: BigNumber;
+        generation: BigNumber;
+        birthDate: BigNumber;
+        extensionTraits: string;
       }
     >;
 
@@ -278,28 +260,57 @@ export interface IncubatorMethods extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
+  allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   breedHounds(
     hound1Id: BigNumberish,
-    hound1: Hound.StructStruct,
+    hound1: HoundIdentity.StructStruct,
     hound2Id: BigNumberish,
-    hound2: Hound.StructStruct,
-    overrides?: CallOverrides
-  ): Promise<Hound.StructStructOutput>;
+    hound2: HoundIdentity.StructStruct,
+    theId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, number] & {
+    [string, string, string, string, string, number] & {
       methods: string;
       randomness: string;
       genetics: string;
+      gamification: string;
+      races: string;
       secondsToMaturity: number;
+    }
+  >;
+
+  getIdentity(
+    theId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<HoundIdentity.StructStructOutput>;
+
+  houndsIdentity(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+      maleParent: BigNumber;
+      femaleParent: BigNumber;
+      generation: BigNumber;
+      birthDate: BigNumber;
+      extensionTraits: string;
     }
   >;
 
@@ -314,28 +325,57 @@ export interface IncubatorMethods extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setIdentity(
+    theId: BigNumberish,
+    identity: HoundIdentity.StructStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
     breedHounds(
       hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
+      hound1: HoundIdentity.StructStruct,
       hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
+      hound2: HoundIdentity.StructStruct,
+      theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<Hound.StructStructOutput>;
+    ): Promise<void>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, number] & {
+      [string, string, string, string, string, number] & {
         methods: string;
         randomness: string;
         genetics: string;
+        gamification: string;
+        races: string;
         secondsToMaturity: number;
+      }
+    >;
+
+    getIdentity(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<HoundIdentity.StructStructOutput>;
+
+    houndsIdentity(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+        maleParent: BigNumber;
+        femaleParent: BigNumber;
+        generation: BigNumber;
+        birthDate: BigNumber;
+        extensionTraits: string;
       }
     >;
 
@@ -345,6 +385,12 @@ export interface IncubatorMethods extends BaseContract {
 
     setGlobalParameters(
       globalParameters: IncubatorConstructor.StructStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -366,15 +412,28 @@ export interface IncubatorMethods extends BaseContract {
   };
 
   estimateGas: {
+    allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     breedHounds(
       hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
+      hound1: HoundIdentity.StructStruct,
       hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
-      overrides?: CallOverrides
+      hound2: HoundIdentity.StructStruct,
+      theId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getIdentity(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    houndsIdentity(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -387,6 +446,12 @@ export interface IncubatorMethods extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -394,15 +459,31 @@ export interface IncubatorMethods extends BaseContract {
   };
 
   populateTransaction: {
-    breedHounds(
-      hound1Id: BigNumberish,
-      hound1: Hound.StructStruct,
-      hound2Id: BigNumberish,
-      hound2: Hound.StructStruct,
+    allowed(
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    breedHounds(
+      hound1Id: BigNumberish,
+      hound1: HoundIdentity.StructStruct,
+      hound2Id: BigNumberish,
+      hound2: HoundIdentity.StructStruct,
+      theId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getIdentity(
+      theId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    houndsIdentity(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -412,6 +493,12 @@ export interface IncubatorMethods extends BaseContract {
 
     setGlobalParameters(
       globalParameters: IncubatorConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setIdentity(
+      theId: BigNumberish,
+      identity: HoundIdentity.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

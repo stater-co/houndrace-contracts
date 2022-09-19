@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 
 
 library IncubatorConstructor {
@@ -8,6 +8,9 @@ library IncubatorConstructor {
         address methods;
         address randomness;
         address genetics;
+        address gamification;
+        address races;
+        address[] allowed;
         uint32 secondsToMaturity;
     }
 

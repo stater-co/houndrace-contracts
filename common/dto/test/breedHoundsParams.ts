@@ -1,7 +1,8 @@
-import { ethers, Signer } from "ethers";
+import { Signer } from "ethers";
+import { Hounds } from "../../../typechain-types/Hounds";
 
 export interface BreedHoundsParams {
-    contract: ethers.Contract;
+    contract: Hounds;
     hound1: string | number;
     hound2: string | number;
     signer: Signer;

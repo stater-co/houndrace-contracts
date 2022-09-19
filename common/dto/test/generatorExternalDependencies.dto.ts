@@ -4,5 +4,6 @@ export interface GeneratorExternalDependencies {
     houndsAddress: string;
     racesAddress: string;
     paymentsAddress: string;
+    incubatorAddress: string;
     sortingsLibraryAddress: string;
 }

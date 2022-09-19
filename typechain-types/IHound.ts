@@ -20,15 +20,15 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Hound {
-  export type StatisticsStruct = {
+export declare namespace HoundStatistics {
+  export type StructStruct = {
     totalRuns: BigNumberish;
     firstPlace: BigNumberish;
     secondPlace: BigNumberish;
     thirdPlace: BigNumberish;
   };
 
-  export type StatisticsStructOutput = [
+  export type StructStructOutput = [
     BigNumber,
     BigNumber,
     BigNumber,
@@ -39,8 +39,10 @@ export declare namespace Hound {
     secondPlace: BigNumber;
     thirdPlace: BigNumber;
   };
+}
 
-  export type StaminaStruct = {
+export declare namespace HoundStamina {
+  export type StructStruct = {
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
@@ -48,7 +50,7 @@ export declare namespace Hound {
     staminaCap: BigNumberish;
   };
 
-  export type StaminaStructOutput = [
+  export type StructStructOutput = [
     BigNumber,
     BigNumber,
     number,
@@ -61,27 +63,34 @@ export declare namespace Hound {
     staminaPerHour: number;
     staminaCap: number;
   };
+}
 
-  export type BreedingStruct = {
+export declare namespace HoundBreeding {
+  export type StructStruct = {
+    breedingFeeCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
     availableToBreed: boolean;
   };
 
-  export type BreedingStructOutput = [
+  export type StructStructOutput = [
+    string,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
+    breedingFeeCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
     availableToBreed: boolean;
   };
+}
 
-  export type IdentityStruct = {
+export declare namespace HoundIdentity {
+  export type StructStruct = {
     maleParent: BigNumberish;
     femaleParent: BigNumberish;
     generation: BigNumberish;
@@ -90,7 +99,7 @@ export declare namespace Hound {
     extensionTraits: string;
   };
 
-  export type IdentityStructOutput = [
+  export type StructStructOutput = [
     BigNumber,
     BigNumber,
     BigNumber,
@@ -105,36 +114,45 @@ export declare namespace Hound {
     geneticSequence: number[];
     extensionTraits: string;
   };
+}
 
+export declare namespace HoundProfile {
   export type StructStruct = {
-    statistics: Hound.StatisticsStruct;
-    stamina: Hound.StaminaStruct;
-    breeding: Hound.BreedingStruct;
-    identity: Hound.IdentityStruct;
-    title: string;
+    name: string;
     token_uri: string;
     queueId: BigNumberish;
     custom: boolean;
   };
 
-  export type StructStructOutput = [
-    Hound.StatisticsStructOutput,
-    Hound.StaminaStructOutput,
-    Hound.BreedingStructOutput,
-    Hound.IdentityStructOutput,
-    string,
-    string,
-    BigNumber,
-    boolean
-  ] & {
-    statistics: Hound.StatisticsStructOutput;
-    stamina: Hound.StaminaStructOutput;
-    breeding: Hound.BreedingStructOutput;
-    identity: Hound.IdentityStructOutput;
-    title: string;
+  export type StructStructOutput = [string, string, BigNumber, boolean] & {
+    name: string;
     token_uri: string;
     queueId: BigNumber;
     custom: boolean;
+  };
+}
+
+export declare namespace Hound {
+  export type StructStruct = {
+    statistics: HoundStatistics.StructStruct;
+    stamina: HoundStamina.StructStruct;
+    breeding: HoundBreeding.StructStruct;
+    identity: HoundIdentity.StructStruct;
+    profile: HoundProfile.StructStruct;
+  };
+
+  export type StructStructOutput = [
+    HoundStatistics.StructStructOutput,
+    HoundStamina.StructStructOutput,
+    HoundBreeding.StructStructOutput,
+    HoundIdentity.StructStructOutput,
+    HoundProfile.StructStructOutput
+  ] & {
+    statistics: HoundStatistics.StructStructOutput;
+    stamina: HoundStamina.StructStructOutput;
+    breeding: HoundBreeding.StructStructOutput;
+    identity: HoundIdentity.StructStructOutput;
+    profile: HoundProfile.StructStructOutput;
   };
 }
 

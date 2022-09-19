@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 import '../params/Index.sol';
 
 
@@ -14,8 +14,8 @@ contract RacesMethods is Params {
 
             races[id] = IGenerate(control.generator).generate(queue,theId);
 
-            for ( uint256 i = 0 ; i < queue.participants.length ; ++i ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.participants[i], theId) != 0);
+            for ( uint256 i = 0 ; i < queue.core.participants.length ; ++i ) {
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], theId) != 0);
             }
 
             emit NewFinishedRace(id, races[id]);
@@ -23,13 +23,18 @@ contract RacesMethods is Params {
         } else {
 
             emit NewRace(id, Race.Struct(
-                queue.name,
-                IArenaCurrency(control.arenas).arenaCurrency(queue.arena),
-                queue.participants,
-                queue.arena,
-                queue.entryFee,
-                0,
-                queue.payments, // payments to be filled
+                Core.Struct(
+                    queue.core.name,
+                    queue.core.feeCurrency,
+                    queue.core.entryFeeCurrency,
+                    queue.core.participants,
+                    queue.core.enqueueDates,
+                    queue.core.arena,
+                    queue.core.entryFee,
+                    queue.core.fee,
+                    queue.core.payments
+                ),
+                block.timestamp,
                 theId,
                 '0x00'
             ));
@@ -46,18 +51,14 @@ contract RacesMethods is Params {
         require(allowed[msg.sender]);
 
         for ( uint256 i = 0 ; i < payment.from.length ; ++i ) {
-            (bool success, ) = control.payments.delegatecall(
-                abi.encodeWithSignature(
-                    "pay(address,address,address,uint256[],uint256[],uint32)", 
-                    payment.from[i],
-                    payment.to[i],
-                    payment.currency[i],
-                    payment.ids[i],
-                    payment.amounts[i],
-                    payment.paymentType[i]
-                )
+            IPay(control.payments).pay(
+                payment.from[i],
+                payment.to[i],
+                payment.currency[i],
+                payment.ids[i],
+                payment.amounts[i],
+                payment.paymentType[i]
             );
-            require(success);
         }
 
     }

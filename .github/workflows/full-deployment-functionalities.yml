@@ -1,0 +1,24 @@
+name: Entire Contracts Ecosystem Verification
+on: push
+jobs:
+  Full-deployment-functionalities:
+    name: Entire Contracts Ecosystem Verification
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout set-up
+        uses: actions/checkout@v3
+      - name: Node set-up
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - name: Location set-up
+        run: npm install
+      - name: Entire Contracts Ecosystem Verification
+        run: npm run compile && npm run full-deployment-workflow-test
+        env: 
+          ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
+          ETH_ACCOUNT_PUBLIC_KEY: ${{ secrets.ETH_ACCOUNT_PUBLIC_KEY }}
+          POLYSCAN_API_KEY: ${{ secrets.POLYSCAN_API_KEY }}
+          MUMBAI_URL: ${{ secrets.MUMBAI_URL }}
+          RINKEBY_URL: ${{ secrets.RINKEBY_URL }}

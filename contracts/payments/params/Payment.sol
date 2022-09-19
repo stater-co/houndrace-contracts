@@ -1,8 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16;
+pragma solidity 0.8.17;
 
 
 library Payment {
+
+    enum PaymentTypes {
+        ERC721,
+        ERC1155,
+        ERC20,
+        DEFAULT
+    }
     
     struct Struct {
         address[] from;
@@ -10,7 +17,7 @@ library Payment {
         address[] currency;
         uint256[][] ids;
         uint256[][] amounts;
-        uint32[] paymentType;
+        PaymentTypes[] paymentType;
     }
 
 }

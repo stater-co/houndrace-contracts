@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
-import { ArenasConstructor } from '../../../typechain-types/Arenas';
+import { Arenas, ArenasConstructor } from '../../../typechain-types/Arenas';
 
 export interface ArenasSystemController {
-    arenasRestricted: ethers.Contract;
-    arenasMethods: ethers.Contract;
-    arenas: ethers.Contract;
+    arenasRestricted: Arenas;
+    arenasMethods: Arenas;
+    arenas: Arenas;
     constructor: ArenasConstructor.StructStruct;
 }

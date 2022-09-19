@@ -23,10 +23,10 @@ export async function run(
             globalParams.address0,
             dependencies.randomnessAddress,
             dependencies.geneticsAddress,
-            "0x67657452",
-            1800,
-            2419200,
-            '300000000000000000'
+            globalParams.address0,
+            globalParams.address0,
+            [],
+            0
           ]],
           props: {}
         }) as IncubatorMethods;
@@ -37,13 +37,13 @@ export async function run(
         incubator = await deployContract({
           name: 'Incubator',
           constructor: [[
-            incubatorMethods.address,
+            globalParams.address0,
             dependencies.randomnessAddress,
             dependencies.geneticsAddress,
-            "0x67657452",
-            1800,
-            2419200,
-            '300000000000000000'
+            globalParams.address0,
+            globalParams.address0,
+            [],
+            0
           ]],
           props: {}
         }) as Incubator;
