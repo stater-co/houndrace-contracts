@@ -15,7 +15,6 @@ export async function safeMintHound(
   const after = await params.contract.id();
   expecting(before !== after && Number(before) === Number(after) - 1, "Mint hound method bugged");
   const stamina = await params.gamification.houndsStamina(before);
-  const breeding = await params.gamification.houndsBreeding(before);
   const statistics = await params.races.houndsStatistic(before);
   const hound = await params.contract.hound(before);
   const profile = await params.contract.hounds(before);

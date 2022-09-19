@@ -4,7 +4,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:25:33.557Z'
+  timestamp: '2022-09-19T13:31:17.338Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -12,7 +12,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:26:23.714Z'
+  timestamp: '2022-09-19T13:32:01.182Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -20,7 +20,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:27:20.224Z'
+  timestamp: '2022-09-19T13:32:59.685Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -28,7 +28,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:28:03.043Z'
+  timestamp: '2022-09-19T13:33:44.540Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -36,7 +36,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:28:58.549Z'
+  timestamp: '2022-09-19T13:34:40.980Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -44,7 +44,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:29:44.431Z'
+  timestamp: '2022-09-19T13:35:39.787Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -52,7 +52,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:30:34.506Z'
+  timestamp: '2022-09-19T13:36:31.668Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -60,7 +60,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:31:17.357Z'
+  timestamp: '2022-09-19T13:37:18.231Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -68,7 +68,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:32:03.016Z'
+  timestamp: '2022-09-19T13:38:07.429Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -76,7 +76,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:34:10.179Z'
+  timestamp: '2022-09-19T13:38:55.901Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -84,7 +84,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:34:50.805Z'
+  timestamp: '2022-09-19T13:39:54.481Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -92,7 +92,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:36:37.581Z'
+  timestamp: '2022-09-19T13:40:44.155Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -100,7 +100,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:37:30.464Z'
+  timestamp: '2022-09-19T13:41:35.834Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -108,7 +108,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:38:15.581Z'
+  timestamp: '2022-09-19T13:42:26.915Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -116,7 +116,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:39:01.888Z'
+  timestamp: '2022-09-19T13:43:15.084Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -124,7 +124,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:39:50.856Z'
+  timestamp: '2022-09-19T13:44:02.852Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -132,7 +132,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:42:48.739Z'
+  timestamp: '2022-09-19T13:44:47.672Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -140,7 +140,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:43:36.147Z'
+  timestamp: '2022-09-19T13:45:40.394Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -148,7 +148,7 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:44:23.915Z'
+  timestamp: '2022-09-19T13:47:44.028Z'
 }
 {
   message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
@@ -156,53 +156,5 @@
     'Reason: Already Verified',
   level: 'error',
   network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:45:18.908Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:46:17.413Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:47:04.177Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:49:04.901Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:50:15.649Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:52:08.846Z'
-}
-{
-  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
-    'The verification may still succeed but should be checked manually.\n' +
-    'Reason: Already Verified',
-  level: 'error',
-  network: 'polygonMumbai',
-  timestamp: '2022-09-15T17:53:07.853Z'
+  timestamp: '2022-09-19T13:48:33.400Z'
 }

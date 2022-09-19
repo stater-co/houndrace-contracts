@@ -567,6 +567,7 @@ async function main() {
     });
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
+      allowedApprovals: [],
       hounds: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
@@ -709,6 +710,7 @@ async function main() {
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
+      allowedApprovals: [],
       hounds: hounds.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),

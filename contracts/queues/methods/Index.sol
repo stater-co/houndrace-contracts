@@ -80,7 +80,6 @@ contract QueuesMethods is Params {
 
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
 
-
         (
             MicroPayment.Struct memory alphaduneFee, 
             MicroPayment.Struct memory arenaFee, 
