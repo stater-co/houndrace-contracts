@@ -10,6 +10,11 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "queueId",
+        type: "uint256",
+      },
+      {
         components: [
           {
             components: [
@@ -139,11 +144,6 @@ const _abi = [
         internalType: "struct Queue.Struct",
         name: "queue",
         type: "tuple",
-      },
-      {
-        internalType: "uint256",
-        name: "theId",
-        type: "uint256",
       },
     ],
     name: "raceStart",

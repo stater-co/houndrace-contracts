@@ -261,8 +261,8 @@ export interface RacesRestrictedInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "uploadRace", data: BytesLike): Result;
 
   events: {
-    "NewFinishedRace(uint256,tuple)": EventFragment;
-    "NewRace(uint256,tuple)": EventFragment;
+    "NewFinishedRace(uint256,uint256,tuple)": EventFragment;
+    "NewRace(uint256,uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "UploadRace(uint256,uint256,tuple)": EventFragment;
   };
@@ -274,15 +274,15 @@ export interface RacesRestrictedInterface extends utils.Interface {
 }
 
 export type NewFinishedRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type NewFinishedRaceEventFilter = TypedEventFilter<NewFinishedRaceEvent>;
 
 export type NewRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type NewRaceEventFilter = TypedEventFilter<NewRaceEvent>;
@@ -626,20 +626,27 @@ export interface RacesRestricted extends BaseContract {
   };
 
   filters: {
-    "NewFinishedRace(uint256,tuple)"(
+    "NewFinishedRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewFinishedRaceEventFilter;
     NewFinishedRace(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewFinishedRaceEventFilter;
 
-    "NewRace(uint256,tuple)"(
+    "NewRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewRaceEventFilter;
-    NewRace(id?: BigNumberish | null, race?: null): NewRaceEventFilter;
+    NewRace(
+      id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
+      race?: null
+    ): NewRaceEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,

@@ -5,6 +5,9 @@ import '../../queues/params/Queue.sol';
 
 interface IRaceStart {
 
-    function raceStart(Queue.Struct memory queue, uint256 theId) external;
+    function raceStart(
+        uint256 queueId,
+        Queue.Struct memory queue
+    ) external;
 
 }

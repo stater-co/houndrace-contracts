@@ -219,7 +219,7 @@ export interface RacesMethodsInterface extends utils.Interface {
     "participantsOf(uint256)": FunctionFragment;
     "payout(uint256)": FunctionFragment;
     "race(uint256)": FunctionFragment;
-    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
+    "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool))": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
@@ -253,7 +253,7 @@ export interface RacesMethodsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "race", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "raceStart",
-    values: [Queue.StructStruct, BigNumberish]
+    values: [BigNumberish, Queue.StructStruct]
   ): string;
   encodeFunctionData(functionFragment: "races", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -307,8 +307,8 @@ export interface RacesMethodsInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "NewFinishedRace(uint256,tuple)": EventFragment;
-    "NewRace(uint256,tuple)": EventFragment;
+    "NewFinishedRace(uint256,uint256,tuple)": EventFragment;
+    "NewRace(uint256,uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "UploadRace(uint256,uint256,tuple)": EventFragment;
   };
@@ -320,15 +320,15 @@ export interface RacesMethodsInterface extends utils.Interface {
 }
 
 export type NewFinishedRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type NewFinishedRaceEventFilter = TypedEventFilter<NewFinishedRaceEvent>;
 
 export type NewRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type NewRaceEventFilter = TypedEventFilter<NewRaceEvent>;
@@ -448,8 +448,8 @@ export interface RacesMethods extends BaseContract {
     ): Promise<[Race.StructStructOutput]>;
 
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -552,8 +552,8 @@ export interface RacesMethods extends BaseContract {
   ): Promise<Race.StructStructOutput>;
 
   raceStart(
+    queueId: BigNumberish,
     queue: Queue.StructStruct,
-    theId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -653,8 +653,8 @@ export interface RacesMethods extends BaseContract {
     ): Promise<Race.StructStructOutput>;
 
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -684,20 +684,27 @@ export interface RacesMethods extends BaseContract {
   };
 
   filters: {
-    "NewFinishedRace(uint256,tuple)"(
+    "NewFinishedRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewFinishedRaceEventFilter;
     NewFinishedRace(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewFinishedRaceEventFilter;
 
-    "NewRace(uint256,tuple)"(
+    "NewRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): NewRaceEventFilter;
-    NewRace(id?: BigNumberish | null, race?: null): NewRaceEventFilter;
+    NewRace(
+      id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
+      race?: null
+    ): NewRaceEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
@@ -757,8 +764,8 @@ export interface RacesMethods extends BaseContract {
     race(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -822,8 +829,8 @@ export interface RacesMethods extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

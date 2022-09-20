@@ -124,12 +124,12 @@ export declare namespace Queue {
 export interface IRaceStartInterface extends utils.Interface {
   contractName: "IRaceStart";
   functions: {
-    "raceStart(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool),uint256)": FunctionFragment;
+    "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool))": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "raceStart",
-    values: [Queue.StructStruct, BigNumberish]
+    values: [BigNumberish, Queue.StructStruct]
   ): string;
 
   decodeFunctionResult(functionFragment: "raceStart", data: BytesLike): Result;
@@ -166,22 +166,22 @@ export interface IRaceStart extends BaseContract {
 
   functions: {
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   raceStart(
+    queueId: BigNumberish,
     queue: Queue.StructStruct,
-    theId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -190,16 +190,16 @@ export interface IRaceStart extends BaseContract {
 
   estimateGas: {
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     raceStart(
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
-      theId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
