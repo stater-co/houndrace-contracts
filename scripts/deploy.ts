@@ -435,6 +435,7 @@ async function main() {
       payments: globalParams.address0,
       restricted: globalParams.address0,
       queues: globalParams.address0,
+      races: globalParams.address0,
       allowedCallers: [],
       callable: false
     }
@@ -680,6 +681,7 @@ async function main() {
       payments: payments.address,
       restricted: racesRestricted.address,
       queues: queues.address,
+      races: races.address,
       allowedCallers: [races.address, queues.address],
       callable: false
     }
