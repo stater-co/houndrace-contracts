@@ -11,21 +11,21 @@ contract RacesRestricted is Params {
         uint256 theId, 
         uint256 queueId,
         Race.Struct memory race
-    ) external payable onlyOwner {
+    ) external onlyOwner {
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 
         IHandleRaceLoot(control.races).handleRaceLoot(race.core.payments);
 
         races[theId] = race;
-        uint32 staminaCost = IStaminaCostOf(control.hounds).staminaCostOf(queueId);
+        uint32 staminaCost = IStaminaCostOf(control.queues).staminaCostOf(queueId);
 
         for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
             require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0) != 0);
             IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
         }
 
-        emit UploadRace(theId, race);
+        emit UploadRace(theId, queueId, race);
 
     }
 

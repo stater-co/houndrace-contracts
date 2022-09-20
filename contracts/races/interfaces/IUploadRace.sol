@@ -5,6 +5,10 @@ import '../params/Race.sol';
 
 interface IUploadRace {
 
-    function uploadRace(uint256 theId, Race.Struct memory race) external payable;
+    function uploadRace(
+        uint256 theId, 
+        uint256 queueId,
+        Race.Struct memory race
+    ) external;
 
 }

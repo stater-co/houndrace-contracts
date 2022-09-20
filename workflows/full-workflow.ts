@@ -240,7 +240,7 @@ async function main() {
             payments: payments.payments.address,
             queues: queues.queues.address,
             randomness: randomness.randomness.address,
-            restricted: queues.queuesRestricted.address,
+            restricted: races.racesRestricted.address,
             races: races.races.address,
             callable: false,
             allowedCallers: [

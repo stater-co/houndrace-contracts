@@ -366,3 +366,69 @@
   network: 'polygonMumbai',
   timestamp: '2022-09-20T07:25:46.005Z'
 }
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0x7b85ae73b916db8003E637c394c42053712b44Dc does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:36:57.318Z'
+}
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0xB102594D03747e42e24Cd31aa4e5A5571184783d does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:38:13.169Z'
+}
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0x7271C4797e3E92e527AD735C7Ab14105161F91c8 does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:38:56.937Z'
+}
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0xffde0423Bf8236015F636f6a94b46c19443e79c9 does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:43:02.198Z'
+}
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0x955A87C0c3c9ce215FE66ade90930C63EC957e96 does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:44:20.071Z'
+}
+{
+  message: '[DIIMIIM] Failed to send contract verification request.\n' +
+    'Endpoint URL: https://api-testnet.polygonscan.com/api\n' +
+    'Reason: The Etherscan API responded that the address 0xD543f04a6f6356BC23e30438D7fDF8613Dc6909E does not have bytecode.\n' +
+    "This can happen if the contract was recently deployed and this fact hasn't propagated to the backend yet.\n" +
+    'Try waiting for a minute before verifying your contract. If you are invoking this from a script,\n' +
+    'try to wait for five confirmations of your contract deployment transaction before running the verification subtask.',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:45:03.524Z'
+}

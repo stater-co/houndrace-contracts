@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -265,7 +264,7 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "NewFinishedRace(uint256,tuple)": EventFragment;
     "NewRace(uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "UploadRace(uint256,tuple)": EventFragment;
+    "UploadRace(uint256,uint256,tuple)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "NewFinishedRace"): EventFragment;
@@ -297,8 +296,8 @@ export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
 export type UploadRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type UploadRaceEventFilter = TypedEventFilter<UploadRaceEvent>;
@@ -427,7 +426,7 @@ export interface RacesRestricted extends BaseContract {
       theId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -527,7 +526,7 @@ export interface RacesRestricted extends BaseContract {
     theId: BigNumberish,
     queueId: BigNumberish,
     race: Race.StructStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -651,11 +650,16 @@ export interface RacesRestricted extends BaseContract {
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
 
-    "UploadRace(uint256,tuple)"(
+    "UploadRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): UploadRaceEventFilter;
-    UploadRace(id?: BigNumberish | null, race?: null): UploadRaceEventFilter;
+    UploadRace(
+      id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
+      race?: null
+    ): UploadRaceEventFilter;
   };
 
   estimateGas: {
@@ -709,7 +713,7 @@ export interface RacesRestricted extends BaseContract {
       theId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
@@ -773,7 +777,7 @@ export interface RacesRestricted extends BaseContract {
       theId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -1,11 +1,10 @@
-import { expect } from "chai";
 import { UploadRaceParams } from "../../common/dto/test/uploadRaceParams.dto";
 import { expecting } from "../expecting";
 
 export async function uploadRace(
   params: UploadRaceParams
 ) {
-  await params.contract.uploadRace(params.onId,params.race);
+  await params.contract.uploadRace(params.onId, params.race.queueId, params.race);
 }
 
 export async function safeUploadRace(
@@ -14,5 +13,5 @@ export async function safeUploadRace(
   const before = await params.contract.races(params.onId);
   await uploadRace(params);
   const after = await params.contract.races(params.onId);
-  //expecting(JSON.stringify(before) !== JSON.stringify(after), "Upload race method bugged");
+  expecting(JSON.stringify(before) !== JSON.stringify(after), "Upload race method bugged");
 }

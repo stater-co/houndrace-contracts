@@ -78070,3 +78070,21 @@
   network: 'polygonMumbai',
   timestamp: '2022-09-20T06:47:42.099Z'
 }
+{
+  message: '[DIIMIIM] export RACE_RESTRICTED=0xffde0423Bf8236015F636f6a94b46c19443e79c9',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:41:55.973Z'
+}
+{
+  message: '[DIIMIIM] export RACE_METHODS=0x955A87C0c3c9ce215FE66ade90930C63EC957e96',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:42:10.433Z'
+}
+{
+  message: '[DIIMIIM] export RACE=0xD543f04a6f6356BC23e30438D7fDF8613Dc6909E',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-20T09:42:20.808Z'
+}

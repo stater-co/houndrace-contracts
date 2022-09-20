@@ -310,7 +310,7 @@ export interface RacesMethodsInterface extends utils.Interface {
     "NewFinishedRace(uint256,tuple)": EventFragment;
     "NewRace(uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "UploadRace(uint256,tuple)": EventFragment;
+    "UploadRace(uint256,uint256,tuple)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "NewFinishedRace"): EventFragment;
@@ -342,8 +342,8 @@ export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
 export type UploadRaceEvent = TypedEvent<
-  [BigNumber, Race.StructStructOutput],
-  { id: BigNumber; race: Race.StructStructOutput }
+  [BigNumber, BigNumber, Race.StructStructOutput],
+  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
 >;
 
 export type UploadRaceEventFilter = TypedEventFilter<UploadRaceEvent>;
@@ -708,11 +708,16 @@ export interface RacesMethods extends BaseContract {
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
 
-    "UploadRace(uint256,tuple)"(
+    "UploadRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
       race?: null
     ): UploadRaceEventFilter;
-    UploadRace(id?: BigNumberish | null, race?: null): UploadRaceEventFilter;
+    UploadRace(
+      id?: BigNumberish | null,
+      queueId?: BigNumberish | null,
+      race?: null
+    ): UploadRaceEventFilter;
   };
 
   estimateGas: {

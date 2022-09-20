@@ -15,6 +15,11 @@ const _abi = [
         type: "uint256",
       },
       {
+        internalType: "uint256",
+        name: "queueId",
+        type: "uint256",
+      },
+      {
         components: [
           {
             components: [
@@ -123,7 +128,7 @@ const _abi = [
     ],
     name: "uploadRace",
     outputs: [],
-    stateMutability: "payable",
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];

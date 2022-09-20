@@ -8,7 +8,7 @@ import {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  PayableOverrides,
+  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -109,12 +109,12 @@ export declare namespace Race {
 export interface IUploadRaceInterface extends utils.Interface {
   contractName: "IUploadRace";
   functions: {
-    "uploadRace(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "uploadRace",
-    values: [BigNumberish, Race.StructStruct]
+    values: [BigNumberish, BigNumberish, Race.StructStruct]
   ): string;
 
   decodeFunctionResult(functionFragment: "uploadRace", data: BytesLike): Result;
@@ -152,20 +152,23 @@ export interface IUploadRace extends BaseContract {
   functions: {
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   uploadRace(
     theId: BigNumberish,
+    queueId: BigNumberish,
     race: Race.StructStruct,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -176,16 +179,18 @@ export interface IUploadRace extends BaseContract {
   estimateGas: {
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     uploadRace(
       theId: BigNumberish,
+      queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }
