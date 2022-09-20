@@ -11,6 +11,7 @@ library RacesConstructor {
         address payments;
         address restricted;
         address queues;
+        address races;
         address[] allowedCallers;
         bool callable;
     }

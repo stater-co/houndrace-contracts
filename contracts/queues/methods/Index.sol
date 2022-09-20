@@ -127,12 +127,6 @@ contract QueuesMethods is Params {
 
         if ( queues[theId].core.participants.length == queues[theId].totalParticipants ) {
 
-            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].core.arena);
-
-            IHandleRaceLoot(control.races).handleRaceLoot(
-                queues[theId].core.payments
-            );
-
             IRaceStart(control.races).raceStart(queues[theId], theId);
 
             delete queues[theId].core.participants;

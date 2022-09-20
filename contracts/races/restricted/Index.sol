@@ -15,16 +15,7 @@ contract RacesRestricted is Params {
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 
-        for ( uint256 i = 0 ; i < race.core.payments.from.length ; ++i ) {
-            IPay(control.payments).pay(
-                race.core.payments.from[i],
-                race.core.payments.to[i],
-                race.core.payments.currency[i],
-                race.core.payments.ids[i],
-                race.core.payments.amounts[i],
-                race.core.payments.paymentType[i]
-            );
-        }
+        IHandleRaceLoot(control.races).handleRaceLoot(race.core.payments);
 
         races[theId] = race;
         uint32 staminaCost = IStaminaCostOf(control.hounds).staminaCostOf(queueId);

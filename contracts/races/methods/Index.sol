@@ -12,10 +12,15 @@ contract RacesMethods is Params {
 
         if ( control.callable ) {
 
+            IHandleArenaUsage(control.arenas).handleArenaUsage(queue.core.arena);
+
+            IHandleRaceLoot(control.races).handleRaceLoot(queue.core.payments);
+
             races[id] = IGenerate(control.generator).generate(queue,theId);
 
             for ( uint256 i = 0 ; i < queue.core.participants.length ; ++i ) {
                 require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], theId) != 0);
+                IUpdateHoundStamina(control.hounds).updateHoundStamina(queue.core.participants[i], queue.staminaCost);
             }
 
             emit NewFinishedRace(id, races[id]);
