@@ -31,6 +31,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
+            globalParams.address0,
             [],
             500000000,
             true
@@ -43,6 +44,7 @@ export async function run(
         racesMethods = await deployContract({
           name: 'RacesMethods',
           constructor: [[
+            globalParams.address0,
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
@@ -72,6 +74,7 @@ export async function run(
             dependencies.paymentsAddress,
             racesRestricted.address,
             otherOwner.address,
+            globalParams.address0,
             [],
             500000000,
             true

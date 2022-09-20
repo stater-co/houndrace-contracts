@@ -33,11 +33,13 @@ export declare namespace RacesConstructor {
     payments: string;
     restricted: string;
     queues: string;
+    races: string;
     allowedCallers: string[];
     callable: boolean;
   };
 
   export type StructStructOutput = [
+    string,
     string,
     string,
     string,
@@ -57,6 +59,7 @@ export declare namespace RacesConstructor {
     payments: string;
     restricted: string;
     queues: string;
+    races: string;
     allowedCallers: string[];
     callable: boolean;
   };
@@ -181,7 +184,7 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "race(uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
@@ -342,6 +345,7 @@ export interface RacesRestricted extends BaseContract {
         string,
         string,
         string,
+        string,
         boolean
       ] & {
         randomness: string;
@@ -352,6 +356,7 @@ export interface RacesRestricted extends BaseContract {
         payments: string;
         restricted: string;
         queues: string;
+        races: string;
         callable: boolean;
       }
     >;
@@ -440,6 +445,7 @@ export interface RacesRestricted extends BaseContract {
       string,
       string,
       string,
+      string,
       boolean
     ] & {
       randomness: string;
@@ -450,6 +456,7 @@ export interface RacesRestricted extends BaseContract {
       payments: string;
       restricted: string;
       queues: string;
+      races: string;
       callable: boolean;
     }
   >;
@@ -538,6 +545,7 @@ export interface RacesRestricted extends BaseContract {
         string,
         string,
         string,
+        string,
         boolean
       ] & {
         randomness: string;
@@ -548,6 +556,7 @@ export interface RacesRestricted extends BaseContract {
         payments: string;
         restricted: string;
         queues: string;
+        races: string;
         callable: boolean;
       }
     >;
