@@ -1,8 +1,8 @@
-name: Entire Contracts Ecosystem Verification
+name: Full Contracts Ecosystem Verification
 on: push
 jobs:
   Full-deployment-functionalities:
-    name: Entire Contracts Ecosystem Verification
+    name: Full Contracts Ecosystem Verification
     runs-on: ubuntu-latest
     steps:
       - name: Checkout set-up
@@ -14,7 +14,7 @@ jobs:
           cache: 'npm'
       - name: Location set-up
         run: npm install
-      - name: Entire Contracts Ecosystem Verification
+      - name: Full Contracts Ecosystem Verification
         run: npm run compile && npm run full-deployment-workflow-test
         env: 
           ETH_ACCOUNT_PRIVATE_KEY: ${{ secrets.ETH_ACCOUNT_PRIVATE_KEY }}
