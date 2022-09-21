@@ -11,7 +11,7 @@
     "full-workflow-test": "npx hardhat test workflows/full-workflow.ts",
     "races-statistics-generation-test": "TOTAL_RACES=10 npx hardhat test workflows/races-generator.ts",
     "typegenall": "cp -r typechain-types/* $TYPEGEN_ALL_PATH",
-    "compile": "npx hardhat compile",
+    "compile": "rm -rf cache && rm -rf artifacts && rm -rf typechain-types && npx hardhat compile",
     "safe-hardhat-test": "echo 'Recommended for node > 16.x' && export SET NODE_OPTIONS=--openssl-legacy-provider && hardhat test",
     "deployments-to-env": "cd plugins && ts-node deployments-to-env.ts",
     "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts",

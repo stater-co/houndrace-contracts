@@ -23,6 +23,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "address",
+            name: "staminaRefillCurrency",
+            type: "address",
+          },
+          {
             internalType: "uint256",
             name: "staminaLastUpdate",
             type: "uint256",
@@ -33,13 +38,18 @@ const _abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "refillStaminaCooldownCost",
+            type: "uint256",
+          },
+          {
             internalType: "uint32",
             name: "staminaValue",
             type: "uint32",
           },
           {
             internalType: "uint32",
-            name: "staminaPerHour",
+            name: "staminaPerTimeUnit",
             type: "uint32",
           },
           {
@@ -60,6 +70,11 @@ const _abi = [
             type: "address",
           },
           {
+            internalType: "address",
+            name: "breedingCooldownCurrency",
+            type: "address",
+          },
+          {
             internalType: "uint256",
             name: "lastBreed",
             type: "uint256",
@@ -72,6 +87,16 @@ const _abi = [
           {
             internalType: "uint256",
             name: "breedingFee",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "breedingCooldownTimeUnit",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "refillBreedingCooldownCost",
             type: "uint256",
           },
           {

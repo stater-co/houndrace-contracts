@@ -5,7 +5,7 @@ import { expecting } from "../expecting";
 export async function updateStamina(
   params: UpdateHoundStaminaParams
 ) {
-  await params.contract.updateHoundStamina(params.houndId);
+  await params.contract.updateHoundStamina(params.houndId, 3);
 }
 
 export async function safeUpdateStamina(

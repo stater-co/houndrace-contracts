@@ -129,6 +129,16 @@ const _abi = [
             type: "uint32",
           },
           {
+            internalType: "uint32",
+            name: "staminaCost",
+            type: "uint32",
+          },
+          {
+            internalType: "enum Specie.Enum[]",
+            name: "speciesAllowed",
+            type: "uint8[]",
+          },
+          {
             internalType: "bool",
             name: "closed",
             type: "bool",

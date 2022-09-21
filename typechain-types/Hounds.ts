@@ -69,18 +69,12 @@ export declare namespace ConstructorFees {
     breedFeeCurrency: string;
     breedCost: BigNumberish;
     breedFee: BigNumberish;
-    refillCost: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
-    refillStaminaCooldownCost: BigNumberish;
   };
 
   export type StructStructOutput = [
     string,
     string,
     string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
     BigNumber,
     BigNumber
   ] & {
@@ -89,9 +83,6 @@ export declare namespace ConstructorFees {
     breedFeeCurrency: string;
     breedCost: BigNumber;
     breedFee: BigNumber;
-    refillCost: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
-    refillStaminaCooldownCost: BigNumber;
   };
 }
 
@@ -142,35 +133,13 @@ export declare namespace HoundStatistics {
 
 export declare namespace HoundStamina {
   export type StructStruct = {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
-    staminaValue: number;
-    staminaPerHour: number;
-    staminaCap: number;
-  };
-}
-
-export declare namespace HoundBreeding {
-  export type StructStruct = {
-    breedingFeeCurrency: string;
-    lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
@@ -178,12 +147,49 @@ export declare namespace HoundBreeding {
     BigNumber,
     BigNumber,
     BigNumber,
+    number,
+    number,
+    number
+  ] & {
+    staminaRefillCurrency: string;
+    staminaLastUpdate: BigNumber;
+    staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
+    staminaValue: number;
+    staminaPerTimeUnit: number;
+    staminaCap: number;
+  };
+}
+
+export declare namespace HoundBreeding {
+  export type StructStruct = {
+    breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    lastBreed: BigNumberish;
+    breedingCooldown: BigNumberish;
+    breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
+    availableToBreed: boolean;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
     boolean
   ] & {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
     availableToBreed: boolean;
   };
 }
@@ -196,6 +202,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -204,7 +211,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -212,6 +220,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 
@@ -267,6 +276,7 @@ export declare namespace MicroPayment {
 export interface HoundsInterface extends utils.Interface {
   contractName: "Hounds";
   functions: {
+    "allowance(address,uint256)": FunctionFragment;
     "allowed(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -280,7 +290,7 @@ export interface HoundsInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(address,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
@@ -292,7 +302,7 @@ export interface HoundsInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256,uint256,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "setTokenURI(uint256,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -301,9 +311,13 @@ export interface HoundsInterface extends utils.Interface {
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "updateHoundRunning(uint256,uint256)": FunctionFragment;
-    "updateHoundStamina(uint256)": FunctionFragment;
+    "updateHoundStamina(uint256,uint32)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "allowance",
+    values: [string, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -418,9 +432,10 @@ export interface HoundsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "updateHoundStamina",
-    values: [BigNumberish]
+    values: [BigNumberish, BigNumberish]
   ): string;
 
+  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -524,7 +539,7 @@ export interface HoundsInterface extends utils.Interface {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "BreedHound(uint256,address,tuple)": EventFragment;
-    "HoundBreedable(uint256,uint256)": EventFragment;
+    "HoundBreedable(uint256,uint256,bool)": EventFragment;
     "HoundBreedingStatusUpdate(uint256,bool)": EventFragment;
     "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
     "HoundStaminaUpdate(uint256,uint32)": EventFragment;
@@ -569,8 +584,8 @@ export type BreedHoundEvent = TypedEvent<
 export type BreedHoundEventFilter = TypedEventFilter<BreedHoundEvent>;
 
 export type HoundBreedableEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { id: BigNumber; price: BigNumber }
+  [BigNumber, BigNumber, boolean],
+  { id: BigNumber; price: BigNumber; status: boolean }
 >;
 
 export type HoundBreedableEventFilter = TypedEventFilter<HoundBreedableEvent>;
@@ -656,6 +671,12 @@ export interface Hounds extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     approve(
@@ -859,9 +880,16 @@ export interface Hounds extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  allowance(
+    sender: string,
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
 
   allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
@@ -1057,10 +1085,17 @@ export interface Hounds extends BaseContract {
 
   updateHoundStamina(
     theId: BigNumberish,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     approve(
@@ -1256,6 +1291,7 @@ export interface Hounds extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -1294,13 +1330,15 @@ export interface Hounds extends BaseContract {
       hound?: null
     ): BreedHoundEventFilter;
 
-    "HoundBreedable(uint256,uint256)"(
+    "HoundBreedable(uint256,uint256,bool)"(
       id?: BigNumberish | null,
-      price?: null
+      price?: null,
+      status?: null
     ): HoundBreedableEventFilter;
     HoundBreedable(
       id?: BigNumberish | null,
-      price?: null
+      price?: null,
+      status?: null
     ): HoundBreedableEventFilter;
 
     "HoundBreedingStatusUpdate(uint256,bool)"(
@@ -1372,6 +1410,12 @@ export interface Hounds extends BaseContract {
   };
 
   estimateGas: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
@@ -1542,11 +1586,18 @@ export interface Hounds extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    allowance(
+      sender: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     allowed(
       arg0: string,
       overrides?: CallOverrides
@@ -1729,6 +1780,7 @@ export interface Hounds extends BaseContract {
 
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

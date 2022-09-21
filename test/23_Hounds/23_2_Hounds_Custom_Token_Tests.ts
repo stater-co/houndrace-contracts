@@ -59,7 +59,6 @@ async function advancedTests(
 
       const [sig1] = await ethers.getSigners();
 
-      console.log("------ 0");
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
@@ -70,11 +69,9 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      console.log("------ 1");
       let maleHound: Hound.StructStruct = femaleHound;
       maleHound.identity.geneticSequence[1] = 1;
 
-      console.log("------ 2");
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
@@ -85,21 +82,17 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      console.log("------ 3");
       const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      console.log("------ 4 ", sig1.address, totalValueToPay);
       await dependencies.erc20.mint(sig1.address,totalValueToPay);
 
-      console.log("------ 5");
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
-      console.log("------ 6");
       await safeBreed({
         contract: dependencies.hounds,
         hound1: hound1Id,
@@ -367,7 +360,6 @@ async function advancedTests(
 
       await safeBoostHoundBreeding({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 
@@ -386,7 +378,6 @@ async function advancedTests(
 
       await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 

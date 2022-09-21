@@ -25,10 +25,45 @@ import type {
 export declare namespace HoundBreeding {
   export type StructStruct = {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
     availableToBreed: boolean;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    boolean
+  ] & {
+    breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    lastBreed: BigNumber;
+    breedingCooldown: BigNumber;
+    breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
+    availableToBreed: boolean;
+  };
+}
+
+export declare namespace HoundStamina {
+  export type StructStruct = {
+    staminaRefillCurrency: string;
+    staminaLastUpdate: BigNumberish;
+    staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
+    staminaValue: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
+    staminaCap: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -36,36 +71,16 @@ export declare namespace HoundBreeding {
     BigNumber,
     BigNumber,
     BigNumber,
-    boolean
-  ] & {
-    breedingFeeCurrency: string;
-    lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    availableToBreed: boolean;
-  };
-}
-
-export declare namespace HoundStamina {
-  export type StructStruct = {
-    staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
-    staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
-    staminaCap: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
     number,
     number,
     number
   ] & {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
-    staminaPerHour: number;
+    staminaPerTimeUnit: number;
     staminaCap: number;
   };
 }
@@ -107,7 +122,7 @@ export interface GamificationMethodsInterface extends utils.Interface {
     "initializeHoundGamingStats(uint256,uint32[54])": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters(((address,uint256,uint256,uint256,bool),(uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setGlobalParameters(((address,address,uint256,uint256,uint256,uint256,uint256,bool),(address,uint256,uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -270,11 +285,23 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+      [
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        boolean
+      ] & {
         breedingFeeCurrency: string;
+        breedingCooldownCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;
+        breedingCooldownTimeUnit: BigNumber;
+        refillBreedingCooldownCost: BigNumber;
         availableToBreed: boolean;
       }
     >;
@@ -283,11 +310,13 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, number, number, number] & {
+      [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+        staminaRefillCurrency: string;
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
+        refillStaminaCooldownCost: BigNumber;
         staminaValue: number;
-        staminaPerHour: number;
+        staminaPerTimeUnit: number;
         staminaCap: number;
       }
     >;
@@ -354,11 +383,23 @@ export interface GamificationMethods extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, BigNumber, BigNumber, BigNumber, boolean] & {
+    [
+      string,
+      string,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      BigNumber,
+      boolean
+    ] & {
       breedingFeeCurrency: string;
+      breedingCooldownCurrency: string;
       lastBreed: BigNumber;
       breedingCooldown: BigNumber;
       breedingFee: BigNumber;
+      breedingCooldownTimeUnit: BigNumber;
+      refillBreedingCooldownCost: BigNumber;
       availableToBreed: boolean;
     }
   >;
@@ -367,11 +408,13 @@ export interface GamificationMethods extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, number, number, number] & {
+    [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+      staminaRefillCurrency: string;
       staminaLastUpdate: BigNumber;
       staminaRefill1x: BigNumber;
+      refillStaminaCooldownCost: BigNumber;
       staminaValue: number;
-      staminaPerHour: number;
+      staminaPerTimeUnit: number;
       staminaCap: number;
     }
   >;
@@ -438,11 +481,23 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, boolean] & {
+      [
+        string,
+        string,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        BigNumber,
+        boolean
+      ] & {
         breedingFeeCurrency: string;
+        breedingCooldownCurrency: string;
         lastBreed: BigNumber;
         breedingCooldown: BigNumber;
         breedingFee: BigNumber;
+        breedingCooldownTimeUnit: BigNumber;
+        refillBreedingCooldownCost: BigNumber;
         availableToBreed: boolean;
       }
     >;
@@ -451,11 +506,13 @@ export interface GamificationMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, number, number, number] & {
+      [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+        staminaRefillCurrency: string;
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
+        refillStaminaCooldownCost: BigNumber;
         staminaValue: number;
-        staminaPerHour: number;
+        staminaPerTimeUnit: number;
         staminaCap: number;
       }
     >;

@@ -81,7 +81,8 @@ async function main() {
         racesAddress: races.races.address,
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address
+        paymentsAddress: payments.payments.address,
+        incubatorAddress: incubators.incubator.address
     });
     
     const generator: GeneratorSystem = await runGenerator({
@@ -153,7 +154,8 @@ async function main() {
             races: races.races.address,
             allowedCallers: [races.races.address],
             queues: queues.queues.address,
-            zerocost: queues.queueZerocost.address
+            zerocost: queues.queueZerocost.address,
+            incubator: incubators.incubator.address
         }
     });
 
@@ -218,10 +220,7 @@ async function main() {
             breedFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000",
-            refillCost: "0x2386F26FC10000",
-            refillBreedingCooldownCost: "0x2386F26FC10000",
-            refillStaminaCooldownCost: "0x2386F26FC10000"
+            breedFee: "0x2386F26FC10000"
            }
         }
     });
@@ -238,7 +237,8 @@ async function main() {
             payments: payments.payments.address,
             queues: queues.queues.address,
             randomness: randomness.randomness.address,
-            restricted: queues.queuesRestricted.address,
+            races: races.races.address,
+            restricted: races.racesRestricted.address,
             callable: false,
             allowedCallers: [
                 races.races.address,
@@ -321,10 +321,7 @@ async function main() {
             breedFeeCurrency: payments.houndracePotions.address,
             currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000",
-            refillCost: "0x2386F26FC10000",
-            refillBreedingCooldownCost: "0x2386F26FC10000",
-            refillStaminaCooldownCost: "0x2386F26FC10000"
+            breedFee: "0x2386F26FC10000"
            }
         }
     });

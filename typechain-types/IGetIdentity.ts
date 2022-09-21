@@ -28,6 +28,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -36,7 +37,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -44,6 +46,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 

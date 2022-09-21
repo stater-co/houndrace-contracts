@@ -55,9 +55,19 @@ contract QueuesMethods is Params {
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
             ((queues[theId].endDate == 0 && queues[theId].startDate == 0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
-            IHoundOwner(control.hounds).houndOwner(hound) == msg.sender && 
+            IAllowance(control.hounds).allowance(msg.sender, hound) && 
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
+
+        HoundIdentity.Struct memory identity = IGetIdentity(control.incubator).getIdentity(hound);
+        bool validSpecie;
+        for ( uint256 i = 0 ; i < queues[theId].speciesAllowed.length ; ++i ) {
+            if ( queues[theId].speciesAllowed[i] == identity.specie ) {
+                validSpecie = true;
+                break;
+            }
+        }
+        require(validSpecie);
 
         for ( uint256 i = 0 ; i < queues[theId].core.participants.length ; ++i ) {
             require(queues[theId].core.participants[i] != hound);
@@ -66,12 +76,9 @@ contract QueuesMethods is Params {
         queues[theId].core.participants.push(hound);
         queues[theId].core.enqueueDates.push(block.timestamp);
 
-        IUpdateHoundStamina(control.hounds).updateHoundStamina(hound);
-
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, theId) == 0);
 
         address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
-
 
         (
             MicroPayment.Struct memory alphaduneFee, 
@@ -120,13 +127,7 @@ contract QueuesMethods is Params {
 
         if ( queues[theId].core.participants.length == queues[theId].totalParticipants ) {
 
-            IHandleArenaUsage(control.arenas).handleArenaUsage(queues[theId].core.arena);
-
-            IHandleRaceLoot(control.races).handleRaceLoot(
-                queues[theId].core.payments
-            );
-
-            IRaceStart(control.races).raceStart(queues[theId], theId);
+            IRaceStart(control.races).raceStart(theId, queues[theId]);
 
             delete queues[theId].core.participants;
             delete queues[theId].core.enqueueDates;

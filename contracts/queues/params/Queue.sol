@@ -2,6 +2,7 @@
 pragma solidity 0.8.17;
 import '../../payments/params/Payment.sol';
 import './Core.sol';
+import '../../incubator/params/Specie.sol';
 
 library Queue {
     
@@ -18,6 +19,10 @@ library Queue {
         uint32 totalParticipants;
 
         uint32 cooldown;
+
+        uint32 staminaCost;
+
+        Specie.Enum[] speciesAllowed;
 
         bool closed;
 

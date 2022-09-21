@@ -60,6 +60,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -68,7 +69,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -76,6 +78,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 
@@ -83,14 +86,14 @@ export interface IncubatorInterface extends utils.Interface {
   contractName: "Incubator";
   functions: {
     "allowed(address)": FunctionFragment;
-    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256,(uint256,uint256,uint256,uint256,uint32[54],string),uint256)": FunctionFragment;
+    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256)": FunctionFragment;
     "control()": FunctionFragment;
     "getIdentity(uint256)": FunctionFragment;
     "houndsIdentity(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address,address,address,address,address,address[],uint32))": FunctionFragment;
-    "setIdentity(uint256,(uint256,uint256,uint256,uint256,uint32[54],string))": FunctionFragment;
+    "setIdentity(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -240,12 +243,13 @@ export interface Incubator extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, number] & {
         maleParent: BigNumber;
         femaleParent: BigNumber;
         generation: BigNumber;
         birthDate: BigNumber;
         extensionTraits: string;
+        specie: number;
       }
     >;
 
@@ -305,12 +309,13 @@ export interface Incubator extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+    [BigNumber, BigNumber, BigNumber, BigNumber, string, number] & {
       maleParent: BigNumber;
       femaleParent: BigNumber;
       generation: BigNumber;
       birthDate: BigNumber;
       extensionTraits: string;
+      specie: number;
     }
   >;
 
@@ -370,12 +375,13 @@ export interface Incubator extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber, string] & {
+      [BigNumber, BigNumber, BigNumber, BigNumber, string, number] & {
         maleParent: BigNumber;
         femaleParent: BigNumber;
         generation: BigNumber;
         birthDate: BigNumber;
         extensionTraits: string;
+        specie: number;
       }
     >;
 

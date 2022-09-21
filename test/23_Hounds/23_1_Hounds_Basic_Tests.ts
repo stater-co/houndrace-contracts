@@ -101,7 +101,6 @@ async function basicTest(
         races: dependencies.races
       });
 
-      console.log("===== ok1");
       await safeBreed({
         contract: dependencies.hounds,
         hound1: createdHoundId,
@@ -116,7 +115,6 @@ async function basicTest(
       const [sig1] = await ethers.getSigners();
       await safeBoostHoundBreeding({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 
@@ -127,7 +125,6 @@ async function basicTest(
       const [sig1] = await ethers.getSigners();
       await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,
-        hound1: createdHoundId,
         signer: sig1
       });
 

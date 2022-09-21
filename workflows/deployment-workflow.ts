@@ -62,7 +62,8 @@ async function main() {
         racesAddress: races.races.address,
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address
+        paymentsAddress: payments.payments.address,
+        incubatorAddress: incubators.incubator.address
     });
     
     await runGenerator({

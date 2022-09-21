@@ -13,16 +13,30 @@ import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import './HoundStatistics.sol';
+import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 import '../../payments/interfaces/IPay.sol';
+import '../../queues/interfaces/IStaminaCostOf.sol';
 
 
 contract Params is Ownable, Withdrawable {
     
-    event NewRace(uint256 indexed id, Race.Struct race);
-    event NewFinishedRace(uint256 indexed id, Race.Struct race);
-    event UploadRace(uint256 indexed id, Race.Struct race);
+    event NewRace(
+        uint256 indexed id, 
+        uint256 indexed queueId, 
+        Race.Struct race
+    );
+    event NewFinishedRace(
+        uint256 indexed id, 
+        uint256 indexed queueId, 
+        Race.Struct race
+    );
+    event UploadRace(
+        uint256 indexed id, 
+        uint256 indexed queueId, 
+        Race.Struct race
+    );
 
     uint256 public id = 1;
     RacesConstructor.Struct public control;

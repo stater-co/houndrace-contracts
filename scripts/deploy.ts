@@ -298,10 +298,7 @@ async function main() {
       breedCostCurrency: globalParams.address0,
       breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
-      breedFee: "0x2386F26FC10000",
-      refillCost: "0x2386F26FC10000",
-      refillBreedingCooldownCost: "0x2386F26FC10000",
-      refillStaminaCooldownCost: "0x2386F26FC10000"
+      breedFee: "0x2386F26FC10000"
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
@@ -424,7 +421,7 @@ async function main() {
       })],
       props: {}
     }) as Gamification;
-    DeploymentLogger('export GAMIFICATIONS=' + gamificationRestricted.address);
+    DeploymentLogger('export GAMIFICATIONS=' + gamification.address);
     deployments.update(18, {
       step: "Deploy races restricted"
     });
@@ -438,6 +435,7 @@ async function main() {
       payments: globalParams.address0,
       restricted: globalParams.address0,
       queues: globalParams.address0,
+      races: globalParams.address0,
       allowedCallers: [],
       callable: false
     }
@@ -526,6 +524,7 @@ async function main() {
       races: globalParams.address0,
       queues: globalParams.address0,
       zerocost: globalParams.address0,
+      incubator: globalParams.address0,
       allowedCallers: []
     }
     const queuesMethods = await deployContract({
@@ -569,6 +568,7 @@ async function main() {
     });
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
+      allowedApprovals: [],
       hounds: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
@@ -638,10 +638,7 @@ async function main() {
       breedCostCurrency: globalParams.address0,
       breedFeeCurrency: globalParams.address0,
       breedCost: "0xB1A2BC2EC50000",
-      breedFee: "0x2386F26FC10000",
-      refillCost: "0x2386F26FC10000",
-      refillBreedingCooldownCost: "0x2386F26FC10000",
-      refillStaminaCooldownCost: "0x2386F26FC10000"
+      breedFee: "0x2386F26FC10000"
     };
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       incubator: incubator.address,
@@ -684,6 +681,7 @@ async function main() {
       payments: payments.address,
       restricted: racesRestricted.address,
       queues: queues.address,
+      races: races.address,
       allowedCallers: [races.address, queues.address],
       callable: false
     }
@@ -709,10 +707,12 @@ async function main() {
       races: races.address,
       allowedCallers: [races.address],
       queues: queues.address,
-      zerocost: queuesZerocost.address
+      zerocost: queuesZerocost.address,
+      incubator: incubator.address
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
+      allowedApprovals: [],
       hounds: hounds.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -1180,7 +1180,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationRestricted.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1192,7 +1196,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamificationMethods.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1204,7 +1212,11 @@ async function main() {
       try {
         await run("verify:verify", {
           address: gamification.address,
-          constructorArguments: [arrayfy(gamificationConstructor)]
+          constructorArguments: [arrayfy({
+            ...gamificationConstructor,
+            defaultBreeding: arrayfy(globalParams.houndBreeding),
+            defaultStamina: arrayfy(globalParams.houndStamina)
+          })]
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);

@@ -23,6 +23,7 @@ export async function run(
         lootboxes = await deployContract({
           name: 'Lootboxes',
           constructor: [[
+            [],
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
             sig1.address,

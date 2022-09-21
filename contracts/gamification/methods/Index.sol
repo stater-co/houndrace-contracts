@@ -14,16 +14,21 @@ contract GamificationMethods is Params {
     function initializeHoundGamingStats(uint256 onId, uint32[54] memory genetics) external {
         require(allowed[msg.sender]);
         houndsStamina[onId] = HoundStamina.Struct(
+            control.defaultStamina.staminaRefillCurrency, // staminaRefillCurrency
             0, // staminaLastUpdate
             genetics[53] > 3 ? 
                 control.defaultStamina.staminaRefill1x - ( control.defaultStamina.staminaRefill1x / 100 * genetics[53] ) 
             : 
                 control.defaultStamina.staminaRefill1x + ( control.defaultStamina.staminaRefill1x / 100 * genetics[53] ), // staminaRefill1x
+            genetics[50] >= 1 && genetics[50] <= 4 ? 
+                    control.defaultStamina.refillStaminaCooldownCost - ( ( control.defaultStamina.refillStaminaCooldownCost / 100 ) * genetics[50] ) 
+                :
+                    control.defaultStamina.refillStaminaCooldownCost + ( ( control.defaultStamina.refillStaminaCooldownCost / 150 ) * genetics[50] ), // refillStaminaCooldownCost
             genetics[52] > 6 ? 
                 control.defaultStamina.staminaValue + genetics[52] - 6 
             : 
                 control.defaultStamina.staminaValue - genetics[52], // staminaValue
-            genetics[51] == 9 ? 2 : control.defaultStamina.staminaPerHour, // staminaPerHour
+            genetics[51] == 9 ? control.defaultStamina.staminaPerTimeUnit / 2 : control.defaultStamina.staminaPerTimeUnit, // staminaPerHour
             genetics[50] > 6 ? 
                 control.defaultStamina.staminaCap + ( ( genetics[50] - 6 ) * 5 ) 
             : 
@@ -31,7 +36,8 @@ contract GamificationMethods is Params {
         );
 
         houndsBreeding[onId] = HoundBreeding.Struct(
-            address(0), // breeding fee currency
+            control.defaultBreeding.breedingFeeCurrency,
+            control.defaultBreeding.breedingCooldownCurrency,
             0, // lastBreed
             genetics[1] == 1 ? 
                 control.defaultBreeding.breedingCooldown - (
@@ -47,10 +53,12 @@ contract GamificationMethods is Params {
                     : 
                         0
                 ), // breedingCooldown
-            genetics[53] < 3 ? 
-                control.defaultBreeding.breedingFee - ( control.defaultBreeding.breedingFee / 100 * genetics[53] ) 
+            0, // breedingFee,
+            genetics[51] == 1 ? control.defaultBreeding.breedingCooldownTimeUnit / 2 : control.defaultBreeding.breedingCooldownTimeUnit, // breedingCooldownTimeUnit
+            genetics[52] > 7 && genetics[52] <= 9 ? 
+                control.defaultBreeding.refillBreedingCooldownCost - ( ( control.defaultBreeding.refillBreedingCooldownCost / 100 ) * genetics[52] )
             : 
-                control.defaultBreeding.breedingFee + ( control.defaultBreeding.breedingFee / 100 * genetics[53] ), // staminaRefill1x,
+                control.defaultBreeding.refillBreedingCooldownCost + ( ( control.defaultBreeding.refillBreedingCooldownCost / 150 ) * genetics[52] ), // refillBreedingCooldownCost
             false // availableToBreed
         );
     }

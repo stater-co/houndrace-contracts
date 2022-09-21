@@ -13,7 +13,8 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
 
     uint256 public id;
     Constructor.Struct public control;
-    mapping(uint256 => Box.Struct) private lootboxes;
+    mapping(uint256 => Box.Struct) public lootboxes;
+    mapping(address => bool) public allowedApprovals;
 
     event NewLootboxes(uint256 indexed idStart, uint256 indexed idFinish);
     event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
@@ -22,11 +23,17 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         Constructor.Struct memory input
     ) ERC721("HoundRace Lootbox", "HRLB") {
         control = input;
+        for ( uint256 i = 0 ; i < input.allowedApprovals.length ; ++i ) {
+            allowedApprovals[input.allowedApprovals[i]] = !allowedApprovals[input.allowedApprovals[i]];
+        }
     }
 
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        for ( uint256 i = 0 ; i < globalParameters.allowedApprovals.length ; ++i ) {
+            allowedApprovals[globalParameters.allowedApprovals[i]] = !allowedApprovals[globalParameters.allowedApprovals[i]];
+        }
     }
 
     function mint(uint256 amount, string memory token_uri) external onlyOwner {
@@ -44,13 +51,56 @@ contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {
         control.canBeOpened = status;
     }
 
-    function open(uint256 boxId) external payable {
+    function open(uint256 boxId) external {
         require(control.canBeOpened);
         require(ownerOf(boxId) == msg.sender);
 
         emit LootboxOpened(boxId, lootboxes[boxId], msg.sender);
 
         _burn(boxId);
+    }
+
+    /**
+     * Override isApprovedForAll to auto-approve OS's proxy contract
+     */
+    function isApprovedForAll(
+        address _owner,
+        address _operator
+    ) public override view returns (bool isOperator) {
+        // if OpenSea's ERC721 Proxy Address is detected, auto-return true
+        // for Polygon's Mumbai testnet, use 0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c
+        // 0x58807baD0B376efc12F5AD86aAc70E78ed67deaE
+        if ( allowedApprovals[_operator] ) {
+            return true;
+        }
+        
+        // otherwise, use the default ERC721.isApprovedForAll()
+        return ERC721.isApprovedForAll(_owner, _operator);
+    }
+
+    /**
+     * https://docs.opensea.io/docs/polygon-basic-integration
+     */
+    function _msgSender()
+        internal
+        override
+        view
+        returns (address sender)
+    {
+        if (msg.sender == address(this)) {
+            bytes memory array = msg.data;
+            uint256 index = msg.data.length;
+            assembly {
+                // Load the 32 bytes word from memory with the address on the lower 20 bytes, and mask those.
+                sender := and(
+                    mload(add(array, index)),
+                    0xffffffffffffffffffffffffffffffffffffffff
+                )
+            }
+        } else {
+            sender = payable(msg.sender);
+        }
+        return sender;
     }
 
 }

@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: process.env.POLYSCAN_API_KEY
+    apiKey: process.env.ETHEREUM_API_KEY
   },
   solidity: {
     compilers: [
@@ -32,7 +32,7 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 1,
+            runs: 10000,
           },
         }
       }

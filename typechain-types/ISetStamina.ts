@@ -24,24 +24,30 @@ import type {
 
 export declare namespace HoundStamina {
   export type StructStruct = {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
   };
 
   export type StructStructOutput = [
+    string,
+    BigNumber,
     BigNumber,
     BigNumber,
     number,
     number,
     number
   ] & {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
-    staminaPerHour: number;
+    staminaPerTimeUnit: number;
     staminaCap: number;
   };
 }
@@ -49,7 +55,7 @@ export declare namespace HoundStamina {
 export interface ISetStaminaInterface extends utils.Interface {
   contractName: "ISetStamina";
   functions: {
-    "setStamina(uint256,(uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "setStamina(uint256,(address,uint256,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
   };
 
   encodeFunctionData(

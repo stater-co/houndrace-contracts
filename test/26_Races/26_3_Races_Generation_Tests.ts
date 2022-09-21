@@ -65,7 +65,8 @@ async function generationTests(
         for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
           let houndToMint: Hound.StructStruct = globalParams.defaultHound;
           houndToMint.identity.geneticSequence = houndToMint.identity.geneticSequence.map((i) => { return Math.floor(Math.random() * 9) + 1; });
-          houndToMint.identity.geneticSequence[1] = 1;
+          houndToMint.identity.geneticSequence[1] = i % 2 === 0 ? 1 : 2;
+          console.log(houndToMint.identity.geneticSequence);
           let createdHoundId = await safeMintHound({
             contract: dependencies.hounds,
             hound: houndToMint as Hound.StructStructOutput,
@@ -93,7 +94,7 @@ async function generationTests(
       for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
       
         it("Generate race " + i, async function () {
-          const response: any = await axios.post("https://houndrace.com/api/races/generate", {
+          const response: any = await axios.post("http://localhost:3000/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,
             ids: ids,

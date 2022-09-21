@@ -27,34 +27,26 @@ export async function joinQueue(
 export async function safeJoinQueue(
   params: JoinQueueParams
 ): Promise<void> {
-  console.log("enqueue x1");
   const before: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
 
-  console.log("enqueue x2");
   const queue: any = await params.contract.queues(params.queueId);
 
-  console.log("enqueue x3 ", queue.core.arena);
   const arena: Arena.StructStruct = await params.arenasContract.arenas(queue.core.arena);
 
-  console.log("enqueue x4");
   const senderAddress = await params.sender.getAddress();
 
-  console.log("enqueue x5");
   const enqueueCost: MicroPayment.StructStructOutput[] = await params.contract.enqueueCost(params.queueId);
 
-  console.log("enqueue x6");
   let totalValueToPay: BigNumber = BigNumber.from(0);
   for ( let i = 0 , l = enqueueCost.length ; i < l ; ++i ) {
     totalValueToPay = totalValueToPay.add(enqueueCost[i].amount);
   }
 
-  console.log("enqueue x7");
   if ( arena.currency !== globalParams.address0 ) {
     await params.erc20.mint(senderAddress, totalValueToPay);
     await params.erc20.approve(params.paymentsContract.address, totalValueToPay);
   }
 
-  console.log("joining queue here ...");
   await joinQueue(params);
 
   const after: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);

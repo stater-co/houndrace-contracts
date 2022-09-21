@@ -7,22 +7,30 @@ contract RacesMethods is Params {
 
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
-    function raceStart(Queue.Struct memory queue, uint256 theId) external {
+    function raceStart(
+        uint256 queueId,
+        Queue.Struct memory queue
+    ) external {
         require(allowed[msg.sender]);
 
         if ( control.callable ) {
 
-            races[id] = IGenerate(control.generator).generate(queue,theId);
+            IHandleArenaUsage(control.arenas).handleArenaUsage(queue.core.arena);
+
+            IHandleRaceLoot(control.races).handleRaceLoot(queue.core.payments);
+
+            races[id] = IGenerate(control.generator).generate(queue,queueId);
 
             for ( uint256 i = 0 ; i < queue.core.participants.length ; ++i ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], theId) != 0);
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], queueId) != 0);
+                IUpdateHoundStamina(control.hounds).updateHoundStamina(queue.core.participants[i], queue.staminaCost);
             }
 
-            emit NewFinishedRace(id, races[id]);
+            emit NewFinishedRace(id, queueId, races[id]);
 
         } else {
 
-            emit NewRace(id, Race.Struct(
+            emit NewRace(id, queueId, Race.Struct(
                 Core.Struct(
                     queue.core.name,
                     queue.core.feeCurrency,
@@ -35,7 +43,7 @@ contract RacesMethods is Params {
                     queue.core.payments
                 ),
                 block.timestamp,
-                theId,
+                queueId,
                 '0x00'
             ));
 

@@ -48,10 +48,12 @@ const defaultRace: Race.StructStruct = {
 };
 
 const houndStamina: HoundStamina.StructStruct = {
+    staminaRefillCurrency: address0,
     staminaLastUpdate: 0,
-    staminaRefill1x: 100000,
+    staminaRefill1x: 100_000,
     staminaValue: 100,
-    staminaPerHour: 1,
+    staminaPerTimeUnit: 86_400,
+    refillStaminaCooldownCost: 100_000,
     staminaCap: 100
 };
 
@@ -63,10 +65,13 @@ const houndStatistics: HoundStatistics.StructStruct = {
 };
 
 const houndBreeding: HoundBreeding.StructStruct = {
+    breedingCooldownCurrency: address0,
     breedingFeeCurrency: address0,
     lastBreed: 0,
-    breedingCooldown: 0,
-    breedingFee: 100000,
+    breedingCooldown: 345_600,
+    breedingFee: 100_000,
+    breedingCooldownTimeUnit: 3600,
+    refillBreedingCooldownCost: 100_000,
     availableToBreed: false
 };
 
@@ -76,7 +81,8 @@ const houndIdentity: HoundIdentity.StructStruct = {
     generation: 1,
     geneticSequence: maleBoilerplateGene,
     maleParent: 0,
-    extensionTraits: ""
+    extensionTraits: "",
+    specie: 0
 };
 
 const houndProfile: HoundProfile.StructStruct = {
@@ -111,7 +117,9 @@ const defaultQueue: Queue.StructStruct = {
     lastCompletion: BigNumber.from(0),
     totalParticipants: 3,
     cooldown: 0,
-    closed: false
+    speciesAllowed: [0,1],
+    closed: false,
+    staminaCost: 5
 };
 
 interface GlobalParams {

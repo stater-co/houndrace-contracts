@@ -33,7 +33,21 @@ contract IncubatorMethods is Params {
             hound1.generation + hound2.generation,
             block.timestamp,
             genetics,
-            ""
+            "",
+            uint256(uint160(control.randomness)) % 100 == 99 ? 
+                (
+                    hound1.specie > hound2.specie ? 
+                        hound1.specie
+                    : 
+                        hound2.specie
+                )
+            : 
+                (
+                    hound1.specie > hound2.specie ? 
+                        hound2.specie
+                    : 
+                        hound1.specie
+                )
         );
     }
 

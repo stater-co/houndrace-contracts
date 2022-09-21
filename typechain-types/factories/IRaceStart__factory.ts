@@ -10,6 +10,11 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "queueId",
+        type: "uint256",
+      },
+      {
         components: [
           {
             components: [
@@ -121,6 +126,16 @@ const _abi = [
             type: "uint32",
           },
           {
+            internalType: "uint32",
+            name: "staminaCost",
+            type: "uint32",
+          },
+          {
+            internalType: "enum Specie.Enum[]",
+            name: "speciesAllowed",
+            type: "uint8[]",
+          },
+          {
             internalType: "bool",
             name: "closed",
             type: "bool",
@@ -129,11 +144,6 @@ const _abi = [
         internalType: "struct Queue.Struct",
         name: "queue",
         type: "tuple",
-      },
-      {
-        internalType: "uint256",
-        name: "theId",
-        type: "uint256",
       },
     ],
     name: "raceStart",

@@ -9,7 +9,6 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
-  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -25,13 +24,21 @@ import type {
 
 export declare namespace Constructor {
   export type StructStruct = {
+    allowedApprovals: string[];
     hounds: string;
     payments: string;
     alphadune: string;
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [string, string, string, boolean] & {
+  export type StructStructOutput = [
+    string[],
+    string,
+    string,
+    string,
+    boolean
+  ] & {
+    allowedApprovals: string[];
     hounds: string;
     payments: string;
     alphadune: string;
@@ -66,12 +73,14 @@ export declare namespace Box {
 export interface LootboxesInterface extends utils.Interface {
   contractName: "Lootboxes";
   functions: {
+    "allowedApprovals(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "lootboxes(uint256)": FunctionFragment;
     "mint(uint256,string)": FunctionFragment;
     "name()": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
@@ -81,7 +90,7 @@ export interface LootboxesInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -90,6 +99,10 @@ export interface LootboxesInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "allowedApprovals",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "approve",
     values: [string, BigNumberish]
@@ -104,6 +117,10 @@ export interface LootboxesInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "lootboxes",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
@@ -158,6 +175,10 @@ export interface LootboxesInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "allowedApprovals",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -170,6 +191,7 @@ export interface LootboxesInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "lootboxes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
@@ -302,6 +324,11 @@ export interface Lootboxes extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -329,10 +356,15 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[boolean] & { isOperator: boolean }>;
+
+    lootboxes(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { generated: boolean }>;
 
     mint(
       amount: BigNumberish,
@@ -352,7 +384,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
@@ -422,6 +454,8 @@ export interface Lootboxes extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
   approve(
     to: string,
     tokenId: BigNumberish,
@@ -449,10 +483,12 @@ export interface Lootboxes extends BaseContract {
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
   isApprovedForAll(
-    owner: string,
-    operator: string,
+    _owner: string,
+    _operator: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
+
+  lootboxes(arg0: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
 
   mint(
     amount: BigNumberish,
@@ -472,7 +508,7 @@ export interface Lootboxes extends BaseContract {
 
   open(
     boxId: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   owner(overrides?: CallOverrides): Promise<string>;
@@ -536,6 +572,8 @@ export interface Lootboxes extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -563,10 +601,12 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    lootboxes(arg0: BigNumberish, overrides?: CallOverrides): Promise<boolean>;
 
     mint(
       amount: BigNumberish,
@@ -707,6 +747,11 @@ export interface Lootboxes extends BaseContract {
   };
 
   estimateGas: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -725,8 +770,13 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    lootboxes(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -748,7 +798,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
@@ -819,6 +869,11 @@ export interface Lootboxes extends BaseContract {
   };
 
   populateTransaction: {
+    allowedApprovals(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -840,8 +895,13 @@ export interface Lootboxes extends BaseContract {
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      _owner: string,
+      _operator: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    lootboxes(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -863,7 +923,7 @@ export interface Lootboxes extends BaseContract {
 
     open(
       boxId: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;

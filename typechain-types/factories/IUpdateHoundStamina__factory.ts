@@ -17,6 +17,11 @@ const _abi = [
         name: "theId",
         type: "uint256",
       },
+      {
+        internalType: "uint32",
+        name: "amount",
+        type: "uint32",
+      },
     ],
     name: "updateHoundStamina",
     outputs: [],

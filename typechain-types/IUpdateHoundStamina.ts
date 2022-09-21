@@ -25,12 +25,12 @@ import type {
 export interface IUpdateHoundStaminaInterface extends utils.Interface {
   contractName: "IUpdateHoundStamina";
   functions: {
-    "updateHoundStamina(uint256)": FunctionFragment;
+    "updateHoundStamina(uint256,uint32)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "updateHoundStamina",
-    values: [BigNumberish]
+    values: [BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(
@@ -71,18 +71,21 @@ export interface IUpdateHoundStamina extends BaseContract {
   functions: {
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   updateHoundStamina(
     theId: BigNumberish,
+    amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -92,6 +95,7 @@ export interface IUpdateHoundStamina extends BaseContract {
   estimateGas: {
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -99,6 +103,7 @@ export interface IUpdateHoundStamina extends BaseContract {
   populateTransaction: {
     updateHoundStamina(
       theId: BigNumberish,
+      amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

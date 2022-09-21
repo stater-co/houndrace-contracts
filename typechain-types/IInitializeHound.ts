@@ -45,35 +45,13 @@ export declare namespace HoundStatistics {
 
 export declare namespace HoundStamina {
   export type StructStruct = {
+    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
+    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerHour: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
-    staminaValue: number;
-    staminaPerHour: number;
-    staminaCap: number;
-  };
-}
-
-export declare namespace HoundBreeding {
-  export type StructStruct = {
-    breedingFeeCurrency: string;
-    lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
@@ -81,12 +59,49 @@ export declare namespace HoundBreeding {
     BigNumber,
     BigNumber,
     BigNumber,
+    number,
+    number,
+    number
+  ] & {
+    staminaRefillCurrency: string;
+    staminaLastUpdate: BigNumber;
+    staminaRefill1x: BigNumber;
+    refillStaminaCooldownCost: BigNumber;
+    staminaValue: number;
+    staminaPerTimeUnit: number;
+    staminaCap: number;
+  };
+}
+
+export declare namespace HoundBreeding {
+  export type StructStruct = {
+    breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    lastBreed: BigNumberish;
+    breedingCooldown: BigNumberish;
+    breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
+    availableToBreed: boolean;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
     boolean
   ] & {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
     availableToBreed: boolean;
   };
 }
@@ -99,6 +114,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
+    specie: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -107,7 +123,8 @@ export declare namespace HoundIdentity {
     BigNumber,
     BigNumber,
     number[],
-    string
+    string,
+    number
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
@@ -115,6 +132,7 @@ export declare namespace HoundIdentity {
     birthDate: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
+    specie: number;
   };
 }
 
@@ -161,7 +179,7 @@ export declare namespace Hound {
 export interface IInitializeHoundInterface extends utils.Interface {
   contractName: "IInitializeHound";
   functions: {
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(uint256,uint256,uint32,uint32,uint32),(address,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
   };
 
   encodeFunctionData(

@@ -25,7 +25,7 @@ export function checkHoundStructure(
     ( hound.statistics.totalRuns >= 0 ) && 
     ( hound.stamina.staminaCap > 0 ) && 
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
-    ( hound.stamina.staminaPerHour >= 0 ) && 
+    ( hound.stamina.staminaPerTimeUnit >= 0 ) && 
     ( hound.stamina.staminaRefill1x >= 0 ) && 
     ( hound.stamina.staminaValue >= 0 ),
     "Hound structure has not been entirely retreiven from contract"

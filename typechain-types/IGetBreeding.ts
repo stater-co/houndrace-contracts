@@ -23,23 +23,32 @@ import type {
 export declare namespace HoundBreeding {
   export type StructStruct = {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
     breedingCooldown: BigNumberish;
     breedingFee: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
     availableToBreed: boolean;
   };
 
   export type StructStructOutput = [
     string,
+    string,
+    BigNumber,
+    BigNumber,
     BigNumber,
     BigNumber,
     BigNumber,
     boolean
   ] & {
     breedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
     lastBreed: BigNumber;
     breedingCooldown: BigNumber;
     breedingFee: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
     availableToBreed: boolean;
   };
 }

@@ -5,23 +5,35 @@ import { expecting } from '../expecting';
 
 export async function boostHoundStamina(
   params: BoostStaminaParams
-) {
-  const hound: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  await params.contract.boostHoundStamina(
-    params.hound1, 
-    await params.contract.signer.getAddress(), 
-    hound.breeding.breedingFee,{
-      value: await (await params.contract.control()).fees.currency === globalParams.address0 ? hound.stamina.staminaRefill1x : 0
+): Promise<[Hound.StructStructOutput,Hound.StructStructOutput]> {
+  const totalHounds: number = Number(await params.contract.id());
+  let exists: boolean = false;
+  let i = 1;
+  let hound: Hound.StructStructOutput = await params.contract.hound(i);
+  for (  ; i < totalHounds ; ++i ) {
+    hound = await params.contract.hound(i);
+    if ( Number(hound.stamina.staminaValue) < Number(hound.stamina.staminaCap) ) {
+      exists = true;
+      break;
     }
-  );
+  }
+
+  if ( exists ) {
+    await params.contract.boostHoundStamina(
+      i, 
+      await params.contract.signer.getAddress(), 
+      hound.stamina.staminaRefillCurrency === globalParams.address0 ? 0 : hound.breeding.breedingFee,{
+        value: hound.stamina.staminaRefillCurrency === globalParams.address0 ? hound.stamina.staminaRefill1x : 0
+      }
+    );
+  }
+
+  return [hound, await params.contract.hound(i)];
 }
 
 export async function safeBoostHoundStamina(
   params: BoostStaminaParams
 ) {
-  const before: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  await boostHoundStamina(params);
-  const after: Hound.StructStructOutput = await params.contract.hound(params.hound1);
-  expecting(before.breeding.lastBreed !== after.breeding.lastBreed, "Boost hound stamina method bugged");
-
+  const boostedHound: [Hound.StructStructOutput,Hound.StructStructOutput] = await boostHoundStamina(params);
+  expecting(JSON.stringify(boostedHound[0]) !== JSON.stringify(boostedHound[1]),  "Boost hound stamina method bugged");
 }
