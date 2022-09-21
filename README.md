@@ -5,7 +5,9 @@
 <h1 align="center">It's in your DNA</h1>
 </br></br></br></br>
 
-[![Compilation status](https://github.com/stater-co/houndrace-contracts/actions/workflows/compilation-status.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/compilation-status.yml)
-[![Core functionalities](https://github.com/stater-co/houndrace-contracts/actions/workflows/core-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/core-functionalities.yml)
-[![Deployment functionalities](https://github.com/stater-co/houndrace-contracts/actions/workflows/deployment-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/deployment-functionalities.yml)
-[![Full Contracts Ecosystem Verification](https://github.com/stater-co/houndrace-contracts/actions/workflows/full-deployment-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/full-deployment-functionalities.yml)
+| Dev & QA tests  | Status |
+| :------------ |:---------------:|
+| [![Compilation status](https://github.com/stater-co/houndrace-contracts/actions/workflows/compilation-status.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/compilation-status.yml) |  |
+| [![Core functionalities](https://github.com/stater-co/houndrace-contracts/actions/workflows/core-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/core-functionalities.yml) |  |
+| [![Deployment functionalities](https://github.com/stater-co/houndrace-contracts/actions/workflows/deployment-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/deployment-functionalities.yml) |  |
+| [![Full Contracts Ecosystem Verification](https://github.com/stater-co/houndrace-contracts/actions/workflows/full-deployment-functionalities.yml/badge.svg)](https://github.com/stater-co/houndrace-contracts/actions/workflows/full-deployment-functionalities.yml) |  |
