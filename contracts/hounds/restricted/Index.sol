@@ -7,7 +7,11 @@ contract HoundsRestricted is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
     
-    function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external {
+    function initializeHound(
+        uint256 onId, 
+        address owner, 
+        Hound.Struct memory theHound
+    ) external onlyOwner {
         if ( onId > 0 ) {
             require(bytes(hounds[onId].token_uri).length == 0);
             require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
@@ -26,7 +30,10 @@ contract HoundsRestricted is Params {
         }
     }
 
-    function setTokenURI(uint256 _tokenId, string memory token_uri) external {
+    function setTokenURI(
+        uint256 _tokenId, 
+        string memory token_uri
+    ) external onlyOwner {
         hounds[_tokenId].token_uri = token_uri;
         emit NewTokenUri(_tokenId, token_uri);
     }

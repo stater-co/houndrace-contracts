@@ -8,7 +8,7 @@ import {
   BytesLike,
   CallOverrides,
   ContractTransaction,
-  PayableOverrides,
+  Overrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -22,15 +22,51 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace HoundIdentity {
+  export type StructStruct = {
+    maleParent: BigNumberish;
+    femaleParent: BigNumberish;
+    generation: BigNumberish;
+    birthDate: BigNumberish;
+    geneticSequence: BigNumberish[];
+    extensionTraits: string;
+    specie: BigNumberish;
+  };
+
+  export type StructStructOutput = [
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    BigNumber,
+    number[],
+    string,
+    number
+  ] & {
+    maleParent: BigNumber;
+    femaleParent: BigNumber;
+    generation: BigNumber;
+    birthDate: BigNumber;
+    geneticSequence: number[];
+    extensionTraits: string;
+    specie: number;
+  };
+}
+
 export interface IBreedHoundsInterface extends utils.Interface {
   contractName: "IBreedHounds";
   functions: {
-    "breedHounds(uint256,uint256)": FunctionFragment;
+    "breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "breedHounds",
-    values: [BigNumberish, BigNumberish]
+    values: [
+      BigNumberish,
+      HoundIdentity.StructStruct,
+      BigNumberish,
+      HoundIdentity.StructStruct,
+      BigNumberish
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -70,22 +106,31 @@ export interface IBreedHounds extends BaseContract {
 
   functions: {
     breedHounds(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      hound1Id: BigNumberish,
+      hound1: HoundIdentity.StructStruct,
+      hound2Id: BigNumberish,
+      hound2: HoundIdentity.StructStruct,
+      onId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   breedHounds(
-    hound1: BigNumberish,
-    hound2: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    hound1Id: BigNumberish,
+    hound1: HoundIdentity.StructStruct,
+    hound2Id: BigNumberish,
+    hound2: HoundIdentity.StructStruct,
+    onId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     breedHounds(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
+      hound1Id: BigNumberish,
+      hound1: HoundIdentity.StructStruct,
+      hound2Id: BigNumberish,
+      hound2: HoundIdentity.StructStruct,
+      onId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -94,17 +139,23 @@ export interface IBreedHounds extends BaseContract {
 
   estimateGas: {
     breedHounds(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      hound1Id: BigNumberish,
+      hound1: HoundIdentity.StructStruct,
+      hound2Id: BigNumberish,
+      hound2: HoundIdentity.StructStruct,
+      onId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     breedHounds(
-      hound1: BigNumberish,
-      hound2: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
+      hound1Id: BigNumberish,
+      hound1: HoundIdentity.StructStruct,
+      hound2Id: BigNumberish,
+      hound2: HoundIdentity.StructStruct,
+      onId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

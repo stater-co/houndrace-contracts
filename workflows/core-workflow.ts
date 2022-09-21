@@ -238,7 +238,7 @@ async function main() {
             queues: queues.queues.address,
             randomness: randomness.randomness.address,
             races: races.races.address,
-            restricted: queues.queuesRestricted.address,
+            restricted: races.racesRestricted.address,
             callable: false,
             allowedCallers: [
                 races.races.address,
