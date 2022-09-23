@@ -21,6 +21,7 @@ export async function run(
         methods = await deployContract({
           name: 'GamificationMethods',
           constructor: [[
+            dependencies.defaultFirewall,
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
             dependencies.allowed,
@@ -35,6 +36,7 @@ export async function run(
         restricted = await deployContract({
           name: 'GamificationRestricted',
           constructor: [[
+            dependencies.defaultFirewall,
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
             dependencies.allowed,
@@ -49,6 +51,7 @@ export async function run(
         gamification = await deployContract({
           name: 'Gamification',
           constructor: [[
+            dependencies.defaultFirewall,
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
             dependencies.allowed,

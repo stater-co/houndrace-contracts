@@ -6,6 +6,7 @@ import { Arena } from '../typechain-types/Arenas';
 import { Race, HoundStatistics } from '../typechain-types/Races';
 import { HoundStamina, HoundBreeding } from '../typechain-types/Gamification';
 import { HoundIdentity } from '../typechain-types/Incubator';
+import { FirewallConstructor } from '../typechain-types/Firewall';
 
 
 const address0: string = '0x0000000000000000000000000000000000000000';
@@ -29,6 +30,11 @@ const defaultArena: Arena.StructStruct = {
     distance: 1,
     weather: 1
 };
+
+const defaultFirewall: FirewallConstructor.StructStruct = {
+    council: [],
+    minCouncilApprovals: 0
+}
 
 const defaultRace: Race.StructStruct = {
     core: {
@@ -132,6 +138,7 @@ interface GlobalParams {
     defaultRace: Race.StructStructOutput;
     houndBreeding: HoundBreeding.StructStruct;
     houndStamina: HoundStamina.StructStruct;
+    defaultFirewall: FirewallConstructor.StructStruct;
 };
 
 export const globalParams: GlobalParams = {
@@ -143,5 +150,6 @@ export const globalParams: GlobalParams = {
     defaultArena: defaultArena as Arena.StructStructOutput,
     defaultRace: defaultRace as Race.StructStructOutput,
     houndBreeding: houndBreeding,
-    houndStamina: houndStamina
+    houndStamina: houndStamina,
+    defaultFirewall: defaultFirewall
 };

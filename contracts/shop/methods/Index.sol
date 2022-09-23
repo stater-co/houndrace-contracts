@@ -5,9 +5,20 @@ import '../params/Index.sol';
 
 contract ShopMethods is Params {
 
-    constructor(ShopConstructor.Struct memory input) Params(input) {}
+    constructor(
+        ShopConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
 
-    function calculateDiscount(address requester) external returns(uint256) {
+    }
+
+    function calculateDiscount(
+        address requester
+    ) 
+        external 
+        returns(uint256) 
+    {
         uint256 discount;
 
         for ( uint256 i = 0; i < id; ++i ) {
@@ -23,7 +34,7 @@ contract ShopMethods is Params {
                                     if ( discounts[i].usable ) {
                                         IERC1155(discounts[i].tokenContract).safeTransferFrom(
                                             requester,
-                                            address(this),
+                                            control.alphadune,
                                             discounts[i].tokenIds[j],
                                             1,
                                             '0x00'
@@ -63,7 +74,7 @@ contract ShopMethods is Params {
                                                 if ( discounts[i].usable ) {
                                                     IERC721(discounts[i].tokenContract).safeTransferFrom(
                                                         requester,
-                                                        address(this),
+                                                        control.alphadune,
                                                         discounts[i].tokenIds[j]
                                                     );
                                                     discount = discounts[i].discount;

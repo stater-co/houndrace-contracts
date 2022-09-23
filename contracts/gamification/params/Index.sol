@@ -6,37 +6,56 @@ import './HoundBreeding.sol';
 import './HoundStamina.sol';
 
 
-contract Params is Ownable {
+contract Params is Ownable, Firewall {
 
-    Constructor.Struct public control;
-    mapping (address => bool) public allowed;
+    GamificationConstructor.Struct public control;
     mapping(uint256 => HoundStamina.Struct) public houndsStamina;
     mapping(uint256 => HoundBreeding.Struct) public houndsBreeding;
 
-    constructor(Constructor.Struct memory input) {
+    constructor(
+        GamificationConstructor.Struct memory input
+    ) 
+        Firewall(input.firewall) 
+    {
         control = input;
-        handleAllowedCallers(input.allowed);
     }
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        handleAllowedCallers(globalParameters.allowed);
+    function setGlobalParameters(
+        GamificationConstructor.Struct memory globalParameters
+    ) 
+        external 
+        onlyOwner 
+    {
         control = globalParameters;
     }
 
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
-    }
-
-    function getStamina(uint256 id) external view returns(HoundStamina.Struct memory){
+    function getStamina(
+        uint256 id
+    ) 
+        external 
+        view 
+        returns(HoundStamina.Struct memory) 
+    {
         return houndsStamina[id];
     }
 
-    function getBreeding(uint256 id) external view returns(HoundBreeding.Struct memory){
+    function getBreeding(
+        uint256 id
+    ) 
+        external 
+        view 
+        returns(HoundBreeding.Struct memory) 
+    {
         return houndsBreeding[id];
     }
 
-    function getStaminaBreeding(uint256 id) external view returns(HoundStamina.Struct memory, HoundBreeding.Struct memory) {
+    function getStaminaBreeding(
+        uint256 id
+    ) 
+        external 
+        view 
+        returns(HoundStamina.Struct memory, HoundBreeding.Struct memory) 
+    {
         return (houndsStamina[id],houndsBreeding[id]);
     }
 

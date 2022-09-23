@@ -5,6 +5,8 @@ import '../params/Discount.sol';
 
 interface ICreateDiscount {
 
-    function createDiscount(Discount.Struct memory discount) external;
+    function createDiscount(
+        Discount.Struct memory discount
+    ) external;
 
 }

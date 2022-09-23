@@ -101,7 +101,8 @@ async function main() {
     const gamification: GamificationSystem = await runGamification({
         allowed: [],
         defaultBreeding: globalParams.houndBreeding,
-        defaultStamina: globalParams.houndStamina
+        defaultStamina: globalParams.houndStamina,
+        defaultFirewall: globalParams.defaultFirewall
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
@@ -126,7 +127,8 @@ async function main() {
         shopRestricted: payments.shopRestricted,
         constructor: {
             methods: payments.shopMethods.address,
-            restricted: payments.shopRestricted.address
+            restricted: payments.shopRestricted.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -136,11 +138,13 @@ async function main() {
             defaultBreeding: globalParams.houndBreeding,
             defaultStamina: globalParams.houndStamina,
             methods: gamification.methods.address,
-            restricted: gamification.restricted.address
+            restricted: gamification.restricted.address,
+            firewall: globalParams.defaultFirewall
         },
         methods: gamification.methods,
         restricted: gamification.restricted,
-        gamification: gamification.gamification
+        gamification: gamification.gamification,
+        defaultFirewall: globalParams.defaultFirewall
     });
 
     await setQueues({

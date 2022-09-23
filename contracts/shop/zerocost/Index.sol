@@ -5,9 +5,21 @@ import '../params/Index.sol';
 
 contract ShopZerocost is Params {
 
-    constructor(ShopConstructor.Struct memory input) Params(input) {}
+    constructor(
+        ShopConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
 
-    function checkDiscount(address requester) external view returns(uint256) {
+    }
+
+    function checkDiscount(
+        address requester
+    ) 
+        external 
+        view 
+        returns(uint256) 
+    {
         uint256 discount;
 
         for ( uint256 i = 0; i < id; ++i ) {

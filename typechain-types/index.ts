@@ -31,6 +31,7 @@ export type { ArenasRestricted } from "./ArenasRestricted";
 export type { TestingErc1155 } from "./TestingErc1155";
 export type { AlphaERC721 } from "./AlphaERC721";
 export type { Lootboxes } from "./Lootboxes";
+export type { Firewall } from "./Firewall";
 export type { Gamification } from "./Gamification";
 export type { IGetBreeding } from "./IGetBreeding";
 export type { IGetStamina } from "./IGetStamina";
@@ -148,6 +149,7 @@ export { ArenasRestricted__factory } from "./factories/ArenasRestricted__factory
 export { TestingErc1155__factory } from "./factories/TestingErc1155__factory";
 export { AlphaERC721__factory } from "./factories/AlphaERC721__factory";
 export { Lootboxes__factory } from "./factories/Lootboxes__factory";
+export { Firewall__factory } from "./factories/Firewall__factory";
 export { Gamification__factory } from "./factories/Gamification__factory";
 export { IGetBreeding__factory } from "./factories/IGetBreeding__factory";
 export { IGetStamina__factory } from "./factories/IGetStamina__factory";

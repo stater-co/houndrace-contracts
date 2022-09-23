@@ -5,15 +5,31 @@ import '../params/Index.sol';
 
 contract GamificationRestricted is Params {
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    constructor(
+        GamificationConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
 
-    function setStamina(uint256 id, HoundStamina.Struct memory stamina) external {
-        require(allowed[msg.sender]);
+    }
+
+    function setStamina(
+        uint256 id, 
+        HoundStamina.Struct memory stamina
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         houndsStamina[id] = stamina;
     }
 
-    function setBreeding(uint256 id, HoundBreeding.Struct memory breeding) external {
-        require(allowed[msg.sender]);
+    function setBreeding(
+        uint256 id, 
+        HoundBreeding.Struct memory breeding
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         houndsBreeding[id] = breeding;
     }
 

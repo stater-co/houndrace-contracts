@@ -5,8 +5,8 @@ import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
-import './Constructor.sol';
-import './Box.sol';
+import './params/Constructor.sol';
+import './params/Box.sol';
 
 
 contract Lootboxes is Ownable, ERC721URIStorage, ERC721Holder {

@@ -5,6 +5,9 @@ import '../params/Discount.sol';
 
 interface IEditDiscount {
 
-    function editDiscount(Discount.Struct memory discount, uint256 theId) external;
+    function editDiscount(
+        Discount.Struct memory discount, 
+        uint256 theId
+    ) external;
 
 }

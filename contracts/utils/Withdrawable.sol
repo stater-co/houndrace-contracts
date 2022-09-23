@@ -5,7 +5,12 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 
 contract Withdrawable is Ownable {
 
-    function payout(uint256 amount) external onlyOwner {
+    function payout(
+        uint256 amount
+    ) 
+        external 
+        onlyOwner 
+    {
         require(amount <= address(this).balance, "Payout: Requested amount to withdraw is too big");
         require(payable(owner()).send(amount), "Payout: Failed to withdraw");
     }

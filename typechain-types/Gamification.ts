@@ -22,6 +22,18 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace FirewallConstructor {
+  export type StructStruct = {
+    council: string[];
+    minCouncilApprovals: BigNumberish;
+  };
+
+  export type StructStructOutput = [string[], number] & {
+    council: string[];
+    minCouncilApprovals: number;
+  };
+}
+
 export declare namespace HoundBreeding {
   export type StructStruct = {
     breedingFeeCurrency: string;
@@ -85,8 +97,9 @@ export declare namespace HoundStamina {
   };
 }
 
-export declare namespace Constructor {
+export declare namespace GamificationConstructor {
   export type StructStruct = {
+    firewall: FirewallConstructor.StructStruct;
     defaultBreeding: HoundBreeding.StructStruct;
     defaultStamina: HoundStamina.StructStruct;
     allowed: string[];
@@ -95,12 +108,14 @@ export declare namespace Constructor {
   };
 
   export type StructStructOutput = [
+    FirewallConstructor.StructStructOutput,
     HoundBreeding.StructStructOutput,
     HoundStamina.StructStructOutput,
     string[],
     string,
     string
   ] & {
+    firewall: FirewallConstructor.StructStructOutput;
     defaultBreeding: HoundBreeding.StructStructOutput;
     defaultStamina: HoundStamina.StructStructOutput;
     allowed: string[];
@@ -112,7 +127,6 @@ export declare namespace Constructor {
 export interface GamificationInterface extends utils.Interface {
   contractName: "Gamification";
   functions: {
-    "allowed(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getBreeding(uint256)": FunctionFragment;
     "getStamina(uint256)": FunctionFragment;
@@ -120,15 +134,17 @@ export interface GamificationInterface extends utils.Interface {
     "houndsBreeding(uint256)": FunctionFragment;
     "houndsStamina(uint256)": FunctionFragment;
     "initializeHoundGamingStats(uint256,uint32[54])": FunctionFragment;
+    "isAllowed(address,bytes4)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "rules(bytes4,address,uint256)": FunctionFragment;
     "setBreeding(uint256,(address,address,uint256,uint256,uint256,uint256,uint256,bool))": FunctionFragment;
-    "setGlobalParameters(((address,address,uint256,uint256,uint256,uint256,uint256,bool),(address,uint256,uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setGlobalParameters(((address[],uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(address,uint256,uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setRules(bytes4[],address[])": FunctionFragment;
     "setStamina(uint256,(address,uint256,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "getBreeding",
@@ -154,10 +170,18 @@ export interface GamificationInterface extends utils.Interface {
     functionFragment: "initializeHoundGamingStats",
     values: [BigNumberish, BigNumberish[]]
   ): string;
+  encodeFunctionData(
+    functionFragment: "isAllowed",
+    values: [string, BytesLike]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "rules",
+    values: [BytesLike, string, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setBreeding",
@@ -165,7 +189,11 @@ export interface GamificationInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [Constructor.StructStruct]
+    values: [GamificationConstructor.StructStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setRules",
+    values: [BytesLike[], string[]]
   ): string;
   encodeFunctionData(
     functionFragment: "setStamina",
@@ -176,7 +204,6 @@ export interface GamificationInterface extends utils.Interface {
     values: [string]
   ): string;
 
-  decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getBreeding",
@@ -199,11 +226,13 @@ export interface GamificationInterface extends utils.Interface {
     functionFragment: "initializeHoundGamingStats",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "isAllowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "rules", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setBreeding",
     data: BytesLike
@@ -212,6 +241,7 @@ export interface GamificationInterface extends utils.Interface {
     functionFragment: "setGlobalParameters",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setRules", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "setStamina", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
@@ -261,17 +291,17 @@ export interface Gamification extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
       [
+        FirewallConstructor.StructStructOutput,
         HoundBreeding.StructStructOutput,
         HoundStamina.StructStructOutput,
         string,
         string
       ] & {
+        firewall: FirewallConstructor.StructStructOutput;
         defaultBreeding: HoundBreeding.StructStructOutput;
         defaultStamina: HoundStamina.StructStructOutput;
         restricted: string;
@@ -342,11 +372,24 @@ export interface Gamification extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    isAllowed(
+      user: string,
+      method: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    rules(
+      arg0: BytesLike,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     setBreeding(
       id: BigNumberish,
@@ -355,7 +398,13 @@ export interface Gamification extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GamificationConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setRules(
+      signatures: BytesLike[],
+      permissions: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -371,17 +420,17 @@ export interface Gamification extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
   control(
     overrides?: CallOverrides
   ): Promise<
     [
+      FirewallConstructor.StructStructOutput,
       HoundBreeding.StructStructOutput,
       HoundStamina.StructStructOutput,
       string,
       string
     ] & {
+      firewall: FirewallConstructor.StructStructOutput;
       defaultBreeding: HoundBreeding.StructStructOutput;
       defaultStamina: HoundStamina.StructStructOutput;
       restricted: string;
@@ -452,11 +501,24 @@ export interface Gamification extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  isAllowed(
+    user: string,
+    method: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  rules(
+    arg0: BytesLike,
+    arg1: string,
+    arg2: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   setBreeding(
     id: BigNumberish,
@@ -465,7 +527,13 @@ export interface Gamification extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setGlobalParameters(
-    globalParameters: Constructor.StructStruct,
+    globalParameters: GamificationConstructor.StructStruct,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setRules(
+    signatures: BytesLike[],
+    permissions: string[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -481,17 +549,17 @@ export interface Gamification extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
       [
+        FirewallConstructor.StructStructOutput,
         HoundBreeding.StructStructOutput,
         HoundStamina.StructStructOutput,
         string,
         string
       ] & {
+        firewall: FirewallConstructor.StructStructOutput;
         defaultBreeding: HoundBreeding.StructStructOutput;
         defaultStamina: HoundStamina.StructStructOutput;
         restricted: string;
@@ -562,9 +630,22 @@ export interface Gamification extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    isAllowed(
+      user: string,
+      method: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    rules(
+      arg0: BytesLike,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     setBreeding(
       id: BigNumberish,
@@ -573,7 +654,13 @@ export interface Gamification extends BaseContract {
     ): Promise<void>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GamificationConstructor.StructStruct,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setRules(
+      signatures: BytesLike[],
+      permissions: string[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -601,8 +688,6 @@ export interface Gamification extends BaseContract {
   };
 
   estimateGas: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     getBreeding(
@@ -633,10 +718,23 @@ export interface Gamification extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    isAllowed(
+      user: string,
+      method: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    rules(
+      arg0: BytesLike,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setBreeding(
@@ -646,7 +744,13 @@ export interface Gamification extends BaseContract {
     ): Promise<BigNumber>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GamificationConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setRules(
+      signatures: BytesLike[],
+      permissions: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -663,11 +767,6 @@ export interface Gamification extends BaseContract {
   };
 
   populateTransaction: {
-    allowed(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getBreeding(
@@ -701,10 +800,23 @@ export interface Gamification extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    isAllowed(
+      user: string,
+      method: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    rules(
+      arg0: BytesLike,
+      arg1: string,
+      arg2: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     setBreeding(
@@ -714,7 +826,13 @@ export interface Gamification extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: GamificationConstructor.StructStruct,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setRules(
+      signatures: BytesLike[],
+      permissions: string[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
