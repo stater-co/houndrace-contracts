@@ -112,7 +112,6 @@ export interface ArenasInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setGlobalParameters((string,string,address,address,address,address,address[],uint256))": FunctionFragment;
-    "setTokenUri(uint256,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
@@ -196,10 +195,6 @@ export interface ArenasInterface extends utils.Interface {
     values: [ArenasConstructor.StructStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTokenUri",
-    values: [BigNumberish, string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
@@ -269,10 +264,6 @@ export interface ArenasInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenUri",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -527,12 +518,6 @@ export interface Arenas extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTokenUri(
-      theId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -689,12 +674,6 @@ export interface Arenas extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTokenUri(
-    theId: BigNumberish,
-    token_uri: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -846,12 +825,6 @@ export interface Arenas extends BaseContract {
 
     setGlobalParameters(
       globalParameters: ArenasConstructor.StructStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTokenUri(
-      theId: BigNumberish,
-      token_uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1068,12 +1041,6 @@ export interface Arenas extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTokenUri(
-      theId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -1221,12 +1188,6 @@ export interface Arenas extends BaseContract {
 
     setGlobalParameters(
       globalParameters: ArenasConstructor.StructStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTokenUri(
-      theId: BigNumberish,
-      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -111,7 +111,6 @@ export interface ArenasRestrictedInterface extends utils.Interface {
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setGlobalParameters((string,string,address,address,address,address,address[],uint256))": FunctionFragment;
-    "setTokenURI(uint256,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
@@ -191,10 +190,6 @@ export interface ArenasRestrictedInterface extends utils.Interface {
     values: [ArenasConstructor.StructStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTokenURI",
-    values: [BigNumberish, string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
@@ -260,10 +255,6 @@ export interface ArenasRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -513,12 +504,6 @@ export interface ArenasRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -670,12 +655,6 @@ export interface ArenasRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTokenURI(
-    _tokenId: BigNumberish,
-    token_uri: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -822,12 +801,6 @@ export interface ArenasRestricted extends BaseContract {
 
     setGlobalParameters(
       globalParameters: ArenasConstructor.StructStruct,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1036,12 +1009,6 @@ export interface ArenasRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -1184,12 +1151,6 @@ export interface ArenasRestricted extends BaseContract {
 
     setGlobalParameters(
       globalParameters: ArenasConstructor.StructStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

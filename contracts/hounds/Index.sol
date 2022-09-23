@@ -16,14 +16,6 @@ contract Hounds is Params {
         require(success);
     }
 
-    function setTokenURI(
-        uint256 _tokenId, 
-        string memory token_uri
-    ) external {
-        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
     function breedHounds(
         uint256 hound1, 
         uint256 hound2
