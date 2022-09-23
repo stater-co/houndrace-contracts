@@ -1,5 +1,1 @@
-{
-  message: 'An error occured during the process execution, please check /home/diimiim/houndrace-contracts/logs/deployment/errors.logs for more informations',
-  level: 'error',
-  timestamp: '2022-07-13T13:56:22.416Z'
-}
+{"message":"An error occured during the process execution, please check /home/diimiim/houndrace-contracts/logs/deployment/errors.logs for more informations","level":"error","timestamp":"2022-07-13T13:56:22.416Z"}

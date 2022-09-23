@@ -4,7 +4,7 @@ import { testErrorsPath } from '../../../common/paths';
 
 const formats: Array<any> = [
   format.timestamp(),
-  format.prettyPrint()
+  format.json()
 ];
 
 const loggerOptions: LoggerOptions = {
