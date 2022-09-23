@@ -5,13 +5,22 @@ import '../params/Index.sol';
 
 contract RacesRestricted is Params {
 
-    constructor(RacesConstructor.Struct memory input) Params(input) {}
+    constructor(
+        RacesConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+        
+    }
 
     function uploadRace(
         uint256 theId, 
         uint256 queueId,
         Race.Struct memory race
-    ) external onlyOwner {
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 

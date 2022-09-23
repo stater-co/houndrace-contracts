@@ -5,9 +5,20 @@ import '../params/Index.sol';
 
 contract QueuesMethods is Params {
 
-    constructor(QueuesConstructor.Struct memory input) Params(input) {}
+    constructor(
+        QueuesConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
 
-    function unenqueue(uint256 theId, uint256 hound) external {
+    }
+
+    function unenqueue(
+        uint256 theId, 
+        uint256 hound
+    ) 
+        external 
+    {
         address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
         require(houndOwner == msg.sender);
 
@@ -51,7 +62,13 @@ contract QueuesMethods is Params {
         emit Unenqueue(theId, hound);
     }
 
-    function enqueue(uint256 theId, uint256 hound) external payable {
+    function enqueue(
+        uint256 theId, 
+        uint256 hound
+    ) 
+        external 
+        payable 
+    {
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
             ((queues[theId].endDate == 0 && queues[theId].startDate == 0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 

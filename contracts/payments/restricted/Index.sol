@@ -6,14 +6,23 @@ import '../params/Index.sol';
 contract PaymentsRestricted is Params {
 
 	
-    constructor(PaymentsConstructor.Struct memory input) Params(input) {}
+    constructor(
+		PaymentsConstructor.Struct memory input
+	) 
+		Params(input) 
+	{
+		
+	}
 
 	function fillRewardsReservoir(
         address currency,
         uint256[] memory ids, // for batch transfers
         uint256[] memory amounts, // for batch transfers
 		Payment.PaymentTypes paymentType
-	) external payable {
+	) 
+		external 
+		payable 
+	{
 
 		for ( uint256 i = 0 ; i < ids.length ; ++i ) {
 			alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];

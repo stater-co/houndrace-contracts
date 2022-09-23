@@ -8,19 +8,28 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
 import '../../payments/params/Payment.sol';
 import './Constructor.sol';
+import '../../firewall/Index.sol';
 
 
-contract Params is Ownable, ReentrancyGuard {
+contract Params is Firewall, ReentrancyGuard {
+    
     // Payment type => address => id => amount
     mapping(Payment.PaymentTypes => mapping(address => mapping(uint256 => uint256))) public alphaduneReservoirs;
     mapping(Payment.PaymentTypes => mapping(address => mapping(uint256 => uint256))) public rewardsReservoirs;
     PaymentsConstructor.Struct public control;
 
-    constructor(PaymentsConstructor.Struct memory input) {
+    constructor(
+        PaymentsConstructor.Struct memory input
+    ) Firewall(input.firewall) {
         control = input;
     }
     
-    function setGlobalParameters(PaymentsConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(
+        PaymentsConstructor.Struct memory globalParameters
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         control = globalParameters;
     }
 

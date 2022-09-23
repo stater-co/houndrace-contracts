@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
+import '../../firewall/params/Constructor.sol';
 
 library QueuesConstructor {
     struct Struct {
+
+        FirewallConstructor.Struct firewall;
 
         // Contract modules
         address methods;

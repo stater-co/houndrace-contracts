@@ -1,14 +1,14 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './Discount.sol';
 import './Constructor.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
+import '../../firewall/Index.sol';
 interface Geyser { function totalStakedFor(address addr) external view returns(uint256); }
 
 
-contract Params is Ownable {
+contract Params is Firewall {
     
     uint256 public id = 1;
     ShopConstructor.Struct public control;
@@ -17,7 +17,7 @@ contract Params is Ownable {
 
     constructor(
         ShopConstructor.Struct memory input
-    ) {
+    ) Firewall(input.firewall) {
         control = input;
     }
 
@@ -25,7 +25,7 @@ contract Params is Ownable {
         ShopConstructor.Struct memory globalParameters
     ) 
         external 
-        onlyOwner 
+        allowed(msg.sender,msg.sig)  
     {
         control = globalParameters;
     }

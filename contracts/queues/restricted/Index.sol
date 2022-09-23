@@ -5,9 +5,20 @@ import '../params/Index.sol';
 
 contract QueuesRestricted is Params {
 
-    constructor(QueuesConstructor.Struct memory input) Params(input) {}
+    constructor(
+        QueuesConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
 
-    function createQueues(Queue.Struct[] memory theQueues) external {
+    }
+
+    function createQueues(
+        Queue.Struct[] memory theQueues
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         uint256 arenaFee;
         for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
             arenaFee = IArenaFee(control.arenas).arenaFee(theQueues[i].core.arena);
@@ -19,14 +30,25 @@ contract QueuesRestricted is Params {
         emit QueuesCreation(id-theQueues.length,id-1,theQueues);
     }
 
-    function editQueue(uint256 theId, Queue.Struct memory queue) external {
+    function editQueue(
+        uint256 theId, 
+        Queue.Struct memory queue
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         Arena.Struct memory arena = IArena(control.arenas).arena(queue.core.arena);
         require(arena.fee < queue.core.entryFee / 2);
         queues[theId] = queue;
         emit EditQueue(theId,queues[theId]);
     }
 
-    function closeQueue(uint256 theId) external {
+    function closeQueue(
+        uint256 theId
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         queues[theId].closed = true;
         
         uint256[] memory amounts = new uint256[](1);
@@ -55,7 +77,12 @@ contract QueuesRestricted is Params {
         emit QueueClosed(theId);
     }
 
-    function deleteQueue(uint256 theId) external {
+    function deleteQueue(
+        uint256 theId
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = queues[theId].core.entryFee;
 

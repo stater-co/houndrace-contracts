@@ -5,7 +5,13 @@ import './params/Index.sol';
 
 contract Races is Params {
     
-    constructor(RacesConstructor.Struct memory input) Params(input) {}
+    constructor(
+        RacesConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+        
+    }
 
     function uploadRace(
         uint256 theId, 

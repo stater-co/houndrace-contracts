@@ -5,13 +5,21 @@ import '../params/Index.sol';
 
 contract RacesMethods is Params {
 
-    constructor(RacesConstructor.Struct memory input) Params(input) {}
+    constructor(
+        RacesConstructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+        
+    }
 
     function raceStart(
         uint256 queueId,
         Queue.Struct memory queue
-    ) external {
-        require(allowed[msg.sender]);
+    ) 
+        external 
+        allowed(msg.sender,msg.sig) 
+    {
 
         if ( control.callable ) {
 
@@ -55,8 +63,11 @@ contract RacesMethods is Params {
 
     function handleRaceLoot(
         Payment.Struct memory payment
-    ) public payable {
-        require(allowed[msg.sender]);
+    ) 
+        public 
+        payable 
+        allowed(msg.sender,msg.sig) 
+    {
 
         for ( uint256 i = 0 ; i < payment.from.length ; ++i ) {
             IPay(control.payments).pay(

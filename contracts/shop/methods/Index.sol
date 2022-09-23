@@ -17,6 +17,7 @@ contract ShopMethods is Params {
         address requester
     ) 
         external 
+        allowed(msg.sender,msg.sig) 
         returns(uint256) 
     {
         uint256 discount;

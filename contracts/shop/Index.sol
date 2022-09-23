@@ -16,8 +16,7 @@ contract Shop is Params {
     function createDiscount(
         Discount.Struct memory discount
     ) 
-        external 
-        onlyOwner 
+        external  
     {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
@@ -27,8 +26,7 @@ contract Shop is Params {
         Discount.Struct memory discount, 
         uint256 theId
     ) 
-        external 
-        onlyOwner 
+        external  
     {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);

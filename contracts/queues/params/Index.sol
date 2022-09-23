@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import './Queue.sol';
 import './Constructor.sol';
@@ -21,9 +20,10 @@ import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../hounds/interfaces/IAllowance.sol';
+import '../../firewall/Index.sol';
 
 
-contract Params is Ownable, Withdrawable {
+contract Params is Withdrawable, Firewall {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
@@ -35,41 +35,62 @@ contract Params is Ownable, Withdrawable {
     uint256 public id = 1;
     QueuesConstructor.Struct public control;
     mapping(uint256 => Queue.Struct) public queues;
-    mapping(address => bool) public allowed;
 
-    constructor(QueuesConstructor.Struct memory input) {
+    constructor(
+        QueuesConstructor.Struct memory input
+    ) 
+        Firewall(input.firewall) 
+    {
         control = input;
-        handleAllowedCallers(input.allowedCallers);
     }
 
-    function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(
+        QueuesConstructor.Struct memory globalParameters
+    ) 
+        external 
+        allowed(msg.sender,msg.sig)  
+    {
         control = globalParameters;
-        handleAllowedCallers(globalParameters.allowedCallers);
     }
     
-    function queue(uint256 theId) external view returns(Queue.Struct memory) {
+    function queue(
+        uint256 theId
+    ) 
+        external 
+        view 
+        returns(Queue.Struct memory) 
+    {
         return queues[theId];
     }
 
-    function staminaCostOf(uint256 theId) external view returns(uint32) {
+    function staminaCostOf(
+        uint256 theId
+    ) 
+        external 
+        view 
+        returns(uint32) 
+    {
         return queues[theId].staminaCost;
     }
 
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i ) {
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
-        }
-    }
-
-    function participantsOf(uint256 theId) external view returns(uint256[] memory) {
+    function participantsOf(
+        uint256 theId
+    ) 
+        external 
+        view 
+        returns(uint256[] memory) 
+    {
         return queues[theId].core.participants;
     }
 
-    function enqueueDatesOf(uint256 theId) external view returns(uint256[] memory) {
+    function enqueueDatesOf(
+        uint256 theId
+    ) 
+        external 
+        view 
+        returns(uint256[] memory) 
+    {
         return queues[theId].core.enqueueDates;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }
