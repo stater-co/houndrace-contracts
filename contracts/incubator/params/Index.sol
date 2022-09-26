@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import '../../genetics/interfaces/IMixGenes.sol';
 import '../../randomness/IGetRandomNumber.sol';
@@ -9,10 +8,11 @@ import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../races/interfaces/IGetStatistics.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import './HoundIdentity.sol';
 
 
-contract Params is Ownable {
+contract Params {
 
     IncubatorConstructor.Struct public control;
     mapping(address => bool) public allowed;
@@ -20,12 +20,11 @@ contract Params is Ownable {
 
     constructor(IncubatorConstructor.Struct memory input) {
         control = input;
-        handleAllowedCallers(input.allowed);
     }
     
-    function setGlobalParameters(IncubatorConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(IncubatorConstructor.Struct memory globalParameters) external {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
-        handleAllowedCallers(globalParameters.allowed);
     }
 
     function getIdentity(uint256 theId) external view returns(HoundIdentity.Struct memory) {
@@ -35,11 +34,6 @@ contract Params is Ownable {
     function setIdentity(uint256 theId, HoundIdentity.Struct memory identity) external {
         require(allowed[msg.sender]);
         houndsIdentity[theId] = identity;
-    }
-
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
 
 }

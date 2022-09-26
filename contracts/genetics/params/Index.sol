@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import './Constructor.sol';
 
 
-contract Params is Ownable {
+contract Params {
 
     GeneticsConstructor.Struct public control;
 
@@ -13,6 +13,7 @@ contract Params is Ownable {
     }
 
     function setGlobalParameters(GeneticsConstructor.Struct memory globalParameters) external {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 

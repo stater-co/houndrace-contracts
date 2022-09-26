@@ -17,9 +17,9 @@ contract ShopMethods is Params {
         address requester
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
         returns(uint256) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         uint256 discount;
 
         for ( uint256 i = 0; i < id; ++i ) {

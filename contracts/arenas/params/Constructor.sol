@@ -10,7 +10,7 @@ library ArenasConstructor {
         address methods;
         address payments;
         address alphadune;
-        address[] allowedCallers;
+        address firewall;
         uint256 alhpadunePercentage;
     }
 }

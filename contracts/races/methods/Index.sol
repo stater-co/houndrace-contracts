@@ -18,8 +18,8 @@ contract RacesMethods is Params {
         Queue.Struct memory queue
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
 
         if ( control.callable ) {
 
@@ -66,8 +66,8 @@ contract RacesMethods is Params {
     ) 
         public 
         payable 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
 
         for ( uint256 i = 0 ; i < payment.from.length ; ++i ) {
             IPay(control.payments).pay(

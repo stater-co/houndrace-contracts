@@ -23,7 +23,8 @@ contract PaymentsRestricted is Params {
 		external 
 		payable 
 	{
-
+		require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
+		
 		for ( uint256 i = 0 ; i < ids.length ; ++i ) {
 			alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];
 		}

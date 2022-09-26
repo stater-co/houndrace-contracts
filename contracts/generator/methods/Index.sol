@@ -9,7 +9,7 @@ contract GeneratorMethods is Params {
 
     function generate(Queue.Struct memory queue, uint256 queueId) external view returns(Race.Struct memory) {
 
-        require(control.allowed == msg.sender);
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         require(queue.core.participants.length == queue.totalParticipants);
         
         uint256 theRandomness = IGetRandomNumber(control.randomness).getRandomNumber(abi.encode(block.timestamp));

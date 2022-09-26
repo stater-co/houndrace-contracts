@@ -8,12 +8,12 @@ library GeneratorConstructor {
         address randomness;
         address arenas;
         address hounds;
-        address allowed;
         address methods;
         address payments;
         address zerocost;
         address incubator;
         address gamification;
+        address firewall;
     }
 
 }

@@ -1,12 +1,12 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import './Constructor.sol';
 import './HoundBreeding.sol';
 import './HoundStamina.sol';
 
 
-contract Params is Ownable, Firewall {
+contract Params {
 
     GamificationConstructor.Struct public control;
     mapping(uint256 => HoundStamina.Struct) public houndsStamina;
@@ -15,7 +15,6 @@ contract Params is Ownable, Firewall {
     constructor(
         GamificationConstructor.Struct memory input
     ) 
-        Firewall(input.firewall) 
     {
         control = input;
     }
@@ -23,9 +22,9 @@ contract Params is Ownable, Firewall {
     function setGlobalParameters(
         GamificationConstructor.Struct memory globalParameters
     ) 
-        external 
-        onlyOwner 
+        external  
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 

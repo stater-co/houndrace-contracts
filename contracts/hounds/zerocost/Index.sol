@@ -1,12 +1,12 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
 import '../../payments/params/MicroPayment.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import '../params/Constructor.sol';
 
 
-contract HoundsZerocost is Ownable {
+contract HoundsZerocost {
 
     Constructor.Struct public control;
 
@@ -14,7 +14,8 @@ contract HoundsZerocost is Ownable {
         control = input;
     }
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external {
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 

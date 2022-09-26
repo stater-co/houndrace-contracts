@@ -11,22 +11,33 @@ contract HoundsRestricted is Params {
         uint256 onId, 
         address owner, 
         Hound.Struct memory theHound
-    ) external onlyOwner {
+    ) external {
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
+
         if ( onId > 0 ) {
+
             require(bytes(hounds[onId].token_uri).length == 0);
             require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
+
             IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(onId, theHound.identity.geneticSequence);
             ISetIdentity(control.boilerplate.incubator).setIdentity(onId, theHound.identity);
+            
             emit NewHound(onId,owner,theHound);
+            
             hounds[onId] = theHound.profile;
             _safeMint(owner,onId);
+
         } else {
+            
             IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(id, theHound.identity.geneticSequence);
             ISetIdentity(control.boilerplate.incubator).setIdentity(id, theHound.identity);
+
             emit NewHound(id,owner,theHound);
+            
             hounds[id] = theHound.profile;
             _safeMint(owner,id);
             ++id;
+
         }
     }
 }

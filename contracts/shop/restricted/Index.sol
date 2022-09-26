@@ -17,8 +17,8 @@ contract ShopRestricted is Params {
         Discount.Struct memory discount
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         discounts[id] = discount;
         emit NewDiscount(id,discount);
         ++id;
@@ -29,8 +29,8 @@ contract ShopRestricted is Params {
         uint256 theId
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         discounts[theId] = discount;
         emit NewDiscount(theId, discount);
     }

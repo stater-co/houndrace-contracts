@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
+import '../../firewall/interfaces/IsAllowed.sol';
 import './Race.sol';
 import './Constructor.sol';
 import '../../utils/Converters.sol';
@@ -20,7 +21,7 @@ import '../../queues/interfaces/IStaminaCostOf.sol';
 import '../../firewall/Index.sol';
 
 
-contract Params is Withdrawable, Firewall {
+contract Params is Withdrawable {
     
     event NewRace(
         uint256 indexed id, 
@@ -45,7 +46,7 @@ contract Params is Withdrawable, Firewall {
 
     constructor(
         RacesConstructor.Struct memory input
-    ) Firewall(input.firewall) {
+    ) {
         control = input;
     }
 
@@ -53,7 +54,6 @@ contract Params is Withdrawable, Firewall {
         RacesConstructor.Struct memory globalParameters
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
         control = globalParameters;
     }

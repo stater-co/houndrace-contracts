@@ -18,6 +18,7 @@ contract PaymentsMethods is Params {
 		public 
 		payable 
 	{
+		require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
 
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 

@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import '../interfaces/ISimulateClassicRace.sol';
 import '../../queues/params/Queue.sol';
@@ -16,22 +15,27 @@ import '../../incubator/params/HoundIdentity.sol';
 import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../gamification/params/HoundStamina.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import '../../queues/params/Core.sol';
 
 
-contract Params is Ownable {
+contract Params {
 
     GeneratorConstructor.Struct public control;
 
-    constructor(GeneratorConstructor.Struct memory input) {
+    constructor(
+        GeneratorConstructor.Struct memory input
+    ) {
         control = input;
     }
 
-    function setGlobalParameters(GeneratorConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(
+        GeneratorConstructor.Struct memory globalParameters
+    ) 
+        external 
+    {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

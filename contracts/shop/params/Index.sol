@@ -4,11 +4,11 @@ import './Discount.sol';
 import './Constructor.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
-import '../../firewall/Index.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 interface Geyser { function totalStakedFor(address addr) external view returns(uint256); }
 
 
-contract Params is Firewall {
+contract Params {
     
     uint256 public id = 1;
     ShopConstructor.Struct public control;
@@ -17,7 +17,7 @@ contract Params is Firewall {
 
     constructor(
         ShopConstructor.Struct memory input
-    ) Firewall(input.firewall) {
+    ) {
         control = input;
     }
 
@@ -25,7 +25,6 @@ contract Params is Firewall {
         ShopConstructor.Struct memory globalParameters
     ) 
         external 
-        allowed(msg.sender,msg.sig)  
     {
         control = globalParameters;
     }

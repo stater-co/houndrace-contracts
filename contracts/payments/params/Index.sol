@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '@openzeppelin/contracts/utils/Address.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import '../../payments/params/Payment.sol';
 import './Constructor.sol';
-import '../../firewall/Index.sol';
 
 
-contract Params is Firewall, ReentrancyGuard {
+contract Params is ReentrancyGuard {
     
     // Payment type => address => id => amount
     mapping(Payment.PaymentTypes => mapping(address => mapping(uint256 => uint256))) public alphaduneReservoirs;
@@ -20,7 +19,7 @@ contract Params is Firewall, ReentrancyGuard {
 
     constructor(
         PaymentsConstructor.Struct memory input
-    ) Firewall(input.firewall) {
+    ) {
         control = input;
     }
     
@@ -28,7 +27,6 @@ contract Params is Firewall, ReentrancyGuard {
         PaymentsConstructor.Struct memory globalParameters
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
         control = globalParameters;
     }

@@ -8,7 +8,7 @@ contract ArenasMethods is Params {
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
     function handleArenaUsage(uint256 theId) external {
-        require(allowed[msg.sender]);
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         
         uint256[] memory amounts = new uint256[](1);
         

@@ -31,7 +31,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract HoundracePotions is Context, Ownable, IERC20, IERC20Metadata {
+contract HoundRacePotions is Context, Ownable, IERC20, IERC20Metadata {
     mapping(address => uint256) private _balances;
 
     mapping(address => mapping(address => uint256)) private _allowances;

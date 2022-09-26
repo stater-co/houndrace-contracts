@@ -19,8 +19,8 @@ contract RacesRestricted is Params {
         Race.Struct memory race
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 

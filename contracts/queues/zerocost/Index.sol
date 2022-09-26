@@ -5,16 +5,16 @@ import '../../payments/params/MicroPayment.sol';
 import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../params/Queue.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import '../interfaces/IQueue.sol';
-import '../../firewall/Index.sol';
 
-contract QueuesZerocost is Firewall {
+
+contract QueuesZerocost {
 
     QueuesConstructor.Struct public control;
     constructor(
         QueuesConstructor.Struct memory input
     ) 
-        Firewall(input.firewall) 
     {
 
     }
@@ -23,8 +23,8 @@ contract QueuesZerocost is Firewall {
         QueuesConstructor.Struct memory globalParameters
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 

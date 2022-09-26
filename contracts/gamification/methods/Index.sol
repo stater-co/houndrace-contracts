@@ -17,8 +17,9 @@ contract GamificationMethods is Params {
         uint256 onId, 
         uint32[54] memory genetics
     ) 
-    allowed(msg.sender,msg.sig) 
-    external {
+        external 
+    {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         houndsStamina[onId] = control.defaultStamina;
         houndsBreeding[onId] = control.defaultBreeding; 
     }

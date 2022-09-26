@@ -39,7 +39,7 @@ contract Firewall is Ownable {
         require(signatures.length == permissions.length);
         for ( uint256 i = 0 ; i < signatures.length ; ++i ) {
             require(signatures[i] == bytes4(0) ? msg.sender == owner() : !indexOf(rules[msg.sig][permissions[i]], msg.sender) && indexOf(firewall.council, msg.sender));
-            rules[signatures[i]][permissions[i]].push(permissions[i]);
+            rules[signatures[i]][permissions[i]].push(msg.sender);
         }
     }
 

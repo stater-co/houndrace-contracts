@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../arenas/params/Arena.sol';
@@ -23,7 +24,7 @@ import '../../hounds/interfaces/IAllowance.sol';
 import '../../firewall/Index.sol';
 
 
-contract Params is Withdrawable, Firewall {
+contract Params is Withdrawable {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
@@ -39,7 +40,6 @@ contract Params is Withdrawable, Firewall {
     constructor(
         QueuesConstructor.Struct memory input
     ) 
-        Firewall(input.firewall) 
     {
         control = input;
     }
@@ -48,7 +48,6 @@ contract Params is Withdrawable, Firewall {
         QueuesConstructor.Struct memory globalParameters
     ) 
         external 
-        allowed(msg.sender,msg.sig)  
     {
         control = globalParameters;
     }

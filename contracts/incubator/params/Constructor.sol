@@ -10,7 +10,7 @@ library IncubatorConstructor {
         address genetics;
         address gamification;
         address races;
-        address[] allowed;
+        address firewall;
         uint32 secondsToMaturity;
     }
 

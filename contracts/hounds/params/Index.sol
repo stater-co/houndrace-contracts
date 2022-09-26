@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import './Constructor.sol';
@@ -17,11 +16,12 @@ import '../../gamification/interfaces/ISetStamina.sol';
 import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../gamification/interfaces/ISetBreeding.sol';
 import '../../incubator/interfaces/ISetIdentity.sol';
+import '../../firewall/interfaces/IsAllowed.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../interfaces/IGetBreedCost.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
+contract Params is ERC721, ERC721Holder, Withdrawable {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => HoundProfile.Struct) public hounds;
@@ -36,16 +36,16 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
     bool public matingSeason = true;
 
     constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
-        handleAllowedCallers(input.allowedCallers);
         control = input;
     }
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        handleAllowedCallers(globalParameters.allowedCallers);
+    function setGlobalParameters(Constructor.Struct memory globalParameters) external {
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 
-    function setMatingSeason(bool _matingSeason) external onlyOwner {
+    function setMatingSeason(bool _matingSeason) external {
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
         matingSeason = _matingSeason;
     }
 
@@ -69,11 +69,6 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].token_uri;
-    }
-
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
 
 }

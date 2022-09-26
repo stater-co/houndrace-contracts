@@ -14,7 +14,7 @@ contract IncubatorMethods is Params {
         HoundIdentity.Struct memory hound2, 
         uint256 theId
     ) public {
-        require(allowed[msg.sender]);
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         
         uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
             abi.encode(hound1Id > hound2Id ? hound1.geneticSequence : hound2.geneticSequence)

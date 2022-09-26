@@ -18,8 +18,8 @@ contract GamificationRestricted is Params {
         HoundStamina.Struct memory stamina
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         houndsStamina[id] = stamina;
     }
 
@@ -28,8 +28,8 @@ contract GamificationRestricted is Params {
         HoundBreeding.Struct memory breeding
     ) 
         external 
-        allowed(msg.sender,msg.sig) 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         houndsBreeding[id] = breeding;
     }
 
