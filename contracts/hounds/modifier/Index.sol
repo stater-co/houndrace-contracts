@@ -42,7 +42,7 @@ contract HoundsModifier is Params {
 
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
         require(stamina.staminaValue < stamina.staminaCap);
-        uint256 refillStaminaCooldownCost = stamina.refillStaminaCooldownCost - ((stamina.refillStaminaCooldownCost / 100) * discount);
+        uint256 staminaRefill1x = stamina.staminaRefill1x - ((stamina.staminaRefill1x / 100) * discount);
         
         require(
                 ( stamina.staminaRefillCurrency == address(0) && payed == 0 && msg.value > 0 ) 
@@ -63,7 +63,7 @@ contract HoundsModifier is Params {
         );
 
         
-        stamina.staminaValue += uint32(amounts[0] / refillStaminaCooldownCost);
+        stamina.staminaValue += uint32(amounts[0] / staminaRefill1x);
         refreshStamina(theId, stamina);
     }
 

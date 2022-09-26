@@ -4,9 +4,9 @@ pragma solidity 0.8.17;
 
 library Specie {
     enum Enum {
-        FREE_HOUND,
+        PROTOTYPE,
         NORMAL,
-        CHAD,
+        MUTANT,
         RACER,
         COMMUNITY,
         SPEC_OPS,

@@ -59,7 +59,6 @@ const houndStamina: HoundStamina.StructStruct = {
     staminaRefill1x: 100_000,
     staminaValue: 100,
     staminaPerTimeUnit: 86_400,
-    refillStaminaCooldownCost: 100_000,
     staminaCap: 100
 };
 
