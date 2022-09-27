@@ -1,4 +1,4 @@
 export interface ArenasExternalDependencies {
     paymentsAddress: string;
-    allowedCallers: Array<string>
+    firewall: string;
 }

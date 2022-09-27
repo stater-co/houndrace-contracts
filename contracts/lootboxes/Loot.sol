@@ -30,11 +30,11 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder {
         control = globalParameters;
     }
 
-    function mint(uint256 amount, string memory token_uri) external {
+    function mint(uint256 amount, uint256 tokenId, string memory token_uri) external {
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         uint256 idStart = id;
         for ( uint256 i = 0; i < amount; ++i ) {
-            _mint(msg.sender, id, 1, '0x0');
+            _mint(msg.sender, id, tokenId, '0x0');
             _setURI(token_uri);
             ++id;
         }

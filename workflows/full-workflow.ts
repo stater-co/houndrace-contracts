@@ -41,29 +41,40 @@ import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
 import { test as testRacesAdvanced } from '../test/26_Races/26_2_Races_Advanced_Tests';
 import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
+import { DeployedFirewall } from '../common/dto/test/firewallDeployment.dto';
+import { run as runFirewall } from '../test/0_Deploy_Firewall';
 
 
 async function main() {
     
+    const firewall: DeployedFirewall = await runFirewall({
+        council: [],
+        minCouncilApprovals: 0
+    });
+
     const libraries: DeployedLibraries = await runLibraries();
     
-    const payments: PaymentEcosystem = await runPayments();
+    const payments: PaymentEcosystem = await runPayments({
+        firewall: firewall.firewall.address
+    });
     
     const randomness: RandomnessSystem = await runRandomness();
 
     const arenas: ArenasSystem = await runArenas({
         paymentsAddress: payments.payments.address,
-        allowedCallers: []
+        firewall: firewall.firewall.address
     });
 
     const genetics: GeneticsSystem = await runGenetics({
         arenasAddress: arenas.arenas.address,
-        randomnessAddress: randomness.randomness.address
+        randomnessAddress: randomness.randomness.address,
+        firewall: firewall.firewall.address
     });
 
     const incubators: IncubatorSystem = await runIncubators({
         geneticsAddress: genetics.genetics.address,
-        randomnessAddress: randomness.randomness.address
+        randomnessAddress: randomness.randomness.address,
+        firewall: firewall.firewall.address
     });
 
     const hounds: HoundsSystem = await runHounds({
@@ -99,10 +110,9 @@ async function main() {
     });
 
     const gamification: GamificationSystem = await runGamification({
-        allowed: [],
         defaultBreeding: globalParams.houndBreeding,
         defaultStamina: globalParams.houndStamina,
-        defaultFirewall: globalParams.defaultFirewall
+        firewall: firewall.firewall.address
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
@@ -118,7 +128,8 @@ async function main() {
         constructor: {
             restricted: payments.paymentRestricted.address,
             methods: payments.paymentMethods.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            firewall: firewall.firewall.address
         }
     });
 
@@ -128,23 +139,23 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            firewall: firewall.firewall.address
         }
     });
 
     await setGamification({
         constructor: {
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
             defaultBreeding: globalParams.houndBreeding,
             defaultStamina: globalParams.houndStamina,
             methods: gamification.methods.address,
             restricted: gamification.restricted.address,
-            firewall: globalParams.defaultFirewall
+            firewall: firewall.firewall.address
         },
         methods: gamification.methods,
         restricted: gamification.restricted,
         gamification: gamification.gamification,
-        defaultFirewall: globalParams.defaultFirewall
+        firewall: firewall.firewall.address
     });
 
     await setQueues({
@@ -159,10 +170,10 @@ async function main() {
             payments: payments.payments.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            allowedCallers: [races.races.address],
             queues: queues.queues.address,
             zerocost: queues.queueZerocost.address,
-            incubator: incubators.incubator.address
+            incubator: incubators.incubator.address,
+            firewall: firewall.firewall.address
         }
     });
 
@@ -177,8 +188,8 @@ async function main() {
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            allowedCallers: [races.races.address,queues.queues.address],
-            alhpadunePercentage: 60
+            alhpadunePercentage: 60,
+            firewall: firewall.firewall.address
         }
     });
 
@@ -192,7 +203,7 @@ async function main() {
             secondsToMaturity: 345600,
             gamification: gamification.gamification.address,
             races: races.races.address,
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address]
+            firewall: firewall.firewall.address
         }
     });
 
@@ -205,11 +216,6 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
-           allowedCallers: [
-            hounds.hounds.address,
-            races.races.address,
-            queues.queues.address
-           ],
            boilerplate: {
             incubator: incubators.incubator.address,
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -220,7 +226,8 @@ async function main() {
             payments: payments.payments.address,
             shop: payments.shop.address,
             gamification: gamification.gamification.address,
-            races: races.races.address
+            races: races.races.address,
+            firewall: firewall.firewall.address
            },
            fees: {
             breedCostCurrency: globalParams.address0,
@@ -247,11 +254,7 @@ async function main() {
             restricted: races.racesRestricted.address,
             races: races.races.address,
             callable: false,
-            allowedCallers: [
-                races.races.address,
-                queues.queues.address,
-                globalParams.address0
-            ]
+            firewall: firewall.firewall.address
         }
     });
 
@@ -265,9 +268,9 @@ async function main() {
             payments: payments.payments.address,
             randomness: randomness.randomness.address,
             zerocost: generator.generatorZerocost.address,
-            allowed: races.races.address,
             incubator: incubators.incubator.address,
-            gamification: gamification.gamification.address
+            gamification: gamification.gamification.address,
+            firewall: firewall.firewall.address
         }
     });
 
@@ -310,7 +313,6 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
-           allowedCallers: [],
            boilerplate: {
             incubator: incubators.incubator.address,
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
@@ -321,7 +323,8 @@ async function main() {
             payments: payments.payments.address,
             shop: payments.shop.address,
             gamification: gamification.gamification.address,
-            races: races.races.address
+            races: races.races.address,
+            firewall: firewall.firewall.address
            },
            fees: {
             breedCostCurrency: payments.houndracePotions.address,

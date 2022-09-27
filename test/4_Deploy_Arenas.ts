@@ -19,7 +19,6 @@ export async function run(
     describe('Setting up the Arenas System', async function () {
 
       it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
         arenasRestricted = await deployContract({
           name: 'ArenasRestricted',
           constructor: [[
@@ -28,8 +27,8 @@ export async function run(
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall,
             60
           ]],
           props: {}
@@ -37,7 +36,6 @@ export async function run(
       });
 
       it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
         arenasMethods = await deployContract({
           name: 'ArenasMethods',
           constructor: [[
@@ -46,8 +44,8 @@ export async function run(
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall,
             60
           ]],
           props: {}
@@ -55,7 +53,6 @@ export async function run(
       });
 
       it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
         arenas = await deployContract({
           name: 'Arenas',
           constructor: [[
@@ -64,8 +61,8 @@ export async function run(
             arenasRestricted.address, 
             arenasMethods.address, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
+            dependencies.firewall,
             60
           ]],
           props: {}

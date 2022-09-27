@@ -3,7 +3,7 @@ import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { ShopRestricted } from '../typechain-types//ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
-import { HoundracePotions } from '../typechain-types/HoundracePotions';
+import { HoundRacePotions } from '../typechain-types/HoundRacePotions';
 import { Payments } from '../typechain-types/Payments';
 import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
@@ -11,9 +11,10 @@ import { ShopZerocost } from '../typechain-types/ShopZerocost';
 import { Shop } from '../typechain-types/Shop';
 import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
+import { PaymentsExternalDependencies } from '../common/dto/test/paymentsExternalDependencies.dto';
 
 
-let houndracePotions: HoundracePotions;
+let houndRacePotions: HoundRacePotions;
 let payments: Payments;
 let paymentsRestricted: PaymentsRestricted;
 let paymentsMethods: PaymentsMethods;
@@ -25,25 +26,28 @@ let shopZerocost: ShopZerocost;
 let shop: Shop;
 
 
-export async function run(): Promise<PaymentEcosystem> {
+export async function run(
+  dependencies: PaymentsExternalDependencies
+): Promise<PaymentEcosystem> {
   return new Promise((resolve, ) => {
     describe('Setting up the Payments System', function () {
   
       it('Deploy the HoundRace Potions contract', async function () {
-        houndracePotions = await deployContract({
-          name: 'HoundracePotions',
+        houndRacePotions = await deployContract({
+          name: 'HoundRacePotions',
           constructor: ['Ogars', 'OG'],
           props: {}
-        }) as HoundracePotions;
+        }) as HoundRacePotions;
       });
     
       it('Deploy the payments restricted contract', async function () {
         paymentsRestricted = await deployContract({
           name: 'PaymentsRestricted',
           constructor: [[
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0
+            dependencies.firewall
           ]],
           props: {}
         }) as PaymentsRestricted;
@@ -53,9 +57,10 @@ export async function run(): Promise<PaymentEcosystem> {
         paymentsMethods = await deployContract({
           name: 'PaymentsMethods',
           constructor: [[
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            paymentsRestricted.address,
             globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
+            dependencies.firewall
           ]],
           props: {}
         }) as PaymentsMethods;
@@ -66,8 +71,9 @@ export async function run(): Promise<PaymentEcosystem> {
           name: 'Payments',
           constructor: [[
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            globalParams.address0,
-            globalParams.address0
+            paymentsRestricted.address,
+            paymentsMethods.address,
+            dependencies.firewall
           ]],
           props: {}
         }) as Payments;
@@ -100,7 +106,12 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Shop restricted contract', async function () {
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[globalParams.address0,globalParams.address0,globalParams.address0]],
+          constructor: [[
+            globalParams.address0,
+            globalParams.address0,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall
+          ]],
           props: {}
         }) as ShopRestricted;
       });
@@ -108,7 +119,12 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Shop methods contract', async function () {
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[globalParams.address0,globalParams.address0,globalParams.address0]],
+          constructor: [[
+            globalParams.address0,
+            shopRestricted.address,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall
+          ]],
           props: {}
         }) as ShopMethods;
       });
@@ -116,7 +132,12 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Shop zerocost contract', async function () {
         shopZerocost = await deployContract({
           name: 'ShopZerocost',
-          constructor: [[globalParams.address0,globalParams.address0,globalParams.address0]],
+          constructor: [[
+            shopMethods.address,
+            shopRestricted.address,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall
+          ]],
           props: {}
         }) as ShopZerocost;
       });
@@ -124,12 +145,17 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Shop contract', async function () {
         shop = await deployContract({
           name: 'Shop',
-          constructor: [[shopMethods.address,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
+          constructor: [[
+            shopMethods.address,
+            shopRestricted.address,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            dependencies.firewall
+          ]],
           props: {}
         }) as Shop;
 
         resolve({
-          houndracePotions: houndracePotions,
+          houndracePotions: houndRacePotions,
           payments: payments,
           paymentMethods: paymentsMethods,
           paymentRestricted: paymentsRestricted,

@@ -15,11 +15,11 @@ async function basicTest(
       it("Create hounds for lootbox", async function () {
         const [sig1] = await ethers.getSigners();
 
-        let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(sig1.address);
+        let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(sig1.address,1);
 
-        await dependencies.lootboxesContract.mint(totalLootboxesToCreate, "token_uri");
+        await dependencies.lootboxesContract.mint(totalLootboxesToCreate, 1, "token_uri");
 
-        let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(sig1.address);
+        let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(sig1.address,1);
 
         expecting(Number(houndsBalanceBefore) < Number(houndsBalanceAfter), "Lootboxes creation bugged");
 

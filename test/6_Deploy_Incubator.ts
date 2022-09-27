@@ -25,7 +25,7 @@ export async function run(
             dependencies.geneticsAddress,
             globalParams.address0,
             globalParams.address0,
-            [],
+            dependencies.firewall,
             0
           ]],
           props: {}
@@ -42,7 +42,7 @@ export async function run(
             dependencies.geneticsAddress,
             globalParams.address0,
             globalParams.address0,
-            [],
+            dependencies.firewall,
             0
           ]],
           props: {}

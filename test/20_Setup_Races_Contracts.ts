@@ -12,13 +12,9 @@ export async function set(
     
       const [sig1] = await ethers.getSigners();
       const before = await dependencies.racesRestricted.control();
-      await dependencies.racesRestricted.setGlobalParameters({
-        ...dependencies.constructor,
-        allowedCallers: [
-          ...dependencies.constructor.allowedCallers,
-          sig1.address
-        ]
-      });
+      await dependencies.racesRestricted.setGlobalParameters(
+        dependencies.constructor
+      );
       const after = await dependencies.racesRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races restricted global params setter bugged");
 
@@ -28,13 +24,9 @@ export async function set(
     
       const [sig1] = await ethers.getSigners();
       const before = await dependencies.racesMethods.control();
-      await dependencies.racesMethods.setGlobalParameters({
-        ...dependencies.constructor,
-        allowedCallers: [
-          ...dependencies.constructor.allowedCallers,
-          sig1.address
-        ]
-      });
+      await dependencies.racesMethods.setGlobalParameters(
+        dependencies.constructor
+      );
       const after = await dependencies.racesMethods.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races methods global params setter bugged");
 
@@ -44,13 +36,9 @@ export async function set(
     
       const [sig1] = await ethers.getSigners();
       const before = await dependencies.races.control();
-      await dependencies.races.setGlobalParameters({
-        ...dependencies.constructor,
-        allowedCallers: [
-          ...dependencies.constructor.allowedCallers,
-          sig1.address
-        ]
-      });
+      await dependencies.races.setGlobalParameters(
+        dependencies.constructor,
+      );
       const after = await dependencies.races.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races global params setter bugged");
 
