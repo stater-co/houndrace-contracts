@@ -16,11 +16,11 @@ async function main() {
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "HoundRace Lootboxes",
-      allowedApprovals: [],
       hounds: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
-      canBeOpened: true
+      firewall: globalParams.address0,
+      canBeOpened: false
     }
     const lootboxes = await deployContract({
       name: 'Lootboxes',
@@ -33,10 +33,10 @@ async function main() {
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "HoundRace Lootboxes",
-      allowedApprovals: [],
       hounds: String(process.env.HOUNDS),
       payments: String(process.env.PAYMENTS),
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      firewall: String(process.env.FIREWALL),
       canBeOpened: true
     }
 

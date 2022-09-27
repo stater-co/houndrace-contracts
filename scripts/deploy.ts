@@ -36,6 +36,7 @@ import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { globalParams } from '../common/params';
 import { Gamification, Constructor as GamificationConstructor } from '../typechain-types/Gamification';
+import { arrayfy } from '../plugins/arrayfy';
 
 
 const cliProgress = require('cli-progress');
@@ -69,10 +70,6 @@ verifications.update(0, {
 
 const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
-
-const arrayfy = (input: any): Array<any> => {
-  return Object.keys(input).map((key) => input[key]);
-}
 
 async function main() {
 

@@ -11,11 +11,10 @@ import './params/Box.sol';
 
 contract Lootboxes is ERC1155URIStorage, ERC1155Holder {
 
-    uint256 public id;
     Constructor.Struct public control;
     mapping(uint256 => Box.Struct) public lootboxes;
 
-    event NewLootboxes(uint256 indexed idStart, uint256 indexed idFinish);
+    event NewLootboxes(uint256 indexed id, uint256 indexed amount);
     event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
 
     constructor(
@@ -32,14 +31,9 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder {
 
     function mint(uint256 amount, uint256 tokenId, string memory token_uri) external {
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
-        uint256 idStart = id;
-        for ( uint256 i = 0; i < amount; ++i ) {
-            _mint(msg.sender, id, tokenId, '0x0');
-            _setURI(token_uri);
-            ++id;
-        }
-
-        emit NewLootboxes(idStart, id);
+        _mint(msg.sender, tokenId, amount, '0x0');
+        _setURI(token_uri);
+        emit NewLootboxes(tokenId, amount);
     }
 
     function setOpenStatus(bool status) external {

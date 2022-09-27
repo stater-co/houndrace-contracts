@@ -8,7 +8,6 @@ import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
 import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { HoundsZerocost } from '../typechain-types/HoundsZerocost';
-const { ethers } = require("hardhat");
 
 
 let houndsRestricted: HoundsRestricted;
@@ -25,23 +24,22 @@ export async function run(
     describe('Setting up the Hounds Ecosystem', async function () {
 
       it("Deploy the hounds restricted contract", async function () {
-        const [owner, otherOwner] = await ethers.getSigners();
         houndsRestricted = await deployContract({
           name: 'HoundsRestricted',
           constructor: [[
             "HoundRace",
             "HR",
-            [owner.address],
             [
               globalParams.address0,
-              otherOwner.address,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              dependencies.incubatorAddress,
+              dependencies.paymentsAddress,
+              dependencies.shopsAddress,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               globalParams.address0
             ],[
               globalParams.address0,
@@ -59,23 +57,22 @@ export async function run(
       });
 
       it("Deploy the hounds modifier contract", async function () {
-        const [owner, otherOwner] = await ethers.getSigners();
         houndsModifier = await deployContract({
           name: 'HoundsModifier',
           constructor: [[
             "HoundRace",
             "HR",
-            [owner.address],
             [
-              globalParams.address0,
-              otherOwner.address,
-              globalParams.address0,
+              houndsRestricted.address,
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
+              dependencies.incubatorAddress,
+              dependencies.paymentsAddress,
+              dependencies.shopsAddress,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               globalParams.address0
             ],[
               globalParams.address0,
@@ -93,23 +90,22 @@ export async function run(
       });
 
       it("Deploy the hounds zerocost contract", async function () {
-        const [owner, otherOwner] = await ethers.getSigners();
         houndsZerocost = await deployContract({
           name: 'HoundsZerocost',
           constructor: [[
             "HoundRace",
             "HR",
-            [owner.address],
             [
+              houndsRestricted.address,
               globalParams.address0,
-              otherOwner.address,
+              houndsModifier.address,
+              globalParams.address0,
+              dependencies.incubatorAddress,
+              dependencies.paymentsAddress,
+              dependencies.shopsAddress,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               globalParams.address0
             ],[
               globalParams.address0,
@@ -127,23 +123,22 @@ export async function run(
       });
     
       it("Deploy the hounds minter contract", async function () {
-        const [owner, otherOwner] = await ethers.getSigners();
         houndsMinter = await deployContract({
           name: 'HoundsMinter',
           constructor: [[
             "HoundRace",
             "HR",
-            [owner.address],
             [
+              houndsRestricted.address,
               globalParams.address0,
-              otherOwner.address,
+              houndsModifier.address,
+              houndsZerocost.address,
+              dependencies.incubatorAddress,
+              dependencies.paymentsAddress,
+              dependencies.shopsAddress,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
-              globalParams.address0,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               globalParams.address0
             ],[
               globalParams.address0,
@@ -161,23 +156,22 @@ export async function run(
       });
 
       it("Deploy the hounds contract", async function () {
-        const [owner, otherOwner] = await ethers.getSigners();
         hounds = await deployContract({
           name: 'Hounds',
           constructor: [[
             "HoundRace",
             "HR",
-            [owner.address],
             [
-              dependencies.incubatorAddress,
-              otherOwner.address,
-              dependencies.paymentsAddress,
               houndsRestricted.address,
               houndsMinter.address,
-              globalParams.address0,
               houndsModifier.address,
+              houndsZerocost.address,
+              dependencies.incubatorAddress,
+              dependencies.paymentsAddress,
               dependencies.shopsAddress,
               globalParams.address0,
+              globalParams.address0,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
               globalParams.address0
             ],[
               globalParams.address0,
