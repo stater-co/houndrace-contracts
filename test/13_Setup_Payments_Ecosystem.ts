@@ -23,10 +23,14 @@ export async function set(
       });
 
       it('Setup payments contract controller', async function () {
-        const before = await dependencies.payments.control();
         await dependencies.payments.setGlobalParameters(dependencies.constructor);
         const after = await dependencies.payments.control();
-        expecting(JSON.stringify(before) !== JSON.stringify(after), "Payments global params setter bugged");
+        expecting(
+          after.alphadune === String(process.env.ETH_ACCOUNT_PUBLIC_KEY) && 
+          after.firewall === dependencies.firewall && 
+          after.methods === dependencies.paymentMethods.address && 
+          after.restricted === dependencies.paymentRestricted.address, 
+          "Payments global params setter bugged");
         resolve();
       });
 

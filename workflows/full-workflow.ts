@@ -88,7 +88,8 @@ async function main() {
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
-        randomnessAddress: randomness.randomness.address
+        randomnessAddress: randomness.randomness.address,
+        firewall: firewall.firewall.address
     });
 
     const queues: QueuesSystem = await runQueues({
@@ -96,7 +97,8 @@ async function main() {
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address
+        incubatorAddress: incubators.incubator.address,
+        firewall: firewall.firewall.address
     });
     
     const generator: GeneratorSystem = await runGenerator({
@@ -118,7 +120,8 @@ async function main() {
     const lootboxes: LootboxesSystem = await runLootboxes({
         canBeOpened: false,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address
+        paymentsAddress: payments.payments.address,
+        firewall: firewall.firewall.address
     });
 
     await setPayments({
@@ -130,7 +133,8 @@ async function main() {
             methods: payments.paymentMethods.address,
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             firewall: firewall.firewall.address
-        }
+        },
+        firewall: firewall.firewall.address
     });
 
     await setShop({

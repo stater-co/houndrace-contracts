@@ -28,36 +28,15 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            5000000
+            dependencies.arenasAddress,
+            dependencies.houndsAddress,
+            dependencies.paymentsAddress,
+            dependencies.racesAddress,
+            dependencies.incubatorAddress,
+            dependencies.firewall
           ]],
           props: {}
         }) as QueuesRestricted;
-      });
-
-      it("Deploy the queues zerocost contract", async function () {
-        queuesZerocost = await deployContract({
-          name: 'QueuesZerocost',
-          constructor: [[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            5000000
-          ]],
-          props: {}
-        }) as QueuesZerocost;
       });
 
       it("Deploy the queues methods contract", async function () {
@@ -65,16 +44,15 @@ export async function run(
           name: 'QueuesMethods',
           constructor: [[
             globalParams.address0,
+            queuesRestricted.address,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            5000000
+            dependencies.arenasAddress,
+            dependencies.houndsAddress,
+            dependencies.paymentsAddress,
+            dependencies.racesAddress,
+            dependencies.incubatorAddress,
+            dependencies.firewall
           ]],
           props: {}
         }) as QueuesMethods;
@@ -84,17 +62,16 @@ export async function run(
         queuesZerocost = await deployContract({
           name: 'QueuesZerocost',
           constructor: [[
+            queuesMethods.address,
+            queuesRestricted.address,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0,
-            [],
-            5000000
+            dependencies.arenasAddress,
+            dependencies.houndsAddress,
+            dependencies.paymentsAddress,
+            dependencies.racesAddress,
+            dependencies.incubatorAddress,
+            dependencies.firewall
           ]],
           props: {}
         }) as QueuesZerocost;
@@ -113,8 +90,7 @@ export async function run(
             dependencies.paymentsAddress,
             dependencies.racesAddress,
             dependencies.incubatorAddress,
-            [],
-            5000000
+            dependencies.firewall
           ]],
           props: {}
         }) as Queues;
