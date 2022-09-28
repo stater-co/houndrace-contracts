@@ -8,45 +8,45 @@ import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
 import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
-import { run as runLibraries } from '../test/1_Deploy_Libraries';
-import { run as runPayments } from '../test/2_Deploy_Payments_Ecosystem';
-import { run as runRandomness } from '../test/3_Deploy_Randomness';
-import { run as runArenas } from '../test/4_Deploy_Arenas';
-import { run as runGenetics } from '../test/5_Deploy_Genetics';
-import { run as runIncubators } from '../test/6_Deploy_Incubator';
-import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
-import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
-import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
-import { run as runGenerator } from '../test/10_Deploy_Generator';
-import { set as setQueues } from '../test/18_Setup_Queues_Contracts';
-import { set as setShop } from '../test/14_Setup_Shop_Contracts';
-import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
-import { set as setIncubators } from '../test/16_Setup_Incubator_Contracts';
-import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
-import { set as setRaces } from '../test/20_Setup_Races_Contracts';
-import { set as setGenerator } from '../test/19_Setup_Generator_Contracts';
-import { test as testGenetics } from '../test/22_Genetics/22_1_Genetics_Basic_Tests';
-import { test as testHounds } from '../test/23_Hounds/23_1_Hounds_Basic_Tests';
-import { test as testHoundsAdvanced } from '../test/23_Hounds/23_2_Hounds_Custom_Token_Tests';
-import { test as testArenas } from '../test/24_Arenas/24_1_Arenas_Basic_Tests';
-import { test as testQueues } from '../test/25_Queues/25_1_Queues_Basic_Tests';
-import { test as testQueuesAdvanced } from '../test/25_Queues/25_2_Queues_Advanced_Tests';
-import { test as testRaces } from '../test/26_Races/26_1_Races_Basic_Tests';
+import { run as runLibraries } from '../test/Deploy_Libraries';
+import { run as runPayments } from '../test/Deploy_Payments_Ecosystem';
+import { run as runRandomness } from '../test/Deploy_Randomness';
+import { run as runArenas } from '../test/Deploy_Arenas';
+import { run as runGenetics } from '../test/Deploy_Genetics';
+import { run as runIncubators } from '../test/Deploy_Incubator';
+import { run as runHounds } from '../test/Deploy_Hounds_Ecosystem';
+import { run as runRaces } from '../test/Deploy_Races_Ecosystem';
+import { run as runQueues } from '../test/Deploy_Queues_Ecosystem';
+import { run as runGenerator } from '../test/Deploy_Generator';
+import { set as setQueues } from '../test/Setup_Queues_Contracts';
+import { set as setShop } from '../test/Setup_Shop_Contracts';
+import { set as setArenas } from '../test/Setup_Arenas_Contracts';
+import { set as setIncubators } from '../test/Setup_Incubator_Contracts';
+import { set as setHounds } from '../test/Setup_Hounds_Contracts';
+import { set as setRaces } from '../test/Setup_Races_Contracts';
+import { set as setGenerator } from '../test/Setup_Generator_Contracts';
+import { test as testGenetics } from '../test/Genetics/Genetics_Basic_Tests';
+import { test as testHounds } from '../test/Hounds/Hounds_Basic_Tests';
+import { test as testHoundsAdvanced } from '../test/Hounds/Hounds_Custom_Token_Tests';
+import { test as testArenas } from '../test/Arenas/Arenas_Basic_Tests';
+import { test as testQueues } from '../test/Queues/Queues_Basic_Tests';
+import { test as testQueuesAdvanced } from '../test/Queues/Queues_Advanced_Tests';
+import { test as testRaces } from '../test/Races/Races_Basic_Tests';
 import { globalParams } from '../common/params';
-import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
+import { run as runLootboxes } from '../test/Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
-import { run as runGamification } from '../test/12_Deploy_Gamification';
-import { set as setGamification } from '../test/21_Setup_Gamification';
-import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic_Tests';
+import { run as runGamification } from '../test/Deploy_Gamification';
+import { set as setGamification } from '../test/Setup_Gamification';
+import { test as testLootboxes } from '../test/Lootboxes/Lootboxes_Basic_Tests';
 import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
-import { test as testRacesAdvanced } from '../test/26_Races/26_2_Races_Advanced_Tests';
-import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
+import { test as testRacesAdvanced } from '../test/Races/Races_Advanced_Tests';
+import { set as setPayments } from '../test/Setup_Payments_Ecosystem';
 import { DeployedFirewall } from '../common/dto/test/firewallDeployment.dto';
-import { run as runFirewall } from '../test/0_Deploy_Firewall';
-
+import { run as runFirewall } from '../test/Deploy_Firewall';
+import { set as setFirewall } from '../test/Setup_Firewall_Rules';
 
 async function main() {
-    
+
     const firewall: DeployedFirewall = await runFirewall({
         council: [],
         minCouncilApprovals: 0
@@ -122,6 +122,12 @@ async function main() {
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
         firewall: firewall.firewall.address
+    });
+
+    await setFirewall({
+        features: [],
+        firewall: firewall.firewall,
+        operators: []
     });
 
     await setPayments({

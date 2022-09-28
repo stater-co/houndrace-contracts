@@ -1,7 +1,7 @@
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
-import { ShopRestricted } from '../typechain-types//ShopRestricted';
+import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
 import { HoundRacePotions } from '../typechain-types/HoundRacePotions';
 import { Payments } from '../typechain-types/Payments';

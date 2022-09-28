@@ -1,3 +1,6 @@
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x33CCb3D3F92Dd91E615906e88075ff581d2aFE34","network":"polygonMumbai","timestamp":"2022-09-26T15:31:54.738Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x3C502B1b0D9040a02874360af81B1035860A6afF","network":"polygonMumbai","timestamp":"2022-09-26T15:33:33.464Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xa4C77f926687BB1A5c776698193062A854dad4f9","network":"polygonMumbai","timestamp":"2022-09-27T14:44:07.433Z"}
+{"level":"info","message":"[DIIMIIM] export GAMIFICATION_RESTRICTED=0x5e6a12FA2c0408AC4aF10618CB433366b0b0389D","network":"polygonMumbai","timestamp":"2022-09-28T13:50:42.968Z"}
+{"level":"info","message":"[DIIMIIM] export GAMIFICATION_METHODS=0xC5834528eEA7447268Ae17dA6d87de4145e4118F","network":"polygonMumbai","timestamp":"2022-09-28T13:50:53.736Z"}
+{"level":"info","message":"[DIIMIIM] export GAMIFICATIONS=0x9dF0B8076f8848242c6ed98C055C3601D1a1A103","network":"polygonMumbai","timestamp":"2022-09-28T13:51:04.872Z"}
