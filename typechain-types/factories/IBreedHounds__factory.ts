@@ -11,107 +11,18 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "hound1Id",
-        type: "uint256",
-      },
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "maleParent",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "femaleParent",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "generation",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "birthDate",
-            type: "uint256",
-          },
-          {
-            internalType: "uint32[54]",
-            name: "geneticSequence",
-            type: "uint32[54]",
-          },
-          {
-            internalType: "string",
-            name: "extensionTraits",
-            type: "string",
-          },
-          {
-            internalType: "enum Specie.Enum",
-            name: "specie",
-            type: "uint8",
-          },
-        ],
-        internalType: "struct HoundIdentity.Struct",
         name: "hound1",
-        type: "tuple",
-      },
-      {
-        internalType: "uint256",
-        name: "hound2Id",
         type: "uint256",
       },
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "maleParent",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "femaleParent",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "generation",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "birthDate",
-            type: "uint256",
-          },
-          {
-            internalType: "uint32[54]",
-            name: "geneticSequence",
-            type: "uint32[54]",
-          },
-          {
-            internalType: "string",
-            name: "extensionTraits",
-            type: "string",
-          },
-          {
-            internalType: "enum Specie.Enum",
-            name: "specie",
-            type: "uint8",
-          },
-        ],
-        internalType: "struct HoundIdentity.Struct",
-        name: "hound2",
-        type: "tuple",
-      },
-      {
         internalType: "uint256",
-        name: "onId",
+        name: "hound2",
         type: "uint256",
       },
     ],
     name: "breedHounds",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
 ];

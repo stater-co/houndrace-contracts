@@ -79168,3 +79168,21 @@
   network: 'rinkeby',
   timestamp: '2022-09-21T10:08:27.948Z'
 }
+{
+  message: '[DIIMIIM] export GAMIFICATION_RESTRICTED=0xCF4915F2Ad4529Eaf11F34FfE2930b6eC7981164',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-28T14:18:36.212Z'
+}
+{
+  message: '[DIIMIIM] export GAMIFICATION_METHODS=0x6E10fEC959eBE954513AA2B62DD3b3e1BA33d0A0',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-28T14:18:47.360Z'
+}
+{
+  message: '[DIIMIIM] export GAMIFICATIONS=0xD21371fc12FD6Ccf1d0361EEA5729105096b625d',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-09-28T14:18:59.373Z'
+}
