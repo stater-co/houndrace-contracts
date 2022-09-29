@@ -1,6 +1,6 @@
 import { GamificationSystemController } from '../common/dto/test/gamificationSystemController.dto';
 import { expecting } from '../plugins/expecting';
-
+const { ethers } = require('hardhat');
 
 export async function set(
   dependencies: GamificationSystemController
@@ -10,7 +10,8 @@ export async function set(
 
       it('Setup gamification methods controller', async function () {
         const before = await dependencies.methods.control();
-        await dependencies.methods.setGlobalParameters({
+        const [ , , , sig4 ] = await ethers.getSigners();
+        await dependencies.methods.connect(sig4).setGlobalParameters({
           defaultBreeding: dependencies.constructor.defaultBreeding,
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,
@@ -23,7 +24,8 @@ export async function set(
 
       it('Setup gamification restricted controller', async function () {
         const before = await dependencies.restricted.control();
-        await dependencies.restricted.setGlobalParameters({
+        const [ , , , sig4 ] = await ethers.getSigners();
+        await dependencies.restricted.connect(sig4).setGlobalParameters({
           defaultBreeding: dependencies.constructor.defaultBreeding,
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,
@@ -35,7 +37,8 @@ export async function set(
       });
 
       it('Setup gamification controller', async function () {
-        await dependencies.gamification.setGlobalParameters({
+        const [ , , , sig4 ] = await ethers.getSigners();
+        await dependencies.gamification.connect(sig4).setGlobalParameters({
           defaultBreeding: dependencies.constructor.defaultBreeding,
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,

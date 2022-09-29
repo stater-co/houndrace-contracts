@@ -48,7 +48,6 @@ import { set as setFirewall } from '../test/Setup_Firewall_Rules';
 async function main() {
 
     const firewall: DeployedFirewall = await runFirewall({
-        council: [],
         minCouncilApprovals: 0
     });
 
@@ -125,9 +124,7 @@ async function main() {
     });
 
     await setFirewall({
-        features: [],
-        firewall: firewall.firewall,
-        operators: []
+        firewall: firewall.firewall
     });
 
     await setPayments({

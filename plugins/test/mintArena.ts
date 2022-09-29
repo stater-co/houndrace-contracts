@@ -1,10 +1,13 @@
 import { MintArenaParams } from "../../common/dto/test/mintArenaParams.dto";
 import { expecting } from "../expecting";
+const { ethers } = require('hardhat');
+
 
 export async function mintArena(
   params: MintArenaParams
 ) {
-  await params.contract.createArena(params.arena);
+  const [ sig1 ] = await ethers.getSigners();
+  await params.contract.connect(sig1).createArena(params.arena);
 }
 
 export async function safeMintArena(

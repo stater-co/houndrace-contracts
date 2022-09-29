@@ -9,32 +9,32 @@ export async function set(
   describe('Setting up the Arena Contracts Controller', async function () {
 
     it("Setup arena restricted contract controller", async function () {
-      const [sig1] = await ethers.getSigners();
+      const [ , , sig3 ] = await ethers.getSigners();
       const before = await dependencies.arenasRestricted.control();
-      await dependencies.arenasRestricted.setGlobalParameters({
+      await dependencies.arenasRestricted.connect(sig3).setGlobalParameters({
         ...dependencies.constructor,
-        alphadune: sig1.address
+        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
       });
       const after = await dependencies.arenasRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Arenas Restricted global params setter bugged");
     });
 
     it("Setup arena methods contract controller", async function () {
-      const [sig1] = await ethers.getSigners();
+      const [ , , sig3 ] = await ethers.getSigners();
       const before = await dependencies.arenasMethods.control();
-      await dependencies.arenasMethods.setGlobalParameters({
+      await dependencies.arenasMethods.connect(sig3).setGlobalParameters({
         ...dependencies.constructor,
-        alphadune: sig1.address
+        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
       });
       const after = await dependencies.arenasMethods.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Arenas Methods global params setter bugged");
     });
 
     it("Setup arena contract controller", async function () {
-      const [sig1] = await ethers.getSigners();
-      await dependencies.arenas.setGlobalParameters({
+      const [ , , sig3 ] = await ethers.getSigners();
+      await dependencies.arenas.connect(sig3).setGlobalParameters({
         ...dependencies.constructor,
-        alphadune: sig1.address
+        alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
       });
     });
 
