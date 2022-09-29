@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: process.env.ETHEREUM_API_KEY
+    apiKey: process.env.POLYSCAN_API_KEY
   },
   solidity: {
     compilers: [
