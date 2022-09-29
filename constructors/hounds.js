@@ -1,4 +1,4 @@
-// npx hardhat verify --network rinkeby --constructor-args constructors/hounds.js 0x69143C6bb5d697df07470B79bA1ff39BDa2
+// npx hardhat verify --network rinkeby --constructor-args constructors/hounds.js 0x9BE28c12b3C807A1B00DB8e682d3B837b92b11e9
 module.exports = [
     [
         "HoundRace",
@@ -21,9 +21,6 @@ module.exports = [
             "0x0000000000000000000000000000000000000000",
             "0x0000000000000000000000000000000000000000",
             "0xB1A2BC2EC50000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
-            "0x2386F26FC10000",
             "0x2386F26FC10000"
         ]
     ]
