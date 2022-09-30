@@ -53,8 +53,8 @@ contract Hounds is Params {
         oldQueueId = abi.decode(output,(uint256)); 
     }
 
-    function getBreedCost(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
-        return IGetBreedCost(control.boilerplate.zerocost).getBreedCost(hound);
+    function getBreedCosts(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
+        return IGetBreedCosts(control.boilerplate.zerocost).getBreedCosts(hound);
     }
 
 }

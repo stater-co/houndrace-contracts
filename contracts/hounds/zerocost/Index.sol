@@ -25,7 +25,7 @@ contract HoundsZerocost {
         control = globalParameters;
     }
 
-    function getBreedCost(
+    function getBreedCosts(
         uint256 hound
     ) 
         external 

@@ -18,7 +18,7 @@ import '../../gamification/interfaces/ISetBreeding.sol';
 import '../../incubator/interfaces/ISetIdentity.sol';
 import '../../firewall/interfaces/IsAllowed.sol';
 import '../../payments/params/MicroPayment.sol';
-import '../interfaces/IGetBreedCost.sol';
+import '../interfaces/IGetBreedCosts.sol';
 
 
 contract Params is ERC721, ERC721Holder, Withdrawable {

@@ -21,7 +21,9 @@ contract GamificationMethods is Params {
     {
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         houndsStamina[onId] = control.defaultStamina;
-        houndsBreeding[onId] = control.defaultBreeding; 
+        houndsStamina[onId].staminaLastUpdate = block.timestamp;
+        houndsBreeding[onId] = control.defaultBreeding;
+        houndsBreeding[onId].lastBreed = block.timestamp;
     }
 
 }

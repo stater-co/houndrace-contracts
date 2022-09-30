@@ -25,8 +25,10 @@ contract QueuesZerocost {
     ) 
         external 
     {
-        console.log("Setting params: ", control.firewall);
+        console.log("Setting params: ", globalParameters.firewall);
+        console.log(msg.sender);
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
+        console.log("ok!");
         control = globalParameters;
     }
 

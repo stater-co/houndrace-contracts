@@ -59,18 +59,6 @@ export async function run(
       });
       
       it("Deploy the queues zerocost contract", async function () {
-        console.log("Deploy queues zerocost with: ", [
-          queuesMethods.address,
-          queuesRestricted.address,
-          globalParams.address0,
-          globalParams.address0,
-          dependencies.arenasAddress,
-          dependencies.houndsAddress,
-          dependencies.paymentsAddress,
-          dependencies.racesAddress,
-          dependencies.incubatorAddress,
-          dependencies.firewall
-        ]);
         queuesZerocost = await deployContract({
           name: 'QueuesZerocost',
           constructor: [[
