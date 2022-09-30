@@ -5,7 +5,13 @@ import '../params/Index.sol';
 
 contract HoundsMinter is Params {
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    constructor(
+        Constructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+
+    }
 
     function breedHounds(uint256 hound1, uint256 hound2) external payable {
         HoundBreeding.Struct memory breeding1 = IGetBreeding(control.boilerplate.gamification).getBreeding(hound1);

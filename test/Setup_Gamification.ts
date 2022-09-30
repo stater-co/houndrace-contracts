@@ -16,7 +16,7 @@ export async function set(
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address,
-          firewall: dependencies.firewall
+          firewall: dependencies.firewallAddress
         });
         const after = await dependencies.methods.control();
         expecting(JSON.stringify(before) !== JSON.stringify(after), "Gamification methods params setter bugged");
@@ -30,7 +30,7 @@ export async function set(
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address,
-          firewall: dependencies.firewall
+          firewall: dependencies.firewallAddress
         });
         const after = await dependencies.restricted.control();
         expecting(JSON.stringify(before) !== JSON.stringify(after), "Gamification restricted params setter bugged");
@@ -43,7 +43,7 @@ export async function set(
           defaultStamina: dependencies.constructor.defaultStamina,
           methods: dependencies.methods.address,
           restricted: dependencies.restricted.address,
-          firewall: dependencies.firewall
+          firewall: dependencies.firewallAddress
         });
         resolve();
       });

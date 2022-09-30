@@ -23,7 +23,7 @@ export async function run(
         racesRestricted = await deployContract({
           name: 'RacesRestricted',
           constructor: [[
-            dependencies.firewall,
+            dependencies.firewallAddress,
             dependencies.randomnessAddress,
             dependencies.arenasAddress,
             dependencies.houndsAddress,
@@ -45,7 +45,7 @@ export async function run(
         racesMethods = await deployContract({
           name: 'RacesMethods',
           constructor: [[
-            dependencies.firewall,
+            dependencies.firewallAddress,
             dependencies.randomnessAddress,
             dependencies.arenasAddress,
             dependencies.houndsAddress,
@@ -68,7 +68,7 @@ export async function run(
         races = await deployContract({
           name: 'Races',
           constructor: [[
-            dependencies.firewall,
+            dependencies.firewallAddress,
             dependencies.randomnessAddress,
             dependencies.arenasAddress,
             dependencies.houndsAddress,

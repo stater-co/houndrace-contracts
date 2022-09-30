@@ -27,7 +27,7 @@ export async function run(
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall,
+            dependencies.firewallAddress,
             false
           ]],
           props: {}

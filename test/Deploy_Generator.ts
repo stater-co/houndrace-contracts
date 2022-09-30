@@ -30,7 +30,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as GeneratorMethods;
@@ -48,7 +48,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0
+            dependencies.firewallAddress
           ]],
           props: {
             libraries: {
@@ -70,7 +70,7 @@ export async function run(
             dependencies.paymentsAddress,
             generatorZerocost.address,
             dependencies.incubatorAddress,
-            globalParams.address0
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as Generator;

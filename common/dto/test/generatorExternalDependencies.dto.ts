@@ -6,4 +6,5 @@ export interface GeneratorExternalDependencies {
     paymentsAddress: string;
     incubatorAddress: string;
     sortingsLibraryAddress: string;
+    firewallAddress: string;
 }

@@ -2,7 +2,7 @@
 pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './params/Constructor.sol';
-import 'hardhat/console.sol';
+
 
 contract Firewall is Ownable {
 
@@ -52,9 +52,6 @@ contract Firewall is Ownable {
         view 
         returns(bool) 
     {
-        console.log("is allowed ...");
-        console.log(user);
-        console.log(rules[method][user].length, firewall.minCouncilApprovals);
         return rules[method][user].length >= firewall.minCouncilApprovals;
     }
 

@@ -4,5 +4,5 @@ import { HoundBreeding, HoundStamina } from '../../../typechain-types/Gamificati
 export interface GamificationExternalDependencies {
     defaultBreeding: HoundBreeding.StructStruct,
     defaultStamina: HoundStamina.StructStruct,
-    firewall: string
+    firewallAddress: string
 }

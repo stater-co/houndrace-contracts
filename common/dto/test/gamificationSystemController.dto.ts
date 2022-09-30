@@ -8,5 +8,5 @@ export interface GamificationSystemController {
     methods: GamificationMethods;
     gamification: Gamification;
     constructor: GamificationConstructor.StructStruct;
-    firewall: string;
+    firewallAddress: string;
 }

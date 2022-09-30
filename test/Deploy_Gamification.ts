@@ -23,7 +23,7 @@ export async function run(
           constructor: [[
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
-            dependencies.firewall,
+            dependencies.firewallAddress,
             globalParams.address0,
             globalParams.address0
           ]],
@@ -37,7 +37,7 @@ export async function run(
           constructor: [[
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
-            dependencies.firewall,
+            dependencies.firewallAddress,
             globalParams.address0,
             methods.address
           ]],
@@ -51,7 +51,7 @@ export async function run(
           constructor: [[
             dependencies.defaultBreeding,
             dependencies.defaultStamina,
-            dependencies.firewall,
+            dependencies.firewallAddress,
             restricted.address,
             methods.address
           ]],

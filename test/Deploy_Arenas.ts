@@ -28,7 +28,7 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall,
+            dependencies.firewallAddress,
             60
           ]],
           props: {}
@@ -45,7 +45,7 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall,
+            dependencies.firewallAddress,
             60
           ]],
           props: {}
@@ -62,7 +62,7 @@ export async function run(
             arenasMethods.address, 
             dependencies.paymentsAddress, 
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY), 
-            dependencies.firewall,
+            dependencies.firewallAddress,
             60
           ]],
           props: {}

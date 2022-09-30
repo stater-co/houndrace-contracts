@@ -1,4 +1,4 @@
 export interface ArenasExternalDependencies {
     paymentsAddress: string;
-    firewall: string;
+    firewallAddress: string;
 }

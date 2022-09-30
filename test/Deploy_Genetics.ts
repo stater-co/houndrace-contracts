@@ -20,7 +20,7 @@ export async function run(
           constructor: [[
             dependencies.randomnessAddress,
             dependencies.arenasAddress,
-            dependencies.firewall,
+            dependencies.firewallAddress,
             globalParams.maleBoilerplateGene,
             globalParams.femaleBoilerplateGene,
             60,

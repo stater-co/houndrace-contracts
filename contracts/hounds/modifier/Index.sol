@@ -5,13 +5,19 @@ import '../params/Index.sol';
 
 contract HoundsModifier is Params {
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    constructor(
+        Constructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+        
+    }
     
     function updateHoundStamina(
         uint256 theId,
         uint32 amount
     ) external {
-        require(allowed[msg.sender]);
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
 
         HoundStamina.Struct memory stamina = IGetStamina(control.boilerplate.gamification).getStamina(theId);
 
@@ -23,7 +29,7 @@ contract HoundsModifier is Params {
         uint256 theId, 
         uint256 queueId
     ) external returns(uint256 oldQueueId) {
-        require(allowed[msg.sender]);
+        require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
 
         oldQueueId = hounds[theId].queueId;
         hounds[theId].queueId = queueId;

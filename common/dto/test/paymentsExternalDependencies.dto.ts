@@ -1,3 +1,3 @@
 export interface PaymentsExternalDependencies {
-    firewall: string;
+    firewallAddress: string;
 }

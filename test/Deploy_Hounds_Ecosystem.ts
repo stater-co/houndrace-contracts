@@ -40,7 +40,7 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0
+              dependencies.firewallAddress
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -73,7 +73,7 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0
+              dependencies.firewallAddress
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -106,7 +106,7 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0
+              dependencies.firewallAddress
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -139,7 +139,7 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0
+              dependencies.firewallAddress
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -172,7 +172,7 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-              globalParams.address0
+              dependencies.firewallAddress
             ],[
               globalParams.address0,
               globalParams.address0,

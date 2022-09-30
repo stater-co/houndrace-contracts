@@ -23,7 +23,6 @@ contract GamificationMethods is Params {
         houndsStamina[onId] = control.defaultStamina;
         houndsStamina[onId].staminaLastUpdate = block.timestamp;
         houndsBreeding[onId] = control.defaultBreeding;
-        houndsBreeding[onId].lastBreed = block.timestamp;
     }
 
 }

@@ -33,7 +33,7 @@ export async function run(
             dependencies.paymentsAddress,
             dependencies.racesAddress,
             dependencies.incubatorAddress,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as QueuesRestricted;
@@ -52,7 +52,7 @@ export async function run(
             dependencies.paymentsAddress,
             dependencies.racesAddress,
             dependencies.incubatorAddress,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as QueuesMethods;
@@ -71,7 +71,7 @@ export async function run(
             dependencies.paymentsAddress,
             dependencies.racesAddress,
             dependencies.incubatorAddress,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as QueuesZerocost;
@@ -90,7 +90,7 @@ export async function run(
             dependencies.paymentsAddress,
             dependencies.racesAddress,
             dependencies.incubatorAddress,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as Queues;

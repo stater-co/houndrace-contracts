@@ -15,7 +15,6 @@ import './HoundIdentity.sol';
 contract Params {
 
     IncubatorConstructor.Struct public control;
-    mapping(address => bool) public allowed;
     mapping(uint256 => HoundIdentity.Struct) public houndsIdentity;
 
     constructor(IncubatorConstructor.Struct memory input) {
@@ -32,7 +31,7 @@ contract Params {
     }
 
     function setIdentity(uint256 theId, HoundIdentity.Struct memory identity) external {
-        require(allowed[msg.sender]);
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         houndsIdentity[theId] = identity;
     }
 

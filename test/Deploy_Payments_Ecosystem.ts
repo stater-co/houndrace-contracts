@@ -47,7 +47,7 @@ export async function run(
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             globalParams.address0,
             globalParams.address0,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as PaymentsRestricted;
@@ -60,7 +60,7 @@ export async function run(
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             paymentsRestricted.address,
             globalParams.address0,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as PaymentsMethods;
@@ -73,7 +73,7 @@ export async function run(
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             paymentsRestricted.address,
             paymentsMethods.address,
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as Payments;
@@ -110,7 +110,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as ShopRestricted;
@@ -123,7 +123,7 @@ export async function run(
             globalParams.address0,
             shopRestricted.address,
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as ShopMethods;
@@ -136,7 +136,7 @@ export async function run(
             shopMethods.address,
             shopRestricted.address,
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as ShopZerocost;
@@ -149,7 +149,7 @@ export async function run(
             shopMethods.address,
             shopRestricted.address,
             String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-            dependencies.firewall
+            dependencies.firewallAddress
           ]],
           props: {}
         }) as Shop;

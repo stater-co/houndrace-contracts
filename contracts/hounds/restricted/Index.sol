@@ -5,7 +5,13 @@ import '../params/Index.sol';
 
 contract HoundsRestricted is Params {
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    constructor(
+        Constructor.Struct memory input
+    ) 
+        Params(input) 
+    {
+        
+    }
     
     function initializeHound(
         uint256 onId, 

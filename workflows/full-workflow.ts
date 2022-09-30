@@ -54,33 +54,34 @@ async function main() {
     const libraries: DeployedLibraries = await runLibraries();
     
     const payments: PaymentEcosystem = await runPayments({
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
     
     const randomness: RandomnessSystem = await runRandomness();
 
     const arenas: ArenasSystem = await runArenas({
         paymentsAddress: payments.payments.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     const genetics: GeneticsSystem = await runGenetics({
         arenasAddress: arenas.arenas.address,
         randomnessAddress: randomness.randomness.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     const incubators: IncubatorSystem = await runIncubators({
         geneticsAddress: genetics.genetics.address,
         randomnessAddress: randomness.randomness.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
         incubatorAddress: incubators.incubator.address,
-        transferrableRoot: payments.testErc721
+        transferrableRoot: payments.testErc721,
+        firewallAddress: firewall.firewall.address
     });
 
     const races: RacesSystem = await runRaces({
@@ -88,7 +89,7 @@ async function main() {
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
         randomnessAddress: randomness.randomness.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     const queues: QueuesSystem = await runQueues({
@@ -97,7 +98,7 @@ async function main() {
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
         incubatorAddress: incubators.incubator.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
     
     const generator: GeneratorSystem = await runGenerator({
@@ -107,20 +108,21 @@ async function main() {
         racesAddress: races.races.address,
         randomnessAddress: randomness.randomness.address,
         sortingsLibraryAddress: libraries.sortings.address,
-        incubatorAddress: incubators.incubator.address
+        incubatorAddress: incubators.incubator.address,
+        firewallAddress: firewall.firewall.address
     });
 
     const gamification: GamificationSystem = await runGamification({
         defaultBreeding: globalParams.houndBreeding,
         defaultStamina: globalParams.houndStamina,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
         canBeOpened: false,
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     await setFirewall({
@@ -137,7 +139,7 @@ async function main() {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             firewall: firewall.firewall.address
         },
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     await setShop({
@@ -162,7 +164,7 @@ async function main() {
         methods: gamification.methods,
         restricted: gamification.restricted,
         gamification: gamification.gamification,
-        firewall: firewall.firewall.address
+        firewallAddress: firewall.firewall.address
     });
 
     await setQueues({

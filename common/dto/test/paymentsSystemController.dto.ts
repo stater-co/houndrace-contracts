@@ -7,5 +7,5 @@ export interface PaymentsSystemController {
     paymentRestricted: PaymentsRestricted;
     paymentMethods: PaymentsMethods;
     constructor: PaymentsConstructor.StructStruct;
-    firewall: string;
+    firewallAddress: string;
 }

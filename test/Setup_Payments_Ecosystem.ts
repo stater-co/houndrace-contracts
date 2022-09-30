@@ -27,7 +27,7 @@ export async function set(
         const after = await dependencies.payments.control();
         expecting(
           after.alphadune === String(process.env.ETH_ACCOUNT_PUBLIC_KEY) && 
-          after.firewall === dependencies.firewall && 
+          after.firewall === dependencies.firewallAddress && 
           after.methods === dependencies.paymentMethods.address && 
           after.restricted === dependencies.paymentRestricted.address, 
           "Payments global params setter bugged");
