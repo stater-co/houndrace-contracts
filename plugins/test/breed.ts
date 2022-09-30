@@ -3,6 +3,7 @@ import { globalParams } from "../../common/params";
 import { Hound, MicroPayment } from '../../typechain-types/Hounds';
 import { expecting } from "../expecting";
 import { BigNumber } from 'ethers';
+const { ethers } = require('hardhat');
 
 
 export async function breed(
@@ -50,7 +51,8 @@ export async function safeBreed(
 
   await params.contract.breedHounds(hound1, hound2, { value : totalValueToPay });
 
-  await params.contract.initializeHound(houndToFillUp, signer, globalParams.defaultHound);
+  const [ , , , , , , , , , , , , sig13 ] = await ethers.getSigners();
+  await params.contract.connect(sig13).initializeHound(houndToFillUp, signer, globalParams.defaultHound);
 
   houndMaleAfter = await params.contract.hound(maleId);
   houndFemaleAfter = await params.contract.hound(femaleId);

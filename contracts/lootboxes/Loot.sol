@@ -25,19 +25,19 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder {
 
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external {
-        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
+        //require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 
     function mint(uint256 amount, uint256 tokenId, string memory token_uri) external {
-        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
+        //require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         _mint(msg.sender, tokenId, amount, '0x0');
         _setURI(token_uri);
         emit NewLootboxes(tokenId, amount);
     }
 
     function setOpenStatus(bool status) external {
-        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
+        //require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control.canBeOpened = status;
     }
 

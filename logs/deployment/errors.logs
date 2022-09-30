@@ -935,3 +935,4 @@
   timestamp: '2022-09-29T12:05:13.366Z'
 }
 >>>>>>> master
+{"level":"error","message":"[DIIMIIM] The Etherscan API responded with a failure status.\nThe verification may still succeed but should be checked manually.\nReason: Already Verified","network":"polygonMumbai","timestamp":"2022-09-30T09:00:33.894Z"}

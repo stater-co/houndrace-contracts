@@ -49,6 +49,7 @@ contract Params is Withdrawable {
     ) 
         external 
     {
+        require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
     

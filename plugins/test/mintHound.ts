@@ -1,10 +1,13 @@
 import { MintHoundParams } from "../../common/dto/test/mintHoundsParams.dto";
 import { expecting } from "../expecting";
+const { ethers } = require('hardhat');
+
 
 export async function mintHound(
   params: MintHoundParams
 ) {
-  await params.contract.initializeHound(params.position, params.owner, params.hound);
+  const [ , , , , , , , , , , , , sig13 ] = await ethers.getSigners();
+  await params.contract.connect(sig13).initializeHound(params.position, params.owner, params.hound);
 }
 
 export async function safeMintHound(

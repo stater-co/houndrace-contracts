@@ -7,6 +7,7 @@ import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../params/Queue.sol';
 import '../../firewall/interfaces/IsAllowed.sol';
 import '../interfaces/IQueue.sol';
+import 'hardhat/console.sol';
 
 
 contract QueuesZerocost {
@@ -24,6 +25,7 @@ contract QueuesZerocost {
     ) 
         external 
     {
+        console.log("Setting params: ", control.firewall);
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }

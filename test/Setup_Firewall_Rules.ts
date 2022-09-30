@@ -34,12 +34,12 @@ export async function set(
           sig6.address,
           sig7.address,
           sig8.address,
-          sig9.address /*,
+          sig9.address,
           sig10.address,
           sig11.address,
           sig12.address,
           sig13.address,
-          sig14.address,
+          sig14.address /*,
           sig15.address,
           sig16.address,
           sig17.address,
@@ -75,7 +75,23 @@ export async function set(
           utils.id('generate(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool),uint256)').substring(0,10),
           
           // 9. function setGlobalParameters(GeneratorConstructor.Struct memory globalParameters)
-          utils.id('setGlobalParameters((address,address,address,address,address,address,address,address,address))').substring(0,10)
+          utils.id('setGlobalParameters((address,address,address,address,address,address,address,address,address))').substring(0,10),
+
+          // 10. function setGlobalParameters(GeneticsConstructor.Struct memory globalParameters)
+          utils.id('setGlobalParameters((address,address,address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))').substring(0,10),
+
+          // 11. function setGlobalParameters(Constructor.Struct memory globalParameters)
+          utils.id('setGlobalParameters((string,string,(address,address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))').substring(0,10),
+
+          // 12. function setMatingSeason(bool _matingSeason)
+          utils.id('setMatingSeason(bool)').substring(0,10),
+
+          // 13. function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external
+          utils.id('initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))').substring(0,10),
+
+          // 14. function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) 
+          utils.id('setGlobalParameters((address,address,address,address,address,address,address,address,address,address))').substring(0,10)
+
         ];
 
         console.log(features);

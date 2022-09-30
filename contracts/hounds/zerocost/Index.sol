@@ -10,20 +10,32 @@ contract HoundsZerocost {
 
     Constructor.Struct public control;
 
-    constructor(Constructor.Struct memory input) {
+    constructor(
+        Constructor.Struct memory input
+    ) {
         control = input;
     }
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external {
+    function setGlobalParameters(
+        Constructor.Struct memory globalParameters
+    ) 
+        external 
+    {
         require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 
-    function getBreedCost(uint256 hound) external view returns(
-        MicroPayment.Struct memory, 
-        MicroPayment.Struct memory, 
-        MicroPayment.Struct memory
-    ) {
+    function getBreedCost(
+        uint256 hound
+    ) 
+        external 
+        view 
+        returns(
+            MicroPayment.Struct memory, 
+            MicroPayment.Struct memory, 
+            MicroPayment.Struct memory
+        ) 
+    {
         return (
 
             // Breed cost fee
