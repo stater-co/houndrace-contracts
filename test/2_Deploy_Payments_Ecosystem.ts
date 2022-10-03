@@ -97,25 +97,34 @@ export async function run(): Promise<PaymentEcosystem> {
         }) as TestingErc1155;
       });
     
-      it('Deploy the Payments methods contract', async function () {
+      it('Deploy the Shop Restricted contract', async function () {
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[globalParams.address0,globalParams.address0]],
+          constructor: [[globalParams.address0,globalParams.address0,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
           props: {}
         }) as ShopRestricted;
+      });
+
+      it('Deploy the Shop Methods contract', async function () {
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[globalParams.address0,shopRestricted.address]],
+          constructor: [[globalParams.address0,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
           props: {}
         }) as ShopMethods;
+      });
+
+      it('Deploy the Shop Zerocost contract', async function () {
         shopZerocost = await deployContract({
           name: 'ShopZerocost',
-          constructor: [[globalParams.address0,shopRestricted.address]],
+          constructor: [[globalParams.address0,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
           props: {}
         }) as ShopZerocost;
+      });
+
+      it('Deploy the Shop contract', async function () {
         shop = await deployContract({
           name: 'Shop',
-          constructor: [[shopMethods.address,shopRestricted.address]],
+          constructor: [[shopMethods.address,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
           props: {}
         }) as Shop;
 

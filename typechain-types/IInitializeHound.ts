@@ -48,7 +48,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
-    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
     staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
@@ -58,7 +57,6 @@ export declare namespace HoundStamina {
     string,
     BigNumber,
     BigNumber,
-    BigNumber,
     number,
     number,
     number
@@ -66,7 +64,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
-    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
     staminaPerTimeUnit: number;
     staminaCap: number;
@@ -179,7 +176,7 @@ export declare namespace Hound {
 export interface IInitializeHoundInterface extends utils.Interface {
   contractName: "IInitializeHound";
   functions: {
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
   };
 
   encodeFunctionData(

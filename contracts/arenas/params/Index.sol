@@ -54,7 +54,4 @@ contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
         }
     }
 
-    fallback() external payable {}
-    receive() external payable {}
-
 }

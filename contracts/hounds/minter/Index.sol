@@ -7,7 +7,14 @@ contract HoundsMinter is Params {
 
     constructor(Constructor.Struct memory input) Params(input) {}
 
-    function breedHounds(uint256 hound1, uint256 hound2) external payable {
+    function breedHounds(
+        uint256 hound1, 
+        uint256 hound2
+    ) 
+        external 
+        payable 
+        nonReentrant 
+    {
         HoundBreeding.Struct memory breeding1 = IGetBreeding(control.boilerplate.gamification).getBreeding(hound1);
         HoundBreeding.Struct memory breeding2 = IGetBreeding(control.boilerplate.gamification).getBreeding(hound2);
         HoundIdentity.Struct memory identity1 = IGetIdentity(control.boilerplate.incubator).getIdentity(hound1);

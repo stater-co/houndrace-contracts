@@ -18,7 +18,7 @@ contract HoundsZerocost is Ownable {
         control = globalParameters;
     }
 
-    function getBreedCost(uint256 hound) external view returns(
+    function getBreedCosts(uint256 hound) external view returns(
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory

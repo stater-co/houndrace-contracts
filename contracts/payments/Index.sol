@@ -14,7 +14,10 @@ contract Payments is Params {
         uint256[] memory ids, // for batch transfers
         uint256[] memory amounts, // for batch transfers
         Payment.PaymentTypes paymentType
-	) public payable nonReentrant {
+	) 
+        public 
+        payable 
+    {
         (bool success, ) = control.methods.delegatecall(msg.data);
         require(success);
 	}
@@ -24,7 +27,10 @@ contract Payments is Params {
         uint256[] memory ids,
         uint256[] memory amounts,
 		Payment.PaymentTypes paymentType
-	) external payable onlyOwner {
+	) 
+        external 
+        payable 
+    {
 		(bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
 	}

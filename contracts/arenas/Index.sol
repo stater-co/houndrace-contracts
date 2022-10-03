@@ -22,11 +22,6 @@ contract Arenas is Params {
         require(success);
     }
 
-    function setTokenUri(uint256 theId, string memory token_uri) external {
-        (bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-    }
-
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return arenas[_tokenId].token_uri;
     }

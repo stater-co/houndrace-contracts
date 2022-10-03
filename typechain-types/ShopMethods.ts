@@ -23,11 +23,16 @@ import type {
 } from "./common";
 
 export declare namespace ShopConstructor {
-  export type StructStruct = { methods: string; restricted: string };
-
-  export type StructStructOutput = [string, string] & {
+  export type StructStruct = {
     methods: string;
     restricted: string;
+    alphadune: string;
+  };
+
+  export type StructStructOutput = [string, string, string] & {
+    methods: string;
+    restricted: string;
+    alphadune: string;
   };
 }
 
@@ -69,7 +74,7 @@ export interface ShopMethodsInterface extends utils.Interface {
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address))": FunctionFragment;
+    "setGlobalParameters((address,address,address))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -172,7 +177,13 @@ export interface ShopMethods extends BaseContract {
 
     control(
       overrides?: CallOverrides
-    ): Promise<[string, string] & { methods: string; restricted: string }>;
+    ): Promise<
+      [string, string, string] & {
+        methods: string;
+        restricted: string;
+        alphadune: string;
+      }
+    >;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -200,7 +211,13 @@ export interface ShopMethods extends BaseContract {
 
   control(
     overrides?: CallOverrides
-  ): Promise<[string, string] & { methods: string; restricted: string }>;
+  ): Promise<
+    [string, string, string] & {
+      methods: string;
+      restricted: string;
+      alphadune: string;
+    }
+  >;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -228,7 +245,13 @@ export interface ShopMethods extends BaseContract {
 
     control(
       overrides?: CallOverrides
-    ): Promise<[string, string] & { methods: string; restricted: string }>;
+    ): Promise<
+      [string, string, string] & {
+        methods: string;
+        restricted: string;
+        alphadune: string;
+      }
+    >;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 

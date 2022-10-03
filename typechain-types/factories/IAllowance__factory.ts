@@ -11,21 +11,21 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "owner",
+        name: "sender",
         type: "address",
       },
       {
-        internalType: "address",
-        name: "spender",
-        type: "address",
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
       },
     ],
     name: "allowance",
     outputs: [
       {
-        internalType: "uint256",
+        internalType: "bool",
         name: "",
-        type: "uint256",
+        type: "bool",
       },
     ],
     stateMutability: "view",

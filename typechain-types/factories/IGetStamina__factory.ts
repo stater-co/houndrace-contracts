@@ -35,11 +35,6 @@ const _abi = [
             type: "uint256",
           },
           {
-            internalType: "uint256",
-            name: "refillStaminaCooldownCost",
-            type: "uint256",
-          },
-          {
             internalType: "uint32",
             name: "staminaValue",
             type: "uint32",
