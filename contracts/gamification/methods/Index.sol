@@ -11,6 +11,7 @@ contract GamificationMethods is Params {
         require(allowed[msg.sender]);
 
         houndsStamina[onId] = control.defaultStamina;
+        houndsStamina[onId].staminaLastUpdate = block.timestamp;
         houndsBreeding[onId] = control.defaultBreeding;
     }
 
