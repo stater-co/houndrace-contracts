@@ -1,6 +1,6 @@
 import { FirewallRulesExternalDependencies } from '../common/dto/test/firewallRulesExternalDependencies.dto';
 import { Signer, utils } from 'ethers';
-const { ethers } = require('hardhat');
+import { generateSigners } from '../plugins/signersGenerator';
 
 
 export async function set(
@@ -11,42 +11,16 @@ export async function set(
 
       it('Set-up rules', async function () {
 
-        const [
-          sig1, sig2, sig3, sig4, sig5, 
-          sig6, sig7, sig8, sig9, sig10,
-          sig11, sig12, sig13, sig14, sig15,
-          sig16, sig17, sig18, sig19, sig20
-        ] = await ethers.getSigners();
-        const signers: Array<Signer> = [
-          sig1, sig2, sig3, sig4, sig5, 
-          sig6, sig7, sig8, sig9, sig10,
-          sig11, sig12, sig13, sig14, sig15,
-          sig16, sig17, sig18, sig19, sig20
-        ];
+        const totalAccounts: number = 20;
 
+        const signers: Array<Signer> = generateSigners(totalAccounts);
 
-        const signersAddresses: Array<string> = [
-          sig1.address,
-          sig2.address,
-          sig3.address,
-          sig4.address,
-          sig5.address,
-          sig6.address,
-          sig7.address,
-          sig8.address,
-          sig9.address,
-          sig10.address,
-          sig11.address,
-          sig12.address,
-          sig13.address,
-          sig14.address,
-          sig15.address,
-          sig16.address,
-          sig17.address,
-          sig18.address,
-          sig19.address,
-          sig20.address
-        ];
+        let signersAddresses: Array<string> = [];
+        for ( let i = 0 , l = totalAccounts ; i < l ; ++i ) {
+          let address: string = await signers[i].getAddress();
+          signersAddresses.push(address);
+        }
+
         const features: Array<string> = [
 
           // 1. createArena(Arena.Struct memory arena)
@@ -111,8 +85,7 @@ export async function set(
 
         ];
 
-        console.log(features);
-        for ( let i = 0 ; i < 20 ; ++i ) {
+        for ( let i = 0 ; i < totalAccounts ; ++i ) {
           await dependencies.firewall
           .connect(signers[i])
           .setRules(features, signersAddresses);
