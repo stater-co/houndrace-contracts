@@ -3,7 +3,7 @@ pragma solidity 0.8.17;
 import './Boilerplate.sol';
 import './Fees.sol';
 
-library Constructor {
+library HoundsConstructor {
     struct Struct {
         string name;
         string symbol;

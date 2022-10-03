@@ -8,16 +8,16 @@ import '../params/Constructor.sol';
 
 contract HoundsZerocost {
 
-    Constructor.Struct public control;
+    HoundsConstructor.Struct public control;
 
     constructor(
-        Constructor.Struct memory input
+        HoundsConstructor.Struct memory input
     ) {
         control = input;
     }
 
     function setGlobalParameters(
-        Constructor.Struct memory globalParameters
+        HoundsConstructor.Struct memory globalParameters
     ) 
         external 
     {

@@ -39,14 +39,13 @@ export async function set(
           sig11.address,
           sig12.address,
           sig13.address,
-          sig14.address /*,
+          sig14.address,
           sig15.address,
           sig16.address,
           sig17.address,
           sig18.address,
           sig19.address,
           sig20.address
-          */
         ];
         const features: Array<string> = [
 
@@ -80,7 +79,7 @@ export async function set(
           // 10. function setGlobalParameters(GeneticsConstructor.Struct memory globalParameters)
           utils.id('setGlobalParameters((address,address,address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))').substring(0,10),
 
-          // 11. function setGlobalParameters(Constructor.Struct memory globalParameters)
+          // 11. function setGlobalParameters(HoundsConstructor.Struct memory globalParameters)
           utils.id('setGlobalParameters((string,string,(address,address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))').substring(0,10),
 
           // 12. function setMatingSeason(bool _matingSeason)
@@ -90,7 +89,25 @@ export async function set(
           utils.id('initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))').substring(0,10),
 
           // 14. function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) 
-          utils.id('setGlobalParameters((address,address,address,address,address,address,address,address,address,address))').substring(0,10)
+          utils.id('setGlobalParameters((address,address,address,address,address,address,address,address,address,address))').substring(0,10),
+
+          // 15. function updateHoundStamina(uint256 theId, uint32 amount)
+          utils.id('updateHoundStamina(uint256,uint32)').substring(0,10), 
+
+          // 16. function updateHoundRunning(uint256 theId, uint256 queueId)
+          utils.id('updateHoundRunning(uint256,uint256)').substring(0,10), 
+
+          // 17. function breedHounds(uint256 hound1Id, HoundIdentity.Struct memory hound1, uint256 hound2Id, HoundIdentity.Struct memory hound2, uint256 theId)
+          utils.id('breedHounds(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8),uint256)').substring(0,10),
+
+          // 18. function setGlobalParameters(IncubatorConstructor.Struct memory globalParameters)
+          utils.id('setGlobalParameters((address,address,address,address,address,address,uint32))').substring(0,10),
+
+          // 19. function setGlobalParameters(LootboxesConstructor.Struct memory globalParameters)
+          utils.id('setGlobalParameters((string,address,address,address,address,bool))').substring(0,10), 
+
+          // 20. function mint(uint256 amount, uint256 tokenId, string memory token_uri)
+          utils.id('mint(uint256,uint256,string)').substring(0,10)
 
         ];
 

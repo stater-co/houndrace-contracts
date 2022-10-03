@@ -2,7 +2,7 @@
 pragma solidity 0.8.17;
 
 
-library Constructor {
+library LootboxesConstructor {
     struct Struct {
         string name;
         address hounds;

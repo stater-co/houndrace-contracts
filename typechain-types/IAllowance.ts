@@ -4,7 +4,6 @@
 import {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
   PopulatedTransaction,
@@ -23,12 +22,12 @@ import type {
 export interface IAllowanceInterface extends utils.Interface {
   contractName: "IAllowance";
   functions: {
-    "allowance(address,uint256)": FunctionFragment;
+    "allowance(address,address)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "allowance",
-    values: [string, BigNumberish]
+    values: [string, string]
   ): string;
 
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -65,40 +64,40 @@ export interface IAllowance extends BaseContract {
 
   functions: {
     allowance(
-      sender: string,
-      tokenId: BigNumberish,
+      owner: string,
+      spender: string,
       overrides?: CallOverrides
-    ): Promise<[boolean]>;
+    ): Promise<[BigNumber]>;
   };
 
   allowance(
-    sender: string,
-    tokenId: BigNumberish,
+    owner: string,
+    spender: string,
     overrides?: CallOverrides
-  ): Promise<boolean>;
+  ): Promise<BigNumber>;
 
   callStatic: {
     allowance(
-      sender: string,
-      tokenId: BigNumberish,
+      owner: string,
+      spender: string,
       overrides?: CallOverrides
-    ): Promise<boolean>;
+    ): Promise<BigNumber>;
   };
 
   filters: {};
 
   estimateGas: {
     allowance(
-      sender: string,
-      tokenId: BigNumberish,
+      owner: string,
+      spender: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     allowance(
-      sender: string,
-      tokenId: BigNumberish,
+      owner: string,
+      spender: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

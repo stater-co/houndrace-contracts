@@ -6,7 +6,7 @@ import '../params/Index.sol';
 contract HoundsRestricted is Params {
 
     constructor(
-        Constructor.Struct memory input
+        HoundsConstructor.Struct memory input
     ) 
         Params(input) 
     {

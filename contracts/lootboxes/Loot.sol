@@ -11,25 +11,35 @@ import './params/Box.sol';
 
 contract Lootboxes is ERC1155URIStorage, ERC1155Holder {
 
-    Constructor.Struct public control;
+    LootboxesConstructor.Struct public control;
     mapping(uint256 => Box.Struct) public lootboxes;
 
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
     event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
 
     constructor(
-        Constructor.Struct memory input
+        LootboxesConstructor.Struct memory input
     ) ERC1155(input.name) {
         control = input;
     }
 
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external {
+    function setGlobalParameters(
+        LootboxesConstructor.Struct memory globalParameters
+    ) 
+        external 
+    {
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }
 
-    function mint(uint256 amount, uint256 tokenId, string memory token_uri) external {
+    function mint(
+        uint256 amount, 
+        uint256 tokenId, 
+        string memory token_uri
+    ) 
+        external 
+    {
         require(IsAllowed(control.firewall).isAllowed(msg.sender,msg.sig));
         _mint(msg.sender, tokenId, amount, '0x0');
         _setURI(token_uri);

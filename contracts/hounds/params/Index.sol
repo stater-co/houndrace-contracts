@@ -19,7 +19,6 @@ import '../../incubator/interfaces/ISetIdentity.sol';
 import '../../firewall/interfaces/IsAllowed.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../interfaces/IGetBreedCosts.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is ERC721, ERC721Holder, Withdrawable {
@@ -32,15 +31,14 @@ contract Params is ERC721, ERC721Holder, Withdrawable {
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
     event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);
-    Constructor.Struct public control;
+    HoundsConstructor.Struct public control;
     bool public matingSeason = true;
 
-    constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
+    constructor(HoundsConstructor.Struct memory input) ERC721(input.name,input.symbol) {
         control = input;
     }
 
-    function setGlobalParameters(Constructor.Struct memory globalParameters) external {
-        console.log("Firewall: ", control.boilerplate.firewall);
+    function setGlobalParameters(HoundsConstructor.Struct memory globalParameters) external {
         require(IsAllowed(control.boilerplate.firewall).isAllowed(msg.sender,msg.sig));
         control = globalParameters;
     }

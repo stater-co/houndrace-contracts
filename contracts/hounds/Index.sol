@@ -5,7 +5,7 @@ import './params/Index.sol';
 
 contract Hounds is Params {
 
-    constructor(Constructor.Struct memory input) Params(input) {}
+    constructor(HoundsConstructor.Struct memory input) Params(input) {}
 
     function initializeHound(
         uint256 onId, 
