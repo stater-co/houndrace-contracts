@@ -118,7 +118,8 @@ async function main() {
         shopRestricted: payments.shopRestricted,
         constructor: {
             methods: payments.shopMethods.address,
-            restricted: payments.shopRestricted.address
+            restricted: payments.shopRestricted.address,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -292,6 +293,7 @@ async function main() {
     });
 
     lootboxes.lootboxes.setGlobalParameters({
+        name: "HoundRace Lootboxes",
         alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
         canBeOpened: true,
         hounds: hounds.hounds.address,
