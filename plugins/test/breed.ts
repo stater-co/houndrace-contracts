@@ -41,7 +41,7 @@ export async function safeBreed(
     hound2 = maleId;
   }
 
-  const totalToPay: MicroPayment.StructStructOutput[] = await params.contract.getBreedCost(hound2);
+  const totalToPay: MicroPayment.StructStructOutput[] = await params.contract.getBreedCosts(hound2);
   const houndToFillUp = await params.contract.id();
   let totalValueToPay: BigNumber = BigNumber.from(0);
   for ( let i = 0 , l = totalToPay.length ; i < l ; ++i ) {

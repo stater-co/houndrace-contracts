@@ -16,15 +16,20 @@ contract Params is Ownable {
     mapping(uint256 => Discount.Struct) discounts;
     event NewDiscount(uint256 indexed id, Discount.Struct discount);
 
-    constructor(ShopConstructor.Struct memory input) {
+    constructor(
+        ShopConstructor.Struct memory input
+    ) 
+    {
         control = input;
     }
 
-    function setGlobalParameters(ShopConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(
+        ShopConstructor.Struct memory globalParameters
+    ) 
+        external 
+        onlyOwner 
+    {
         control = globalParameters;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

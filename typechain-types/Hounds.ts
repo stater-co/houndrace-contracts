@@ -136,7 +136,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
-    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
     staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
@@ -146,7 +145,6 @@ export declare namespace HoundStamina {
     string,
     BigNumber,
     BigNumber,
-    BigNumber,
     number,
     number,
     number
@@ -154,7 +152,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
-    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
     staminaPerTimeUnit: number;
     staminaCap: number;
@@ -285,12 +282,12 @@ export interface HoundsInterface extends utils.Interface {
     "breedHounds(uint256,uint256)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getBreedCost(uint256)": FunctionFragment;
+    "getBreedCosts(uint256)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
@@ -304,7 +301,6 @@ export interface HoundsInterface extends utils.Interface {
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
-    "setTokenURI(uint256,string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
@@ -342,7 +338,7 @@ export interface HoundsInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "getBreedCost",
+    functionFragment: "getBreedCosts",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
@@ -406,10 +402,6 @@ export interface HoundsInterface extends utils.Interface {
     values: [boolean]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTokenURI",
-    values: [BigNumberish, string]
-  ): string;
-  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
@@ -457,7 +449,7 @@ export interface HoundsInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getBreedCost",
+    functionFragment: "getBreedCosts",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
@@ -506,10 +498,6 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setMatingSeason",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTokenURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -728,7 +716,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    getBreedCost(
+    getBreedCosts(
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -842,12 +830,6 @@ export interface Hounds extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -942,7 +924,7 @@ export interface Hounds extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
-  getBreedCost(
+  getBreedCosts(
     hound: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
@@ -1050,12 +1032,6 @@ export interface Hounds extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTokenURI(
-    _tokenId: BigNumberish,
-    token_uri: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -1147,7 +1123,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
-    getBreedCost(
+    getBreedCosts(
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -1250,12 +1226,6 @@ export interface Hounds extends BaseContract {
 
     setMatingSeason(
       _matingSeason: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1453,7 +1423,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getBreedCost(
+    getBreedCosts(
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -1548,12 +1518,6 @@ export interface Hounds extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -1641,7 +1605,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getBreedCost(
+    getBreedCosts(
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1739,12 +1703,6 @@ export interface Hounds extends BaseContract {
 
     setMatingSeason(
       _matingSeason: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTokenURI(
-      _tokenId: BigNumberish,
-      token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -13,7 +13,11 @@ contract PaymentsRestricted is Params {
         uint256[] memory ids, // for batch transfers
         uint256[] memory amounts, // for batch transfers
 		Payment.PaymentTypes paymentType
-	) external payable {
+	) 
+		external 
+		payable 
+		onlyOwner 
+	{
 
 		for ( uint256 i = 0 ; i < ids.length ; ++i ) {
 			alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];

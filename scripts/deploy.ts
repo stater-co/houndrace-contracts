@@ -4,7 +4,7 @@ import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Sortings } from '../typechain-types/Sortings';
 import { Converters } from '../typechain-types/Converters';
-import { Lootboxes, Constructor as LootboxesConstructor } from '../typechain-types/Lootboxes';
+import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
 import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Randomness } from '../typechain-types/Randomness';
@@ -160,7 +160,8 @@ async function main() {
 
     const shopConstructor: ShopConstructor.StructStruct = {
       methods: globalParams.address0,
-      restricted: globalParams.address0
+      restricted: globalParams.address0,
+      alphadune: globalParams.address0
     };
     const shopRestricted = await deployContract({
       name: 'ShopRestricted',
@@ -568,6 +569,7 @@ async function main() {
     });
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
+      name: "",
       allowedApprovals: [],
       hounds: globalParams.address0,
       payments: globalParams.address0,
@@ -598,7 +600,8 @@ async function main() {
   
     const newShopConstructor: ShopConstructor.StructStruct = {
       methods: shopMethods.address,
-      restricted: shopRestricted.address
+      restricted: shopRestricted.address,
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
     }
 
     const newArenasConstructor: ArenasConstructor.StructStruct = {
@@ -712,6 +715,7 @@ async function main() {
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
+      name: "HoundRace Lootboxes",
       allowedApprovals: [],
       hounds: hounds.address,
       payments: payments.address,

@@ -60,7 +60,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
-    refillStaminaCooldownCost: BigNumberish;
     staminaValue: BigNumberish;
     staminaPerTimeUnit: BigNumberish;
     staminaCap: BigNumberish;
@@ -70,7 +69,6 @@ export declare namespace HoundStamina {
     string,
     BigNumber,
     BigNumber,
-    BigNumber,
     number,
     number,
     number
@@ -78,7 +76,6 @@ export declare namespace HoundStamina {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumber;
     staminaRefill1x: BigNumber;
-    refillStaminaCooldownCost: BigNumber;
     staminaValue: number;
     staminaPerTimeUnit: number;
     staminaCap: number;
@@ -123,8 +120,8 @@ export interface GamificationInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setBreeding(uint256,(address,address,uint256,uint256,uint256,uint256,uint256,bool))": FunctionFragment;
-    "setGlobalParameters(((address,address,uint256,uint256,uint256,uint256,uint256,bool),(address,uint256,uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
-    "setStamina(uint256,(address,uint256,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "setGlobalParameters(((address,address,uint256,uint256,uint256,uint256,uint256,bool),(address,uint256,uint256,uint32,uint32,uint32),address[],address,address))": FunctionFragment;
+    "setStamina(uint256,(address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -325,11 +322,10 @@ export interface Gamification extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+      [string, BigNumber, BigNumber, number, number, number] & {
         staminaRefillCurrency: string;
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
-        refillStaminaCooldownCost: BigNumber;
         staminaValue: number;
         staminaPerTimeUnit: number;
         staminaCap: number;
@@ -435,11 +431,10 @@ export interface Gamification extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+    [string, BigNumber, BigNumber, number, number, number] & {
       staminaRefillCurrency: string;
       staminaLastUpdate: BigNumber;
       staminaRefill1x: BigNumber;
-      refillStaminaCooldownCost: BigNumber;
       staminaValue: number;
       staminaPerTimeUnit: number;
       staminaCap: number;
@@ -545,11 +540,10 @@ export interface Gamification extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, BigNumber, BigNumber, BigNumber, number, number, number] & {
+      [string, BigNumber, BigNumber, number, number, number] & {
         staminaRefillCurrency: string;
         staminaLastUpdate: BigNumber;
         staminaRefill1x: BigNumber;
-        refillStaminaCooldownCost: BigNumber;
         staminaValue: number;
         staminaPerTimeUnit: number;
         staminaCap: number;

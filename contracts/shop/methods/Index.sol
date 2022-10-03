@@ -23,7 +23,7 @@ contract ShopMethods is Params {
                                     if ( discounts[i].usable ) {
                                         IERC1155(discounts[i].tokenContract).safeTransferFrom(
                                             requester,
-                                            address(this),
+                                            control.alphadune,
                                             discounts[i].tokenIds[j],
                                             1,
                                             '0x00'
@@ -63,7 +63,7 @@ contract ShopMethods is Params {
                                                 if ( discounts[i].usable ) {
                                                     IERC721(discounts[i].tokenContract).safeTransferFrom(
                                                         requester,
-                                                        address(this),
+                                                        control.alphadune,
                                                         discounts[i].tokenIds[j]
                                                     );
                                                     discount = discounts[i].discount;

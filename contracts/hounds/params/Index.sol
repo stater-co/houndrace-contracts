@@ -3,6 +3,7 @@ pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Constructor.sol';
 import './Hound.sol';
 import '../../payments/interfaces/IPay.sol';
@@ -18,10 +19,10 @@ import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../gamification/interfaces/ISetBreeding.sol';
 import '../../incubator/interfaces/ISetIdentity.sol';
 import '../../payments/params/MicroPayment.sol';
-import '../interfaces/IGetBreedCost.sol';
+import '../interfaces/IGetBreedCosts.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
+contract Params is Ownable, ERC721, ERC721Holder, Withdrawable, ReentrancyGuard {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => HoundProfile.Struct) public hounds;

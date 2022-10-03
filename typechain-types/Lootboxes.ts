@@ -22,8 +22,9 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Constructor {
+export declare namespace LootboxesConstructor {
   export type StructStruct = {
+    name: string;
     allowedApprovals: string[];
     hounds: string;
     payments: string;
@@ -32,12 +33,14 @@ export declare namespace Constructor {
   };
 
   export type StructStructOutput = [
+    string,
     string[],
     string,
     string,
     string,
     boolean
   ] & {
+    name: string;
     allowedApprovals: string[];
     hounds: string;
     payments: string;
@@ -74,29 +77,25 @@ export interface LootboxesInterface extends utils.Interface {
   contractName: "Lootboxes";
   functions: {
     "allowedApprovals(address)": FunctionFragment;
-    "approve(address,uint256)": FunctionFragment;
-    "balanceOf(address)": FunctionFragment;
+    "balanceOf(address,uint256)": FunctionFragment;
+    "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "control()": FunctionFragment;
-    "getApproved(uint256)": FunctionFragment;
-    "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "lootboxes(uint256)": FunctionFragment;
-    "mint(uint256,string)": FunctionFragment;
-    "name()": FunctionFragment;
-    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
+    "mint(uint256,uint256,string)": FunctionFragment;
+    "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "onERC1155Received(address,address,uint256,uint256,bytes)": FunctionFragment;
     "open(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
-    "ownerOf(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "safeTransferFrom(address,address,uint256)": FunctionFragment;
+    "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((string,address[],address,address,address,bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
-    "symbol()": FunctionFragment;
-    "tokenURI(uint256)": FunctionFragment;
-    "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "uri(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -104,16 +103,14 @@ export interface LootboxesInterface extends utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "approve",
+    functionFragment: "balanceOf",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getApproved",
-    values: [BigNumberish]
+    functionFragment: "balanceOfBatch",
+    values: [string[], BigNumberish[]]
   ): string;
-  encodeFunctionData(functionFragment: "id", values?: undefined): string;
+  encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -124,26 +121,29 @@ export interface LootboxesInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [BigNumberish, string]
+    values: [BigNumberish, BigNumberish, string]
   ): string;
-  encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "onERC721Received",
-    values: [string, string, BigNumberish, BytesLike]
+    functionFragment: "onERC1155BatchReceived",
+    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "onERC1155Received",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "open", values: [BigNumberish]): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "ownerOf",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "safeBatchTransferFrom",
+    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "safeTransferFrom",
-    values: [string, string, BigNumberish]
+    values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
@@ -151,7 +151,7 @@ export interface LootboxesInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [Constructor.StructStruct]
+    values: [LootboxesConstructor.StructStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "setOpenStatus",
@@ -161,48 +161,44 @@ export interface LootboxesInterface extends utils.Interface {
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
-  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "tokenURI",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom",
-    values: [string, string, BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
 
   decodeFunctionResult(
     functionFragment: "allowedApprovals",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getApproved",
+    functionFragment: "balanceOfBatch",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "lootboxes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "onERC721Received",
+    functionFragment: "onERC1155BatchReceived",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "onERC1155Received",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "open", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "safeBatchTransferFrom",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -225,44 +221,34 @@ export interface LootboxesInterface extends utils.Interface {
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
 
   events: {
-    "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
     "LootboxOpened(uint256,tuple,address)": EventFragment;
     "NewLootboxes(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "Transfer(address,address,uint256)": EventFragment;
+    "TransferBatch(address,address,address,uint256[],uint256[])": EventFragment;
+    "TransferSingle(address,address,address,uint256,uint256)": EventFragment;
+    "URI(string,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "LootboxOpened"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewLootboxes"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransferBatch"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TransferSingle"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "URI"): EventFragment;
 }
-
-export type ApprovalEvent = TypedEvent<
-  [string, string, BigNumber],
-  { owner: string; approved: string; tokenId: BigNumber }
->;
-
-export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
 
 export type ApprovalForAllEvent = TypedEvent<
   [string, string, boolean],
-  { owner: string; operator: string; approved: boolean }
+  { account: string; operator: string; approved: boolean }
 >;
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
@@ -276,7 +262,7 @@ export type LootboxOpenedEventFilter = TypedEventFilter<LootboxOpenedEvent>;
 
 export type NewLootboxesEvent = TypedEvent<
   [BigNumber, BigNumber],
-  { idStart: BigNumber; idFinish: BigNumber }
+  { id: BigNumber; amount: BigNumber }
 >;
 
 export type NewLootboxesEventFilter = TypedEventFilter<NewLootboxesEvent>;
@@ -289,12 +275,38 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
-export type TransferEvent = TypedEvent<
-  [string, string, BigNumber],
-  { from: string; to: string; tokenId: BigNumber }
+export type TransferBatchEvent = TypedEvent<
+  [string, string, string, BigNumber[], BigNumber[]],
+  {
+    operator: string;
+    from: string;
+    to: string;
+    ids: BigNumber[];
+    values: BigNumber[];
+  }
 >;
 
-export type TransferEventFilter = TypedEventFilter<TransferEvent>;
+export type TransferBatchEventFilter = TypedEventFilter<TransferBatchEvent>;
+
+export type TransferSingleEvent = TypedEvent<
+  [string, string, string, BigNumber, BigNumber],
+  {
+    operator: string;
+    from: string;
+    to: string;
+    id: BigNumber;
+    value: BigNumber;
+  }
+>;
+
+export type TransferSingleEventFilter = TypedEventFilter<TransferSingleEvent>;
+
+export type URIEvent = TypedEvent<
+  [string, BigNumber],
+  { value: string; id: BigNumber }
+>;
+
+export type URIEventFilter = TypedEventFilter<URIEvent>;
 
 export interface Lootboxes extends BaseContract {
   contractName: "Lootboxes";
@@ -329,31 +341,29 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    balanceOf(
+      account: string,
+      id: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    balanceOfBatch(
+      accounts: string[],
+      ids: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, boolean] & {
+      [string, string, string, string, boolean] & {
+        name: string;
         hounds: string;
         payments: string;
         alphadune: string;
         canBeOpened: boolean;
       }
     >;
-
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     isApprovedForAll(
       _owner: string,
@@ -368,17 +378,26 @@ export interface Lootboxes extends BaseContract {
 
     mint(
       amount: BigNumberish,
+      tokenId: BigNumberish,
       token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    name(overrides?: CallOverrides): Promise<[string]>;
+    onERC1155BatchReceived(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish[],
+      arg3: BigNumberish[],
+      arg4: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
-    onERC721Received(
+    onERC1155Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
-      arg3: BytesLike,
+      arg3: BigNumberish,
+      arg4: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -389,26 +408,24 @@ export interface Lootboxes extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "safeTransferFrom(address,address,uint256)"(
+    safeBatchTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "safeTransferFrom(address,address,uint256,bytes)"(
+    safeTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
+      amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -420,7 +437,7 @@ export interface Lootboxes extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: LootboxesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -434,53 +451,39 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    symbol(overrides?: CallOverrides): Promise<[string]>;
-
-    tokenURI(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
   };
 
   allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
-  approve(
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  balanceOf(
+    account: string,
+    id: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
-  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOfBatch(
+    accounts: string[],
+    ids: BigNumberish[],
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
 
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, boolean] & {
+    [string, string, string, string, boolean] & {
+      name: string;
       hounds: string;
       payments: string;
       alphadune: string;
       canBeOpened: boolean;
     }
   >;
-
-  getApproved(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  id(overrides?: CallOverrides): Promise<BigNumber>;
 
   isApprovedForAll(
     _owner: string,
@@ -492,17 +495,26 @@ export interface Lootboxes extends BaseContract {
 
   mint(
     amount: BigNumberish,
+    tokenId: BigNumberish,
     token_uri: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  name(overrides?: CallOverrides): Promise<string>;
+  onERC1155BatchReceived(
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish[],
+    arg3: BigNumberish[],
+    arg4: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
-  onERC721Received(
+  onERC1155Received(
     arg0: string,
     arg1: string,
     arg2: BigNumberish,
-    arg3: BytesLike,
+    arg3: BigNumberish,
+    arg4: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -513,23 +525,24 @@ export interface Lootboxes extends BaseContract {
 
   owner(overrides?: CallOverrides): Promise<string>;
 
-  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "safeTransferFrom(address,address,uint256)"(
+  safeBatchTransferFrom(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    ids: BigNumberish[],
+    amounts: BigNumberish[],
+    data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "safeTransferFrom(address,address,uint256,bytes)"(
+  safeTransferFrom(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
+    amount: BigNumberish,
     data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -541,7 +554,7 @@ export interface Lootboxes extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setGlobalParameters(
-    globalParameters: Constructor.StructStruct,
+    globalParameters: LootboxesConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -555,50 +568,39 @@ export interface Lootboxes extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  symbol(overrides?: CallOverrides): Promise<string>;
-
-  tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  transferFrom(
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
   callStatic: {
     allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
-    approve(
-      to: string,
-      tokenId: BigNumberish,
+    balanceOf(
+      account: string,
+      id: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<BigNumber>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOfBatch(
+      accounts: string[],
+      ids: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, boolean] & {
+      [string, string, string, string, boolean] & {
+        name: string;
         hounds: string;
         payments: string;
         alphadune: string;
         canBeOpened: boolean;
       }
     >;
-
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    id(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       _owner: string,
@@ -610,17 +612,26 @@ export interface Lootboxes extends BaseContract {
 
     mint(
       amount: BigNumberish,
+      tokenId: BigNumberish,
       token_uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    name(overrides?: CallOverrides): Promise<string>;
+    onERC1155BatchReceived(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish[],
+      arg3: BigNumberish[],
+      arg4: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
-    onERC721Received(
+    onERC1155Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
-      arg3: BytesLike,
+      arg3: BigNumberish,
+      arg4: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -628,21 +639,22 @@ export interface Lootboxes extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "safeTransferFrom(address,address,uint256)"(
+    safeBatchTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "safeTransferFrom(address,address,uint256,bytes)"(
+    safeTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
+      amount: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -654,7 +666,7 @@ export interface Lootboxes extends BaseContract {
     ): Promise<void>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: LootboxesConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -665,42 +677,22 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    symbol(overrides?: CallOverrides): Promise<string>;
-
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     transferOwnership(
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    "Approval(address,address,uint256)"(
-      owner?: string | null,
-      approved?: string | null,
-      tokenId?: BigNumberish | null
-    ): ApprovalEventFilter;
-    Approval(
-      owner?: string | null,
-      approved?: string | null,
-      tokenId?: BigNumberish | null
-    ): ApprovalEventFilter;
-
     "ApprovalForAll(address,address,bool)"(
-      owner?: string | null,
+      account?: string | null,
       operator?: string | null,
       approved?: null
     ): ApprovalForAllEventFilter;
     ApprovalForAll(
-      owner?: string | null,
+      account?: string | null,
       operator?: string | null,
       approved?: null
     ): ApprovalForAllEventFilter;
@@ -717,12 +709,12 @@ export interface Lootboxes extends BaseContract {
     ): LootboxOpenedEventFilter;
 
     "NewLootboxes(uint256,uint256)"(
-      idStart?: BigNumberish | null,
-      idFinish?: BigNumberish | null
+      id?: BigNumberish | null,
+      amount?: BigNumberish | null
     ): NewLootboxesEventFilter;
     NewLootboxes(
-      idStart?: BigNumberish | null,
-      idFinish?: BigNumberish | null
+      id?: BigNumberish | null,
+      amount?: BigNumberish | null
     ): NewLootboxesEventFilter;
 
     "OwnershipTransferred(address,address)"(
@@ -734,16 +726,41 @@ export interface Lootboxes extends BaseContract {
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
 
-    "Transfer(address,address,uint256)"(
+    "TransferBatch(address,address,address,uint256[],uint256[])"(
+      operator?: string | null,
       from?: string | null,
       to?: string | null,
-      tokenId?: BigNumberish | null
-    ): TransferEventFilter;
-    Transfer(
+      ids?: null,
+      values?: null
+    ): TransferBatchEventFilter;
+    TransferBatch(
+      operator?: string | null,
       from?: string | null,
       to?: string | null,
-      tokenId?: BigNumberish | null
-    ): TransferEventFilter;
+      ids?: null,
+      values?: null
+    ): TransferBatchEventFilter;
+
+    "TransferSingle(address,address,address,uint256,uint256)"(
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      id?: null,
+      value?: null
+    ): TransferSingleEventFilter;
+    TransferSingle(
+      operator?: string | null,
+      from?: string | null,
+      to?: string | null,
+      id?: null,
+      value?: null
+    ): TransferSingleEventFilter;
+
+    "URI(string,uint256)"(
+      value?: null,
+      id?: BigNumberish | null
+    ): URIEventFilter;
+    URI(value?: null, id?: BigNumberish | null): URIEventFilter;
   };
 
   estimateGas: {
@@ -752,22 +769,19 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-    control(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getApproved(
-      tokenId: BigNumberish,
+    balanceOf(
+      account: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    id(overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOfBatch(
+      accounts: string[],
+      ids: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    control(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       _owner: string,
@@ -782,17 +796,26 @@ export interface Lootboxes extends BaseContract {
 
     mint(
       amount: BigNumberish,
+      tokenId: BigNumberish,
       token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    name(overrides?: CallOverrides): Promise<BigNumber>;
+    onERC1155BatchReceived(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish[],
+      arg3: BigNumberish[],
+      arg4: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
-    onERC721Received(
+    onERC1155Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
-      arg3: BytesLike,
+      arg3: BigNumberish,
+      arg4: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -803,26 +826,24 @@ export interface Lootboxes extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "safeTransferFrom(address,address,uint256)"(
+    safeBatchTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "safeTransferFrom(address,address,uint256,bytes)"(
+    safeTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
+      amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -834,7 +855,7 @@ export interface Lootboxes extends BaseContract {
     ): Promise<BigNumber>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: LootboxesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -848,24 +869,12 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    symbol(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tokenURI(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -874,25 +883,19 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+    balanceOf(
+      account: string,
+      id: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    balanceOf(
-      owner: string,
+    balanceOfBatch(
+      accounts: string[],
+      ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
       _owner: string,
@@ -907,17 +910,26 @@ export interface Lootboxes extends BaseContract {
 
     mint(
       amount: BigNumberish,
+      tokenId: BigNumberish,
       token_uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    onERC1155BatchReceived(
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish[],
+      arg3: BigNumberish[],
+      arg4: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
-    onERC721Received(
+    onERC1155Received(
       arg0: string,
       arg1: string,
       arg2: BigNumberish,
-      arg3: BytesLike,
+      arg3: BigNumberish,
+      arg4: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -928,26 +940,24 @@ export interface Lootboxes extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "safeTransferFrom(address,address,uint256)"(
+    safeBatchTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      ids: BigNumberish[],
+      amounts: BigNumberish[],
+      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "safeTransferFrom(address,address,uint256,bytes)"(
+    safeTransferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
+      amount: BigNumberish,
       data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -959,7 +969,7 @@ export interface Lootboxes extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: LootboxesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -973,23 +983,14 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tokenURI(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    uri(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

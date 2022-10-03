@@ -18,15 +18,14 @@ export async function run(
 
       it("Deploy the lootboxes contract", async function () {
 
-        const [sig1] = await ethers.getSigners();
-
         lootboxes = await deployContract({
           name: 'Lootboxes',
           constructor: [[
+            "HoundRace lootboxes",
             [],
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
-            sig1.address,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             false
           ]],
           props: {}

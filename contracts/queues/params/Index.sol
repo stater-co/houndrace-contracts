@@ -2,6 +2,7 @@
 pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../arenas/params/Arena.sol';
@@ -23,7 +24,7 @@ import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../hounds/interfaces/IAllowance.sol';
 
 
-contract Params is Ownable, Withdrawable {
+contract Params is Ownable, Withdrawable, ReentrancyGuard {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
@@ -68,8 +69,5 @@ contract Params is Ownable, Withdrawable {
     function enqueueDatesOf(uint256 theId) external view returns(uint256[] memory) {
         return queues[theId].core.enqueueDates;
     }
-
-    fallback() external payable {}
-    receive() external payable {}
 
 }

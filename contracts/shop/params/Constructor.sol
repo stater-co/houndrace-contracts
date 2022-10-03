@@ -7,6 +7,7 @@ library ShopConstructor {
     struct Struct {
         address methods;
         address restricted;
+        address alphadune;
     }
 
 }

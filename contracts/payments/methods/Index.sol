@@ -14,7 +14,11 @@ contract PaymentsMethods is Params {
         uint256[] memory ids, // for batch transfers
         uint256[] memory amounts, // for batch transfers
         Payment.PaymentTypes paymentType
-	) public payable {
+	) 
+		public 
+		payable 
+		nonReentrant 
+	{
 
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 

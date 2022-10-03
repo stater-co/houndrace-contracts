@@ -82,7 +82,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
@@ -131,7 +131,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
@@ -180,7 +180,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
@@ -229,7 +229,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
@@ -278,7 +278,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
@@ -327,7 +327,7 @@ async function advancedTests(
         races: dependencies.races
       });
 
-      const breedCost = await dependencies.hounds.getBreedCost(hound2Id);
+      const breedCost = await dependencies.hounds.getBreedCosts(hound2Id);
       let totalValueToPay: BigNumber = BigNumber.from(0);
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
