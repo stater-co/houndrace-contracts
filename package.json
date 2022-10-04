@@ -17,6 +17,7 @@
     "deployments-to-yml": "cd plugins && ts-node deployments-to-yml.ts",
     "deploy-rinkeby": "hardhat run scripts/deploy.ts --network rinkeby",
     "deploy-polygonMumbai": "hardhat run scripts/deploy.ts --network polygonMumbai",
+    "deploy-lootboxes-polygonMumbai": "HOUNDS=0x8d6E14AC7e279221c2060AF9791aF78859f266cd PAYMENTS=0x64565db658D89db255af710E21d0f4acC1Ca4f45 hardhat run scripts/utils/deploy-lootboxes-ecosystem.ts --network polygonMumbai",
     "deploy": "hardhat run scripts/deploy.ts"
   },
   "repository": {

@@ -9,6 +9,5 @@ library Box {
         uint256[] tokenIds;
         uint256[] amounts;
         Payment.PaymentTypes[] rewardTypes;
-        bool generated;
     }
 }
