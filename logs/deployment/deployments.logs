@@ -80050,3 +80050,9 @@
   network: 'polygonMumbai',
   timestamp: '2022-10-03T12:19:52.017Z'
 }
+{
+  message: '[DIIMIIM] export LOOTBOXES=0xF326c067D06ffd2366E580672961C8ffb701C454',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:20:00.626Z'
+}

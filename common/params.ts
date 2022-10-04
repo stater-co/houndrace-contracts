@@ -1,5 +1,6 @@
 import { Hound, HoundProfile } from '../typechain-types/Hounds';
 import { BigNumber } from 'ethers';
+import { network } from 'hardhat';
 import { Queue } from '../typechain-types/Queues';
 import { Payment } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
@@ -8,7 +9,8 @@ import { HoundStamina, HoundBreeding } from '../typechain-types/Gamification';
 import { HoundIdentity } from '../typechain-types/Incubator';
 import { Box } from '../typechain-types/Lootboxes';
 
-
+const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
+const POLYGON_MUMBAI_OPENSEA_CONTRACT_ADDRESS = "0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c";
 const address0: string = '0x0000000000000000000000000000000000000000';
 const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
 
@@ -140,7 +142,19 @@ interface GlobalParams {
     houndBreeding: HoundBreeding.StructStruct;
     houndStamina: HoundStamina.StructStruct;
     defaultLootbox: Box.StructStruct;
+    OPENSEA_CONTRACT_ADDRESS: string;
 };
+
+const getOpenseaContractAddress = (): string => {
+    switch ( network.name ) {
+        case "polygonMumbai": 
+            return POLYGON_MUMBAI_OPENSEA_CONTRACT_ADDRESS;
+        case "polygonMainnet":
+            return POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS;
+        default:
+            return address0;
+    }
+}
 
 export const globalParams: GlobalParams = {
     address0: address0,
@@ -152,5 +166,6 @@ export const globalParams: GlobalParams = {
     defaultRace: defaultRace as Race.StructStructOutput,
     houndBreeding: houndBreeding,
     houndStamina: houndStamina,
-    defaultLootbox: defaultLootbox
+    defaultLootbox: defaultLootbox,
+    OPENSEA_CONTRACT_ADDRESS: getOpenseaContractAddress()
 };
