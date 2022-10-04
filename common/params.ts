@@ -6,6 +6,7 @@ import { Arena } from '../typechain-types/Arenas';
 import { Race, HoundStatistics } from '../typechain-types/Races';
 import { HoundStamina, HoundBreeding } from '../typechain-types/Gamification';
 import { HoundIdentity } from '../typechain-types/Incubator';
+import { Box } from '../typechain-types/Lootboxes';
 
 
 const address0: string = '0x0000000000000000000000000000000000000000';
@@ -19,6 +20,14 @@ const defaultQueuePayment: Payment.StructStruct = {
     amounts: [[]],
     paymentType: []
 };
+
+const defaultLootbox: Box.StructStruct = {
+    amounts: [1],
+    generated: true,
+    rewardContracts: [address0],
+    rewardTypes: [0],
+    tokenIds: [1]
+}
 
 const defaultArena: Arena.StructStruct = {
     name: "Arena #",
@@ -131,6 +140,7 @@ interface GlobalParams {
     defaultRace: Race.StructStructOutput;
     houndBreeding: HoundBreeding.StructStruct;
     houndStamina: HoundStamina.StructStruct;
+    defaultLootbox: Box.StructStruct;
 };
 
 export const globalParams: GlobalParams = {
@@ -142,5 +152,6 @@ export const globalParams: GlobalParams = {
     defaultArena: defaultArena as Arena.StructStructOutput,
     defaultRace: defaultRace as Race.StructStructOutput,
     houndBreeding: houndBreeding,
-    houndStamina: houndStamina
+    houndStamina: houndStamina,
+    defaultLootbox: defaultLootbox
 };

@@ -1,4 +1,5 @@
 import { LootboxesBasicTests } from "../../common/dto/test/lootboxesBasicTests";
+import { globalParams } from "../../common/params";
 import { expecting } from "../../plugins/expecting";
 const { ethers } = require('hardhat');
 
@@ -32,8 +33,10 @@ async function basicTest(
         expecting(JSON.stringify(controlBefore) !== JSON.stringify(controlAfter), "Set open status method bugged");
       })
 
-      it("Open lootbox ", async function() {
+      it("Open lootbox", async function() {
         await dependencies.lootboxesContract.open(1);
+        const [sig] = await ethers.getSigners();
+        await dependencies.lootboxesContract.opened(1,sig.address,globalParams.defaultLootbox);
         resolve();
       });
 

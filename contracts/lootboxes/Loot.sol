@@ -8,14 +8,13 @@ import '@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol';
 import './params/Constructor.sol';
 import './params/Box.sol';
 
-
 contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
 
     LootboxesConstructor.Struct public control;
-    mapping(uint256 => Box.Struct) public lootboxes;
     mapping(address => bool) public allowedApprovals;
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
-    event LootboxOpened(uint256 indexed id, Box.Struct box, address indexed owner);
+    event LootboxOpen(uint256 indexed id, address indexed owner);
+    event LootboxOpened(uint256 indexed id, address indexed owner, Box.Struct loot);
 
     constructor(
         LootboxesConstructor.Struct memory input
@@ -69,9 +68,20 @@ contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
         require(control.canBeOpened);
         require(balanceOf(msg.sender, boxId) > 0);
 
-        emit LootboxOpened(boxId, lootboxes[boxId], msg.sender);
+        emit LootboxOpen(boxId, msg.sender);
 
         _burn(msg.sender,boxId,1);
+    }
+
+    function opened(
+        uint256 boxId,
+        address user,
+        Box.Struct memory loot
+    ) 
+        external 
+        onlyOwner 
+    {
+        emit LootboxOpened(boxId, user, loot);
     }
 
     /**
