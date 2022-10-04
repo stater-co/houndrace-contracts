@@ -229,7 +229,7 @@ export interface LootboxesInterface extends utils.Interface {
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "LootboxOpen(uint256,address)": EventFragment;
+    "LootboxOpen(uint256,address,uint256)": EventFragment;
     "LootboxOpened(uint256,address,tuple[])": EventFragment;
     "NewLootboxes(uint256,uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
@@ -256,8 +256,8 @@ export type ApprovalForAllEvent = TypedEvent<
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
 export type LootboxOpenEvent = TypedEvent<
-  [BigNumber, string],
-  { id: BigNumber; owner: string }
+  [BigNumber, string, BigNumber],
+  { id: BigNumber; owner: string; quantity: BigNumber }
 >;
 
 export type LootboxOpenEventFilter = TypedEventFilter<LootboxOpenEvent>;
@@ -724,13 +724,15 @@ export interface Lootboxes extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "LootboxOpen(uint256,address)"(
+    "LootboxOpen(uint256,address,uint256)"(
       id?: BigNumberish | null,
-      owner?: string | null
+      owner?: string | null,
+      quantity?: null
     ): LootboxOpenEventFilter;
     LootboxOpen(
       id?: BigNumberish | null,
-      owner?: string | null
+      owner?: string | null,
+      quantity?: null
     ): LootboxOpenEventFilter;
 
     "LootboxOpened(uint256,address,tuple[])"(

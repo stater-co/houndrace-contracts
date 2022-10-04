@@ -340,3 +340,19 @@
   network: 'polygonMumbai',
   timestamp: '2022-10-04T10:18:46.877Z'
 }
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:35:37.292Z'
+}
+{
+  message: '[DIIMIIM] The Etherscan API responded with a failure status.\n' +
+    'The verification may still succeed but should be checked manually.\n' +
+    'Reason: Already Verified',
+  level: 'error',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:49:15.528Z'
+}

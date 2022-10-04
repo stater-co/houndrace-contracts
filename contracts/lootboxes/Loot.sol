@@ -13,7 +13,7 @@ contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
     LootboxesConstructor.Struct public control;
     mapping(address => bool) public allowedApprovals;
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
-    event LootboxOpen(uint256 indexed id, address indexed owner);
+    event LootboxOpen(uint256 indexed id, address indexed owner, uint256 quantity);
     event LootboxOpened(uint256 indexed id, address indexed owner, Box.Struct[] loot);
 
     constructor(
@@ -69,7 +69,7 @@ contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
         require(control.canBeOpened);
         require(balanceOf(msg.sender, boxId) >= quantity);
 
-        emit LootboxOpen(boxId, msg.sender);
+        emit LootboxOpen(boxId, msg.sender, quantity);
 
         _burn(msg.sender,boxId,quantity);
     }

@@ -80056,3 +80056,21 @@
   network: 'polygonMumbai',
   timestamp: '2022-10-04T10:20:00.626Z'
 }
+{
+  message: '[DIIMIIM] export LOOTBOXES=0xe9E705bD2b1FC969C09Cc2A5C8E906B6b756d511',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:34:46.251Z'
+}
+{
+  message: '[DIIMIIM] export LOOTBOXES=0x4390F0288400cd2CC7BB10aACf36750984619b90',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:45:23.537Z'
+}
+{
+  message: '[DIIMIIM] export LOOTBOXES=0xd3B90b89d20F8Fa728C8f611B76a4164b2dd1874',
+  level: 'info',
+  network: 'polygonMumbai',
+  timestamp: '2022-10-04T10:48:28.090Z'
+}
