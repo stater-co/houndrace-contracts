@@ -23,7 +23,6 @@ const defaultQueuePayment: Payment.StructStruct = {
 
 const defaultLootbox: Box.StructStruct = {
     amounts: [1],
-    generated: true,
     rewardContracts: [address0],
     rewardTypes: [0],
     tokenIds: [1]

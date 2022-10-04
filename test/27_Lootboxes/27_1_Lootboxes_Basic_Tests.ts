@@ -34,9 +34,9 @@ async function basicTest(
       })
 
       it("Open lootbox", async function() {
-        await dependencies.lootboxesContract.open(1);
+        await dependencies.lootboxesContract.open(1,1);
         const [sig] = await ethers.getSigners();
-        await dependencies.lootboxesContract.opened(1,sig.address,globalParams.defaultLootbox);
+        await dependencies.lootboxesContract.opened(1,sig.address,[globalParams.defaultLootbox]);
         resolve();
       });
 
