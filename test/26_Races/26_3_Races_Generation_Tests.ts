@@ -94,7 +94,7 @@ async function generationTests(
       for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
       
         it("Generate race " + i, async function () {
-          const response: any = await axios.post("https://houndrace.com/mumbai_api/races/generate", {
+          const response: any = await axios.post("http://localhost:3000/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,
             ids: ids,
@@ -156,8 +156,15 @@ async function generationTests(
           plotConfiguration.chartConfiguration.data.datasets[0].borderColor = houndStatisticsUsedColors;
           plotConfiguration.chartConfiguration.options = {
             plugins: {
-              legend: {
-                display: false
+              datalabels: {
+                color: 'white',
+                display: (context: any) => {
+                  return context.dataset.data[context.dataIndex] > 15;
+                },
+                font: {
+                  weight: 'bold'
+                },
+                formatter: Math.round
               }
             }
           };
@@ -173,8 +180,15 @@ async function generationTests(
         plotConfiguration.chartConfiguration.data.datasets[0].borderColor = [stringifiedArrayOfColors[4].toString()];
         plotConfiguration.chartConfiguration.options = {
           plugins: {
-            legend: {
-              display: false
+            datalabels: {
+              color: 'white',
+              display: (context: any) => {
+                return context.dataset.data[context.dataIndex] > 15;
+              },
+              font: {
+                weight: 'bold'
+              },
+              formatter: Math.round
             }
           }
         };
