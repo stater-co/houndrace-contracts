@@ -249,17 +249,6 @@ async function generationTests(
         plotConfiguration.imageConfiguration.path = variation;
         plotConfiguration.chartConfiguration.data.labels = ids.map((id) => "Hound #" + id);
 
-        if ( plotConfiguration.chartConfiguration.options ) {
-          plotConfiguration.chartConfiguration.options.scales = {
-            x: {
-              stacked: true
-            },
-            y: {
-              stacked: true
-            }
-          };
-        }
-
         const variation1: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[0]);
         const variation2: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[1]);
 
