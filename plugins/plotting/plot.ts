@@ -1,6 +1,5 @@
 import { ChartJSNodeCanvas, ChartCallback } from '.';
 import { ChartConfiguration } from 'chart.js';
-import { Context } from 'chartjs-plugin-datalabels';
 import { promises as fs } from 'fs';
 
 export interface Resolution {
