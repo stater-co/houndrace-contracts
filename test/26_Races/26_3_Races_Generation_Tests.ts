@@ -260,7 +260,6 @@ async function generationTests(
           };
         }
 
-        plotConfiguration.chartConfiguration.data.datasets.push(plotConfiguration.chartConfiguration.data.datasets[0]);
         const variation1: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[0]);
         const variation2: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[1]);
 
@@ -268,11 +267,13 @@ async function generationTests(
         plotConfiguration.chartConfiguration.data.datasets[0].data = variation1;
         plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[0].toString()];
 
-        plotConfiguration.chartConfiguration.data.datasets[1].label = "Hounds maximum score";
-        plotConfiguration.chartConfiguration.data.datasets[1].data = variation2;
-        plotConfiguration.chartConfiguration.data.datasets[1].backgroundColor = [stringifiedArrayOfColors[1].toString()];
+        plotConfiguration.chartConfiguration.data.datasets.push({
+          ...plotConfiguration.chartConfiguration.data.datasets[0],
+          label: "Hounds maximum score",
+          data: variation2,
+          backgroundColor: [stringifiedArrayOfColors[1].toString()]
+        });
 
-        console.log(JSON.stringify(plotConfiguration.chartConfiguration.data));
         await plot(plotConfiguration);
 
       });
