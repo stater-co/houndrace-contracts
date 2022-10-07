@@ -15,6 +15,7 @@ async function generationTests(
   return new Promise((resolve, ) => {
 
     const initialDummyGenerations: number = Number(process.env.TOTAL_RACES);
+    const initialHoundsNumber: number = Number(process.env.INITIAL_HOUNDS_NUMBER);
 
     describe('Races Generation: ' + initialDummyGenerations + ' dummy races', async function () {
       
@@ -31,8 +32,8 @@ async function generationTests(
       const performance: string = path + "performance/";
       const variation: string = path + "variations/";
     
-      let participants: Array<Hound.StructStruct> = new Array(initialDummyGenerations);
-      let topWinners: Array<HoundStatistics> = new Array(initialDummyGenerations);
+      let participants: Array<Hound.StructStruct> = new Array(initialHoundsNumber);
+      let topWinners: Array<HoundStatistics> = new Array(initialHoundsNumber);
     
       const allHoundsLabels: Array<string> = participants.map((_, id) => "Hound #" + id);
       let plotConfiguration: PlottingConfiguration = {
@@ -65,9 +66,9 @@ async function generationTests(
 
       let performances: number[];
 
-      it("Mint " + initialDummyGenerations + "x hounds for races generation", async function () {
+      it("Mint " + initialHoundsNumber + "x hounds for races generation", async function () {
         let [sig1] = await ethers.getSigners();
-        for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
+        for ( let i = 0 ; i < initialHoundsNumber ; ++i ) {
           let houndToMint: Hound.StructStruct = globalParams.defaultHound;
           houndToMint.identity.geneticSequence = houndToMint.identity.geneticSequence.map((i) => { return Math.floor(Math.random() * 9) + 1; });
           houndToMint.identity.geneticSequence[1] = i % 2 === 0 ? 1 : 2;
@@ -84,7 +85,7 @@ async function generationTests(
           ids.push(Number(createdHoundId));
         }
 
-        for ( let i = 0 , l = initialDummyGenerations ; i < l ; ++i ) {
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           topWinners[i] = {
             totalRuns: 0,
             firstPlace: 0,
@@ -107,7 +108,7 @@ async function generationTests(
           const winners: Array<number> = response.data.participants.map((part: any) => Number(part.hex));
           performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
 
-          for ( let m = 0 , n = initialDummyGenerations; m < n ; ++m ) {
+          for ( let m = 0 , n = initialHoundsNumber; m < n ; ++m ) {
             for ( let j = 0 , k = winners.length ; j < k ; ++j ) {
               if ( winners[j] === ids[m] ) {
                 switch (j) {
@@ -164,7 +165,7 @@ async function generationTests(
           }
         }
 
-        for ( let i = 0 , l = initialDummyGenerations ; i < l ; ++i ) {
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           plotConfiguration.imageConfiguration.name = "Hound #" + ids[i];
           plotConfiguration.imageConfiguration.path = winratePath;
           plotConfiguration.chartConfiguration.data.labels = ["Total runs", "First place", "Second place", "Third place"];
@@ -249,19 +250,11 @@ async function generationTests(
         plotConfiguration.imageConfiguration.path = variation;
         plotConfiguration.chartConfiguration.data.labels = ids.map((id) => "Hound #" + id);
 
-        const variation1: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[0]);
-        const variation2: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[1]);
+        const variations: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[1] - variation[0]);
 
-        plotConfiguration.chartConfiguration.data.datasets[0].label = "Hounds minimum score";
-        plotConfiguration.chartConfiguration.data.datasets[0].data = variation1;
+        plotConfiguration.chartConfiguration.data.datasets[0].label = "Vatiation levels";
+        plotConfiguration.chartConfiguration.data.datasets[0].data = variations;
         plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[0].toString()];
-
-        plotConfiguration.chartConfiguration.data.datasets.push({
-          ...plotConfiguration.chartConfiguration.data.datasets[0],
-          label: "Hounds maximum score",
-          data: variation2,
-          backgroundColor: [stringifiedArrayOfColors[1].toString()]
-        });
 
         await plot(plotConfiguration);
 
