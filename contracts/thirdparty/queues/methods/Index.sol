@@ -9,13 +9,17 @@ contract QueuesMethods is Params {
 
     function unenqueue(
         uint256 theId, 
-        uint256 hound
+        uint256 participantId
     ) 
         external 
         nonReentrant
     {
-        address houndOwner = IHoundOwner(control.hounds).houndOwner(hound);
-        require(houndOwner == msg.sender);
+        require(
+            queues[theId].core.participants[participantId].tokenType == 0 ? 
+                IERC721(queues[theId].core.participants[participantId].sourceContract).ownerOf(queues[theId].core.participants[participantId].tokenId)
+            :
+                IERC1155(queues[theId].core.participants[participantId].sourceContract).balanceOf(msg.sender,queues[theId].core.participants[participantId].tokenId) > 0
+        );
 
         uint256[] memory replacedParticipants = queues[theId].core.participants;
         uint256[] memory replacedEnqueueDates = queues[theId].core.enqueueDates;
