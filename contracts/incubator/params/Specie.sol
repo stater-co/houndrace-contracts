@@ -10,6 +10,7 @@ library Specie {
         RACER,
         COMMUNITY,
         SPEC_OPS,
-        PRIME
+        PRIME,
+        THIRT_PARTY
     }
 }
