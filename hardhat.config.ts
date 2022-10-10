@@ -1,10 +1,11 @@
 import '@nomiclabs/hardhat-etherscan';
 import '@typechain/hardhat';
-import "@nomicfoundation/hardhat-chai-matchers";
-import "@nomiclabs/hardhat-ethers";
+import '@nomicfoundation/hardhat-chai-matchers';
+import 'hardhat-gas-reporter'
+import '@nomiclabs/hardhat-ethers';
 import 'solidity-coverage';
 import '@nomicfoundation/hardhat-toolbox';
-import "hardhat-deploy-ethers"
+import 'hardhat-deploy-ethers'
 import { HardhatUserConfig } from 'hardhat/config';
 
 
@@ -44,6 +45,17 @@ const config: HardhatUserConfig = {
     root: './',
     tests: './test',
     cache: './cache'
+  },
+  gasReporter: {
+    currency: 'ETH',
+    gasPrice: 40,
+    enabled: true
+  },
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions : {
+
+    }
   }
 };
 

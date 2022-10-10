@@ -105,6 +105,7 @@ async function generationTests(
             ids: ids,
             participants: participants
           })
+          console.log(response.data.statistics);
           const winners: Array<number> = response.data.participants.map((part: any) => Number(part.hex));
           performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
 
@@ -220,12 +221,12 @@ async function generationTests(
 
         let VARIATION_LEVELS: Array<[number,number]> = [];
 
-        for ( let i = 0 , l = PERFORMANCES.length ; i < l ; ++i ) {
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           VARIATION_LEVELS[i] = [Number.MAX_SAFE_INTEGER,0];
         }
 
-        for ( let i = 0 , l = PERFORMANCES.length ; i < l ; ++i ) {
-          for ( let j = 0 , k = PERFORMANCES[i].length ; j < k ; ++j ) {
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
+          for ( let j = 0 , k = initialHoundsNumber ; j < k ; ++j ) {
             if ( VARIATION_LEVELS[i][0] > PERFORMANCES[j][i] ) {
               VARIATION_LEVELS[i][0] = PERFORMANCES[j][i];
             }
