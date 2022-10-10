@@ -4,23 +4,19 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
 import '../../utils/Converters.sol';
-import '../../generator/interfaces/IGenerate.sol';
 import '../../arenas/interfaces/IHandleArenaUsage.sol';
-import '../../arenas/interfaces/IArena.sol';
-import '../../arenas/interfaces/IArenaCurrency.sol';
 import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import './HoundStatistics.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
-import '../../utils/Withdrawable.sol';
 import '../../queues/params/Queue.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../queues/interfaces/IStaminaCostOf.sol';
 
 
-contract Params is Ownable, Withdrawable {
+contract Params is Ownable {
     
     event NewRace(
         uint256 indexed id, 

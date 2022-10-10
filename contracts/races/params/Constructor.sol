@@ -7,12 +7,10 @@ library RacesConstructor {
         address arenas;
         address hounds;
         address methods;
-        address generator;
         address payments;
         address restricted;
         address queues;
         address races;
         address[] allowedCallers;
-        bool callable;
     }
 }

@@ -16,7 +16,6 @@ import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';
 import '../../hounds/interfaces/IHound.sol';
-import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
@@ -24,7 +23,7 @@ import '../../incubator/interfaces/IGetIdentity.sol';
 import '../../hounds/interfaces/IAllowance.sol';
 
 
-contract Params is Ownable, Withdrawable, ReentrancyGuard {
+contract Params is Ownable, ReentrancyGuard {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);

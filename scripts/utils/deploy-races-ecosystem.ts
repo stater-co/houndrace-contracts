@@ -26,8 +26,7 @@ async function main() {
       restricted: globalParams.address0,
       queues: globalParams.address0,
       races: globalParams.address0,
-      allowedCallers: [],
-      callable: false
+      allowedCallers: []
     }
     const racesRestricted = await deployContract({
       name: 'RacesRestricted',

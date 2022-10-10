@@ -45,6 +45,7 @@ export interface PaymentsInterface extends utils.Interface {
     "fillRewardsReservoir(address,uint256[],uint256[],uint8)": FunctionFragment;
     "owner()": FunctionFragment;
     "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
+    "payout(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rewardsReservoirs(uint8,address,uint256)": FunctionFragment;
     "setGlobalParameters((address,address,address))": FunctionFragment;
@@ -71,6 +72,10 @@ export interface PaymentsInterface extends utils.Interface {
       BigNumberish[],
       BigNumberish
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "payout",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -100,6 +105,7 @@ export interface PaymentsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pay", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "payout", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
@@ -197,6 +203,11 @@ export interface Payments extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    payout(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -254,6 +265,11 @@ export interface Payments extends BaseContract {
     amounts: BigNumberish[],
     paymentType: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  payout(
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   renounceOwnership(
@@ -314,6 +330,8 @@ export interface Payments extends BaseContract {
       paymentType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    payout(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -376,6 +394,11 @@ export interface Payments extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    payout(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -426,6 +449,11 @@ export interface Payments extends BaseContract {
       amounts: BigNumberish[],
       paymentType: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    payout(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
