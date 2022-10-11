@@ -21,10 +21,8 @@ contract QueuesMethods is Params {
                 IERC1155(queues[theId].core.participants[participantId].sourceContract).balanceOf(msg.sender,queues[theId].core.participants[participantId].tokenId) > 0
         );
 
-        uint256[] memory replacedParticipants = queues[theId].core.participants;
-        uint256[] memory replacedEnqueueDates = queues[theId].core.enqueueDates;
+        Participant.Struct[] memory replacedParticipants = queues[theId].core.participants;
         delete queues[theId].core.participants;
-        delete queues[theId].core.enqueueDates;
 
         if ( replacedParticipants.length > 0 ) {
             bool exists;
@@ -41,7 +39,7 @@ contract QueuesMethods is Params {
         }
 
 
-        require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == theId);
+        // Give asset back to user
 
         
         ( , , MicroPayment.Struct memory entryFee) = IEnqueueCost(control.zerocost).enqueueCost(theId);
