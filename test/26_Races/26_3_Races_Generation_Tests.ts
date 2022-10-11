@@ -15,6 +15,7 @@ async function generationTests(
   return new Promise((resolve, ) => {
 
     const initialDummyGenerations: number = Number(process.env.TOTAL_RACES);
+    const initialHoundsNumber: number = Number(process.env.INITIAL_HOUNDS_NUMBER);
 
     describe('Races Generation: ' + initialDummyGenerations + ' dummy races', async function () {
       
@@ -29,9 +30,10 @@ async function generationTests(
       const path: string = "./statistics/" + initialDummyGenerations + "-race/";
       const winratePath: string = path + "winrate/";
       const performance: string = path + "performance/";
+      const variation: string = path + "variations/";
     
-      let participants: Array<Hound.StructStruct> = new Array(initialDummyGenerations);
-      let topWinners: Array<HoundStatistics> = new Array(initialDummyGenerations);
+      let participants: Array<Hound.StructStruct> = new Array(initialHoundsNumber);
+      let topWinners: Array<HoundStatistics> = new Array(initialHoundsNumber);
     
       const allHoundsLabels: Array<string> = participants.map((_, id) => "Hound #" + id);
       let plotConfiguration: PlottingConfiguration = {
@@ -40,14 +42,18 @@ async function generationTests(
           data: {
             labels: allHoundsLabels,
             datasets: [{
-              label: 'Wins of ' + initialDummyGenerations + ' races',
+              label: '',
               data: [],
-              backgroundColor: [
-              ],
-              borderColor: [
-              ],
-              borderWidth: 1
-            }]
+              backgroundColor: []
+            }],
+          },
+          options: {
+            plugins: {
+              title: {
+                display: false,
+                text: ''
+              },
+            },
           }
         },
         imageConfiguration: {
@@ -60,13 +66,12 @@ async function generationTests(
 
       let performances: number[];
 
-      it("Mint " + initialDummyGenerations + "x hounds for races generation", async function () {
+      it("Mint " + initialHoundsNumber + "x hounds for races generation", async function () {
         let [sig1] = await ethers.getSigners();
-        for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
+        for ( let i = 0 ; i < initialHoundsNumber ; ++i ) {
           let houndToMint: Hound.StructStruct = globalParams.defaultHound;
           houndToMint.identity.geneticSequence = houndToMint.identity.geneticSequence.map((i) => { return Math.floor(Math.random() * 9) + 1; });
           houndToMint.identity.geneticSequence[1] = i % 2 === 0 ? 1 : 2;
-          console.log(houndToMint.identity.geneticSequence);
           let createdHoundId = await safeMintHound({
             contract: dependencies.hounds,
             hound: houndToMint as Hound.StructStructOutput,
@@ -80,7 +85,7 @@ async function generationTests(
           ids.push(Number(createdHoundId));
         }
 
-        for ( let i = 0 , l = initialDummyGenerations ; i < l ; ++i ) {
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           topWinners[i] = {
             totalRuns: 0,
             firstPlace: 0,
@@ -94,17 +99,17 @@ async function generationTests(
       for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
       
         it("Generate race " + i, async function () {
-          const response: any = await axios.post("https://houndrace.com/mumbai_api/races/generate", {
+          const response: any = await axios.post("http://localhost:3000/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,
             ids: ids,
             participants: participants
           })
+          console.log(response.data.statistics);
           const winners: Array<number> = response.data.participants.map((part: any) => Number(part.hex));
-          const randomness: number = Number(response.data.randomness.hex);
           performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
 
-          for ( let m = 0 , n = initialDummyGenerations; m < n ; ++m ) {
+          for ( let m = 0 , n = initialHoundsNumber; m < n ; ++m ) {
             for ( let j = 0 , k = winners.length ; j < k ; ++j ) {
               if ( winners[j] === ids[m] ) {
                 switch (j) {
@@ -141,27 +146,45 @@ async function generationTests(
         if (!existsSync(winratePath)){
           mkdirSync(winratePath, { recursive: true });
         }
+
+        if (!existsSync(variation)){
+          mkdirSync(variation, { recursive: true });
+        }
       
         if (!existsSync(performance)){
           mkdirSync(performance, { recursive: true });
         }
 
-        for ( let i = 0 , l = initialDummyGenerations ; i < l ; ++i ) {
+        if ( plotConfiguration.chartConfiguration.options ) {
+          if ( plotConfiguration.chartConfiguration.options.plugins ) {
+            if ( plotConfiguration.chartConfiguration.options.plugins.title ) {
+              plotConfiguration.chartConfiguration.options.plugins.title = {
+                display: true,
+                text: 'Individual hound statistics'
+              };
+            }
+          }
+        }
+
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           plotConfiguration.imageConfiguration.name = "Hound #" + ids[i];
           plotConfiguration.imageConfiguration.path = winratePath;
           plotConfiguration.chartConfiguration.data.labels = ["Total runs", "First place", "Second place", "Third place"];
           plotConfiguration.chartConfiguration.data.datasets[0].label = allHoundsLabels[i] + " statistics";
           plotConfiguration.chartConfiguration.data.datasets[0].data = [topWinners[i].totalRuns,topWinners[i].firstPlace,topWinners[i].secondPlace,topWinners[i].thirdPlace];
           plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = houndStatisticsUsedColors;
-          plotConfiguration.chartConfiguration.data.datasets[0].borderColor = houndStatisticsUsedColors;
-          plotConfiguration.chartConfiguration.options = {
-            plugins: {
-              legend: {
-                display: false
-              }
-            }
-          };
           await plot(plotConfiguration);
+        }
+
+        if ( plotConfiguration.chartConfiguration.options ) {
+          if ( plotConfiguration.chartConfiguration.options.plugins ) {
+            if ( plotConfiguration.chartConfiguration.options.plugins.title ) {
+              plotConfiguration.chartConfiguration.options.plugins.title = {
+                display: true,
+                text: 'Hounds performances'
+              };
+            }
+          }
         }
 
         plotConfiguration.imageConfiguration.name = "Hounds performances";
@@ -170,16 +193,71 @@ async function generationTests(
         plotConfiguration.chartConfiguration.data.datasets[0].label = "Performances";
         plotConfiguration.chartConfiguration.data.datasets[0].data = performances;
         plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[4].toString()];
-        plotConfiguration.chartConfiguration.data.datasets[0].borderColor = [stringifiedArrayOfColors[4].toString()];
-        plotConfiguration.chartConfiguration.options = {
-          plugins: {
-            legend: {
-              display: false
-            }
-          }
-        };
         await plot(plotConfiguration);
         resolve();
+
+      });
+
+      it("Generate variation specter", async function () {
+
+        let IDS: Array<Array<number>> = [  ];
+        let PERFORMANCES: Array<Array<number>> = [  ];
+
+        for ( let i = 0 ; i < initialDummyGenerations ; ++i ) {
+        
+          IDS.push(ids);  
+
+          const response: any = await axios.post("http://localhost:3000/races/generate", {
+            race: dependencies.race,
+            arena: dependencies.arena,
+            ids: ids,
+            participants: participants
+          })
+          performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
+
+          PERFORMANCES.push(performances);
+
+        }
+
+        let VARIATION_LEVELS: Array<[number,number]> = [];
+
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
+          VARIATION_LEVELS[i] = [Number.MAX_SAFE_INTEGER,0];
+        }
+
+        for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
+          for ( let j = 0 , k = initialHoundsNumber ; j < k ; ++j ) {
+            if ( VARIATION_LEVELS[i][0] > PERFORMANCES[j][i] ) {
+              VARIATION_LEVELS[i][0] = PERFORMANCES[j][i];
+            }
+            if ( VARIATION_LEVELS[i][1] < PERFORMANCES[j][i] ) {
+              VARIATION_LEVELS[i][1] = PERFORMANCES[j][i];
+            }
+          }
+        }
+
+        if ( plotConfiguration.chartConfiguration.options ) {
+          if ( plotConfiguration.chartConfiguration.options.plugins ) {
+            if ( plotConfiguration.chartConfiguration.options.plugins.title ) {
+              plotConfiguration.chartConfiguration.options.plugins.title = {
+                display: true,
+                text: 'Hounds performances variation level'
+              };
+            }
+          }
+        }
+
+        plotConfiguration.imageConfiguration.name = "Hounds variation score";
+        plotConfiguration.imageConfiguration.path = variation;
+        plotConfiguration.chartConfiguration.data.labels = ids.map((id) => "Hound #" + id);
+
+        const variations: Array<number> = VARIATION_LEVELS.map((variation: [number,number]) => variation[1] - variation[0]);
+
+        plotConfiguration.chartConfiguration.data.datasets[0].label = "Vatiation levels";
+        plotConfiguration.chartConfiguration.data.datasets[0].data = variations;
+        plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[0].toString()];
+
+        await plot(plotConfiguration);
 
       });
 
