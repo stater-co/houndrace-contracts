@@ -27,9 +27,6 @@ import { Hounds, Constructor as HoundsConstructor, ConstructorBoilerplate, Const
 import { RacesRestricted } from '../typechain-types/RacesRestricted';
 import { RacesMethods } from '../typechain-types/RacesMethods';
 import { Races, RacesConstructor } from '../typechain-types/Races';
-import { GeneratorZerocost } from '../typechain-types/GeneratorZerocost';
-import { GeneratorMethods } from '../typechain-types/GeneratorMethods';
-import { Generator, GeneratorConstructor } from '../typechain-types/Generator';
 import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
@@ -432,7 +429,6 @@ async function main() {
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
-      generator: globalParams.address0,
       payments: globalParams.address0,
       restricted: globalParams.address0,
       queues: globalParams.address0,
@@ -468,51 +464,6 @@ async function main() {
 
     deployments.update(21, {
       step: "Deploy generator methods"
-    });
-
-    const generatorConstructor: GeneratorConstructor.StructStruct = {
-      randomness: globalParams.address0,
-      arenas: globalParams.address0,
-      hounds: globalParams.address0,
-      allowed: globalParams.address0,
-      methods: globalParams.address0,
-      payments: globalParams.address0,
-      zerocost: globalParams.address0,
-      incubator: globalParams.address0,
-      gamification: globalParams.address0
-    }
-    const generatorMethods = await deployContract({
-      name: 'GeneratorMethods',
-      constructor: [arrayfy(generatorConstructor)],
-      props: {}
-    }) as GeneratorMethods;
-    DeploymentLogger('export GENERATOR_METHODS=' + generatorMethods.address);
-    deployments.update(22, {
-      step: "Deploy generator zerocost"
-    });
-
-    const generatorZerocost = await deployContract({
-      name: 'GeneratorZerocost',
-      constructor: [arrayfy(generatorConstructor)],
-      props: {
-        libraries: {
-          Sortings: sortings.address
-        }
-      }
-    }) as GeneratorZerocost;
-    DeploymentLogger('export GENERATOR_ZEROCOST=' + generatorZerocost.address);
-    deployments.update(23, {
-      step: "Deploy generator"
-    });
-
-    const generator = await deployContract({
-      name: 'Generator',
-      constructor: [arrayfy(generatorConstructor)],
-      props: {}
-    }) as Generator;
-    DeploymentLogger('export GENERATOR=' + generator.address);
-    deployments.update(24, {
-      step: "Deploy queues methods"
     });
 
     const queuesConstructor: QueuesConstructor.StructStruct = {
@@ -679,24 +630,11 @@ async function main() {
       arenas: arenas.address,
       hounds: hounds.address,
       methods: racesMethods.address,
-      generator: generator.address,
       payments: payments.address,
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
       allowedCallers: [races.address, queues.address]
-    }
-
-    const newGeneratorConstructor: GeneratorConstructor.StructStruct = {
-      randomness: randomness.address,
-      arenas: arenas.address,
-      hounds: hounds.address,
-      allowed: races.address,
-      methods: generatorMethods.address,
-      payments: payments.address,
-      zerocost: generatorZerocost.address,
-      incubator: incubator.address,
-      gamification: gamification.address
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {
@@ -868,33 +806,6 @@ async function main() {
       await incubator.setGlobalParameters(newIncubatorConstructor);
       configurations.update(5, {
         step: "Set global parameters for generator methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await generatorMethods.setGlobalParameters(newGeneratorConstructor);
-      configurations.update(6, {
-        step: "Set global parameters for generator zerocost"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await generatorZerocost.setGlobalParameters(newGeneratorConstructor);
-      configurations.update(6, {
-        step: "Set global parameters for generator zerocost"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await generator.setGlobalParameters(newGeneratorConstructor);
-      configurations.update(6, {
-        step: "Set global parameters for generator zerocost"
       });
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
@@ -1378,42 +1289,6 @@ async function main() {
       }
       verifications.update(21, {
         step: "Verify generator methods"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: generatorMethods.address, 
-          constructorArguments: [arrayfy(generatorConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(22, {
-        step: "Verify generator"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: generatorZerocost.address, 
-          constructorArguments: [arrayfy(generatorConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(22, {
-        step: "Verify generator"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: generator.address,
-          constructorArguments: [arrayfy(generatorConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(23, {
-        step: "Verify queues restricted"
       });
 
       try {
