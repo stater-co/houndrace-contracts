@@ -294,7 +294,6 @@ export interface HoundsInterface extends utils.Interface {
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "payout(uint256)": FunctionFragment;
     "putHoundForBreed(uint256,uint256,bool)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
@@ -371,10 +370,6 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "payout",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -475,7 +470,6 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "payout", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "putHoundForBreed",
     data: BytesLike
@@ -783,11 +777,6 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
@@ -985,11 +974,6 @@ export interface Hounds extends BaseContract {
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
-  payout(
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   putHoundForBreed(
     theId: BigNumberish,
     fee: BigNumberish,
@@ -1186,8 +1170,6 @@ export interface Hounds extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    payout(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     putHoundForBreed(
       theId: BigNumberish,
@@ -1471,11 +1453,6 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     putHoundForBreed(
       theId: BigNumberish,
       fee: BigNumberish,
@@ -1657,11 +1634,6 @@ export interface Hounds extends BaseContract {
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     putHoundForBreed(

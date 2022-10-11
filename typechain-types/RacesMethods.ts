@@ -29,13 +29,11 @@ export declare namespace RacesConstructor {
     arenas: string;
     hounds: string;
     methods: string;
-    generator: string;
     payments: string;
     restricted: string;
     queues: string;
     races: string;
     allowedCallers: string[];
-    callable: boolean;
   };
 
   export type StructStructOutput = [
@@ -47,21 +45,17 @@ export declare namespace RacesConstructor {
     string,
     string,
     string,
-    string,
-    string[],
-    boolean
+    string[]
   ] & {
     randomness: string;
     arenas: string;
     hounds: string;
     methods: string;
-    generator: string;
     payments: string;
     restricted: string;
     queues: string;
     races: string;
     allowedCallers: string[];
-    callable: boolean;
   };
 }
 
@@ -217,12 +211,11 @@ export interface RacesMethodsInterface extends utils.Interface {
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
-    "payout(uint256)": FunctionFragment;
     "race(uint256)": FunctionFragment;
     "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool))": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[],bool))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -244,10 +237,6 @@ export interface RacesMethodsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "participantsOf",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "payout",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "race", values: [BigNumberish]): string;
@@ -289,7 +278,6 @@ export interface RacesMethodsInterface extends utils.Interface {
     functionFragment: "participantsOf",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "payout", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "race", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "raceStart", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "races", data: BytesLike): Result;
@@ -381,28 +369,15 @@ export interface RacesMethods extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        boolean
-      ] & {
+      [string, string, string, string, string, string, string, string] & {
         randomness: string;
         arenas: string;
         hounds: string;
         methods: string;
-        generator: string;
         payments: string;
         restricted: string;
         queues: string;
         races: string;
-        callable: boolean;
       }
     >;
 
@@ -436,11 +411,6 @@ export interface RacesMethods extends BaseContract {
       theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
-
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     race(
       theId: BigNumberish,
@@ -485,28 +455,15 @@ export interface RacesMethods extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      string,
-      boolean
-    ] & {
+    [string, string, string, string, string, string, string, string] & {
       randomness: string;
       arenas: string;
       hounds: string;
       methods: string;
-      generator: string;
       payments: string;
       restricted: string;
       queues: string;
       races: string;
-      callable: boolean;
     }
   >;
 
@@ -540,11 +497,6 @@ export interface RacesMethods extends BaseContract {
     theId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
-
-  payout(
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   race(
     theId: BigNumberish,
@@ -589,28 +541,15 @@ export interface RacesMethods extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        boolean
-      ] & {
+      [string, string, string, string, string, string, string, string] & {
         randomness: string;
         arenas: string;
         hounds: string;
         methods: string;
-        generator: string;
         payments: string;
         restricted: string;
         queues: string;
         races: string;
-        callable: boolean;
       }
     >;
 
@@ -644,8 +583,6 @@ export interface RacesMethods extends BaseContract {
       theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
-
-    payout(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     race(
       theId: BigNumberish,
@@ -756,11 +693,6 @@ export interface RacesMethods extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     race(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     raceStart(
@@ -816,11 +748,6 @@ export interface RacesMethods extends BaseContract {
     participantsOf(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     race(

@@ -184,7 +184,6 @@ export interface QueuesInterface extends utils.Interface {
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
-    "payout(uint256)": FunctionFragment;
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -224,10 +223,6 @@ export interface QueuesInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "participantsOf",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "payout",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "queue", values: [BigNumberish]): string;
@@ -279,7 +274,6 @@ export interface QueuesInterface extends utils.Interface {
     functionFragment: "participantsOf",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "payout", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "queue", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "queues", data: BytesLike): Result;
   decodeFunctionResult(
@@ -470,11 +464,6 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     queue(
       theId: BigNumberish,
       overrides?: CallOverrides
@@ -595,11 +584,6 @@ export interface Queues extends BaseContract {
     theId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
-
-  payout(
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   queue(
     theId: BigNumberish,
@@ -728,8 +712,6 @@ export interface Queues extends BaseContract {
       theId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
-
-    payout(amount: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     queue(
       theId: BigNumberish,
@@ -885,11 +867,6 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     queue(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     queues(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -967,11 +944,6 @@ export interface Queues extends BaseContract {
     participantsOf(
       theId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    payout(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     queue(

@@ -1,5 +1,4 @@
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
-import { GeneratorSystem } from '../common/dto/test/generatorSystem.dto';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
@@ -17,14 +16,12 @@ import { run as runIncubators } from '../test/6_Deploy_Incubator';
 import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
 import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
-import { run as runGenerator } from '../test/10_Deploy_Generator';
 import { set as setQueues } from '../test/18_Setup_Queues_Contracts';
 import { set as setShop } from '../test/14_Setup_Shop_Contracts';
 import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
 import { set as setIncubators } from '../test/16_Setup_Incubator_Contracts';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { set as setRaces } from '../test/20_Setup_Races_Contracts';
-import { set as setGenerator } from '../test/19_Setup_Generator_Contracts';
 import { globalParams } from '../common/params';
 import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
@@ -77,16 +74,6 @@ async function main() {
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
         paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address
-    });
-    
-    const generator: GeneratorSystem = await runGenerator({
-        arenasAddress: arenas.arenas.address,
-        houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address,
-        racesAddress: races.races.address,
-        randomnessAddress: randomness.randomness.address,
-        sortingsLibraryAddress: libraries.sortings.address,
         incubatorAddress: incubators.incubator.address
     });
 
@@ -227,7 +214,6 @@ async function main() {
         racesRestricted: races.racesRestricted,
         constructor: {
             arenas: arenas.arenas.address,
-            generator: generator.generator.address,
             hounds: hounds.hounds.address,
             methods: races.racesMethods.address,
             payments: payments.payments.address,
@@ -235,28 +221,11 @@ async function main() {
             randomness: randomness.randomness.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            callable: false,
             allowedCallers: [
                 races.races.address,
                 queues.queues.address,
                 globalParams.address0
             ]
-        }
-    });
-
-    await setGenerator({
-        generatorMethods: generator.generatorMethods,
-        generatorZerocost: generator.generatorZerocost,
-        constructor: {
-            arenas: arenas.arenas.address,
-            hounds: hounds.hounds.address,
-            methods: generator.generatorMethods.address,
-            payments: payments.payments.address,
-            randomness: randomness.randomness.address,
-            zerocost: generator.generatorZerocost.address,
-            allowed: races.races.address,
-            incubator: incubators.incubator.address,
-            gamification: gamification.gamification.address
         }
     });
 
