@@ -437,8 +437,7 @@ async function main() {
       restricted: globalParams.address0,
       queues: globalParams.address0,
       races: globalParams.address0,
-      allowedCallers: [],
-      callable: false
+      allowedCallers: []
     }
     const racesRestricted = await deployContract({
       name: 'RacesRestricted',
@@ -685,8 +684,7 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      allowedCallers: [races.address, queues.address],
-      callable: false
+      allowedCallers: [races.address, queues.address]
     }
 
     const newGeneratorConstructor: GeneratorConstructor.StructStruct = {

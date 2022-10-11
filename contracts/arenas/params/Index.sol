@@ -8,10 +8,9 @@ import '@openzeppelin/contracts/utils/Address.sol';
 import '../../payments/interfaces/IPay.sol';
 import './Arena.sol';
 import './Constructor.sol';
-import '../../utils/Withdrawable.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder, Withdrawable {
+contract Params is Ownable, ERC721, ERC721Holder {
 
     ArenasConstructor.Struct public control;
     uint256 public id = 1;

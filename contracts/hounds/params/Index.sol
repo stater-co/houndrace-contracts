@@ -9,7 +9,6 @@ import './Hound.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../incubator/interfaces/IBreedHounds.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
-import '../../utils/Withdrawable.sol';
 import '../../races/interfaces/IGetStatistics.sol';
 import '../../gamification/interfaces/IGetStamina.sol';
 import '../../gamification/interfaces/IGetBreeding.sol';
@@ -22,7 +21,7 @@ import '../../payments/params/MicroPayment.sol';
 import '../interfaces/IGetBreedCosts.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder, Withdrawable, ReentrancyGuard {
+contract Params is Ownable, ERC721, ERC721Holder, ReentrancyGuard {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => HoundProfile.Struct) public hounds;

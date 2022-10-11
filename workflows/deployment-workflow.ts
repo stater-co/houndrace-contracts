@@ -15,7 +15,6 @@ import { run as runIncubators } from '../test/6_Deploy_Incubator';
 import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
 import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
-import { run as runGenerator } from '../test/10_Deploy_Generator';
 import { globalParams } from '../common/params';
 import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
 import { run as runGamification } from '../test/12_Deploy_Gamification';
@@ -66,16 +65,6 @@ async function main() {
         incubatorAddress: incubators.incubator.address
     });
     
-    await runGenerator({
-        arenasAddress: arenas.arenas.address,
-        houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address,
-        racesAddress: races.races.address,
-        randomnessAddress: randomness.randomness.address,
-        sortingsLibraryAddress: libraries.sortings.address,
-        incubatorAddress: incubators.incubator.address
-    });
-
     await runGamification({
         allowed: [],
         defaultBreeding: globalParams.houndBreeding,

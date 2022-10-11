@@ -4,7 +4,6 @@
 import {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -22,16 +21,18 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace ArenasConstructor {
+export declare namespace QueuesConstructor {
   export type StructStruct = {
-    name: string;
-    symbol: string;
-    restricted: string;
     methods: string;
+    restricted: string;
+    queues: string;
+    zerocost: string;
+    arenas: string;
+    hounds: string;
     payments: string;
-    alphadune: string;
+    races: string;
+    incubator: string;
     allowedCallers: string[];
-    alhpadunePercentage: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -41,29 +42,33 @@ export declare namespace ArenasConstructor {
     string,
     string,
     string,
-    string[],
-    BigNumber
+    string,
+    string,
+    string,
+    string[]
   ] & {
-    name: string;
-    symbol: string;
-    restricted: string;
     methods: string;
+    restricted: string;
+    queues: string;
+    zerocost: string;
+    arenas: string;
+    hounds: string;
     payments: string;
-    alphadune: string;
+    races: string;
+    incubator: string;
     allowedCallers: string[];
-    alhpadunePercentage: BigNumber;
   };
 }
 
 export interface ISetGlobalParametersInterface extends utils.Interface {
   contractName: "ISetGlobalParameters";
   functions: {
-    "setGlobalParameters((string,string,address,address,address,address,address[],uint256))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [ArenasConstructor.StructStruct]
+    values: [QueuesConstructor.StructStruct]
   ): string;
 
   decodeFunctionResult(
@@ -103,19 +108,19 @@ export interface ISetGlobalParameters extends BaseContract {
 
   functions: {
     setGlobalParameters(
-      globalParameters: ArenasConstructor.StructStruct,
+      input: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   setGlobalParameters(
-    globalParameters: ArenasConstructor.StructStruct,
+    input: QueuesConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     setGlobalParameters(
-      globalParameters: ArenasConstructor.StructStruct,
+      input: QueuesConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -124,14 +129,14 @@ export interface ISetGlobalParameters extends BaseContract {
 
   estimateGas: {
     setGlobalParameters(
-      globalParameters: ArenasConstructor.StructStruct,
+      input: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     setGlobalParameters(
-      globalParameters: ArenasConstructor.StructStruct,
+      input: QueuesConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

@@ -68,7 +68,7 @@ contract QueuesMethods is Params {
         require(
             queues[theId].totalParticipants > 0 && !queues[theId].closed && 
             ((queues[theId].endDate == 0 && queues[theId].startDate == 0) || (queues[theId].startDate <= block.timestamp && queues[theId].endDate >= block.timestamp)) && 
-            IAllowance(control.hounds).allowance(msg.sender, hound) && 
+            IHoundOwner(control.hounds).houndOwner(hound) == msg.sender && 
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
 

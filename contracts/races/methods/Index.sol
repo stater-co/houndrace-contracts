@@ -13,41 +13,22 @@ contract RacesMethods is Params {
     ) external {
         require(allowed[msg.sender]);
 
-        if ( control.callable ) {
-
-            IHandleArenaUsage(control.arenas).handleArenaUsage(queue.core.arena);
-
-            IHandleRaceLoot(control.races).handleRaceLoot(queue.core.payments);
-
-            races[id] = IGenerate(control.generator).generate(queue,queueId);
-
-            for ( uint256 i = 0 ; i < queue.core.participants.length ; ++i ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queue.core.participants[i], queueId) != 0);
-                IUpdateHoundStamina(control.hounds).updateHoundStamina(queue.core.participants[i], queue.staminaCost);
-            }
-
-            emit NewFinishedRace(id, queueId, races[id]);
-
-        } else {
-
-            emit NewRace(id, queueId, Race.Struct(
-                Core.Struct(
-                    queue.core.name,
-                    queue.core.feeCurrency,
-                    queue.core.entryFeeCurrency,
-                    queue.core.participants,
-                    queue.core.enqueueDates,
-                    queue.core.arena,
-                    queue.core.entryFee,
-                    queue.core.fee,
-                    queue.core.payments
-                ),
-                block.timestamp,
-                queueId,
-                '0x00'
-            ));
-
-        }
+        emit NewRace(id, queueId, Race.Struct(
+            Core.Struct(
+                queue.core.name,
+                queue.core.feeCurrency,
+                queue.core.entryFeeCurrency,
+                queue.core.participants,
+                queue.core.enqueueDates,
+                queue.core.arena,
+                queue.core.entryFee,
+                queue.core.fee,
+                queue.core.payments
+            ),
+            block.timestamp,
+            queueId,
+            '0x00'
+        ));
 
         ++id;
 
