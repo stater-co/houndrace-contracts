@@ -24,7 +24,6 @@ import type {
 
 export declare namespace GeneticsConstructor {
   export type StructStruct = {
-    randomness: string;
     terrains: string;
     male: BigNumberish[];
     female: BigNumberish[];
@@ -36,7 +35,6 @@ export declare namespace GeneticsConstructor {
 
   export type StructStructOutput = [
     string,
-    string,
     number[],
     number[],
     number,
@@ -44,7 +42,6 @@ export declare namespace GeneticsConstructor {
     number[],
     number[]
   ] & {
-    randomness: string;
     terrains: string;
     male: number[];
     female: number[];
@@ -65,7 +62,7 @@ export interface GeneticsInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "scrambleMutation(uint32[54],uint256)": FunctionFragment;
-    "setGlobalParameters((address,address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))": FunctionFragment;
+    "setGlobalParameters((address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))": FunctionFragment;
     "swapMutation(uint32[54],uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uniformCrossover(uint32[54],uint32[54],uint256)": FunctionFragment;
@@ -207,8 +204,7 @@ export interface Genetics extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, number, number] & {
-        randomness: string;
+      [string, number, number] & {
         terrains: string;
         maleGenesProbability: number;
         femaleGenesProbability: number;
@@ -279,8 +275,7 @@ export interface Genetics extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, number, number] & {
-      randomness: string;
+    [string, number, number] & {
       terrains: string;
       maleGenesProbability: number;
       femaleGenesProbability: number;
@@ -351,8 +346,7 @@ export interface Genetics extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, number, number] & {
-        randomness: string;
+      [string, number, number] & {
         terrains: string;
         maleGenesProbability: number;
         femaleGenesProbability: number;

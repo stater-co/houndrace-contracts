@@ -16,13 +16,10 @@ contract IncubatorMethods is Params {
     ) public {
         require(allowed[msg.sender]);
         
-        uint256 randomness = IGetRandomNumber(control.randomness).getRandomNumber(
-            abi.encode(hound1Id > hound2Id ? hound1.geneticSequence : hound2.geneticSequence)
-        );
         uint32[54] memory genetics = IMixGenes(control.genetics).mixGenes(
             hound1.geneticSequence, 
             hound2.geneticSequence,
-            randomness
+            block.timestamp
         );
 
         IInitializeHoundGamingStats(control.gamification).initializeHoundGamingStats(theId, genetics);
@@ -34,7 +31,7 @@ contract IncubatorMethods is Params {
             block.timestamp,
             genetics,
             "",
-            uint256(uint160(control.randomness)) % 100 == 99 ? 
+            block.timestamp % 100 == 99 ? 
                 (
                     hound1.specie > hound2.specie ? 
                         hound1.specie

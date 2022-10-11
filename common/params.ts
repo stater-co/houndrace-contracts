@@ -53,8 +53,7 @@ const defaultRace: Race.StructStruct = {
         payments: defaultQueuePayment
     },
     queueId: 1,
-    seed: "0x00",
-    randomness: 5
+    seed: "0x00"
 };
 
 const houndStamina: HoundStamina.StructStruct = {

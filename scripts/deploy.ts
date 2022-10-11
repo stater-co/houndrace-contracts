@@ -7,7 +7,6 @@ import { Converters } from '../typechain-types/Converters';
 import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
 import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
-import { Randomness } from '../typechain-types/Randomness';
 import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
@@ -94,17 +93,7 @@ async function main() {
     }) as Sortings;
     DeploymentLogger('export SORTINGS=' + sortings.address);
     deployments.update(2, {
-      step: "Deploy randomness"
-    });
-
-    const randomness = await deployContract({
-      name: 'Randomness',
-      constructor: [],
-      props: {}
-    }) as Randomness;
-    DeploymentLogger('export RANDOMNESS=' + randomness.address);
-    deployments.update(3, {
-      step: "Deploy payment methods"
+      step: "Deploy payments"
     });
 
     const paymentsConstructor: PaymentsConstructor.StructStruct = {
@@ -231,7 +220,6 @@ async function main() {
     });
 
     const geneticsConstructor: GeneticsConstructor.StructStruct = {
-      randomness: globalParams.address0,
       terrains: globalParams.address0,
       male: globalParams.maleBoilerplateGene,
       female: globalParams.femaleBoilerplateGene,
@@ -252,7 +240,6 @@ async function main() {
 
     const incubatorConstructor: IncubatorConstructor.StructStruct = {
       methods: globalParams.address0,
-      randomness: globalParams.address0,
       genetics: globalParams.address0,
       gamification: globalParams.address0,
       races: globalParams.address0,
@@ -425,7 +412,6 @@ async function main() {
     });
 
     const racesConstructor: RacesConstructor.StructStruct = {
-      randomness: globalParams.address0,
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
@@ -566,7 +552,6 @@ async function main() {
     }
 
     const newGeneticsConstructor: GeneticsConstructor.StructStruct = {
-      randomness: randomness.address,
       terrains: arenas.address,
       male: maleBoilerplateGene,
       female: femaleBoilerplateGene,
@@ -578,7 +563,6 @@ async function main() {
 
     const newIncubatorConstructor: IncubatorConstructor.StructStruct = {
       methods: incubatorMethods.address,
-      randomness: randomness.address,
       genetics: genetics.address,
       gamification: gamification.address,
       races: races.address,
@@ -626,7 +610,6 @@ async function main() {
     }
 
     const newRacesConstructor: RacesConstructor.StructStruct = {
-      randomness: randomness.address,
       arenas: arenas.address,
       hounds: hounds.address,
       methods: racesMethods.address,
@@ -956,18 +939,7 @@ async function main() {
         DeploymentError((err as NodeJS.ErrnoException).message);
       }
       verifications.update(2, {
-        step: "Verify randomness"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: randomness.address
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(3, {
-        step: "Verify payment methods"
+        step: "Verify payments"
       });
       
       try {

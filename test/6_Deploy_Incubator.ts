@@ -21,7 +21,6 @@ export async function run(
           name: 'IncubatorMethods',
           constructor: [[
             globalParams.address0,
-            dependencies.randomnessAddress,
             dependencies.geneticsAddress,
             globalParams.address0,
             globalParams.address0,
@@ -38,7 +37,6 @@ export async function run(
           name: 'Incubator',
           constructor: [[
             globalParams.address0,
-            dependencies.randomnessAddress,
             dependencies.geneticsAddress,
             globalParams.address0,
             globalParams.address0,

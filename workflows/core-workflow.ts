@@ -6,10 +6,8 @@ import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
-import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
 import { run as runLibraries } from '../test/1_Deploy_Libraries';
 import { run as runPayments } from '../test/2_Deploy_Payments_Ecosystem';
-import { run as runRandomness } from '../test/3_Deploy_Randomness';
 import { run as runArenas } from '../test/4_Deploy_Arenas';
 import { run as runGenetics } from '../test/5_Deploy_Genetics';
 import { run as runIncubators } from '../test/6_Deploy_Incubator';
@@ -39,11 +37,7 @@ import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
 
 async function main() {
     
-    const libraries: DeployedLibraries = await runLibraries();
-    
     const payments: PaymentEcosystem = await runPayments();
-    
-    const randomness: RandomnessSystem = await runRandomness();
 
     const arenas: ArenasSystem = await runArenas({
         paymentsAddress: payments.payments.address,
@@ -51,13 +45,11 @@ async function main() {
     });
 
     const genetics: GeneticsSystem = await runGenetics({
-        arenasAddress: arenas.arenas.address,
-        randomnessAddress: randomness.randomness.address
+        arenasAddress: arenas.arenas.address
     });
 
     const incubators: IncubatorSystem = await runIncubators({
-        geneticsAddress: genetics.genetics.address,
-        randomnessAddress: randomness.randomness.address
+        geneticsAddress: genetics.genetics.address
     });
 
     const hounds: HoundsSystem = await runHounds({
@@ -70,8 +62,7 @@ async function main() {
     const races: RacesSystem = await runRaces({
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address,
-        randomnessAddress: randomness.randomness.address
+        paymentsAddress: payments.payments.address
     });
 
     const queues: QueuesSystem = await runQueues({
@@ -169,7 +160,6 @@ async function main() {
         constructor: {
             genetics: genetics.genetics.address,
             methods: incubators.incubatorMethods.address,
-            randomness: randomness.randomness.address,
             secondsToMaturity: 345600,
             gamification: gamification.gamification.address,
             races: races.races.address,
@@ -223,7 +213,6 @@ async function main() {
             methods: races.racesMethods.address,
             payments: payments.payments.address,
             queues: queues.queues.address,
-            randomness: randomness.randomness.address,
             races: races.races.address,
             restricted: races.racesRestricted.address,
             allowedCallers: [

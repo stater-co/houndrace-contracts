@@ -10,7 +10,6 @@ import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
-import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';

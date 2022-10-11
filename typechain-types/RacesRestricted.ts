@@ -24,7 +24,6 @@ import type {
 
 export declare namespace RacesConstructor {
   export type StructStruct = {
-    randomness: string;
     arenas: string;
     hounds: string;
     methods: string;
@@ -43,10 +42,8 @@ export declare namespace RacesConstructor {
     string,
     string,
     string,
-    string,
     string[]
   ] & {
-    randomness: string;
     arenas: string;
     hounds: string;
     methods: string;
@@ -124,7 +121,6 @@ export declare namespace Core {
 export declare namespace Race {
   export type StructStruct = {
     core: Core.StructStruct;
-    randomness: BigNumberish;
     queueId: BigNumberish;
     seed: BytesLike;
   };
@@ -132,14 +128,8 @@ export declare namespace Race {
   export type StructStructOutput = [
     Core.StructStructOutput,
     BigNumber,
-    BigNumber,
     string
-  ] & {
-    core: Core.StructStructOutput;
-    randomness: BigNumber;
-    queueId: BigNumber;
-    seed: string;
-  };
+  ] & { core: Core.StructStructOutput; queueId: BigNumber; seed: string };
 }
 
 export declare namespace HoundStatistics {
@@ -176,9 +166,9 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "race(uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
@@ -323,8 +313,7 @@ export interface RacesRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
-        randomness: string;
+      [string, string, string, string, string, string, string] & {
         arenas: string;
         hounds: string;
         methods: string;
@@ -370,9 +359,8 @@ export interface RacesRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+      [Core.StructStructOutput, BigNumber, string] & {
         core: Core.StructStructOutput;
-        randomness: BigNumber;
         queueId: BigNumber;
         seed: string;
       }
@@ -405,8 +393,7 @@ export interface RacesRestricted extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, string, string] & {
-      randomness: string;
+    [string, string, string, string, string, string, string] & {
       arenas: string;
       hounds: string;
       methods: string;
@@ -452,9 +439,8 @@ export interface RacesRestricted extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+    [Core.StructStructOutput, BigNumber, string] & {
       core: Core.StructStructOutput;
-      randomness: BigNumber;
       queueId: BigNumber;
       seed: string;
     }
@@ -487,8 +473,7 @@ export interface RacesRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
-        randomness: string;
+      [string, string, string, string, string, string, string] & {
         arenas: string;
         hounds: string;
         methods: string;
@@ -534,9 +519,8 @@ export interface RacesRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
+      [Core.StructStructOutput, BigNumber, string] & {
         core: Core.StructStructOutput;
-        randomness: BigNumber;
         queueId: BigNumber;
         seed: string;
       }

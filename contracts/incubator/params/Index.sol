@@ -3,7 +3,6 @@ pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import './Constructor.sol';
 import '../../genetics/interfaces/IMixGenes.sol';
-import '../../randomness/IGetRandomNumber.sol';
 import '../interfaces/IBreedHounds.sol';
 import '../../gamification/interfaces/IInitializeHoundGamingStats.sol';
 import '../../races/interfaces/IGetStatistics.sol';

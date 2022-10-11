@@ -5,7 +5,6 @@ pragma solidity 0.8.17;
 library GeneticsConstructor {
     
     struct Struct {
-        address randomness;
         address terrains;
         uint32[54] male;
         uint32[54] female;

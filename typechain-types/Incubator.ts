@@ -25,7 +25,6 @@ import type {
 export declare namespace IncubatorConstructor {
   export type StructStruct = {
     methods: string;
-    randomness: string;
     genetics: string;
     gamification: string;
     races: string;
@@ -38,12 +37,10 @@ export declare namespace IncubatorConstructor {
     string,
     string,
     string,
-    string,
     string[],
     number
   ] & {
     methods: string;
-    randomness: string;
     genetics: string;
     gamification: string;
     races: string;
@@ -92,7 +89,7 @@ export interface IncubatorInterface extends utils.Interface {
     "houndsIdentity(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address[],uint32))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address[],uint32))": FunctionFragment;
     "setIdentity(uint256,(uint256,uint256,uint256,uint256,uint32[54],string,uint8))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -224,9 +221,8 @@ export interface Incubator extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, number] & {
+      [string, string, string, string, number] & {
         methods: string;
-        randomness: string;
         genetics: string;
         gamification: string;
         races: string;
@@ -290,9 +286,8 @@ export interface Incubator extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, number] & {
+    [string, string, string, string, number] & {
       methods: string;
-      randomness: string;
       genetics: string;
       gamification: string;
       races: string;
@@ -356,9 +351,8 @@ export interface Incubator extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, number] & {
+      [string, string, string, string, number] & {
         methods: string;
-        randomness: string;
         genetics: string;
         gamification: string;
         races: string;

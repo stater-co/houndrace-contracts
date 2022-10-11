@@ -107,11 +107,6 @@ const _abi = [
           },
           {
             internalType: "uint256",
-            name: "randomness",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
             name: "queueId",
             type: "uint256",
           },

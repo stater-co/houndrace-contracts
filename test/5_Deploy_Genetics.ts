@@ -18,7 +18,6 @@ export async function run(
         genetics = await deployContract({
           name: 'Genetics',
           constructor: [[
-            dependencies.randomnessAddress,
             dependencies.arenasAddress,
             globalParams.maleBoilerplateGene,
             globalParams.femaleBoilerplateGene,
