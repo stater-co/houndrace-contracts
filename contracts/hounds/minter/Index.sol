@@ -15,19 +15,15 @@ contract HoundsMinter is Params {
         payable 
         nonReentrant 
     {
-        HoundBreeding.Struct memory breeding1 = IGetBreeding(control.boilerplate.gamification).getBreeding(hound1);
-        HoundBreeding.Struct memory breeding2 = IGetBreeding(control.boilerplate.gamification).getBreeding(hound2);
-        HoundIdentity.Struct memory identity1 = IGetIdentity(control.boilerplate.incubator).getIdentity(hound1);
-        HoundIdentity.Struct memory identity2 = IGetIdentity(control.boilerplate.incubator).getIdentity(hound2);
 
         require(
             matingSeason && 
-            breeding2.lastBreed + breeding2.breedingCooldown < block.timestamp && 
-            breeding1.lastBreed + breeding1.breedingCooldown < block.timestamp && 
-            hounds[hound1].queueId == 0 && 
-            hounds[hound2].queueId == 0 && 
-            ( ( identity1.geneticSequence[1] == 1 && identity2.geneticSequence[1] == 2 ) || 
-            ( identity1.geneticSequence[1] == 2 && identity2.geneticSequence[1] == 1 ) ) && 
+            hounds[hound2].breeding.lastBreed + hounds[hound2].breeding.breedingCooldown < block.timestamp && 
+            hounds[hound1].breeding.lastBreed + hounds[hound1].breeding.breedingCooldown < block.timestamp && 
+            hounds[hound1].profile.runningOn == 0 && 
+            hounds[hound2].profile.runningOn == 0 && 
+            ( ( hounds[hound1].identity.geneticSequence[1] == 1 && hounds[hound2].identity.geneticSequence[1] == 2 ) || 
+            ( hounds[hound1].identity.geneticSequence[1] == 2 && hounds[hound2].identity.geneticSequence[1] == 1 ) ) && 
             ownerOf(hound1) == msg.sender && 
             msg.value >= (
                 control.fees.breedCostCurrency == address(0) ? 
@@ -82,47 +78,29 @@ contract HoundsMinter is Params {
                     : 
                         0
                 ) + (
-                    breeding2.breedingFeeCurrency == address(0) ? 
-                        breeding2.breedingFee 
+                    hounds[hound2].breeding.breedingFeeCurrency == address(0) ? 
+                        hounds[hound2].breeding.breedingFee 
                     : 
                         0
                 )
             );
 
-            amounts[0] = breeding2.breedingFee;
+            amounts[0] = hounds[hound2].breeding.breedingFee;
             IPay(control.boilerplate.payments).pay(
                 control.boilerplate.payments,
                 ownerOf(hound2),
-                breeding2.breedingFeeCurrency,
+                hounds[hound2].breeding.breedingFeeCurrency,
                 new uint256[](0),
                 amounts,
-                breeding2.breedingFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+                hounds[hound2].breeding.breedingFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
             );
                 
         }
 
-        breeding2.lastBreed = block.timestamp;
-        breeding1.lastBreed = block.timestamp;
+        hounds[hound2].breeding.lastBreed = block.timestamp;
+        hounds[hound1].breeding.lastBreed = block.timestamp;
 
-        IBreedHounds(control.boilerplate.incubator).breedHounds(
-            hound1, 
-            identity1, 
-            hound2, 
-            identity2,
-            id
-        );
-
-        ISetBreeding(control.boilerplate.gamification).setBreeding(hound1, breeding1);
-        ISetBreeding(control.boilerplate.gamification).setBreeding(hound2, breeding2);
-
-        hounds[id] = HoundProfile.Struct(
-            "",
-            "",
-            0,
-            false
-        );
-
-        emit BreedHound(id,msg.sender,this.hound(id));
+        emit BreedHound(hound1, hound2, id,msg.sender);
         ++id;
 
     } 

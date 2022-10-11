@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
-import '../../gamification/interfaces/IGetBreeding.sol';
+import '../interfaces/IHound.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../params/Constructor.sol';
 
@@ -23,6 +23,8 @@ contract HoundsZerocost is Ownable {
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory
     ) {
+        Hound.Struct memory houndStruct = IHound(control.boilerplate.hounds).hound(hound);
+
         return (
 
             // Breed cost fee
@@ -39,8 +41,8 @@ contract HoundsZerocost is Ownable {
 
             // Hound breeding fee ( in case of external breeding )
             MicroPayment.Struct(
-                IGetBreeding(control.boilerplate.gamification).getBreeding(hound).breedingFeeCurrency,
-                IGetBreeding(control.boilerplate.gamification).getBreeding(hound).breedingFee
+                houndStruct.breeding.breedingFeeCurrency,
+                houndStruct.breeding.breedingFee
             )
 
         );

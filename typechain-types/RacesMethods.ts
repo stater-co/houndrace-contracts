@@ -133,27 +133,6 @@ export declare namespace Race {
   ] & { core: Core.StructStructOutput; queueId: BigNumber; seed: string };
 }
 
-export declare namespace HoundStatistics {
-  export type StructStruct = {
-    totalRuns: BigNumberish;
-    firstPlace: BigNumberish;
-    secondPlace: BigNumberish;
-    thirdPlace: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    totalRuns: BigNumber;
-    firstPlace: BigNumber;
-    secondPlace: BigNumber;
-    thirdPlace: BigNumber;
-  };
-}
-
 export declare namespace Queue {
   export type StructStruct = {
     core: Core.StructStruct;
@@ -195,9 +174,7 @@ export interface RacesMethodsInterface extends utils.Interface {
   functions: {
     "allowed(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "getStatistics(uint256)": FunctionFragment;
     "handleRaceLoot((address[],address[],address[],uint256[][],uint256[][],uint8[]))": FunctionFragment;
-    "houndsStatistic(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
@@ -212,16 +189,8 @@ export interface RacesMethodsInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getStatistics",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "handleRaceLoot",
     values: [Payment.StructStruct]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "houndsStatistic",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -251,15 +220,7 @@ export interface RacesMethodsInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getStatistics",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
     functionFragment: "handleRaceLoot",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "houndsStatistic",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
@@ -370,27 +331,10 @@ export interface RacesMethods extends BaseContract {
       }
     >;
 
-    getStatistics(
-      theId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[HoundStatistics.StructStructOutput]>;
-
     handleRaceLoot(
       payment: Payment.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    houndsStatistic(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalRuns: BigNumber;
-        firstPlace: BigNumber;
-        secondPlace: BigNumber;
-        thirdPlace: BigNumber;
-      }
-    >;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -454,27 +398,10 @@ export interface RacesMethods extends BaseContract {
     }
   >;
 
-  getStatistics(
-    theId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<HoundStatistics.StructStructOutput>;
-
   handleRaceLoot(
     payment: Payment.StructStruct,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  houndsStatistic(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [BigNumber, BigNumber, BigNumber, BigNumber] & {
-      totalRuns: BigNumber;
-      firstPlace: BigNumber;
-      secondPlace: BigNumber;
-      thirdPlace: BigNumber;
-    }
-  >;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -538,27 +465,10 @@ export interface RacesMethods extends BaseContract {
       }
     >;
 
-    getStatistics(
-      theId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<HoundStatistics.StructStructOutput>;
-
     handleRaceLoot(
       payment: Payment.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    houndsStatistic(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [BigNumber, BigNumber, BigNumber, BigNumber] & {
-        totalRuns: BigNumber;
-        firstPlace: BigNumber;
-        secondPlace: BigNumber;
-        thirdPlace: BigNumber;
-      }
-    >;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -653,19 +563,9 @@ export interface RacesMethods extends BaseContract {
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getStatistics(
-      theId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     handleRaceLoot(
       payment: Payment.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    houndsStatistic(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -710,19 +610,9 @@ export interface RacesMethods extends BaseContract {
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getStatistics(
-      theId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     handleRaceLoot(
       payment: Payment.StructStruct,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    houndsStatistic(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;

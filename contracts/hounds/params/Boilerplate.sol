@@ -9,13 +9,12 @@ library ConstructorBoilerplate {
         address minter;
         address houndsModifier;
         address zerocost;
+        address hounds;
 
         // External dependencies
-        address incubator;
         address payments;
         address shop;
         address races;
-        address gamification;
 
         // Payout checkpoint
         address alphadune;

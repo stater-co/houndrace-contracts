@@ -55,11 +55,6 @@ const _abi = [
             type: "address",
           },
           {
-            internalType: "address",
-            name: "incubator",
-            type: "address",
-          },
-          {
             internalType: "address[]",
             name: "allowedCallers",
             type: "address[]",

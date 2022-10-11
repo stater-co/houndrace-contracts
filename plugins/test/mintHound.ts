@@ -14,13 +14,9 @@ export async function safeMintHound(
   await mintHound(params);
   const after = await params.contract.id();
   expecting(before !== after && Number(before) === Number(after) - 1, "Mint hound method bugged");
-  const stamina = await params.gamification.houndsStamina(before);
-  const statistics = await params.races.houndsStatistic(before);
   const hound = await params.contract.hound(before);
-  const profile = await params.contract.hounds(before);
-  expecting(stamina.staminaCap > 0 && stamina.staminaPerTimeUnit > 0, "Bugged stamina setter");
-  expecting(Number(statistics.firstPlace) === 0 && Number(statistics.totalRuns) === 0, "Bugged statistics setter");
-  expecting(profile.name.length > 0, "Bugged profile setter");
+  expecting(hound.stamina.staminaCap > 0 && hound.stamina.staminaPerTimeUnit > 0, "Bugged stamina setter");
+  expecting(hound.profile.name.length > 0, "Bugged profile setter");
   expecting(hound.identity.geneticSequence[1] > 0, "Bugged incubator setter");
   return Number(before);
 }

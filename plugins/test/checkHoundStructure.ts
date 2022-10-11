@@ -18,11 +18,7 @@ export function checkHoundStructure(
     ( hound.identity.maleParent >= 0 ) && 
     ( hound.identity.generation >= 0 ) && 
     ( hound.identity.geneticSequence.length > 0 ) && 
-    ( hound.profile.queueId >= 0 ) && 
-    ( hound.statistics.firstPlace >= 0 ) && 
-    ( hound.statistics.secondPlace >= 0 ) && 
-    ( hound.statistics.thirdPlace >= 0 ) && 
-    ( hound.statistics.totalRuns >= 0 ) && 
+    ( hound.profile.runningOn >= 0 ) && 
     ( hound.stamina.staminaCap > 0 ) && 
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
     ( hound.stamina.staminaPerTimeUnit >= 0 ) && 

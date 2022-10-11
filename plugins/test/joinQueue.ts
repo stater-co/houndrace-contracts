@@ -50,5 +50,5 @@ export async function safeJoinQueue(
   await joinQueue(params);
 
   const after: Hound.StructStructOutput = await params.houndsContract.hound(params.houndId);
-  expecting(Number(before.profile.queueId) !== Number(after.profile.queueId), "Join Queue method bugged");
+  expecting(Number(before.profile.runningOn) !== Number(after.profile.runningOn), "Join Queue method bugged");
 }

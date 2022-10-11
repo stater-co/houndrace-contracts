@@ -8,7 +8,6 @@ import '../../arenas/params/Arena.sol';
 import '../../payments/params/Payment.sol';
 import '../interfaces/IHandleRaceLoot.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
-import './HoundStatistics.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../queues/params/Queue.sol';
 import '../../payments/interfaces/IPay.sol';
@@ -37,7 +36,6 @@ contract Params is Ownable {
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
     mapping(address => bool) public allowed;
-    mapping(uint256 => HoundStatistics.Struct) public houndsStatistic;
 
     constructor(RacesConstructor.Struct memory input) {
         control = input;
@@ -59,10 +57,6 @@ contract Params is Ownable {
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {
         return races[theId].core.participants;
-    }
-
-    function getStatistics(uint256 theId) external view returns(HoundStatistics.Struct memory) {
-        return houndsStatistic[theId];
     }
 
 }

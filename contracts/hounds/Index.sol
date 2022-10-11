@@ -47,10 +47,10 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 queueId) external returns(uint256 oldQueueId) {
+    function updateHoundRunning(uint256 theId, uint256 runningOn) external returns(uint256 ranOn) {
         (bool success, bytes memory output) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
-        oldQueueId = abi.decode(output,(uint256)); 
+        ranOn = abi.decode(output,(uint256)); 
     }
 
     function getBreedCosts(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
