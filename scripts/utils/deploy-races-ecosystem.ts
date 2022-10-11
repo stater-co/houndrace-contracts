@@ -17,7 +17,6 @@ async function main() {
   try {
 
     const racesConstructor: RacesConstructor.StructStruct = {
-      randomness: globalParams.address0,
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,

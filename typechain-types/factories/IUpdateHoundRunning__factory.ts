@@ -19,7 +19,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "queueId",
+        name: "runningOn",
         type: "uint256",
       },
     ],
@@ -27,7 +27,7 @@ const _abi = [
     outputs: [
       {
         internalType: "uint256",
-        name: "oldQueueId",
+        name: "ranOn",
         type: "uint256",
       },
     ],

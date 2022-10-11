@@ -32,7 +32,6 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0,
             [],
             5000000
           ]],
@@ -44,7 +43,6 @@ export async function run(
         queuesZerocost = await deployContract({
           name: 'QueuesZerocost',
           constructor: [[
-            globalParams.address0,
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
@@ -72,7 +70,6 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
-            globalParams.address0,
             [],
             5000000
           ]],
@@ -84,7 +81,6 @@ export async function run(
         queuesZerocost = await deployContract({
           name: 'QueuesZerocost',
           constructor: [[
-            globalParams.address0,
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
@@ -112,7 +108,6 @@ export async function run(
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
             dependencies.racesAddress,
-            dependencies.incubatorAddress,
             [],
             5000000
           ]],

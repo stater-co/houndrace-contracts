@@ -14,7 +14,7 @@ const deploymentFormat = format((info) => {
 const formats: Array<any> = [
   deploymentFormat,
   format.timestamp(),
-  format.prettyPrint(),
+  format.json(),
   format.label({
     label: String(userName()),
     message: true

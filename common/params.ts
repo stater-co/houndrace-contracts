@@ -1,12 +1,10 @@
-import { Hound, HoundProfile } from '../typechain-types/Hounds';
+import { Hound } from '../typechain-types/Hounds';
 import { BigNumber } from 'ethers';
 import { network } from 'hardhat';
 import { Queue } from '../typechain-types/Queues';
 import { Payment } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
-import { Race, HoundStatistics } from '../typechain-types/Races';
-import { HoundStamina, HoundBreeding } from '../typechain-types/Gamification';
-import { HoundIdentity } from '../typechain-types/Incubator';
+import { Race } from '../typechain-types/Races';
 import { Box } from '../typechain-types/Lootboxes';
 
 const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
@@ -53,11 +51,10 @@ const defaultRace: Race.StructStruct = {
         payments: defaultQueuePayment
     },
     queueId: 1,
-    seed: "0x00",
-    randomness: 5
+    seed: "0x00"
 };
 
-const houndStamina: HoundStamina.StructStruct = {
+const houndStamina: Hound.StaminaStruct = {
     staminaRefillCurrency: address0,
     staminaLastUpdate: 0,
     staminaRefill1x: 100_000,
@@ -66,14 +63,7 @@ const houndStamina: HoundStamina.StructStruct = {
     staminaCap: 100
 };
 
-const houndStatistics: HoundStatistics.StructStruct = {
-    firstPlace: 0,
-    secondPlace: 0,
-    thirdPlace: 0,
-    totalRuns: 0
-};
-
-const houndBreeding: HoundBreeding.StructStruct = {
+const houndBreeding: Hound.BreedingStruct = {
     breedingCooldownCurrency: address0,
     breedingFeeCurrency: address0,
     lastBreed: 0,
@@ -84,7 +74,7 @@ const houndBreeding: HoundBreeding.StructStruct = {
     availableToBreed: false
 };
 
-const houndIdentity: HoundIdentity.StructStruct = {
+const houndIdentity: Hound.IdentityStruct = {
     birthDate: 0,
     femaleParent: 0,
     generation: 1,
@@ -94,15 +84,14 @@ const houndIdentity: HoundIdentity.StructStruct = {
     specie: 0
 };
 
-const houndProfile: HoundProfile.StructStruct = {
+const houndProfile: Hound.ProfileStruct = {
     name: "Hound #1",
     custom: true,
-    queueId: BigNumber.from(0),
+    runningOn: BigNumber.from(0),
     token_uri: "hound_token_uri"
 };
 
 const defaultHound: Hound.StructStruct = {
-    statistics: houndStatistics,
     breeding: houndBreeding,
     identity: houndIdentity,
     profile: houndProfile,
@@ -139,8 +128,8 @@ interface GlobalParams {
     defaultHound: Hound.StructStructOutput;
     defaultArena: Arena.StructStructOutput;
     defaultRace: Race.StructStructOutput;
-    houndBreeding: HoundBreeding.StructStruct;
-    houndStamina: HoundStamina.StructStruct;
+    houndBreeding: Hound.BreedingStruct;
+    houndStamina: Hound.StaminaStruct;
     defaultLootbox: Box.StructStruct;
     OPENSEA_CONTRACT_ADDRESS: string;
 };

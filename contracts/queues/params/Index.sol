@@ -10,7 +10,6 @@ import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';
-import '../../utils/Converters.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
@@ -19,8 +18,6 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
-import '../../incubator/interfaces/IGetIdentity.sol';
-import '../../hounds/interfaces/IAllowance.sol';
 
 
 contract Params is Ownable, ReentrancyGuard {

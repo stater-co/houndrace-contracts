@@ -169,7 +169,6 @@ export async function run(
             "HR",
             [owner.address],
             [
-              dependencies.incubatorAddress,
               otherOwner.address,
               dependencies.paymentsAddress,
               houndsRestricted.address,

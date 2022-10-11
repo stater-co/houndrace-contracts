@@ -25,7 +25,6 @@ contract RacesMethods is Params {
                 queue.core.fee,
                 queue.core.payments
             ),
-            block.timestamp,
             queueId,
             '0x00'
         ));

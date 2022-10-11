@@ -9,8 +9,6 @@ library Race {
 
         Core.Struct core;
 
-        uint256 randomness;
-
         uint256 queueId;
 
         bytes seed;

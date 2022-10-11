@@ -22,33 +22,6 @@ const _abi = [
           {
             components: [
               {
-                internalType: "uint64",
-                name: "totalRuns",
-                type: "uint64",
-              },
-              {
-                internalType: "uint64",
-                name: "firstPlace",
-                type: "uint64",
-              },
-              {
-                internalType: "uint64",
-                name: "secondPlace",
-                type: "uint64",
-              },
-              {
-                internalType: "uint64",
-                name: "thirdPlace",
-                type: "uint64",
-              },
-            ],
-            internalType: "struct HoundStatistics.Struct",
-            name: "statistics",
-            type: "tuple",
-          },
-          {
-            components: [
-              {
                 internalType: "address",
                 name: "staminaRefillCurrency",
                 type: "address",
@@ -79,7 +52,7 @@ const _abi = [
                 type: "uint32",
               },
             ],
-            internalType: "struct HoundStamina.Struct",
+            internalType: "struct Hound.Stamina",
             name: "stamina",
             type: "tuple",
           },
@@ -126,7 +99,7 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct HoundBreeding.Struct",
+            internalType: "struct Hound.Breeding",
             name: "breeding",
             type: "tuple",
           },
@@ -168,7 +141,7 @@ const _abi = [
                 type: "uint8",
               },
             ],
-            internalType: "struct HoundIdentity.Struct",
+            internalType: "struct Hound.Identity",
             name: "identity",
             type: "tuple",
           },
@@ -186,7 +159,7 @@ const _abi = [
               },
               {
                 internalType: "uint256",
-                name: "queueId",
+                name: "runningOn",
                 type: "uint256",
               },
               {
@@ -195,7 +168,7 @@ const _abi = [
                 type: "bool",
               },
             ],
-            internalType: "struct HoundProfile.Struct",
+            internalType: "struct Hound.Profile",
             name: "profile",
             type: "tuple",
           },

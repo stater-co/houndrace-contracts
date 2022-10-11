@@ -1,28 +1,18 @@
 import { ArenasSystem } from '../common/dto/test/arenasSystem.dto';
-import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
-import { IncubatorSystem } from '../common/dto/test/incubatorSystem.dto';
-import { DeployedLibraries } from '../common/dto/test/librariesDeployment.dto';
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
-import { RandomnessSystem } from '../common/dto/test/randomnessSystem.dto';
-import { run as runLibraries } from '../test/1_Deploy_Libraries';
 import { run as runPayments } from '../test/2_Deploy_Payments_Ecosystem';
-import { run as runRandomness } from '../test/3_Deploy_Randomness';
 import { run as runArenas } from '../test/4_Deploy_Arenas';
-import { run as runGenetics } from '../test/5_Deploy_Genetics';
-import { run as runIncubators } from '../test/6_Deploy_Incubator';
 import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
 import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
 import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
 import { set as setQueues } from '../test/18_Setup_Queues_Contracts';
 import { set as setShop } from '../test/14_Setup_Shop_Contracts';
 import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
-import { set as setIncubators } from '../test/16_Setup_Incubator_Contracts';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { set as setRaces } from '../test/20_Setup_Races_Contracts';
-import { test as testGenetics } from '../test/22_Genetics/22_1_Genetics_Basic_Tests';
 import { test as testHounds } from '../test/23_Hounds/23_1_Hounds_Basic_Tests';
 import { test as testArenas } from '../test/24_Arenas/24_1_Arenas_Basic_Tests';
 import { test as testQueues } from '../test/25_Queues/25_1_Queues_Basic_Tests';
@@ -30,62 +20,36 @@ import { test as testRaces } from '../test/26_Races/26_1_Races_Basic_Tests';
 import { globalParams } from '../common/params';
 import { run as runLootboxes } from '../test/11_Deploy_Lootboxes';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
-import { run as runGamification } from '../test/12_Deploy_Gamification';
-import { set as setGamification } from '../test/21_Setup_Gamification';
 import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic_Tests';
-import { GamificationSystem } from '../common/dto/test/gamificationSystem.dto';
 import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
 
 
 async function main() {
     
-    const libraries: DeployedLibraries = await runLibraries();
-    
     const payments: PaymentEcosystem = await runPayments();
-    
-    const randomness: RandomnessSystem = await runRandomness();
 
     const arenas: ArenasSystem = await runArenas({
         paymentsAddress: payments.payments.address,
         allowedCallers: []
     });
 
-    const genetics: GeneticsSystem = await runGenetics({
-        arenasAddress: arenas.arenas.address,
-        randomnessAddress: randomness.randomness.address
-    });
-
-    const incubators: IncubatorSystem = await runIncubators({
-        geneticsAddress: genetics.genetics.address,
-        randomnessAddress: randomness.randomness.address
-    });
-
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address,
         transferrableRoot: payments.testErc721
     });
 
     const races: RacesSystem = await runRaces({
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address,
-        randomnessAddress: randomness.randomness.address
+        paymentsAddress: payments.payments.address
     });
 
     const queues: QueuesSystem = await runQueues({
         racesAddress: races.races.address,
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
-        paymentsAddress: payments.payments.address,
-        incubatorAddress: incubators.incubator.address
-    });
-
-    const gamification: GamificationSystem = await runGamification({
-        allowed: [],
-        defaultBreeding: globalParams.houndBreeding,
-        defaultStamina: globalParams.houndStamina
+        paymentsAddress: payments.payments.address
     });
 
     const lootboxes: LootboxesSystem = await runLootboxes({
@@ -115,19 +79,6 @@ async function main() {
         }
     });
 
-    await setGamification({
-        constructor: {
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address],
-            defaultBreeding: globalParams.houndBreeding,
-            defaultStamina: globalParams.houndStamina,
-            methods: gamification.methods.address,
-            restricted: gamification.restricted.address
-        },
-        methods: gamification.methods,
-        restricted: gamification.restricted,
-        gamification: gamification.gamification
-    });
-
     await setQueues({
         queuesRestricted: queues.queuesRestricted,
         queuesMethods: queues.queueMethods,
@@ -142,8 +93,7 @@ async function main() {
             races: races.races.address,
             allowedCallers: [races.races.address],
             queues: queues.queues.address,
-            zerocost: queues.queueZerocost.address,
-            incubator: incubators.incubator.address
+            zerocost: queues.queueZerocost.address
         }
     });
 
@@ -163,20 +113,6 @@ async function main() {
         }
     });
 
-    await setIncubators({
-        incubator: incubators.incubator,
-        incubatorMethods: incubators.incubatorMethods,
-        constructor: {
-            genetics: genetics.genetics.address,
-            methods: incubators.incubatorMethods.address,
-            randomness: randomness.randomness.address,
-            secondsToMaturity: 345600,
-            gamification: gamification.gamification.address,
-            races: races.races.address,
-            allowed: [incubators.incubator.address, hounds.hounds.address, incubators.incubatorMethods.address]
-        }
-    });
-
     await setHounds({
         hounds: hounds.hounds,
         houndsMinter: hounds.houndsMinter,
@@ -192,15 +128,14 @@ async function main() {
             queues.queues.address
            ],
            boilerplate: {
-            incubator: incubators.incubator.address,
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
+            hounds: hounds.hounds.address,
             shop: payments.shop.address,
-            gamification: gamification.gamification.address,
             races: races.races.address
            },
            fees: {
@@ -223,7 +158,6 @@ async function main() {
             methods: races.racesMethods.address,
             payments: payments.payments.address,
             queues: queues.queues.address,
-            randomness: randomness.randomness.address,
             races: races.races.address,
             restricted: races.racesRestricted.address,
             allowedCallers: [
@@ -234,13 +168,8 @@ async function main() {
         }
     });
 
-    await testGenetics.basicTest({
-        genetics: genetics.genetics
-    });
-
     await testHounds.basicTest({
         hounds: hounds.hounds,
-        gamification: gamification.gamification,
         races: races.races
     });
 
@@ -275,7 +204,6 @@ async function main() {
            symbol: "HR",
            allowedCallers: [],
            boilerplate: {
-            incubator: incubators.incubator.address,
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
             houndsModifier: hounds.houndsModifier.address,
@@ -283,7 +211,7 @@ async function main() {
             restricted: hounds.houndsRestricted.address,
             payments: payments.payments.address,
             shop: payments.shop.address,
-            gamification: gamification.gamification.address,
+            hounds: hounds.hounds.address,
             races: races.races.address
            },
            fees: {
@@ -301,7 +229,6 @@ async function main() {
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,
         houndsContract: hounds.hounds,
-        gamification: gamification.gamification,
         races: races.races
     });
 

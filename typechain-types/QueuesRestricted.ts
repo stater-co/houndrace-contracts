@@ -32,12 +32,10 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    incubator: string;
     allowedCallers: string[];
   };
 
   export type StructStructOutput = [
-    string,
     string,
     string,
     string,
@@ -56,7 +54,6 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    incubator: string;
     allowedCallers: string[];
   };
 }
@@ -176,7 +173,7 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
     "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
@@ -377,17 +374,7 @@ export interface QueuesRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string
-      ] & {
+      [string, string, string, string, string, string, string, string] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -396,7 +383,6 @@ export interface QueuesRestricted extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
-        incubator: string;
       }
     >;
 
@@ -490,7 +476,7 @@ export interface QueuesRestricted extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, string, string] & {
       methods: string;
       restricted: string;
       queues: string;
@@ -499,7 +485,6 @@ export interface QueuesRestricted extends BaseContract {
       hounds: string;
       payments: string;
       races: string;
-      incubator: string;
     }
   >;
 
@@ -590,17 +575,7 @@ export interface QueuesRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string,
-        string
-      ] & {
+      [string, string, string, string, string, string, string, string] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -609,7 +584,6 @@ export interface QueuesRestricted extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
-        incubator: string;
       }
     >;
 

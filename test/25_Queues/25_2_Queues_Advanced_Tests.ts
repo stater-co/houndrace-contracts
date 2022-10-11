@@ -113,7 +113,7 @@ async function advancedTests(
 
       for ( let j = 1 ; j < totalHounds && totalEnqueues < 10 ; ++j ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
-        if ( Number(hound.profile.queueId) === 0 ) {    
+        if ( Number(hound.profile.runningOn) === 0 ) {    
 
           await safeJoinQueue({
             contract: dependencies.queuesContract as Queues,
@@ -144,7 +144,7 @@ async function advancedTests(
       for ( let j = 1 ; j < totalHounds && totalEnqueues < 10 ; ++j ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         let houndOwner: string = await dependencies.houndsContract.houndOwner(j);
-        if ( Number(hound.profile.queueId) === 0 && houndOwner === sig2.address) {
+        if ( Number(hound.profile.runningOn) === 0 && houndOwner === sig2.address) {
     
           await dependencies.erc20.mint(sig1.address, totalValueToPay);
 

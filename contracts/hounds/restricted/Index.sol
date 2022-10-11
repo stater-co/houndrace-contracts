@@ -13,18 +13,18 @@ contract HoundsRestricted is Params {
         Hound.Struct memory theHound
     ) external onlyOwner {
         if ( onId > 0 ) {
-            require(bytes(hounds[onId].token_uri).length == 0);
+            require(bytes(hounds[onId].profile.token_uri).length == 0);
             require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));
-            IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(onId, theHound.identity.geneticSequence);
-            ISetIdentity(control.boilerplate.incubator).setIdentity(onId, theHound.identity);
+            
             emit NewHound(onId,owner,theHound);
-            hounds[onId] = theHound.profile;
+
+            hounds[onId] = theHound;
             _safeMint(owner,onId);
         } else {
-            IInitializeHoundGamingStats(control.boilerplate.gamification).initializeHoundGamingStats(id, theHound.identity.geneticSequence);
-            ISetIdentity(control.boilerplate.incubator).setIdentity(id, theHound.identity);
             emit NewHound(id,owner,theHound);
-            hounds[id] = theHound.profile;
+
+            hounds[id] = theHound;
+
             _safeMint(owner,id);
             ++id;
         }

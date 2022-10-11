@@ -28,16 +28,14 @@ export declare namespace ConstructorBoilerplate {
     minter: string;
     houndsModifier: string;
     zerocost: string;
-    incubator: string;
+    hounds: string;
     payments: string;
     shop: string;
     races: string;
-    gamification: string;
     alphadune: string;
   };
 
   export type StructStructOutput = [
-    string,
     string,
     string,
     string,
@@ -52,11 +50,10 @@ export declare namespace ConstructorBoilerplate {
     minter: string;
     houndsModifier: string;
     zerocost: string;
-    incubator: string;
+    hounds: string;
     payments: string;
     shop: string;
     races: string;
-    gamification: string;
     alphadune: string;
   };
 }
@@ -109,29 +106,8 @@ export declare namespace Constructor {
   };
 }
 
-export declare namespace HoundStatistics {
-  export type StructStruct = {
-    totalRuns: BigNumberish;
-    firstPlace: BigNumberish;
-    secondPlace: BigNumberish;
-    thirdPlace: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    totalRuns: BigNumber;
-    firstPlace: BigNumber;
-    secondPlace: BigNumber;
-    thirdPlace: BigNumber;
-  };
-}
-
-export declare namespace HoundStamina {
-  export type StructStruct = {
+export declare namespace Hound {
+  export type StaminaStruct = {
     staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
     staminaRefill1x: BigNumberish;
@@ -140,7 +116,7 @@ export declare namespace HoundStamina {
     staminaCap: BigNumberish;
   };
 
-  export type StructStructOutput = [
+  export type StaminaStructOutput = [
     string,
     BigNumber,
     BigNumber,
@@ -155,10 +131,8 @@ export declare namespace HoundStamina {
     staminaPerTimeUnit: number;
     staminaCap: number;
   };
-}
 
-export declare namespace HoundBreeding {
-  export type StructStruct = {
+  export type BreedingStruct = {
     breedingFeeCurrency: string;
     breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
@@ -169,7 +143,7 @@ export declare namespace HoundBreeding {
     availableToBreed: boolean;
   };
 
-  export type StructStructOutput = [
+  export type BreedingStructOutput = [
     string,
     string,
     BigNumber,
@@ -188,10 +162,8 @@ export declare namespace HoundBreeding {
     refillBreedingCooldownCost: BigNumber;
     availableToBreed: boolean;
   };
-}
 
-export declare namespace HoundIdentity {
-  export type StructStruct = {
+  export type IdentityStruct = {
     maleParent: BigNumberish;
     femaleParent: BigNumberish;
     generation: BigNumberish;
@@ -201,7 +173,7 @@ export declare namespace HoundIdentity {
     specie: BigNumberish;
   };
 
-  export type StructStructOutput = [
+  export type IdentityStructOutput = [
     BigNumber,
     BigNumber,
     BigNumber,
@@ -218,52 +190,44 @@ export declare namespace HoundIdentity {
     extensionTraits: string;
     specie: number;
   };
-}
 
-export declare namespace HoundProfile {
-  export type StructStruct = {
+  export type ProfileStruct = {
     name: string;
     token_uri: string;
-    queueId: BigNumberish;
+    runningOn: BigNumberish;
     custom: boolean;
   };
 
-  export type StructStructOutput = [string, string, BigNumber, boolean] & {
+  export type ProfileStructOutput = [string, string, BigNumber, boolean] & {
     name: string;
     token_uri: string;
-    queueId: BigNumber;
+    runningOn: BigNumber;
     custom: boolean;
   };
-}
 
-export declare namespace Hound {
   export type StructStruct = {
-    statistics: HoundStatistics.StructStruct;
-    stamina: HoundStamina.StructStruct;
-    breeding: HoundBreeding.StructStruct;
-    identity: HoundIdentity.StructStruct;
-    profile: HoundProfile.StructStruct;
+    stamina: Hound.StaminaStruct;
+    breeding: Hound.BreedingStruct;
+    identity: Hound.IdentityStruct;
+    profile: Hound.ProfileStruct;
   };
 
   export type StructStructOutput = [
-    HoundStatistics.StructStructOutput,
-    HoundStamina.StructStructOutput,
-    HoundBreeding.StructStructOutput,
-    HoundIdentity.StructStructOutput,
-    HoundProfile.StructStructOutput
+    Hound.StaminaStructOutput,
+    Hound.BreedingStructOutput,
+    Hound.IdentityStructOutput,
+    Hound.ProfileStructOutput
   ] & {
-    statistics: HoundStatistics.StructStructOutput;
-    stamina: HoundStamina.StructStructOutput;
-    breeding: HoundBreeding.StructStructOutput;
-    identity: HoundIdentity.StructStructOutput;
-    profile: HoundProfile.StructStructOutput;
+    stamina: Hound.StaminaStructOutput;
+    breeding: Hound.BreedingStructOutput;
+    identity: Hound.IdentityStructOutput;
+    profile: Hound.ProfileStructOutput;
   };
 }
 
 export interface HoundsRestrictedInterface extends utils.Interface {
   contractName: "HoundsRestricted";
   functions: {
-    "allowance(address,uint256)": FunctionFragment;
     "allowed(address)": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -273,7 +237,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((uint64,uint64,uint64,uint64),(address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[54],string,uint8),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
@@ -283,7 +247,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -292,10 +256,6 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "allowance",
-    values: [string, BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -377,7 +337,6 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     values: [string]
   ): string;
 
-  decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -447,7 +406,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "BreedHound(uint256,address,tuple)": EventFragment;
+    "BreedHound(uint256,uint256,uint256,address)": EventFragment;
     "HoundBreedable(uint256,uint256,bool)": EventFragment;
     "HoundBreedingStatusUpdate(uint256,bool)": EventFragment;
     "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
@@ -486,8 +445,8 @@ export type ApprovalForAllEvent = TypedEvent<
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
 export type BreedHoundEvent = TypedEvent<
-  [BigNumber, string, Hound.StructStructOutput],
-  { id: BigNumber; owner: string; hound: Hound.StructStructOutput }
+  [BigNumber, BigNumber, BigNumber, string],
+  { parent1: BigNumber; parent2: BigNumber; id: BigNumber; owner: string }
 >;
 
 export type BreedHoundEventFilter = TypedEventFilter<BreedHoundEvent>;
@@ -580,12 +539,6 @@ export interface HoundsRestricted extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowance(
-      sender: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
 
     approve(
@@ -631,11 +584,16 @@ export interface HoundsRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, boolean] & {
-        name: string;
-        token_uri: string;
-        queueId: BigNumber;
-        custom: boolean;
+      [
+        Hound.StaminaStructOutput,
+        Hound.BreedingStructOutput,
+        Hound.IdentityStructOutput,
+        Hound.ProfileStructOutput
+      ] & {
+        stamina: Hound.StaminaStructOutput;
+        breeding: Hound.BreedingStructOutput;
+        identity: Hound.IdentityStructOutput;
+        profile: Hound.ProfileStructOutput;
       }
     >;
 
@@ -733,12 +691,6 @@ export interface HoundsRestricted extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  allowance(
-    sender: string,
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
   allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   approve(
@@ -781,11 +733,16 @@ export interface HoundsRestricted extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, BigNumber, boolean] & {
-      name: string;
-      token_uri: string;
-      queueId: BigNumber;
-      custom: boolean;
+    [
+      Hound.StaminaStructOutput,
+      Hound.BreedingStructOutput,
+      Hound.IdentityStructOutput,
+      Hound.ProfileStructOutput
+    ] & {
+      stamina: Hound.StaminaStructOutput;
+      breeding: Hound.BreedingStructOutput;
+      identity: Hound.IdentityStructOutput;
+      profile: Hound.ProfileStructOutput;
     }
   >;
 
@@ -877,12 +834,6 @@ export interface HoundsRestricted extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    allowance(
-      sender: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
     allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
     approve(
@@ -928,11 +879,16 @@ export interface HoundsRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, BigNumber, boolean] & {
-        name: string;
-        token_uri: string;
-        queueId: BigNumber;
-        custom: boolean;
+      [
+        Hound.StaminaStructOutput,
+        Hound.BreedingStructOutput,
+        Hound.IdentityStructOutput,
+        Hound.ProfileStructOutput
+      ] & {
+        stamina: Hound.StaminaStructOutput;
+        breeding: Hound.BreedingStructOutput;
+        identity: Hound.IdentityStructOutput;
+        profile: Hound.ProfileStructOutput;
       }
     >;
 
@@ -1048,15 +1004,17 @@ export interface HoundsRestricted extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "BreedHound(uint256,address,tuple)"(
+    "BreedHound(uint256,uint256,uint256,address)"(
+      parent1?: null,
+      parent2?: null,
       id?: BigNumberish | null,
-      owner?: string | null,
-      hound?: null
+      owner?: string | null
     ): BreedHoundEventFilter;
     BreedHound(
+      parent1?: null,
+      parent2?: null,
       id?: BigNumberish | null,
-      owner?: string | null,
-      hound?: null
+      owner?: string | null
     ): BreedHoundEventFilter;
 
     "HoundBreedable(uint256,uint256,bool)"(
@@ -1139,12 +1097,6 @@ export interface HoundsRestricted extends BaseContract {
   };
 
   estimateGas: {
-    allowance(
-      sender: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
@@ -1266,12 +1218,6 @@ export interface HoundsRestricted extends BaseContract {
   };
 
   populateTransaction: {
-    allowance(
-      sender: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     allowed(
       arg0: string,
       overrides?: CallOverrides

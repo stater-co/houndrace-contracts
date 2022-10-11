@@ -72,10 +72,10 @@ contract QueuesMethods is Params {
             queues[theId].lastCompletion < block.timestamp - queues[theId].cooldown
         );
 
-        HoundIdentity.Struct memory identity = IGetIdentity(control.incubator).getIdentity(hound);
+        Hound.Struct memory houndStruct = IHound(control.hounds).hound(hound);
         bool validSpecie;
         for ( uint256 i = 0 ; i < queues[theId].speciesAllowed.length ; ++i ) {
-            if ( queues[theId].speciesAllowed[i] == identity.specie ) {
+            if ( queues[theId].speciesAllowed[i] == houndStruct.identity.specie ) {
                 validSpecie = true;
                 break;
             }

@@ -2,7 +2,7 @@
 pragma solidity 0.8.17;
 import '../../payments/params/Payment.sol';
 import './Core.sol';
-import '../../incubator/params/Specie.sol';
+import '../../hounds/params/Specie.sol';
 
 library Queue {
     
