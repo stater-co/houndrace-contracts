@@ -2,8 +2,6 @@ import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
-import { Sortings } from '../typechain-types/Sortings';
-import { Converters } from '../typechain-types/Converters';
 import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
 import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
@@ -15,9 +13,6 @@ import { Shop, ShopConstructor } from '../typechain-types/Shop';
 import { ArenasConstructor, ArenasRestricted } from '../typechain-types/ArenasRestricted';
 import { ArenasMethods } from '../typechain-types/ArenasMethods';
 import { Arenas } from '../typechain-types/Arenas';
-import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
-import { IncubatorConstructor, IncubatorMethods } from '../typechain-types/IncubatorMethods';
-import { Incubator } from '../typechain-types/Incubator';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
@@ -31,7 +26,6 @@ import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { globalParams } from '../common/params';
-import { Gamification, Constructor as GamificationConstructor } from '../typechain-types/Gamification';
 
 
 const cliProgress = require('cli-progress');
@@ -75,26 +69,6 @@ async function main() {
   try {
 
     DeploymentLogger('##############################################');
-
-    const converters = await deployContract({
-      name: 'Converters',
-      constructor: [],
-      props: {}
-    }) as Converters;
-    DeploymentLogger('export CONVERTERS=' + converters.address);
-    deployments.update(1, {
-      step: "Deploy sortings"
-    });
-
-    const sortings = await deployContract({
-      name: 'Sortings',
-      constructor: [],
-      props: {}
-    }) as Sortings;
-    DeploymentLogger('export SORTINGS=' + sortings.address);
-    deployments.update(2, {
-      step: "Deploy payments"
-    });
 
     const paymentsConstructor: PaymentsConstructor.StructStruct = {
       alphadune: globalParams.address0,
@@ -219,64 +193,16 @@ async function main() {
       step: "Deploy genetics"
     });
 
-    const geneticsConstructor: GeneticsConstructor.StructStruct = {
-      terrains: globalParams.address0,
-      male: globalParams.maleBoilerplateGene,
-      female: globalParams.femaleBoilerplateGene,
-      maleGenesProbability: 60,
-      femaleGenesProbability: 40,
-      geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,42,46,50],
-      maxValues: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
-    };
-    const genetics = await deployContract({
-      name: 'Genetics',
-      constructor: [arrayfy(geneticsConstructor)],
-      props: {}
-    }) as Genetics;
-    DeploymentLogger('export GENETICS=' + genetics.address);
-    deployments.update(12, {
-      step: "Deploy incubator methods"
-    });
-
-    const incubatorConstructor: IncubatorConstructor.StructStruct = {
-      methods: globalParams.address0,
-      genetics: globalParams.address0,
-      gamification: globalParams.address0,
-      races: globalParams.address0,
-      allowed: [],
-      secondsToMaturity: 345600
-    };
-    const incubatorMethods = await deployContract({
-      name: 'IncubatorMethods',
-      constructor: [arrayfy(incubatorConstructor)],
-      props: {}
-    }) as IncubatorMethods;
-    DeploymentLogger('export INCUBATOR_METHODS=' + incubatorMethods.address);
-    deployments.update(13, {
-      step: "Deploy incubator"
-    });
-
-    const incubator = await deployContract({
-      name: 'Incubator',
-      constructor: [arrayfy(incubatorConstructor)],
-      props: {}
-    }) as Incubator;
-    DeploymentLogger('export INCUBATOR=' + incubator.address);
-    deployments.update(14, {
-      step: "Deploy hounds restricted"
-    });
-
     const houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
-      incubator: globalParams.address0,
       alphadune: globalParams.address0,
       payments: globalParams.address0,
       restricted: globalParams.address0,
       minter: globalParams.address0,
       houndsModifier: globalParams.address0,
+      hounds: globalParams.address0,
       zerocost: globalParams.address0,
       shop: globalParams.address0,
-      races: globalParams.address0,
-      gamification: globalParams.address0
+      races: globalParams.address0
     };
     const houndsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
@@ -362,55 +288,6 @@ async function main() {
       step: "Deploy races restricted"
     });
 
-    const gamificationConstructor: GamificationConstructor.StructStruct = {
-      defaultBreeding: globalParams.houndBreeding,
-      defaultStamina: globalParams.houndStamina,
-      allowed: [],
-      methods: globalParams.address0,
-      restricted: globalParams.address0
-    }
-    const gamificationRestricted = await deployContract({
-      name: 'GamificationRestricted',
-      constructor: [arrayfy({
-        ...gamificationConstructor,
-        defaultBreeding: arrayfy(globalParams.houndBreeding),
-        defaultStamina: arrayfy(globalParams.houndStamina)
-      })],
-      props: {}
-    }) as Gamification;
-    DeploymentLogger('export GAMIFICATION_RESTRICTED=' + gamificationRestricted.address);
-    deployments.update(18, {
-      step: "Deploy races restricted"
-    });
-
-    const gamificationMethods = await deployContract({
-      name: 'GamificationMethods',
-      constructor: [arrayfy({
-        ...gamificationConstructor,
-        defaultBreeding: arrayfy(globalParams.houndBreeding),
-        defaultStamina: arrayfy(globalParams.houndStamina)
-      })],
-      props: {}
-    }) as Gamification;
-    DeploymentLogger('export GAMIFICATION_METHODS=' + gamificationMethods.address);
-    deployments.update(18, {
-      step: "Deploy races restricted"
-    });
-
-    const gamification = await deployContract({
-      name: 'Gamification',
-      constructor: [arrayfy({
-        ...gamificationConstructor,
-        defaultBreeding: arrayfy(globalParams.houndBreeding),
-        defaultStamina: arrayfy(globalParams.houndStamina)
-      })],
-      props: {}
-    }) as Gamification;
-    DeploymentLogger('export GAMIFICATIONS=' + gamification.address);
-    deployments.update(18, {
-      step: "Deploy races restricted"
-    });
-
     const racesConstructor: RacesConstructor.StructStruct = {
       arenas: globalParams.address0,
       hounds: globalParams.address0,
@@ -461,7 +338,6 @@ async function main() {
       races: globalParams.address0,
       queues: globalParams.address0,
       zerocost: globalParams.address0,
-      incubator: globalParams.address0,
       allowedCallers: []
     }
     const queuesMethods = await deployContract({
@@ -551,25 +427,6 @@ async function main() {
       alhpadunePercentage: 60
     }
 
-    const newGeneticsConstructor: GeneticsConstructor.StructStruct = {
-      terrains: arenas.address,
-      male: maleBoilerplateGene,
-      female: femaleBoilerplateGene,
-      maleGenesProbability: 60,
-      femaleGenesProbability: 40,
-      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
-      maxValues: geneticsConstructor.maxValues
-    }
-
-    const newIncubatorConstructor: IncubatorConstructor.StructStruct = {
-      methods: incubatorMethods.address,
-      genetics: genetics.address,
-      gamification: gamification.address,
-      races: races.address,
-      allowed: [incubator.address, hounds.address, incubatorMethods.address],
-      secondsToMaturity: 345600
-    }
-
     const newHoundsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
       breedCostCurrency: globalParams.address0,
@@ -577,8 +434,8 @@ async function main() {
       breedCost: "0xB1A2BC2EC50000",
       breedFee: "0x2386F26FC10000"
     };
+
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
-      incubator: incubator.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       payments: payments.address,
       restricted: houndsRestricted.address,
@@ -586,9 +443,10 @@ async function main() {
       houndsModifier: houndsModifier.address,
       zerocost: houndsZerocost.address,
       shop: shop.address,
-      races: races.address,
-      gamification: gamification.address
+      hounds: hounds.address,
+      races: races.address
     };
+
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
@@ -599,14 +457,6 @@ async function main() {
       ],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
-    }
-
-    const newGamificationConstructor: GamificationConstructor.StructStruct = {
-      defaultBreeding: globalParams.houndBreeding,
-      defaultStamina: globalParams.houndStamina,
-      allowed: [incubator.address, hounds.address, incubatorMethods.address],
-      restricted: gamificationRestricted.address,
-      methods: gamificationMethods.address
     }
 
     const newRacesConstructor: RacesConstructor.StructStruct = {
@@ -629,8 +479,7 @@ async function main() {
       races: races.address,
       allowedCallers: [races.address],
       queues: queues.address,
-      zerocost: queuesZerocost.address,
-      incubator: incubator.address
+      zerocost: queuesZerocost.address
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
@@ -714,42 +563,6 @@ async function main() {
     }
 
     try {
-      await gamificationRestricted.setGlobalParameters(newGamificationConstructor);
-      configurations.update(2, {
-        step: "Set global parameters for shop methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await gamificationMethods.setGlobalParameters(newGamificationConstructor);
-      configurations.update(2, {
-        step: "Set global parameters for shop methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await gamification.setGlobalParameters(newGamificationConstructor);
-      configurations.update(2, {
-        step: "Set global parameters for shop methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await genetics.setGlobalParameters(newGeneticsConstructor);
-      configurations.update(2, {
-        step: "Set global parameters for shop methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
       await arenasRestricted.setGlobalParameters(newArenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
@@ -771,24 +584,6 @@ async function main() {
       await arenas.setGlobalParameters(newArenasConstructor);
       configurations.update(4, {
         step: "Set global parameters for incubator methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await incubatorMethods.setGlobalParameters(newIncubatorConstructor);
-      configurations.update(5, {
-        step: "Set global parameters for generator methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
-
-    try {
-      await incubator.setGlobalParameters(newIncubatorConstructor);
-      configurations.update(5, {
-        step: "Set global parameters for generator methods"
       });
     } catch(err) {
       DeploymentError((err as NodeJS.ErrnoException).message);
@@ -922,28 +717,6 @@ async function main() {
 
       try {
         await run("verify:verify", {
-          address: converters.address
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(1, {
-        step: "Verify sortings"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: sortings.address
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(2, {
-        step: "Verify payments"
-      });
-      
-      try {
-        await run("verify:verify", {
           address: payments.address,
           constructorArguments: [arrayfy(paymentsConstructor)]
         });
@@ -1060,90 +833,6 @@ async function main() {
       }
       verifications.update(11, {
         step: "Verify genetics"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: gamificationRestricted.address,
-          constructorArguments: [arrayfy({
-            ...gamificationConstructor,
-            defaultBreeding: arrayfy(globalParams.houndBreeding),
-            defaultStamina: arrayfy(globalParams.houndStamina)
-          })]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(10, {
-        step: "Verify arenas"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: gamificationMethods.address,
-          constructorArguments: [arrayfy({
-            ...gamificationConstructor,
-            defaultBreeding: arrayfy(globalParams.houndBreeding),
-            defaultStamina: arrayfy(globalParams.houndStamina)
-          })]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(10, {
-        step: "Verify arenas"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: gamification.address,
-          constructorArguments: [arrayfy({
-            ...gamificationConstructor,
-            defaultBreeding: arrayfy(globalParams.houndBreeding),
-            defaultStamina: arrayfy(globalParams.houndStamina)
-          })]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(10, {
-        step: "Verify arenas"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: genetics.address,
-          constructorArguments: [arrayfy(geneticsConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(12, {
-        step: "Verify incubator methods"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: incubatorMethods.address,
-          constructorArguments: [arrayfy(incubatorConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(13, {
-        step: "Verify incubator"
-      });
-      
-      try {
-        await run("verify:verify", {
-          address: incubator.address,
-          constructorArguments: [arrayfy(incubatorConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(14, {
-        step: "Verify hounds restricted"
       });
 
       try {
