@@ -26,7 +26,7 @@ contract HoundsModifier is Params {
         ranOn = hounds[theId].profile.runningOn;
         hounds[theId].profile.runningOn = runningOn;
         
-        emit HoundQueueStatusUpdate(theId, ranOn);
+        emit HoundQueueStatusUpdate(theId, runningOn);
     }
 
     function boostHoundStamina(
