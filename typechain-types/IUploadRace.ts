@@ -89,20 +89,27 @@ export declare namespace Race {
   export type StructStruct = {
     core: Core.StructStruct;
     queueId: BigNumberish;
+    randomness: BigNumberish;
     seed: BytesLike;
   };
 
   export type StructStructOutput = [
     Core.StructStructOutput,
     BigNumber,
+    BigNumber,
     string
-  ] & { core: Core.StructStructOutput; queueId: BigNumber; seed: string };
+  ] & {
+    core: Core.StructStructOutput;
+    queueId: BigNumber;
+    randomness: BigNumber;
+    seed: string;
+  };
 }
 
 export interface IUploadRaceInterface extends utils.Interface {
   contractName: "IUploadRace";
   functions: {
-    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
   encodeFunctionData(

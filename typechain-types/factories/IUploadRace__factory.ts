@@ -111,6 +111,11 @@ const _abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "randomness",
+            type: "uint256",
+          },
+          {
             internalType: "bytes",
             name: "seed",
             type: "bytes",

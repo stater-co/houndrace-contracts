@@ -11,6 +11,8 @@ library Race {
 
         uint256 queueId;
 
+        uint256 randomness;
+
         bytes seed;
 
     }
