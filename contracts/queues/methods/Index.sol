@@ -73,6 +73,8 @@ contract QueuesMethods is Params {
         );
 
         Hound.Struct memory houndStruct = IHound(control.hounds).hound(hound);
+        require(houndStruct.stamina.staminaValue >= queues[theId].staminaCost);
+        
         bool validSpecie;
         for ( uint256 i = 0 ; i < queues[theId].speciesAllowed.length ; ++i ) {
             if ( queues[theId].speciesAllowed[i] == houndStruct.identity.specie ) {
