@@ -123,14 +123,21 @@ export declare namespace Race {
   export type StructStruct = {
     core: Core.StructStruct;
     queueId: BigNumberish;
+    randomness: BigNumberish;
     seed: BytesLike;
   };
 
   export type StructStructOutput = [
     Core.StructStructOutput,
     BigNumber,
+    BigNumber,
     string
-  ] & { core: Core.StructStructOutput; queueId: BigNumber; seed: string };
+  ] & {
+    core: Core.StructStructOutput;
+    queueId: BigNumber;
+    randomness: BigNumber;
+    seed: string;
+  };
 }
 
 export declare namespace Queue {
@@ -360,9 +367,10 @@ export interface RacesMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [Core.StructStructOutput, BigNumber, string] & {
+      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
         core: Core.StructStructOutput;
         queueId: BigNumber;
+        randomness: BigNumber;
         seed: string;
       }
     >;
@@ -427,9 +435,10 @@ export interface RacesMethods extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [Core.StructStructOutput, BigNumber, string] & {
+    [Core.StructStructOutput, BigNumber, BigNumber, string] & {
       core: Core.StructStructOutput;
       queueId: BigNumber;
+      randomness: BigNumber;
       seed: string;
     }
   >;
@@ -494,9 +503,10 @@ export interface RacesMethods extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [Core.StructStructOutput, BigNumber, string] & {
+      [Core.StructStructOutput, BigNumber, BigNumber, string] & {
         core: Core.StructStructOutput;
         queueId: BigNumber;
+        randomness: BigNumber;
         seed: string;
       }
     >;

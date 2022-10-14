@@ -51,6 +51,7 @@ const defaultRace: Race.StructStruct = {
         payments: defaultQueuePayment
     },
     queueId: 1,
+    randomness: 0,
     seed: "0x00"
 };
 
