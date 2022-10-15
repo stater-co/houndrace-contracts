@@ -117,7 +117,7 @@ contract HoundsModifier is Params {
     ) external {
         require(ownerOf(theId) == msg.sender);
 
-        hounds[theId].breeding.breedingFee = fee;
+        hounds[theId].breeding.breedingFee = status ? fee : 0;
         hounds[theId].breeding.availableToBreed = status;
 
         emit HoundBreedable(

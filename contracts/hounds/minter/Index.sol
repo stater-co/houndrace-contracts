@@ -100,7 +100,7 @@ contract HoundsMinter is Params {
         hounds[hound2].breeding.lastBreed = block.timestamp;
         hounds[hound1].breeding.lastBreed = block.timestamp;
 
-        emit BreedHound(hound1, hound2, id,msg.sender);
+        emit BreedHound(hound1, hound2, id, msg.sender);
         ++id;
 
     } 
