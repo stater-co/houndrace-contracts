@@ -24,18 +24,7 @@ contract HoundsMinter is Params {
             hounds[hound2].profile.runningOn == 0 && 
             ( ( hounds[hound1].identity.geneticSequence[1] == 1 && hounds[hound2].identity.geneticSequence[1] == 2 ) || 
             ( hounds[hound1].identity.geneticSequence[1] == 2 && hounds[hound2].identity.geneticSequence[1] == 1 ) ) && 
-            ownerOf(hound1) == msg.sender && 
-            msg.value >= (
-                control.fees.breedCostCurrency == address(0) ? 
-                    control.fees.breedCost 
-                : 
-                    0
-            ) + (
-                control.fees.breedFeeCurrency == address(0) ? 
-                    control.fees.breedFee 
-                : 
-                    0
-            )
+            ownerOf(hound1) == msg.sender
         );
 
         uint256[] memory amounts = new uint256[](1);
@@ -65,25 +54,6 @@ contract HoundsMinter is Params {
         );
 
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
-
-            require(
-                msg.value >= (
-                    control.fees.breedCostCurrency == address(0) ? 
-                        control.fees.breedCost 
-                    : 
-                        0
-                ) + (
-                    control.fees.breedFeeCurrency == address(0) ? 
-                        control.fees.breedFee 
-                    : 
-                        0
-                ) + (
-                    hounds[hound2].breeding.breedingFeeCurrency == address(0) ? 
-                        hounds[hound2].breeding.breedingFee 
-                    : 
-                        0
-                )
-            );
 
             amounts[0] = hounds[hound2].breeding.breedingFee;
             IPay(control.boilerplate.payments).pay(

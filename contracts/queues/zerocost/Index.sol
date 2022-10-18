@@ -36,7 +36,7 @@ contract QueuesZerocost is Ownable {
             // Arena fee 
             MicroPayment.Struct(
                 IArenaCurrency(control.arenas).arenaCurrency(queue.core.arena),
-                ( IArenaFee(control.arenas).arenaFee(queue.core.arena) / queue.totalParticipants ) + queue.totalParticipants + queue.core.entryFee
+                ( IArenaFee(control.arenas).arenaFee(queue.core.arena) / queue.totalParticipants ) + queue.totalParticipants
             ),
 
             // Entry fee 
