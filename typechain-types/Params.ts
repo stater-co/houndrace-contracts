@@ -22,47 +22,33 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace ShopConstructor {
+export declare namespace GeneticsConstructor {
   export type StructStruct = {
-    methods: string;
-    restricted: string;
-    alphadune: string;
-  };
-
-  export type StructStructOutput = [string, string, string] & {
-    methods: string;
-    restricted: string;
-    alphadune: string;
-  };
-}
-
-export declare namespace Discount {
-  export type StructStruct = {
-    tokenContract: string;
-    tokenIds: BigNumberish[];
-    dateStart: BigNumberish;
-    dateStop: BigNumberish;
-    discount: BigNumberish;
-    tokenType: BigNumberish;
-    usable: boolean;
+    terrains: string;
+    male: BigNumberish[];
+    female: BigNumberish[];
+    maleGenesProbability: BigNumberish;
+    femaleGenesProbability: BigNumberish;
+    geneticSequenceSignature: BigNumberish[];
+    maxValues: BigNumberish[];
   };
 
   export type StructStructOutput = [
     string,
-    BigNumber[],
-    BigNumber,
-    BigNumber,
+    number[],
+    number[],
     number,
     number,
-    boolean
+    number[],
+    number[]
   ] & {
-    tokenContract: string;
-    tokenIds: BigNumber[];
-    dateStart: BigNumber;
-    dateStop: BigNumber;
-    discount: number;
-    tokenType: number;
-    usable: boolean;
+    terrains: string;
+    male: number[];
+    female: number[];
+    maleGenesProbability: number;
+    femaleGenesProbability: number;
+    geneticSequenceSignature: number[];
+    maxValues: number[];
   };
 }
 
@@ -70,15 +56,13 @@ export interface ParamsInterface extends utils.Interface {
   contractName: "Params";
   functions: {
     "control()": FunctionFragment;
-    "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address))": FunctionFragment;
+    "setGlobalParameters((address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
-  encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -86,7 +70,7 @@ export interface ParamsInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [ShopConstructor.StructStruct]
+    values: [GeneticsConstructor.StructStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -94,7 +78,6 @@ export interface ParamsInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -110,20 +93,11 @@ export interface ParamsInterface extends utils.Interface {
   ): Result;
 
   events: {
-    "NewDiscount(uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "NewDiscount"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
-
-export type NewDiscountEvent = TypedEvent<
-  [BigNumber, Discount.StructStructOutput],
-  { id: BigNumber; discount: Discount.StructStructOutput }
->;
-
-export type NewDiscountEventFilter = TypedEventFilter<NewDiscountEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -164,14 +138,12 @@ export interface Params extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string] & {
-        methods: string;
-        restricted: string;
-        alphadune: string;
+      [string, number, number] & {
+        terrains: string;
+        maleGenesProbability: number;
+        femaleGenesProbability: number;
       }
     >;
-
-    id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -180,7 +152,7 @@ export interface Params extends BaseContract {
     ): Promise<ContractTransaction>;
 
     setGlobalParameters(
-      globalParameters: ShopConstructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -193,14 +165,12 @@ export interface Params extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string] & {
-      methods: string;
-      restricted: string;
-      alphadune: string;
+    [string, number, number] & {
+      terrains: string;
+      maleGenesProbability: number;
+      femaleGenesProbability: number;
     }
   >;
-
-  id(overrides?: CallOverrides): Promise<BigNumber>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -209,7 +179,7 @@ export interface Params extends BaseContract {
   ): Promise<ContractTransaction>;
 
   setGlobalParameters(
-    globalParameters: ShopConstructor.StructStruct,
+    globalParameters: GeneticsConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -222,21 +192,19 @@ export interface Params extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string] & {
-        methods: string;
-        restricted: string;
-        alphadune: string;
+      [string, number, number] & {
+        terrains: string;
+        maleGenesProbability: number;
+        femaleGenesProbability: number;
       }
     >;
-
-    id(overrides?: CallOverrides): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     setGlobalParameters(
-      globalParameters: ShopConstructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -247,15 +215,6 @@ export interface Params extends BaseContract {
   };
 
   filters: {
-    "NewDiscount(uint256,tuple)"(
-      id?: BigNumberish | null,
-      discount?: null
-    ): NewDiscountEventFilter;
-    NewDiscount(
-      id?: BigNumberish | null,
-      discount?: null
-    ): NewDiscountEventFilter;
-
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -269,8 +228,6 @@ export interface Params extends BaseContract {
   estimateGas: {
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
-    id(overrides?: CallOverrides): Promise<BigNumber>;
-
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
@@ -278,7 +235,7 @@ export interface Params extends BaseContract {
     ): Promise<BigNumber>;
 
     setGlobalParameters(
-      globalParameters: ShopConstructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -291,8 +248,6 @@ export interface Params extends BaseContract {
   populateTransaction: {
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     renounceOwnership(
@@ -300,7 +255,7 @@ export interface Params extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setGlobalParameters(
-      globalParameters: ShopConstructor.StructStruct,
+      globalParameters: GeneticsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -4,4 +4,5 @@ export interface HoundExternalDependencies {
     paymentsAddress: string;
     shopsAddress: string;
     transferrableRoot: AlphaERC721;
+    geneticsAddress: string;
 }

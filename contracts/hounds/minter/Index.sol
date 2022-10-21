@@ -70,7 +70,29 @@ contract HoundsMinter is Params {
         hounds[hound2].breeding.lastBreed = block.timestamp;
         hounds[hound1].breeding.lastBreed = block.timestamp;
 
-        emit BreedHound(hound1, hound2, id, msg.sender);
+        Hound.Struct memory offspring = control.defaultHound;
+        offspring.identity.geneticSequence = IMixGenes(control.boilerplate.genetics).mixGenes(
+            hounds[hound1].identity.geneticSequence, 
+            hounds[hound2].identity.geneticSequence,
+            uint256(
+                keccak256(
+                    abi.encodePacked(
+                        block.difficulty, 
+                        block.timestamp, 
+                        block.gaslimit,
+                        blockhash(block.number-1)
+                    )
+                )
+            )
+        );
+
+        emit BreedHound(
+            hound1, 
+            hound2, 
+            id, 
+            offspring, 
+            msg.sender
+        );
         ++id;
 
     } 

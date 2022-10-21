@@ -31,6 +31,7 @@ export async function run(
           constructor: [[
             "HoundRace",
             "HR",
+            globalParams.defaultHound,
             [owner.address],
             [
               globalParams.address0,
@@ -41,8 +42,8 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
+              dependencies.geneticsAddress,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -65,6 +66,7 @@ export async function run(
           constructor: [[
             "HoundRace",
             "HR",
+            globalParams.defaultHound,
             [owner.address],
             [
               globalParams.address0,
@@ -75,8 +77,8 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
+              dependencies.geneticsAddress,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -99,6 +101,7 @@ export async function run(
           constructor: [[
             "HoundRace",
             "HR",
+            globalParams.defaultHound,
             [owner.address],
             [
               globalParams.address0,
@@ -109,8 +112,8 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
+              dependencies.geneticsAddress,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -133,6 +136,7 @@ export async function run(
           constructor: [[
             "HoundRace",
             "HR",
+            globalParams.defaultHound,
             [owner.address],
             [
               globalParams.address0,
@@ -143,8 +147,8 @@ export async function run(
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
-              globalParams.address0,
-              globalParams.address0
+              dependencies.geneticsAddress,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
             ],[
               globalParams.address0,
               globalParams.address0,
@@ -167,6 +171,7 @@ export async function run(
           constructor: [[
             "HoundRace",
             "HR",
+            globalParams.defaultHound,
             [owner.address],
             [
               otherOwner.address,
@@ -177,7 +182,8 @@ export async function run(
               houndsModifier.address,
               dependencies.shopsAddress,
               globalParams.address0,
-              globalParams.address0
+              dependencies.geneticsAddress,
+              String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
             ],[
               globalParams.address0,
               globalParams.address0,
