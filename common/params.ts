@@ -58,7 +58,7 @@ const defaultRace: Race.StructStruct = {
 const houndStamina: Hound.StaminaStruct = {
     staminaRefillCurrency: address0,
     staminaLastUpdate: 0,
-    staminaRefill1x: 100_000,
+    staminaRefill1x: "500000000000000",
     staminaValue: 100,
     staminaPerTimeUnit: 86_400,
     staminaCap: 100
@@ -68,19 +68,19 @@ const houndBreeding: Hound.BreedingStruct = {
     breedingCooldownCurrency: address0,
     breedingFeeCurrency: address0,
     lastBreed: 0,
-    breedingCooldown: 345_600,
-    breedingFee: 100_000,
+    breedingCooldown: 264_000,
+    breedingFee: 0,
     breedingCooldownTimeUnit: 3600,
-    refillBreedingCooldownCost: 100_000,
+    refillBreedingCooldownCost: 0,
     availableToBreed: false
 };
 
 const houndIdentity: Hound.IdentityStruct = {
-    birthDate: 0,
-    femaleParent: 0,
+    birthDate: Number((Date.now() / 1000).toFixed(0)),
+    femaleParent: 1,
     generation: 1,
     geneticSequence: maleBoilerplateGene,
-    maleParent: 0,
+    maleParent: 1,
     extensionTraits: "",
     specie: 0
 };
