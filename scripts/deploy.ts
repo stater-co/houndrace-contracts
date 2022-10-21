@@ -25,6 +25,7 @@ import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
+import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
 import { globalParams } from '../common/params';
 
 
@@ -193,6 +194,25 @@ async function main() {
       step: "Deploy genetics"
     });
 
+    const geneticsConstructor: GeneticsConstructor.StructStruct = {
+      terrains: globalParams.address0,
+      male: globalParams.maleBoilerplateGene,
+      female: globalParams.femaleBoilerplateGene,
+      maleGenesProbability: 60,
+      femaleGenesProbability: 40,
+      geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,42,46,50],
+      maxValues: [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    };
+    const genetics = await deployContract({
+      name: 'Genetics',
+      constructor: [arrayfy(geneticsConstructor)],
+      props: {}
+    }) as Genetics;
+    DeploymentLogger('export GENETICS=' + genetics.address);
+    deployments.update(12, {
+      step: "Deploy incubator methods"
+    });
+
     const houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       alphadune: globalParams.address0,
       payments: globalParams.address0,
@@ -202,7 +222,8 @@ async function main() {
       hounds: globalParams.address0,
       zerocost: globalParams.address0,
       shop: globalParams.address0,
-      races: globalParams.address0
+      races: globalParams.address0,
+      genetics: globalParams.address0
     };
     const houndsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
@@ -214,6 +235,7 @@ async function main() {
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
+      defaultHound: globalParams.defaultHound,
       allowedCallers: [],
       boilerplate: houndsConstructorBoilerplate,
       fees: houndsConstructorFees
@@ -427,6 +449,16 @@ async function main() {
       alhpadunePercentage: 60
     }
 
+    const newGeneticsConstructor: GeneticsConstructor.StructStruct = {
+      terrains: arenas.address,
+      male: maleBoilerplateGene,
+      female: femaleBoilerplateGene,
+      maleGenesProbability: 60,
+      femaleGenesProbability: 40,
+      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
+      maxValues: geneticsConstructor.maxValues
+    }
+
     const newHoundsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
       breedCostCurrency: globalParams.address0,
@@ -444,12 +476,14 @@ async function main() {
       zerocost: houndsZerocost.address,
       shop: shop.address,
       hounds: hounds.address,
-      races: races.address
+      races: races.address,
+      genetics: genetics.address
     };
 
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
+      defaultHound: globalParams.defaultHound,
       allowedCallers: [
         hounds.address,
         races.address,
@@ -555,6 +589,15 @@ async function main() {
 
     try {
       await lootboxes.setGlobalParameters(newLootboxesConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await genetics.setGlobalParameters(newGeneticsConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -833,6 +876,18 @@ async function main() {
       }
       verifications.update(11, {
         step: "Verify genetics"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: genetics.address,
+          constructorArguments: [arrayfy(geneticsConstructor)]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(12, {
+        step: "Verify incubator methods"
       });
 
       try {
