@@ -7,10 +7,10 @@ contract Genetics is Params {
 
     constructor(GeneticsConstructor.Struct memory input) Params(input) {}
 
-    function wholeArithmeticRecombination(uint32[54] memory geneticSequence1, uint32[54] memory geneticSequence2) public view returns(uint32[54] memory geneticSequence) {
+    function wholeArithmeticRecombination(uint32[72] memory geneticSequence1, uint32[72] memory geneticSequence2) public view returns(uint32[72] memory geneticSequence) {
         
         // Return the average of parents genetical sequences
-        for ( uint256 i = 2 ; i < 54 ; ++i ) {
+        for ( uint256 i = 2 ; i < 72 ; ++i ) {
 
             // arithmetic recombination
             geneticSequence[i] = ( geneticSequence1[i] + geneticSequence2[i] ) / 2;
@@ -23,7 +23,7 @@ contract Genetics is Params {
 
     }
 
-    function swapMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
+    function swapMutation(uint32[72] memory geneticSequence, uint256 randomness) public view returns(uint32[72] memory) {
 
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -39,7 +39,7 @@ contract Genetics is Params {
         return geneticSequence;
     }
 
-    function inversionMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
+    function inversionMutation(uint32[72] memory geneticSequence, uint256 randomness) public view returns(uint32[72] memory) {
         
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -67,7 +67,7 @@ contract Genetics is Params {
         return geneticSequence;
     }
 
-    function scrambleMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
+    function scrambleMutation(uint32[72] memory geneticSequence, uint256 randomness) public view returns(uint32[72] memory) {
         
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -99,7 +99,7 @@ contract Genetics is Params {
         return geneticSequence;
     }
     
-    function arithmeticMutation(uint32[54] memory geneticSequence, uint256 randomness) public view returns(uint32[54] memory) {
+    function arithmeticMutation(uint32[72] memory geneticSequence, uint256 randomness) public view returns(uint32[72] memory) {
 
         // Generate random gene index
         uint256 randomGene = generateRandomGeneIndex(geneticSequence[2], randomness);
@@ -120,8 +120,8 @@ contract Genetics is Params {
 
     }
 
-    function uniformCrossover(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) public view returns(uint32[54] memory geneticSequence) {
-        for ( uint256 i = 0 ; i < 54 ; ++i ) {
+    function uniformCrossover(uint32[72] calldata geneticSequence1, uint32[72] calldata geneticSequence2, uint256 randomness) public view returns(uint32[72] memory geneticSequence) {
+        for ( uint256 i = 0 ; i < 72 ; ++i ) {
             uint256 dominantGene = uint256(keccak256(abi.encodePacked(i, randomness)));
             if ( dominantGene % 100 < control.maleGenesProbability ) {
                 geneticSequence[i] = geneticSequence1[i];
@@ -131,10 +131,10 @@ contract Genetics is Params {
         }
     }
 
-    function mixGenes(uint32[54] calldata geneticSequence1, uint32[54] calldata geneticSequence2, uint256 randomness) external view returns(uint32[54] memory) {
+    function mixGenes(uint32[72] calldata geneticSequence1, uint32[72] calldata geneticSequence2, uint256 randomness) external view returns(uint32[72] memory) {
 
         // Performs the default uniform crossover algorithm
-        uint32[54] memory geneticSequence = uniformCrossover(geneticSequence1,geneticSequence2,randomness);
+        uint32[72] memory geneticSequence = uniformCrossover(geneticSequence1,geneticSequence2,randomness);
 
         uint256 chance = randomness % 1000;
         if ( chance >= 444 && chance <= 446 ) {
@@ -182,7 +182,7 @@ contract Genetics is Params {
         return ( uint256(keccak256(abi.encodePacked(pillar, randomness))) % 9 ) + 2;
     }
 
-    function generateRandomAlleles(uint32[54] memory geneticSequence, uint256 randomness, uint256 randomGene) internal view returns(uint256,uint256) {
+    function generateRandomAlleles(uint32[72] memory geneticSequence, uint256 randomness, uint256 randomGene) internal view returns(uint256,uint256) {
 
         // Generate 2 random indexes within the gene
         return(

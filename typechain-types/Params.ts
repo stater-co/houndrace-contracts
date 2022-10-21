@@ -24,7 +24,6 @@ import type {
 
 export declare namespace GeneticsConstructor {
   export type StructStruct = {
-    terrains: string;
     male: BigNumberish[];
     female: BigNumberish[];
     maleGenesProbability: BigNumberish;
@@ -34,7 +33,6 @@ export declare namespace GeneticsConstructor {
   };
 
   export type StructStructOutput = [
-    string,
     number[],
     number[],
     number,
@@ -42,7 +40,6 @@ export declare namespace GeneticsConstructor {
     number[],
     number[]
   ] & {
-    terrains: string;
     male: number[];
     female: number[];
     maleGenesProbability: number;
@@ -58,7 +55,7 @@ export interface ParamsInterface extends utils.Interface {
     "control()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,uint32[54],uint32[54],uint32,uint32,uint32[13],uint32[54]))": FunctionFragment;
+    "setGlobalParameters((uint32[72],uint32[72],uint32,uint32,uint32[13],uint32[72]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 
@@ -138,8 +135,7 @@ export interface Params extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, number, number] & {
-        terrains: string;
+      [number, number] & {
         maleGenesProbability: number;
         femaleGenesProbability: number;
       }
@@ -165,8 +161,7 @@ export interface Params extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, number, number] & {
-      terrains: string;
+    [number, number] & {
       maleGenesProbability: number;
       femaleGenesProbability: number;
     }
@@ -192,8 +187,7 @@ export interface Params extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, number, number] & {
-        terrains: string;
+      [number, number] & {
         maleGenesProbability: number;
         femaleGenesProbability: number;
       }

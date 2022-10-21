@@ -194,6 +194,11 @@ async function main() {
       step: "Deploy genetics"
     });
 
+    /*
+    [2,6,10,14,18,22,26,30,34,38,48,58,68],
+    [0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    */
+
     const geneticsConstructor: GeneticsConstructor.StructStruct = {
       terrains: globalParams.address0,
       male: globalParams.maleBoilerplateGene,
