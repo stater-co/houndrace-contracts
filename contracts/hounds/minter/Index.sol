@@ -74,6 +74,7 @@ contract HoundsMinter is Params {
         offspring.identity.generation = hounds[hound2].identity.generation + hounds[hound1].identity.generation;
         offspring.identity.maleParent = hounds[hound1].identity.geneticSequence[1] == 1 ? hound1 : hound2;
         offspring.identity.femaleParent = hounds[hound1].identity.geneticSequence[1] == 2 ? hound1 : hound2;
+        offspring.stamina.staminaLastUpdate = block.timestamp;
         offspring.identity.geneticSequence = IMixGenes(control.boilerplate.genetics).mixGenes(
             hounds[hound1].identity.geneticSequence, 
             hounds[hound2].identity.geneticSequence,
