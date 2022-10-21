@@ -412,7 +412,6 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
     "HoundStaminaUpdate(uint256,uint32)": EventFragment;
     "NewHound(uint256,address,tuple)": EventFragment;
-    "NewTokenUri(uint256,string)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -425,7 +424,6 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "HoundQueueStatusUpdate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "HoundStaminaUpdate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewHound"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewTokenUri"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -488,13 +486,6 @@ export type NewHoundEvent = TypedEvent<
 >;
 
 export type NewHoundEventFilter = TypedEventFilter<NewHoundEvent>;
-
-export type NewTokenUriEvent = TypedEvent<
-  [BigNumber, string],
-  { id: BigNumber; token_uri: string }
->;
-
-export type NewTokenUriEventFilter = TypedEventFilter<NewTokenUriEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -1065,15 +1056,6 @@ export interface HoundsRestricted extends BaseContract {
       owner?: string | null,
       hound?: null
     ): NewHoundEventFilter;
-
-    "NewTokenUri(uint256,string)"(
-      id?: BigNumberish | null,
-      token_uri?: null
-    ): NewTokenUriEventFilter;
-    NewTokenUri(
-      id?: BigNumberish | null,
-      token_uri?: null
-    ): NewTokenUriEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,

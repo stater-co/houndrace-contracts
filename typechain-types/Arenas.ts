@@ -280,7 +280,6 @@ export interface ArenasInterface extends utils.Interface {
     "ApprovalForAll(address,address,bool)": EventFragment;
     "EditArena(uint256,address,tuple)": EventFragment;
     "NewArena(uint256,address,tuple)": EventFragment;
-    "NewTokenUri(uint256,string)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
@@ -289,7 +288,6 @@ export interface ArenasInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "EditArena"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewArena"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewTokenUri"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -321,13 +319,6 @@ export type NewArenaEvent = TypedEvent<
 >;
 
 export type NewArenaEventFilter = TypedEventFilter<NewArenaEvent>;
-
-export type NewTokenUriEvent = TypedEvent<
-  [BigNumber, string],
-  { id: BigNumber; token_uri: string }
->;
-
-export type NewTokenUriEventFilter = TypedEventFilter<NewTokenUriEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -879,15 +870,6 @@ export interface Arenas extends BaseContract {
       owner?: string | null,
       arena?: null
     ): NewArenaEventFilter;
-
-    "NewTokenUri(uint256,string)"(
-      id?: BigNumberish | null,
-      token_uri?: null
-    ): NewTokenUriEventFilter;
-    NewTokenUri(
-      id?: BigNumberish | null,
-      token_uri?: null
-    ): NewTokenUriEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
