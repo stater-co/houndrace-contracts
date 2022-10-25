@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Queue.sol';
@@ -16,11 +15,12 @@ import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';
 import '../../hounds/interfaces/IHound.sol';
 import '../../races/interfaces/IRaceStart.sol';
+import '../../whitelist/Index.sol';
 import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
 
 
-contract Params is Ownable, ReentrancyGuard {
+contract Params is ReentrancyGuard, Whitelist {
     
     event QueuesCreation(uint256 indexed idStart, uint256 indexed idStop, Queue.Struct[] newQueues);
     event DeleteQueue(uint256 indexed id);
@@ -32,16 +32,13 @@ contract Params is Ownable, ReentrancyGuard {
     uint256 public id = 1;
     QueuesConstructor.Struct public control;
     mapping(uint256 => Queue.Struct) public queues;
-    mapping(address => bool) public allowed;
 
-    constructor(QueuesConstructor.Struct memory input) {
+    constructor(QueuesConstructor.Struct memory input) Whitelist(input.operators, input.targets) {
         control = input;
-        handleAllowedCallers(input.allowedCallers);
     }
 
     function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
-        handleAllowedCallers(globalParameters.allowedCallers);
     }
     
     function queue(uint256 theId) external view returns(Queue.Struct memory) {
@@ -50,12 +47,6 @@ contract Params is Ownable, ReentrancyGuard {
 
     function staminaCostOf(uint256 theId) external view returns(uint32) {
         return queues[theId].staminaCost;
-    }
-
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i ) {
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
-        }
     }
 
     function participantsOf(uint256 theId) external view returns(uint256[] memory) {

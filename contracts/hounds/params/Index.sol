@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
@@ -8,12 +7,13 @@ import '../../genetics/interfaces/IMixGenes.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../payments/params/MicroPayment.sol';
+import '../../whitelist/Index.sol';
 import '../interfaces/IGetBreedCosts.sol';
 import './Constructor.sol';
 import './Hound.sol';
 
 
-contract Params is Ownable, ERC721, ERC721Holder, ReentrancyGuard {
+contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) public hounds;
@@ -39,13 +39,11 @@ contract Params is Ownable, ERC721, ERC721Holder, ReentrancyGuard {
     Constructor.Struct public control;
     bool public matingSeason = true;
 
-    constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) {
-        handleAllowedCallers(input.allowedCallers);
+    constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) Whitelist(input.operators, input.targets) {
         control = input;
     }
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
-        handleAllowedCallers(globalParameters.allowedCallers);
         control = globalParameters;
     }
 
@@ -63,11 +61,6 @@ contract Params is Ownable, ERC721, ERC721Holder, ReentrancyGuard {
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {
         return hounds[_tokenId].profile.token_uri;
-    }
-
-    function handleAllowedCallers(address[] memory allowedCallers) internal {
-        for ( uint256 i = 0 ; i < allowedCallers.length ; ++i )
-            allowed[allowedCallers[i]] = !allowed[allowedCallers[i]];
     }
 
 }

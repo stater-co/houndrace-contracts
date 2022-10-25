@@ -22,17 +22,4 @@ contract Payments is Params {
         require(success);
 	}
 
-	function fillRewardsReservoir(
-        address currency,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-		Payment.PaymentTypes paymentType
-	) 
-        external 
-        payable 
-    {
-		(bool success, ) = control.restricted.delegatecall(msg.data);
-        require(success);
-	}
-
 }

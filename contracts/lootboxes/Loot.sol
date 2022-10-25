@@ -1,28 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC1155/IERC1155.sol';
 import '@openzeppelin/contracts/token/ERC1155/extensions/ERC1155URIStorage.sol';
 import '@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol';
+import '../whitelist/Index.sol';
 import './params/Constructor.sol';
 import './params/Box.sol';
 
-contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
+contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
 
     LootboxesConstructor.Struct public control;
-    mapping(address => bool) public allowedApprovals;
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
     event LootboxOpen(uint256 indexed id, address indexed owner, uint256 quantity);
     event LootboxOpened(uint256 indexed id, address indexed owner, Box.Struct[] loot);
 
     constructor(
         LootboxesConstructor.Struct memory input
-    ) ERC1155(input.name) {
+    ) ERC1155(input.name) Whitelist(input.operators, input.targets) {
         control = input;
-        for ( uint256 i = 0 ; i < input.allowedApprovals.length ; ++i ) {
-            allowedApprovals[input.allowedApprovals[i]] = !allowedApprovals[input.allowedApprovals[i]];
-        }
     }
 
 
@@ -33,9 +29,6 @@ contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
         onlyOwner 
     {
         control = globalParameters;
-        for ( uint256 i = 0 ; i < globalParameters.allowedApprovals.length ; ++i ) {
-            allowedApprovals[globalParameters.allowedApprovals[i]] = !allowedApprovals[globalParameters.allowedApprovals[i]];
-        }
     }
 
     function mint(
@@ -95,7 +88,7 @@ contract Lootboxes is Ownable, ERC1155URIStorage, ERC1155Holder {
         // if OpenSea's ERC1155 Proxy Address is detected, auto-return true
         // for Polygon's Mumbai testnet, use 0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c
         // 0x58807baD0B376efc12F5AD86aAc70E78ed67deaE
-        if ( allowedApprovals[_operator] ) {
+        if ( whitelists[_operator] == msg.sig ) {
             return true;
         }
         

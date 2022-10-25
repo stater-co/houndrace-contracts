@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '@openzeppelin/contracts/access/Ownable.sol';
 import './Race.sol';
 import './Constructor.sol';
 import '../../arenas/interfaces/IHandleArenaUsage.sol';
@@ -11,10 +10,11 @@ import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IUpdateHoundStamina.sol';
 import '../../queues/params/Queue.sol';
 import '../../payments/interfaces/IPay.sol';
+import '../../whitelist/Index.sol';
 import '../../queues/interfaces/IStaminaCostOf.sol';
 
 
-contract Params is Ownable {
+contract Params is Whitelist {
     
     event NewRace(
         uint256 indexed id, 
@@ -37,18 +37,12 @@ contract Params is Ownable {
     mapping(uint256 => Race.Struct) public races;
     mapping(address => bool) public allowed;
 
-    constructor(RacesConstructor.Struct memory input) {
+    constructor(RacesConstructor.Struct memory input) Whitelist(input.operators, input.targets) {
         control = input;
-        for ( uint256 i = 0 ; i < input.allowedCallers.length ; ++i ) {
-            allowed[input.allowedCallers[i]] = !allowed[input.allowedCallers[i]];
-        }
     }
 
     function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
-        for ( uint256 i = 0 ; i < globalParameters.allowedCallers.length ; ++i ) {
-            allowed[globalParameters.allowedCallers[i]] = !allowed[globalParameters.allowedCallers[i]];
-        }
     }
 
     function race(uint256 theId) external view returns(Race.Struct memory) {

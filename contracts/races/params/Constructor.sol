@@ -3,6 +3,7 @@ pragma solidity 0.8.17;
 
 library RacesConstructor {
     struct Struct {
+        address[] operators;
         address arenas;
         address hounds;
         address methods;
@@ -10,6 +11,6 @@ library RacesConstructor {
         address restricted;
         address queues;
         address races;
-        address[] allowedCallers;
+        bytes4[] targets;
     }
 }

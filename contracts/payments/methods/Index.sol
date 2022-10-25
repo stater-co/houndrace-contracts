@@ -20,6 +20,8 @@ contract PaymentsMethods is Params {
 		nonReentrant 
 	{
 
+		require(whitelists[msg.sender] == msg.sig);
+
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 
 			IERC721(currency).safeTransferFrom(from, to, ids[0]);
@@ -45,12 +47,6 @@ contract PaymentsMethods is Params {
 				require(payable(to).send(amounts[0]));
 			}
 
-		}
-
-		if ( to == control.alphadune ) {
-			for ( uint256 i = 0 ; i < ids.length ; ++i ) {
-				alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];
-			}
 		}
 
 	}

@@ -3,6 +3,7 @@ pragma solidity 0.8.17;
 
 library QueuesConstructor {
     struct Struct {
+        address[] operators;
 
         // Contract modules
         address methods;
@@ -15,8 +16,7 @@ library QueuesConstructor {
         address hounds;
         address payments;
         address races;
-        
-        // Whitelist boilerplate
-        address[] allowedCallers;
+
+        bytes4[] targets;
     }
 }
