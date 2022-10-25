@@ -15,6 +15,7 @@ library ConstructorBoilerplate {
         address payments;
         address shop;
         address races;
+        address genetics;
 
         // Payout checkpoint
         address alphadune;

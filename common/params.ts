@@ -10,7 +10,7 @@ import { Box } from '../typechain-types/Lootboxes';
 const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
 const POLYGON_MUMBAI_OPENSEA_CONTRACT_ADDRESS = "0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c";
 const address0: string = '0x0000000000000000000000000000000000000000';
-const maleBoilerplateGene = [ 1, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
+const maleBoilerplateGene = [ 0, 1, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3, 0, 9, 4, 1, 7, 4, 5, 8, 1, 3, 7, 2, 5, 9, 7, 3, 5, 0];
 
 const defaultQueuePayment: Payment.StructStruct = {
     from: [],
@@ -58,7 +58,7 @@ const defaultRace: Race.StructStruct = {
 const houndStamina: Hound.StaminaStruct = {
     staminaRefillCurrency: address0,
     staminaLastUpdate: 0,
-    staminaRefill1x: 100_000,
+    staminaRefill1x: "500000000000000",
     staminaValue: 100,
     staminaPerTimeUnit: 86_400,
     staminaCap: 100
@@ -68,19 +68,19 @@ const houndBreeding: Hound.BreedingStruct = {
     breedingCooldownCurrency: address0,
     breedingFeeCurrency: address0,
     lastBreed: 0,
-    breedingCooldown: 345_600,
-    breedingFee: 100_000,
+    breedingCooldown: 264_000,
+    breedingFee: 0,
     breedingCooldownTimeUnit: 3600,
-    refillBreedingCooldownCost: 100_000,
+    refillBreedingCooldownCost: 0,
     availableToBreed: false
 };
 
 const houndIdentity: Hound.IdentityStruct = {
-    birthDate: 0,
-    femaleParent: 0,
+    birthDate: Number((Date.now() / 1000).toFixed(0)),
+    femaleParent: 1,
     generation: 1,
     geneticSequence: maleBoilerplateGene,
-    maleParent: 0,
+    maleParent: 1,
     extensionTraits: "",
     specie: 0
 };
@@ -149,7 +149,7 @@ const getOpenseaContractAddress = (): string => {
 export const globalParams: GlobalParams = {
     address0: address0,
     maleBoilerplateGene: maleBoilerplateGene,
-    femaleBoilerplateGene: [ 2, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ],
+    femaleBoilerplateGene: [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3, 0, 9, 4, 1, 7, 4, 5, 8, 1, 3, 7, 2, 5, 9, 7, 3, 5, 0],
     defaultQueue: defaultQueue as Queue.StructStructOutput,
     defaultHound: defaultHound as Hound.StructStructOutput,
     defaultArena: defaultArena as Arena.StructStructOutput,

@@ -37,7 +37,7 @@ library Hound {
         uint256 femaleParent;
         uint256 generation;
         uint256 birthDate;
-        uint32[54] geneticSequence;
+        uint32[72] geneticSequence;
         string extensionTraits;
         Specie.Enum specie;
     }

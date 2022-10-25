@@ -3,6 +3,9 @@ import { HoundsSystem } from '../common/dto/test/houndsSystem.dto';
 import { PaymentEcosystem } from '../common/dto/test/paymentEcosystem.dto';
 import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 import { RacesSystem } from '../common/dto/test/racesSystem.dto';
+import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
+import { run as runGenetics } from '../test/5_Deploy_Genetics';
+import { test as testGenetics } from '../test/22_Genetics/22_1_Genetics_Basic_Tests';
 import { run as runPayments } from '../test/2_Deploy_Payments_Ecosystem';
 import { run as runArenas } from '../test/4_Deploy_Arenas';
 import { run as runHounds } from '../test/7_Deploy_Hounds_Ecosystem';
@@ -36,10 +39,15 @@ async function main() {
         allowedCallers: []
     });
 
+    const genetics: GeneticsSystem = await runGenetics({
+        arenasAddress: arenas.arenas.address
+    });
+
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721
+        transferrableRoot: payments.testErc721,
+        geneticsAddress: genetics.genetics.address
     });
 
     const races: RacesSystem = await runRaces({
@@ -130,6 +138,7 @@ async function main() {
             races.races.address,
             queues.queues.address
            ],
+           defaultHound: globalParams.defaultHound,
            boilerplate: {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
@@ -139,7 +148,8 @@ async function main() {
             payments: payments.payments.address,
             shop: payments.shop.address,
             hounds: hounds.hounds.address,
-            races: races.races.address
+            races: races.races.address,
+            genetics: genetics.genetics.address
            },
            fees: {
             breedCostCurrency: globalParams.address0,
@@ -169,6 +179,10 @@ async function main() {
                 globalParams.address0
             ]
         }
+    });
+
+    await testGenetics.basicTest({
+        genetics: genetics.genetics
     });
 
     await testHounds.basicTest({
@@ -206,6 +220,7 @@ async function main() {
            name: "HoundRace",
            symbol: "HR",
            allowedCallers: [],
+           defaultHound: globalParams.defaultHound,
            boilerplate: {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
@@ -215,7 +230,8 @@ async function main() {
             payments: payments.payments.address,
             shop: payments.shop.address,
             hounds: hounds.hounds.address,
-            races: races.races.address
+            races: races.races.address,
+            genetics: genetics.genetics.address
            },
            fees: {
             breedCostCurrency: payments.houndracePotions.address,

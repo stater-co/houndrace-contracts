@@ -207,6 +207,7 @@ async function generationTests(
         
           IDS.push(ids);  
 
+          console.log(participants);
           const response: any = await axios.post("http://localhost:3000/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,

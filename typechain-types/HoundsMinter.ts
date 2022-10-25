@@ -23,90 +23,6 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace ConstructorBoilerplate {
-  export type StructStruct = {
-    restricted: string;
-    minter: string;
-    houndsModifier: string;
-    zerocost: string;
-    hounds: string;
-    payments: string;
-    shop: string;
-    races: string;
-    alphadune: string;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string
-  ] & {
-    restricted: string;
-    minter: string;
-    houndsModifier: string;
-    zerocost: string;
-    hounds: string;
-    payments: string;
-    shop: string;
-    races: string;
-    alphadune: string;
-  };
-}
-
-export declare namespace ConstructorFees {
-  export type StructStruct = {
-    currency: string;
-    breedCostCurrency: string;
-    breedFeeCurrency: string;
-    breedCost: BigNumberish;
-    breedFee: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber
-  ] & {
-    currency: string;
-    breedCostCurrency: string;
-    breedFeeCurrency: string;
-    breedCost: BigNumber;
-    breedFee: BigNumber;
-  };
-}
-
-export declare namespace Constructor {
-  export type StructStruct = {
-    name: string;
-    symbol: string;
-    allowedCallers: string[];
-    boilerplate: ConstructorBoilerplate.StructStruct;
-    fees: ConstructorFees.StructStruct;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string[],
-    ConstructorBoilerplate.StructStructOutput,
-    ConstructorFees.StructStructOutput
-  ] & {
-    name: string;
-    symbol: string;
-    allowedCallers: string[];
-    boilerplate: ConstructorBoilerplate.StructStructOutput;
-    fees: ConstructorFees.StructStructOutput;
-  };
-}
-
 export declare namespace Hound {
   export type StaminaStruct = {
     staminaRefillCurrency: string;
@@ -226,6 +142,96 @@ export declare namespace Hound {
   };
 }
 
+export declare namespace ConstructorBoilerplate {
+  export type StructStruct = {
+    restricted: string;
+    minter: string;
+    houndsModifier: string;
+    zerocost: string;
+    hounds: string;
+    payments: string;
+    shop: string;
+    races: string;
+    genetics: string;
+    alphadune: string;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string,
+    string
+  ] & {
+    restricted: string;
+    minter: string;
+    houndsModifier: string;
+    zerocost: string;
+    hounds: string;
+    payments: string;
+    shop: string;
+    races: string;
+    genetics: string;
+    alphadune: string;
+  };
+}
+
+export declare namespace ConstructorFees {
+  export type StructStruct = {
+    currency: string;
+    breedCostCurrency: string;
+    breedFeeCurrency: string;
+    breedCost: BigNumberish;
+    breedFee: BigNumberish;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber,
+    BigNumber
+  ] & {
+    currency: string;
+    breedCostCurrency: string;
+    breedFeeCurrency: string;
+    breedCost: BigNumber;
+    breedFee: BigNumber;
+  };
+}
+
+export declare namespace Constructor {
+  export type StructStruct = {
+    name: string;
+    symbol: string;
+    defaultHound: Hound.StructStruct;
+    allowedCallers: string[];
+    boilerplate: ConstructorBoilerplate.StructStruct;
+    fees: ConstructorFees.StructStruct;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    Hound.StructStructOutput,
+    string[],
+    ConstructorBoilerplate.StructStructOutput,
+    ConstructorFees.StructStructOutput
+  ] & {
+    name: string;
+    symbol: string;
+    defaultHound: Hound.StructStructOutput;
+    allowedCallers: string[];
+    boilerplate: ConstructorBoilerplate.StructStructOutput;
+    fees: ConstructorFees.StructStructOutput;
+  };
+}
+
 export interface HoundsMinterInterface extends utils.Interface {
   contractName: "HoundsMinter";
   functions: {
@@ -248,7 +254,7 @@ export interface HoundsMinterInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],(address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint32[72],string,uint8),(string,string,uint256,bool)),address[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -407,7 +413,7 @@ export interface HoundsMinterInterface extends utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "BreedHound(uint256,uint256,uint256,address)": EventFragment;
+    "BreedHound(uint256,uint256,uint256,tuple,address)": EventFragment;
     "HoundBreedable(uint256,uint256,bool)": EventFragment;
     "HoundBreedingStatusUpdate(uint256,bool)": EventFragment;
     "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
@@ -444,8 +450,14 @@ export type ApprovalForAllEvent = TypedEvent<
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
 export type BreedHoundEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber, string],
-  { parent1: BigNumber; parent2: BigNumber; id: BigNumber; owner: string }
+  [BigNumber, BigNumber, BigNumber, Hound.StructStructOutput, string],
+  {
+    parent1: BigNumber;
+    parent2: BigNumber;
+    id: BigNumber;
+    offspring: Hound.StructStructOutput;
+    owner: string;
+  }
 >;
 
 export type BreedHoundEventFilter = TypedEventFilter<BreedHoundEvent>;
@@ -553,11 +565,13 @@ export interface HoundsMinter extends BaseContract {
       [
         string,
         string,
+        Hound.StructStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
+        defaultHound: Hound.StructStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -704,11 +718,13 @@ export interface HoundsMinter extends BaseContract {
     [
       string,
       string,
+      Hound.StructStructOutput,
       ConstructorBoilerplate.StructStructOutput,
       ConstructorFees.StructStructOutput
     ] & {
       name: string;
       symbol: string;
+      defaultHound: Hound.StructStructOutput;
       boilerplate: ConstructorBoilerplate.StructStructOutput;
       fees: ConstructorFees.StructStructOutput;
     }
@@ -846,11 +862,13 @@ export interface HoundsMinter extends BaseContract {
       [
         string,
         string,
+        Hound.StructStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
+        defaultHound: Hound.StructStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -993,16 +1011,18 @@ export interface HoundsMinter extends BaseContract {
       approved?: null
     ): ApprovalForAllEventFilter;
 
-    "BreedHound(uint256,uint256,uint256,address)"(
+    "BreedHound(uint256,uint256,uint256,tuple,address)"(
       parent1?: null,
       parent2?: null,
       id?: BigNumberish | null,
+      offspring?: null,
       owner?: string | null
     ): BreedHoundEventFilter;
     BreedHound(
       parent1?: null,
       parent2?: null,
       id?: BigNumberish | null,
+      offspring?: null,
       owner?: string | null
     ): BreedHoundEventFilter;
 

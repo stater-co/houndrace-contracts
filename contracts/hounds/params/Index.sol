@@ -4,6 +4,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
+import '../../genetics/interfaces/IMixGenes.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../payments/params/MicroPayment.sol';
@@ -16,12 +17,25 @@ contract Params is Ownable, ERC721, ERC721Holder, ReentrancyGuard {
     uint256 public id = 1;
     mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) public hounds;
+
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
-    event BreedHound(uint256 parent1, uint256 parent2, uint256 indexed id, address indexed owner);
+
+    event BreedHound(
+        uint256 parent1, 
+        uint256 parent2, 
+        uint256 indexed id, 
+        Hound.Struct offspring,
+        address indexed owner
+    );
+
     event HoundBreedable(uint256 indexed id, uint256 price, bool status);
+
     event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
+
     event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
+
     event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);
+
     Constructor.Struct public control;
     bool public matingSeason = true;
 

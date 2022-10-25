@@ -9,6 +9,8 @@ import { run as runRaces } from '../test/8_Deploy_Races_Ecosystem';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { globalParams } from '../common/params';
 import { test as generationTests } from '../test/26_Races/26_3_Races_Generation_Tests';
+import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
+import { run as runGenetics } from '../test/5_Deploy_Genetics';
 
 
 async function main() {
@@ -20,10 +22,15 @@ async function main() {
         allowedCallers: []
     });
 
+    const genetics: GeneticsSystem = await runGenetics({
+        arenasAddress: arenas.arenas.address
+    });
+
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721
+        transferrableRoot: payments.testErc721,
+        geneticsAddress: genetics.genetics.address
     });
 
     const races: RacesSystem = await runRaces({
@@ -41,6 +48,7 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
+           defaultHound: globalParams.defaultHound,
            allowedCallers: [
             hounds.hounds.address,
             races.races.address
@@ -54,7 +62,8 @@ async function main() {
             payments: payments.payments.address,
             shop: payments.shop.address,
             hounds: hounds.hounds.address,
-            races: races.races.address
+            races: races.races.address,
+            genetics: genetics.genetics.address
            },
            fees: {
             breedCostCurrency: globalParams.address0,

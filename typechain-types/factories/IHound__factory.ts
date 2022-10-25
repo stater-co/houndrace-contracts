@@ -126,9 +126,9 @@ const _abi = [
                 type: "uint256",
               },
               {
-                internalType: "uint32[54]",
+                internalType: "uint32[72]",
                 name: "geneticSequence",
-                type: "uint32[54]",
+                type: "uint32[72]",
               },
               {
                 internalType: "string",

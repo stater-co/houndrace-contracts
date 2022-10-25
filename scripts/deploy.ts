@@ -25,6 +25,7 @@ import { QueuesRestricted } from '../typechain-types/QueuesRestricted';
 import { QueuesZerocost } from '../typechain-types/QueuesZerocost';
 import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
+import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
 import { globalParams } from '../common/params';
 
 
@@ -57,8 +58,8 @@ verifications.update(0, {
 });
 
 
-const maleBoilerplateGene: Array<number> = [ 0, 1, 8, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 9, 8, 2, 1, 4, 2, 9, 8, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 7, 7, 0, 2, 9, 1, 0, 9, 1, 1, 2, 1, 9, 0, 2, 2, 8, 5, 2, 8, 1, 9 ];
-const femaleBoilerplateGene: Array<number> = [ 0, 2, 6, 6, 1, 2, 3, 4, 4, 3, 2, 1, 5, 4, 3, 1, 9, 1, 4, 2, 4, 7, 1, 2, 6, 5, 8, 3, 9, 9, 8, 1, 1, 7, 2, 7, 9, 1, 0, 9, 1, 1, 2, 1, 0, 7, 2, 2, 8, 5, 8, 7, 1, 3 ];
+const maleBoilerplateGene: Array<number> = globalParams.maleBoilerplateGene;
+const femaleBoilerplateGene: Array<number> = globalParams.femaleBoilerplateGene;
 
 const arrayfy = (input: any): Array<any> => {
   return Object.keys(input).map((key) => input[key]);
@@ -193,6 +194,24 @@ async function main() {
       step: "Deploy genetics"
     });
 
+    const geneticsConstructor: GeneticsConstructor.StructStruct = {
+      male: globalParams.maleBoilerplateGene,
+      female: globalParams.femaleBoilerplateGene,
+      maleGenesProbability: 60,
+      femaleGenesProbability: 40,
+      geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,48,58,68],
+      maxValues: [0,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
+    };
+    const genetics = await deployContract({
+      name: 'Genetics',
+      constructor: [arrayfy(geneticsConstructor)],
+      props: {}
+    }) as Genetics;
+    DeploymentLogger('export GENETICS=' + genetics.address);
+    deployments.update(12, {
+      step: "Deploy incubator methods"
+    });
+
     const houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       alphadune: globalParams.address0,
       payments: globalParams.address0,
@@ -202,7 +221,8 @@ async function main() {
       hounds: globalParams.address0,
       zerocost: globalParams.address0,
       shop: globalParams.address0,
-      races: globalParams.address0
+      races: globalParams.address0,
+      genetics: globalParams.address0
     };
     const houndsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
@@ -214,6 +234,7 @@ async function main() {
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
+      defaultHound: globalParams.defaultHound,
       allowedCallers: [],
       boilerplate: houndsConstructorBoilerplate,
       fees: houndsConstructorFees
@@ -427,6 +448,15 @@ async function main() {
       alhpadunePercentage: 60
     }
 
+    const newGeneticsConstructor: GeneticsConstructor.StructStruct = {
+      male: maleBoilerplateGene,
+      female: femaleBoilerplateGene,
+      maleGenesProbability: 60,
+      femaleGenesProbability: 40,
+      geneticSequenceSignature: geneticsConstructor.geneticSequenceSignature,
+      maxValues: geneticsConstructor.maxValues
+    }
+
     const newHoundsConstructorFees: ConstructorFees.StructStruct = {
       currency: globalParams.address0,
       breedCostCurrency: globalParams.address0,
@@ -444,12 +474,14 @@ async function main() {
       zerocost: houndsZerocost.address,
       shop: shop.address,
       hounds: hounds.address,
-      races: races.address
+      races: races.address,
+      genetics: genetics.address
     };
 
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
       name: 'HoundRace',
       symbol: 'HR',
+      defaultHound: globalParams.defaultHound,
       allowedCallers: [
         hounds.address,
         races.address,
@@ -555,6 +587,15 @@ async function main() {
 
     try {
       await lootboxes.setGlobalParameters(newLootboxesConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await genetics.setGlobalParameters(newGeneticsConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
@@ -833,6 +874,18 @@ async function main() {
       }
       verifications.update(11, {
         step: "Verify genetics"
+      });
+
+      try {
+        await run("verify:verify", {
+          address: genetics.address,
+          constructorArguments: [arrayfy(geneticsConstructor)]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      verifications.update(12, {
+        step: "Verify incubator methods"
       });
 
       try {
