@@ -15,7 +15,6 @@ contract Params is ERC721, ERC721Holder, Whitelist {
     ArenasConstructor.Struct public control;
     uint256 public id = 1;
     mapping(uint256 => Arena.Struct) public arenas;
-    mapping(address => bool) public allowed;
     
     event NewArena(uint256 indexed id, address indexed owner, Arena.Struct arena);
     event EditArena(uint256 indexed id, address indexed owner, Arena.Struct arena);

@@ -35,7 +35,6 @@ contract Params is Whitelist {
     uint256 public id = 1;
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
-    mapping(address => bool) public allowed;
 
     constructor(RacesConstructor.Struct memory input) Whitelist(input.operators, input.targets) {
         control = input;

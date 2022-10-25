@@ -7,17 +7,17 @@ contract Queues is Params {
     
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
-    function createQueues(Queue.Struct[] memory theQueues) external onlyOwner {
+    function createQueues(Queue.Struct[] memory theQueues) external {
         (bool success,) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function editQueue(uint256 theId, Queue.Struct memory queue) external onlyOwner {
+    function editQueue(uint256 theId, Queue.Struct memory queue) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
 
-    function closeQueue(uint256 theId) external onlyOwner {
+    function closeQueue(uint256 theId) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

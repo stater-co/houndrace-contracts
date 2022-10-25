@@ -37,7 +37,7 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         string memory token_uri
     ) 
         external 
-        onlyOwner 
+        whitelisted 
     {
         _mint(msg.sender, tokenId, amount, '0x0');
         _setURI(token_uri);
@@ -48,7 +48,7 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         bool status
     ) 
         external 
-        onlyOwner 
+        whitelisted 
     {
         control.canBeOpened = status;
     }
@@ -73,7 +73,7 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         Box.Struct[] memory loot
     ) 
         external 
-        onlyOwner 
+        whitelisted  
     {
         emit LootboxOpened(boxId, user, loot);
     }

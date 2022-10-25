@@ -18,9 +18,8 @@ contract PaymentsMethods is Params {
 		public 
 		payable 
 		nonReentrant 
+		whitelisted 
 	{
-
-		require(whitelists[msg.sender] == msg.sig);
 
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
 

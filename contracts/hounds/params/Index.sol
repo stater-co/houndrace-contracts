@@ -15,7 +15,6 @@ import './Hound.sol';
 
 contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
     uint256 public id = 1;
-    mapping(address => bool) public allowed;
     mapping(uint256 => Hound.Struct) public hounds;
 
     event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
@@ -47,7 +46,7 @@ contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
         control = globalParameters;
     }
 
-    function setMatingSeason(bool _matingSeason) external onlyOwner {
+    function setMatingSeason(bool _matingSeason) external whitelisted {
         matingSeason = _matingSeason;
     }
 
