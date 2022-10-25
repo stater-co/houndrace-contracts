@@ -39,6 +39,7 @@ contract Params is ReentrancyGuard, Whitelist {
 
     function setGlobalParameters(QueuesConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
     
     function queue(uint256 theId) external view returns(Queue.Struct memory) {

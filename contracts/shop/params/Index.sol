@@ -31,6 +31,7 @@ contract Params is Whitelist {
         onlyOwner 
     {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
 }

@@ -252,7 +252,6 @@ export interface HoundsInterface extends utils.Interface {
     "boostHoundBreeding(uint256,address,uint256)": FunctionFragment;
     "boostHoundStamina(uint256,address,uint256)": FunctionFragment;
     "breedHounds(uint256,uint256)": FunctionFragment;
-    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getBreedCosts(uint256)": FunctionFragment;
@@ -280,7 +279,6 @@ export interface HoundsInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "updateHoundRunning(uint256,uint256)": FunctionFragment;
     "updateHoundStamina(uint256,uint32)": FunctionFragment;
-    "updateWhitelist(address[],bytes4[])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -299,10 +297,6 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "breedHounds",
     values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkWhiteList",
-    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
@@ -394,10 +388,6 @@ export interface HoundsInterface extends utils.Interface {
     functionFragment: "updateHoundStamina",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "updateWhitelist",
-    values: [string[], BytesLike[]]
-  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -411,10 +401,6 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "breedHounds",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkWhiteList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -493,10 +479,6 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "updateHoundStamina",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
 
@@ -660,11 +642,6 @@ export interface Hounds extends BaseContract {
       hound2: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -838,12 +815,6 @@ export interface Hounds extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   approve(
@@ -873,11 +844,6 @@ export interface Hounds extends BaseContract {
     hound2: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  checkWhiteList(
-    user: string,
-    overrides?: CallOverrides
-  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -1043,12 +1009,6 @@ export interface Hounds extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateWhitelist(
-    operators: string[],
-    targets: BytesLike[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     approve(
       to: string,
@@ -1077,11 +1037,6 @@ export interface Hounds extends BaseContract {
       hound2: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -1250,12 +1205,6 @@ export interface Hounds extends BaseContract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
@@ -1395,8 +1344,6 @@ export interface Hounds extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     getApproved(
@@ -1529,12 +1476,6 @@ export interface Hounds extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1567,11 +1508,6 @@ export interface Hounds extends BaseContract {
       hound1: BigNumberish,
       hound2: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1710,12 +1646,6 @@ export interface Hounds extends BaseContract {
     updateHoundStamina(
       theId: BigNumberish,
       amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

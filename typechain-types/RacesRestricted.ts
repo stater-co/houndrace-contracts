@@ -145,7 +145,6 @@ export declare namespace Race {
 export interface RacesRestrictedInterface extends utils.Interface {
   contractName: "RacesRestricted";
   functions: {
-    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -155,14 +154,9 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address[],address,address,address,address,address,address,address,bytes4[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateWhitelist(address[],bytes4[])": FunctionFragment;
     "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "checkWhiteList",
-    values: [string]
-  ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -185,18 +179,10 @@ export interface RacesRestrictedInterface extends utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "updateWhitelist",
-    values: [string[], BytesLike[]]
-  ): string;
-  encodeFunctionData(
     functionFragment: "uploadRace",
     values: [BigNumberish, BigNumberish, Race.StructStruct]
   ): string;
 
-  decodeFunctionResult(
-    functionFragment: "checkWhiteList",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -216,10 +202,6 @@ export interface RacesRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uploadRace", data: BytesLike): Result;
@@ -294,11 +276,6 @@ export interface RacesRestricted extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -353,12 +330,6 @@ export interface RacesRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     uploadRace(
       theId: BigNumberish,
       queueId: BigNumberish,
@@ -366,11 +337,6 @@ export interface RacesRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
-
-  checkWhiteList(
-    user: string,
-    overrides?: CallOverrides
-  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -426,12 +392,6 @@ export interface RacesRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateWhitelist(
-    operators: string[],
-    targets: BytesLike[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   uploadRace(
     theId: BigNumberish,
     queueId: BigNumberish,
@@ -440,11 +400,6 @@ export interface RacesRestricted extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -494,12 +449,6 @@ export interface RacesRestricted extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -556,8 +505,6 @@ export interface RacesRestricted extends BaseContract {
   };
 
   estimateGas: {
-    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -587,12 +534,6 @@ export interface RacesRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     uploadRace(
       theId: BigNumberish,
       queueId: BigNumberish,
@@ -602,11 +543,6 @@ export interface RacesRestricted extends BaseContract {
   };
 
   populateTransaction: {
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -639,12 +575,6 @@ export interface RacesRestricted extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -25,6 +25,7 @@ contract Params is ERC721, ERC721Holder, Whitelist {
 
     function setGlobalParameters(ArenasConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     function arena(uint256 theId) external view returns(Arena.Struct memory) {

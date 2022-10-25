@@ -80,22 +80,16 @@ export interface ShopZerocostInterface extends utils.Interface {
   contractName: "ShopZerocost";
   functions: {
     "checkDiscount(address)": FunctionFragment;
-    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setGlobalParameters((address[],address,address,address,bytes4[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateWhitelist(address[],bytes4[])": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "checkDiscount",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkWhiteList",
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
@@ -113,17 +107,9 @@ export interface ShopZerocostInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "updateWhitelist",
-    values: [string[], BytesLike[]]
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "checkDiscount",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkWhiteList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -139,10 +125,6 @@ export interface ShopZerocostInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
 
@@ -203,11 +185,6 @@ export interface ShopZerocost extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -235,23 +212,12 @@ export interface ShopZerocost extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   checkDiscount(
     requester: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
-
-  checkWhiteList(
-    user: string,
-    overrides?: CallOverrides
-  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -281,22 +247,11 @@ export interface ShopZerocost extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateWhitelist(
-    operators: string[],
-    targets: BytesLike[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     checkDiscount(
       requester: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -321,12 +276,6 @@ export interface ShopZerocost extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -357,8 +306,6 @@ export interface ShopZerocost extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -378,22 +325,11 @@ export interface ShopZerocost extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     checkDiscount(
       requester: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    checkWhiteList(
-      user: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -414,12 +350,6 @@ export interface ShopZerocost extends BaseContract {
 
     transferOwnership(
       newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

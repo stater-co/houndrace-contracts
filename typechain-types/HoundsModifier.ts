@@ -242,7 +242,6 @@ export interface HoundsModifierInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "boostHoundBreeding(uint256,address,uint256)": FunctionFragment;
     "boostHoundStamina(uint256,address,uint256)": FunctionFragment;
-    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
@@ -268,7 +267,6 @@ export interface HoundsModifierInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "updateHoundRunning(uint256,uint256)": FunctionFragment;
     "updateHoundStamina(uint256,uint32)": FunctionFragment;
-    "updateWhitelist(address[],bytes4[])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -283,10 +281,6 @@ export interface HoundsModifierInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "boostHoundStamina",
     values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "checkWhiteList",
-    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
@@ -370,10 +364,6 @@ export interface HoundsModifierInterface extends utils.Interface {
     functionFragment: "updateHoundStamina",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "updateWhitelist",
-    values: [string[], BytesLike[]]
-  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -383,10 +373,6 @@ export interface HoundsModifierInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "boostHoundStamina",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "checkWhiteList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -457,10 +443,6 @@ export interface HoundsModifierInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "updateHoundStamina",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
 
@@ -619,11 +601,6 @@ export interface HoundsModifier extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -778,12 +755,6 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   approve(
@@ -807,11 +778,6 @@ export interface HoundsModifier extends BaseContract {
     payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  checkWhiteList(
-    user: string,
-    overrides?: CallOverrides
-  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -959,12 +925,6 @@ export interface HoundsModifier extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  updateWhitelist(
-    operators: string[],
-    targets: BytesLike[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     approve(
       to: string,
@@ -987,11 +947,6 @@ export interface HoundsModifier extends BaseContract {
       payed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
-    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -1142,12 +1097,6 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: CallOverrides
-    ): Promise<void>;
   };
 
   filters: {
@@ -1281,8 +1230,6 @@ export interface HoundsModifier extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     getApproved(
@@ -1403,12 +1350,6 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1435,11 +1376,6 @@ export interface HoundsModifier extends BaseContract {
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    checkWhiteList(
-      user: string,
-      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1566,12 +1502,6 @@ export interface HoundsModifier extends BaseContract {
     updateHoundStamina(
       theId: BigNumberish,
       amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    updateWhitelist(
-      operators: string[],
-      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

@@ -5,4 +5,5 @@ export interface PaymentsSystemController {
     payments: Payments;
     paymentMethods: PaymentsMethods;
     constructor: PaymentsConstructor.StructStruct;
+    houndsAddress: string;
 }

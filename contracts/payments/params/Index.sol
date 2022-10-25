@@ -29,6 +29,7 @@ contract Params is ReentrancyGuard, Whitelist {
     
     function setGlobalParameters(PaymentsConstructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     fallback() external payable {}

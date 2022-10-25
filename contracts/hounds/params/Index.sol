@@ -44,6 +44,7 @@ contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
 
     function setGlobalParameters(Constructor.Struct memory globalParameters) external onlyOwner {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     function setMatingSeason(bool _matingSeason) external whitelisted {

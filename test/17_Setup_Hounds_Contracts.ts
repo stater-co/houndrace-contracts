@@ -15,7 +15,7 @@ export async function set(
       await dependencies.houndsMinter.setGlobalParameters({
         ...dependencies.constructor,
         operators: [
-          ...dependencies.constructor.operators, sig.address
+          ...dependencies.constructor.operators
         ],
         targets: [
           ...dependencies.constructor.targets
@@ -31,7 +31,7 @@ export async function set(
       await dependencies.houndsModifier.setGlobalParameters({
         ...dependencies.constructor,
         operators: [
-          ...dependencies.constructor.operators, sig.address
+          ...dependencies.constructor.operators
         ]
       });
       const after = await dependencies.houndsModifier.control();
@@ -44,7 +44,7 @@ export async function set(
       await dependencies.houndsZerocost.setGlobalParameters({
         ...dependencies.constructor,
         operators: [
-          ...dependencies.constructor.operators, sig.address
+          ...dependencies.constructor.operators
         ]
       });
       const after = await dependencies.houndsZerocost.control();
@@ -57,7 +57,7 @@ export async function set(
       await dependencies.houndsRestricted.setGlobalParameters({
         ...dependencies.constructor,
         operators: [
-          ...dependencies.constructor.operators, sig.address
+          ...dependencies.constructor.operators
         ]
       });
       const after = await dependencies.houndsRestricted.control();
@@ -70,7 +70,7 @@ export async function set(
       await dependencies.hounds.setGlobalParameters({
         ...dependencies.constructor,
         operators: [
-          ...dependencies.constructor.operators, sig.address
+          ...dependencies.constructor.operators
         ]
       });
       const after = await dependencies.hounds.control();

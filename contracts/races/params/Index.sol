@@ -36,12 +36,22 @@ contract Params is Whitelist {
     RacesConstructor.Struct public control;
     mapping(uint256 => Race.Struct) public races;
 
-    constructor(RacesConstructor.Struct memory input) Whitelist(input.operators, input.targets) {
+    constructor(
+        RacesConstructor.Struct memory input
+    ) 
+        Whitelist(input.operators, input.targets) 
+    {
         control = input;
     }
 
-    function setGlobalParameters(RacesConstructor.Struct memory globalParameters) external onlyOwner {
+    function setGlobalParameters(
+        RacesConstructor.Struct memory globalParameters
+    ) 
+        external 
+        onlyOwner 
+    {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     function race(uint256 theId) external view returns(Race.Struct memory) {

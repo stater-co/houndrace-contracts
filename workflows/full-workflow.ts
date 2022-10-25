@@ -70,6 +70,7 @@ async function main() {
     await setPayments({
         payments: payments.payments,
         paymentMethods: payments.paymentMethods,
+        houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.paymentMethods.address,
             operators: [],
@@ -80,6 +81,8 @@ async function main() {
     await setShop({
         shopMethods: payments.shopMethods,
         shopRestricted: payments.shopRestricted,
+        shop: payments.shop,
+        houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address,
@@ -182,7 +185,8 @@ async function main() {
 
     await testHounds.basicTest({
         hounds: hounds.hounds,
-        races: races.races
+        races: races.races,
+        payments: payments.payments
     });
 
     /*
