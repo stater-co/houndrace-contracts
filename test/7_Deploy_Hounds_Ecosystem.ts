@@ -25,15 +25,15 @@ export async function run(
     describe('Setting up the Hounds Ecosystem', async function () {
 
       it("Deploy the hounds restricted contract", async function () {
-        const [owner, signer2] = await ethers.getSigners();
+        const [owner, signer2, signer3] = await ethers.getSigners();
         houndsRestricted = await deployContract({
           name: 'HoundsRestricted',
           constructor: [[
             "HoundRace",
             "HR",
             globalParams.defaultHound,
-            [owner.address, signer2.address],
-            ['0x45fb9412','0xfbba82fc'],
+            [owner.address, signer2.address, signer3.address],
+            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
             [
               globalParams.address0,
               globalParams.address0,
@@ -61,15 +61,15 @@ export async function run(
       });
 
       it("Deploy the hounds modifier contract", async function () {
-        const [owner, signer2] = await ethers.getSigners();
+        const [owner, signer2, signer3] = await ethers.getSigners();
         houndsModifier = await deployContract({
           name: 'HoundsModifier',
           constructor: [[
             "HoundRace",
             "HR",
             globalParams.defaultHound,
-            [owner.address, signer2.address],
-            ['0x45fb9412','0xfbba82fc'],
+            [owner.address, signer2.address, signer3.address],
+            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -97,15 +97,15 @@ export async function run(
       });
 
       it("Deploy the hounds zerocost contract", async function () {
-        const [owner, signer2] = await ethers.getSigners();
+        const [owner, signer2, signer3] = await ethers.getSigners();
         houndsZerocost = await deployContract({
           name: 'HoundsZerocost',
           constructor: [[
             "HoundRace",
             "HR",
             globalParams.defaultHound,
-            [owner.address, signer2.address],
-            ['0x45fb9412','0xfbba82fc'],
+            [owner.address, signer2.address, signer3.address],
+            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -133,15 +133,15 @@ export async function run(
       });
     
       it("Deploy the hounds minter contract", async function () {
-        const [owner, signer2] = await ethers.getSigners();
+        const [owner, signer2, signer3] = await ethers.getSigners();
         houndsMinter = await deployContract({
           name: 'HoundsMinter',
           constructor: [[
             "HoundRace",
             "HR",
             globalParams.defaultHound,
-            [owner.address, signer2.address],
-            ['0x45fb9412','0xfbba82fc'],
+            [owner.address, signer2.address, signer3.address],
+            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -169,15 +169,15 @@ export async function run(
       });
 
       it("Deploy the hounds contract", async function () {
-        const [owner, signer2] = await ethers.getSigners();
+        const [owner, signer2, signer3] = await ethers.getSigners();
         hounds = await deployContract({
           name: 'Hounds',
           constructor: [[
             "HoundRace",
             "HR",
             globalParams.defaultHound,
-            [owner.address, signer2.address],
-            ['0x45fb9412','0xfbba82fc'],
+            [owner.address, signer2.address, signer3.address],
+            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
             [
               houndsRestricted.address,
               houndsMinter.address,

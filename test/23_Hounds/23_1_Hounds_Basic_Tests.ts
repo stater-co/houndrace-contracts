@@ -40,7 +40,6 @@ async function basicTest(
       });
     });
     
-    /*
     it("Verifying hound data", async function () {
       await checkHoundStructure(
         await dependencies.hounds.hound(createdHoundId)
@@ -48,12 +47,15 @@ async function basicTest(
     });
 
     it("Set mating season true", async function () {
+      let [, , signer] = await ethers.getSigners();
       await safeSetMatingSeason({
         season: true,
-        contract: dependencies.hounds
+        contract: dependencies.hounds,
+        signer: signer
       });
     });
 
+    /*
     it("Mint 20x females", async function () {
       let [sig1] = await ethers.getSigners();
       for ( let i = 0 ; i < 20 ; ++i ) {
