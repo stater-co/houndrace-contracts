@@ -20,26 +20,27 @@ async function basicTest(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
-      let [sig1] = await ethers.getSigners();
+      let [sig] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
         hound: globalParams.defaultHound,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
     });
     
     it("Update hound stamina after creation", async function() {
+      let [, sig] = await ethers.getSigners();
       await safeUpdateStamina({
         contract: dependencies.hounds,
         houndId: createdHoundId,
-        gamification: dependencies.gamification
+        signer: sig
       });
     });
     
+    /*
     it("Verifying hound data", async function () {
       await checkHoundStructure(
         await dependencies.hounds.hound(createdHoundId)
@@ -138,6 +139,7 @@ async function basicTest(
         contract: dependencies.hounds
       });
     });
+    */
 
   });
 }

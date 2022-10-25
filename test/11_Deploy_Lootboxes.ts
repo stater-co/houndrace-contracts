@@ -17,7 +17,7 @@ export async function run(
     describe('Setting up the Lootboxes', async function () {
 
       it("Deploy the lootboxes contract", async function () {
-
+        const [owner] = await ethers.getSigners();
         lootboxes = await deployContract({
           name: 'Lootboxes',
           constructor: [[
@@ -25,7 +25,8 @@ export async function run(
             [],
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            owner.address,
+            [],
             false
           ]],
           props: {}

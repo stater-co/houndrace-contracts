@@ -24,15 +24,25 @@ import type {
 
 export declare namespace ShopConstructor {
   export type StructStruct = {
+    operators: string[];
     methods: string;
     restricted: string;
     alphadune: string;
+    targets: BytesLike[];
   };
 
-  export type StructStructOutput = [string, string, string] & {
+  export type StructStructOutput = [
+    string[],
+    string,
+    string,
+    string,
+    string[]
+  ] & {
+    operators: string[];
     methods: string;
     restricted: string;
     alphadune: string;
+    targets: string[];
   };
 }
 
@@ -69,16 +79,22 @@ export declare namespace Discount {
 export interface ShopRestrictedInterface extends utils.Interface {
   contractName: "ShopRestricted";
   functions: {
+    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "createDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool))": FunctionFragment;
     "editDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,bytes4[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "updateWhitelist(address[],bytes4[])": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "checkWhiteList",
+    values: [string]
+  ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "createDiscount",
@@ -102,7 +118,15 @@ export interface ShopRestrictedInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateWhitelist",
+    values: [string[], BytesLike[]]
+  ): string;
 
+  decodeFunctionResult(
+    functionFragment: "checkWhiteList",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createDiscount",
@@ -124,6 +148,10 @@ export interface ShopRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
 
@@ -179,6 +207,11 @@ export interface ShopRestricted extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    checkWhiteList(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
+
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -217,7 +250,18 @@ export interface ShopRestricted extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
+
+  checkWhiteList(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -258,7 +302,18 @@ export interface ShopRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  updateWhitelist(
+    operators: string[],
+    targets: BytesLike[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
+    checkWhiteList(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
+
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -295,6 +350,12 @@ export interface ShopRestricted extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -318,6 +379,8 @@ export interface ShopRestricted extends BaseContract {
   };
 
   estimateGas: {
+    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
+
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     createDiscount(
@@ -348,9 +411,20 @@ export interface ShopRestricted extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
+    checkWhiteList(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     createDiscount(
@@ -379,6 +453,12 @@ export interface ShopRestricted extends BaseContract {
 
     transferOwnership(
       newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

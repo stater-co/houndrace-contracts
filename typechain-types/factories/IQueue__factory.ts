@@ -104,6 +104,11 @@ const _abi = [
             type: "tuple",
           },
           {
+            internalType: "uint256[]",
+            name: "speciesAllowed",
+            type: "uint256[]",
+          },
+          {
             internalType: "uint256",
             name: "startDate",
             type: "uint256",
@@ -132,11 +137,6 @@ const _abi = [
             internalType: "uint32",
             name: "staminaCost",
             type: "uint32",
-          },
-          {
-            internalType: "enum Specie.Enum[]",
-            name: "speciesAllowed",
-            type: "uint8[]",
           },
           {
             internalType: "bool",

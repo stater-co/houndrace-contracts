@@ -25,41 +25,36 @@ import type {
 
 export declare namespace PaymentsConstructor {
   export type StructStruct = {
-    alphadune: string;
-    restricted: string;
+    operators: string[];
     methods: string;
+    targets: BytesLike[];
   };
 
-  export type StructStructOutput = [string, string, string] & {
-    alphadune: string;
-    restricted: string;
+  export type StructStructOutput = [string[], string, string[]] & {
+    operators: string[];
     methods: string;
+    targets: string[];
   };
 }
 
 export interface PaymentsInterface extends utils.Interface {
   contractName: "Payments";
   functions: {
-    "alphaduneReservoirs(uint8,address,uint256)": FunctionFragment;
+    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "fillRewardsReservoir(address,uint256[],uint256[],uint8)": FunctionFragment;
     "owner()": FunctionFragment;
     "pay(address,address,address,uint256[],uint256[],uint8)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "rewardsReservoirs(uint8,address,uint256)": FunctionFragment;
-    "setGlobalParameters((address,address,address))": FunctionFragment;
+    "setGlobalParameters((address[],address,bytes4[]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "updateWhitelist(address[],bytes4[])": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "alphaduneReservoirs",
-    values: [BigNumberish, string, BigNumberish]
+    functionFragment: "checkWhiteList",
+    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "fillRewardsReservoir",
-    values: [string, BigNumberish[], BigNumberish[], BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pay",
@@ -77,10 +72,6 @@ export interface PaymentsInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "rewardsReservoirs",
-    values: [BigNumberish, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setGlobalParameters",
     values: [PaymentsConstructor.StructStruct]
   ): string;
@@ -88,24 +79,20 @@ export interface PaymentsInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateWhitelist",
+    values: [string[], BytesLike[]]
+  ): string;
 
   decodeFunctionResult(
-    functionFragment: "alphaduneReservoirs",
+    functionFragment: "checkWhiteList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "fillRewardsReservoir",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "pay", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "rewardsReservoirs",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -116,13 +103,33 @@ export interface PaymentsInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateWhitelist",
+    data: BytesLike
+  ): Result;
 
   events: {
+    "NewPayment(address,address,address,uint256[],uint256[],uint8)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "NewPayment"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
 }
+
+export type NewPaymentEvent = TypedEvent<
+  [string, string, string, BigNumber[], BigNumber[], number],
+  {
+    from: string;
+    to: string;
+    currency: string;
+    ids: BigNumber[];
+    amounts: BigNumber[];
+    paymentType: number;
+  }
+>;
+
+export type NewPaymentEventFilter = TypedEventFilter<NewPaymentEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -160,30 +167,12 @@ export interface Payments extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    alphaduneReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
+    checkWhiteList(
+      user: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[string, string]>;
 
-    control(
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, string] & {
-        alphadune: string;
-        restricted: string;
-        methods: string;
-      }
-    >;
-
-    fillRewardsReservoir(
-      currency: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      paymentType: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    control(overrides?: CallOverrides): Promise<[string] & { methods: string }>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -201,13 +190,6 @@ export interface Payments extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    rewardsReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -217,32 +199,20 @@ export interface Payments extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
-  alphaduneReservoirs(
-    arg0: BigNumberish,
-    arg1: string,
-    arg2: BigNumberish,
+  checkWhiteList(
+    user: string,
     overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<[string, string]>;
 
-  control(
-    overrides?: CallOverrides
-  ): Promise<
-    [string, string, string] & {
-      alphadune: string;
-      restricted: string;
-      methods: string;
-    }
-  >;
-
-  fillRewardsReservoir(
-    currency: string,
-    ids: BigNumberish[],
-    amounts: BigNumberish[],
-    paymentType: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  control(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -260,13 +230,6 @@ export interface Payments extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  rewardsReservoirs(
-    arg0: BigNumberish,
-    arg1: string,
-    arg2: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   setGlobalParameters(
     globalParameters: PaymentsConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -277,31 +240,19 @@ export interface Payments extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  updateWhitelist(
+    operators: string[],
+    targets: BytesLike[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
-    alphaduneReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
+    checkWhiteList(
+      user: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ): Promise<[string, string]>;
 
-    control(
-      overrides?: CallOverrides
-    ): Promise<
-      [string, string, string] & {
-        alphadune: string;
-        restricted: string;
-        methods: string;
-      }
-    >;
-
-    fillRewardsReservoir(
-      currency: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      paymentType: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    control(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -317,13 +268,6 @@ export interface Payments extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    rewardsReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
       overrides?: CallOverrides
@@ -333,9 +277,32 @@ export interface Payments extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
+    "NewPayment(address,address,address,uint256[],uint256[],uint8)"(
+      from?: null,
+      to?: null,
+      currency?: null,
+      ids?: null,
+      amounts?: null,
+      paymentType?: null
+    ): NewPaymentEventFilter;
+    NewPayment(
+      from?: null,
+      to?: null,
+      currency?: null,
+      ids?: null,
+      amounts?: null,
+      paymentType?: null
+    ): NewPaymentEventFilter;
+
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -347,22 +314,9 @@ export interface Payments extends BaseContract {
   };
 
   estimateGas: {
-    alphaduneReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
-
-    fillRewardsReservoir(
-      currency: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      paymentType: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -380,13 +334,6 @@ export interface Payments extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    rewardsReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -396,25 +343,21 @@ export interface Payments extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    alphaduneReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
+    checkWhiteList(
+      user: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    fillRewardsReservoir(
-      currency: string,
-      ids: BigNumberish[],
-      amounts: BigNumberish[],
-      paymentType: BigNumberish,
-      overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -432,13 +375,6 @@ export interface Payments extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    rewardsReservoirs(
-      arg0: BigNumberish,
-      arg1: string,
-      arg2: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     setGlobalParameters(
       globalParameters: PaymentsConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -446,6 +382,12 @@ export interface Payments extends BaseContract {
 
     transferOwnership(
       newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

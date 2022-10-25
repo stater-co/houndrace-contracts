@@ -25,10 +25,11 @@ import type {
 export declare namespace LootboxesConstructor {
   export type StructStruct = {
     name: string;
-    allowedApprovals: string[];
+    operators: string[];
     hounds: string;
     payments: string;
     alphadune: string;
+    targets: BytesLike[];
     canBeOpened: boolean;
   };
 
@@ -38,13 +39,15 @@ export declare namespace LootboxesConstructor {
     string,
     string,
     string,
+    string[],
     boolean
   ] & {
     name: string;
-    allowedApprovals: string[];
+    operators: string[];
     hounds: string;
     payments: string;
     alphadune: string;
+    targets: string[];
     canBeOpened: boolean;
   };
 }
@@ -73,9 +76,9 @@ export declare namespace Box {
 export interface LootboxesInterface extends utils.Interface {
   contractName: "Lootboxes";
   functions: {
-    "allowedApprovals(address)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
+    "checkWhiteList(address)": FunctionFragment;
     "control()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(uint256,uint256,string)": FunctionFragment;
@@ -88,17 +91,14 @@ export interface LootboxesInterface extends utils.Interface {
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,address[],address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((string,address[],address,address,address,bytes4[],bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "updateWhitelist(address[],bytes4[])": FunctionFragment;
     "uri(uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "allowedApprovals",
-    values: [string]
-  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [string, BigNumberish]
@@ -106,6 +106,10 @@ export interface LootboxesInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOfBatch",
     values: [string[], BigNumberish[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "checkWhiteList",
+    values: [string]
   ): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
@@ -165,15 +169,19 @@ export interface LootboxesInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "updateWhitelist",
+    values: [string[], BytesLike[]]
+  ): string;
   encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
 
-  decodeFunctionResult(
-    functionFragment: "allowedApprovals",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "checkWhiteList",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -223,6 +231,10 @@ export interface LootboxesInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "updateWhitelist",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
@@ -345,11 +357,6 @@ export interface Lootboxes extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -361,6 +368,11 @@ export interface Lootboxes extends BaseContract {
       ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
+
+    checkWhiteList(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -468,10 +480,14 @@ export interface Lootboxes extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
   };
-
-  allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
 
   balanceOf(
     account: string,
@@ -484,6 +500,11 @@ export interface Lootboxes extends BaseContract {
     ids: BigNumberish[],
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
+
+  checkWhiteList(
+    user: string,
+    overrides?: CallOverrides
+  ): Promise<[string, string]>;
 
   control(
     overrides?: CallOverrides
@@ -591,11 +612,15 @@ export interface Lootboxes extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  updateWhitelist(
+    operators: string[],
+    targets: BytesLike[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
-    allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -607,6 +632,11 @@ export interface Lootboxes extends BaseContract {
       ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
+
+    checkWhiteList(
+      user: string,
+      overrides?: CallOverrides
+    ): Promise<[string, string]>;
 
     control(
       overrides?: CallOverrides
@@ -709,6 +739,12 @@ export interface Lootboxes extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
   };
 
@@ -802,11 +838,6 @@ export interface Lootboxes extends BaseContract {
   };
 
   estimateGas: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -818,6 +849,8 @@ export interface Lootboxes extends BaseContract {
       ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    checkWhiteList(user: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -915,15 +948,16 @@ export interface Lootboxes extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -933,6 +967,11 @@ export interface Lootboxes extends BaseContract {
     balanceOfBatch(
       accounts: string[],
       ids: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    checkWhiteList(
+      user: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1029,6 +1068,12 @@ export interface Lootboxes extends BaseContract {
 
     transferOwnership(
       newOwner: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    updateWhitelist(
+      operators: string[],
+      targets: BytesLike[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

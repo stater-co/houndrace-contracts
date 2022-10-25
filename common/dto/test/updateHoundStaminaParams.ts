@@ -1,9 +1,8 @@
 import { BigNumber } from "ethers";
-import { Gamification } from "../../../typechain-types/Gamification";
 import { Hounds } from "../../../typechain-types/Hounds";
+import { SignerDependency } from "./raw/signerDependency.dto";
 
-export interface UpdateHoundStaminaParams {
+export interface UpdateHoundStaminaParams extends SignerDependency {
     contract: Hounds;
-    gamification: Gamification
     houndId: string | number | BigNumber
   }

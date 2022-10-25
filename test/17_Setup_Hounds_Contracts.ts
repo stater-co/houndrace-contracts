@@ -9,85 +9,72 @@ export async function set(
   describe('Setting up the Hounds Contracts Controller', async function () {
 
     it("Setup hounds minter controller", async function () {
-    
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
       const before = await dependencies.houndsMinter.control();
+      console.log("Address: ", sig.address);
       await dependencies.houndsMinter.setGlobalParameters({
         ...dependencies.constructor,
-        boilerplate: {
-          ...dependencies.constructor.boilerplate,
-          alphadune: sig1.address
-        }
+        operators: [
+          ...dependencies.constructor.operators, sig.address
+        ],
+        targets: [
+          ...dependencies.constructor.targets
+        ]
       });
       const after = await dependencies.houndsMinter.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds minter global params setter bugged");
     });
 
     it("Setup hounds modifier controller", async function () {
-    
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
       const before = await dependencies.houndsModifier.control();
       await dependencies.houndsModifier.setGlobalParameters({
         ...dependencies.constructor,
-        boilerplate: {
-          ...dependencies.constructor.boilerplate,
-          alphadune: sig1.address
-        }
+        operators: [
+          ...dependencies.constructor.operators, sig.address
+        ]
       });
       const after = await dependencies.houndsModifier.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds modifier global params setter bugged");
-
     });
 
     it("Setup hounds zerocost controller", async function () {
-    
-      const [sig1] = await ethers.getSigners();
-
+      const [sig] = await ethers.getSigners();
       const before = await dependencies.houndsZerocost.control();
       await dependencies.houndsZerocost.setGlobalParameters({
         ...dependencies.constructor,
-        boilerplate: {
-          ...dependencies.constructor.boilerplate,
-          alphadune: sig1.address
-        }
+        operators: [
+          ...dependencies.constructor.operators, sig.address
+        ]
       });
       const after = await dependencies.houndsZerocost.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds zerocost global params setter bugged");
-
     });
 
     it("Setup hounds restricted controller", async function () {
-    
-      const [sig1] = await ethers.getSigners();
-
+      const [sig] = await ethers.getSigners();
       const before = await dependencies.houndsRestricted.control();
       await dependencies.houndsRestricted.setGlobalParameters({
         ...dependencies.constructor,
-        boilerplate: {
-          ...dependencies.constructor.boilerplate,
-          alphadune: sig1.address
-        }
+        operators: [
+          ...dependencies.constructor.operators, sig.address
+        ]
       });
       const after = await dependencies.houndsRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds restricted global params setter bugged");
-
     });
 
     it("Setup hounds controller", async function () {
-    
-      const [sig1] = await ethers.getSigners();
-
+      const [sig] = await ethers.getSigners();
       const before = await dependencies.hounds.control();
       await dependencies.hounds.setGlobalParameters({
         ...dependencies.constructor,
-        boilerplate: {
-          ...dependencies.constructor.boilerplate,
-          alphadune: sig1.address
-        }
+        operators: [
+          ...dependencies.constructor.operators, sig.address
+        ]
       });
       const after = await dependencies.hounds.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds global params setter bugged");
-
     });
 
   });

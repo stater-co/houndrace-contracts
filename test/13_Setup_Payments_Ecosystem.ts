@@ -7,13 +7,6 @@ export async function set(
 ): Promise<void> {
   return new Promise((resolve, ) => {
     describe('Setting up the Payments Contracts Controller', function () {
-  
-      it('Setup payments restricted contract controller', async function () {
-        const before = await dependencies.paymentRestricted.control();
-        await dependencies.paymentRestricted.setGlobalParameters(dependencies.constructor);
-        const after = await dependencies.paymentRestricted.control();
-        expecting(JSON.stringify(before) !== JSON.stringify(after), "Payments Restricted global params setter bugged");
-      });
     
       it('Setup payments methods contract controller', async function () {
         const before = await dependencies.paymentMethods.control();

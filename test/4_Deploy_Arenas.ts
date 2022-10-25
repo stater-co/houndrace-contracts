@@ -5,7 +5,7 @@ import { deployContract } from '../plugins/test/deployContract';
 import { ArenasRestricted } from '../typechain-types/ArenasRestricted';
 import { ArenasMethods } from '../typechain-types/ArenasMethods';
 import { Arenas } from '../typechain-types/Arenas';
-const { ethers } = require("hardhat");
+const { ethers } = require('hardhat');
 
 let arenasRestricted: ArenasRestricted;
 let arenasMethods: ArenasMethods;
@@ -18,54 +18,57 @@ export async function run(
   return new Promise((resolve, ) => {
     describe('Setting up the Arenas System', async function () {
 
-      it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
+      it('Deploy the arenas contracts', async function () {
+        const [owner] = await ethers.getSigners();
         arenasRestricted = await deployContract({
           name: 'ArenasRestricted',
           constructor: [[
-            "HoundRace Arenas", 
-            "HRA", 
+            'HoundRace Arenas', 
+            'HRA', 
+            [owner.address],
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            owner.address, 
+            ['0xe195c287'],
             60
           ]],
           props: {}
         }) as ArenasRestricted;
       });
 
-      it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
+      it('Deploy the arenas contracts', async function () {
+        const [owner] = await ethers.getSigners();
         arenasMethods = await deployContract({
           name: 'ArenasMethods',
           constructor: [[
-            "HoundRace Arenas", 
-            "HRA", 
+            'HoundRace Arenas', 
+            'HRA', 
+            [owner.address],
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            owner.address, 
+            ['0xe195c287'],
             60
           ]],
           props: {}
         }) as ArenasMethods;
       });
 
-      it("Deploy the arenas contracts", async function () {
-        const [deployer] = await ethers.getSigners();
+      it('Deploy the arenas contracts', async function () {
+        const [owner] = await ethers.getSigners();
         arenas = await deployContract({
           name: 'Arenas',
           constructor: [[
-            "HoundRace Arenas", 
-            "HRA", 
+            'HoundRace Arenas', 
+            'HRA', 
+            [owner.address], 
             arenasRestricted.address, 
             arenasMethods.address, 
             dependencies.paymentsAddress, 
-            deployer.address, 
-            dependencies.allowedCallers,
+            owner.address, 
+            ['0xe195c287'],
             60
           ]],
           props: {}
