@@ -12,6 +12,15 @@ import './Constructor.sol';
 
 contract Params is ReentrancyGuard, Whitelist {
     
+    event NewPayment(
+        address from,
+        address to,
+        address currency,
+        uint256[] ids,
+        uint256[] amounts,
+        Payment.PaymentTypes paymentType
+    );
+    
     PaymentsConstructor.Struct public control;
 
     constructor(PaymentsConstructor.Struct memory input) Whitelist(input.operators, input.targets) {

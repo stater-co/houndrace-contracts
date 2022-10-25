@@ -49,6 +49,15 @@ contract PaymentsMethods is Params {
 
 		}
 
+		emit NewPayment(
+			from,
+			to,
+			currency,
+			ids,
+			amounts,
+			paymentType
+		);
+
 	}
 
 }
