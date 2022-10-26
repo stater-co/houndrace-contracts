@@ -17,20 +17,22 @@ async function basicTest(
     let createdQueueId: string | number;
 
     it("Create queue", async function () {
+      let [, , , , , signer] = await ethers.getSigners();
       createdQueueId = await safeMintQueue({
         contract: dependencies.contract,
-        queue: dependencies.queue
+        queue: dependencies.queue,
+        signer: signer
       });
     });
 
     it("Enqueue", async function() {
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
       await safeJoinQueue({
         contract: dependencies.contract as Queues,
         queueId: createdQueueId,
         houndId: dependencies.houndIdToEnqueue,
         houndsContract: dependencies.houndsContract as Hounds,
-        sender: sig1,
+        sender: sig,
         arenasContract: dependencies.arenasContract,
         erc20: dependencies.erc20,
         paymentsContract: dependencies.payments
@@ -40,7 +42,7 @@ async function basicTest(
     it("Enqueue 10x", async function() {
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.profile.runningOn) === 0 ) {
@@ -49,7 +51,7 @@ async function basicTest(
             queueId: createdQueueId,
             houndId: j,
             houndsContract: dependencies.houndsContract as Hounds,
-            sender: sig1,
+            sender: sig,
             arenasContract: dependencies.arenasContract,
             erc20: dependencies.erc20,
             paymentsContract: dependencies.payments
@@ -62,13 +64,13 @@ async function basicTest(
     it("Unenqueue", async function() {
       let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
       if ( queue.core.participants.length === 0 ) {
-        const [sig1] = await ethers.getSigners();
+        const [sig] = await ethers.getSigners();
         await safeJoinQueue({
           contract: dependencies.contract as Queues,
           queueId: createdQueueId,
           houndId: 1,
           houndsContract: dependencies.houndsContract as Hounds,
-          sender: sig1,
+          sender: sig,
           arenasContract: dependencies.arenasContract,
           erc20: dependencies.erc20,
           paymentsContract: dependencies.payments
@@ -83,17 +85,21 @@ async function basicTest(
     });
 
     it("Edit queue", async function() {
+      let [, , , , , , signer] = await ethers.getSigners();
       await safeEditQueue({
         contract: dependencies.contract,
         queueId: createdQueueId,
-        queue: dependencies.queue
+        queue: dependencies.queue,
+        signer: signer
       });
     });
 
     it("Close queue", async function() {
+      let [, , , , , , , signer] = await ethers.getSigners();
       await safeCloseQueue({
         contract: dependencies.contract,
-        queueId: createdQueueId
+        queueId: createdQueueId,
+        signer: signer
       });
     });
 

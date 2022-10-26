@@ -88,8 +88,10 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         // if OpenSea's ERC1155 Proxy Address is detected, auto-return true
         // for Polygon's Mumbai testnet, use 0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c
         // 0x58807baD0B376efc12F5AD86aAc70E78ed67deaE
-        if ( whitelists[_operator] == msg.sig ) {
-            return true;
+        for (uint256 i = 0; i < whitelists[_operator].length; ++i) {
+            if ( whitelists[_operator][i] == msg.sig ) {
+                return true;
+            }
         }
         
         // otherwise, use the default ERC1155.isApprovedForAll()

@@ -211,7 +211,7 @@ export declare namespace Constructor {
     symbol: string;
     defaultHound: Hound.StructStruct;
     operators: string[];
-    targets: BytesLike[];
+    targets: BytesLike[][];
     boilerplate: ConstructorBoilerplate.StructStruct;
     fees: ConstructorFees.StructStruct;
   };
@@ -221,7 +221,7 @@ export declare namespace Constructor {
     string,
     Hound.StructStructOutput,
     string[],
-    string[],
+    string[][],
     ConstructorBoilerplate.StructStructOutput,
     ConstructorFees.StructStructOutput
   ] & {
@@ -229,7 +229,7 @@ export declare namespace Constructor {
     symbol: string;
     defaultHound: Hound.StructStructOutput;
     operators: string[];
-    targets: string[];
+    targets: string[][];
     boilerplate: ConstructorBoilerplate.StructStructOutput;
     fees: ConstructorFees.StructStructOutput;
   };
@@ -258,7 +258,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),address[],bytes4[],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -267,6 +267,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "transferOwnership(address)": FunctionFragment;
     "updateHoundRunning(uint256,uint256)": FunctionFragment;
     "updateHoundStamina(uint256,uint32)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -364,6 +365,10 @@ export interface HoundsModifierInterface extends utils.Interface {
     functionFragment: "updateHoundStamina",
     values: [BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -445,6 +450,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     functionFragment: "updateHoundStamina",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -755,6 +761,12 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   approve(
@@ -924,6 +936,12 @@ export interface HoundsModifier extends BaseContract {
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
     approve(
@@ -1097,6 +1115,12 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -1350,6 +1374,12 @@ export interface HoundsModifier extends BaseContract {
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1503,6 +1533,12 @@ export interface HoundsModifier extends BaseContract {
       theId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

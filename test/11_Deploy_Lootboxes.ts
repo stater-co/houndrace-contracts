@@ -17,16 +17,16 @@ export async function run(
     describe('Setting up the Lootboxes', async function () {
 
       it("Deploy the lootboxes contract", async function () {
-        const [owner] = await ethers.getSigners();
+        let [owner, , , , , , , , , signer, signer2, signer3] = await ethers.getSigners();
         lootboxes = await deployContract({
           name: 'Lootboxes',
           constructor: [[
             "HoundRace lootboxes",
-            [],
+            [signer.address, signer2.address, signer3.address],
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
             owner.address,
-            [],
+            [['0xc6e64e53'],['0x7c46a44b'],['0xedd0cb87']],
             false
           ]],
           props: {}

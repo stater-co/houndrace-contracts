@@ -6,4 +6,5 @@ export interface RacesSystemController {
     racesMethods: ethers.Contract;
     races: ethers.Contract;
     constructor: RacesConstructor.StructStruct;
+    queuesAddress: string;
 }

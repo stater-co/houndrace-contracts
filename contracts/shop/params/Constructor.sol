@@ -9,7 +9,7 @@ library ShopConstructor {
         address methods;
         address restricted;
         address alphadune;
-        bytes4[] targets;
+        bytes4[][] targets;
     }
 
 }

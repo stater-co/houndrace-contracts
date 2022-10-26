@@ -34,7 +34,7 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    targets: BytesLike[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
@@ -47,7 +47,7 @@ export declare namespace QueuesConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
     operators: string[];
     methods: string;
@@ -58,7 +58,7 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    targets: string[];
+    targets: string[][];
   };
 }
 
@@ -173,10 +173,11 @@ export interface QueuesMethodsInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
@@ -219,6 +220,10 @@ export interface QueuesMethodsInterface extends utils.Interface {
     functionFragment: "unenqueue",
     values: [BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "enqueue", data: BytesLike): Result;
@@ -251,6 +256,7 @@ export interface QueuesMethodsInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "unenqueue", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "DeleteQueue(uint256)": EventFragment;
@@ -436,6 +442,12 @@ export interface QueuesMethods extends BaseContract {
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   control(
@@ -528,6 +540,12 @@ export interface QueuesMethods extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   callStatic: {
     control(
       overrides?: CallOverrides
@@ -616,6 +634,12 @@ export interface QueuesMethods extends BaseContract {
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -723,6 +747,12 @@ export interface QueuesMethods extends BaseContract {
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -781,6 +811,12 @@ export interface QueuesMethods extends BaseContract {
       theId: BigNumberish,
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

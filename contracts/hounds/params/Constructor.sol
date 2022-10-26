@@ -10,7 +10,7 @@ library Constructor {
         string symbol;
         Hound.Struct defaultHound;
         address[] operators;
-        bytes4[] targets;
+        bytes4[][] targets;
         ConstructorBoilerplate.Struct boilerplate;
         ConstructorFees.Struct fees;
     }

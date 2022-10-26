@@ -11,7 +11,7 @@ library ArenasConstructor {
         address methods;
         address payments;
         address alphadune;
-        bytes4[] targets;
+        bytes4[][] targets;
         uint256 alhpadunePercentage;
     }
 }

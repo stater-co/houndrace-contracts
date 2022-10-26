@@ -1,5 +1,6 @@
 import { RacesAdvancedTests } from "../../common/dto/test/racesAdvancedTests";
 import { safeUploadRace } from "../../plugins/test/uploadRace";
+const { ethers } = require('hardhat');
 
 
 async function advancedTests(
@@ -9,10 +10,14 @@ async function advancedTests(
     describe('Races Advanced Tests', async function () {
 
       it("Upload race", async function () {
+        let [, , , , , , , , signer] = await ethers.getSigners();
         await safeUploadRace({
           contract: dependencies.contract,
           race: dependencies.race,
-          onId: 1000000
+          onId: 100000,
+          hounds: dependencies.hounds,
+          queues: dependencies.queues,
+          signer: signer
         });
 
         resolve();

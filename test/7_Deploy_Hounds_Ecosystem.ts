@@ -33,7 +33,7 @@ export async function run(
             "HR",
             globalParams.defaultHound,
             [owner.address, signer2.address, signer3.address],
-            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
+            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
             [
               globalParams.address0,
               globalParams.address0,
@@ -69,7 +69,7 @@ export async function run(
             "HR",
             globalParams.defaultHound,
             [owner.address, signer2.address, signer3.address],
-            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
+            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -105,7 +105,7 @@ export async function run(
             "HR",
             globalParams.defaultHound,
             [owner.address, signer2.address, signer3.address],
-            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
+            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -141,7 +141,7 @@ export async function run(
             "HR",
             globalParams.defaultHound,
             [owner.address, signer2.address, signer3.address],
-            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
+            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -177,7 +177,7 @@ export async function run(
             "HR",
             globalParams.defaultHound,
             [owner.address, signer2.address, signer3.address],
-            ['0x45fb9412','0xfbba82fc','0x5c80b448'],
+            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               houndsMinter.address,

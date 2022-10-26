@@ -33,7 +33,7 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     races: string;
-    targets: BytesLike[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
@@ -45,7 +45,7 @@ export declare namespace RacesConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
     operators: string[];
     arenas: string;
@@ -55,7 +55,7 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     races: string;
-    targets: string[];
+    targets: string[][];
   };
 }
 
@@ -191,9 +191,10 @@ export interface RacesInterface extends utils.Interface {
     "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,bytes4[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
@@ -229,6 +230,10 @@ export interface RacesInterface extends utils.Interface {
     functionFragment: "uploadRace",
     values: [BigNumberish, BigNumberish, Race.StructStruct]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
@@ -257,6 +262,7 @@ export interface RacesInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uploadRace", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "NewFinishedRace(uint256,uint256,tuple)": EventFragment;
@@ -399,6 +405,12 @@ export interface Races extends BaseContract {
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   control(
@@ -473,6 +485,12 @@ export interface Races extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   callStatic: {
     control(
       overrides?: CallOverrides
@@ -543,6 +561,12 @@ export interface Races extends BaseContract {
       race: Race.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -636,6 +660,12 @@ export interface Races extends BaseContract {
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -690,6 +720,12 @@ export interface Races extends BaseContract {
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

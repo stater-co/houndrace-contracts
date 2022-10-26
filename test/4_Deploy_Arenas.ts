@@ -30,7 +30,7 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             owner.address, 
-            ['0xe195c287'],
+            [['0xe195c287']],
             60
           ]],
           props: {}
@@ -49,7 +49,7 @@ export async function run(
             globalParams.address0, 
             dependencies.paymentsAddress, 
             owner.address, 
-            ['0xe195c287'],
+            [['0xe195c287']],
             60
           ]],
           props: {}
@@ -68,7 +68,7 @@ export async function run(
             arenasMethods.address, 
             dependencies.paymentsAddress, 
             owner.address, 
-            ['0xe195c287'],
+            [['0xe195c287']],
             60
           ]],
           props: {}

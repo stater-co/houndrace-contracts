@@ -1,8 +1,9 @@
-import { ethers } from "ethers";
-import { Queue } from "../../../typechain-types/contracts/queues/Index.sol/Queues";
+import { Signer } from "ethers";
+import { Queue, Queues } from "../../../typechain-types/Queues";
 
 export interface EditQueueParams {
-  contract: ethers.Contract;
+  contract: Queues;
   queue: Queue.StructStructOutput;
   queueId: number | string;
+  signer: Signer;
 }

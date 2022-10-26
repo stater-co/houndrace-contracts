@@ -129,7 +129,6 @@ async function basicTest(
 
     });
 
-    /*
     it("Set hound available to breed externally", async function () {
       await safeSetAvailableToBreed({
         status: true,
@@ -138,7 +137,6 @@ async function basicTest(
         contract: dependencies.hounds
       });
     });
-    */
 
   });
 }

@@ -31,7 +31,7 @@ export declare namespace ArenasConstructor {
     methods: string;
     payments: string;
     alphadune: string;
-    targets: BytesLike[];
+    targets: BytesLike[][];
     alhpadunePercentage: BigNumberish;
   };
 
@@ -43,7 +43,7 @@ export declare namespace ArenasConstructor {
     string,
     string,
     string,
-    string[],
+    string[][],
     BigNumber
   ] & {
     name: string;
@@ -53,7 +53,7 @@ export declare namespace ArenasConstructor {
     methods: string;
     payments: string;
     alphadune: string;
-    targets: string[];
+    targets: string[][];
     alhpadunePercentage: BigNumber;
   };
 }
@@ -112,12 +112,13 @@ export interface ArenasInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,address[],address,address,address,address,bytes4[],uint256))": FunctionFragment;
+    "setGlobalParameters((string,string,address[],address,address,address,address,bytes4[][],uint256))": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenURI(uint256)": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -207,6 +208,10 @@ export interface ArenasInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "arena", data: BytesLike): Result;
@@ -274,6 +279,7 @@ export interface ArenasInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
@@ -519,6 +525,12 @@ export interface Arenas extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   approve(
@@ -665,6 +677,12 @@ export interface Arenas extends BaseContract {
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   callStatic: {
     approve(
@@ -818,6 +836,12 @@ export interface Arenas extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -1015,6 +1039,12 @@ export interface Arenas extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1154,6 +1184,12 @@ export interface Arenas extends BaseContract {
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

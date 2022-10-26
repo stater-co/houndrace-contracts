@@ -7,7 +7,7 @@ library PaymentsConstructor {
     struct Struct {
         address[] operators;
         address methods;
-        bytes4[] targets;
+        bytes4[][] targets;
     }
 
 }

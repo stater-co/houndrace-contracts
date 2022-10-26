@@ -60,9 +60,9 @@ const _abi = [
             type: "address",
           },
           {
-            internalType: "bytes4[]",
+            internalType: "bytes4[][]",
             name: "targets",
-            type: "bytes4[]",
+            type: "bytes4[][]",
           },
         ],
         internalType: "struct QueuesConstructor.Struct",

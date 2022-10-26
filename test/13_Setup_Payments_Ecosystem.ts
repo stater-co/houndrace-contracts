@@ -13,8 +13,8 @@ export async function set(
         const before = await dependencies.paymentMethods.control();
         await dependencies.paymentMethods.setGlobalParameters({
           ...dependencies.constructor,
-          targets: [...dependencies.constructor.targets, '0xc01f59c2'],
-          operators: [...dependencies.constructor.operators, dependencies.houndsAddress]
+          targets: [['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2']],
+          operators: [dependencies.houndsAddress, dependencies.queuesAddress, dependencies.arenasAddress]
         });
         const after = await dependencies.paymentMethods.control();
         expecting(JSON.stringify(before) !== JSON.stringify(after), "Payments methods global params setter bugged");
@@ -24,8 +24,8 @@ export async function set(
         const before = await dependencies.payments.control();
         await dependencies.payments.setGlobalParameters({
           ...dependencies.constructor,
-          targets: [...dependencies.constructor.targets, '0xc01f59c2'],
-          operators: [...dependencies.constructor.operators, dependencies.houndsAddress]
+          targets: [['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2']],
+          operators: [dependencies.houndsAddress, dependencies.queuesAddress, dependencies.arenasAddress]
         });
         const after = await dependencies.payments.control();
         expecting(JSON.stringify(before) !== JSON.stringify(after), "Payments global params setter bugged");

@@ -11,6 +11,6 @@ library RacesConstructor {
         address restricted;
         address queues;
         address races;
-        bytes4[] targets;
+        bytes4[][] targets;
     }
 }

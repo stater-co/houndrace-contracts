@@ -11,7 +11,7 @@ export async function set(
       const before = await dependencies.shopRestricted.control();
       await dependencies.shopRestricted.setGlobalParameters({
         ...dependencies.constructor,
-        targets: [...dependencies.constructor.targets, '0xad6a8745'],
+        targets: [['0xad6a8745']],
         operators: [...dependencies.constructor.operators, dependencies.houndsAddress]
       });
       const after = await dependencies.shopRestricted.control();
@@ -22,7 +22,7 @@ export async function set(
       const before = await dependencies.shopMethods.control();
       await dependencies.shopMethods.setGlobalParameters({
         ...dependencies.constructor,
-        targets: [...dependencies.constructor.targets, '0xad6a8745'],
+        targets: [['0xad6a8745']],
         operators: [...dependencies.constructor.operators, dependencies.houndsAddress]
       });
       const after = await dependencies.shopMethods.control();
@@ -33,7 +33,7 @@ export async function set(
       const before = await dependencies.shop.control();
       await dependencies.shop.setGlobalParameters({
         ...dependencies.constructor,
-        targets: [...dependencies.constructor.targets, '0xad6a8745'],
+        targets: [['0xad6a8745']],
         operators: [...dependencies.constructor.operators, dependencies.houndsAddress]
       });
       const after = await dependencies.shop.control();

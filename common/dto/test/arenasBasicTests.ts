@@ -1,7 +1,6 @@
-import { ethers } from "ethers";
-import { Arena } from "../../../typechain-types/Arenas";
+import { Arena, Arenas } from "../../../typechain-types/Arenas";
 
 export interface ArenasBasicTests {
-    arenas: ethers.Contract;
+    arenas: Arenas;
     arena: Arena.StructStructOutput;
 }

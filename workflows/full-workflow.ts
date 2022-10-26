@@ -71,6 +71,8 @@ async function main() {
         payments: payments.payments,
         paymentMethods: payments.paymentMethods,
         houndsAddress: hounds.hounds.address,
+        queuesAddress: queues.queues.address,
+        arenasAddress: arenas.arenas.address,
         constructor: {
             methods: payments.paymentMethods.address,
             operators: [],
@@ -115,6 +117,7 @@ async function main() {
         arenas: arenas.arenas,
         arenasMethods: arenas.arenasMethods,
         arenasRestricted: arenas.arenasRestricted,
+        racesAddress: races.races.address,
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
@@ -134,6 +137,8 @@ async function main() {
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
         houndsZerocost: hounds.houndsZerocost,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
@@ -166,6 +171,7 @@ async function main() {
         races: races.races,
         racesMethods: races.racesMethods,
         racesRestricted: races.racesRestricted,
+        queuesAddress: queues.queues.address,
         constructor: {
             arenas: arenas.arenas.address,
             hounds: hounds.hounds.address,
@@ -189,7 +195,6 @@ async function main() {
         payments: payments.payments
     });
 
-    /*
     await testArenas.basicTest({
         arenas: arenas.arenas,
         arena: globalParams.defaultArena
@@ -207,7 +212,9 @@ async function main() {
 
     await testRaces.basicTest({
         contract: races.races,
-        race: globalParams.defaultRace
+        race: globalParams.defaultRace,
+        hounds: hounds.hounds,
+        queues: queues.queues
     });
 
     await setHounds({
@@ -216,6 +223,8 @@ async function main() {
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
         houndsZerocost: hounds.houndsZerocost,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
@@ -263,8 +272,6 @@ async function main() {
         payments: payments.payments
     });
 
-
-
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,
         houndsContract: hounds.hounds,
@@ -273,10 +280,10 @@ async function main() {
 
     await testRacesAdvanced.advancedTests({
         contract: races.races,
-        race: globalParams.defaultRace
+        race: globalParams.defaultRace,
+        queues: queues.queues,
+        hounds: hounds.hounds
     });
-
-    */
 
 }
 

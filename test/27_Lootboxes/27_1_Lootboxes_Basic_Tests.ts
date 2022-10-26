@@ -14,29 +14,25 @@ async function basicTest(
       const tokenId: number = 1;
 
       it("Create hounds for lootbox", async function () {
-        const [sig1] = await ethers.getSigners();
-
-        let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(sig1.address, tokenId);
-
-        await dependencies.lootboxesContract.mint(totalLootboxesToCreate, tokenId, "token_uri");
-
-        let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(sig1.address, tokenId);
-
+        let [, , , , , , , , , signer] = await ethers.getSigners();
+        let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(signer.address, tokenId);
+        await dependencies.lootboxesContract.connect(signer).mint(totalLootboxesToCreate, tokenId, "token_uri");
+        let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(signer.address, tokenId);
         expecting(Number(houndsBalanceBefore) < Number(houndsBalanceAfter), "Lootboxes creation bugged");
-
       });
 
       it("Set open status to true", async function () {
+        let [, , , , , , , , , , signer] = await ethers.getSigners();
         const controlBefore: any = await dependencies.lootboxesContract.control();
-        await dependencies.lootboxesContract.setOpenStatus(true);
+        await dependencies.lootboxesContract.connect(signer).setOpenStatus(true);
         const controlAfter: any = await dependencies.lootboxesContract.control();
         expecting(JSON.stringify(controlBefore) !== JSON.stringify(controlAfter), "Set open status method bugged");
       })
 
       it("Open lootbox", async function() {
-        await dependencies.lootboxesContract.open(1,1);
-        const [sig] = await ethers.getSigners();
-        await dependencies.lootboxesContract.opened(1,sig.address,[globalParams.defaultLootbox]);
+        let [, , , , , , , , , signer, , signer2] = await ethers.getSigners();
+        await dependencies.lootboxesContract.connect(signer).open(1,1);
+        await dependencies.lootboxesContract.connect(signer2).opened(1,signer.address,[globalParams.defaultLootbox]);
         resolve();
       });
 

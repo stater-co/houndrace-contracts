@@ -28,7 +28,7 @@ export declare namespace ShopConstructor {
     methods: string;
     restricted: string;
     alphadune: string;
-    targets: BytesLike[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
@@ -36,13 +36,13 @@ export declare namespace ShopConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
     operators: string[];
     methods: string;
     restricted: string;
     alphadune: string;
-    targets: string[];
+    targets: string[][];
   };
 }
 
@@ -86,8 +86,9 @@ export interface ShopInterface extends utils.Interface {
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,bytes4[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,bytes4[][]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -117,6 +118,10 @@ export interface ShopInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "calculateDiscount",
@@ -145,6 +150,7 @@ export interface ShopInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "NewDiscount(uint256,tuple)": EventFragment;
@@ -241,6 +247,12 @@ export interface Shop extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   calculateDiscount(
@@ -287,6 +299,12 @@ export interface Shop extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   callStatic: {
     calculateDiscount(
       requester: string,
@@ -329,6 +347,12 @@ export interface Shop extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -387,6 +411,12 @@ export interface Shop extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -424,6 +454,12 @@ export interface Shop extends BaseContract {
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

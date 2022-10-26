@@ -47,9 +47,11 @@ async function advancedTests(
     });
 
     it("Set mating season true", async function () {
+      let [, , signer] = await ethers.getSigners();
       await safeSetMatingSeason({
         season: true,
-        contract: dependencies.hounds
+        contract: dependencies.hounds,
+        signer: signer
       });
     });
     

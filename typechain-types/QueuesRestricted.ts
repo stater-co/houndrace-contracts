@@ -33,7 +33,7 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    targets: BytesLike[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
@@ -46,7 +46,7 @@ export declare namespace QueuesConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
     operators: string[];
     methods: string;
@@ -57,7 +57,7 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    targets: string[];
+    targets: string[][];
   };
 }
 
@@ -175,9 +175,10 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -228,6 +229,10 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
   decodeFunctionResult(functionFragment: "closeQueue", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
@@ -268,6 +273,7 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "DeleteQueue(uint256)": EventFragment;
@@ -462,6 +468,12 @@ export interface QueuesRestricted extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
   };
 
   closeQueue(
@@ -563,6 +575,12 @@ export interface QueuesRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   callStatic: {
     closeQueue(theId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -654,6 +672,12 @@ export interface QueuesRestricted extends BaseContract {
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -770,6 +794,12 @@ export interface QueuesRestricted extends BaseContract {
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -837,6 +867,12 @@ export interface QueuesRestricted extends BaseContract {
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }
