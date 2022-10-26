@@ -423,9 +423,9 @@ async function main() {
 
 
     const newPaymentsConstructor: PaymentsConstructor.StructStruct = {
-      operators: [hounds.address, queues.address, arenas.address],
+      operators: [hounds.address, queues.address, arenas.address, races.address],
       methods: paymentsMethods.address,
-      targets: [['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2']]
+      targets: [['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2']]
     }
   
     const newShopConstructor: ShopConstructor.StructStruct = {
@@ -439,12 +439,12 @@ async function main() {
     const newArenasConstructor: ArenasConstructor.StructStruct = {
       name: "HoundRace Arenas", 
       symbol: "HRA",
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
       restricted: arenasRestricted.address,
       methods: arenasMethods.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      targets: [['0xe195c287']],
+      targets: [['0xe195c287','0x3a420b95'],['0x11a34393']],
       alhpadunePercentage: 60
     }
 
@@ -482,14 +482,14 @@ async function main() {
       name: 'HoundRace',
       symbol: 'HR',
       defaultHound: globalParams.defaultHound,
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
-      targets: [['0x45fb9412','0xfbba82fc','0x5c80b448','0x894f39fc']],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY), queues.address, races.address],
+      targets: [['0x45fb9412','0xfbba82fc','0x5c80b448'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
     }
 
     const newRacesConstructor: RacesConstructor.StructStruct = {
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      operators: [queues.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), races.address],
       arenas: arenas.address,
       hounds: hounds.address,
       methods: racesMethods.address,
@@ -497,7 +497,7 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      targets: [['0x65913d77','0x30e54438','0x9ad2e2b0']]
+      targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {
