@@ -21,11 +21,6 @@ contract Params is Whitelist {
         uint256 indexed queueId, 
         Race.Struct race
     );
-    event NewFinishedRace(
-        uint256 indexed id, 
-        uint256 indexed queueId, 
-        Race.Struct race
-    );
     event UploadRace(
         uint256 indexed id, 
         uint256 indexed queueId, 
