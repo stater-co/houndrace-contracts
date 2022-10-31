@@ -11,6 +11,8 @@ import { globalParams } from '../common/params';
 import { test as generationTests } from '../test/26_Races/26_3_Races_Generation_Tests';
 import { GeneticsSystem } from '../common/dto/test/geneticsSystem.dto';
 import { run as runGenetics } from '../test/5_Deploy_Genetics';
+import { run as runQueues } from '../test/9_Deploy_Queues_Ecosystem';
+import { QueuesSystem } from '../common/dto/test/queuesSystem.dto';
 
 
 async function main() {
@@ -18,8 +20,7 @@ async function main() {
     const payments: PaymentEcosystem = await runPayments();
 
     const arenas: ArenasSystem = await runArenas({
-        paymentsAddress: payments.payments.address,
-        allowedCallers: []
+        paymentsAddress: payments.payments.address
     });
 
     const genetics: GeneticsSystem = await runGenetics({
@@ -39,20 +40,27 @@ async function main() {
         paymentsAddress: payments.payments.address
     });
 
+    const queues: QueuesSystem = await runQueues({
+        racesAddress: races.races.address,
+        arenasAddress: arenas.arenas.address,
+        houndsAddress: hounds.hounds.address,
+        paymentsAddress: payments.payments.address
+    });
+
     await setHounds({
         hounds: hounds.hounds,
         houndsMinter: hounds.houndsMinter,
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
         houndsZerocost: hounds.houndsZerocost,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
            defaultHound: globalParams.defaultHound,
-           allowedCallers: [
-            hounds.hounds.address,
-            races.races.address
-           ],
+           operators: [],
+           targets: [],
            boilerplate: {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,

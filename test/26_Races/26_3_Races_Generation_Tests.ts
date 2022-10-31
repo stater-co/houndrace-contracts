@@ -77,8 +77,7 @@ async function generationTests(
             hound: houndToMint as Hound.StructStructOutput,
             owner: sig1.address,
             position: 0,
-            signer: sig1.address,
-            gamification: dependencies.gamification,
+            signer: sig1,
             races: dependencies.races
           });
           participants[i] = await dependencies.hounds.hound(createdHoundId);
