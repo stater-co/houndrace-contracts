@@ -7,7 +7,14 @@ contract ShopMethods is Params {
 
     constructor(ShopConstructor.Struct memory input) Params(input) {}
 
-    function calculateDiscount(address requester) external returns(uint256) {
+    function calculateDiscount(
+        address requester
+    ) 
+        external 
+        whitelisted 
+        returns(uint256) 
+    {
+        
         uint256 discount;
 
         for ( uint256 i = 0; i < id; ++i ) {

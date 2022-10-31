@@ -11,4 +11,6 @@ export interface HoundsSystemController {
     houndsZerocost: HoundsZerocost;
     hounds: Hounds;
     constructor: Constructor.StructStruct;
+    queuesAddress: string;
+    racesAddress: string;
 }

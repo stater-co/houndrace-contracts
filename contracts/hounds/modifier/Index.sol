@@ -10,8 +10,7 @@ contract HoundsModifier is Params {
     function updateHoundStamina(
         uint256 theId,
         uint32 amount
-    ) external {
-        require(allowed[msg.sender]);
+    ) external whitelisted {
 
         hounds[theId].stamina.staminaValue -= amount;
         refreshStamina(theId, hounds[theId].stamina);
@@ -20,8 +19,7 @@ contract HoundsModifier is Params {
     function updateHoundRunning(
         uint256 theId, 
         uint256 runningOn
-    ) external returns(uint256 ranOn) {
-        require(allowed[msg.sender]);
+    ) external whitelisted returns(uint256 ranOn) {
 
         ranOn = hounds[theId].profile.runningOn;
         hounds[theId].profile.runningOn = runningOn;
@@ -39,18 +37,12 @@ contract HoundsModifier is Params {
         nonReentrant 
     {
         require(theId < id);
-        
         uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
 
         Hound.Stamina memory stamina = hounds[theId].stamina;
         require(stamina.staminaValue < stamina.staminaCap);
         uint256 staminaRefill1x = stamina.staminaRefill1x - ((stamina.staminaRefill1x / 100) * discount);
 
-        require(
-                ( stamina.staminaRefillCurrency == address(0) && payed == 0 && msg.value > 0 ) 
-            || 
-                ( stamina.staminaRefillCurrency != address(0) && payed > 0 && msg.value == 0 )
-        );
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = stamina.staminaRefillCurrency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
@@ -84,12 +76,6 @@ contract HoundsModifier is Params {
         Hound.Breeding memory breeding = hounds[theId].breeding;
         require(breeding.lastBreed > 0);
         uint256 refillBreedingCooldownCost = breeding.refillBreedingCooldownCost - ((breeding.refillBreedingCooldownCost / 100) * discount);
-        
-        require(
-                ( breeding.breedingCooldownCurrency == address(0) && payed == 0 && msg.value > 0 ) 
-            || 
-                ( breeding.breedingCooldownCurrency != address(0) && payed > 0 && msg.value == 0 )
-        );
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = breeding.breedingCooldownCurrency == address(0) ? msg.value : payed;

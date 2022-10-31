@@ -3,7 +3,6 @@ import DeploymentError from '../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
 import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
-import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
 import { HoundracePotions } from '../typechain-types/HoundracePotions';
@@ -72,19 +71,10 @@ async function main() {
     DeploymentLogger('##############################################');
 
     const paymentsConstructor: PaymentsConstructor.StructStruct = {
-      alphadune: globalParams.address0,
+      operators: [],
       methods: globalParams.address0,
-      restricted: globalParams.address0
+      targets: []
     };
-    const paymentsRestricted = await deployContract({
-      name: 'PaymentsRestricted',
-      constructor: [arrayfy(paymentsConstructor)],
-      props: {}
-    }) as PaymentsRestricted;
-    DeploymentLogger('export PAYMENTS_RESTRICTED=' + paymentsRestricted.address);
-    deployments.update(5, {
-      step: "Deploy houndrace potions"
-    });
 
     const paymentsMethods = await deployContract({
       name: 'PaymentsMethods',
@@ -120,9 +110,11 @@ async function main() {
     });
 
     const shopConstructor: ShopConstructor.StructStruct = {
+      operators: [],
       methods: globalParams.address0,
       restricted: globalParams.address0,
-      alphadune: globalParams.address0
+      alphadune: globalParams.address0,
+      targets: []
     };
     const shopRestricted = await deployContract({
       name: 'ShopRestricted',
@@ -157,11 +149,12 @@ async function main() {
     const arenasConstructor: ArenasConstructor.StructStruct = {
       name: "HoundRace Arenas",
       symbol: "HRA",
+      operators: [],
       restricted: globalParams.address0,
       methods: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
-      allowedCallers: [],
+      targets: [],
       alhpadunePercentage: 60
     };
     const arenasRestricted = await deployContract({
@@ -235,7 +228,8 @@ async function main() {
       name: 'HoundRace',
       symbol: 'HR',
       defaultHound: globalParams.defaultHound,
-      allowedCallers: [],
+      operators: [],
+      targets: [],
       boilerplate: houndsConstructorBoilerplate,
       fees: houndsConstructorFees
     }
@@ -310,6 +304,7 @@ async function main() {
     });
 
     const racesConstructor: RacesConstructor.StructStruct = {
+      operators: [],
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
@@ -317,7 +312,7 @@ async function main() {
       restricted: globalParams.address0,
       queues: globalParams.address0,
       races: globalParams.address0,
-      allowedCallers: []
+      targets: []
     }
     const racesRestricted = await deployContract({
       name: 'RacesRestricted',
@@ -351,6 +346,7 @@ async function main() {
     });
 
     const queuesConstructor: QueuesConstructor.StructStruct = {
+      operators: [],
       arenas: globalParams.address0,
       hounds: globalParams.address0,
       methods: globalParams.address0,
@@ -359,7 +355,7 @@ async function main() {
       races: globalParams.address0,
       queues: globalParams.address0,
       zerocost: globalParams.address0,
-      allowedCallers: []
+      targets: []      
     }
     const queuesMethods = await deployContract({
       name: 'QueuesMethods',
@@ -403,10 +399,11 @@ async function main() {
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "",
-      allowedApprovals: [],
+      operators: [],
       hounds: globalParams.address0,
       payments: globalParams.address0,
       alphadune: globalParams.address0,
+      targets: [],
       canBeOpened: true
     }
     const lootboxes = await deployContract({
@@ -426,25 +423,28 @@ async function main() {
 
 
     const newPaymentsConstructor: PaymentsConstructor.StructStruct = {
-      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      operators: [hounds.address, queues.address, arenas.address, races.address],
       methods: paymentsMethods.address,
-      restricted: paymentsRestricted.address
+      targets: [['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2'], ['0xc01f59c2']]
     }
   
     const newShopConstructor: ShopConstructor.StructStruct = {
+      operators: [hounds.address],
       methods: shopMethods.address,
       restricted: shopRestricted.address,
-      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      targets: [['0xad6a8745']]
     }
 
     const newArenasConstructor: ArenasConstructor.StructStruct = {
       name: "HoundRace Arenas", 
       symbol: "HRA",
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
       restricted: arenasRestricted.address,
       methods: arenasMethods.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      allowedCallers: [races.address,queues.address],
+      targets: [['0xe195c287','0x3a420b95'],['0x11a34393']],
       alhpadunePercentage: 60
     }
 
@@ -482,16 +482,14 @@ async function main() {
       name: 'HoundRace',
       symbol: 'HR',
       defaultHound: globalParams.defaultHound,
-      allowedCallers: [
-        hounds.address,
-        races.address,
-        queues.address
-      ],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY), queues.address, races.address],
+      targets: [['0x45fb9412','0xfbba82fc','0x5c80b448'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
     }
 
     const newRacesConstructor: RacesConstructor.StructStruct = {
+      operators: [queues.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), races.address],
       arenas: arenas.address,
       hounds: hounds.address,
       methods: racesMethods.address,
@@ -499,27 +497,29 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      allowedCallers: [races.address, queues.address]
+      targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       arenas: arenas.address,
       hounds: hounds.address,
       methods: queuesMethods.address,
       payments: payments.address,
       restricted: queuesRestricted.address,
       races: races.address,
-      allowedCallers: [races.address],
       queues: queues.address,
-      zerocost: queuesZerocost.address
+      zerocost: queuesZerocost.address,
+      targets: [['0x30f9a0f0','0xe7c4d374','0x19e3e592']]
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "HoundRace Lootboxes",
-      allowedApprovals: [],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       hounds: hounds.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
       canBeOpened: true
     }
 
@@ -531,14 +531,6 @@ async function main() {
 
 
 
-    try {
-      await paymentsRestricted.setGlobalParameters(newPaymentsConstructor);
-      configurations.update(2, {
-        step: "Set global parameters for shop methods"
-      });
-    } catch(err) {
-      DeploymentError((err as NodeJS.ErrnoException).message);
-    }
 
     try {
       await paymentsMethods.setGlobalParameters(newPaymentsConstructor);
@@ -759,18 +751,6 @@ async function main() {
       try {
         await run("verify:verify", {
           address: payments.address,
-          constructorArguments: [arrayfy(paymentsConstructor)]
-        });
-      } catch (err) {
-        DeploymentError((err as NodeJS.ErrnoException).message);
-      }
-      verifications.update(5, {
-        step: "Verify houndrace potions"
-      });
-
-      try {
-        await run("verify:verify", {
-          address: paymentsRestricted.address,
           constructorArguments: [arrayfy(paymentsConstructor)]
         });
       } catch (err) {

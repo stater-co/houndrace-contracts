@@ -6,11 +6,12 @@ library ArenasConstructor {
     struct Struct {
         string name;
         string symbol;
+        address[] operators;
         address restricted;
         address methods;
         address payments;
         address alphadune;
-        address[] allowedCallers;
+        bytes4[][] targets;
         uint256 alhpadunePercentage;
     }
 }

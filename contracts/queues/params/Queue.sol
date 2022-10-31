@@ -2,13 +2,15 @@
 pragma solidity 0.8.17;
 import '../../payments/params/Payment.sol';
 import './Core.sol';
-import '../../hounds/params/Specie.sol';
+
 
 library Queue {
     
     struct Struct {
 
         Core.Struct core;
+
+        uint256[] speciesAllowed;
 
         uint256 startDate;
 
@@ -21,8 +23,6 @@ library Queue {
         uint32 cooldown;
 
         uint32 staminaCost;
-
-        Specie.Enum[] speciesAllowed;
 
         bool closed;
 

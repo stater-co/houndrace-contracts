@@ -5,7 +5,7 @@ import { expecting } from "../expecting";
 export async function closeQueue(
   params: CloseQueueParams
 ) {
-  await params.contract.closeQueue(params.queueId);
+  await params.contract.connect(params.signer).closeQueue(params.queueId);
 }
 
 export async function safeCloseQueue(

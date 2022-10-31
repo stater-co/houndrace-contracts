@@ -1,8 +1,9 @@
-import { ethers } from "ethers";
-import { Arena } from '../../../typechain-types/contracts/arenas/params/Index.sol/Params';
+import { ethers, Signer } from "ethers";
+import { Arena } from '../../../typechain-types/Arenas';
 
 export interface EditArenaParams {
     contract: ethers.Contract;
     arena: Arena.StructStructOutput;
     arenaId: string | number;
+    signer: Signer;
   }

@@ -8,7 +8,7 @@ contract ArenasRestricted is Params {
 
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
-    function createArena(Arena.Struct memory arena) external onlyOwner {
+    function createArena(Arena.Struct memory arena) external whitelisted {
         arenas[id] = arena;
 
         // Mint arena
@@ -20,7 +20,7 @@ contract ArenasRestricted is Params {
         ++id;
     }
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external onlyOwner {
+    function editArena(uint256 theId, Arena.Struct memory arena) external whitelisted {
         arenas[theId] = arena;
         emit EditArena(theId,msg.sender,arena);
     }

@@ -11,7 +11,7 @@ contract HoundsRestricted is Params {
         uint256 onId, 
         address owner, 
         Hound.Struct memory theHound
-    ) external onlyOwner {
+    ) external whitelisted {
         if ( onId > 0 ) {
             require(bytes(hounds[onId].profile.token_uri).length == 0);
             require(theHound.stamina.staminaCap > 0 && onId < id && (theHound.identity.geneticSequence[1] == 1 || theHound.identity.geneticSequence[1] == 2));

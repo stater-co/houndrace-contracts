@@ -18,6 +18,7 @@ contract PaymentsMethods is Params {
 		public 
 		payable 
 		nonReentrant 
+		whitelisted 
 	{
 
 		if ( paymentType == Payment.PaymentTypes.ERC721 ) {
@@ -47,11 +48,14 @@ contract PaymentsMethods is Params {
 
 		}
 
-		if ( to == control.alphadune ) {
-			for ( uint256 i = 0 ; i < ids.length ; ++i ) {
-				alphaduneReservoirs[paymentType][currency][ids[i]] += amounts[i];
-			}
-		}
+		emit NewPayment(
+			from,
+			to,
+			currency,
+			ids,
+			amounts,
+			paymentType
+		);
 
 	}
 

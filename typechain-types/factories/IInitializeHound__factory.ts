@@ -131,6 +131,11 @@ const _abi = [
                 type: "uint256",
               },
               {
+                internalType: "uint256",
+                name: "specie",
+                type: "uint256",
+              },
+              {
                 internalType: "uint32[72]",
                 name: "geneticSequence",
                 type: "uint32[72]",
@@ -139,11 +144,6 @@ const _abi = [
                 internalType: "string",
                 name: "extensionTraits",
                 type: "string",
-              },
-              {
-                internalType: "enum Specie.Enum",
-                name: "specie",
-                type: "uint8",
               },
             ],
             internalType: "struct Hound.Identity",

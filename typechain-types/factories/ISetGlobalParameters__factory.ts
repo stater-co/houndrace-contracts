@@ -15,6 +15,11 @@ const _abi = [
       {
         components: [
           {
+            internalType: "address[]",
+            name: "operators",
+            type: "address[]",
+          },
+          {
             internalType: "address",
             name: "methods",
             type: "address",
@@ -55,9 +60,9 @@ const _abi = [
             type: "address",
           },
           {
-            internalType: "address[]",
-            name: "allowedCallers",
-            type: "address[]",
+            internalType: "bytes4[][]",
+            name: "targets",
+            type: "bytes4[][]",
           },
         ],
         internalType: "struct QueuesConstructor.Struct",

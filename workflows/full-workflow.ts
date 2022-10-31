@@ -35,8 +35,7 @@ async function main() {
     const payments: PaymentEcosystem = await runPayments();
 
     const arenas: ArenasSystem = await runArenas({
-        paymentsAddress: payments.payments.address,
-        allowedCallers: []
+        paymentsAddress: payments.payments.address
     });
 
     const genetics: GeneticsSystem = await runGenetics({
@@ -49,7 +48,6 @@ async function main() {
         transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
-
     const races: RacesSystem = await runRaces({
         arenasAddress: arenas.arenas.address,
         houndsAddress: hounds.hounds.address,
@@ -72,21 +70,27 @@ async function main() {
     await setPayments({
         payments: payments.payments,
         paymentMethods: payments.paymentMethods,
-        paymentRestricted: payments.paymentRestricted,
+        houndsAddress: hounds.hounds.address,
+        queuesAddress: queues.queues.address,
+        arenasAddress: arenas.arenas.address,
         constructor: {
-            restricted: payments.paymentRestricted.address,
             methods: payments.paymentMethods.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+            operators: [],
+            targets: []
         }
     });
 
     await setShop({
         shopMethods: payments.shopMethods,
         shopRestricted: payments.shopRestricted,
+        shop: payments.shop,
+        houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            operators: [],
+            targets: []
         }
     });
 
@@ -102,9 +106,10 @@ async function main() {
             payments: payments.payments.address,
             restricted: queues.queuesRestricted.address,
             races: races.races.address,
-            allowedCallers: [races.races.address],
             queues: queues.queues.address,
-            zerocost: queues.queueZerocost.address
+            zerocost: queues.queueZerocost.address,
+            operators: [],
+            targets: []
         }
     });
 
@@ -112,15 +117,17 @@ async function main() {
         arenas: arenas.arenas,
         arenasMethods: arenas.arenasMethods,
         arenasRestricted: arenas.arenasRestricted,
+        racesAddress: races.races.address,
         constructor: {
             name: "HoundRace Arenas",
             symbol: "HRA",
-            alphadune: globalParams.address0,
+            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            allowedCallers: [races.races.address,queues.queues.address],
-            alhpadunePercentage: 60
+            alhpadunePercentage: 60,
+            operators: [],
+            targets: []
         }
     });
 
@@ -130,15 +137,14 @@ async function main() {
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
         houndsZerocost: hounds.houndsZerocost,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
-           allowedCallers: [
-            hounds.hounds.address,
-            races.races.address,
-            queues.queues.address
-           ],
            defaultHound: globalParams.defaultHound,
+           operators: [],
+           targets: [],
            boilerplate: {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
@@ -165,6 +171,7 @@ async function main() {
         races: races.races,
         racesMethods: races.racesMethods,
         racesRestricted: races.racesRestricted,
+        queuesAddress: queues.queues.address,
         constructor: {
             arenas: arenas.arenas.address,
             hounds: hounds.hounds.address,
@@ -173,11 +180,8 @@ async function main() {
             queues: queues.queues.address,
             restricted: races.racesRestricted.address,
             races: races.races.address,
-            allowedCallers: [
-                races.races.address,
-                queues.queues.address,
-                globalParams.address0
-            ]
+            operators: [],
+            targets: []
         }
     });
 
@@ -187,7 +191,8 @@ async function main() {
 
     await testHounds.basicTest({
         hounds: hounds.hounds,
-        races: races.races
+        races: races.races,
+        payments: payments.payments
     });
 
     await testArenas.basicTest({
@@ -207,7 +212,9 @@ async function main() {
 
     await testRaces.basicTest({
         contract: races.races,
-        race: globalParams.defaultRace
+        race: globalParams.defaultRace,
+        hounds: hounds.hounds,
+        queues: queues.queues
     });
 
     await setHounds({
@@ -216,11 +223,14 @@ async function main() {
         houndsModifier: hounds.houndsModifier,
         houndsRestricted: hounds.houndsRestricted,
         houndsZerocost: hounds.houndsZerocost,
+        queuesAddress: queues.queues.address,
+        racesAddress: races.races.address,
         constructor: {
            name: "HoundRace",
            symbol: "HR",
-           allowedCallers: [],
            defaultHound: globalParams.defaultHound,
+           operators: [],
+           targets: [],
            boilerplate: {
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
@@ -262,8 +272,6 @@ async function main() {
         payments: payments.payments
     });
 
-
-
     await testLootboxes.basicTest({
         lootboxesContract: lootboxes.lootboxes,
         houndsContract: hounds.hounds,
@@ -272,7 +280,9 @@ async function main() {
 
     await testRacesAdvanced.advancedTests({
         contract: races.races,
-        race: globalParams.defaultRace
+        race: globalParams.defaultRace,
+        queues: queues.queues,
+        hounds: hounds.hounds
     });
 
 }
