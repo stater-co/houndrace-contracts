@@ -82,9 +82,9 @@ export declare namespace Hound {
     femaleParent: BigNumberish;
     generation: BigNumberish;
     birthDate: BigNumberish;
+    specie: BigNumberish;
     geneticSequence: BigNumberish[];
     extensionTraits: string;
-    specie: BigNumberish;
   };
 
   export type IdentityStructOutput = [
@@ -92,17 +92,17 @@ export declare namespace Hound {
     BigNumber,
     BigNumber,
     BigNumber,
+    BigNumber,
     number[],
-    string,
-    number
+    string
   ] & {
     maleParent: BigNumber;
     femaleParent: BigNumber;
     generation: BigNumber;
     birthDate: BigNumber;
+    specie: BigNumber;
     geneticSequence: number[];
     extensionTraits: string;
-    specie: number;
   };
 
   export type ProfileStruct = {

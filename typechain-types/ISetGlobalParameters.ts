@@ -23,6 +23,7 @@ import type {
 
 export declare namespace QueuesConstructor {
   export type StructStruct = {
+    operators: string[];
     methods: string;
     restricted: string;
     queues: string;
@@ -31,10 +32,11 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    allowedCallers: string[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
+    string[],
     string,
     string,
     string,
@@ -43,8 +45,9 @@ export declare namespace QueuesConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
+    operators: string[];
     methods: string;
     restricted: string;
     queues: string;
@@ -53,14 +56,14 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
-    allowedCallers: string[];
+    targets: string[][];
   };
 }
 
 export interface ISetGlobalParametersInterface extends utils.Interface {
   contractName: "ISetGlobalParameters";
   functions: {
-    "setGlobalParameters((address,address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
   };
 
   encodeFunctionData(

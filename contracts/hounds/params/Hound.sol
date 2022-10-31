@@ -1,6 +1,5 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import './Specie.sol';
 
 
 library Hound {
@@ -37,9 +36,9 @@ library Hound {
         uint256 femaleParent;
         uint256 generation;
         uint256 birthDate;
+        uint256 specie;
         uint32[72] geneticSequence;
         string extensionTraits;
-        Specie.Enum specie;
     }
 
     struct Struct {

@@ -29,30 +29,26 @@ async function advancedTests(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig1,
         races: dependencies.races
       });
     });
 
     it("Create arena with custom token", async function () {
+      let [, , , signer] = await ethers.getSigners();
       createdArenaId = await safeMintArena({
         contract: dependencies.arenasContract,
-        arena: {
-          ...dependencies.arena,
-          currency: dependencies.erc20.address
-        }
+        arena: dependencies.arena,
+        signer: signer
       });
     });
 
     it("Create queue using custom token arena", async function () {
+      let [, , , , , signer] = await ethers.getSigners();
       createdQueueId = await safeMintQueue({
         contract: dependencies.queuesContract,
-        queue: {
-          ...dependencies.queue,
-          arena: createdArenaId,
-          cooldown: 0
-        }
+        queue: dependencies.queue,
+        signer: signer
       });
     });
 
@@ -82,8 +78,7 @@ async function advancedTests(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig1.address,
           position: 0,
-          signer: sig1.address,
-          gamification: dependencies.gamification,
+          signer: sig1,
           races: dependencies.races
         });
       }
@@ -99,8 +94,7 @@ async function advancedTests(
           hound: houndToMint as Hound.StructStructOutput,
           owner: sig2.address,
           position: 0,
-          signer: sig1.address,
-          gamification: dependencies.gamification,
+          signer: sig1,
           races: dependencies.races
         });
       }
@@ -180,8 +174,7 @@ async function advancedTests(
         hound: globalParams.defaultHound,
         owner: sig1.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig1,
         races: dependencies.races
       });
     });
@@ -207,17 +200,21 @@ async function advancedTests(
     });
 
     it("Edit queue", async function() {
+      let [, , , , , , signer] = await ethers.getSigners();
       await safeEditQueue({
         contract: dependencies.queuesContract,
         queueId: createdQueueId,
-        queue: dependencies.queue
+        queue: dependencies.queue,
+        signer: signer
       });
     });
 
     it("Close queue", async function() {
+      let [, , , , , , , signer] = await ethers.getSigners();
       await safeCloseQueue({
         contract: dependencies.queuesContract,
-        queueId: createdQueueId
+        queueId: createdQueueId,
+        signer: signer
       });
     });
 

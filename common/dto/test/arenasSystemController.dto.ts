@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { Arenas, ArenasConstructor } from '../../../typechain-types/Arenas';
 
 export interface ArenasSystemController {
@@ -6,4 +5,5 @@ export interface ArenasSystemController {
     arenasMethods: Arenas;
     arenas: Arenas;
     constructor: ArenasConstructor.StructStruct;
+    racesAddress: string;
 }

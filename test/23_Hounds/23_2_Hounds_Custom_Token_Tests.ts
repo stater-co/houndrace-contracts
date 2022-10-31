@@ -20,23 +20,23 @@ async function advancedTests(
     let createdHoundId: string | number;
 
     it("Mint", async function () {
-      let [sig1] = await ethers.getSigners();
+      let [sig] = await ethers.getSigners();
       createdHoundId = await safeMintHound({
         contract: dependencies.hounds,
         hound: globalParams.defaultHound,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
     });
     
     it("Update hound stamina after creation", async function() {
+      let [, sig] = await ethers.getSigners();
       await safeUpdateStamina({
         contract: dependencies.hounds,
         houndId: createdHoundId,
-        gamification: dependencies.gamification
+        signer: sig
       });
     });
     
@@ -47,9 +47,11 @@ async function advancedTests(
     });
 
     it("Set mating season true", async function () {
+      let [, , signer] = await ethers.getSigners();
       await safeSetMatingSeason({
         season: true,
-        contract: dependencies.hounds
+        contract: dependencies.hounds,
+        signer: signer
       });
     });
     
@@ -57,15 +59,14 @@ async function advancedTests(
       let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -75,10 +76,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -88,7 +88,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address,totalValueToPay);
+      await dependencies.erc20.mint(sig.address,totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -97,7 +97,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });
@@ -106,15 +106,14 @@ async function advancedTests(
       let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -124,10 +123,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -137,7 +135,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address,totalValueToPay);
+      await dependencies.erc20.mint(sig.address,totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -146,7 +144,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });
@@ -155,15 +153,14 @@ async function advancedTests(
       let femaleHound: Hound.StructStruct = globalParams.defaultHound;
       femaleHound.identity.geneticSequence[1] = 2;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -173,10 +170,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -186,7 +182,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address,totalValueToPay);
+      await dependencies.erc20.mint(sig.address,totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -195,7 +191,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });
@@ -204,15 +200,14 @@ async function advancedTests(
       let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -222,10 +217,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -235,7 +229,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address, totalValueToPay);
+      await dependencies.erc20.mint(sig.address, totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -244,7 +238,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });
@@ -253,15 +247,14 @@ async function advancedTests(
       let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -271,10 +264,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -284,7 +276,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address, totalValueToPay);
+      await dependencies.erc20.mint(sig.address, totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -293,7 +285,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });
@@ -302,15 +294,14 @@ async function advancedTests(
       let maleHound: Hound.StructStruct = globalParams.defaultHound;
       maleHound.identity.geneticSequence[1] = 1;
 
-      const [sig1] = await ethers.getSigners();
+      const [sig] = await ethers.getSigners();
 
       let hound1Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: maleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -320,10 +311,9 @@ async function advancedTests(
       let hound2Id: string | number = await safeMintHound({
         contract: dependencies.hounds,
         hound: femaleHound as Hound.StructStructOutput,
-        owner: sig1.address,
+        owner: sig.address,
         position: 0,
-        signer: sig1.address,
-        gamification: dependencies.gamification,
+        signer: sig,
         races: dependencies.races
       });
 
@@ -333,7 +323,7 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig1.address, totalValueToPay);
+      await dependencies.erc20.mint(sig.address, totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -342,7 +332,7 @@ async function advancedTests(
         contract: dependencies.hounds,
         hound1: hound1Id,
         hound2: hound2Id,
-        signer: sig1
+        signer: sig
       });
 
     });

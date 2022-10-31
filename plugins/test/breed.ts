@@ -50,7 +50,7 @@ export async function safeBreed(
 
   await params.contract.breedHounds(hound1, hound2, { value : totalValueToPay });
 
-  await params.contract.initializeHound(houndToFillUp, signer, globalParams.defaultHound);
+  await params.contract.connect(params.signer).initializeHound(houndToFillUp, signer, globalParams.defaultHound);
 
   houndMaleAfter = await params.contract.hound(maleId);
   houndFemaleAfter = await params.contract.hound(femaleId);

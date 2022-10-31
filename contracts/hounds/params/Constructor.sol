@@ -9,7 +9,8 @@ library Constructor {
         string name;
         string symbol;
         Hound.Struct defaultHound;
-        address[] allowedCallers;
+        address[] operators;
+        bytes4[][] targets;
         ConstructorBoilerplate.Struct boilerplate;
         ConstructorFees.Struct fees;
     }

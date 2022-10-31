@@ -17,8 +17,7 @@ async function main() {
     const payments: PaymentEcosystem = await runPayments();
 
     const arenas: ArenasSystem = await runArenas({
-        paymentsAddress: payments.payments.address,
-        allowedCallers: []
+        paymentsAddress: payments.payments.address
     });
 
     const genetics: GeneticsSystem = await runGenetics({

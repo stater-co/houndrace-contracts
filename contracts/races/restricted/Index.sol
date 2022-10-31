@@ -11,7 +11,10 @@ contract RacesRestricted is Params {
         uint256 theId, 
         uint256 queueId,
         Race.Struct memory race
-    ) external onlyOwner {
+    ) 
+        external 
+        whitelisted 
+    {
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 

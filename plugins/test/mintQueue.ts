@@ -4,7 +4,7 @@ import { expecting } from "../expecting";
 export async function mintQueue(
   params: MintQueueParams
 ) {
-  await params.contract.createQueues([params.queue]);
+  await params.contract.connect(params.signer).createQueues([params.queue]);
 }
 
 export async function safeMintQueue(

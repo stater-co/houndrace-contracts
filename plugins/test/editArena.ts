@@ -5,7 +5,7 @@ import { expecting } from "../expecting";
 export async function editArena(
   params: EditArenaParams
 ) {
-  await params.contract.editArena(params.arenaId,{
+  await params.contract.connect(params.signer).editArena(params.arenaId,{
     ...params.arena,
     name: params.arena.name + ", upated on " + new Date()
   });

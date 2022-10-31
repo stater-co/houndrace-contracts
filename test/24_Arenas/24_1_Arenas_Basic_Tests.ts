@@ -1,6 +1,7 @@
 import { ArenasBasicTests } from "../../common/dto/test/arenasBasicTests";
 import { safeEditArena } from "../../plugins/test/editArena";
 import { safeMintArena } from "../../plugins/test/mintArena";
+const { ethers } = require('hardhat');
 
 
 async function basicTest(
@@ -11,17 +12,21 @@ async function basicTest(
     let createdArenaId: string | number;
 
     it("Mint", async function () {
+      let [, , , signer] = await ethers.getSigners();
       createdArenaId = await safeMintArena({
         contract: dependencies.arenas,
-        arena: dependencies.arena
+        arena: dependencies.arena,
+        signer: signer
       });
     });
     
     it("Edit", async function () {
+      let [, , , , signer] = await ethers.getSigners();
       await safeEditArena({
         contract: dependencies.arenas,
         arena: dependencies.arena,
-        arenaId: createdArenaId
+        arenaId: createdArenaId,
+        signer: signer
       });
     });
 

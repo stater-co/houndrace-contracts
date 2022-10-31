@@ -9,13 +9,12 @@ import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
 import { ShopZerocost } from '../typechain-types/ShopZerocost';
 import { Shop } from '../typechain-types/Shop';
-import { PaymentsRestricted } from '../typechain-types/PaymentsRestricted';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
+const { ethers } = require('hardhat');
 
 
 let houndracePotions: HoundracePotions;
 let payments: Payments;
-let paymentsRestricted: PaymentsRestricted;
 let paymentsMethods: PaymentsMethods;
 let testErc721: AlphaERC721;
 let testErc1155: TestingErc1155;
@@ -36,26 +35,14 @@ export async function run(): Promise<PaymentEcosystem> {
           props: {}
         }) as HoundracePotions;
       });
-    
-      it('Deploy the payments restricted contract', async function () {
-        paymentsRestricted = await deployContract({
-          name: 'PaymentsRestricted',
-          constructor: [[
-            globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
-          ]],
-          props: {}
-        }) as PaymentsRestricted;
-      });
 
       it('Deploy the payments methods contract', async function () {
         paymentsMethods = await deployContract({
           name: 'PaymentsMethods',
           constructor: [[
+            [],
             globalParams.address0,
-            globalParams.address0,
-            globalParams.address0
+            []
           ]],
           props: {}
         }) as PaymentsMethods;
@@ -65,9 +52,9 @@ export async function run(): Promise<PaymentEcosystem> {
         payments = await deployContract({
           name: 'Payments',
           constructor: [[
-            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            [],
             globalParams.address0,
-            globalParams.address0
+            []
           ]],
           props: {}
         }) as Payments;
@@ -98,33 +85,37 @@ export async function run(): Promise<PaymentEcosystem> {
       });
     
       it('Deploy the Shop Restricted contract', async function () {
+        const [owner] = await ethers.getSigners();
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[globalParams.address0,globalParams.address0,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
+          constructor: [[[],globalParams.address0,globalParams.address0,owner.address,[]]],
           props: {}
         }) as ShopRestricted;
       });
 
       it('Deploy the Shop Methods contract', async function () {
+        const [owner] = await ethers.getSigners();
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[globalParams.address0,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
+          constructor: [[[],globalParams.address0,shopRestricted.address,owner.address,[]]],
           props: {}
         }) as ShopMethods;
       });
 
       it('Deploy the Shop Zerocost contract', async function () {
+        const [owner] = await ethers.getSigners();
         shopZerocost = await deployContract({
           name: 'ShopZerocost',
-          constructor: [[globalParams.address0,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
+          constructor: [[[],shopMethods.address,shopRestricted.address,owner.address,[]]],
           props: {}
         }) as ShopZerocost;
       });
 
       it('Deploy the Shop contract', async function () {
+        const [owner] = await ethers.getSigners();
         shop = await deployContract({
           name: 'Shop',
-          constructor: [[shopMethods.address,shopRestricted.address,String(process.env.ETH_ACCOUNT_PUBLIC_KEY)]],
+          constructor: [[[],shopMethods.address,shopRestricted.address,owner.address,[]]],
           props: {}
         }) as Shop;
 
@@ -132,7 +123,6 @@ export async function run(): Promise<PaymentEcosystem> {
           houndracePotions: houndracePotions,
           payments: payments,
           paymentMethods: paymentsMethods,
-          paymentRestricted: paymentsRestricted,
           shop: shop,
           shopMethods: shopMethods,
           shopRestricted: shopRestricted,

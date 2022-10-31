@@ -1,9 +1,9 @@
-import { Hounds } from "../../../typechain-types/Hounds";
-import { Gamification } from "../../../typechain-types/Gamification";
-import { Races } from "../../../typechain-types/Races";
+import { Hounds } from '../../../typechain-types/Hounds';
+import { Races } from '../../../typechain-types/Races';
+import { Payments } from '../../../typechain-types/Payments';
 
 export interface HoundsBasicTests {
     hounds: Hounds;
-    gamification: Gamification;
     races: Races;
+    payments: Payments;
 }

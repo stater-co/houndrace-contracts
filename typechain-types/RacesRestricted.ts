@@ -24,6 +24,7 @@ import type {
 
 export declare namespace RacesConstructor {
   export type StructStruct = {
+    operators: string[];
     arenas: string;
     hounds: string;
     methods: string;
@@ -31,10 +32,11 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     races: string;
-    allowedCallers: string[];
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
+    string[],
     string,
     string,
     string,
@@ -42,8 +44,9 @@ export declare namespace RacesConstructor {
     string,
     string,
     string,
-    string[]
+    string[][]
   ] & {
+    operators: string[];
     arenas: string;
     hounds: string;
     methods: string;
@@ -51,7 +54,7 @@ export declare namespace RacesConstructor {
     restricted: string;
     queues: string;
     races: string;
-    allowedCallers: string[];
+    targets: string[][];
   };
 }
 
@@ -142,7 +145,6 @@ export declare namespace Race {
 export interface RacesRestrictedInterface extends utils.Interface {
   contractName: "RacesRestricted";
   functions: {
-    "allowed(address)": FunctionFragment;
     "control()": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -150,12 +152,12 @@ export interface RacesRestrictedInterface extends utils.Interface {
     "race(uint256)": FunctionFragment;
     "races(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address,address,address,address,address,address,address,address[]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(functionFragment: "allowed", values: [string]): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -181,8 +183,11 @@ export interface RacesRestrictedInterface extends utils.Interface {
     functionFragment: "uploadRace",
     values: [BigNumberish, BigNumberish, Race.StructStruct]
   ): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(functionFragment: "allowed", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
@@ -205,26 +210,18 @@ export interface RacesRestrictedInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uploadRace", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
-    "NewFinishedRace(uint256,uint256,tuple)": EventFragment;
     "NewRace(uint256,uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "UploadRace(uint256,uint256,tuple)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "NewFinishedRace"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewRace"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "UploadRace"): EventFragment;
 }
-
-export type NewFinishedRaceEvent = TypedEvent<
-  [BigNumber, BigNumber, Race.StructStructOutput],
-  { id: BigNumber; queueId: BigNumber; race: Race.StructStructOutput }
->;
-
-export type NewFinishedRaceEventFilter = TypedEventFilter<NewFinishedRaceEvent>;
 
 export type NewRaceEvent = TypedEvent<
   [BigNumber, BigNumber, Race.StructStructOutput],
@@ -276,8 +273,6 @@ export interface RacesRestricted extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -338,9 +333,13 @@ export interface RacesRestricted extends BaseContract {
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-  };
 
-  allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+  };
 
   control(
     overrides?: CallOverrides
@@ -403,9 +402,13 @@ export interface RacesRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  callStatic: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
+  callStatic: {
     control(
       overrides?: CallOverrides
     ): Promise<
@@ -464,20 +467,15 @@ export interface RacesRestricted extends BaseContract {
       race: Race.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
-    "NewFinishedRace(uint256,uint256,tuple)"(
-      id?: BigNumberish | null,
-      queueId?: BigNumberish | null,
-      race?: null
-    ): NewFinishedRaceEventFilter;
-    NewFinishedRace(
-      id?: BigNumberish | null,
-      queueId?: BigNumberish | null,
-      race?: null
-    ): NewFinishedRaceEventFilter;
-
     "NewRace(uint256,uint256,tuple)"(
       id?: BigNumberish | null,
       queueId?: BigNumberish | null,
@@ -511,8 +509,6 @@ export interface RacesRestricted extends BaseContract {
   };
 
   estimateGas: {
-    allowed(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -548,14 +544,15 @@ export interface RacesRestricted extends BaseContract {
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    allowed(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -596,6 +593,12 @@ export interface RacesRestricted extends BaseContract {
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

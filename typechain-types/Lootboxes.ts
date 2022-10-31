@@ -25,10 +25,11 @@ import type {
 export declare namespace LootboxesConstructor {
   export type StructStruct = {
     name: string;
-    allowedApprovals: string[];
+    operators: string[];
     hounds: string;
     payments: string;
     alphadune: string;
+    targets: BytesLike[][];
     canBeOpened: boolean;
   };
 
@@ -38,13 +39,15 @@ export declare namespace LootboxesConstructor {
     string,
     string,
     string,
+    string[][],
     boolean
   ] & {
     name: string;
-    allowedApprovals: string[];
+    operators: string[];
     hounds: string;
     payments: string;
     alphadune: string;
+    targets: string[][];
     canBeOpened: boolean;
   };
 }
@@ -73,7 +76,6 @@ export declare namespace Box {
 export interface LootboxesInterface extends utils.Interface {
   contractName: "Lootboxes";
   functions: {
-    "allowedApprovals(address)": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
     "control()": FunctionFragment;
@@ -88,17 +90,14 @@ export interface LootboxesInterface extends utils.Interface {
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,address[],address,address,address,bool))": FunctionFragment;
+    "setGlobalParameters((string,address[],address,address,address,bytes4[][],bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
+    "whitelists(address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "allowedApprovals",
-    values: [string]
-  ): string;
   encodeFunctionData(
     functionFragment: "balanceOf",
     values: [string, BigNumberish]
@@ -166,11 +165,11 @@ export interface LootboxesInterface extends utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "whitelists",
+    values: [string, BigNumberish]
+  ): string;
 
-  decodeFunctionResult(
-    functionFragment: "allowedApprovals",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
@@ -226,6 +225,7 @@ export interface LootboxesInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
@@ -345,11 +345,6 @@ export interface Lootboxes extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -469,9 +464,13 @@ export interface Lootboxes extends BaseContract {
     ): Promise<ContractTransaction>;
 
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
-  };
 
-  allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+  };
 
   balanceOf(
     account: string,
@@ -593,9 +592,13 @@ export interface Lootboxes extends BaseContract {
 
   uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
-  callStatic: {
-    allowedApprovals(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+  whitelists(
+    arg0: string,
+    arg1: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
+  callStatic: {
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -710,6 +713,12 @@ export interface Lootboxes extends BaseContract {
     ): Promise<void>;
 
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {
@@ -802,11 +811,6 @@ export interface Lootboxes extends BaseContract {
   };
 
   estimateGas: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -916,14 +920,15 @@ export interface Lootboxes extends BaseContract {
     ): Promise<BigNumber>;
 
     uri(tokenId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    allowedApprovals(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     balanceOf(
       account: string,
       id: BigNumberish,
@@ -1034,6 +1039,12 @@ export interface Lootboxes extends BaseContract {
 
     uri(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    whitelists(
+      arg0: string,
+      arg1: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

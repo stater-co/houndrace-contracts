@@ -88,35 +88,35 @@ export declare namespace Core {
 export declare namespace Queue {
   export type StructStruct = {
     core: Core.StructStruct;
+    speciesAllowed: BigNumberish[];
     startDate: BigNumberish;
     endDate: BigNumberish;
     lastCompletion: BigNumberish;
     totalParticipants: BigNumberish;
     cooldown: BigNumberish;
     staminaCost: BigNumberish;
-    speciesAllowed: BigNumberish[];
     closed: boolean;
   };
 
   export type StructStructOutput = [
     Core.StructStructOutput,
+    BigNumber[],
     BigNumber,
     BigNumber,
     BigNumber,
     number,
     number,
     number,
-    number[],
     boolean
   ] & {
     core: Core.StructStructOutput;
+    speciesAllowed: BigNumber[];
     startDate: BigNumber;
     endDate: BigNumber;
     lastCompletion: BigNumber;
     totalParticipants: number;
     cooldown: number;
     staminaCost: number;
-    speciesAllowed: number[];
     closed: boolean;
   };
 }
@@ -124,7 +124,7 @@ export declare namespace Queue {
 export interface ICreateQueuesInterface extends utils.Interface {
   contractName: "ICreateQueues";
   functions: {
-    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,uint256,uint32,uint32,uint32,uint8[],bool)[])": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
   };
 
   encodeFunctionData(
