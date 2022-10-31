@@ -218,3 +218,8 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x4A837A120089861C736af8A6acdeea869eA4234E","network":"polygonMumbai","timestamp":"2022-10-24T07:12:39.166Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0xcb9276EeFC839560dc86337712aD49640B610B41","network":"polygonMumbai","timestamp":"2022-10-24T07:12:49.629Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xd3fd6eD2D77A67920bB24B24D4425944085ED3c8","network":"polygonMumbai","timestamp":"2022-10-24T07:12:56.312Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-10-31T12:21:40.796Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_RESTRICTED=0x156B32ab8693b4D0DBE33298de937F6D1FDEefcB","network":"polygon","timestamp":"2022-10-31T12:21:52.297Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0x146DA9c60dB0416E67d803De0E5Aab6E3e4F6DEc","network":"polygon","timestamp":"2022-10-31T12:22:02.308Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0xf7b9969026C04aa451Fbaf1390c3EcAD8dc89A32","network":"polygon","timestamp":"2022-10-31T12:22:08.182Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDRACE_POTIONS=0x4102778953c4520acdC9e9DC192523659B66E62d","network":"polygon","timestamp":"2022-10-31T12:22:13.980Z"}

@@ -96,6 +96,7 @@ export type { ShopMethods } from "./ShopMethods";
 export type { Geyser } from "./Geyser";
 export type { ShopRestricted } from "./ShopRestricted";
 export type { ShopZerocost } from "./ShopZerocost";
+export type { Whitelist } from "./Whitelist";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { ERC1155__factory } from "./factories/ERC1155__factory";
@@ -192,3 +193,4 @@ export { ShopMethods__factory } from "./factories/ShopMethods__factory";
 export { Geyser__factory } from "./factories/Geyser__factory";
 export { ShopRestricted__factory } from "./factories/ShopRestricted__factory";
 export { ShopZerocost__factory } from "./factories/ShopZerocost__factory";
+export { Whitelist__factory } from "./factories/Whitelist__factory";
