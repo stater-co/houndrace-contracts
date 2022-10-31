@@ -21,6 +21,10 @@ const config: HardhatUserConfig = {
     polygonMumbai: {
       url: String(process.env.MUMBAI_URL),
       accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
+    },
+    polygon: {
+      url: String(process.env.POLYGON_URL),
+      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
     }
   },
   etherscan: {
