@@ -387,3 +387,27 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0xfD527Ad185C72f0aB48D67E140Aa46E6600877Cf","network":"polygon","timestamp":"2022-11-01T16:13:52.568Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0x9Ed8930b727366E861D0e3Aa52fa5F57DF749cAC","network":"polygon","timestamp":"2022-11-01T16:13:59.279Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x2433aaF578291c878cAE79e5b44c890F56b30dDD","network":"polygon","timestamp":"2022-11-01T16:14:05.903Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-02T10:40:36.182Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0xAb07d2674362E6Faad00f003Dd6eE85c6cA7932d","network":"polygon","timestamp":"2022-11-02T10:40:47.611Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0x34bdFa5AADc1A48ce158104c9ee42578A8ed7C45","network":"polygon","timestamp":"2022-11-02T10:40:53.656Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDRACE_POTIONS=0x466F587c5AC50432658EC418Cf10D9B6e198862b","network":"polygon","timestamp":"2022-11-02T10:41:01.519Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_RESTRICTED=0x25Cd1bD81e81A419d5957293eB511A0f1e9f4B7D","network":"polygon","timestamp":"2022-11-02T10:41:11.457Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_METHODS=0x30a992F53776c9f0Bfe147622FACF2470616a486","network":"polygon","timestamp":"2022-11-02T10:41:17.802Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP=0xe8941Dd364e961e04681498158A93295E2c236e9","network":"polygon","timestamp":"2022-11-02T10:41:27.019Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_RESTRICTED=0x8c1D35b414Fad9B76d5973792c9d02Bf5aD05886","network":"polygon","timestamp":"2022-11-02T10:41:33.178Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_METHODS=0x8Cdd873670D3448981157a6FF267410188550BcB","network":"polygon","timestamp":"2022-11-02T10:43:31.776Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS=0x12Ab7f0490028dC872357947A7e38308Fa0CA6F7","network":"polygon","timestamp":"2022-11-02T10:43:40.753Z"}
+{"level":"info","message":"[DIIMIIM] export GENETICS=0xc4F066AcB16423Ae233fa9965ABb1D7b591A2758","network":"polygon","timestamp":"2022-11-02T10:43:49.662Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_RESTRICTED=0x01AFE81151E32e5ef782c386d0F07a0DcCFB9913","network":"polygon","timestamp":"2022-11-02T10:43:58.785Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_ZEROCOST=0x22D2405efb0333bBdE7142edb5E71Cf609913cd0","network":"polygon","timestamp":"2022-11-02T10:44:07.580Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MODIFIER=0x9Df7099EAFad1A5d7FD3D93055750375F6794aE1","network":"polygon","timestamp":"2022-11-02T10:44:14.801Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MINTER=0x6cBBC2D80D6f3De90129C36dfe46F95b371B80Bc","network":"polygon","timestamp":"2022-11-02T10:44:24.133Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS=0xd3E9983bE90986e0e772733592fE82fE31497070","network":"polygon","timestamp":"2022-11-02T10:44:33.764Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_RESTRICTED=0x118FE739C011ba0F8880a3f3E0c64Ec3C61327b3","network":"polygon","timestamp":"2022-11-02T10:44:42.597Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_METHODS=0x506DfD581Dd6173bfefF213F363368DED65885d7","network":"polygon","timestamp":"2022-11-02T10:44:51.637Z"}
+{"level":"info","message":"[DIIMIIM] export RACE=0xE3f0f8f955ED8F8c1f8C6d8D38AD9d1a734c42D5","network":"polygon","timestamp":"2022-11-02T10:45:00.836Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_METHODS=0x4a844A859208ddAECE4E3130505Bfbf49A72FB9F","network":"polygon","timestamp":"2022-11-02T10:45:07.997Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_RESTRICTED=0x09a68b52B4B0708B57707d64bc8b89A0BEa471b7","network":"polygon","timestamp":"2022-11-02T10:45:17.422Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x53de6C3776aBb0a51bEd6863CFB14b8F3Cf7dc27","network":"polygon","timestamp":"2022-11-02T10:45:26.684Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES=0xD929cde9DD4A6315f884C5b8A227Ff6A7b331290","network":"polygon","timestamp":"2022-11-02T10:45:36.179Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x4e52d9Ca8e22cbc63bf1d54FA7302cd050a3338d","network":"polygon","timestamp":"2022-11-02T10:45:45.476Z"}
