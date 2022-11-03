@@ -16,11 +16,12 @@ async function main() {
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "HoundRace Lootboxes",
-      allowedApprovals: [],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       hounds: globalParams.address0,
       payments: globalParams.address0,
-      alphadune: globalParams.address0,
-      canBeOpened: false
+      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
+      canBeOpened: true
     };
     const lootboxes = await deployContract({
       name: 'Lootboxes',
@@ -33,10 +34,11 @@ async function main() {
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "HoundRace Lootboxes",
-      allowedApprovals: [globalParams.OPENSEA_CONTRACT_ADDRESS],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       hounds: String(process.env.HOUNDS),
       payments: String(process.env.PAYMENTS),
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
       canBeOpened: true
     }
 

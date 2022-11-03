@@ -411,3 +411,5 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x53de6C3776aBb0a51bEd6863CFB14b8F3Cf7dc27","network":"polygon","timestamp":"2022-11-02T10:45:26.684Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0xD929cde9DD4A6315f884C5b8A227Ff6A7b331290","network":"polygon","timestamp":"2022-11-02T10:45:36.179Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x4e52d9Ca8e22cbc63bf1d54FA7302cd050a3338d","network":"polygon","timestamp":"2022-11-02T10:45:45.476Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x37238b0ab9E0aF0d410cE0a29f37B08aA6f443be","network":"polygon","timestamp":"2022-11-03T12:31:33.524Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x6cE4C8A590687acBe0a1F551fd45381c3Ad1b166","network":"polygon","timestamp":"2022-11-03T12:53:22.610Z"}

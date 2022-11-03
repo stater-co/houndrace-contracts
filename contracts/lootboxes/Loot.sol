@@ -21,7 +21,6 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         control = input;
     }
 
-
     function setGlobalParameters(
         LootboxesConstructor.Struct memory globalParameters
     ) 
@@ -29,6 +28,7 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         onlyOwner 
     {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     function mint(
