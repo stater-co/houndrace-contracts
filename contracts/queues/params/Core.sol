@@ -22,8 +22,6 @@ library Core {
 
         uint256 fee;
 
-        Payment.Struct payments; // to remove ??
-
     }
 
 }
