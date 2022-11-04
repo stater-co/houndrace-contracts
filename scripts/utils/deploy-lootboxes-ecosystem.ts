@@ -15,7 +15,7 @@ async function main() {
   try {
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
-      name: "HoundRace Lootboxes",
+      name: "Houndrace Mystery Boxes",
       operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       hounds: globalParams.address0,
       payments: globalParams.address0,
@@ -39,7 +39,7 @@ async function main() {
       payments: String(process.env.PAYMENTS),
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
-      canBeOpened: true
+      canBeOpened: false
     }
 
     try {

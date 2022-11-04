@@ -514,7 +514,7 @@ async function main() {
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
-      name: "HoundRace Lootboxes",
+      name: "Houndrace Mystery Boxes",
       operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       hounds: hounds.address,
       payments: payments.address,
