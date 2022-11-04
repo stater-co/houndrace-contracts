@@ -5,7 +5,7 @@ import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '../../genetics/interfaces/IMixGenes.sol';
 import '../../payments/interfaces/IPay.sol';
-import '../../shop/interfaces/ICalculateDiscount.sol';
+import '../../shop/interfaces/ICheckDiscount.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../whitelist/Index.sol';
 import '../interfaces/IGetBreedCosts.sol';

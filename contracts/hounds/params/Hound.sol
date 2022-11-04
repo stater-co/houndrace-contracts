@@ -12,23 +12,23 @@ library Hound {
     }
 
     struct Breeding {
-        address breedingFeeCurrency;
-        address breedingCooldownCurrency;
+        address breedingFeeCurrency; // constructor
+        address breedingCooldownCurrency; // constructor
         uint256 lastBreed;
-        uint256 breedingCooldown;
+        uint256 breedingCooldown; // constructor
         uint256 breedingFee;
-        uint256 breedingCooldownTimeUnit;
-        uint256 refillBreedingCooldownCost;
+        uint256 breedingCooldownTimeUnit; // constructor
+        uint256 refillBreedingCooldownCost; // constructor
         bool availableToBreed;
     }
 
     struct Stamina {
-        address staminaRefillCurrency;
+        address staminaRefillCurrency; // constructor
         uint256 staminaLastUpdate;
-        uint256 staminaRefill1x;
+        uint256 staminaRefill1x; // constructor
         uint32 staminaValue;
-        uint32 staminaPerTimeUnit;
-        uint32 staminaCap;
+        uint32 staminaPerTimeUnit; // constructor
+        uint32 staminaCap; // constructor
     }
 
     struct Identity {

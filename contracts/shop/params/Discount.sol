@@ -16,6 +16,7 @@ library Discount {
 
         uint32 discount;
 
+// TO ADD ERC20
         uint8 tokenType; // 0 - erc721 , 1 - erc1155 , 2 - geyser
 
         bool usable;

@@ -37,7 +37,7 @@ contract HoundsModifier is Params {
         nonReentrant 
     {
         require(theId < id);
-        uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
+        uint256 discount = ICheckDiscount(control.boilerplate.shop).checkDiscount(user);
 
         Hound.Stamina memory stamina = hounds[theId].stamina;
         require(stamina.staminaValue < stamina.staminaCap);
@@ -71,7 +71,7 @@ contract HoundsModifier is Params {
         nonReentrant 
     {
         require(theId < id);
-        uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
+        uint256 discount = ICheckDiscount(control.boilerplate.shop).checkDiscount(user);
 
         Hound.Breeding memory breeding = hounds[theId].breeding;
         require(breeding.lastBreed > 0);

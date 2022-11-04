@@ -18,6 +18,9 @@ contract ShopZerocost is Params {
 
         for ( uint256 i = 0; i < id; ++i ) {
 
+            // to add erc20 support
+
+
             // token type 1 is first to check to ensure the biggest discount will be applied
             // if user has a erc 1155 for discount
             if ( discounts[i].tokenType == 1 )

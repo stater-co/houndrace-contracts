@@ -6,8 +6,8 @@ library LootboxesConstructor {
     struct Struct {
         string name;
         address[] operators;
-        address hounds;
-        address payments;
+        address hounds; // to remove
+        address payments; // to remove
         bytes4[][] targets;
         bool canBeOpened;
     }
