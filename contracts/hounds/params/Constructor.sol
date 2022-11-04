@@ -9,6 +9,8 @@ library Constructor {
         string name;
         string symbol;
         Hound.Struct defaultHound;
+        Hound.ConstructorBreeding breeding;
+        Hound.ConstructorStamina stamina; 
         address[] operators;
         bytes4[][] targets;
         ConstructorBoilerplate.Struct boilerplate;
