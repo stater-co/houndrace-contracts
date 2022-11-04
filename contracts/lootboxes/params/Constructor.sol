@@ -8,7 +8,6 @@ library LootboxesConstructor {
         address[] operators;
         address hounds;
         address payments;
-        address alphadune;
         bytes4[][] targets;
         bool canBeOpened;
     }

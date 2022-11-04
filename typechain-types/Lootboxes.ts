@@ -28,7 +28,6 @@ export declare namespace LootboxesConstructor {
     operators: string[];
     hounds: string;
     payments: string;
-    alphadune: string;
     targets: BytesLike[][];
     canBeOpened: boolean;
   };
@@ -38,7 +37,6 @@ export declare namespace LootboxesConstructor {
     string[],
     string,
     string,
-    string,
     string[][],
     boolean
   ] & {
@@ -46,7 +44,6 @@ export declare namespace LootboxesConstructor {
     operators: string[];
     hounds: string;
     payments: string;
-    alphadune: string;
     targets: string[][];
     canBeOpened: boolean;
   };
@@ -90,7 +87,7 @@ export interface LootboxesInterface extends utils.Interface {
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,address[],address,address,address,bytes4[][],bool))": FunctionFragment;
+    "setGlobalParameters((string,address[],address,address,bytes4[][],bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -360,11 +357,10 @@ export interface Lootboxes extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, boolean] & {
+      [string, string, string, boolean] & {
         name: string;
         hounds: string;
         payments: string;
-        alphadune: string;
         canBeOpened: boolean;
       }
     >;
@@ -487,11 +483,10 @@ export interface Lootboxes extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, boolean] & {
+    [string, string, string, boolean] & {
       name: string;
       hounds: string;
       payments: string;
-      alphadune: string;
       canBeOpened: boolean;
     }
   >;
@@ -614,11 +609,10 @@ export interface Lootboxes extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, boolean] & {
+      [string, string, string, boolean] & {
         name: string;
         hounds: string;
         payments: string;
-        alphadune: string;
         canBeOpened: boolean;
       }
     >;

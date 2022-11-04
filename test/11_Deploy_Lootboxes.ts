@@ -21,11 +21,10 @@ export async function run(
         lootboxes = await deployContract({
           name: 'Lootboxes',
           constructor: [[
-            "HoundRace lootboxes",
+            "Houndrace Mystery Boxes",
             [signer.address, signer2.address, signer3.address],
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
-            owner.address,
             [['0xc6e64e53'],['0x7c46a44b'],['0xedd0cb87']],
             false
           ]],
