@@ -15,7 +15,7 @@ export async function set(
       await dependencies.racesRestricted.setGlobalParameters({
         ...dependencies.constructor,
         operators: [dependencies.queuesAddress, signer.address, dependencies.races.address],
-        targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
+        targets: [['0x65913d77', '0x5bd4fd05'], ['0x30e54438'], ['0x9ad2e2b0', '0x5bd4fd05']]
       });
       const after = await dependencies.racesRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races restricted global params setter bugged");
@@ -27,7 +27,7 @@ export async function set(
       await dependencies.racesMethods.setGlobalParameters({
         ...dependencies.constructor,
         operators: [dependencies.queuesAddress, signer.address, dependencies.races.address],
-        targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
+        targets: [['0x65913d77', '0x5bd4fd05'], ['0x30e54438'], ['0x9ad2e2b0', '0x5bd4fd05']]
       });
       const after = await dependencies.racesMethods.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races methods global params setter bugged");
@@ -39,7 +39,7 @@ export async function set(
       await dependencies.races.setGlobalParameters({
         ...dependencies.constructor,
         operators: [dependencies.queuesAddress, signer.address, dependencies.races.address],
-        targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
+        targets: [['0x65913d77', '0x5bd4fd05'], ['0x797a6764'], ['0x9ad2e2b0', '0x5bd4fd05']]
       });
       const after = await dependencies.races.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Races global params setter bugged");
