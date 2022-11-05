@@ -5,6 +5,6 @@ import '../params/Hound.sol';
 
 interface IInitializeHound {
 
-    function initializeHound(uint256 onId, address owner, Hound.Struct memory theHound) external;
+    function initializeHound(uint256 onId, address owner, Hound.Struct memory createdHound) external;
 
 }

@@ -25,58 +25,24 @@ import type {
 
 export declare namespace Hound {
   export type StaminaStruct = {
-    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerTimeUnit: BigNumberish;
-    staminaCap: BigNumberish;
   };
 
-  export type StaminaStructOutput = [
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaRefillCurrency: string;
+  export type StaminaStructOutput = [BigNumber, number] & {
     staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerTimeUnit: number;
-    staminaCap: number;
   };
 
   export type BreedingStruct = {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    breedingCooldownTimeUnit: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
+    externalBreedingFee: BigNumberish;
     availableToBreed: boolean;
   };
 
-  export type BreedingStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
+  export type BreedingStructOutput = [BigNumber, BigNumber, boolean] & {
     lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    breedingCooldownTimeUnit: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
+    externalBreedingFee: BigNumber;
     availableToBreed: boolean;
   };
 
@@ -140,6 +106,47 @@ export declare namespace Hound {
     identity: Hound.IdentityStructOutput;
     profile: Hound.ProfileStructOutput;
   };
+
+  export type ConstructorBreedingStruct = {
+    externalBreedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    breedingCooldown: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
+  };
+
+  export type ConstructorBreedingStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    externalBreedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    breedingCooldown: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
+  };
+
+  export type ConstructorStaminaStruct = {
+    staminaRefillCurrency: string;
+    staminaRefill1x: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
+    staminaCap: BigNumberish;
+  };
+
+  export type ConstructorStaminaStructOutput = [
+    string,
+    BigNumber,
+    number,
+    number
+  ] & {
+    staminaRefillCurrency: string;
+    staminaRefill1x: BigNumber;
+    staminaPerTimeUnit: number;
+    staminaCap: number;
+  };
 }
 
 export declare namespace ConstructorBoilerplate {
@@ -153,7 +160,7 @@ export declare namespace ConstructorBoilerplate {
     shop: string;
     races: string;
     genetics: string;
-    alphadune: string;
+    houndsInitializer: string;
   };
 
   export type StructStructOutput = [
@@ -177,7 +184,7 @@ export declare namespace ConstructorBoilerplate {
     shop: string;
     races: string;
     genetics: string;
-    alphadune: string;
+    houndsInitializer: string;
   };
 }
 
@@ -185,9 +192,9 @@ export declare namespace ConstructorFees {
   export type StructStruct = {
     currency: string;
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    alphaduneFeeCurrency: string;
     breedCost: BigNumberish;
-    breedFee: BigNumberish;
+    alphaduneFee: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -199,9 +206,9 @@ export declare namespace ConstructorFees {
   ] & {
     currency: string;
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    alphaduneFeeCurrency: string;
     breedCost: BigNumber;
-    breedFee: BigNumber;
+    alphaduneFee: BigNumber;
   };
 }
 
@@ -210,6 +217,8 @@ export declare namespace Constructor {
     name: string;
     symbol: string;
     defaultHound: Hound.StructStruct;
+    breeding: Hound.ConstructorBreedingStruct;
+    stamina: Hound.ConstructorStaminaStruct;
     operators: string[];
     targets: BytesLike[][];
     boilerplate: ConstructorBoilerplate.StructStruct;
@@ -220,6 +229,8 @@ export declare namespace Constructor {
     string,
     string,
     Hound.StructStructOutput,
+    Hound.ConstructorBreedingStructOutput,
+    Hound.ConstructorStaminaStructOutput,
     string[],
     string[][],
     ConstructorBoilerplate.StructStructOutput,
@@ -228,6 +239,8 @@ export declare namespace Constructor {
     name: string;
     symbol: string;
     defaultHound: Hound.StructStructOutput;
+    breeding: Hound.ConstructorBreedingStructOutput;
+    stamina: Hound.ConstructorStaminaStructOutput;
     operators: string[];
     targets: string[][];
     boilerplate: ConstructorBoilerplate.StructStructOutput;
@@ -256,7 +269,7 @@ export interface HoundsMinterInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -570,12 +583,16 @@ export interface HoundsMinter extends BaseContract {
         string,
         string,
         Hound.StructStructOutput,
+        Hound.ConstructorBreedingStructOutput,
+        Hound.ConstructorStaminaStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
         defaultHound: Hound.StructStructOutput;
+        breeding: Hound.ConstructorBreedingStructOutput;
+        stamina: Hound.ConstructorStaminaStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -587,7 +604,7 @@ export interface HoundsMinter extends BaseContract {
     ): Promise<[string]>;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Hound.StructStructOutput]>;
 
@@ -727,12 +744,16 @@ export interface HoundsMinter extends BaseContract {
       string,
       string,
       Hound.StructStructOutput,
+      Hound.ConstructorBreedingStructOutput,
+      Hound.ConstructorStaminaStructOutput,
       ConstructorBoilerplate.StructStructOutput,
       ConstructorFees.StructStructOutput
     ] & {
       name: string;
       symbol: string;
       defaultHound: Hound.StructStructOutput;
+      breeding: Hound.ConstructorBreedingStructOutput;
+      stamina: Hound.ConstructorStaminaStructOutput;
       boilerplate: ConstructorBoilerplate.StructStructOutput;
       fees: ConstructorFees.StructStructOutput;
     }
@@ -744,7 +765,7 @@ export interface HoundsMinter extends BaseContract {
   ): Promise<string>;
 
   hound(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Hound.StructStructOutput>;
 
@@ -875,12 +896,16 @@ export interface HoundsMinter extends BaseContract {
         string,
         string,
         Hound.StructStructOutput,
+        Hound.ConstructorBreedingStructOutput,
+        Hound.ConstructorStaminaStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
         defaultHound: Hound.StructStructOutput;
+        breeding: Hound.ConstructorBreedingStructOutput;
+        stamina: Hound.ConstructorStaminaStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -892,7 +917,7 @@ export interface HoundsMinter extends BaseContract {
     ): Promise<string>;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Hound.StructStructOutput>;
 
@@ -1136,7 +1161,7 @@ export interface HoundsMinter extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    hound(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     houndOwner(
       tokenId: BigNumberish,
@@ -1264,7 +1289,7 @@ export interface HoundsMinter extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

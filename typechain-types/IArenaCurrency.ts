@@ -68,19 +68,19 @@ export interface IArenaCurrency extends BaseContract {
 
   functions: {
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
   };
 
   arenaCurrency(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   callStatic: {
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -89,14 +89,14 @@ export interface IArenaCurrency extends BaseContract {
 
   estimateGas: {
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

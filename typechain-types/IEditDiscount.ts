@@ -28,6 +28,7 @@ export declare namespace Discount {
     tokenIds: BigNumberish[];
     dateStart: BigNumberish;
     dateStop: BigNumberish;
+    amountToUsePerUsableDiscount: BigNumberish;
     discount: BigNumberish;
     tokenType: BigNumberish;
     usable: boolean;
@@ -38,6 +39,7 @@ export declare namespace Discount {
     BigNumber[],
     BigNumber,
     BigNumber,
+    BigNumber,
     number,
     number,
     boolean
@@ -46,6 +48,7 @@ export declare namespace Discount {
     tokenIds: BigNumber[];
     dateStart: BigNumber;
     dateStop: BigNumber;
+    amountToUsePerUsableDiscount: BigNumber;
     discount: number;
     tokenType: number;
     usable: boolean;
@@ -55,7 +58,7 @@ export declare namespace Discount {
 export interface IEditDiscountInterface extends utils.Interface {
   contractName: "IEditDiscount";
   functions: {
-    "editDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
+    "editDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -101,21 +104,21 @@ export interface IEditDiscount extends BaseContract {
   functions: {
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   editDiscount(
     discount: Discount.StructStruct,
-    theId: BigNumberish,
+    discountId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -125,7 +128,7 @@ export interface IEditDiscount extends BaseContract {
   estimateGas: {
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -133,7 +136,7 @@ export interface IEditDiscount extends BaseContract {
   populateTransaction: {
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

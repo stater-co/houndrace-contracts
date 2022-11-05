@@ -6,7 +6,7 @@ import '../params/Race.sol';
 interface IUploadRace {
 
     function uploadRace(
-        uint256 theId, 
+        uint256 raceId, 
         uint256 queueId,
         Race.Struct memory race
     ) external;

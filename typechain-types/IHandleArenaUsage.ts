@@ -70,19 +70,19 @@ export interface IHandleArenaUsage extends BaseContract {
 
   functions: {
     handleArenaUsage(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   handleArenaUsage(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     handleArenaUsage(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -91,14 +91,14 @@ export interface IHandleArenaUsage extends BaseContract {
 
   estimateGas: {
     handleArenaUsage(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     handleArenaUsage(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

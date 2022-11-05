@@ -49,12 +49,12 @@ contract Params is Whitelist {
         updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
-    function race(uint256 theId) external view returns(Race.Struct memory) {
-        return races[theId];
+    function race(uint256 raceId) external view returns(Race.Struct memory) {
+        return races[raceId];
     }
 
-    function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return races[theId].core.participants;
+    function participantsOf(uint256 raceId) external view returns(uint256[] memory) {
+        return races[raceId].core.participants;
     }
 
 }

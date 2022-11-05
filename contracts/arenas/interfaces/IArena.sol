@@ -5,6 +5,6 @@ import '../params/Arena.sol';
 
 interface IArena {
     
-    function arena(uint256 theId) external view returns(Arena.Struct memory);
+    function arena(uint256 arenaId) external view returns(Arena.Struct memory);
     
 }

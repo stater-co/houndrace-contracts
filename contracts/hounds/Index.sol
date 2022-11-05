@@ -10,7 +10,7 @@ contract Hounds is Params {
     function initializeHound(
         uint256 onId, 
         address owner, 
-        Hound.Struct memory theHound
+        Hound.Struct memory createdHound
     ) external {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
@@ -25,7 +25,7 @@ contract Hounds is Params {
     }
 
     function updateHoundStamina(
-        uint256 theId, 
+        uint256 houndId, 
         uint32 amount
     ) external {
         (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
@@ -33,7 +33,7 @@ contract Hounds is Params {
     }
 
     function boostHoundStamina(
-        uint256 theId, 
+        uint256 houndId, 
         address user, 
         uint256 payed
     ) external payable {
@@ -41,17 +41,17 @@ contract Hounds is Params {
         require(success);
     }
 
-    function boostHoundBreeding(uint256 theId, address user, uint256 payed) external payable {
+    function boostHoundBreeding(uint256 houndId, address user, uint256 payed) external payable {
         (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function putHoundForBreed(uint256 theId, uint256 fee, bool status) external {
+    function putHoundForBreed(uint256 houndId, uint256 fee, bool status) external {
         (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
     }
 
-    function updateHoundRunning(uint256 theId, uint256 runningOn) external returns(uint256 ranOn) {
+    function updateHoundRunning(uint256 houndId, uint256 runningOn) external returns(uint256 ranOn) {
         (bool success, bytes memory output) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
         ranOn = abi.decode(output,(uint256)); 

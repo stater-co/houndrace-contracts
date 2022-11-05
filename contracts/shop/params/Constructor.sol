@@ -8,7 +8,7 @@ library ShopConstructor {
         address[] operators;
         address methods;
         address restricted;
-        address alphadune;
+        address discountsReceiverWallet;
         bytes4[][] targets;
     }
 

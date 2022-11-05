@@ -92,19 +92,19 @@ export interface IArena extends BaseContract {
 
   functions: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Arena.StructStructOutput]>;
   };
 
   arena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Arena.StructStructOutput>;
 
   callStatic: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Arena.StructStructOutput>;
   };
@@ -112,12 +112,12 @@ export interface IArena extends BaseContract {
   filters: {};
 
   estimateGas: {
-    arena(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    arena(arenaId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

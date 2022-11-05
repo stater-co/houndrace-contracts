@@ -5,8 +5,8 @@ library ConstructorFees {
     struct Struct {
         address currency;
         address breedCostCurrency;
-        address breedFeeCurrency;
+        address alphaduneFeeCurrency;
         uint256 breedCost;
-        uint256 breedFee;
+        uint256 alphaduneFee;
     }
 }

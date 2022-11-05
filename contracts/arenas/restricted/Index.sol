@@ -20,9 +20,9 @@ contract ArenasRestricted is Params {
         ++id;
     }
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external whitelisted {
-        arenas[theId] = arena;
-        emit EditArena(theId,msg.sender,arena);
+    function editArena(uint256 arenaId, Arena.Struct memory arena) external whitelisted {
+        arenas[arenaId] = arena;
+        emit EditArena(arenaId,msg.sender,arena);
     }
     
 }

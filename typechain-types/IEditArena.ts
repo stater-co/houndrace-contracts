@@ -97,21 +97,21 @@ export interface IEditArena extends BaseContract {
 
   functions: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   editArena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     arena: Arena.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -121,7 +121,7 @@ export interface IEditArena extends BaseContract {
 
   estimateGas: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -129,7 +129,7 @@ export interface IEditArena extends BaseContract {
 
   populateTransaction: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

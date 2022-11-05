@@ -12,7 +12,7 @@ contract Shop is Params {
         require(success);
     }
 
-    function editDiscount(Discount.Struct memory discount, uint256 theId) external {
+    function editDiscount(Discount.Struct memory discount, uint256 discountId) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }

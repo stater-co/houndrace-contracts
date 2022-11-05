@@ -8,24 +8,24 @@ contract QueuesRestricted is Params {
     constructor(QueuesConstructor.Struct memory input) Params(input) {}
 
     function createQueues(
-        Queue.Struct[] memory theQueues
+        Queue.Struct[] memory createdQueues
     ) 
         external 
         whitelisted 
     {
         uint256 arenaFee;
-        for ( uint256 i = 0 ; i < theQueues.length ; ++i ) {
-            arenaFee = IArenaFee(control.arenas).arenaFee(theQueues[i].core.arena);
-            require(arenaFee < theQueues[i].core.entryFee / theQueues[i].totalParticipants);
-            queues[id] = theQueues[i];
+        for ( uint256 i = 0 ; i < createdQueues.length ; ++i ) {
+            arenaFee = IArenaFee(control.arenas).arenaFee(createdQueues[i].core.arena);
+            require(arenaFee < createdQueues[i].core.entryFee / createdQueues[i].totalParticipants);
+            queues[id] = createdQueues[i];
             ++id;
         }
 
-        emit QueuesCreation(id-theQueues.length,id-1,theQueues);
+        emit QueuesCreation(id-createdQueues.length,id-1,createdQueues);
     }
 
     function editQueue(
-        uint256 theId, 
+        uint256 queueId, 
         Queue.Struct memory queue
     ) 
         external 
@@ -33,30 +33,30 @@ contract QueuesRestricted is Params {
     {
         Arena.Struct memory arena = IArena(control.arenas).arena(queue.core.arena);
         require(arena.fee < queue.core.entryFee / 2);
-        queues[theId] = queue;
-        emit EditQueue(theId,queues[theId]);
+        queues[queueId] = queue;
+        emit EditQueue(queueId,queues[queueId]);
     }
 
     function closeQueue(
-        uint256 theId
+        uint256 queueId
     ) 
         external 
         whitelisted 
     {
-        queues[theId].closed = true;
+        queues[queueId].closed = true;
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[theId].core.entryFee;
+        amounts[0] = queues[queueId].core.entryFee;
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[queueId].core.arena);
 
-        for ( uint256 i = 0; i < queues[theId].core.participants.length; ++i ) {
-            if ( queues[theId].core.participants[i] > 0 ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[theId].core.participants[i], theId) != 0);
-                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[theId].core.participants[i]);
+        for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
+            if ( queues[queueId].core.participants[i] > 0 ) {
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], queueId) != 0);
+                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
 
                 IPay(control.payments).pay{
-                    value: arenaCurrency == address(0) ? queues[theId].core.entryFee : 0
+                    value: arenaCurrency == address(0) ? queues[queueId].core.entryFee : 0
                 }(
                     address(this),
                     houndOwner,
@@ -68,27 +68,27 @@ contract QueuesRestricted is Params {
             }
         }
 
-        emit QueueClosed(theId);
+        emit QueueClosed(queueId);
     }
 
     function deleteQueue(
-        uint256 theId
+        uint256 queueId
     ) 
         external 
         whitelisted 
     {
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[theId].core.entryFee;
+        amounts[0] = queues[queueId].core.entryFee;
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[theId].core.arena);
+        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[queueId].core.arena);
 
-        for ( uint256 i = 0; i < queues[theId].core.participants.length; ++i ) {
-            if ( queues[theId].core.participants[i] > 0 ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[theId].core.participants[i], theId) != 0);
-                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[theId].core.participants[i]);
+        for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
+            if ( queues[queueId].core.participants[i] > 0 ) {
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], queueId) != 0);
+                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
 
                 IPay(control.payments).pay{
-                    value: arenaCurrency == address(0) ? queues[theId].core.entryFee : 0
+                    value: arenaCurrency == address(0) ? queues[queueId].core.entryFee : 0
                 }(
                     address(this),
                     houndOwner,
@@ -99,8 +99,8 @@ contract QueuesRestricted is Params {
                 );
             }
         }
-        delete queues[theId];
-        emit DeleteQueue(theId);
+        delete queues[queueId];
+        emit DeleteQueue(queueId);
     }
 
 }

@@ -26,24 +26,13 @@ export declare namespace LootboxesConstructor {
   export type StructStruct = {
     name: string;
     operators: string[];
-    hounds: string;
-    payments: string;
     targets: BytesLike[][];
     canBeOpened: boolean;
   };
 
-  export type StructStructOutput = [
-    string,
-    string[],
-    string,
-    string,
-    string[][],
-    boolean
-  ] & {
+  export type StructStructOutput = [string, string[], string[][], boolean] & {
     name: string;
     operators: string[];
-    hounds: string;
-    payments: string;
     targets: string[][];
     canBeOpened: boolean;
   };
@@ -87,7 +76,7 @@ export interface LootboxesInterface extends utils.Interface {
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,address[],address,address,bytes4[][],bool))": FunctionFragment;
+    "setGlobalParameters((string,address[],bytes4[][],bool))": FunctionFragment;
     "setOpenStatus(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
@@ -356,14 +345,7 @@ export interface Lootboxes extends BaseContract {
 
     control(
       overrides?: CallOverrides
-    ): Promise<
-      [string, string, string, boolean] & {
-        name: string;
-        hounds: string;
-        payments: string;
-        canBeOpened: boolean;
-      }
-    >;
+    ): Promise<[string, boolean] & { name: string; canBeOpened: boolean }>;
 
     isApprovedForAll(
       _owner: string,
@@ -482,14 +464,7 @@ export interface Lootboxes extends BaseContract {
 
   control(
     overrides?: CallOverrides
-  ): Promise<
-    [string, string, string, boolean] & {
-      name: string;
-      hounds: string;
-      payments: string;
-      canBeOpened: boolean;
-    }
-  >;
+  ): Promise<[string, boolean] & { name: string; canBeOpened: boolean }>;
 
   isApprovedForAll(
     _owner: string,
@@ -608,14 +583,7 @@ export interface Lootboxes extends BaseContract {
 
     control(
       overrides?: CallOverrides
-    ): Promise<
-      [string, string, string, boolean] & {
-        name: string;
-        hounds: string;
-        payments: string;
-        canBeOpened: boolean;
-      }
-    >;
+    ): Promise<[string, boolean] & { name: string; canBeOpened: boolean }>;
 
     isApprovedForAll(
       _owner: string,

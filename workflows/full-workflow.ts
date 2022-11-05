@@ -88,7 +88,7 @@ async function main() {
         constructor: {
             methods: payments.shopMethods.address,
             restricted: payments.shopRestricted.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             operators: [],
             targets: []
         }
@@ -109,7 +109,8 @@ async function main() {
             queues: queues.queues.address,
             zerocost: queues.queueZerocost.address,
             operators: [],
-            targets: []
+            targets: [],
+            raceUploader: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -142,11 +143,13 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
@@ -159,10 +162,10 @@ async function main() {
            },
            fees: {
             breedCostCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
+            alphaduneFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            alphaduneFee: "0x2386F26FC10000"
            }
         }
     });
@@ -228,11 +231,13 @@ async function main() {
         constructor: {
            name: "HoundRace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
             houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
@@ -245,10 +250,10 @@ async function main() {
            },
            fees: {
             breedCostCurrency: payments.houndracePotions.address,
-            breedFeeCurrency: payments.houndracePotions.address,
+            alphaduneFeeCurrency: payments.houndracePotions.address,
             currency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            alphaduneFee: "0x2386F26FC10000"
            }
         }
     });

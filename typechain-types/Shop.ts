@@ -27,7 +27,7 @@ export declare namespace ShopConstructor {
     operators: string[];
     methods: string;
     restricted: string;
-    alphadune: string;
+    discountsReceiverWallet: string;
     targets: BytesLike[][];
   };
 
@@ -41,7 +41,7 @@ export declare namespace ShopConstructor {
     operators: string[];
     methods: string;
     restricted: string;
-    alphadune: string;
+    discountsReceiverWallet: string;
     targets: string[][];
   };
 }
@@ -52,6 +52,7 @@ export declare namespace Discount {
     tokenIds: BigNumberish[];
     dateStart: BigNumberish;
     dateStop: BigNumberish;
+    amountToUsePerUsableDiscount: BigNumberish;
     discount: BigNumberish;
     tokenType: BigNumberish;
     usable: boolean;
@@ -62,6 +63,7 @@ export declare namespace Discount {
     BigNumber[],
     BigNumber,
     BigNumber,
+    BigNumber,
     number,
     number,
     boolean
@@ -70,6 +72,7 @@ export declare namespace Discount {
     tokenIds: BigNumber[];
     dateStart: BigNumber;
     dateStop: BigNumber;
+    amountToUsePerUsableDiscount: BigNumber;
     discount: number;
     tokenType: number;
     usable: boolean;
@@ -81,8 +84,8 @@ export interface ShopInterface extends utils.Interface {
   functions: {
     "calculateDiscount(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "createDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool))": FunctionFragment;
-    "editDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
+    "createDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool))": FunctionFragment;
+    "editDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
@@ -215,7 +218,7 @@ export interface Shop extends BaseContract {
       [string, string, string] & {
         methods: string;
         restricted: string;
-        alphadune: string;
+        discountsReceiverWallet: string;
       }
     >;
 
@@ -226,7 +229,7 @@ export interface Shop extends BaseContract {
 
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -266,7 +269,7 @@ export interface Shop extends BaseContract {
     [string, string, string] & {
       methods: string;
       restricted: string;
-      alphadune: string;
+      discountsReceiverWallet: string;
     }
   >;
 
@@ -277,7 +280,7 @@ export interface Shop extends BaseContract {
 
   editDiscount(
     discount: Discount.StructStruct,
-    theId: BigNumberish,
+    discountId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -317,7 +320,7 @@ export interface Shop extends BaseContract {
       [string, string, string] & {
         methods: string;
         restricted: string;
-        alphadune: string;
+        discountsReceiverWallet: string;
       }
     >;
 
@@ -328,7 +331,7 @@ export interface Shop extends BaseContract {
 
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -390,7 +393,7 @@ export interface Shop extends BaseContract {
 
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -434,7 +437,7 @@ export interface Shop extends BaseContract {
 
     editDiscount(
       discount: Discount.StructStruct,
-      theId: BigNumberish,
+      discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

@@ -70,7 +70,7 @@ export interface IBoostHoundStamina extends BaseContract {
 
   functions: {
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -78,7 +78,7 @@ export interface IBoostHoundStamina extends BaseContract {
   };
 
   boostHoundStamina(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     user: string,
     payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -86,7 +86,7 @@ export interface IBoostHoundStamina extends BaseContract {
 
   callStatic: {
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: CallOverrides
@@ -97,7 +97,7 @@ export interface IBoostHoundStamina extends BaseContract {
 
   estimateGas: {
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -106,7 +106,7 @@ export interface IBoostHoundStamina extends BaseContract {
 
   populateTransaction: {
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }

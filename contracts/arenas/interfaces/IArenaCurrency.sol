@@ -5,6 +5,6 @@ import '../params/Arena.sol';
 
 interface IArenaCurrency {
     
-    function arenaCurrency(uint256 theId) external view returns(address);
+    function arenaCurrency(uint256 arenaId) external view returns(address);
     
 }

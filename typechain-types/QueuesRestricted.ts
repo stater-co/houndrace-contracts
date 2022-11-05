@@ -33,11 +33,13 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
     string[],
+    string,
     string,
     string,
     string,
@@ -57,34 +59,8 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: string[][];
-  };
-}
-
-export declare namespace Payment {
-  export type StructStruct = {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumberish[][];
-    amounts: BigNumberish[][];
-    paymentType: BigNumberish[];
-  };
-
-  export type StructStructOutput = [
-    string[],
-    string[],
-    string[],
-    BigNumber[][],
-    BigNumber[][],
-    number[]
-  ] & {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumber[][];
-    amounts: BigNumber[][];
-    paymentType: number[];
   };
 }
 
@@ -98,7 +74,6 @@ export declare namespace Core {
     arena: BigNumberish;
     entryFee: BigNumberish;
     fee: BigNumberish;
-    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
@@ -109,8 +84,7 @@ export declare namespace Core {
     BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
+    BigNumber
   ] & {
     name: string;
     feeCurrency: string;
@@ -120,7 +94,6 @@ export declare namespace Core {
     arena: BigNumber;
     entryFee: BigNumber;
     fee: BigNumber;
-    payments: Payment.StructStructOutput;
   };
 }
 
@@ -165,9 +138,9 @@ export interface QueuesRestrictedInterface extends utils.Interface {
   functions: {
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
-    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
     "deleteQueue(uint256)": FunctionFragment;
-    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
+    "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
     "enqueueDatesOf(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
@@ -175,7 +148,7 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "whitelists(address,uint256)": FunctionFragment;
@@ -371,14 +344,24 @@ export interface QueuesRestricted extends BaseContract {
 
   functions: {
     closeQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -387,27 +370,28 @@ export interface QueuesRestricted extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
+        raceUploader: string;
       }
     >;
 
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     editQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -416,12 +400,12 @@ export interface QueuesRestricted extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Queue.StructStructOutput]>;
 
@@ -460,7 +444,7 @@ export interface QueuesRestricted extends BaseContract {
     ): Promise<ContractTransaction>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[number]>;
 
@@ -477,14 +461,14 @@ export interface QueuesRestricted extends BaseContract {
   };
 
   closeQueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, string, string, string] & {
       methods: string;
       restricted: string;
       queues: string;
@@ -493,27 +477,28 @@ export interface QueuesRestricted extends BaseContract {
       hounds: string;
       payments: string;
       races: string;
+      raceUploader: string;
     }
   >;
 
   createQueues(
-    theQueues: Queue.StructStruct[],
+    createdQueues: Queue.StructStruct[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   deleteQueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   editQueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     queue: Queue.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   enqueueDatesOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -522,12 +507,12 @@ export interface QueuesRestricted extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   participantsOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
   queue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Queue.StructStructOutput>;
 
@@ -566,7 +551,7 @@ export interface QueuesRestricted extends BaseContract {
   ): Promise<ContractTransaction>;
 
   staminaCostOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<number>;
 
@@ -582,12 +567,22 @@ export interface QueuesRestricted extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
-    closeQueue(theId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    closeQueue(queueId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -596,24 +591,28 @@ export interface QueuesRestricted extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
+        raceUploader: string;
       }
     >;
 
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    deleteQueue(theId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    deleteQueue(
+      queueId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     editQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -622,12 +621,12 @@ export interface QueuesRestricted extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Queue.StructStructOutput>;
 
@@ -664,7 +663,7 @@ export interface QueuesRestricted extends BaseContract {
     ): Promise<void>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<number>;
 
@@ -736,30 +735,30 @@ export interface QueuesRestricted extends BaseContract {
 
   estimateGas: {
     closeQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     editQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -768,11 +767,11 @@ export interface QueuesRestricted extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    queue(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    queue(queueId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     queues(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -786,7 +785,7 @@ export interface QueuesRestricted extends BaseContract {
     ): Promise<BigNumber>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -804,30 +803,30 @@ export interface QueuesRestricted extends BaseContract {
 
   populateTransaction: {
     closeQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     editQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       queue: Queue.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -836,12 +835,12 @@ export interface QueuesRestricted extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -860,7 +859,7 @@ export interface QueuesRestricted extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

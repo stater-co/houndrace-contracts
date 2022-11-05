@@ -34,11 +34,13 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
     string[],
+    string,
     string,
     string,
     string,
@@ -58,34 +60,8 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: string[][];
-  };
-}
-
-export declare namespace Payment {
-  export type StructStruct = {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumberish[][];
-    amounts: BigNumberish[][];
-    paymentType: BigNumberish[];
-  };
-
-  export type StructStructOutput = [
-    string[],
-    string[],
-    string[],
-    BigNumber[][],
-    BigNumber[][],
-    number[]
-  ] & {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumber[][];
-    amounts: BigNumber[][];
-    paymentType: number[];
   };
 }
 
@@ -99,7 +75,6 @@ export declare namespace Core {
     arena: BigNumberish;
     entryFee: BigNumberish;
     fee: BigNumberish;
-    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
@@ -110,8 +85,7 @@ export declare namespace Core {
     BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
+    BigNumber
   ] & {
     name: string;
     feeCurrency: string;
@@ -121,7 +95,6 @@ export declare namespace Core {
     arena: BigNumber;
     entryFee: BigNumber;
     fee: BigNumber;
-    payments: Payment.StructStructOutput;
   };
 }
 
@@ -173,7 +146,7 @@ export interface QueuesMethodsInterface extends utils.Interface {
     "queue(uint256)": FunctionFragment;
     "queues(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
     "staminaCostOf(uint256)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "unenqueue(uint256,uint256)": FunctionFragment;
@@ -356,7 +329,17 @@ export interface QueuesMethods extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -365,17 +348,18 @@ export interface QueuesMethods extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
+        raceUploader: string;
       }
     >;
 
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
@@ -384,12 +368,12 @@ export interface QueuesMethods extends BaseContract {
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Queue.StructStructOutput]>;
 
@@ -428,7 +412,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<ContractTransaction>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[number]>;
 
@@ -438,7 +422,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<ContractTransaction>;
 
     unenqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -453,7 +437,7 @@ export interface QueuesMethods extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, string, string, string, string, string] & {
+    [string, string, string, string, string, string, string, string, string] & {
       methods: string;
       restricted: string;
       queues: string;
@@ -462,17 +446,18 @@ export interface QueuesMethods extends BaseContract {
       hounds: string;
       payments: string;
       races: string;
+      raceUploader: string;
     }
   >;
 
   enqueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     hound: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   enqueueDatesOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
@@ -481,12 +466,12 @@ export interface QueuesMethods extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   participantsOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
   queue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Queue.StructStructOutput>;
 
@@ -525,7 +510,7 @@ export interface QueuesMethods extends BaseContract {
   ): Promise<ContractTransaction>;
 
   staminaCostOf(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<number>;
 
@@ -535,7 +520,7 @@ export interface QueuesMethods extends BaseContract {
   ): Promise<ContractTransaction>;
 
   unenqueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     hound: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -550,7 +535,17 @@ export interface QueuesMethods extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, string, string, string, string, string] & {
+      [
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string,
+        string
+      ] & {
         methods: string;
         restricted: string;
         queues: string;
@@ -559,17 +554,18 @@ export interface QueuesMethods extends BaseContract {
         hounds: string;
         payments: string;
         races: string;
+        raceUploader: string;
       }
     >;
 
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
@@ -578,12 +574,12 @@ export interface QueuesMethods extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Queue.StructStructOutput>;
 
@@ -620,7 +616,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<void>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<number>;
 
@@ -630,7 +626,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<void>;
 
     unenqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -700,13 +696,13 @@ export interface QueuesMethods extends BaseContract {
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -715,11 +711,11 @@ export interface QueuesMethods extends BaseContract {
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    queue(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    queue(queueId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     queues(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -733,7 +729,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<BigNumber>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -743,7 +739,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<BigNumber>;
 
     unenqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -759,13 +755,13 @@ export interface QueuesMethods extends BaseContract {
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     enqueueDatesOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -774,12 +770,12 @@ export interface QueuesMethods extends BaseContract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     participantsOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -798,7 +794,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     staminaCostOf(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -808,7 +804,7 @@ export interface QueuesMethods extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     unenqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

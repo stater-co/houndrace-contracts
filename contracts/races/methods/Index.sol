@@ -24,12 +24,19 @@ contract RacesMethods is Params {
                 queue.core.enqueueDates,
                 queue.core.arena,
                 queue.core.entryFee,
-                queue.core.fee,
-                queue.core.payments
+                queue.core.fee
             ),
             queueId,
             0,
-            '0x00'
+            '0x00',
+            Payment.Struct(
+                new address[](0),
+                new address[](0),
+                new address[](0),
+                new uint256[][](0),
+                new uint256[][](0),
+                new Payment.PaymentTypes[](0)
+            )
         ));
 
         ++id;

@@ -4,6 +4,6 @@ pragma solidity 0.8.17;
 
 interface IHandleArenaUsage { 
 
-    function handleArenaUsage(uint256 theId) external;
+    function handleArenaUsage(uint256 arenaId) external;
 
 }

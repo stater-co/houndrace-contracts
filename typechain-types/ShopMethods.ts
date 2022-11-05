@@ -27,7 +27,7 @@ export declare namespace ShopConstructor {
     operators: string[];
     methods: string;
     restricted: string;
-    alphadune: string;
+    discountsReceiverWallet: string;
     targets: BytesLike[][];
   };
 
@@ -41,7 +41,7 @@ export declare namespace ShopConstructor {
     operators: string[];
     methods: string;
     restricted: string;
-    alphadune: string;
+    discountsReceiverWallet: string;
     targets: string[][];
   };
 }
@@ -52,6 +52,7 @@ export declare namespace Discount {
     tokenIds: BigNumberish[];
     dateStart: BigNumberish;
     dateStop: BigNumberish;
+    amountToUsePerUsableDiscount: BigNumberish;
     discount: BigNumberish;
     tokenType: BigNumberish;
     usable: boolean;
@@ -62,6 +63,7 @@ export declare namespace Discount {
     BigNumber[],
     BigNumber,
     BigNumber,
+    BigNumber,
     number,
     number,
     boolean
@@ -70,6 +72,7 @@ export declare namespace Discount {
     tokenIds: BigNumber[];
     dateStart: BigNumber;
     dateStop: BigNumber;
+    amountToUsePerUsableDiscount: BigNumber;
     discount: number;
     tokenType: number;
     usable: boolean;
@@ -197,7 +200,7 @@ export interface ShopMethods extends BaseContract {
       [string, string, string] & {
         methods: string;
         restricted: string;
-        alphadune: string;
+        discountsReceiverWallet: string;
       }
     >;
 
@@ -237,7 +240,7 @@ export interface ShopMethods extends BaseContract {
     [string, string, string] & {
       methods: string;
       restricted: string;
-      alphadune: string;
+      discountsReceiverWallet: string;
     }
   >;
 
@@ -277,7 +280,7 @@ export interface ShopMethods extends BaseContract {
       [string, string, string] & {
         methods: string;
         restricted: string;
-        alphadune: string;
+        discountsReceiverWallet: string;
       }
     >;
 

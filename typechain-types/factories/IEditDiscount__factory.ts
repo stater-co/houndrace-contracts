@@ -32,6 +32,11 @@ const _abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "amountToUsePerUsableDiscount",
+            type: "uint256",
+          },
+          {
             internalType: "uint32",
             name: "discount",
             type: "uint32",
@@ -53,7 +58,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "theId",
+        name: "discountId",
         type: "uint256",
       },
     ],

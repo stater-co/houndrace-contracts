@@ -5,7 +5,7 @@ pragma solidity 0.8.17;
 library Hound {
 
     struct ConstructorBreeding {
-        address breedingFeeCurrency;
+        address externalBreedingFeeCurrency;
         address breedingCooldownCurrency;
         uint256 breedingCooldown;
         uint256 breedingCooldownTimeUnit;
@@ -28,7 +28,7 @@ library Hound {
 
     struct Breeding {
         uint256 lastBreed;
-        uint256 breedingFee;
+        uint256 externalBreedingFee;
         bool availableToBreed;
     }
 

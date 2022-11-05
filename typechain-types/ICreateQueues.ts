@@ -22,33 +22,6 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Payment {
-  export type StructStruct = {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumberish[][];
-    amounts: BigNumberish[][];
-    paymentType: BigNumberish[];
-  };
-
-  export type StructStructOutput = [
-    string[],
-    string[],
-    string[],
-    BigNumber[][],
-    BigNumber[][],
-    number[]
-  ] & {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumber[][];
-    amounts: BigNumber[][];
-    paymentType: number[];
-  };
-}
-
 export declare namespace Core {
   export type StructStruct = {
     name: string;
@@ -59,7 +32,6 @@ export declare namespace Core {
     arena: BigNumberish;
     entryFee: BigNumberish;
     fee: BigNumberish;
-    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
@@ -70,8 +42,7 @@ export declare namespace Core {
     BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
+    BigNumber
   ] & {
     name: string;
     feeCurrency: string;
@@ -81,7 +52,6 @@ export declare namespace Core {
     arena: BigNumber;
     entryFee: BigNumber;
     fee: BigNumber;
-    payments: Payment.StructStructOutput;
   };
 }
 
@@ -124,7 +94,7 @@ export declare namespace Queue {
 export interface ICreateQueuesInterface extends utils.Interface {
   contractName: "ICreateQueues";
   functions: {
-    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
+    "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -169,19 +139,19 @@ export interface ICreateQueues extends BaseContract {
 
   functions: {
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   createQueues(
-    theQueues: Queue.StructStruct[],
+    createdQueues: Queue.StructStruct[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -190,14 +160,14 @@ export interface ICreateQueues extends BaseContract {
 
   estimateGas: {
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     createQueues(
-      theQueues: Queue.StructStruct[],
+      createdQueues: Queue.StructStruct[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

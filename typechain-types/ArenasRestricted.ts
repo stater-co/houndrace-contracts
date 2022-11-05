@@ -367,17 +367,17 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<ContractTransaction>;
 
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Arena.StructStructOutput]>;
 
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -423,7 +423,7 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<ContractTransaction>;
 
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -526,16 +526,19 @@ export interface ArenasRestricted extends BaseContract {
   ): Promise<ContractTransaction>;
 
   arena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Arena.StructStructOutput>;
 
   arenaCurrency(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
-  arenaFee(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  arenaFee(
+    arenaId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   arenaOwner(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
@@ -576,7 +579,7 @@ export interface ArenasRestricted extends BaseContract {
   ): Promise<ContractTransaction>;
 
   editArena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     arena: Arena.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -673,17 +676,17 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<void>;
 
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Arena.StructStructOutput>;
 
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -729,7 +732,7 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<void>;
 
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -890,15 +893,15 @@ export interface ArenasRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    arena(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    arena(arenaId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -919,7 +922,7 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<BigNumber>;
 
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1023,17 +1026,17 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     arenaCurrency(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1060,7 +1063,7 @@ export interface ArenasRestricted extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

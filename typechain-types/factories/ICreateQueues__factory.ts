@@ -53,43 +53,6 @@ const _abi = [
                 name: "fee",
                 type: "uint256",
               },
-              {
-                components: [
-                  {
-                    internalType: "address[]",
-                    name: "from",
-                    type: "address[]",
-                  },
-                  {
-                    internalType: "address[]",
-                    name: "to",
-                    type: "address[]",
-                  },
-                  {
-                    internalType: "address[]",
-                    name: "currency",
-                    type: "address[]",
-                  },
-                  {
-                    internalType: "uint256[][]",
-                    name: "ids",
-                    type: "uint256[][]",
-                  },
-                  {
-                    internalType: "uint256[][]",
-                    name: "amounts",
-                    type: "uint256[][]",
-                  },
-                  {
-                    internalType: "enum Payment.PaymentTypes[]",
-                    name: "paymentType",
-                    type: "uint8[]",
-                  },
-                ],
-                internalType: "struct Payment.Struct",
-                name: "payments",
-                type: "tuple",
-              },
             ],
             internalType: "struct Core.Struct",
             name: "core",
@@ -137,7 +100,7 @@ const _abi = [
           },
         ],
         internalType: "struct Queue.Struct[]",
-        name: "theQueues",
+        name: "createdQueues",
         type: "tuple[]",
       },
     ],

@@ -70,32 +70,35 @@ export interface IDeleteQueue extends BaseContract {
 
   functions: {
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   deleteQueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    deleteQueue(theId: BigNumberish, overrides?: CallOverrides): Promise<void>;
+    deleteQueue(
+      queueId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {};
 
   estimateGas: {
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     deleteQueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

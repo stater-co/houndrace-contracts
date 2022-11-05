@@ -5,6 +5,7 @@ import './Discount.sol';
 import './Constructor.sol';
 import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 interface Geyser { function totalStakedFor(address addr) external view returns(uint256); }
 
 

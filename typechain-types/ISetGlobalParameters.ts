@@ -32,11 +32,13 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
     string[],
+    string,
     string,
     string,
     string,
@@ -56,6 +58,7 @@ export declare namespace QueuesConstructor {
     hounds: string;
     payments: string;
     races: string;
+    raceUploader: string;
     targets: string[][];
   };
 }
@@ -63,7 +66,7 @@ export declare namespace QueuesConstructor {
 export interface ISetGlobalParametersInterface extends utils.Interface {
   contractName: "ISetGlobalParameters";
   functions: {
-    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,address,address,address,address,bytes4[][]))": FunctionFragment;
   };
 
   encodeFunctionData(

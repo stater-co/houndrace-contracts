@@ -13,7 +13,7 @@ export async function safeSetAvailableToBreed(
   params: SetAvailableToBreedParams
 ) {
   const before: Hound.StructStruct = await params.contract.hound(params.houndId);
-  expecting(before.breeding.availableToBreed !== params.status && Number(before.breeding.breedingFee) !== params.fee, "Can't set the same parameters for hound breeding")
+  expecting(before.breeding.availableToBreed !== params.status, "Can't set the same parameters for hound breeding")
   await setAvailableToBreed(params);
   const after: Hound.StructStruct = await params.contract.hound(params.houndId);
   expecting(JSON.stringify(before) !== JSON.stringify(after), "Set available to breed method bugged");

@@ -20,13 +20,13 @@ contract ShopRestricted is Params {
 
     function editDiscount(
         Discount.Struct memory discount, 
-        uint256 theId
+        uint256 discountId
     ) 
         external 
         whitelisted 
     {
-        discounts[theId] = discount;
-        emit NewDiscount(theId, discount);
+        discounts[discountId] = discount;
+        emit NewDiscount(discountId, discount);
     }
 
 }

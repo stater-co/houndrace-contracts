@@ -5,6 +5,6 @@ import '../params/Queue.sol';
 
 interface ICreateQueues { 
 
-    function createQueues(Queue.Struct[] memory theQueues) external;
+    function createQueues(Queue.Struct[] memory createdQueues) external;
 
 }

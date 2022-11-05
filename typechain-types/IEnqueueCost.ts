@@ -77,7 +77,7 @@ export interface IEnqueueCost extends BaseContract {
 
   functions: {
     enqueueCost(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [
@@ -89,7 +89,7 @@ export interface IEnqueueCost extends BaseContract {
   };
 
   enqueueCost(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
     [
@@ -101,7 +101,7 @@ export interface IEnqueueCost extends BaseContract {
 
   callStatic: {
     enqueueCost(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
       [
@@ -116,14 +116,14 @@ export interface IEnqueueCost extends BaseContract {
 
   estimateGas: {
     enqueueCost(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     enqueueCost(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

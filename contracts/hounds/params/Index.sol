@@ -5,7 +5,7 @@ import '@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import '../../genetics/interfaces/IMixGenes.sol';
 import '../../payments/interfaces/IPay.sol';
-import '../../shop/interfaces/ICheckDiscount.sol';
+import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../whitelist/Index.sol';
 import '../interfaces/IGetBreedCosts.sol';
@@ -55,8 +55,8 @@ contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
         return ownerOf(tokenId);
     }
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
+    function hound(uint256 houndId) external view returns(Hound.Struct memory) {
+        return hounds[houndId];
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {

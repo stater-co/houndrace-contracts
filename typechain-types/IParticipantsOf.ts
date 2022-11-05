@@ -68,19 +68,19 @@ export interface IParticipantsOf extends BaseContract {
 
   functions: {
     participantsOf(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
   };
 
   participantsOf(
-    theId: BigNumberish,
+    raceId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
   callStatic: {
     participantsOf(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
   };
@@ -89,14 +89,14 @@ export interface IParticipantsOf extends BaseContract {
 
   estimateGas: {
     participantsOf(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     participantsOf(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

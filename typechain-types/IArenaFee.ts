@@ -65,16 +65,19 @@ export interface IArenaFee extends BaseContract {
 
   functions: {
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
   };
 
-  arenaFee(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  arenaFee(
+    arenaId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   callStatic: {
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -83,14 +86,14 @@ export interface IArenaFee extends BaseContract {
 
   estimateGas: {
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     arenaFee(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

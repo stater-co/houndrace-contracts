@@ -341,12 +341,12 @@ async function advancedTests(
 
       const [sig1] = await ethers.getSigners();
 
-      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
+      const control = await dependencies.hounds.control();
 
-      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+      await dependencies.erc20.mint(sig1.address,control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
-      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
 
       await safeBoostHoundBreeding({
         contract: dependencies.hounds as Hounds,
@@ -359,12 +359,12 @@ async function advancedTests(
 
       const [sig1] = await ethers.getSigners();
 
-      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
+      const control = await dependencies.hounds.control();
 
-      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+      await dependencies.erc20.mint(sig1.address, control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
-      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
 
       await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,

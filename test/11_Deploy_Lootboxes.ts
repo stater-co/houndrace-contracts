@@ -23,8 +23,6 @@ export async function run(
           constructor: [[
             "Houndrace Mystery Boxes",
             [signer.address, signer2.address, signer3.address],
-            dependencies.houndsAddress,
-            dependencies.paymentsAddress,
             [['0xc6e64e53'],['0x7c46a44b'],['0xedd0cb87']],
             false
           ]],

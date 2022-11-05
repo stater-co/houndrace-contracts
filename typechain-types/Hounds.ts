@@ -25,58 +25,24 @@ import type {
 
 export declare namespace Hound {
   export type StaminaStruct = {
-    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerTimeUnit: BigNumberish;
-    staminaCap: BigNumberish;
   };
 
-  export type StaminaStructOutput = [
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaRefillCurrency: string;
+  export type StaminaStructOutput = [BigNumber, number] & {
     staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerTimeUnit: number;
-    staminaCap: number;
   };
 
   export type BreedingStruct = {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    breedingCooldownTimeUnit: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
+    externalBreedingFee: BigNumberish;
     availableToBreed: boolean;
   };
 
-  export type BreedingStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
+  export type BreedingStructOutput = [BigNumber, BigNumber, boolean] & {
     lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    breedingCooldownTimeUnit: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
+    externalBreedingFee: BigNumber;
     availableToBreed: boolean;
   };
 
@@ -140,6 +106,47 @@ export declare namespace Hound {
     identity: Hound.IdentityStructOutput;
     profile: Hound.ProfileStructOutput;
   };
+
+  export type ConstructorBreedingStruct = {
+    externalBreedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    breedingCooldown: BigNumberish;
+    breedingCooldownTimeUnit: BigNumberish;
+    refillBreedingCooldownCost: BigNumberish;
+  };
+
+  export type ConstructorBreedingStructOutput = [
+    string,
+    string,
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    externalBreedingFeeCurrency: string;
+    breedingCooldownCurrency: string;
+    breedingCooldown: BigNumber;
+    breedingCooldownTimeUnit: BigNumber;
+    refillBreedingCooldownCost: BigNumber;
+  };
+
+  export type ConstructorStaminaStruct = {
+    staminaRefillCurrency: string;
+    staminaRefill1x: BigNumberish;
+    staminaPerTimeUnit: BigNumberish;
+    staminaCap: BigNumberish;
+  };
+
+  export type ConstructorStaminaStructOutput = [
+    string,
+    BigNumber,
+    number,
+    number
+  ] & {
+    staminaRefillCurrency: string;
+    staminaRefill1x: BigNumber;
+    staminaPerTimeUnit: number;
+    staminaCap: number;
+  };
 }
 
 export declare namespace ConstructorBoilerplate {
@@ -153,7 +160,7 @@ export declare namespace ConstructorBoilerplate {
     shop: string;
     races: string;
     genetics: string;
-    alphadune: string;
+    houndsInitializer: string;
   };
 
   export type StructStructOutput = [
@@ -177,7 +184,7 @@ export declare namespace ConstructorBoilerplate {
     shop: string;
     races: string;
     genetics: string;
-    alphadune: string;
+    houndsInitializer: string;
   };
 }
 
@@ -185,9 +192,9 @@ export declare namespace ConstructorFees {
   export type StructStruct = {
     currency: string;
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    alphaduneFeeCurrency: string;
     breedCost: BigNumberish;
-    breedFee: BigNumberish;
+    alphaduneFee: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -199,9 +206,9 @@ export declare namespace ConstructorFees {
   ] & {
     currency: string;
     breedCostCurrency: string;
-    breedFeeCurrency: string;
+    alphaduneFeeCurrency: string;
     breedCost: BigNumber;
-    breedFee: BigNumber;
+    alphaduneFee: BigNumber;
   };
 }
 
@@ -210,6 +217,8 @@ export declare namespace Constructor {
     name: string;
     symbol: string;
     defaultHound: Hound.StructStruct;
+    breeding: Hound.ConstructorBreedingStruct;
+    stamina: Hound.ConstructorStaminaStruct;
     operators: string[];
     targets: BytesLike[][];
     boilerplate: ConstructorBoilerplate.StructStruct;
@@ -220,6 +229,8 @@ export declare namespace Constructor {
     string,
     string,
     Hound.StructStructOutput,
+    Hound.ConstructorBreedingStructOutput,
+    Hound.ConstructorStaminaStructOutput,
     string[],
     string[][],
     ConstructorBoilerplate.StructStructOutput,
@@ -228,6 +239,8 @@ export declare namespace Constructor {
     name: string;
     symbol: string;
     defaultHound: Hound.StructStructOutput;
+    breeding: Hound.ConstructorBreedingStructOutput;
+    stamina: Hound.ConstructorStaminaStructOutput;
     operators: string[];
     targets: string[][];
     boilerplate: ConstructorBoilerplate.StructStructOutput;
@@ -259,7 +272,7 @@ export interface HoundsInterface extends utils.Interface {
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "initializeHound(uint256,address,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)))": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "matingSeason()": FunctionFragment;
     "name()": FunctionFragment;
@@ -270,7 +283,7 @@ export interface HoundsInterface extends utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -630,14 +643,14 @@ export interface Hounds extends BaseContract {
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -656,12 +669,16 @@ export interface Hounds extends BaseContract {
         string,
         string,
         Hound.StructStructOutput,
+        Hound.ConstructorBreedingStructOutput,
+        Hound.ConstructorStaminaStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
         defaultHound: Hound.StructStructOutput;
+        breeding: Hound.ConstructorBreedingStructOutput;
+        stamina: Hound.ConstructorStaminaStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -684,7 +701,7 @@ export interface Hounds extends BaseContract {
     >;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Hound.StructStructOutput]>;
 
@@ -715,7 +732,7 @@ export interface Hounds extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -745,7 +762,7 @@ export interface Hounds extends BaseContract {
     ): Promise<[string]>;
 
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -811,13 +828,13 @@ export interface Hounds extends BaseContract {
     ): Promise<ContractTransaction>;
 
     updateHoundRunning(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       runningOn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -838,14 +855,14 @@ export interface Hounds extends BaseContract {
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   boostHoundBreeding(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     user: string,
     payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   boostHoundStamina(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     user: string,
     payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -864,12 +881,16 @@ export interface Hounds extends BaseContract {
       string,
       string,
       Hound.StructStructOutput,
+      Hound.ConstructorBreedingStructOutput,
+      Hound.ConstructorStaminaStructOutput,
       ConstructorBoilerplate.StructStructOutput,
       ConstructorFees.StructStructOutput
     ] & {
       name: string;
       symbol: string;
       defaultHound: Hound.StructStructOutput;
+      breeding: Hound.ConstructorBreedingStructOutput;
+      stamina: Hound.ConstructorStaminaStructOutput;
       boilerplate: ConstructorBoilerplate.StructStructOutput;
       fees: ConstructorFees.StructStructOutput;
     }
@@ -892,7 +913,7 @@ export interface Hounds extends BaseContract {
   >;
 
   hound(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Hound.StructStructOutput>;
 
@@ -920,7 +941,7 @@ export interface Hounds extends BaseContract {
   initializeHound(
     onId: BigNumberish,
     owner: string,
-    theHound: Hound.StructStruct,
+    createdHound: Hound.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -947,7 +968,7 @@ export interface Hounds extends BaseContract {
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   putHoundForBreed(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     fee: BigNumberish,
     status: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -1010,13 +1031,13 @@ export interface Hounds extends BaseContract {
   ): Promise<ContractTransaction>;
 
   updateHoundRunning(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     runningOn: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   updateHoundStamina(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1037,14 +1058,14 @@ export interface Hounds extends BaseContract {
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: CallOverrides
@@ -1063,12 +1084,16 @@ export interface Hounds extends BaseContract {
         string,
         string,
         Hound.StructStructOutput,
+        Hound.ConstructorBreedingStructOutput,
+        Hound.ConstructorStaminaStructOutput,
         ConstructorBoilerplate.StructStructOutput,
         ConstructorFees.StructStructOutput
       ] & {
         name: string;
         symbol: string;
         defaultHound: Hound.StructStructOutput;
+        breeding: Hound.ConstructorBreedingStructOutput;
+        stamina: Hound.ConstructorStaminaStructOutput;
         boilerplate: ConstructorBoilerplate.StructStructOutput;
         fees: ConstructorFees.StructStructOutput;
       }
@@ -1091,7 +1116,7 @@ export interface Hounds extends BaseContract {
     >;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Hound.StructStructOutput>;
 
@@ -1122,7 +1147,7 @@ export interface Hounds extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1149,7 +1174,7 @@ export interface Hounds extends BaseContract {
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: CallOverrides
@@ -1213,13 +1238,13 @@ export interface Hounds extends BaseContract {
     ): Promise<void>;
 
     updateHoundRunning(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       runningOn: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1349,14 +1374,14 @@ export interface Hounds extends BaseContract {
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -1380,7 +1405,7 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    hound(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     houndOwner(
       tokenId: BigNumberish,
@@ -1394,7 +1419,7 @@ export interface Hounds extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1424,7 +1449,7 @@ export interface Hounds extends BaseContract {
     ): Promise<BigNumber>;
 
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1490,13 +1515,13 @@ export interface Hounds extends BaseContract {
     ): Promise<BigNumber>;
 
     updateHoundRunning(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       runningOn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1521,14 +1546,14 @@ export interface Hounds extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     boostHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -1553,7 +1578,7 @@ export interface Hounds extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1572,7 +1597,7 @@ export interface Hounds extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1602,7 +1627,7 @@ export interface Hounds extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -1668,13 +1693,13 @@ export interface Hounds extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     updateHoundRunning(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       runningOn: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
