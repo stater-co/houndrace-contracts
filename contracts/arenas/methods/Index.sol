@@ -11,7 +11,7 @@ contract ArenasMethods is Params {
         
         uint256[] memory amounts = new uint256[](1);
         
-        amounts[0] = ( arenas[arenaId].fee / 100 ) * control.alhpadunePercentage; // typo name
+        amounts[0] = ( arenas[arenaId].fee / 100 ) * control.alphadunePercentage;
         IPay(control.payments).pay(
             control.payments,
             control.alphadune,

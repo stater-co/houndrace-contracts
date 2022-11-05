@@ -118,7 +118,7 @@ async function main() {
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            alhpadunePercentage: 60,
+            alphadunePercentage: 60,
             operators: [],
             targets: []
         }

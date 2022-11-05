@@ -155,7 +155,7 @@ async function main() {
       payments: globalParams.address0,
       alphadune: globalParams.address0,
       targets: [],
-      alhpadunePercentage: 60
+      alphadunePercentage: 60
     };
     const arenasRestricted = await deployContract({
       name: 'ArenasRestricted',
@@ -445,7 +445,7 @@ async function main() {
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
       targets: [['0xe195c287','0x3a420b95'],['0x11a34393']],
-      alhpadunePercentage: 60
+      alphadunePercentage: 60
     }
 
     const newGeneticsConstructor: GeneticsConstructor.StructStruct = {

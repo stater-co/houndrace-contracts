@@ -32,7 +32,7 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     targets: BytesLike[][];
-    alhpadunePercentage: BigNumberish;
+    alphadunePercentage: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -54,7 +54,7 @@ export declare namespace ArenasConstructor {
     payments: string;
     alphadune: string;
     targets: string[][];
-    alhpadunePercentage: BigNumber;
+    alphadunePercentage: BigNumber;
   };
 }
 
@@ -413,7 +413,7 @@ export interface ArenasRestricted extends BaseContract {
         methods: string;
         payments: string;
         alphadune: string;
-        alhpadunePercentage: BigNumber;
+        alphadunePercentage: BigNumber;
       }
     >;
 
@@ -569,7 +569,7 @@ export interface ArenasRestricted extends BaseContract {
       methods: string;
       payments: string;
       alphadune: string;
-      alhpadunePercentage: BigNumber;
+      alphadunePercentage: BigNumber;
     }
   >;
 
@@ -722,7 +722,7 @@ export interface ArenasRestricted extends BaseContract {
         methods: string;
         payments: string;
         alphadune: string;
-        alhpadunePercentage: BigNumber;
+        alphadunePercentage: BigNumber;
       }
     >;
 
