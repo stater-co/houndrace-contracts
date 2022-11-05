@@ -26,6 +26,7 @@ import { QueuesMethods } from '../typechain-types/QueuesMethods';
 import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
 import { globalParams } from '../common/params';
+import { ShopZerocost } from '../typechain-types/ShopZerocost';
 
 
 const cliProgress = require('cli-progress');
@@ -94,7 +95,7 @@ async function main() {
     });
 
     const houndracePotionsConstructor: Array<string> = [
-      "HoundracePotions", "HP", 500_000_000
+      "HoundracePotions", "HP", "500000000"
     ];
     const houndracePotions = await deployContract({
       name: 'HoundracePotions',
@@ -109,6 +110,8 @@ async function main() {
     const shopConstructor: ShopConstructor.StructStruct = {
       operators: [],
       methods: globalParams.address0,
+      zerocost: globalParams.address0,
+      discounts: globalParams.address0,
       restricted: globalParams.address0,
       discountsReceiverWallet: globalParams.address0,
       targets: []
@@ -129,6 +132,16 @@ async function main() {
       props: {}
     }) as ShopMethods;
     DeploymentLogger('export SHOP_METHODS=' + shopMethods.address);
+    deployments.update(8, {
+      step: "Deploy shop"
+    });
+
+    const shopZerocost = await deployContract({
+      name: 'ShopZerocost',
+      constructor: [arrayfy(shopConstructor)],
+      props: {}
+    }) as ShopZerocost;
+    DeploymentLogger('export SHOP_ZEROCOST=' + shopZerocost.address);
     deployments.update(8, {
       step: "Deploy shop"
     });
@@ -424,11 +437,13 @@ async function main() {
     }
   
     const newShopConstructor: ShopConstructor.StructStruct = {
-      operators: [hounds.address],
+      operators: [hounds.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
       methods: shopMethods.address,
+      zerocost: shopZerocost.address,
+      discounts: shop.address,
       restricted: shopRestricted.address,
       discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      targets: [['0xad6a8745']]
+      targets: [['0xad6a8745'],['0x7c5ff21f','0xd4b1d756']]
     }
 
     const newArenasConstructor: ArenasConstructor.StructStruct = {
@@ -545,6 +560,15 @@ async function main() {
 
     try {
       await shopRestricted.setGlobalParameters(newShopConstructor);
+      configurations.update(2, {
+        step: "Set global parameters for shop methods"
+      });
+    } catch(err) {
+      DeploymentError((err as NodeJS.ErrnoException).message);
+    }
+
+    try {
+      await shopZerocost.setGlobalParameters(newShopConstructor);
       configurations.update(2, {
         step: "Set global parameters for shop methods"
       });
