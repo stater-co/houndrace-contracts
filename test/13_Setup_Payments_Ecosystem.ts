@@ -1,7 +1,6 @@
 import { PaymentsSystemController } from '../common/dto/test/paymentsSystemController.dto';
 import { expecting } from '../plugins/expecting';
 
-// 0xc01f59c2 = pay(...)
 
 export async function set(
   dependencies: PaymentsSystemController

@@ -28,6 +28,7 @@ import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic_Tests';
 import { test as testRacesAdvanced } from '../test/26_Races/26_2_Races_Advanced_Tests';
 import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
+import { test as testDiscounts } from '../test/28_Shop/28_1_Shop_Basic_Tests';
 
 
 async function main() {
@@ -83,10 +84,13 @@ async function main() {
     await setShop({
         shopMethods: payments.shopMethods,
         shopRestricted: payments.shopRestricted,
+        shopZerocost: payments.shopZerocost,
         shop: payments.shop,
         houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.shopMethods.address,
+            zerocost: payments.shopZerocost.address,
+            discounts: payments.shop.address,
             restricted: payments.shopRestricted.address,
             discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             operators: [],
@@ -260,10 +264,11 @@ async function main() {
 
     await testHoundsAdvanced.advancedTests({
         hounds: hounds.hounds,
-        transferableHounds: hounds.transferrableRoot,
         erc20: payments.houndracePotions,
+        erc1155: payments.testErc1155,
         payments: payments.payments,
-        races: races.races
+        races: races.races,
+        shops: payments.shop
     });
 
     await testQueuesAdvanced.advancedTests({
@@ -288,6 +293,11 @@ async function main() {
         race: globalParams.defaultRace,
         queues: queues.queues,
         hounds: hounds.hounds
+    });
+
+    await testDiscounts.basicTest({
+        shop: payments.shop,
+        houndracePotions: payments.houndracePotions
     });
 
 }

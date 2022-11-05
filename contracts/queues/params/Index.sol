@@ -18,7 +18,6 @@ import '../../races/interfaces/IRaceStart.sol';
 import '../../whitelist/Index.sol';
 import '../../hounds/params/Hound.sol';
 import '../interfaces/IEnqueueCost.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is ReentrancyGuard, Whitelist {

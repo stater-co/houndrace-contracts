@@ -26,6 +26,8 @@ export declare namespace ShopConstructor {
   export type StructStruct = {
     operators: string[];
     methods: string;
+    zerocost: string;
+    discounts: string;
     restricted: string;
     discountsReceiverWallet: string;
     targets: BytesLike[][];
@@ -36,10 +38,14 @@ export declare namespace ShopConstructor {
     string,
     string,
     string,
+    string,
+    string,
     string[][]
   ] & {
     operators: string[];
     methods: string;
+    zerocost: string;
+    discounts: string;
     restricted: string;
     discountsReceiverWallet: string;
     targets: string[][];
@@ -84,11 +90,14 @@ export interface ShopRestrictedInterface extends utils.Interface {
   functions: {
     "control()": FunctionFragment;
     "createDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool))": FunctionFragment;
+    "discounts(uint256)": FunctionFragment;
     "editDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool),uint256)": FunctionFragment;
+    "getDiscount(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((address[],address,address,address,bytes4[][]))": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,bytes4[][]))": FunctionFragment;
+    "totalDiscounts()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "whitelists(address,uint256)": FunctionFragment;
   };
@@ -99,8 +108,16 @@ export interface ShopRestrictedInterface extends utils.Interface {
     values: [Discount.StructStruct]
   ): string;
   encodeFunctionData(
+    functionFragment: "discounts",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "editDiscount",
     values: [Discount.StructStruct, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getDiscount",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -111,6 +128,10 @@ export interface ShopRestrictedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "setGlobalParameters",
     values: [ShopConstructor.StructStruct]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "totalDiscounts",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -126,8 +147,13 @@ export interface ShopRestrictedInterface extends utils.Interface {
     functionFragment: "createDiscount",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "discounts", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "editDiscount",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getDiscount",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
@@ -138,6 +164,10 @@ export interface ShopRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setGlobalParameters",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "totalDiscounts",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -201,8 +231,10 @@ export interface ShopRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string] & {
+      [string, string, string, string, string] & {
         methods: string;
+        zerocost: string;
+        discounts: string;
         restricted: string;
         discountsReceiverWallet: string;
       }
@@ -213,11 +245,31 @@ export interface ShopRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    discounts(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+        tokenContract: string;
+        dateStart: BigNumber;
+        dateStop: BigNumber;
+        amountToUsePerUsableDiscount: BigNumber;
+        discount: number;
+        tokenType: number;
+        usable: boolean;
+      }
+    >;
+
     editDiscount(
       discount: Discount.StructStruct,
       discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[Discount.StructStructOutput]>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -231,6 +283,8 @@ export interface ShopRestricted extends BaseContract {
       globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    totalDiscounts(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferOwnership(
       newOwner: string,
@@ -247,8 +301,10 @@ export interface ShopRestricted extends BaseContract {
   control(
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string] & {
+    [string, string, string, string, string] & {
       methods: string;
+      zerocost: string;
+      discounts: string;
       restricted: string;
       discountsReceiverWallet: string;
     }
@@ -259,11 +315,31 @@ export interface ShopRestricted extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  discounts(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<
+    [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+      tokenContract: string;
+      dateStart: BigNumber;
+      dateStop: BigNumber;
+      amountToUsePerUsableDiscount: BigNumber;
+      discount: number;
+      tokenType: number;
+      usable: boolean;
+    }
+  >;
+
   editDiscount(
     discount: Discount.StructStruct,
     discountId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  getDiscount(
+    discountId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<Discount.StructStructOutput>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -277,6 +353,8 @@ export interface ShopRestricted extends BaseContract {
     globalParameters: ShopConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferOwnership(
     newOwner: string,
@@ -293,8 +371,10 @@ export interface ShopRestricted extends BaseContract {
     control(
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string] & {
+      [string, string, string, string, string] & {
         methods: string;
+        zerocost: string;
+        discounts: string;
         restricted: string;
         discountsReceiverWallet: string;
       }
@@ -305,11 +385,31 @@ export interface ShopRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    discounts(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+        tokenContract: string;
+        dateStart: BigNumber;
+        dateStop: BigNumber;
+        amountToUsePerUsableDiscount: BigNumber;
+        discount: number;
+        tokenType: number;
+        usable: boolean;
+      }
+    >;
+
     editDiscount(
       discount: Discount.StructStruct,
       discountId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<Discount.StructStructOutput>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -321,6 +421,8 @@ export interface ShopRestricted extends BaseContract {
       globalParameters: ShopConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -362,10 +464,20 @@ export interface ShopRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    discounts(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     editDiscount(
       discount: Discount.StructStruct,
       discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -380,6 +492,8 @@ export interface ShopRestricted extends BaseContract {
       globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -401,10 +515,20 @@ export interface ShopRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    discounts(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     editDiscount(
       discount: Discount.StructStruct,
       discountId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -419,6 +543,8 @@ export interface ShopRestricted extends BaseContract {
       globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    totalDiscounts(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,

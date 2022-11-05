@@ -6,6 +6,7 @@ import { TestingErc1155 } from '../../../typechain-types/TestingErc1155';
 import { ShopMethods } from '../../../typechain-types/ShopMethods';
 import { ShopRestricted } from '../../../typechain-types/ShopRestricted';
 import { Shop } from '../../../typechain-types/Shop';
+import { ShopZerocost } from '../../../typechain-types/ShopZerocost';
 
 export interface PaymentEcosystem {
     houndracePotions: HoundracePotions;
@@ -14,6 +15,7 @@ export interface PaymentEcosystem {
     testErc721: AlphaERC721;
     testErc1155: TestingErc1155;
     shopRestricted: ShopRestricted;
+    shopZerocost: ShopZerocost;
     shopMethods: ShopMethods;
     shop: Shop;
 }

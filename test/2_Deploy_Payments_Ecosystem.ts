@@ -9,6 +9,7 @@ import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
 import { Shop } from '../typechain-types/Shop';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
+import { ShopZerocost } from '../typechain-types/ShopZerocost';
 const { ethers } = require('hardhat');
 
 
@@ -19,6 +20,7 @@ let testErc721: AlphaERC721;
 let testErc1155: TestingErc1155;
 let shopRestricted: ShopRestricted;
 let shopMethods: ShopMethods;
+let shopZerocost: ShopZerocost;
 let shop: Shop;
 
 
@@ -29,7 +31,7 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the HoundRace Potions contract', async function () {
         houndracePotions = await deployContract({
           name: 'HoundracePotions',
-          constructor: ['Ogars', 'OG'],
+          constructor: ['Ogars', 'OG', '500000000'],
           props: {}
         }) as HoundracePotions;
       });
@@ -86,7 +88,17 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[[],globalParams.address0,globalParams.address0,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as ShopRestricted;
       });
@@ -95,16 +107,55 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[[],globalParams.address0,shopRestricted.address,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as ShopMethods;
+      });
+
+      it('Deploy the Shop Zerocost contract', async function () {
+        const [owner] = await ethers.getSigners();
+        shopZerocost = await deployContract({
+          name: 'ShopZerocost',
+          constructor: [
+            [
+              [],
+              shopMethods.address,
+              globalParams.address0,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
+          props: {}
+        }) as ShopZerocost;
       });
 
       it('Deploy the Shop contract', async function () {
         const [owner] = await ethers.getSigners();
         shop = await deployContract({
           name: 'Shop',
-          constructor: [[[],shopMethods.address,shopRestricted.address,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              shopMethods.address,
+              shopZerocost.address,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as Shop;
 
@@ -115,6 +166,7 @@ export async function run(): Promise<PaymentEcosystem> {
           shop: shop,
           shopMethods: shopMethods,
           shopRestricted: shopRestricted,
+          shopZerocost: shopZerocost,
           testErc1155: testErc1155,
           testErc721: testErc721
         });

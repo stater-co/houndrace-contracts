@@ -5,6 +5,7 @@ import { Queue } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
 import { Payment, Race } from '../typechain-types/Races';
 import { Box } from '../typechain-types/Lootboxes';
+import { Discount } from '../typechain-types/Shop';
 
 const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
 const POLYGON_MUMBAI_OPENSEA_CONTRACT_ADDRESS = "0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c";
@@ -35,6 +36,17 @@ const defaultArena: Arena.StructStruct = {
     surface: 1,
     distance: 1,
     weather: 1
+};
+
+const defaultDiscount: Discount.StructStruct = {
+    amountToUsePerUsableDiscount: 0,
+    dateStart: 0,
+    dateStop: 999999999999,
+    discount: 5,
+    tokenContract: address0,
+    tokenIds: [],
+    tokenType: 3,
+    usable: false
 };
 
 const defaultRace: Race.StructStruct = {
@@ -139,6 +151,7 @@ interface GlobalParams {
     OPENSEA_CONTRACT_ADDRESS: string;
     staminaConstructor: Hound.ConstructorStaminaStruct;
     breedingConstructor: Hound.ConstructorBreedingStruct;
+    defaultDiscount: Discount.StructStruct;
 };
 
 const getOpenseaContractAddress = (): string => {
@@ -165,5 +178,6 @@ export const globalParams: GlobalParams = {
     defaultLootbox: defaultLootbox,
     OPENSEA_CONTRACT_ADDRESS: getOpenseaContractAddress(),
     staminaConstructor: staminaConstructor,
-    breedingConstructor: breedingConstructor
+    breedingConstructor: breedingConstructor,
+    defaultDiscount: defaultDiscount
 };
