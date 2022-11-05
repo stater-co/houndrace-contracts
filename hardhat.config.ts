@@ -25,8 +25,8 @@ const config: HardhatUserConfig = {
     polygon: {
       url: String(process.env.POLYGON_URL),
       accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)],
-      gasMultiplier: 2,
-      gasPrice: "auto"
+      //gasMultiplier: 2,
+      //gasPrice: "auto"
     }
   },
   etherscan: {

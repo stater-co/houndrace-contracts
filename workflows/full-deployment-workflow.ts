@@ -112,7 +112,7 @@ async function main() {
         arenasRestricted: arenas.arenasRestricted,
         racesAddress: races.races.address,
         constructor: {
-            name: "HoundRace Arenas",
+            name: "Houndrace Arenas",
             symbol: "HRA",
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             methods: arenas.arenasMethods.address,
@@ -133,7 +133,7 @@ async function main() {
         queuesAddress: queues.queues.address,
         racesAddress: races.races.address,
         constructor: {
-           name: "HoundRace",
+           name: "Houndrace",
            symbol: "HR",
            defaultHound: globalParams.defaultHound,
            operators: [],
@@ -187,7 +187,7 @@ async function main() {
         queuesAddress: queues.queues.address,
         racesAddress: races.races.address,
         constructor: {
-           name: "HoundRace",
+           name: "Houndrace",
            symbol: "HR",
            defaultHound: globalParams.defaultHound,
            operators: [],

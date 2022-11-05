@@ -95,7 +95,7 @@ async function main() {
     });
 
     const houndracePotionsConstructor: Array<string> = [
-      "HoundracePotions", "HP", "500000000"
+      "Houndrace Potions", "HP", "500000000"
     ];
     const houndracePotions = await deployContract({
       name: 'HoundracePotions',
@@ -157,7 +157,7 @@ async function main() {
     });
 
     const arenasConstructor: ArenasConstructor.StructStruct = {
-      name: "HoundRace Arenas",
+      name: "Houndrace Arenas",
       symbol: "HRA",
       operators: [],
       restricted: globalParams.address0,
@@ -233,7 +233,7 @@ async function main() {
       alphaduneFee: "0x2386F26FC10000"
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
-      name: 'HoundRace',
+      name: 'Houndrace',
       symbol: 'HR',
       defaultHound: globalParams.defaultHound,
       breeding: globalParams.breedingConstructor,
@@ -447,7 +447,7 @@ async function main() {
     }
 
     const newArenasConstructor: ArenasConstructor.StructStruct = {
-      name: "HoundRace Arenas", 
+      name: "Houndrace Arenas", 
       symbol: "HRA",
       operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
       restricted: arenasRestricted.address,
@@ -487,7 +487,7 @@ async function main() {
     };
 
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
-      name: 'HoundRace',
+      name: 'Houndrace',
       symbol: 'HR',
       defaultHound: globalParams.defaultHound,
       breeding: globalParams.breedingConstructor,
@@ -507,7 +507,7 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      targets: [['0x65913d77'], ['0x30e54438'], ['0x9ad2e2b0']]
+      targets: [['0x65913d77','0x5bd4fd05'], ['0x797a6764'], ['0x9ad2e2b0']]
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {

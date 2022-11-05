@@ -401,8 +401,8 @@ export interface Races extends BaseContract {
       raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     whitelists(
       arg0: string,
@@ -487,8 +487,8 @@ export interface Races extends BaseContract {
     raceId: BigNumberish,
     queueId: BigNumberish,
     race: Race.StructStruct,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   whitelists(
     arg0: string,
@@ -572,7 +572,7 @@ export interface Races extends BaseContract {
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     whitelists(
       arg0: string,
@@ -659,7 +659,7 @@ export interface Races extends BaseContract {
       raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     whitelists(
@@ -720,7 +720,7 @@ export interface Races extends BaseContract {
       raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     whitelists(

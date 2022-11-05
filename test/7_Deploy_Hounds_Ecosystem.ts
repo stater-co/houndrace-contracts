@@ -29,7 +29,7 @@ export async function run(
         houndsRestricted = await deployContract({
           name: 'HoundsRestricted',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
             globalParams.breedingConstructor,
@@ -67,7 +67,7 @@ export async function run(
         houndsModifier = await deployContract({
           name: 'HoundsModifier',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
             globalParams.breedingConstructor,
@@ -105,7 +105,7 @@ export async function run(
         houndsZerocost = await deployContract({
           name: 'HoundsZerocost',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
             globalParams.breedingConstructor,
@@ -143,7 +143,7 @@ export async function run(
         houndsMinter = await deployContract({
           name: 'HoundsMinter',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
             globalParams.breedingConstructor,
@@ -181,7 +181,7 @@ export async function run(
         hounds = await deployContract({
           name: 'Hounds',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
             globalParams.breedingConstructor,

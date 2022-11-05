@@ -56,7 +56,7 @@ async function main() {
         queuesAddress: queues.queues.address,
         racesAddress: races.races.address,
         constructor: {
-           name: "HoundRace",
+           name: "Houndrace",
            symbol: "HR",
            defaultHound: globalParams.defaultHound,
            operators: [],
