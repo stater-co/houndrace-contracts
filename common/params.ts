@@ -31,8 +31,8 @@ const defaultLootbox: Box.StructStruct = {
 const defaultArena: Arena.StructStruct = {
     name: "Arena #",
     token_uri: "arena_token_uri",
-    currency: address0,
-    fee: BigNumber.from(100),
+    platformAndArenaFeeCurrency: address0,
+    platformAndArenaFee: BigNumber.from(100),
     surface: 1,
     distance: 1,
     weather: 1
@@ -53,10 +53,10 @@ const defaultRace: Race.StructStruct = {
     core: {
         arena: 1,
         participants: [],
-        entryFee: 0,
+        raceEntryTicket: 0,
         enqueueDates: [],
         feeCurrency: address0,
-        entryFeeCurrency: address0,
+        raceEntryTicketCurrency: address0,
         fee: 0,
         name: "Race #"
     },
@@ -122,8 +122,8 @@ const defaultQueue: Queue.StructStruct = {
         arena: BigNumber.from(1),
         participants: [],
         enqueueDates: [],
-        entryFee: BigNumber.from(10000),
-        entryFeeCurrency: address0,
+        raceEntryTicket: BigNumber.from(10000),
+        raceEntryTicketCurrency: address0,
         fee: BigNumber.from(10000),
         feeCurrency: address0
     },

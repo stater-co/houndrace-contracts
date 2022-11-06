@@ -63,11 +63,11 @@ export declare namespace Core {
   export type StructStruct = {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
-    entryFee: BigNumberish;
+    raceEntryTicket: BigNumberish;
     fee: BigNumberish;
   };
 
@@ -83,11 +83,11 @@ export declare namespace Core {
   ] & {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
-    entryFee: BigNumber;
+    raceEntryTicket: BigNumber;
     fee: BigNumber;
   };
 }

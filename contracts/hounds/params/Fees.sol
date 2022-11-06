@@ -4,10 +4,10 @@ pragma solidity 0.8.17;
 library ConstructorFees {
     struct Struct {
         address renameFeeCurrency;
-        address breedCostCurrency;
-        address alphaduneFeeCurrency;
-        uint256 breedCost;
-        uint256 alphaduneFee;
+        address platformBreedFeeCurrency;
+        address breedTransactionFeeCurrency;
+        uint256 platformBreedFee;
+        uint256 breedTransactionFee;
         uint256 renameFee;
     }
 }

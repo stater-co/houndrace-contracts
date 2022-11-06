@@ -24,8 +24,8 @@ export declare namespace Arena {
   export type StructStruct = {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumberish;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -42,8 +42,8 @@ export declare namespace Arena {
   ] & {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumber;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumber;
     surface: number;
     distance: number;
     weather: number;

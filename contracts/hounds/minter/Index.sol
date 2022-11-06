@@ -29,28 +29,28 @@ contract HoundsMinter is Params {
 
         uint256[] memory amounts = new uint256[](1);
 
-        amounts[0] = control.fees.breedCost;
+        amounts[0] = control.fees.platformBreedFee;
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedCostCurrency == address(0) ? amounts[0] : 0
+            value: control.fees.platformBreedFeeCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            control.fees.breedCostCurrency,
+            control.fees.platformBreedFeeCurrency,
             new uint256[](0),
             amounts,
-            control.fees.breedCostCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.fees.platformBreedFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = control.fees.alphaduneFee;
+        amounts[0] = control.fees.breedTransactionFee;
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.alphaduneFeeCurrency == address(0) ? amounts[0] : 0
+            value: control.fees.breedTransactionFeeCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.houndsInitializer,
-            control.fees.alphaduneFeeCurrency,
+            control.fees.breedTransactionFeeCurrency,
             new uint256[](0),
             amounts,
-            control.fees.alphaduneFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.fees.breedTransactionFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         if ( ownerOf(hound2) != ownerOf(hound1) ) {

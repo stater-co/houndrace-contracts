@@ -19,11 +19,11 @@ contract RacesMethods is Params {
             Core.Struct(
                 queue.core.name,
                 queue.core.feeCurrency,
-                queue.core.entryFeeCurrency,
+                queue.core.raceEntryTicketCurrency,
                 queue.core.participants,
                 queue.core.enqueueDates,
                 queue.core.arena,
-                queue.core.entryFee,
+                queue.core.raceEntryTicket,
                 queue.core.fee
             ),
             queueId,

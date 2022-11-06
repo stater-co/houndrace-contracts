@@ -11,24 +11,24 @@ contract ArenasMethods is Params {
         
         uint256[] memory amounts = new uint256[](1);
         
-        amounts[0] = ( arenas[arenaId].fee / 100 ) * control.alphadunePercentage;
+        amounts[0] = ( arenas[arenaId].platformAndArenaFee / 100 ) * control.alphadunePercentage;
         IPay(control.payments).pay(
             control.payments,
             control.alphadune,
-            arenas[arenaId].currency,
+            arenas[arenaId].platformAndArenaFeeCurrency,
             new uint256[](0),
             amounts,
-            arenas[arenaId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            arenas[arenaId].platformAndArenaFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = arenas[arenaId].fee - amounts[0];
+        amounts[0] = arenas[arenaId].platformAndArenaFee - amounts[0];
         IPay(control.payments).pay(
             control.payments,
             ownerOf(arenaId),
-            arenas[arenaId].currency,
+            arenas[arenaId].platformAndArenaFeeCurrency,
             new uint256[](0),
             amounts,
-            arenas[arenaId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            arenas[arenaId].platformAndArenaFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
         
     }

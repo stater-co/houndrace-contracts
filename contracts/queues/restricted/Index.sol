@@ -13,10 +13,10 @@ contract QueuesRestricted is Params {
         external 
         whitelisted 
     {
-        uint256 arenaFee;
+        uint256 platformAndArenaFee;
         for ( uint256 i = 0 ; i < createdQueues.length ; ++i ) {
-            arenaFee = IArenaFee(control.arenas).arenaFee(createdQueues[i].core.arena);
-            require(arenaFee < createdQueues[i].core.entryFee / createdQueues[i].totalParticipants);
+            platformAndArenaFee = IPlatformAndArenaFee(control.arenas).platformAndArenaFee(createdQueues[i].core.arena);
+            require(platformAndArenaFee < createdQueues[i].core.raceEntryTicket / createdQueues[i].totalParticipants);
             queues[id] = createdQueues[i];
             ++id;
         }
@@ -31,8 +31,8 @@ contract QueuesRestricted is Params {
         external 
         whitelisted 
     {
-        uint256 arenaFee = IArenaFee(control.arenas).arenaFee(queue.core.arena);
-        require(arenaFee < queue.core.entryFee / queue.totalParticipants);
+        uint256 platformAndArenaFee = IPlatformAndArenaFee(control.arenas).platformAndArenaFee(queue.core.arena);
+        require(platformAndArenaFee < queue.core.raceEntryTicket / queue.totalParticipants);
         queues[queueId] = queue;
         emit EditQueue(queueId,queues[queueId]);
     }
@@ -46,9 +46,9 @@ contract QueuesRestricted is Params {
         queues[queueId].closed = true;
         
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[queueId].core.entryFee;
+        amounts[0] = queues[queueId].core.raceEntryTicket;
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[queueId].core.arena);
+        address arenaCurrency = IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queues[queueId].core.arena);
 
         for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
             if ( queues[queueId].core.participants[i] > 0 ) {
@@ -56,7 +56,7 @@ contract QueuesRestricted is Params {
                 address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
 
                 IPay(control.payments).pay{
-                    value: arenaCurrency == address(0) ? queues[queueId].core.entryFee : 0
+                    value: arenaCurrency == address(0) ? queues[queueId].core.raceEntryTicket : 0
                 }(
                     address(this),
                     houndOwner,

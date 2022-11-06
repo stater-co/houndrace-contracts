@@ -20,7 +20,7 @@ export async function joinQueue(
   }
 
   await params.contract.connect(params.sender).enqueue(params.queueId,params.houndId,{
-    value: arena.currency === globalParams.address0 ? totalValueToPay : 0
+    value: arena.platformAndArenaFeeCurrency === globalParams.address0 ? totalValueToPay : 0
   });
 }
 
@@ -42,7 +42,7 @@ export async function safeJoinQueue(
     totalValueToPay = totalValueToPay.add(enqueueCost[i].amount);
   }
 
-  if ( arena.currency !== globalParams.address0 ) {
+  if ( arena.platformAndArenaFeeCurrency !== globalParams.address0 ) {
     await params.erc20.mint(senderAddress, totalValueToPay);
     await params.erc20.approve(params.paymentsContract.address, totalValueToPay);
   }

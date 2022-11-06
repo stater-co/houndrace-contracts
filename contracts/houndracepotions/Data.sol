@@ -4,7 +4,7 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
-contract HoundracePotions is Ownable, ERC20 {
+contract HoundPotions is Ownable, ERC20 {
 
     uint256 private _totalSupply;
 

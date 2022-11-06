@@ -12,7 +12,7 @@ async function basicTest(
     it("Create discount", async function () {
       await dependencies.shop.createDiscount({
         ...globalParams.defaultDiscount,
-        tokenContract: dependencies.houndracePotions.address
+        tokenContract: dependencies.houndPotions.address
       });
     });
     

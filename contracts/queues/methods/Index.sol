@@ -40,18 +40,18 @@ contract QueuesMethods is Params {
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == queueId);
 
         
-        ( , , MicroPayment.Struct memory entryFee) = IEnqueueCost(control.zerocost).enqueueCost(queueId);
+        ( , , MicroPayment.Struct memory raceEntryTicket) = IEnqueueCost(control.zerocost).enqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = entryFee.amount;
+        amounts[0] = raceEntryTicket.amount;
 
         IPay(control.payments).pay(
             control.payments,
             houndOwner,
-            entryFee.currency,
+            raceEntryTicket.currency,
             new uint256[](0),
             amounts,
-            entryFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         emit Unenqueue(queueId, hound);
@@ -94,47 +94,47 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, queueId) == 0);
 
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[queueId].core.arena);
+        address arenaCurrency = IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queues[queueId].core.arena);
 
         (
-            MicroPayment.Struct memory alphaduneFee, 
-            MicroPayment.Struct memory arenaFee, 
-            MicroPayment.Struct memory entryFee
+            MicroPayment.Struct memory startRaceTransactionFee, 
+            MicroPayment.Struct memory platformAndArenaFee, 
+            MicroPayment.Struct memory raceEntryTicket
         ) = IEnqueueCost(control.zerocost).enqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = alphaduneFee.amount;
+        amounts[0] = startRaceTransactionFee.amount;
 
         IPay(control.payments).pay{
-            value: alphaduneFee.currency == address(0) ? alphaduneFee.amount : 0
+            value: startRaceTransactionFee.currency == address(0) ? startRaceTransactionFee.amount : 0
         }(
             msg.sender,
             control.raceUploader,
-            alphaduneFee.currency,
+            startRaceTransactionFee.currency,
             new uint256[](0),
             amounts,
             arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = arenaFee.amount;
+        amounts[0] = platformAndArenaFee.amount;
         IPay(control.payments).pay{
-            value: arenaFee.currency == address(0) ? arenaFee.amount : 0
+            value: platformAndArenaFee.currency == address(0) ? platformAndArenaFee.amount : 0
         }(
             msg.sender,
             control.payments,
-            arenaFee.currency,
+            platformAndArenaFee.currency,
             new uint256[](0),
             amounts,
             arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = entryFee.amount;
+        amounts[0] = raceEntryTicket.amount;
         IPay(control.payments).pay{
-            value: entryFee.currency == address(0) ? entryFee.amount : 0
+            value: raceEntryTicket.currency == address(0) ? raceEntryTicket.amount : 0
         }(
             msg.sender,
             control.payments,
-            entryFee.currency,
+            raceEntryTicket.currency,
             new uint256[](0),
             amounts,
             arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20

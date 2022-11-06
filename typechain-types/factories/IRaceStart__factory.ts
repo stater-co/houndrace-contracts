@@ -30,7 +30,7 @@ const _abi = [
               },
               {
                 internalType: "address",
-                name: "entryFeeCurrency",
+                name: "raceEntryTicketCurrency",
                 type: "address",
               },
               {
@@ -50,7 +50,7 @@ const _abi = [
               },
               {
                 internalType: "uint256",
-                name: "entryFee",
+                name: "raceEntryTicket",
                 type: "uint256",
               },
               {

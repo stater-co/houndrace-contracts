@@ -193,10 +193,10 @@ export declare namespace ConstructorBoilerplate {
 export declare namespace ConstructorFees {
   export type StructStruct = {
     renameFeeCurrency: string;
-    breedCostCurrency: string;
-    alphaduneFeeCurrency: string;
-    breedCost: BigNumberish;
-    alphaduneFee: BigNumberish;
+    platformBreedFeeCurrency: string;
+    breedTransactionFeeCurrency: string;
+    platformBreedFee: BigNumberish;
+    breedTransactionFee: BigNumberish;
     renameFee: BigNumberish;
   };
 
@@ -209,10 +209,10 @@ export declare namespace ConstructorFees {
     BigNumber
   ] & {
     renameFeeCurrency: string;
-    breedCostCurrency: string;
-    alphaduneFeeCurrency: string;
-    breedCost: BigNumber;
-    alphaduneFee: BigNumber;
+    platformBreedFeeCurrency: string;
+    breedTransactionFeeCurrency: string;
+    platformBreedFee: BigNumber;
+    breedTransactionFee: BigNumber;
     renameFee: BigNumber;
   };
 }
@@ -254,11 +254,16 @@ export declare namespace Constructor {
 }
 
 export declare namespace RenamingProposal {
-  export type StructStruct = { proposal: string; accepted: boolean };
-
-  export type StructStructOutput = [string, boolean] & {
+  export type StructStruct = {
     proposal: string;
     accepted: boolean;
+    sessionActive: boolean;
+  };
+
+  export type StructStructOutput = [string, boolean, boolean] & {
+    proposal: string;
+    accepted: boolean;
+    sessionActive: boolean;
   };
 }
 
@@ -709,7 +714,13 @@ export interface HoundsRestricted extends BaseContract {
     renamingProposals(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
+    ): Promise<
+      [string, boolean, boolean] & {
+        proposal: string;
+        accepted: boolean;
+        sessionActive: boolean;
+      }
+    >;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -877,7 +888,13 @@ export interface HoundsRestricted extends BaseContract {
   renamingProposals(
     arg0: BigNumberish,
     overrides?: CallOverrides
-  ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
+  ): Promise<
+    [string, boolean, boolean] & {
+      proposal: string;
+      accepted: boolean;
+      sessionActive: boolean;
+    }
+  >;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -1045,7 +1062,13 @@ export interface HoundsRestricted extends BaseContract {
     renamingProposals(
       arg0: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
+    ): Promise<
+      [string, boolean, boolean] & {
+        proposal: string;
+        accepted: boolean;
+        sessionActive: boolean;
+      }
+    >;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 

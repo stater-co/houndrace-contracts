@@ -1,4 +1,4 @@
-import { HoundracePotions } from '../../../typechain-types/HoundracePotions';
+import { HoundPotions } from '../../../typechain-types/HoundPotions';
 import { Payments } from '../../../typechain-types/Payments';
 import { PaymentsMethods } from '../../../typechain-types/PaymentsMethods';
 import { AlphaERC721 } from '../../../typechain-types/AlphaERC721';
@@ -9,7 +9,7 @@ import { Shop } from '../../../typechain-types/Shop';
 import { ShopZerocost } from '../../../typechain-types/ShopZerocost';
 
 export interface PaymentEcosystem {
-    houndracePotions: HoundracePotions;
+    houndPotions: HoundPotions;
     payments: Payments;
     paymentMethods: PaymentsMethods;
     testErc721: AlphaERC721;

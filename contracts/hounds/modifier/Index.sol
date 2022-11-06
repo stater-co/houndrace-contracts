@@ -140,7 +140,8 @@ contract HoundsModifier is Params {
         require(bytes(nameProposal).length >= 3);
         renamingProposals[houndId] = RenamingProposal.Struct(
             nameProposal,
-            false
+            false,
+            true
         );
 
         uint256[] memory amounts = new uint256[](1);

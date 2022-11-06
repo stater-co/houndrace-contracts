@@ -62,8 +62,8 @@ export declare namespace Arena {
   export type StructStruct = {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumberish;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -80,8 +80,8 @@ export declare namespace Arena {
   ] & {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumber;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -93,8 +93,6 @@ export interface ArenasInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "arena(uint256)": FunctionFragment;
-    "arenaCurrency(uint256)": FunctionFragment;
-    "arenaFee(uint256)": FunctionFragment;
     "arenaOwner(uint256)": FunctionFragment;
     "arenas(uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -109,6 +107,8 @@ export interface ArenasInterface extends utils.Interface {
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
+    "platformAndArenaFee(uint256)": FunctionFragment;
+    "platformAndArenaFeeCurrency(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -126,14 +126,6 @@ export interface ArenasInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "arena", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "arenaCurrency",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "arenaFee",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "arenaOwner",
     values: [BigNumberish]
@@ -176,6 +168,14 @@ export interface ArenasInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "platformAndArenaFee",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "platformAndArenaFeeCurrency",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
@@ -215,11 +215,6 @@ export interface ArenasInterface extends utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "arena", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "arenaCurrency",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "arenaFee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "arenaOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "arenas", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -249,6 +244,14 @@ export interface ArenasInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "platformAndArenaFee",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "platformAndArenaFeeCurrency",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
@@ -380,16 +383,6 @@ export interface Arenas extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[Arena.StructStructOutput]>;
 
-    arenaCurrency(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    arenaFee(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
     arenaOwner(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -402,8 +395,8 @@ export interface Arenas extends BaseContract {
       [string, string, string, BigNumber, number, number, number] & {
         name: string;
         token_uri: string;
-        currency: string;
-        fee: BigNumber;
+        platformAndArenaFeeCurrency: string;
+        platformAndArenaFee: BigNumber;
         surface: number;
         distance: number;
         weather: number;
@@ -469,6 +462,16 @@ export interface Arenas extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
+
+    platformAndArenaFee(
+      arenaId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    platformAndArenaFeeCurrency(
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -544,16 +547,6 @@ export interface Arenas extends BaseContract {
     overrides?: CallOverrides
   ): Promise<Arena.StructStructOutput>;
 
-  arenaCurrency(
-    arenaId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  arenaFee(
-    arenaId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
-
   arenaOwner(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   arenas(
@@ -563,8 +556,8 @@ export interface Arenas extends BaseContract {
     [string, string, string, BigNumber, number, number, number] & {
       name: string;
       token_uri: string;
-      currency: string;
-      fee: BigNumber;
+      platformAndArenaFeeCurrency: string;
+      platformAndArenaFee: BigNumber;
       surface: number;
       distance: number;
       weather: number;
@@ -629,6 +622,16 @@ export interface Arenas extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  platformAndArenaFee(
+    arenaId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  platformAndArenaFeeCurrency(
+    arenaId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -699,16 +702,6 @@ export interface Arenas extends BaseContract {
       overrides?: CallOverrides
     ): Promise<Arena.StructStructOutput>;
 
-    arenaCurrency(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    arenaFee(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     arenaOwner(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -721,8 +714,8 @@ export interface Arenas extends BaseContract {
       [string, string, string, BigNumber, number, number, number] & {
         name: string;
         token_uri: string;
-        currency: string;
-        fee: BigNumber;
+        platformAndArenaFeeCurrency: string;
+        platformAndArenaFee: BigNumber;
         surface: number;
         distance: number;
         weather: number;
@@ -787,6 +780,16 @@ export interface Arenas extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    platformAndArenaFee(
+      arenaId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    platformAndArenaFeeCurrency(
+      arenaId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -922,16 +925,6 @@ export interface Arenas extends BaseContract {
 
     arena(arenaId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
-    arenaCurrency(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    arenaFee(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     arenaOwner(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -986,6 +979,16 @@ export interface Arenas extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    platformAndArenaFee(
+      arenaId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    platformAndArenaFeeCurrency(
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1062,16 +1065,6 @@ export interface Arenas extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    arenaCurrency(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    arenaFee(
-      arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     arenaOwner(
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -1132,6 +1125,16 @@ export interface Arenas extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    platformAndArenaFee(
+      arenaId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    platformAndArenaFeeCurrency(
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

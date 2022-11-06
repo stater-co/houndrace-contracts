@@ -74,10 +74,10 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            breedCostCurrency: globalParams.address0,
+            platformBreedFeeCurrency: globalParams.address0,
             breedFeeCurrency: globalParams.address0,
             currency: globalParams.address0,
-            breedCost: "0xB1A2BC2EC50000",
+            platformBreedFee: "0xB1A2BC2EC50000",
             breedFee: "0x2386F26FC10000"
            }
         }

@@ -5,5 +5,6 @@ library RenamingProposal {
     struct Struct {
         string proposal;
         bool accepted;
+        bool sessionActive;
     }
 }

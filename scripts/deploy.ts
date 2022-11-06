@@ -5,7 +5,7 @@ import { deployContract } from '../plugins/test/deployContract';
 import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
-import { HoundracePotions } from '../typechain-types/HoundracePotions';
+import { HoundPotions } from '../typechain-types/HoundPotions';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
 import { Shop, ShopConstructor } from '../typechain-types/Shop';
@@ -81,7 +81,7 @@ async function main() {
     }) as PaymentsMethods;
     DeploymentLogger('export PAYMENTS_METHODS=' + paymentsMethods.address);
     deployments.update(5, {
-      step: "Deploy houndrace potions"
+      step: "Deploy hound potions"
     });
 
     const payments = await deployContract({
@@ -94,15 +94,15 @@ async function main() {
       step: "Deploy houndrace potions"
     });
 
-    const houndracePotionsConstructor: Array<string> = [
-      "Houndrace Potions", "HP", "500000000"
+    const houndPotionsConstructor: Array<string> = [
+      "Hound Potions", "HP", "500000000"
     ];
-    const houndracePotions = await deployContract({
-      name: 'HoundracePotions',
-      constructor: houndracePotionsConstructor,
+    const houndPotions = await deployContract({
+      name: 'HoundPotions',
+      constructor: houndPotionsConstructor,
       props: {}
-    }) as HoundracePotions;
-    DeploymentLogger('export HOUNDRACE_POTIONS=' + houndracePotions.address);
+    }) as HoundPotions;
+    DeploymentLogger('export HOUND_POTIONS=' + houndPotions.address);
     deployments.update(6, {
       step: "Deploy shop restricted"
     });
@@ -223,14 +223,16 @@ async function main() {
       zerocost: globalParams.address0,
       shop: globalParams.address0,
       races: globalParams.address0,
-      genetics: globalParams.address0
+      genetics: globalParams.address0,
+      houndsRenameHandler: globalParams.address0
     };
     const houndsConstructorFees: ConstructorFees.StructStruct = {
-      currency: globalParams.address0,
-      breedCostCurrency: globalParams.address0,
-      alphaduneFeeCurrency: globalParams.address0,
-      breedCost: "0xB1A2BC2EC50000",
-      alphaduneFee: "0x2386F26FC10000"
+      renameFeeCurrency: globalParams.address0,
+      platformBreedFeeCurrency: globalParams.address0,
+      breedTransactionFeeCurrency: globalParams.address0,
+      platformBreedFee: "0xB1A2BC2EC50000",
+      breedTransactionFee: "0x2386F26FC10000",
+      renameFee: "0x2386F26FC10000"
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'Houndrace',
@@ -466,11 +468,12 @@ async function main() {
     }
 
     const newHoundsConstructorFees: ConstructorFees.StructStruct = {
-      currency: globalParams.address0,
-      breedCostCurrency: globalParams.address0,
-      alphaduneFeeCurrency: globalParams.address0,
-      breedCost: "0xB1A2BC2EC50000",
-      alphaduneFee: "0x2386F26FC10000"
+      renameFeeCurrency: globalParams.address0,
+      platformBreedFeeCurrency: globalParams.address0,
+      breedTransactionFeeCurrency: globalParams.address0,
+      platformBreedFee: "0xB1A2BC2EC50000",
+      breedTransactionFee: "0x2386F26FC10000",
+      renameFee: "0x2386F26FC10000"
     };
 
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
@@ -483,7 +486,8 @@ async function main() {
       shop: shop.address,
       hounds: hounds.address,
       races: races.address,
-      genetics: genetics.address
+      genetics: genetics.address,
+      houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
     };
 
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
@@ -791,8 +795,8 @@ async function main() {
 
       try {
         await run("verify:verify", {
-          address: houndracePotions.address,
-          constructorArguments: houndracePotionsConstructor
+          address: houndPotions.address,
+          constructorArguments: houndPotionsConstructor
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);

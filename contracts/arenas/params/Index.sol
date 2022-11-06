@@ -32,12 +32,12 @@ contract Params is ERC721, ERC721Holder, Whitelist {
         return arenas[arenaId];
     }
 
-    function arenaFee(uint256 arenaId) external view returns(uint256) {
-        return arenas[arenaId].fee;
+    function platformAndArenaFee(uint256 arenaId) external view returns(uint256) {
+        return arenas[arenaId].platformAndArenaFee;
     }
 
-    function arenaCurrency(uint256 arenaId) external view returns(address) {
-        return arenas[arenaId].currency;
+    function platformAndArenaFeeCurrency(uint256 arenaId) external view returns(address) {
+        return arenas[arenaId].platformAndArenaFeeCurrency;
     }
 
     function arenaOwner(uint256 tokenId) external view returns(address) {

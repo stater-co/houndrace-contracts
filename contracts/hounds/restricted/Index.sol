@@ -35,13 +35,17 @@ contract HoundsRestricted is Params {
         string memory newTokenURI, 
         bool validation
     ) external whitelisted {
-        require(!renamingProposals[houndId].accepted && bytes(renamingProposals[houndId].proposal).length >= 3);
+        require(bytes(renamingProposals[houndId].proposal).length >= 3 && renamingProposals[houndId].sessionActive);
+        require((bytes(newTokenURI).length > 0 && validation) || (bytes(newTokenURI).length == 0 && !validation));
 
         renamingProposals[houndId].accepted = validation;
         if ( validation ) {
             hounds[houndId].profile.token_uri = newTokenURI;
             hounds[houndId].profile.name = renamingProposals[houndId].proposal;
-        }        
+        }  
+        renamingProposals[houndId].sessionActive = false; 
+        
+        emit RenameProposal(houndId, renamingProposals[houndId]);     
     }
 
 }

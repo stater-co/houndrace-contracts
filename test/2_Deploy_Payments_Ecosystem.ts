@@ -3,7 +3,7 @@ import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
-import { HoundracePotions } from '../typechain-types/HoundracePotions';
+import { HoundPotions } from '../typechain-types/HoundPotions';
 import { Payments } from '../typechain-types/Payments';
 import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
@@ -13,7 +13,7 @@ import { ShopZerocost } from '../typechain-types/ShopZerocost';
 const { ethers } = require('hardhat');
 
 
-let houndracePotions: HoundracePotions;
+let houndPotions: HoundPotions;
 let payments: Payments;
 let paymentsMethods: PaymentsMethods;
 let testErc721: AlphaERC721;
@@ -29,11 +29,11 @@ export async function run(): Promise<PaymentEcosystem> {
     describe('Setting up the Payments System', function () {
   
       it('Deploy the Houndrace Potions contract', async function () {
-        houndracePotions = await deployContract({
-          name: 'HoundracePotions',
+        houndPotions = await deployContract({
+          name: 'HoundPotions',
           constructor: ['Ogars', 'OG', '500000000'],
           props: {}
-        }) as HoundracePotions;
+        }) as HoundPotions;
       });
 
       it('Deploy the payments methods contract', async function () {
@@ -160,7 +160,7 @@ export async function run(): Promise<PaymentEcosystem> {
         }) as Shop;
 
         resolve({
-          houndracePotions: houndracePotions,
+          houndPotions: houndPotions,
           payments: payments,
           paymentMethods: paymentsMethods,
           shop: shop,

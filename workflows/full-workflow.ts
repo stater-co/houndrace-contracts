@@ -165,12 +165,12 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            breedCostCurrency: globalParams.address0,
-            alphaduneFeeCurrency: globalParams.address0,
+            platformBreedFeeCurrency: globalParams.address0,
+            breedTransactionFeeCurrency: globalParams.address0,
             renameFeeCurrency: globalParams.address0,
             renameFee: "0x2386F26FC10000",
-            breedCost: "0xB1A2BC2EC50000",
-            alphaduneFee: "0x2386F26FC10000"
+            platformBreedFee: "0xB1A2BC2EC50000",
+            breedTransactionFee: "0x2386F26FC10000"
            }
         }
     });
@@ -214,7 +214,7 @@ async function main() {
         houndIdToEnqueue: 1,
         queue: globalParams.defaultQueue,
         arenasContract: arenas.arenas,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
         payments: payments.payments
     });
 
@@ -255,11 +255,11 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            breedCostCurrency: payments.houndracePotions.address,
-            alphaduneFeeCurrency: payments.houndracePotions.address,
-            renameFeeCurrency: payments.houndracePotions.address,
-            breedCost: "0xB1A2BC2EC50000",
-            alphaduneFee: "0x2386F26FC10000",
+            platformBreedFeeCurrency: payments.houndPotions.address,
+            breedTransactionFeeCurrency: payments.houndPotions.address,
+            renameFeeCurrency: payments.houndPotions.address,
+            platformBreedFee: "0xB1A2BC2EC50000",
+            breedTransactionFee: "0x2386F26FC10000",
             renameFee: "0x2386F26FC10000"
            }
         }
@@ -267,7 +267,7 @@ async function main() {
 
     await testHoundsAdvanced.advancedTests({
         hounds: hounds.hounds,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
         erc1155: payments.testErc1155,
         payments: payments.payments,
         races: races.races,
@@ -277,7 +277,7 @@ async function main() {
     await testQueuesAdvanced.advancedTests({
         queuesContract: queues.queues,
         arenasContract: arenas.arenas,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
         queue: globalParams.defaultQueue,
         arena: globalParams.defaultArena,
         houndsContract: hounds.hounds,
@@ -300,7 +300,7 @@ async function main() {
 
     await testDiscounts.basicTest({
         shop: payments.shop,
-        houndracePotions: payments.houndracePotions
+        houndPotions: payments.houndPotions
     });
 
 }

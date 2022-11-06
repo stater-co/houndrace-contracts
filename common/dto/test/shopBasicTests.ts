@@ -1,7 +1,7 @@
 import { Shop } from '../../../typechain-types/Shop';
-import { HoundracePotions } from '../../../typechain-types/HoundracePotions';
+import { HoundPotions } from '../../../typechain-types/HoundPotions';
 
 export interface ShopBasicTests {
     shop: Shop;
-    houndracePotions: HoundracePotions;
+    houndPotions: HoundPotions;
 }
