@@ -139,7 +139,6 @@ export interface QueuesRestrictedInterface extends utils.Interface {
     "closeQueue(uint256)": FunctionFragment;
     "control()": FunctionFragment;
     "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
-    "deleteQueue(uint256)": FunctionFragment;
     "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
     "enqueueDatesOf(uint256)": FunctionFragment;
     "id()": FunctionFragment;
@@ -162,10 +161,6 @@ export interface QueuesRestrictedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "createQueues",
     values: [Queue.StructStruct[]]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "deleteQueue",
-    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "editQueue",
@@ -211,10 +206,6 @@ export interface QueuesRestrictedInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "createQueues",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "deleteQueue",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "editQueue", data: BytesLike): Result;
@@ -379,11 +370,6 @@ export interface QueuesRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    deleteQueue(
-      queueId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     editQueue(
       queueId: BigNumberish,
       queue: Queue.StructStruct,
@@ -483,11 +469,6 @@ export interface QueuesRestricted extends BaseContract {
 
   createQueues(
     createdQueues: Queue.StructStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  deleteQueue(
-    queueId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -597,11 +578,6 @@ export interface QueuesRestricted extends BaseContract {
 
     createQueues(
       createdQueues: Queue.StructStruct[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    deleteQueue(
-      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -746,11 +722,6 @@ export interface QueuesRestricted extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    deleteQueue(
-      queueId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     editQueue(
       queueId: BigNumberish,
       queue: Queue.StructStruct,
@@ -811,11 +782,6 @@ export interface QueuesRestricted extends BaseContract {
 
     createQueues(
       createdQueues: Queue.StructStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    deleteQueue(
-      queueId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

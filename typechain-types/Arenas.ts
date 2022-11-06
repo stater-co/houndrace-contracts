@@ -444,8 +444,8 @@ export interface Arenas extends BaseContract {
 
     handleArenaUsage(
       arenaId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -605,8 +605,8 @@ export interface Arenas extends BaseContract {
 
   handleArenaUsage(
     arenaId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -764,7 +764,7 @@ export interface Arenas extends BaseContract {
     handleArenaUsage(
       arenaId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<void>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -961,7 +961,7 @@ export interface Arenas extends BaseContract {
 
     handleArenaUsage(
       arenaId: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1107,7 +1107,7 @@ export interface Arenas extends BaseContract {
 
     handleArenaUsage(
       arenaId: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;

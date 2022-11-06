@@ -1,11 +1,35 @@
 //SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
-import '../params/Index.sol';
+import '@openzeppelin/contracts/token/ERC721/IERC721.sol';
+import '@openzeppelin/contracts/interfaces/IERC1155.sol';
+import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
+import '../params/Constructor.sol';
+import '../../whitelist/Index.sol';
+import '../interfaces/IGetDiscount.sol';
+import '../interfaces/ITotalDiscounts.sol';
+interface Geyser { function totalStakedFor(address addr) external view returns(uint256); }
 
 
-contract ShopZerocost is Params {
+contract ShopZerocost is Whitelist {
 
-    constructor(ShopConstructor.Struct memory input) Params(input) {}
+    ShopConstructor.Struct public control;
+    constructor(
+        ShopConstructor.Struct memory input
+    ) 
+        Whitelist(input.operators, input.targets) 
+    {
+
+    }
+
+    function setGlobalParameters(
+        ShopConstructor.Struct memory globalParameters
+    ) 
+        external 
+        onlyOwner 
+    {
+        control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
+    }
 
     function viewDiscount(
         address requester

@@ -830,14 +830,14 @@ export interface Hounds extends BaseContract {
     updateHoundRunning(
       houndId: BigNumberish,
       runningOn: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     updateHoundStamina(
       houndId: BigNumberish,
       amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     whitelists(
       arg0: string,
@@ -1033,14 +1033,14 @@ export interface Hounds extends BaseContract {
   updateHoundRunning(
     houndId: BigNumberish,
     runningOn: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   updateHoundStamina(
     houndId: BigNumberish,
     amount: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   whitelists(
     arg0: string,
@@ -1241,13 +1241,13 @@ export interface Hounds extends BaseContract {
       houndId: BigNumberish,
       runningOn: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<BigNumber>;
 
     updateHoundStamina(
       houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<string>;
+    ): Promise<void>;
 
     whitelists(
       arg0: string,
@@ -1517,13 +1517,13 @@ export interface Hounds extends BaseContract {
     updateHoundRunning(
       houndId: BigNumberish,
       runningOn: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     updateHoundStamina(
       houndId: BigNumberish,
       amount: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     whitelists(
@@ -1695,13 +1695,13 @@ export interface Hounds extends BaseContract {
     updateHoundRunning(
       houndId: BigNumberish,
       runningOn: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     updateHoundStamina(
       houndId: BigNumberish,
       amount: BigNumberish,
-      overrides?: CallOverrides
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     whitelists(
