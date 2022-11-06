@@ -71,36 +71,4 @@ contract QueuesRestricted is Params {
         emit QueueClosed(queueId);
     }
 
-    function deleteQueue(
-        uint256 queueId
-    ) 
-        external 
-        whitelisted 
-    {
-        uint256[] memory amounts = new uint256[](1);
-        amounts[0] = queues[queueId].core.entryFee;
-
-        address arenaCurrency = IArenaCurrency(control.arenas).arenaCurrency(queues[queueId].core.arena);
-
-        for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
-            if ( queues[queueId].core.participants[i] > 0 ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], queueId) != 0);
-                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
-
-                IPay(control.payments).pay{
-                    value: arenaCurrency == address(0) ? queues[queueId].core.entryFee : 0
-                }(
-                    address(this),
-                    houndOwner,
-                    arenaCurrency,
-                    new uint256[](0),
-                    amounts,
-                    arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-                );
-            }
-        }
-        delete queues[queueId];
-        emit DeleteQueue(queueId);
-    }
-
 }
