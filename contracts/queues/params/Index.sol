@@ -5,7 +5,6 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../arenas/params/Arena.sol';
-import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
 import '../../arenas/interfaces/IArenaFee.sol';
 import '../../arenas/interfaces/IArenaCurrency.sol';

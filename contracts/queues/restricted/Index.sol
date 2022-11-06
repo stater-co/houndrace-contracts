@@ -31,8 +31,8 @@ contract QueuesRestricted is Params {
         external 
         whitelisted 
     {
-        Arena.Struct memory arena = IArena(control.arenas).arena(queue.core.arena);
-        require(arena.fee < queue.core.entryFee / 2);
+        uint256 arenaFee = IArenaFee(control.arenas).arenaFee(queue.core.arena);
+        require(arenaFee < queue.core.entryFee / queue.totalParticipants);
         queues[queueId] = queue;
         emit EditQueue(queueId,queues[queueId]);
     }
