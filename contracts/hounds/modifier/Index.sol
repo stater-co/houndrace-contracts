@@ -46,7 +46,7 @@ contract HoundsModifier is Params {
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = control.stamina.staminaRefillCurrency == address(0) ? msg.value : payed;
         IPay(control.boilerplate.payments).pay{
-            value: control.stamina.staminaRefillCurrency == address(0) ? msg.value : 0
+            value: control.stamina.staminaRefillCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
@@ -81,7 +81,7 @@ contract HoundsModifier is Params {
         amounts[0] = control.breeding.breedingCooldownCurrency == address(0) ? msg.value : payed;
         
         IPay(control.boilerplate.payments).pay{
-            value: control.breeding.breedingCooldownCurrency == address(0) ? msg.value : 0
+            value: control.breeding.breedingCooldownCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
@@ -127,6 +127,36 @@ contract HoundsModifier is Params {
             houndId, 
             stamina.staminaValue
         );
+    }
+
+    function requestHoundRename(
+        uint256 houndId,
+        string memory nameProposal
+    ) 
+        external 
+        payable 
+    {
+        require(ownerOf(houndId) == msg.sender);
+        require(bytes(nameProposal).length >= 3);
+        renamingProposals[houndId] = RenamingProposal.Struct(
+            nameProposal,
+            false
+        );
+
+        uint256[] memory amounts = new uint256[](1);
+        amounts[0] = control.fees.renameFee;
+        IPay(control.boilerplate.payments).pay{
+            value: control.fees.renameFeeCurrency == address(0) ? amounts[0] : 0
+        }(
+            msg.sender,
+            control.boilerplate.houndsRenameHandler,
+            control.fees.renameFeeCurrency,
+            new uint256[](0),
+            amounts,
+            control.fees.renameFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+        );
+
+        emit RenameProposal(houndId, renamingProposals[houndId]);
     }
 
 }

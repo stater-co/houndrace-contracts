@@ -6,7 +6,6 @@ import { Hounds } from '../typechain-types/Hounds';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
-import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { HoundsZerocost } from '../typechain-types/HoundsZerocost';
 const { ethers } = require("hardhat");
 
@@ -46,14 +45,13 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000"
             ]
@@ -84,14 +82,13 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000"
             ]
@@ -122,14 +119,13 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000"
             ]
@@ -160,14 +156,13 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
               globalParams.address0,
               globalParams.address0,
               "0xB1A2BC2EC50000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
               "0x2386F26FC10000",
               "0x2386F26FC10000"
             ]
@@ -198,6 +193,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -205,23 +201,18 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
               "0x2386F26FC10000"
             ]
           ]],
           props: {}
         }) as Hounds;
 
-        const transferrableRoot: AlphaERC721 = dependencies.transferrableRoot.attach(hounds.address);
-
         resolve({
           houndsRestricted: houndsRestricted,
           houndsModifier: houndsModifier,
           houndsMinter: houndsMinter,
           houndsZerocost: houndsZerocost,
-          hounds: hounds,
-          transferrableRoot: transferrableRoot
+          hounds: hounds
         });
       });
 

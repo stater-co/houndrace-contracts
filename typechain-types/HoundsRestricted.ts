@@ -160,9 +160,11 @@ export declare namespace ConstructorBoilerplate {
     races: string;
     genetics: string;
     houndsInitializer: string;
+    houndsRenameHandler: string;
   };
 
   export type StructStructOutput = [
+    string,
     string,
     string,
     string,
@@ -184,16 +186,18 @@ export declare namespace ConstructorBoilerplate {
     races: string;
     genetics: string;
     houndsInitializer: string;
+    houndsRenameHandler: string;
   };
 }
 
 export declare namespace ConstructorFees {
   export type StructStruct = {
-    currency: string;
+    renameFeeCurrency: string;
     breedCostCurrency: string;
     alphaduneFeeCurrency: string;
     breedCost: BigNumberish;
     alphaduneFee: BigNumberish;
+    renameFee: BigNumberish;
   };
 
   export type StructStructOutput = [
@@ -201,13 +205,15 @@ export declare namespace ConstructorFees {
     string,
     string,
     BigNumber,
+    BigNumber,
     BigNumber
   ] & {
-    currency: string;
+    renameFeeCurrency: string;
     breedCostCurrency: string;
     alphaduneFeeCurrency: string;
     breedCost: BigNumber;
     alphaduneFee: BigNumber;
+    renameFee: BigNumber;
   };
 }
 
@@ -247,6 +253,15 @@ export declare namespace Constructor {
   };
 }
 
+export declare namespace RenamingProposal {
+  export type StructStruct = { proposal: string; accepted: boolean };
+
+  export type StructStructOutput = [string, boolean] & {
+    proposal: string;
+    accepted: boolean;
+  };
+}
+
 export interface HoundsRestrictedInterface extends utils.Interface {
   contractName: "HoundsRestricted";
   functions: {
@@ -254,6 +269,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "handleHoundRename(uint256,string,bool)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
@@ -265,10 +281,11 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
+    "renamingProposals(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256)))": FunctionFragment;
+    "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256,uint256)))": FunctionFragment;
     "setMatingSeason(bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -287,6 +304,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "handleHoundRename",
+    values: [BigNumberish, string, boolean]
   ): string;
   encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -318,6 +339,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renamingProposals",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -369,6 +394,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "handleHoundRename",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "houndOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hounds", data: BytesLike): Result;
@@ -392,6 +421,10 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "renamingProposals",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
     data: BytesLike
@@ -438,6 +471,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
     "HoundStaminaUpdate(uint256,uint32)": EventFragment;
     "NewHound(uint256,address,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "RenameProposal(uint256,tuple)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
@@ -450,6 +484,7 @@ export interface HoundsRestrictedInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "HoundStaminaUpdate"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewHound"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "RenameProposal"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -526,6 +561,13 @@ export type OwnershipTransferredEvent = TypedEvent<
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
 
+export type RenameProposalEvent = TypedEvent<
+  [BigNumber, RenamingProposal.StructStructOutput],
+  { id: BigNumber; renameProposal: RenamingProposal.StructStructOutput }
+>;
+
+export type RenameProposalEventFilter = TypedEventFilter<RenameProposalEvent>;
+
 export type TransferEvent = TypedEvent<
   [string, string, BigNumber],
   { from: string; to: string; tokenId: BigNumber }
@@ -596,6 +638,13 @@ export interface HoundsRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -656,6 +705,11 @@ export interface HoundsRestricted extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
+
+    renamingProposals(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -758,6 +812,13 @@ export interface HoundsRestricted extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  handleHoundRename(
+    houndId: BigNumberish,
+    newTokenURI: string,
+    validation: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   hound(
     houndId: BigNumberish,
     overrides?: CallOverrides
@@ -812,6 +873,11 @@ export interface HoundsRestricted extends BaseContract {
   owner(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+  renamingProposals(
+    arg0: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -911,6 +977,13 @@ export interface HoundsRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -968,6 +1041,11 @@ export interface HoundsRestricted extends BaseContract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    renamingProposals(
+      arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string, boolean] & { proposal: string; accepted: boolean }>;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
@@ -1129,6 +1207,15 @@ export interface HoundsRestricted extends BaseContract {
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
 
+    "RenameProposal(uint256,tuple)"(
+      id?: BigNumberish | null,
+      renameProposal?: null
+    ): RenameProposalEventFilter;
+    RenameProposal(
+      id?: BigNumberish | null,
+      renameProposal?: null
+    ): RenameProposalEventFilter;
+
     "Transfer(address,address,uint256)"(
       from?: string | null,
       to?: string | null,
@@ -1155,6 +1242,13 @@ export interface HoundsRestricted extends BaseContract {
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1197,6 +1291,11 @@ export interface HoundsRestricted extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    renamingProposals(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1285,6 +1384,13 @@ export interface HoundsRestricted extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -1331,6 +1437,11 @@ export interface HoundsRestricted extends BaseContract {
 
     ownerOf(
       tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    renamingProposals(
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

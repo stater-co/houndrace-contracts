@@ -19,6 +19,7 @@ library ConstructorBoilerplate {
 
         // Payout checkpoint
         address houndsInitializer;
+        address houndsRenameHandler;
         
     }
 }

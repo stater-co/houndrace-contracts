@@ -30,4 +30,18 @@ contract HoundsRestricted is Params {
         }
     }
 
+    function handleHoundRename(
+        uint256 houndId,
+        string memory newTokenURI, 
+        bool validation
+    ) external whitelisted {
+        require(!renamingProposals[houndId].accepted && bytes(renamingProposals[houndId].proposal).length >= 3);
+
+        renamingProposals[houndId].accepted = validation;
+        if ( validation ) {
+            hounds[houndId].profile.token_uri = newTokenURI;
+            hounds[houndId].profile.name = renamingProposals[houndId].proposal;
+        }        
+    }
+
 }

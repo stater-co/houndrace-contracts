@@ -46,7 +46,6 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
     const races: RacesSystem = await runRaces({
@@ -154,6 +153,7 @@ async function main() {
            targets: [],
            boilerplate: {
             houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
@@ -167,7 +167,8 @@ async function main() {
            fees: {
             breedCostCurrency: globalParams.address0,
             alphaduneFeeCurrency: globalParams.address0,
-            currency: globalParams.address0,
+            renameFeeCurrency: globalParams.address0,
+            renameFee: "0x2386F26FC10000",
             breedCost: "0xB1A2BC2EC50000",
             alphaduneFee: "0x2386F26FC10000"
            }
@@ -242,6 +243,7 @@ async function main() {
            targets: [],
            boilerplate: {
             houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
             houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
@@ -255,9 +257,10 @@ async function main() {
            fees: {
             breedCostCurrency: payments.houndracePotions.address,
             alphaduneFeeCurrency: payments.houndracePotions.address,
-            currency: payments.houndracePotions.address,
+            renameFeeCurrency: payments.houndracePotions.address,
             breedCost: "0xB1A2BC2EC50000",
-            alphaduneFee: "0x2386F26FC10000"
+            alphaduneFee: "0x2386F26FC10000",
+            renameFee: "0x2386F26FC10000"
            }
         }
     });
