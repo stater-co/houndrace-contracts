@@ -12,8 +12,4 @@ contract HoundracePotions is Ownable, ERC20 {
         _mint(msg.sender, initialSupply_);
     }
 
-    function mint(address account, uint256 amount) external onlyOwner {
-        super._mint(account, amount);
-    }
-
 }
