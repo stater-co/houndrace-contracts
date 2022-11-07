@@ -451,12 +451,12 @@ async function main() {
     const newArenasConstructor: ArenasConstructor.StructStruct = {
       name: "Houndrace Arenas", 
       symbol: "HRA",
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
       restricted: arenasRestricted.address,
       methods: arenasMethods.address,
       payments: payments.address,
       alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      targets: [['0xe195c287','0x3a420b95'],['0x11a34393']],
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
+      targets: [['0xc5eab450', '0x2a6379c3'], ['0x11a34393']],
       alphadunePercentage: 60
     }
 
@@ -497,7 +497,7 @@ async function main() {
       breeding: globalParams.breedingConstructor,
       stamina: globalParams.staminaConstructor,
       operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY), queues.address, races.address],
-      targets: [['0x45fb9412','0xfbba82fc','0x5c80b448'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
+      targets: [['0x1dd2937b','0xfbba82fc','0x5c80b448'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
     }
@@ -511,7 +511,7 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      targets: [['0x65913d77','0x5bd4fd05'], ['0x797a6764'], ['0x9ad2e2b0']]
+      targets: [['0x65913d77','0x5bd4fd05'], ['0x30e54438'], ['0x9ad2e2b0', '0x5bd4fd05']]
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {
@@ -525,7 +525,7 @@ async function main() {
       queues: queues.address,
       zerocost: queuesZerocost.address,
       raceUploader: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      targets: [['0x30f9a0f0','0xe7c4d374','0x19e3e592']]
+      targets: [['0x90c14066', '0x30f9a0f0', '0xe7c4d374', '0x19e3e592', '0x857b29e5']]
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
