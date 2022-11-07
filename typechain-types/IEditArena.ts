@@ -28,6 +28,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -38,6 +39,7 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
@@ -46,6 +48,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -55,7 +58,7 @@ export declare namespace Arena {
 export interface IEditArenaInterface extends utils.Interface {
   contractName: "IEditArena";
   functions: {
-    "editArena(uint256,(string,string,address,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "editArena(uint256,(string,string,address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
   };
 
   encodeFunctionData(

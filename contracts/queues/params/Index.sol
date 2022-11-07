@@ -16,7 +16,7 @@ import '../../hounds/interfaces/IHound.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../whitelist/Index.sol';
 import '../../hounds/params/Hound.sol';
-import '../interfaces/IEnqueueCost.sol';
+import '../interfaces/IGetEnqueueCost.sol';
 
 
 contract Params is ReentrancyGuard, Whitelist {

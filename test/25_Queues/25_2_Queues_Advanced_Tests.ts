@@ -128,7 +128,7 @@ async function advancedTests(
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
       const [sig1, sig2] = await ethers.getSigners();
-      const raceEntryTicket: MicroPayment.StructStructOutput[]  = await dependencies.queuesContract.enqueueCost(createdQueueId);
+      const raceEntryTicket: MicroPayment.StructStructOutput[]  = await dependencies.queuesContract.getEnqueueCost(createdQueueId);
 
       let totalValueToPay: number = 0;
       for ( let i = 0 , l = raceEntryTicket.length ; i < l ; ++i ) {

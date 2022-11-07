@@ -53,7 +53,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -90,7 +90,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -127,7 +127,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -164,7 +164,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -201,7 +201,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}

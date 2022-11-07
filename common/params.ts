@@ -33,6 +33,7 @@ const defaultArena: Arena.StructStruct = {
     token_uri: "arena_token_uri",
     platformAndArenaFeeCurrency: address0,
     platformAndArenaFee: BigNumber.from(100),
+    arenaMap: 1,
     surface: 1,
     distance: 1,
     weather: 1

@@ -288,6 +288,7 @@ export interface HoundsInterface extends utils.Interface {
     "control()": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "getBreedCosts(uint256)": FunctionFragment;
+    "handleHoundRename(uint256,string,bool)": FunctionFragment;
     "hound(uint256)": FunctionFragment;
     "houndOwner(uint256)": FunctionFragment;
     "hounds(uint256)": FunctionFragment;
@@ -302,6 +303,7 @@ export interface HoundsInterface extends utils.Interface {
     "putHoundForBreed(uint256,uint256,bool)": FunctionFragment;
     "renamingProposals(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "requestHoundRename(uint256,string)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256,uint256)))": FunctionFragment;
@@ -341,6 +343,10 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getBreedCosts",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "handleHoundRename",
+    values: [BigNumberish, string, boolean]
   ): string;
   encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
   encodeFunctionData(
@@ -385,6 +391,10 @@ export interface HoundsInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "requestHoundRename",
+    values: [BigNumberish, string]
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
@@ -455,6 +465,10 @@ export interface HoundsInterface extends utils.Interface {
     functionFragment: "getBreedCosts",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "handleHoundRename",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "houndOwner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "hounds", data: BytesLike): Result;
@@ -488,6 +502,10 @@ export interface HoundsInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "requestHoundRename",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -738,6 +756,13 @@ export interface Hounds extends BaseContract {
       ]
     >;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -819,6 +844,12 @@ export interface Hounds extends BaseContract {
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    requestHoundRename(
+      houndId: BigNumberish,
+      nameProposal: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -961,6 +992,13 @@ export interface Hounds extends BaseContract {
     ]
   >;
 
+  handleHoundRename(
+    houndId: BigNumberish,
+    newTokenURI: string,
+    validation: boolean,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   hound(
     houndId: BigNumberish,
     overrides?: CallOverrides
@@ -1036,6 +1074,12 @@ export interface Hounds extends BaseContract {
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  requestHoundRename(
+    houndId: BigNumberish,
+    nameProposal: string,
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
@@ -1175,6 +1219,13 @@ export interface Hounds extends BaseContract {
       ]
     >;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -1252,6 +1303,12 @@ export interface Hounds extends BaseContract {
     >;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
+
+    requestHoundRename(
+      houndId: BigNumberish,
+      nameProposal: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -1485,6 +1542,13 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     houndOwner(
@@ -1542,6 +1606,12 @@ export interface Hounds extends BaseContract {
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    requestHoundRename(
+      houndId: BigNumberish,
+      nameProposal: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -1662,6 +1732,13 @@ export interface Hounds extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    handleHoundRename(
+      houndId: BigNumberish,
+      newTokenURI: string,
+      validation: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     hound(
       houndId: BigNumberish,
       overrides?: CallOverrides
@@ -1725,6 +1802,12 @@ export interface Hounds extends BaseContract {
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    requestHoundRename(
+      houndId: BigNumberish,
+      nameProposal: string,
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(

@@ -26,6 +26,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -36,6 +37,7 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
@@ -44,6 +46,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;

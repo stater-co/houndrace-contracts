@@ -17,7 +17,7 @@ import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { set as setRaces } from '../test/20_Setup_Races_Contracts';
 import { test as testHounds } from '../test/23_Hounds/23_1_Hounds_Basic_Tests';
-import { test as testHoundsAdvanced } from '../test/23_Hounds/23_2_Hounds_Custom_Token_Tests';
+import { test as testHoundsAdvanced } from '../test/23_Hounds/23_2_Hounds_Advanced_Tests';
 import { test as testArenas } from '../test/24_Arenas/24_1_Arenas_Basic_Tests';
 import { test as testQueues } from '../test/25_Queues/25_1_Queues_Basic_Tests';
 import { test as testQueuesAdvanced } from '../test/25_Queues/25_2_Queues_Advanced_Tests';
@@ -168,7 +168,7 @@ async function main() {
             platformBreedFeeCurrency: globalParams.address0,
             breedTransactionFeeCurrency: globalParams.address0,
             renameFeeCurrency: globalParams.address0,
-            renameFee: "0x2386F26FC10000",
+            renameFee: 50000,
             platformBreedFee: "0xB1A2BC2EC50000",
             breedTransactionFee: "0x2386F26FC10000"
            }
@@ -260,7 +260,7 @@ async function main() {
             renameFeeCurrency: payments.houndPotions.address,
             platformBreedFee: "0xB1A2BC2EC50000",
             breedTransactionFee: "0x2386F26FC10000",
-            renameFee: "0x2386F26FC10000"
+            renameFee: 50000
            }
         }
     });

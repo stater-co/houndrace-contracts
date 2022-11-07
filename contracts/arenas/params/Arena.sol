@@ -10,6 +10,7 @@ library Arena {
 
         address platformAndArenaFeeCurrency;
         uint256 platformAndArenaFee;
+        uint256 arenaMap;
         
         uint32 surface;
         uint32 distance;

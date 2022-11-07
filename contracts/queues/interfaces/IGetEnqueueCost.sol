@@ -2,9 +2,9 @@
 pragma solidity 0.8.17;
 import '../../payments/params/MicroPayment.sol';
 
-interface IEnqueueCost {
+interface IGetEnqueueCost {
 
-    function enqueueCost(uint256 queueId) external view returns(
+    function getEnqueueCost(uint256 queueId) external view returns(
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory

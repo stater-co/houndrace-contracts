@@ -138,6 +138,16 @@ async function basicTest(
       });
     });
 
+    it("Send rename proposal", async function () {
+      const [sig] = await ethers.getSigners();
+      const feesControl = await dependencies.hounds.control();
+
+      await dependencies.hounds.connect(sig).requestHoundRename(1, "Test name rename", {
+        value: feesControl.fees.renameFee
+      });
+
+    });
+
   });
 }
 

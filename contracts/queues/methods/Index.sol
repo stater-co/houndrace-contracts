@@ -40,7 +40,7 @@ contract QueuesMethods is Params {
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == queueId);
 
         
-        ( , , MicroPayment.Struct memory raceEntryTicket) = IEnqueueCost(control.zerocost).enqueueCost(queueId);
+        ( , , MicroPayment.Struct memory raceEntryTicket) = IGetEnqueueCost(control.zerocost).getEnqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = raceEntryTicket.amount;
@@ -100,7 +100,7 @@ contract QueuesMethods is Params {
             MicroPayment.Struct memory startRaceTransactionFee, 
             MicroPayment.Struct memory platformAndArenaFee, 
             MicroPayment.Struct memory raceEntryTicket
-        ) = IEnqueueCost(control.zerocost).enqueueCost(queueId);
+        ) = IGetEnqueueCost(control.zerocost).getEnqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = startRaceTransactionFee.amount;

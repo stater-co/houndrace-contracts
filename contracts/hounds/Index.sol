@@ -61,4 +61,24 @@ contract Hounds is Params {
         return IGetBreedCosts(control.boilerplate.zerocost).getBreedCosts(hound);
     }
 
+    function requestHoundRename(
+        uint256 houndId,
+        string memory nameProposal
+    ) 
+        external 
+        payable 
+    {
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
+        require(success);
+    }
+
+    function handleHoundRename(
+        uint256 houndId,
+        string memory newTokenURI, 
+        bool validation
+    ) external {
+        (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
+        require(success);
+    }
+
 }

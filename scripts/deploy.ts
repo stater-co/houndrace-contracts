@@ -232,7 +232,7 @@ async function main() {
       breedTransactionFeeCurrency: globalParams.address0,
       platformBreedFee: "0xB1A2BC2EC50000",
       breedTransactionFee: "0x2386F26FC10000",
-      renameFee: "0x2386F26FC10000"
+      renameFee: 50000
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'Houndrace',
@@ -473,7 +473,7 @@ async function main() {
       breedTransactionFeeCurrency: globalParams.address0,
       platformBreedFee: "0xB1A2BC2EC50000",
       breedTransactionFee: "0x2386F26FC10000",
-      renameFee: "0x2386F26FC10000"
+      renameFee: 50000
     };
 
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {

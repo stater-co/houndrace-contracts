@@ -64,6 +64,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -74,6 +75,7 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
@@ -82,6 +84,7 @@ export declare namespace Arena {
     token_uri: string;
     platformAndArenaFeeCurrency: string;
     platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -97,8 +100,8 @@ export interface ArenasRestrictedInterface extends utils.Interface {
     "arenas(uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "createArena((string,string,address,uint256,uint32,uint32,uint32))": FunctionFragment;
-    "editArena(uint256,(string,string,address,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "createArena((string,string,address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "editArena(uint256,(string,string,address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -383,11 +386,12 @@ export interface ArenasRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, BigNumber, number, number, number] & {
+      [string, string, string, BigNumber, BigNumber, number, number, number] & {
         name: string;
         token_uri: string;
         platformAndArenaFeeCurrency: string;
         platformAndArenaFee: BigNumber;
+        arenaMap: BigNumber;
         surface: number;
         distance: number;
         weather: number;
@@ -539,11 +543,12 @@ export interface ArenasRestricted extends BaseContract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [string, string, string, BigNumber, number, number, number] & {
+    [string, string, string, BigNumber, BigNumber, number, number, number] & {
       name: string;
       token_uri: string;
       platformAndArenaFeeCurrency: string;
       platformAndArenaFee: BigNumber;
+      arenaMap: BigNumber;
       surface: number;
       distance: number;
       weather: number;
@@ -692,11 +697,12 @@ export interface ArenasRestricted extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [string, string, string, BigNumber, number, number, number] & {
+      [string, string, string, BigNumber, BigNumber, number, number, number] & {
         name: string;
         token_uri: string;
         platformAndArenaFeeCurrency: string;
         platformAndArenaFee: BigNumber;
+        arenaMap: BigNumber;
         surface: number;
         distance: number;
         weather: number;

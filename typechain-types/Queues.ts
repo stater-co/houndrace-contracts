@@ -151,8 +151,8 @@ export interface QueuesInterface extends utils.Interface {
     "createQueues(((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool)[])": FunctionFragment;
     "editQueue(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
     "enqueue(uint256,uint256)": FunctionFragment;
-    "enqueueCost(uint256)": FunctionFragment;
     "enqueueDatesOf(uint256)": FunctionFragment;
+    "getEnqueueCost(uint256)": FunctionFragment;
     "id()": FunctionFragment;
     "owner()": FunctionFragment;
     "participantsOf(uint256)": FunctionFragment;
@@ -184,11 +184,11 @@ export interface QueuesInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "enqueueCost",
+    functionFragment: "enqueueDatesOf",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "enqueueDatesOf",
+    functionFragment: "getEnqueueCost",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
@@ -236,11 +236,11 @@ export interface QueuesInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "editQueue", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "enqueue", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "enqueueCost",
+    functionFragment: "enqueueDatesOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "enqueueDatesOf",
+    functionFragment: "getEnqueueCost",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
@@ -413,7 +413,12 @@ export interface Queues extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    enqueueCost(
+    enqueueDatesOf(
+      queueId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]]>;
+
+    getEnqueueCost(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -423,11 +428,6 @@ export interface Queues extends BaseContract {
         MicroPayment.StructStructOutput
       ]
     >;
-
-    enqueueDatesOf(
-      queueId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -538,7 +538,12 @@ export interface Queues extends BaseContract {
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  enqueueCost(
+  enqueueDatesOf(
+    queueId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
+  getEnqueueCost(
     queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
@@ -548,11 +553,6 @@ export interface Queues extends BaseContract {
       MicroPayment.StructStructOutput
     ]
   >;
-
-  enqueueDatesOf(
-    queueId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<BigNumber[]>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -670,7 +670,12 @@ export interface Queues extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    enqueueCost(
+    enqueueDatesOf(
+      queueId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
+
+    getEnqueueCost(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
@@ -680,11 +685,6 @@ export interface Queues extends BaseContract {
         MicroPayment.StructStructOutput
       ]
     >;
-
-    enqueueDatesOf(
-      queueId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber[]>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -834,12 +834,12 @@ export interface Queues extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    enqueueCost(
+    enqueueDatesOf(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    enqueueDatesOf(
+    getEnqueueCost(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -914,12 +914,12 @@ export interface Queues extends BaseContract {
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    enqueueCost(
+    enqueueDatesOf(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    enqueueDatesOf(
+    getEnqueueCost(
       queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

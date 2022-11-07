@@ -40,6 +40,11 @@ const _abi = [
             type: "uint256",
           },
           {
+            internalType: "uint256",
+            name: "arenaMap",
+            type: "uint256",
+          },
+          {
             internalType: "uint32",
             name: "surface",
             type: "uint32",

@@ -145,7 +145,7 @@ contract HoundsModifier is Params {
         );
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.fees.renameFee;
+        amounts[0] = control.fees.renameFeeCurrency == address(0) ? msg.value : control.fees.renameFee;
         IPay(control.boilerplate.payments).pay{
             value: control.fees.renameFeeCurrency == address(0) ? amounts[0] : 0
         }(

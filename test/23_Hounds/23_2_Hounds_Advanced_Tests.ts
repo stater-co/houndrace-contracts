@@ -2,7 +2,7 @@ import { globalParams } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Hound, Hounds } from "../../typechain-types/Hounds";
+import { Constructor, Hound, Hounds } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
@@ -472,6 +472,19 @@ async function advancedTests(
       const discountTokensAfter = await dependencies.erc1155.balanceOf(sig1.address,1);
 
       expecting(String(discountTokensBefore) === String(discountTokensAfter), "Usable discount tokens bugged on boost stamina");
+
+    });
+
+    it("Send rename proposal using custom token", async function () {
+      const [sig] = await ethers.getSigners();
+      const feesControl = await dependencies.hounds.control();
+
+      expecting(feesControl.fees.renameFeeCurrency === dependencies.erc20.address, "Rename fee currency is not the erc20 currency");
+      if ( feesControl.fees.renameFeeCurrency !== globalParams.address0 ) {
+        await dependencies.erc20.approve(dependencies.payments.address, feesControl.fees.renameFee);
+      }
+
+      await dependencies.hounds.connect(sig).requestHoundRename(1, "Test name rename");
 
     });
 

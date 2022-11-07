@@ -17,7 +17,7 @@ contract QueuesZerocost is Ownable {
         control = globalParameters;
     }
 
-    function enqueueCost(uint256 id) external view returns(
+    function getEnqueueCost(uint256 id) external view returns(
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory
