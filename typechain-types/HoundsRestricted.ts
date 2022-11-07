@@ -9,6 +9,7 @@ import {
   CallOverrides,
   ContractTransaction,
   Overrides,
+  PayableOverrides,
   PopulatedTransaction,
   Signer,
   utils,
@@ -647,7 +648,7 @@ export interface HoundsRestricted extends BaseContract {
       houndId: BigNumberish,
       newTokenURI: string,
       validation: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     hound(
@@ -827,7 +828,7 @@ export interface HoundsRestricted extends BaseContract {
     houndId: BigNumberish,
     newTokenURI: string,
     validation: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   hound(
@@ -1271,7 +1272,7 @@ export interface HoundsRestricted extends BaseContract {
       houndId: BigNumberish,
       newTokenURI: string,
       validation: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
@@ -1411,7 +1412,7 @@ export interface HoundsRestricted extends BaseContract {
       houndId: BigNumberish,
       newTokenURI: string,
       validation: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     hound(

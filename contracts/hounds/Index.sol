@@ -76,7 +76,7 @@ contract Hounds is Params {
         uint256 houndId,
         string memory newTokenURI, 
         bool validation
-    ) external {
+    ) external payable {
         (bool success, ) = control.boilerplate.restricted.delegatecall(msg.data);
         require(success);
     }

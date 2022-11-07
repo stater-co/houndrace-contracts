@@ -14,7 +14,7 @@ export async function set(
       await dependencies.houndsMinter.setGlobalParameters({
         ...dependencies.constructor,
         operators: [owner.address, signer2.address, signer3.address, dependencies.queuesAddress, dependencies.racesAddress],
-        targets: [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
+        targets: [['0xd7016c7f', '0x1dd2937b'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
       });
       const after = await dependencies.houndsMinter.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds minter global params setter bugged");
@@ -26,7 +26,7 @@ export async function set(
       await dependencies.houndsModifier.setGlobalParameters({
         ...dependencies.constructor,
         operators: [owner.address, signer2.address, signer3.address, dependencies.queuesAddress, dependencies.racesAddress],
-        targets: [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
+        targets: [['0xd7016c7f', '0x1dd2937b'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
       });
       const after = await dependencies.houndsModifier.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds modifier global params setter bugged");
@@ -38,7 +38,7 @@ export async function set(
       await dependencies.houndsZerocost.setGlobalParameters({
         ...dependencies.constructor,
         operators: [owner.address, signer2.address, signer3.address, dependencies.queuesAddress, dependencies.racesAddress],
-        targets: [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
+        targets: [['0xd7016c7f', '0x1dd2937b'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
       });
       const after = await dependencies.houndsZerocost.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds zerocost global params setter bugged");
@@ -50,7 +50,7 @@ export async function set(
       await dependencies.houndsRestricted.setGlobalParameters({
         ...dependencies.constructor,
         operators: [owner.address, signer2.address, signer3.address, dependencies.queuesAddress, dependencies.racesAddress],
-        targets: [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
+        targets: [['0xd7016c7f', '0x1dd2937b'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
       });
       const after = await dependencies.houndsRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds restricted global params setter bugged");
@@ -62,7 +62,7 @@ export async function set(
       await dependencies.hounds.setGlobalParameters({
         ...dependencies.constructor,
         operators: [owner.address, signer2.address, signer3.address, dependencies.queuesAddress, dependencies.racesAddress],
-        targets: [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
+        targets: [['0xd7016c7f', '0x1dd2937b'],['0xfbba82fc'],['0x5c80b448'], ['0x894f39fc','0x894f39fc'],['0x894f39fc','0xfbba82fc','0x894f39fc']]
       });
       const after = await dependencies.hounds.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Hounds global params setter bugged");
