@@ -139,8 +139,6 @@ async function advancedTests(
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         let houndOwner: string = await dependencies.houndsContract.houndOwner(j);
         if ( Number(hound.profile.runningOn) === 0 && houndOwner === sig2.address) {
-    
-          await dependencies.erc20.mint(sig1.address, totalValueToPay);
 
           await dependencies.erc20.transfer(sig2.address, totalValueToPay);
     

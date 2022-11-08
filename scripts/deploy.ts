@@ -95,7 +95,7 @@ async function main() {
     });
 
     const houndPotionsConstructor: Array<string> = [
-      "Hound Potions", "HP", "500000000"
+      "Hound Potions", "HP", "500000000000000000000000000"
     ];
     const houndPotions = await deployContract({
       name: 'HoundPotions',
@@ -232,7 +232,7 @@ async function main() {
       breedTransactionFeeCurrency: globalParams.address0,
       platformBreedFee: "0xB1A2BC2EC50000",
       breedTransactionFee: "0x2386F26FC10000",
-      renameFee: 50000
+      renameFee: "50000000000000000000"
     };
     const houndsConstructor: HoundsConstructor.StructStruct = {
       name: 'Houndrace',
@@ -473,7 +473,7 @@ async function main() {
       breedTransactionFeeCurrency: globalParams.address0,
       platformBreedFee: "0xB1A2BC2EC50000",
       breedTransactionFee: "0x2386F26FC10000",
-      renameFee: 50000
+      renameFee: "50000000000000000000"
     };
 
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
@@ -497,7 +497,7 @@ async function main() {
       breeding: globalParams.breedingConstructor,
       stamina: globalParams.staminaConstructor,
       operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY), queues.address, races.address],
-      targets: [['0x1dd2937b','0xfbba82fc','0x5c80b448'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
+      targets: [['0x1dd2937b','0xfbba82fc','0x5c80b448','0xd7016c7f'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
     }
@@ -511,7 +511,7 @@ async function main() {
       restricted: racesRestricted.address,
       queues: queues.address,
       races: races.address,
-      targets: [['0x65913d77','0x5bd4fd05'], ['0x30e54438'], ['0x9ad2e2b0', '0x5bd4fd05']]
+      targets: [['0x65913d77','0x5bd4fd05'], ['0x30e54438','0x797a6764'], ['0x9ad2e2b0', '0x5bd4fd05']]
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {

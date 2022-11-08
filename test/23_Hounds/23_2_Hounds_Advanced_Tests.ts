@@ -2,7 +2,7 @@ import { globalParams } from "../../common/params";
 import { safeMintHound } from "../../plugins/test/mintHound";
 import { checkHoundStructure } from "../../plugins/test/checkHoundStructure";
 import { safeUpdateStamina } from "../../plugins/test/updateStamina";
-import { Constructor, Hound, Hounds } from "../../typechain-types/Hounds";
+import { Hound, Hounds } from "../../typechain-types/Hounds";
 import { safeBreed } from "../../plugins/test/breed";
 import { safeSetMatingSeason } from "../../plugins/test/setMatingSeason";
 import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.dto";
@@ -89,8 +89,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -135,8 +133,6 @@ async function advancedTests(
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
-
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -183,8 +179,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -229,8 +223,6 @@ async function advancedTests(
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
-
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -277,8 +269,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -324,8 +314,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -344,8 +332,6 @@ async function advancedTests(
 
       const control = await dependencies.hounds.control();
 
-      await dependencies.erc20.mint(sig1.address,control.breeding.refillBreedingCooldownCost);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
 
@@ -361,8 +347,6 @@ async function advancedTests(
       const [sig1] = await ethers.getSigners();
 
       const control = await dependencies.hounds.control();
-
-      await dependencies.erc20.mint(sig1.address, control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
@@ -383,8 +367,6 @@ async function advancedTests(
       const [sig1] = await ethers.getSigners();
 
       const control = await dependencies.hounds.control();
-
-      await dependencies.erc20.mint(sig1.address, control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
@@ -407,8 +389,6 @@ async function advancedTests(
       const [sig1] = await ethers.getSigners();
 
       const control = await dependencies.hounds.control();
-
-      await dependencies.erc20.mint(sig1.address,control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
@@ -454,8 +434,6 @@ async function advancedTests(
       expecting(String(discountBeforeEdit) !== String(discountAfterEdit), "Edit discount bugged on boosting hound stamina using usable discount");
 
       const control = await dependencies.hounds.control();
-
-      await dependencies.erc20.mint(sig1.address, control.breeding.refillBreedingCooldownCost);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);

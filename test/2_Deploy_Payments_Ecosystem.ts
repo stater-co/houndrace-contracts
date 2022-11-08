@@ -31,7 +31,7 @@ export async function run(): Promise<PaymentEcosystem> {
       it('Deploy the Houndrace Potions contract', async function () {
         houndPotions = await deployContract({
           name: 'HoundPotions',
-          constructor: ['Ogars', 'OG', '500000000'],
+          constructor: ['Ogars', 'OG', '500000000000000000000000000'],
           props: {}
         }) as HoundPotions;
       });
