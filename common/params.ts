@@ -70,7 +70,7 @@ const defaultRace: Race.StructStruct = {
 const staminaConstructor: Hound.ConstructorStaminaStruct = {
     staminaRefillCurrency: address0,
     staminaRefill1x: "500000000000000",
-    staminaPerTimeUnit: 86_400,
+    staminaPerTimeUnit: 1440,
     staminaCap: 100
 };
 
@@ -82,7 +82,7 @@ const houndStamina: Hound.StaminaStruct = {
 const breedingConstructor: Hound.ConstructorBreedingStruct = {
     externalBreedingFeeCurrency: address0,
     breedingCooldownCurrency: address0,
-    breedingCooldown: 264_000,
+    breedingCooldown: 259200,
     breedingCooldownTimeUnit: 3600,
     refillBreedingCooldownCost: 0
 }

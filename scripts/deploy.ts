@@ -411,7 +411,7 @@ async function main() {
     });
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
-      name: "",
+      name: "Houndrace Mystery Boxes",
       operators: [],
       targets: [],
       canBeOpened: true

@@ -504,3 +504,57 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x4E092a6eA26f8632400df7ca2F83FcDDF0FFDC34","network":"polygon","timestamp":"2022-11-07T15:12:16.859Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0x358608502Fa602D5183E3995d3bB0F0D1dFdE886","network":"polygon","timestamp":"2022-11-07T15:12:22.486Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xa318dD77DB5d048bfC4daE2048303cb7bb81C258","network":"polygon","timestamp":"2022-11-07T15:12:32.825Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-09T09:40:34.166Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0xBDb3F12DeD01b17C77f391b3564446e25D9bA048","network":"polygon","timestamp":"2022-11-09T09:40:49.969Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0xFDd3878112fA6FF3a46E2A85897A2970796Df11E","network":"polygon","timestamp":"2022-11-09T09:41:26.707Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-09T10:03:17.057Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0xF5D823Bf9A28C287F22D4E1F0CB32E01f296948D","network":"polygon","timestamp":"2022-11-09T10:03:25.830Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0x62BcDD5A00985313259843fe8ae593A501523dB0","network":"polygon","timestamp":"2022-11-09T10:03:33.196Z"}
+{"level":"info","message":"[DIIMIIM] export HOUND_POTIONS=0x161e393144Cc558202BE0181D556d2FD456c77cA","network":"polygon","timestamp":"2022-11-09T10:03:40.162Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_RESTRICTED=0x2c2e30c56D8fB853893E4feFdAEc2D50d8374711","network":"polygon","timestamp":"2022-11-09T10:03:47.845Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_METHODS=0x52A9b4eA9688fAf56b0f490782A7e85Ed830d12B","network":"polygon","timestamp":"2022-11-09T10:03:55.211Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_ZEROCOST=0xef1E7DA76CEF229d27e3e33ae235E7bA21F44E8C","network":"polygon","timestamp":"2022-11-09T10:04:02.381Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP=0x316F7fCB4542397f06A86f7c29f715A4BdaE30E8","network":"polygon","timestamp":"2022-11-09T10:04:09.588Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_RESTRICTED=0xFD2d50002EEB4a1c483Adb98CfB267B7a14ce8BF","network":"polygon","timestamp":"2022-11-09T10:04:16.921Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_METHODS=0x302f95F223E00208CDA0d4B24bC110b5a4a81044","network":"polygon","timestamp":"2022-11-09T10:04:24.091Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS=0xC9CFE221A37538dF4227B0c58a7672DA2eF4cF3b","network":"polygon","timestamp":"2022-11-09T10:04:30.848Z"}
+{"level":"info","message":"[DIIMIIM] export GENETICS=0xCd101D746C545796B5cAD73980019a3B864De56d","network":"polygon","timestamp":"2022-11-09T10:04:37.492Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_RESTRICTED=0x1a4524f7bC2DB91e1b7480Ffc29070caA9281128","network":"polygon","timestamp":"2022-11-09T10:04:45.595Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_ZEROCOST=0x924c68e5dE3b87Bb33D1225FDf15e9dB0DeE56f8","network":"polygon","timestamp":"2022-11-09T10:04:52.655Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MODIFIER=0x01282fCeD0662aD5aD72AceE606aD9FCe81A50B3","network":"polygon","timestamp":"2022-11-09T10:04:59.723Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MINTER=0xBE08aaB045C6859d1a8eBD946247b6Cdb619Fe44","network":"polygon","timestamp":"2022-11-09T10:05:07.020Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-09T10:09:16.818Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0xe951306bb8602317319AC5eBbFe924021FD5026f","network":"polygon","timestamp":"2022-11-09T10:09:29.240Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0x55B2f4D1d6967eDAdA0278f5347Dc009cD69E393","network":"polygon","timestamp":"2022-11-09T10:09:36.550Z"}
+{"level":"info","message":"[DIIMIIM] export HOUND_POTIONS=0x1cf8f55e3629755Fa44a59030A3da41386f1071b","network":"polygon","timestamp":"2022-11-09T10:09:43.451Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_RESTRICTED=0x921DA13645cEc832A73F764ecB483bA1fD2dfB73","network":"polygon","timestamp":"2022-11-09T10:09:50.568Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_METHODS=0xa66b41FA001a3E09aaaE6Ba816fD54749844E09D","network":"polygon","timestamp":"2022-11-09T10:09:57.762Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_ZEROCOST=0xaefdb25be7aa860B0324901f2FbE5a82e4445FF6","network":"polygon","timestamp":"2022-11-09T10:10:04.975Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP=0x6B83998ebAB73Dd35B0D604C16ddB422d56393B9","network":"polygon","timestamp":"2022-11-09T10:10:11.734Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_RESTRICTED=0xF828aB796087fC6D7e8C0143B61B6A2C3f02c465","network":"polygon","timestamp":"2022-11-09T10:10:19.218Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-09T10:19:37.797Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-09T10:32:13.520Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0x9B4B7871A72A34b7f6b58C9a189cBb4b09e1bf89","network":"polygon","timestamp":"2022-11-09T10:43:06.112Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0xCf249600FA4f2048d550183D56c10D825D788080","network":"polygon","timestamp":"2022-11-09T10:43:13.026Z"}
+{"level":"info","message":"[DIIMIIM] export HOUND_POTIONS=0xf91B1Dcf4E64a05e1510de5F2bc074f7Bf3dF19E","network":"polygon","timestamp":"2022-11-09T10:43:19.828Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_RESTRICTED=0x26097E30aFC27deFF9B5AB81f77820E4c89D154e","network":"polygon","timestamp":"2022-11-09T10:43:27.098Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_METHODS=0x668BbBa6659154A202078eA9d0F459eF5215722A","network":"polygon","timestamp":"2022-11-09T10:45:27.010Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_ZEROCOST=0xFFf4a4BB48f71D8561e0DcB49bCdBDf746fc8dBB","network":"polygon","timestamp":"2022-11-09T10:45:38.475Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP=0x85130FdFc7Dd9E9cDa0baE2547965d6b1036ED85","network":"polygon","timestamp":"2022-11-09T10:45:45.542Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_RESTRICTED=0x32Fb54DeFD51C147B038B9b09C3c5dBBa7482911","network":"polygon","timestamp":"2022-11-09T10:45:52.609Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_METHODS=0x562587d70383c38475A74072Ea485867B3682227","network":"polygon","timestamp":"2022-11-09T10:46:32.137Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS=0xe97D334898f43e2733c81095b7b4A7832D78A785","network":"polygon","timestamp":"2022-11-09T10:46:39.103Z"}
+{"level":"info","message":"[DIIMIIM] export GENETICS=0x26Bc6528Ef456C8c2A41839afAc1EC0E9fca9A01","network":"polygon","timestamp":"2022-11-09T10:53:43.240Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_RESTRICTED=0x84B677026F4E4d82c6587a6b4aacE86b419A12d1","network":"polygon","timestamp":"2022-11-09T10:53:51.228Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_ZEROCOST=0xBF98c18582409F53512C72b43BD6da47Abe5e463","network":"polygon","timestamp":"2022-11-09T10:53:58.907Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MODIFIER=0x6abb786cAC5D4484Eba92C94F8B8b9747Ff2122A","network":"polygon","timestamp":"2022-11-09T10:54:26.635Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MINTER=0x96ae54A232F0a165658a08643eB3ed5eAa2E5030","network":"polygon","timestamp":"2022-11-09T10:54:34.140Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS=0xbe0e21eb3E510339Fc0027429734e07EE9c13608","network":"polygon","timestamp":"2022-11-09T10:54:41.301Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_RESTRICTED=0x8a2b4B26E998d23E016b6740A77d0A1b314f34DE","network":"polygon","timestamp":"2022-11-09T10:54:48.739Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_METHODS=0x878eb9e6728260cB2d32FD55da622C7618508584","network":"polygon","timestamp":"2022-11-09T10:54:55.640Z"}
+{"level":"info","message":"[DIIMIIM] export RACE=0x7a13505cF7dB2E25A6e66F35F272916fD0958B45","network":"polygon","timestamp":"2022-11-09T10:55:18.782Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_METHODS=0x51D029b5C48C9Af8AA16BfEbB4490D7325b5423a","network":"polygon","timestamp":"2022-11-09T10:57:46.312Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_RESTRICTED=0xEcBB259FBbe9b5c4f5f6f462229BD8649bF8b001","network":"polygon","timestamp":"2022-11-09T10:58:01.389Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x5810dE9EF2D5CA93cEc33554C5a43cd29E717806","network":"polygon","timestamp":"2022-11-09T10:58:56.784Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES=0xA46891EB214fB12a46AC9Bd45A0FB65D556c804f","network":"polygon","timestamp":"2022-11-09T11:03:04.698Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xa7e4E5cffFF583f69c7e459c7D34B059A956104D","network":"polygon","timestamp":"2022-11-09T11:03:27.760Z"}
