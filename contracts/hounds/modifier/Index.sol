@@ -123,6 +123,8 @@ contract HoundsModifier is Params {
             stamina.staminaValue = control.stamina.staminaCap;
         }
 
+        hounds[houndId].stamina.staminaValue = stamina.staminaValue;
+
         emit HoundStaminaUpdate(
             houndId, 
             stamina.staminaValue
