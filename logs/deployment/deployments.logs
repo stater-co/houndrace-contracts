@@ -559,3 +559,4 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES=0xA46891EB214fB12a46AC9Bd45A0FB65D556c804f","network":"polygon","timestamp":"2022-11-09T11:03:04.698Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xa7e4E5cffFF583f69c7e459c7D34B059A956104D","network":"polygon","timestamp":"2022-11-09T11:03:27.760Z"}
 {"level":"info","message":"[DIIMIIM] export HOUNDS_ZEROCOST=0x0172B54F35cd642F10b9044E689238B50373CB1E","network":"polygon","timestamp":"2022-11-09T11:03:27.760Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x9A791d5f7338D920f39835620f37383650a14A7F","network":"polygon","timestamp":"2022-11-10T14:16:56.208Z"}

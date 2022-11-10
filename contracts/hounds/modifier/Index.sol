@@ -13,6 +13,7 @@ contract HoundsModifier is Params {
     ) external whitelisted {
 
         hounds[houndId].stamina.staminaValue -= amount;
+        console.log("Stamina now: ", hounds[houndId].stamina.staminaValue);
         refreshStamina(houndId, hounds[houndId].stamina);
     }
 
@@ -118,12 +119,15 @@ contract HoundsModifier is Params {
         Hound.Stamina memory stamina
     ) internal {
         stamina.staminaValue += uint32( ( block.timestamp - stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        console.log("Stamina now: ", stamina.staminaValue);
         stamina.staminaLastUpdate = block.timestamp;
         if ( stamina.staminaValue > control.stamina.staminaCap ) {
             stamina.staminaValue = control.stamina.staminaCap;
         }
 
+        console.log("Stamina now: ", stamina.staminaValue);
         hounds[houndId].stamina.staminaValue = stamina.staminaValue;
+        console.log("Stamina now: ", hounds[houndId].stamina.staminaValue);
 
         emit HoundStaminaUpdate(
             houndId, 

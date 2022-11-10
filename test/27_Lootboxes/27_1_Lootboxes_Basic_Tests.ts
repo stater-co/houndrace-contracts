@@ -8,7 +8,7 @@ async function basicTest(
   dependencies: LootboxesBasicTests
 ): Promise<void> {
   return new Promise((resolve, ) => {
-    describe('Lootboxes Basic Tests', async function () {
+    describe('HoundraceMysteryBoxes Basic Tests', async function () {
 
       const totalLootboxesToCreate: number = 20;
       const tokenId: number = 1;
@@ -18,7 +18,7 @@ async function basicTest(
         let houndsBalanceBefore = await dependencies.lootboxesContract.balanceOf(signer.address, tokenId);
         await dependencies.lootboxesContract.connect(signer).mint(totalLootboxesToCreate, tokenId, "token_uri");
         let houndsBalanceAfter = await dependencies.lootboxesContract.balanceOf(signer.address, tokenId);
-        expecting(Number(houndsBalanceBefore) < Number(houndsBalanceAfter), "Lootboxes creation bugged");
+        expecting(Number(houndsBalanceBefore) < Number(houndsBalanceAfter), "HoundraceMysteryBoxes creation bugged");
       });
 
       it("Set open status to true", async function () {

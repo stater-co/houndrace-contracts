@@ -4,7 +4,7 @@ import { network } from 'hardhat';
 import { Queue } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
 import { Payment, Race } from '../typechain-types/Races';
-import { Box } from '../typechain-types/Lootboxes';
+import { Box } from '../typechain-types/HoundraceMysteryBoxes';
 import { Discount } from '../typechain-types/Shop';
 
 const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
@@ -75,7 +75,7 @@ const staminaConstructor: Hound.ConstructorStaminaStruct = {
 };
 
 const houndStamina: Hound.StaminaStruct = {
-    staminaLastUpdate: 0,
+    staminaLastUpdate: Number((Date.now() / 1000).toFixed(0)),
     staminaValue: 100,
 };
 

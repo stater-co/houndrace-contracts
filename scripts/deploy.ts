@@ -2,7 +2,7 @@ import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../plugins/test/deployContract';
-import { Lootboxes, LootboxesConstructor } from '../typechain-types/Lootboxes';
+import { HoundraceMysteryBoxes, LootboxesConstructor } from '../typechain-types/HoundraceMysteryBoxes';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
 import { HoundPotions } from '../typechain-types/HoundPotions';
@@ -417,10 +417,10 @@ async function main() {
       canBeOpened: true
     }
     const lootboxes = await deployContract({
-      name: 'Lootboxes',
+      name: 'HoundraceMysteryBoxes',
       constructor: [arrayfy(lootboxesConstructor)],
       props: {}
-    }) as Lootboxes;
+    }) as HoundraceMysteryBoxes;
     DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
     deployments.update(1, {
       step: "Deploy sortings"

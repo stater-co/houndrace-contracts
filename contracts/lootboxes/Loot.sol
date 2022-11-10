@@ -8,7 +8,7 @@ import '../whitelist/Index.sol';
 import './params/Constructor.sol';
 import './params/Box.sol';
 
-contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
+contract HoundraceMysteryBoxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
 
     LootboxesConstructor.Struct public control;
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
