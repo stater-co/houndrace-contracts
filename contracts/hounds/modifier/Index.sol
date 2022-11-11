@@ -12,9 +12,11 @@ contract HoundsModifier is Params {
         uint32 amount
     ) external whitelisted {
 
+        uint32 replenishableStaminaPoints = uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        uint32 possibleToReplenish = uint32( control.stamina.staminaCap - hounds[houndId].stamina.staminaValue );
         hounds[houndId].stamina.staminaValue -= amount;
 
-        hounds[houndId].stamina.staminaValue += uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        hounds[houndId].stamina.staminaValue += possibleToReplenish > replenishableStaminaPoints ? replenishableStaminaPoints : possibleToReplenish;
         hounds[houndId].stamina.staminaLastUpdate = block.timestamp;
         
         if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
@@ -49,31 +51,40 @@ contract HoundsModifier is Params {
         nonReentrant 
     {
         require(houndId < id);
-        uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
 
-        Hound.Stamina memory stamina = hounds[houndId].stamina;
-        require(stamina.staminaValue < control.stamina.staminaCap);
-        uint256 staminaRefill1x = control.stamina.staminaRefill1x - ((control.stamina.staminaRefill1x / 100) * discount);
-
-        uint256[] memory amounts = new uint256[](1);
-        amounts[0] = control.stamina.staminaRefillCurrency == address(0) ? msg.value : payed;
-        IPay(control.boilerplate.payments).pay{
-            value: control.stamina.staminaRefillCurrency == address(0) ? amounts[0] : 0
-        }(
-            msg.sender,
-            control.boilerplate.payments,
-            control.stamina.staminaRefillCurrency,
-            new uint256[](0),
-            amounts,
-            control.stamina.staminaRefillCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-        );
-        
-        hounds[houndId].stamina.staminaValue += uint32(amounts[0] / staminaRefill1x);
         hounds[houndId].stamina.staminaValue += uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
         hounds[houndId].stamina.staminaLastUpdate = block.timestamp;
 
         if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
             hounds[houndId].stamina.staminaValue = control.stamina.staminaCap;
+        }
+
+        if ( hounds[houndId].stamina.staminaValue < control.stamina.staminaCap ) {
+
+            uint256 discount = ICalculateDiscount(control.boilerplate.shop).calculateDiscount(user);
+
+            uint256 staminaRefill1x = control.stamina.staminaRefill1x - ((control.stamina.staminaRefill1x / 100) * discount);
+
+            uint256[] memory amounts = new uint256[](1);
+            amounts[0] = control.stamina.staminaRefillCurrency == address(0) ? msg.value : payed;
+
+            IPay(control.boilerplate.payments).pay{
+                value: control.stamina.staminaRefillCurrency == address(0) ? amounts[0] : 0
+            }(
+                msg.sender,
+                control.boilerplate.payments,
+                control.stamina.staminaRefillCurrency,
+                new uint256[](0),
+                amounts,
+                control.stamina.staminaRefillCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            );
+            
+            hounds[houndId].stamina.staminaValue += uint32(amounts[0] / staminaRefill1x);
+
+            if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
+                hounds[houndId].stamina.staminaValue = control.stamina.staminaCap;
+            }
+
         }
 
         emit HoundStaminaUpdate(
