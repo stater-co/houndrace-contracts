@@ -13,8 +13,19 @@ contract HoundsModifier is Params {
     ) external whitelisted {
 
         hounds[houndId].stamina.staminaValue -= amount;
-        console.log("Stamina now: ", hounds[houndId].stamina.staminaValue);
-        refreshStamina(houndId, hounds[houndId].stamina);
+
+        hounds[houndId].stamina.staminaValue += uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        hounds[houndId].stamina.staminaLastUpdate = block.timestamp;
+        
+        if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
+            hounds[houndId].stamina.staminaValue = control.stamina.staminaCap;
+        }
+
+        emit HoundStaminaUpdate(
+            houndId, 
+            hounds[houndId].stamina.staminaValue
+        );
+
     }
 
     function updateHoundRunning(
@@ -56,10 +67,20 @@ contract HoundsModifier is Params {
             amounts,
             control.stamina.staminaRefillCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
-
         
         hounds[houndId].stamina.staminaValue += uint32(amounts[0] / staminaRefill1x);
-        refreshStamina(houndId, hounds[houndId].stamina);
+        hounds[houndId].stamina.staminaValue += uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        hounds[houndId].stamina.staminaLastUpdate = block.timestamp;
+
+        if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
+            hounds[houndId].stamina.staminaValue = control.stamina.staminaCap;
+        }
+
+        emit HoundStaminaUpdate(
+            houndId, 
+            hounds[houndId].stamina.staminaValue
+        );
+
     }
 
     function boostHoundBreeding(
@@ -118,21 +139,8 @@ contract HoundsModifier is Params {
         uint256 houndId, 
         Hound.Stamina memory stamina
     ) internal {
-        stamina.staminaValue += uint32( ( block.timestamp - stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
-        console.log("Stamina now: ", stamina.staminaValue);
-        stamina.staminaLastUpdate = block.timestamp;
-        if ( stamina.staminaValue > control.stamina.staminaCap ) {
-            stamina.staminaValue = control.stamina.staminaCap;
-        }
-
-        console.log("Stamina now: ", stamina.staminaValue);
-        hounds[houndId].stamina.staminaValue = stamina.staminaValue;
-        console.log("Stamina now: ", hounds[houndId].stamina.staminaValue);
-
-        emit HoundStaminaUpdate(
-            houndId, 
-            stamina.staminaValue
-        );
+        // no longer used
+        // kept here to preserve the bytecode integrity of the contract on delegatecall
     }
 
     function requestHoundRename(

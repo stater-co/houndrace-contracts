@@ -12,7 +12,6 @@ import '../../whitelist/Index.sol';
 import '../interfaces/IGetBreedCosts.sol';
 import './Constructor.sol';
 import './Hound.sol';
-import 'hardhat/console.sol';
 
 
 contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
