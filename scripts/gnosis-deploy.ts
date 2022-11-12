@@ -1,9 +1,8 @@
+import hre from 'hardhat'
 import DeploymentLogger from '../logs/deployment/printers/deployment';
 import DeploymentError from '../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
-import { deployContract } from '../plugins/test/deployContract';
 import { HoundraceMysteryBoxes, LootboxesConstructor } from '../typechain-types/HoundraceMysteryBoxes';
-import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
 import { Payments, PaymentsConstructor } from '../typechain-types/Payments';
 import { HoundPotions } from '../typechain-types/HoundPotions';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
@@ -27,6 +26,10 @@ import { Queues, QueuesConstructor } from '../typechain-types/Queues';
 import { Genetics, GeneticsConstructor } from '../typechain-types/Genetics';
 import { globalParams } from '../common/params';
 import { ShopZerocost } from '../typechain-types/ShopZerocost';
+import { PaymentsMethods__factory } from '../typechain-types/factories/PaymentsMethods__factory';
+import { ethers } from "ethers";
+import { Transaction } from 'ethereumjs-tx'
+const Web3 = require('web3');
 
 
 const cliProgress = require('cli-progress');
@@ -74,38 +77,55 @@ async function main() {
       targets: []
     };
 
-    const paymentsMethods = await deployContract({
+    //let factory = new ethers.ContractFactory(PaymentsMethods__factory.abi, PaymentsMethods__factory.bytecode);
+    const web3 = new Web3(String(process.env.POLYGON_URL));
+    const contract = new web3.eth.Contract(PaymentsMethods__factory.abi);
+    const contractTx = contract.deploy({
+      data: PaymentsMethods__factory.bytecode,
+      arguments: [[[],globalParams.address0,[]]]
+   });
+   const encodedTxAbi = contractTx.encodeABI();
+
+   const tx: Transaction = new Transaction({
+    data: encodedTxAbi
+   });
+   tx.sign(Buffer.from(String(process.env.ETH_ACCOUNT_PRIVATE_KEY), 'hex'));
+   console.log(tx.serialize().toString('hex'));
+   
+   /*
+   const createTransaction = await web3.eth.signTransaction({
+    from: '0x37914a72dae18E8e4b43AE9C131Cd4Cc29bbF220', 
+    data: encodedTxAbi 
+   });
+   */
+   //console.log(encodedTxAbi);
+
+    /*
+    const paymentsMethods: ethers.ContractFactory = await encodedContract({
       name: 'PaymentsMethods',
       constructor: [arrayfy(paymentsConstructor)],
       props: {}
-    }) as PaymentsMethods;
-    DeploymentLogger('export PAYMENTS_METHODS=' + paymentsMethods.address);
-    deployments.update(5, {
-      step: "Deploy hound potions"
     });
+    */
+    //console.log(factory.bytecode);
 
-    const payments = await deployContract({
+    /*
+    const payments = await encodedContract({
       name: 'Payments',
       constructor: [arrayfy(paymentsConstructor)],
       props: {}
-    }) as Payments;
-    DeploymentLogger('export PAYMENTS=' + payments.address);
-    deployments.update(5, {
-      step: "Deploy houndrace potions"
     });
+
 
     const houndPotionsConstructor: Array<string> = [
       "Hound Potions", "HPO", "500000000000000000000000000"
     ];
-    const houndPotions = await deployContract({
+    const houndPotions = await encodedContract({
       name: 'HoundPotions',
       constructor: houndPotionsConstructor,
       props: {}
-    }) as HoundPotions;
-    DeploymentLogger('export HOUND_POTIONS=' + houndPotions.address);
-    deployments.update(6, {
-      step: "Deploy shop restricted"
     });
+
 
     const shopConstructor: ShopConstructor.StructStruct = {
       operators: [],
@@ -116,45 +136,33 @@ async function main() {
       discountsReceiverWallet: globalParams.address0,
       targets: []
     };
-    const shopRestricted = await deployContract({
+    const shopRestricted = await encodedContract({
       name: 'ShopRestricted',
       constructor: [arrayfy(shopConstructor)],
       props: {}
-    }) as ShopRestricted;
-    DeploymentLogger('export SHOP_RESTRICTED=' + shopRestricted.address);
-    deployments.update(7, {
-      step: "Deploy shop methods"
     });
 
-    const shopMethods = await deployContract({
+
+    const shopMethods = await encodedContract({
       name: 'ShopMethods',
       constructor: [arrayfy(shopConstructor)],
       props: {}
-    }) as ShopMethods;
-    DeploymentLogger('export SHOP_METHODS=' + shopMethods.address);
-    deployments.update(8, {
-      step: "Deploy shop"
     });
 
-    const shopZerocost = await deployContract({
+
+    const shopZerocost = await encodedContract({
       name: 'ShopZerocost',
       constructor: [arrayfy(shopConstructor)],
       props: {}
-    }) as ShopZerocost;
-    DeploymentLogger('export SHOP_ZEROCOST=' + shopZerocost.address);
-    deployments.update(8, {
-      step: "Deploy shop"
     });
 
-    const shop = await deployContract({
+
+    const shop = await encodedContract({
       name: 'Shop',
       constructor: [arrayfy(shopConstructor)],
       props: {}
-    }) as Shop;
-    DeploymentLogger('export SHOP=' + shop.address);
-    deployments.update(9, {
-      step: "Deploy arenas restricted"
     });
+
 
     const arenasConstructor: ArenasConstructor.StructStruct = {
       name: "Houndrace Arenas",
@@ -167,35 +175,26 @@ async function main() {
       targets: [],
       alphadunePercentage: 60
     };
-    const arenasRestricted = await deployContract({
+    const arenasRestricted = await encodedContract({
       name: 'ArenasRestricted',
       constructor: [arrayfy(arenasConstructor)],
       props: {}
-    }) as ArenasRestricted;
-    DeploymentLogger('export ARENAS_RESTRICTED=' + arenasRestricted.address);
-    deployments.update(10, {
-      step: "Deploy arenas"
     });
 
-    const arenasMethods = await deployContract({
+
+    const arenasMethods = await encodedContract({
       name: 'ArenasMethods',
       constructor: [arrayfy(arenasConstructor)],
       props: {}
-    }) as ArenasMethods;
-    DeploymentLogger('export ARENAS_METHODS=' + arenasMethods.address);
-    deployments.update(10, {
-      step: "Deploy arenas"
     });
 
-    const arenas = await deployContract({
+
+    const arenas = await encodedContract({
       name: 'Arenas',
       constructor: [arrayfy(arenasConstructor)],
       props: {}
-    }) as Arenas;
-    DeploymentLogger('export ARENAS=' + arenas.address);
-    deployments.update(11, {
-      step: "Deploy genetics"
     });
+
 
     const geneticsConstructor: GeneticsConstructor.StructStruct = {
       maleGenesProbability: 60,
@@ -203,15 +202,12 @@ async function main() {
       geneticSequenceSignature: [2,6,10,14,18,22,26,30,34,38,48,58,68],
       maxValues: [0,2,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9]
     };
-    const genetics = await deployContract({
+    const genetics = await encodedContract({
       name: 'Genetics',
       constructor: [arrayfy(geneticsConstructor)],
       props: {}
-    }) as Genetics;
-    DeploymentLogger('export GENETICS=' + genetics.address);
-    deployments.update(12, {
-      step: "Deploy incubator methods"
     });
+
 
     const houndsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
       houndsInitializer: globalParams.address0,
@@ -245,7 +241,7 @@ async function main() {
       boilerplate: houndsConstructorBoilerplate,
       fees: houndsConstructorFees
     }
-    const houndsRestricted = await deployContract({
+    const houndsRestricted = await encodedContract({
       name: 'HoundsRestricted',
       constructor: [arrayfy({
         ...houndsConstructor,
@@ -253,13 +249,10 @@ async function main() {
         fees: arrayfy(houndsConstructorFees)
       })],
       props: {}
-    }) as HoundsRestricted;
-    DeploymentLogger('export HOUNDS_RESTRICTED=' + houndsRestricted.address);
-    deployments.update(15, {
-      step: "Deploy hounds modifier"
     });
 
-    const houndsZerocost = await deployContract({
+
+    const houndsZerocost = await encodedContract({
       name: 'HoundsZerocost',
       constructor: [arrayfy({
         ...houndsConstructor,
@@ -267,13 +260,10 @@ async function main() {
         fees: arrayfy(houndsConstructorFees)
       })],
       props: {}
-    }) as HoundsZerocost;
-    DeploymentLogger('export HOUNDS_ZEROCOST=' + houndsZerocost.address);
-    deployments.update(16, {
-      step: "Deploy hounds minter"
     });
 
-    const houndsModifier = await deployContract({
+
+    const houndsModifier = await encodedContract({
       name: 'HoundsModifier',
       constructor: [arrayfy({
         ...houndsConstructor,
@@ -281,13 +271,10 @@ async function main() {
         fees: arrayfy(houndsConstructorFees)
       })],
       props: {}
-    }) as HoundsModifier;
-    DeploymentLogger('export HOUNDS_MODIFIER=' + houndsModifier.address);
-    deployments.update(16, {
-      step: "Deploy hounds minter"
     });
 
-    const houndsMinter = await deployContract({
+
+    const houndsMinter = await encodedContract({
       name: 'HoundsMinter',
       constructor: [arrayfy({
         ...houndsConstructor,
@@ -295,13 +282,10 @@ async function main() {
         fees: arrayfy(houndsConstructorFees)
       })],
       props: {}
-    }) as HoundsMinter;
-    DeploymentLogger('export HOUNDS_MINTER=' + houndsMinter.address);
-    deployments.update(17, {
-      step: "Deploy hounds"
     });
 
-    const hounds = await deployContract({
+
+    const hounds = await encodedContract({
       name: 'Hounds',
       constructor: [arrayfy({
         ...houndsConstructor,
@@ -309,11 +293,8 @@ async function main() {
         fees: arrayfy(houndsConstructorFees)
       })],
       props: {}
-    }) as Hounds;
-    DeploymentLogger('export HOUNDS=' + hounds.address);
-    deployments.update(18, {
-      step: "Deploy races restricted"
     });
+
 
     const racesConstructor: RacesConstructor.StructStruct = {
       operators: [],
@@ -326,32 +307,26 @@ async function main() {
       races: globalParams.address0,
       targets: []
     }
-    const racesRestricted = await deployContract({
+    const racesRestricted = await encodedContract({
       name: 'RacesRestricted',
       constructor: [arrayfy(racesConstructor)],
       props: {}
-    }) as RacesRestricted;
-    DeploymentLogger('export RACE_RESTRICTED=' + racesRestricted.address);
-    deployments.update(19, {
-      step: "Deploy races methods"
     });
 
-    const racesMethods = await deployContract({
+
+    const racesMethods = await encodedContract({
       name: 'RacesMethods',
       constructor: [arrayfy(racesConstructor)],
       props: {}
-    }) as RacesMethods;
-    DeploymentLogger('export RACE_METHODS=' + racesMethods.address);
-    deployments.update(20, {
-      step: "Deploy races"
     });
 
-    const races = await deployContract({
+
+    const races = await encodedContract({
       name: 'Races',
       constructor: [arrayfy(racesConstructor)],
       props: {}
-    }) as Races;
-    DeploymentLogger('export RACE=' + races.address);
+    });
+
 
     deployments.update(21, {
       step: "Deploy generator methods"
@@ -370,45 +345,33 @@ async function main() {
       raceUploader: globalParams.address0,
       targets: []      
     }
-    const queuesMethods = await deployContract({
+    const queuesMethods = await encodedContract({
       name: 'QueuesMethods',
       constructor: [arrayfy(queuesConstructor)],
       props: {}
-    }) as QueuesMethods;
-    DeploymentLogger('export QUEUES_METHODS=' + queuesMethods.address);
-    deployments.update(25, {
-      step: "Deploy queues restricted"
     });
 
-    const queuesRestricted = await deployContract({
+
+    const queuesRestricted = await encodedContract({
       name: 'QueuesRestricted',
       constructor: [arrayfy(queuesConstructor)],
       props: {}
-    }) as QueuesRestricted;
-    DeploymentLogger('export QUEUES_RESTRICTED=' + queuesRestricted.address);
-    deployments.update(26, {
-      step: "Deploy queues"
     });
 
-    const queuesZerocost = await deployContract({
+
+    const queuesZerocost = await encodedContract({
       name: 'QueuesZerocost',
       constructor: [arrayfy(queuesConstructor)],
       props: {}
-    }) as QueuesZerocost;
-    DeploymentLogger('export QUEUES_ZEROCOST=' + queuesZerocost.address);
-    deployments.update(26, {
-      step: "Deploy queues"
     });
 
-    const queues = await deployContract({
+
+    const queues = await encodedContract({
       name: 'Queues',
       constructor: [arrayfy(queuesConstructor)],
       props: {}
-    }) as Queues;
-    DeploymentLogger('export QUEUES=' + queues.address);
-    deployments.update(27, {
-      step: "Finished!"
     });
+
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "Houndrace Mystery Boxes",
@@ -416,22 +379,18 @@ async function main() {
       targets: [],
       canBeOpened: true
     }
-    const lootboxes = await deployContract({
+    const lootboxes = await encodedContract({
       name: 'HoundraceMysteryBoxes',
       constructor: [arrayfy(lootboxesConstructor)],
       props: {}
-    }) as HoundraceMysteryBoxes;
-    DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
-    deployments.update(1, {
-      step: "Deploy sortings"
     });
+    */
 
 
 
 
 
-
-
+    /*
     const newPaymentsConstructor: PaymentsConstructor.StructStruct = {
       operators: [hounds.address, queues.address, arenas.address, races.address],
       methods: paymentsMethods.address,
@@ -1064,6 +1023,7 @@ async function main() {
       }
 
     }
+    */
 
   } catch(err) {
     console.error(err);

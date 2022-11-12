@@ -1,35 +1,43 @@
 import DeploymentError from '../../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../../plugins/test/deployContract';
-import { HoundPotions } from '../../typechain-types/HoundPotions';
+import { Deployer } from '../../typechain-types/Deployer';
 
 
 async function main() {
 
   try {
 
-    const houndracePotionsConstructor: Array<string> = [
-      "Hound Potions", "HPO", "500000000000000000000000000"
-    ];
-    const houndracePotions = await deployContract({
-      name: 'HoundPotions',
-      constructor: houndracePotionsConstructor,
+    /*
+    const gnosisDeployer = await deployContract({
+      name: 'Deployer',
+      constructor: [],
       props: {}
-    }) as HoundPotions;
-
-
+    }) as Deployer;
+    */
 
     if ( network.name !== "hardhat" ) {
 
+      /*
       try {
         await run("verify:verify", {
-          address: houndracePotions.address,
-          constructorArguments: houndracePotionsConstructor
+          address: gnosisDeployer.address,
+          constructorArguments: []
         });
       } catch (err) {
         DeploymentError((err as NodeJS.ErrnoException).message);
       }
-
+      */
+      
+      try {
+        await run("verify:verify", {
+          address: "0xE81F39c31053d10bd45AE2B59308a771F207D683",
+          constructorArguments: [8]
+        });
+      } catch (err) {
+        DeploymentError((err as NodeJS.ErrnoException).message);
+      }
+      
     }
 
   } catch(err) {
