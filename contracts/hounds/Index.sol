@@ -51,14 +51,39 @@ contract Hounds is Params {
         require(success);
     }
 
-    function updateHoundRunning(uint256 houndId, uint256 runningOn) external returns(uint256 ranOn) {
+    function updateHoundRunning(
+        uint256 houndId, 
+        uint256 runningOn
+    ) 
+        external 
+        returns(
+            uint256 ranOn
+        ) 
+    {
         (bool success, bytes memory output) = control.boilerplate.houndsModifier.delegatecall(msg.data);
         require(success);
         ranOn = abi.decode(output,(uint256)); 
     }
 
-    function getBreedCosts(uint256 hound) public view returns(MicroPayment.Struct memory, MicroPayment.Struct memory, MicroPayment.Struct memory) {
+    function getBreedCosts(
+        uint256 hound
+    ) 
+        public 
+        view 
+        returns(
+            MicroPayment.Struct memory, 
+            MicroPayment.Struct memory, 
+            MicroPayment.Struct memory
+        ) 
+    {
         return IGetBreedCosts(control.boilerplate.zerocost).getBreedCosts(hound);
+    }
+
+    function refreshStamina(
+        uint256 houndId
+    ) external {
+        (bool success, ) = control.boilerplate.houndsModifier.delegatecall(msg.data);
+        require(success);
     }
 
     function requestHoundRename(

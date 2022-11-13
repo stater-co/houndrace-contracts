@@ -147,11 +147,18 @@ contract HoundsModifier is Params {
     }
 
     function refreshStamina(
-        uint256 houndId, 
-        Hound.Stamina memory stamina
-    ) internal {
-        // no longer used
-        // kept here to preserve the bytecode integrity of the contract on delegatecall
+        uint256 houndId
+    ) external {
+        hounds[houndId].stamina.staminaValue += uint32( ( block.timestamp - hounds[houndId].stamina.staminaLastUpdate ) / control.stamina.staminaPerTimeUnit );
+        hounds[houndId].stamina.staminaLastUpdate = block.timestamp;
+        if ( hounds[houndId].stamina.staminaValue > control.stamina.staminaCap ) {
+            hounds[houndId].stamina.staminaValue = control.stamina.staminaCap;
+        }
+
+        emit HoundStaminaUpdate(
+            houndId, 
+            hounds[houndId].stamina.staminaValue
+        );
     }
 
     function requestHoundRename(

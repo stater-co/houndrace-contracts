@@ -288,6 +288,7 @@ export interface HoundsModifierInterface extends utils.Interface {
     "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "putHoundForBreed(uint256,uint256,bool)": FunctionFragment;
+    "refreshStamina(uint256)": FunctionFragment;
     "renamingProposals(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "requestHoundRename(uint256,string)": FunctionFragment;
@@ -354,6 +355,10 @@ export interface HoundsModifierInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "putHoundForBreed",
     values: [BigNumberish, BigNumberish, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "refreshStamina",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "renamingProposals",
@@ -449,6 +454,10 @@ export interface HoundsModifierInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "putHoundForBreed",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "refreshStamina",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -755,6 +764,11 @@ export interface HoundsModifier extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    refreshStamina(
+      houndId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     renamingProposals(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -954,6 +968,11 @@ export interface HoundsModifier extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  refreshStamina(
+    houndId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   renamingProposals(
     arg0: BigNumberish,
     overrides?: CallOverrides
@@ -1150,6 +1169,11 @@ export interface HoundsModifier extends BaseContract {
       houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    refreshStamina(
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1436,6 +1460,11 @@ export interface HoundsModifier extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    refreshStamina(
+      houndId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     renamingProposals(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -1604,6 +1633,11 @@ export interface HoundsModifier extends BaseContract {
       houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    refreshStamina(
+      houndId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

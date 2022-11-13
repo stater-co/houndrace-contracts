@@ -38,6 +38,7 @@ contract QueuesMethods is Params {
 
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, 0) == queueId);
+        IRefreshStamina(control.hounds).refreshStamina(hound);
 
         
         ( , , MicroPayment.Struct memory raceEntryTicket) = IGetEnqueueCost(control.zerocost).getEnqueueCost(queueId);
@@ -140,6 +141,7 @@ contract QueuesMethods is Params {
             arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
+        IRefreshStamina(control.hounds).refreshStamina(hound);
 
         if ( queues[queueId].core.participants.length == queues[queueId].totalParticipants ) {
 

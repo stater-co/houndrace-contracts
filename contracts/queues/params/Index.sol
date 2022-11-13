@@ -13,6 +13,7 @@ import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';
 import '../../hounds/interfaces/IHound.sol';
+import '../../hounds/interfaces/IRefreshStamina.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../whitelist/Index.sol';
 import '../../hounds/params/Hound.sol';
