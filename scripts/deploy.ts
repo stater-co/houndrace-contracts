@@ -439,12 +439,12 @@ async function main() {
     }
   
     const newShopConstructor: ShopConstructor.StructStruct = {
-      operators: [hounds.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      operators: [hounds.address, String(process.env.WHITELISTED_WALLET)],
       methods: shopMethods.address,
       zerocost: shopZerocost.address,
       discounts: shop.address,
       restricted: shopRestricted.address,
-      discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      discountsReceiverWallet: String(process.env.WHITELISTED_WALLET),
       targets: [['0xad6a8745'],['0x7c5ff21f','0xd4b1d756']]
     }
 
@@ -454,8 +454,8 @@ async function main() {
       restricted: arenasRestricted.address,
       methods: arenasMethods.address,
       payments: payments.address,
-      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY),races.address],
+      alphadune: String(process.env.WHITELISTED_WALLET),
+      operators: [String(process.env.WHITELISTED_WALLET),races.address],
       targets: [['0xc5eab450', '0x2a6379c3'], ['0x11a34393']],
       alphadunePercentage: 60
     }
@@ -477,7 +477,7 @@ async function main() {
     };
 
     const newHoundsConstructorBoilerplate: ConstructorBoilerplate.StructStruct = {
-      houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      houndsInitializer: String(process.env.WHITELISTED_WALLET),
       payments: payments.address,
       restricted: houndsRestricted.address,
       minter: houndsMinter.address,
@@ -487,7 +487,7 @@ async function main() {
       hounds: hounds.address,
       races: races.address,
       genetics: genetics.address,
-      houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
+      houndsRenameHandler: String(process.env.WHITELISTED_WALLET)
     };
 
     const newHoundsConstructor: HoundsConstructor.StructStruct = {
@@ -496,14 +496,14 @@ async function main() {
       defaultHound: globalParams.defaultHound,
       breeding: globalParams.breedingConstructor,
       stamina: globalParams.staminaConstructor,
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY), queues.address, races.address],
+      operators: [String(process.env.WHITELISTED_WALLET), queues.address, races.address],
       targets: [['0x1dd2937b','0xfbba82fc','0x5c80b448','0xd7016c7f'],['0x894f39fc'],['0x894f39fc','0xfbba82fc']],
       boilerplate: newHoundsConstructorBoilerplate,
       fees: newHoundsConstructorFees
     }
 
     const newRacesConstructor: RacesConstructor.StructStruct = {
-      operators: [queues.address, String(process.env.ETH_ACCOUNT_PUBLIC_KEY), races.address],
+      operators: [queues.address, String(process.env.WHITELISTED_WALLET), races.address],
       arenas: arenas.address,
       hounds: hounds.address,
       methods: racesMethods.address,
@@ -515,7 +515,7 @@ async function main() {
     }
 
     const newQueuesConstructor: QueuesConstructor.StructStruct = {
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      operators: [String(process.env.WHITELISTED_WALLET)],
       arenas: arenas.address,
       hounds: hounds.address,
       methods: queuesMethods.address,
@@ -524,13 +524,13 @@ async function main() {
       races: races.address,
       queues: queues.address,
       zerocost: queuesZerocost.address,
-      raceUploader: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+      raceUploader: String(process.env.WHITELISTED_WALLET),
       targets: [['0x90c14066', '0x30f9a0f0', '0xe7c4d374', '0x19e3e592', '0x857b29e5']]
     }
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
       name: "Houndrace Mystery Boxes",
-      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      operators: [String(process.env.WHITELISTED_WALLET)],
       targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
       canBeOpened: true
     }
