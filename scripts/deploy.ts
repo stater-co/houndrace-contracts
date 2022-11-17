@@ -95,7 +95,7 @@ async function main() {
     });
 
     const houndPotionsConstructor: Array<string> = [
-      "Hound Potions", "HP", "500000000000000000000000000"
+      "Hound Potions", "HPO", "500000000000000000000000000"
     ];
     const houndPotions = await deployContract({
       name: 'HoundPotions',
