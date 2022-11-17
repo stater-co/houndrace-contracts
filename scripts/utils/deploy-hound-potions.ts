@@ -1,7 +1,7 @@
 import DeploymentError from '../../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../../plugins/test/deployContract';
-import { HoundracePotions } from '../../typechain-types/HoundracePotions';
+import { HoundPotions } from '../../typechain-types/HoundPotions';
 
 
 async function main() {
@@ -9,13 +9,13 @@ async function main() {
   try {
 
     const houndracePotionsConstructor: Array<string> = [
-      "Houndrace Potions", "HP", "500000000"
+      "Hound Potions", "HPO", "500000000000000000000000000"
     ];
     const houndracePotions = await deployContract({
-      name: 'HoundracePotions',
+      name: 'HoundPotions',
       constructor: houndracePotionsConstructor,
       props: {}
-    }) as HoundracePotions;
+    }) as HoundPotions;
 
 
 
