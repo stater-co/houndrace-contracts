@@ -70,7 +70,7 @@ const defaultRace: Race.StructStruct = {
 const staminaConstructor: Hound.ConstructorStaminaStruct = {
     staminaRefillCurrency: address0,
     staminaRefill1x: "500000000000000",
-    staminaPerTimeUnit: 1440,
+    staminaPerTimeUnit: 864,
     staminaCap: 100
 };
 
