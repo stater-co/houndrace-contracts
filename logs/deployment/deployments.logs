@@ -688,3 +688,5 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0xf66adfb775e70F9A8F2609cb8B41Cf622EF90f25","network":"polygon","timestamp":"2022-11-22T14:05:47.478Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0x8E651DF0Ca41c85b2798A4201183AECEa6D2Fee4","network":"polygon","timestamp":"2022-11-22T14:05:55.159Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0xa9bD9D724312f3c905bf0B87e4fC00B91CD609eB","network":"polygon","timestamp":"2022-11-22T14:06:02.537Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"polygon","timestamp":"2022-11-24T13:47:20.798Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_METHODS=0x2A4c777E192Ac439DD03E3641217C61d4f76c06F","network":"polygon","timestamp":"2022-11-24T13:48:24.856Z"}

@@ -95,8 +95,6 @@ contract QueuesMethods is Params {
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, queueId) == 0);
 
-        address arenaCurrency = IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queues[queueId].core.arena);
-
         (
             MicroPayment.Struct memory startRaceTransactionFee, 
             MicroPayment.Struct memory platformAndArenaFee, 
@@ -114,7 +112,7 @@ contract QueuesMethods is Params {
             startRaceTransactionFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            startRaceTransactionFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         amounts[0] = platformAndArenaFee.amount;
@@ -126,7 +124,7 @@ contract QueuesMethods is Params {
             platformAndArenaFee.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            platformAndArenaFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         amounts[0] = raceEntryTicket.amount;
@@ -138,7 +136,7 @@ contract QueuesMethods is Params {
             raceEntryTicket.currency,
             new uint256[](0),
             amounts,
-            arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         IRefreshStamina(control.hounds).refreshStamina(hound);
