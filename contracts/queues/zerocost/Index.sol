@@ -3,8 +3,8 @@ pragma solidity 0.8.17;
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '../params/Constructor.sol';
 import '../../payments/params/MicroPayment.sol';
-import '../../arenas/interfaces/IArenaFee.sol';
-import '../../arenas/interfaces/IArenaCurrency.sol';
+import '../../arenas/interfaces/IPlatformAndArenaFee.sol';
+import '../../arenas/interfaces/IPlatformAndArenaFeeCurrency.sol';
 import '../params/Queue.sol';
 import '../interfaces/IQueue.sol';
 
@@ -17,7 +17,7 @@ contract QueuesZerocost is Ownable {
         control = globalParameters;
     }
 
-    function enqueueCost(uint256 id) external view returns(
+    function getEnqueueCost(uint256 id) external view returns(
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory, 
         MicroPayment.Struct memory
@@ -35,14 +35,14 @@ contract QueuesZerocost is Ownable {
 
             // Arena fee 
             MicroPayment.Struct(
-                IArenaCurrency(control.arenas).arenaCurrency(queue.core.arena),
-                ( IArenaFee(control.arenas).arenaFee(queue.core.arena) / queue.totalParticipants ) + queue.totalParticipants
+                IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queue.core.arena),
+                ( IPlatformAndArenaFee(control.arenas).platformAndArenaFee(queue.core.arena) / queue.totalParticipants ) + queue.totalParticipants
             ),
 
             // Entry fee 
             MicroPayment.Struct(
-                queue.core.entryFeeCurrency,
-                queue.core.entryFee
+                queue.core.raceEntryTicketCurrency,
+                queue.core.raceEntryTicket
             )
 
         );

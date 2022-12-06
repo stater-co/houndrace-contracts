@@ -26,8 +26,9 @@ export declare namespace Arena {
   export type StructStruct = {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumberish;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -38,14 +39,16 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
   ] & {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumber;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -55,7 +58,7 @@ export declare namespace Arena {
 export interface ICreateArenaInterface extends utils.Interface {
   contractName: "ICreateArena";
   functions: {
-    "createArena((string,string,address,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "createArena((string,string,address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
   };
 
   encodeFunctionData(

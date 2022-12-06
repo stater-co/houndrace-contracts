@@ -15,6 +15,8 @@ library Race {
 
         bytes seed;
 
+        Payment.Struct payments;
+
     }
 
 }

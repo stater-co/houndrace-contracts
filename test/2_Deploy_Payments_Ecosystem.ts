@@ -3,17 +3,17 @@ import { globalParams } from '../common/params';
 import { deployContract } from '../plugins/test/deployContract';
 import { ShopRestricted } from '../typechain-types/ShopRestricted';
 import { ShopMethods } from '../typechain-types/ShopMethods';
-import { HoundracePotions } from '../typechain-types/HoundracePotions';
+import { HoundPotions } from '../typechain-types/HoundPotions';
 import { Payments } from '../typechain-types/Payments';
 import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { TestingErc1155 } from '../typechain-types/TestingErc1155';
-import { ShopZerocost } from '../typechain-types/ShopZerocost';
 import { Shop } from '../typechain-types/Shop';
 import { PaymentsMethods } from '../typechain-types/PaymentsMethods';
+import { ShopZerocost } from '../typechain-types/ShopZerocost';
 const { ethers } = require('hardhat');
 
 
-let houndracePotions: HoundracePotions;
+let houndPotions: HoundPotions;
 let payments: Payments;
 let paymentsMethods: PaymentsMethods;
 let testErc721: AlphaERC721;
@@ -28,12 +28,12 @@ export async function run(): Promise<PaymentEcosystem> {
   return new Promise((resolve, ) => {
     describe('Setting up the Payments System', function () {
   
-      it('Deploy the HoundRace Potions contract', async function () {
-        houndracePotions = await deployContract({
-          name: 'HoundracePotions',
-          constructor: ['Ogars', 'OG'],
+      it('Deploy the Houndrace Potions contract', async function () {
+        houndPotions = await deployContract({
+          name: 'HoundPotions',
+          constructor: ['Ogars', 'OG', '500000000000000000000000000'],
           props: {}
-        }) as HoundracePotions;
+        }) as HoundPotions;
       });
 
       it('Deploy the payments methods contract', async function () {
@@ -88,7 +88,17 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shopRestricted = await deployContract({
           name: 'ShopRestricted',
-          constructor: [[[],globalParams.address0,globalParams.address0,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as ShopRestricted;
       });
@@ -97,7 +107,17 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shopMethods = await deployContract({
           name: 'ShopMethods',
-          constructor: [[[],globalParams.address0,shopRestricted.address,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              globalParams.address0,
+              globalParams.address0,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as ShopMethods;
       });
@@ -106,7 +126,17 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shopZerocost = await deployContract({
           name: 'ShopZerocost',
-          constructor: [[[],shopMethods.address,shopRestricted.address,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              shopMethods.address,
+              globalParams.address0,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as ShopZerocost;
       });
@@ -115,12 +145,22 @@ export async function run(): Promise<PaymentEcosystem> {
         const [owner] = await ethers.getSigners();
         shop = await deployContract({
           name: 'Shop',
-          constructor: [[[],shopMethods.address,shopRestricted.address,owner.address,[]]],
+          constructor: [
+            [
+              [],
+              shopMethods.address,
+              shopZerocost.address,
+              globalParams.address0,
+              shopRestricted.address,
+              owner.address,
+              []
+            ]
+          ],
           props: {}
         }) as Shop;
 
         resolve({
-          houndracePotions: houndracePotions,
+          houndPotions: houndPotions,
           payments: payments,
           paymentMethods: paymentsMethods,
           shop: shop,

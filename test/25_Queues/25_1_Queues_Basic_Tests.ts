@@ -26,13 +26,13 @@ async function basicTest(
     });
 
     it("Enqueue", async function() {
-      const [sig] = await ethers.getSigners();
+      const [signer] = await ethers.getSigners();
       await safeJoinQueue({
         contract: dependencies.contract as Queues,
         queueId: createdQueueId,
         houndId: dependencies.houndIdToEnqueue,
         houndsContract: dependencies.houndsContract as Hounds,
-        sender: sig,
+        sender: signer,
         arenasContract: dependencies.arenasContract,
         erc20: dependencies.erc20,
         paymentsContract: dependencies.payments
@@ -42,7 +42,7 @@ async function basicTest(
     it("Enqueue 10x", async function() {
       let totalHounds: number = Number(await dependencies.houndsContract.id());
       let totalEnqueues: number = 0;
-      const [sig] = await ethers.getSigners();
+      const [signer] = await ethers.getSigners();
       for ( let j = 1 ; j < totalHounds ; ++j && totalEnqueues < 10 ) {
         let hound: Hound.StructStructOutput = await dependencies.houndsContract.hound(j);
         if ( Number(hound.profile.runningOn) === 0 ) {
@@ -51,7 +51,7 @@ async function basicTest(
             queueId: createdQueueId,
             houndId: j,
             houndsContract: dependencies.houndsContract as Hounds,
-            sender: sig,
+            sender: signer,
             arenasContract: dependencies.arenasContract,
             erc20: dependencies.erc20,
             paymentsContract: dependencies.payments
@@ -64,13 +64,13 @@ async function basicTest(
     it("Unenqueue", async function() {
       let queue: Queue.StructStructOutput = await dependencies.contract.queue(createdQueueId);
       if ( queue.core.participants.length === 0 ) {
-        const [sig] = await ethers.getSigners();
+        const [signer] = await ethers.getSigners();
         await safeJoinQueue({
           contract: dependencies.contract as Queues,
           queueId: createdQueueId,
           houndId: 1,
           houndsContract: dependencies.houndsContract as Hounds,
-          sender: sig,
+          sender: signer,
           arenasContract: dependencies.arenasContract,
           erc20: dependencies.erc20,
           paymentsContract: dependencies.payments

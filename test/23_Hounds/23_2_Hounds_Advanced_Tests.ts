@@ -9,6 +9,7 @@ import { HoundsAdvancedTests } from "../../common/dto/test/houndsAdvancedTests.d
 import { safeBoostHoundBreeding } from "../../plugins/test/boostBreeding";
 import { safeBoostHoundStamina } from "../../plugins/test/boostStamina";
 import { BigNumber } from 'ethers';
+import { expecting } from "../../plugins/expecting";
 const { ethers } = require('hardhat');
 
 
@@ -88,8 +89,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -134,8 +133,6 @@ async function advancedTests(
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
-
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -182,8 +179,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address,totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -228,8 +223,6 @@ async function advancedTests(
       for ( let i = 0 , l = breedCost.length ; i < l ; ++i ) {
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
-
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
 
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
@@ -276,8 +269,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -323,8 +314,6 @@ async function advancedTests(
         totalValueToPay = totalValueToPay.add(breedCost[i].amount);
       }
 
-      await dependencies.erc20.mint(sig.address, totalValueToPay);
-
       await dependencies.erc20
       .approve(dependencies.payments.address, totalValueToPay);
 
@@ -341,12 +330,10 @@ async function advancedTests(
 
       const [sig1] = await ethers.getSigners();
 
-      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
-
-      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+      const control = await dependencies.hounds.control();
 
       await dependencies.erc20
-      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
 
       await safeBoostHoundBreeding({
         contract: dependencies.hounds as Hounds,
@@ -359,17 +346,123 @@ async function advancedTests(
 
       const [sig1] = await ethers.getSigners();
 
-      const hound: Hound.StructStructOutput = await (dependencies.hounds as Hounds).hound(createdHoundId);
-
-      await dependencies.erc20.mint(sig1.address,hound.breeding.breedingFee);
+      const control = await dependencies.hounds.control();
 
       await dependencies.erc20
-      .approve(dependencies.payments.address, hound.breeding.breedingFee);
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
 
       await safeBoostHoundStamina({
         contract: dependencies.hounds as Hounds,
         signer: sig1
       });
+
+    });
+
+    it("Boost hound stamina cooldown using discount", async function () {
+      await dependencies.shops.createDiscount({
+        ...globalParams.defaultDiscount,
+        tokenContract: dependencies.erc20.address
+      });
+
+      const [sig1] = await ethers.getSigners();
+
+      const control = await dependencies.hounds.control();
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
+
+      const discountTokensBefore = await dependencies.erc20.balanceOf(sig1.address);
+
+      await safeBoostHoundStamina({
+        contract: dependencies.hounds as Hounds,
+        signer: sig1
+      });
+
+      const discountTokensAfter = await dependencies.erc20.balanceOf(sig1.address);
+
+      expecting(String(discountTokensBefore) === String(discountTokensAfter), "Static discount tokens bugged on boost stamina");
+
+    });
+
+    it("Boost hound breeding cooldown using discount", async function () {
+
+      const [sig1] = await ethers.getSigners();
+
+      const control = await dependencies.hounds.control();
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
+
+      const discountTokensBefore = await dependencies.erc20.balanceOf(sig1.address);
+
+      await safeBoostHoundBreeding({
+        contract: dependencies.hounds as Hounds,
+        signer: sig1
+      });
+
+      const discountTokensAfter = await dependencies.erc20.balanceOf(sig1.address);
+
+      expecting(String(discountTokensBefore) === String(discountTokensAfter), "Static discount tokens bugged on boost breeding");
+
+    });
+
+    it("Boost hound stamina cooldown using usable discount", async function () {
+      const discountId: number = Number(await dependencies.shops.id()) - 1;
+      const [sig1] = await ethers.getSigners();
+
+      const erc1155BalanceBeforeMint = await dependencies.erc1155.balanceOf(sig1.address,1);
+
+      await dependencies.erc1155.mintBatch(sig1.address, [1], [1], '0x00');
+
+      const erc1155BalanceAfterMint = await dependencies.erc1155.balanceOf(sig1.address,1);
+
+      expecting(String(erc1155BalanceBeforeMint) !== String(erc1155BalanceAfterMint), "Test ERC1155 mint for creating erc1155 usable discount bugged");
+
+      const discountBeforeEdit = await dependencies.shops.discounts(discountId);
+
+      await dependencies.shops.editDiscount({
+        ...globalParams.defaultDiscount,
+        tokenContract: dependencies.erc1155.address,
+        tokenIds: [1],
+        tokenType: 1,
+        amountToUsePerUsableDiscount: 1,
+        usable: true
+      }, discountId);
+
+      const discountAfterEdit = await dependencies.shops.discounts(discountId);
+
+      expecting(String(discountBeforeEdit) !== String(discountAfterEdit), "Edit discount bugged on boosting hound stamina using usable discount");
+
+      const control = await dependencies.hounds.control();
+
+      await dependencies.erc20
+      .approve(dependencies.payments.address, control.breeding.refillBreedingCooldownCost);
+
+      await dependencies.erc1155.setApprovalForAll(dependencies.hounds.address, true);
+
+      const discountTokensBefore = await dependencies.erc1155.balanceOf(sig1.address,1);
+
+      await safeBoostHoundStamina({
+        contract: dependencies.hounds as Hounds,
+        signer: sig1
+      });
+
+      const discountTokensAfter = await dependencies.erc1155.balanceOf(sig1.address,1);
+
+      expecting(String(discountTokensBefore) === String(discountTokensAfter), "Usable discount tokens bugged on boost stamina");
+
+    });
+
+    it("Send rename proposal using custom token", async function () {
+      const [sig] = await ethers.getSigners();
+      const feesControl = await dependencies.hounds.control();
+
+      expecting(feesControl.fees.renameFeeCurrency === dependencies.erc20.address, "Rename fee currency is not the erc20 currency");
+      if ( feesControl.fees.renameFeeCurrency !== globalParams.address0 ) {
+        await dependencies.erc20.approve(dependencies.payments.address, feesControl.fees.renameFee);
+      }
+
+      await dependencies.hounds.connect(sig).requestHoundRename(1, "Test name rename");
 
     });
 

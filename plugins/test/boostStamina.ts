@@ -10,9 +10,11 @@ export async function boostHoundStamina(
   let exists: boolean = false;
   let i = 1;
   let hound: Hound.StructStructOutput = await params.contract.hound(i);
+  let constructor = await params.contract.control();
+
   for (  ; i < totalHounds ; ++i ) {
     hound = await params.contract.hound(i);
-    if ( Number(hound.stamina.staminaValue) < Number(hound.stamina.staminaCap) ) {
+    if ( Number(hound.stamina.staminaValue) < Number(constructor.stamina.staminaCap) ) {
       exists = true;
       break;
     }
@@ -22,8 +24,8 @@ export async function boostHoundStamina(
     await params.contract.boostHoundStamina(
       i, 
       await params.contract.signer.getAddress(), 
-      hound.stamina.staminaRefillCurrency === globalParams.address0 ? 0 : hound.breeding.breedingFee,{
-        value: hound.stamina.staminaRefillCurrency === globalParams.address0 ? hound.stamina.staminaRefill1x : 0
+      constructor.stamina.staminaRefillCurrency === globalParams.address0 ? 0 : constructor.stamina.staminaRefill1x,{
+        value: constructor.stamina.staminaRefillCurrency === globalParams.address0 ? constructor.stamina.staminaRefill1x : 0
       }
     );
   }

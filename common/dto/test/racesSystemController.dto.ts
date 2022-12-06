@@ -1,10 +1,11 @@
-import { ethers } from "ethers";
-import { RacesConstructor } from '../../../typechain-types/Races';
+import { Races, RacesConstructor } from '../../../typechain-types/Races';
+import { RacesMethods } from "../../../typechain-types/RacesMethods";
+import { RacesRestricted } from "../../../typechain-types/RacesRestricted";
 
 export interface RacesSystemController {
-    racesRestricted: ethers.Contract;
-    racesMethods: ethers.Contract;
-    races: ethers.Contract;
+    racesRestricted: RacesRestricted;
+    racesMethods: RacesMethods;
+    races: Races;
     constructor: RacesConstructor.StructStruct;
     queuesAddress: string;
 }

@@ -23,12 +23,17 @@ const _abi = [
           },
           {
             internalType: "address",
-            name: "currency",
+            name: "platformAndArenaFeeCurrency",
             type: "address",
           },
           {
             internalType: "uint256",
-            name: "fee",
+            name: "platformAndArenaFee",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "arenaMap",
             type: "uint256",
           },
           {

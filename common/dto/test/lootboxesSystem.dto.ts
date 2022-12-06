@@ -1,5 +1,5 @@
-import { Lootboxes } from "../../../typechain-types/Lootboxes";
+import { HoundraceMysteryBoxes } from "../../../typechain-types/HoundraceMysteryBoxes";
 
 export interface LootboxesSystem {
-    lootboxes: Lootboxes;
+    lootboxes: HoundraceMysteryBoxes;
 }

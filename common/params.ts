@@ -2,10 +2,10 @@ import { Hound } from '../typechain-types/Hounds';
 import { BigNumber } from 'ethers';
 import { network } from 'hardhat';
 import { Queue } from '../typechain-types/Queues';
-import { Payment } from '../typechain-types/Queues';
 import { Arena } from '../typechain-types/Arenas';
-import { Race } from '../typechain-types/Races';
-import { Box } from '../typechain-types/Lootboxes';
+import { Payment, Race } from '../typechain-types/Races';
+import { Box } from '../typechain-types/HoundraceMysteryBoxes';
+import { Discount } from '../typechain-types/Shop';
 
 const POLYGON_MAINNET_OPENSEA_CONTRACT_ADDRESS = "0x58807baD0B376efc12F5AD86aAc70E78ed67deaE";
 const POLYGON_MUMBAI_OPENSEA_CONTRACT_ADDRESS = "0xff7Ca10aF37178BdD056628eF42fD7F799fAc77c";
@@ -31,47 +31,65 @@ const defaultLootbox: Box.StructStruct = {
 const defaultArena: Arena.StructStruct = {
     name: "Arena #",
     token_uri: "arena_token_uri",
-    currency: address0,
-    fee: BigNumber.from(100),
+    platformAndArenaFeeCurrency: address0,
+    platformAndArenaFee: BigNumber.from(100),
+    arenaMap: 1,
     surface: 1,
     distance: 1,
     weather: 1
+};
+
+const defaultDiscount: Discount.StructStruct = {
+    amountToUsePerUsableDiscount: 0,
+    dateStart: 0,
+    dateStop: 999999999999,
+    discount: 5,
+    tokenContract: address0,
+    tokenIds: [],
+    tokenType: 3,
+    usable: false
 };
 
 const defaultRace: Race.StructStruct = {
     core: {
         arena: 1,
         participants: [],
-        entryFee: 0,
+        raceEntryTicket: 0,
         enqueueDates: [],
         feeCurrency: address0,
-        entryFeeCurrency: address0,
+        raceEntryTicketCurrency: address0,
         fee: 0,
-        name: "Race #",
-        payments: defaultQueuePayment
+        name: "Race #"
     },
     queueId: 1,
     randomness: 0,
-    seed: "0x00"
+    seed: "0x00",
+    payments: defaultQueuePayment
 };
 
-const houndStamina: Hound.StaminaStruct = {
+const staminaConstructor: Hound.ConstructorStaminaStruct = {
     staminaRefillCurrency: address0,
-    staminaLastUpdate: 0,
     staminaRefill1x: "500000000000000",
-    staminaValue: 100,
-    staminaPerTimeUnit: 86_400,
+    staminaPerTimeUnit: 864,
     staminaCap: 100
 };
 
-const houndBreeding: Hound.BreedingStruct = {
+const houndStamina: Hound.StaminaStruct = {
+    staminaLastUpdate: Number((Date.now() / 1000).toFixed(0)),
+    staminaValue: 100,
+};
+
+const breedingConstructor: Hound.ConstructorBreedingStruct = {
+    externalBreedingFeeCurrency: address0,
     breedingCooldownCurrency: address0,
-    breedingFeeCurrency: address0,
-    lastBreed: 0,
-    breedingCooldown: 264_000,
-    breedingFee: 0,
+    breedingCooldown: 259200,
     breedingCooldownTimeUnit: 3600,
-    refillBreedingCooldownCost: 0,
+    refillBreedingCooldownCost: 0
+}
+
+const houndBreeding: Hound.BreedingStruct = {
+    lastBreed: 0,
+    externalBreedingFee: 0,
     availableToBreed: false
 };
 
@@ -105,11 +123,10 @@ const defaultQueue: Queue.StructStruct = {
         arena: BigNumber.from(1),
         participants: [],
         enqueueDates: [],
-        entryFee: BigNumber.from(10000),
-        entryFeeCurrency: address0,
+        raceEntryTicket: BigNumber.from(10000),
+        raceEntryTicketCurrency: address0,
         fee: BigNumber.from(10000),
-        feeCurrency: address0,
-        payments: defaultQueuePayment as Payment.StructStructOutput
+        feeCurrency: address0
     },
     startDate: BigNumber.from(0),
     endDate: BigNumber.from(0),
@@ -133,6 +150,9 @@ interface GlobalParams {
     houndStamina: Hound.StaminaStruct;
     defaultLootbox: Box.StructStruct;
     OPENSEA_CONTRACT_ADDRESS: string;
+    staminaConstructor: Hound.ConstructorStaminaStruct;
+    breedingConstructor: Hound.ConstructorBreedingStruct;
+    defaultDiscount: Discount.StructStruct;
 };
 
 const getOpenseaContractAddress = (): string => {
@@ -157,5 +177,8 @@ export const globalParams: GlobalParams = {
     houndBreeding: houndBreeding,
     houndStamina: houndStamina,
     defaultLootbox: defaultLootbox,
-    OPENSEA_CONTRACT_ADDRESS: getOpenseaContractAddress()
+    OPENSEA_CONTRACT_ADDRESS: getOpenseaContractAddress(),
+    staminaConstructor: staminaConstructor,
+    breedingConstructor: breedingConstructor,
+    defaultDiscount: defaultDiscount
 };

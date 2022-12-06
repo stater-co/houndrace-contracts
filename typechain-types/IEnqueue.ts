@@ -67,21 +67,21 @@ export interface IEnqueue extends BaseContract {
 
   functions: {
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   enqueue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     hound: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -91,7 +91,7 @@ export interface IEnqueue extends BaseContract {
 
   estimateGas: {
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -99,7 +99,7 @@ export interface IEnqueue extends BaseContract {
 
   populateTransaction: {
     enqueue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       hound: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

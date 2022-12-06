@@ -7,8 +7,6 @@ export function checkHoundStructure(
 
   expecting(
     ( hound.breeding.availableToBreed === false || hound.breeding.availableToBreed === true ) && 
-    ( hound.breeding.breedingCooldown >= 0 ) && 
-    ( hound.breeding.breedingFee >= 0 ) && 
     ( hound.breeding.lastBreed >= 0 ) && 
     ( hound.profile.custom === true || hound.profile.custom === false ) && 
     ( String(hound.profile.name).length > 0 ) && 
@@ -19,10 +17,7 @@ export function checkHoundStructure(
     ( hound.identity.generation >= 0 ) && 
     ( hound.identity.geneticSequence.length > 0 ) && 
     ( hound.profile.runningOn >= 0 ) && 
-    ( hound.stamina.staminaCap > 0 ) && 
     ( hound.stamina.staminaLastUpdate >= 0 ) && 
-    ( hound.stamina.staminaPerTimeUnit >= 0 ) && 
-    ( hound.stamina.staminaRefill1x >= 0 ) && 
     ( hound.stamina.staminaValue >= 0 ),
     "Hound structure has not been entirely retreiven from contract"
   );

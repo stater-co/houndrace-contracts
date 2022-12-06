@@ -8,7 +8,7 @@ import '../whitelist/Index.sol';
 import './params/Constructor.sol';
 import './params/Box.sol';
 
-contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
+contract HoundraceMysteryBoxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
 
     LootboxesConstructor.Struct public control;
     event NewLootboxes(uint256 indexed id, uint256 indexed amount);
@@ -21,7 +21,6 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         control = input;
     }
 
-
     function setGlobalParameters(
         LootboxesConstructor.Struct memory globalParameters
     ) 
@@ -29,6 +28,7 @@ contract Lootboxes is ERC1155URIStorage, ERC1155Holder, Whitelist {
         onlyOwner 
     {
         control = globalParameters;
+        updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
 
     function mint(

@@ -1,11 +1,11 @@
 import { LootboxesExternalDependencies } from '../common/dto/test/lootboxesExternalDependencies.dto';
 import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { deployContract } from '../plugins/test/deployContract';
-import { Lootboxes } from '../typechain-types/Lootboxes';
+import { HoundraceMysteryBoxes } from '../typechain-types/HoundraceMysteryBoxes';
 const { ethers } = require('hardhat');
 
 
-let lootboxes: Lootboxes;
+let lootboxes: HoundraceMysteryBoxes;
 
 
 export async function run(
@@ -14,23 +14,20 @@ export async function run(
 
   return new Promise((resolve, ) => {
 
-    describe('Setting up the Lootboxes', async function () {
+    describe('Setting up the HoundraceMysteryBoxes', async function () {
 
       it("Deploy the lootboxes contract", async function () {
         let [owner, , , , , , , , , signer, signer2, signer3] = await ethers.getSigners();
         lootboxes = await deployContract({
-          name: 'Lootboxes',
+          name: 'HoundraceMysteryBoxes',
           constructor: [[
-            "HoundRace lootboxes",
+            "Houndrace Mystery Boxes",
             [signer.address, signer2.address, signer3.address],
-            dependencies.houndsAddress,
-            dependencies.paymentsAddress,
-            owner.address,
             [['0xc6e64e53'],['0x7c46a44b'],['0xedd0cb87']],
             false
           ]],
           props: {}
-        }) as Lootboxes;
+        }) as HoundraceMysteryBoxes;
 
         resolve({
           lootboxes: lootboxes

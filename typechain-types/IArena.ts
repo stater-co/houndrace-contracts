@@ -24,8 +24,9 @@ export declare namespace Arena {
   export type StructStruct = {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumberish;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -36,14 +37,16 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
   ] & {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumber;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -92,19 +95,19 @@ export interface IArena extends BaseContract {
 
   functions: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Arena.StructStructOutput]>;
   };
 
   arena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Arena.StructStructOutput>;
 
   callStatic: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Arena.StructStructOutput>;
   };
@@ -112,12 +115,12 @@ export interface IArena extends BaseContract {
   filters: {};
 
   estimateGas: {
-    arena(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    arena(arenaId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     arena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

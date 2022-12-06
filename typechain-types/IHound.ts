@@ -22,58 +22,24 @@ import type {
 
 export declare namespace Hound {
   export type StaminaStruct = {
-    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerTimeUnit: BigNumberish;
-    staminaCap: BigNumberish;
   };
 
-  export type StaminaStructOutput = [
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaRefillCurrency: string;
+  export type StaminaStructOutput = [BigNumber, number] & {
     staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerTimeUnit: number;
-    staminaCap: number;
   };
 
   export type BreedingStruct = {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    breedingCooldownTimeUnit: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
+    externalBreedingFee: BigNumberish;
     availableToBreed: boolean;
   };
 
-  export type BreedingStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
+  export type BreedingStructOutput = [BigNumber, BigNumber, boolean] & {
     lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    breedingCooldownTimeUnit: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
+    externalBreedingFee: BigNumber;
     availableToBreed: boolean;
   };
 
@@ -181,19 +147,19 @@ export interface IHound extends BaseContract {
 
   functions: {
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Hound.StructStructOutput]>;
   };
 
   hound(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Hound.StructStructOutput>;
 
   callStatic: {
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Hound.StructStructOutput>;
   };
@@ -201,12 +167,12 @@ export interface IHound extends BaseContract {
   filters: {};
 
   estimateGas: {
-    hound(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     hound(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

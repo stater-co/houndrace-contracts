@@ -60,6 +60,11 @@ const _abi = [
             type: "address",
           },
           {
+            internalType: "address",
+            name: "raceUploader",
+            type: "address",
+          },
+          {
             internalType: "bytes4[][]",
             name: "targets",
             type: "bytes4[][]",

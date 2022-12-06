@@ -12,7 +12,7 @@ export async function joinQueue(
 ) {
   let queue: Queue.StructStruct = await params.contract.queue(params.queueId);
   let arena: Arena.StructStruct = await params.arenasContract.arena(queue.core.arena);
-  let enqueueCost: MicroPayment.StructStructOutput[] = await params.contract.enqueueCost(params.queueId);
+  let enqueueCost: MicroPayment.StructStructOutput[] = await params.contract.getEnqueueCost(params.queueId);
 
   let totalValueToPay: number = 0;
   for ( let i = 0 , l = enqueueCost.length ; i < l ; ++i ) {
@@ -20,7 +20,7 @@ export async function joinQueue(
   }
 
   await params.contract.connect(params.sender).enqueue(params.queueId,params.houndId,{
-    value: arena.currency === globalParams.address0 ? totalValueToPay : 0
+    value: arena.platformAndArenaFeeCurrency === globalParams.address0 ? totalValueToPay : 0
   });
 }
 
@@ -35,14 +35,14 @@ export async function safeJoinQueue(
 
   const senderAddress = await params.sender.getAddress();
 
-  const enqueueCost: MicroPayment.StructStructOutput[] = await params.contract.enqueueCost(params.queueId);
+  const enqueueCost: MicroPayment.StructStructOutput[] = await params.contract.getEnqueueCost(params.queueId);
 
   let totalValueToPay: BigNumber = BigNumber.from(0);
   for ( let i = 0 , l = enqueueCost.length ; i < l ; ++i ) {
     totalValueToPay = totalValueToPay.add(enqueueCost[i].amount);
   }
 
-  if ( arena.currency !== globalParams.address0 ) {
+  if ( arena.platformAndArenaFeeCurrency !== globalParams.address0 ) {
     await params.erc20.mint(senderAddress, totalValueToPay);
     await params.erc20.approve(params.paymentsContract.address, totalValueToPay);
   }

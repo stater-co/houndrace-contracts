@@ -28,6 +28,7 @@ export declare namespace Discount {
     tokenIds: BigNumberish[];
     dateStart: BigNumberish;
     dateStop: BigNumberish;
+    amountToUsePerUsableDiscount: BigNumberish;
     discount: BigNumberish;
     tokenType: BigNumberish;
     usable: boolean;
@@ -38,6 +39,7 @@ export declare namespace Discount {
     BigNumber[],
     BigNumber,
     BigNumber,
+    BigNumber,
     number,
     number,
     boolean
@@ -46,6 +48,7 @@ export declare namespace Discount {
     tokenIds: BigNumber[];
     dateStart: BigNumber;
     dateStop: BigNumber;
+    amountToUsePerUsableDiscount: BigNumber;
     discount: number;
     tokenType: number;
     usable: boolean;
@@ -55,7 +58,7 @@ export declare namespace Discount {
 export interface ICreateDiscountInterface extends utils.Interface {
   contractName: "ICreateDiscount";
   functions: {
-    "createDiscount((address,uint256[],uint256,uint256,uint32,uint8,bool))": FunctionFragment;
+    "createDiscount((address,uint256[],uint256,uint256,uint256,uint32,uint8,bool))": FunctionFragment;
   };
 
   encodeFunctionData(

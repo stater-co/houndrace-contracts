@@ -4,6 +4,6 @@ pragma solidity 0.8.17;
 
 interface IUpdateHoundRunning {
 
-    function updateHoundRunning(uint256 theId, uint256 runningOn) external returns(uint256 ranOn);
+    function updateHoundRunning(uint256 houndId, uint256 runningOn) external returns(uint256 ranOn);
 
 }

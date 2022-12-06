@@ -5,19 +5,19 @@ import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
 import './Queue.sol';
 import './Constructor.sol';
 import '../../arenas/params/Arena.sol';
-import '../../arenas/interfaces/IArena.sol';
 import '../../arenas/interfaces/IArenaOwner.sol';
-import '../../arenas/interfaces/IArenaFee.sol';
-import '../../arenas/interfaces/IArenaCurrency.sol';
+import '../../arenas/interfaces/IPlatformAndArenaFee.sol';
+import '../../arenas/interfaces/IPlatformAndArenaFeeCurrency.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../payments/params/MicroPayment.sol';
 import '../../hounds/interfaces/IUpdateHoundRunning.sol';
 import '../../hounds/interfaces/IHoundOwner.sol';
 import '../../hounds/interfaces/IHound.sol';
+import '../../hounds/interfaces/IRefreshStamina.sol';
 import '../../races/interfaces/IRaceStart.sol';
 import '../../whitelist/Index.sol';
 import '../../hounds/params/Hound.sol';
-import '../interfaces/IEnqueueCost.sol';
+import '../interfaces/IGetEnqueueCost.sol';
 
 
 contract Params is ReentrancyGuard, Whitelist {
@@ -42,20 +42,20 @@ contract Params is ReentrancyGuard, Whitelist {
         updateWhitelist(globalParameters.operators, globalParameters.targets);
     }
     
-    function queue(uint256 theId) external view returns(Queue.Struct memory) {
-        return queues[theId];
+    function queue(uint256 queueId) external view returns(Queue.Struct memory) {
+        return queues[queueId];
     }
 
-    function staminaCostOf(uint256 theId) external view returns(uint32) {
-        return queues[theId].staminaCost;
+    function staminaCostOf(uint256 queueId) external view returns(uint32) {
+        return queues[queueId].staminaCost;
     }
 
-    function participantsOf(uint256 theId) external view returns(uint256[] memory) {
-        return queues[theId].core.participants;
+    function participantsOf(uint256 queueId) external view returns(uint256[] memory) {
+        return queues[queueId].core.participants;
     }
 
-    function enqueueDatesOf(uint256 theId) external view returns(uint256[] memory) {
-        return queues[theId].core.enqueueDates;
+    function enqueueDatesOf(uint256 queueId) external view returns(uint256[] memory) {
+        return queues[queueId].core.enqueueDates;
     }
 
 }

@@ -138,6 +138,33 @@ async function basicTest(
       });
     });
 
+    it("Send rename proposal", async function () {
+      const feesControl = await dependencies.hounds.control();
+      await dependencies.hounds.requestHoundRename(1, "Test name rename", {
+        value: feesControl.fees.renameFee
+      });
+    });
+
+    it("Send rename proposal approval validated", async function () {
+      await dependencies.hounds.handleHoundRename(1, "new token uri x2", true);
+    });
+
+    it("Send rename proposal & dissaprove it", async function () {
+      const [sig] = await ethers.getSigners();
+      const feesControl = await dependencies.hounds.control();
+
+      const balanceBefore = await sig.getBalance();
+      await dependencies.hounds.requestHoundRename(1, "Test name rename x3", {
+        value: feesControl.fees.renameFee
+      });
+      const balanceAfter = await sig.getBalance();
+
+      await dependencies.hounds.handleHoundRename(1, "", false, {
+        value: feesControl.fees.renameFee
+      });
+
+    });
+
   });
 }
 

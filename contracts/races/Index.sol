@@ -8,7 +8,7 @@ contract Races is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function uploadRace(
-        uint256 theId, 
+        uint256 raceId, 
         uint256 queueId,
         Race.Struct memory race
     ) external {

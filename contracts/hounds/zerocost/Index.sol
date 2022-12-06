@@ -29,20 +29,20 @@ contract HoundsZerocost is Ownable {
 
             // Breed cost fee
             MicroPayment.Struct(
-                control.fees.breedCostCurrency,
-                control.fees.breedCost
+                control.fees.platformBreedFeeCurrency,
+                control.fees.platformBreedFee
             ),
 
             // Breed fee for alpha dune
             MicroPayment.Struct(
-                control.fees.breedFeeCurrency,
-                control.fees.breedFee
+                control.fees.breedTransactionFeeCurrency,
+                control.fees.breedTransactionFee
             ),
 
             // Hound breeding fee ( in case of external breeding )
             MicroPayment.Struct(
-                houndStruct.breeding.breedingFeeCurrency,
-                houndStruct.breeding.breedingFee
+                control.breeding.externalBreedingFeeCurrency,
+                houndStruct.breeding.externalBreedingFee
             )
 
         );

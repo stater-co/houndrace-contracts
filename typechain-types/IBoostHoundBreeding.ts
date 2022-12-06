@@ -70,7 +70,7 @@ export interface IBoostHoundBreeding extends BaseContract {
 
   functions: {
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -78,7 +78,7 @@ export interface IBoostHoundBreeding extends BaseContract {
   };
 
   boostHoundBreeding(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     user: string,
     payed: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -86,7 +86,7 @@ export interface IBoostHoundBreeding extends BaseContract {
 
   callStatic: {
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: CallOverrides
@@ -97,7 +97,7 @@ export interface IBoostHoundBreeding extends BaseContract {
 
   estimateGas: {
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -106,7 +106,7 @@ export interface IBoostHoundBreeding extends BaseContract {
 
   populateTransaction: {
     boostHoundBreeding(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       user: string,
       payed: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }

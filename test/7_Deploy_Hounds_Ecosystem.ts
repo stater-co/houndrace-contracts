@@ -6,7 +6,6 @@ import { Hounds } from '../typechain-types/Hounds';
 import { HoundsMinter } from '../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../typechain-types/HoundsModifier';
 import { HoundsRestricted } from '../typechain-types/HoundsRestricted';
-import { AlphaERC721 } from '../typechain-types/AlphaERC721';
 import { HoundsZerocost } from '../typechain-types/HoundsZerocost';
 const { ethers } = require("hardhat");
 
@@ -29,11 +28,13 @@ export async function run(
         houndsRestricted = await deployContract({
           name: 'HoundsRestricted',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
+            globalParams.breedingConstructor,
+            globalParams.staminaConstructor,
             [owner.address, signer2.address, signer3.address],
-            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
+            [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448']],
             [
               globalParams.address0,
               globalParams.address0,
@@ -44,6 +45,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -51,9 +53,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -65,11 +65,13 @@ export async function run(
         houndsModifier = await deployContract({
           name: 'HoundsModifier',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
+            globalParams.breedingConstructor,
+            globalParams.staminaConstructor,
             [owner.address, signer2.address, signer3.address],
-            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
+            [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -80,6 +82,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -87,9 +90,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -101,11 +102,13 @@ export async function run(
         houndsZerocost = await deployContract({
           name: 'HoundsZerocost',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
+            globalParams.breedingConstructor,
+            globalParams.staminaConstructor,
             [owner.address, signer2.address, signer3.address],
-            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
+            [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -116,6 +119,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -123,9 +127,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -137,11 +139,13 @@ export async function run(
         houndsMinter = await deployContract({
           name: 'HoundsMinter',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
+            globalParams.breedingConstructor,
+            globalParams.staminaConstructor,
             [owner.address, signer2.address, signer3.address],
-            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
+            [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               globalParams.address0,
@@ -152,6 +156,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -159,9 +164,7 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
@@ -173,11 +176,13 @@ export async function run(
         hounds = await deployContract({
           name: 'Hounds',
           constructor: [[
-            "HoundRace",
+            "Houndrace",
             "HR",
             globalParams.defaultHound,
+            globalParams.breedingConstructor,
+            globalParams.staminaConstructor,
             [owner.address, signer2.address, signer3.address],
-            [['0x45fb9412'],['0xfbba82fc'],['0x5c80b448']],
+            [['0xd7016c7f'],['0xfbba82fc'],['0x5c80b448']],
             [
               houndsRestricted.address,
               houndsMinter.address,
@@ -188,6 +193,7 @@ export async function run(
               dependencies.shopsAddress,
               globalParams.address0,
               dependencies.geneticsAddress,
+              owner.address,
               owner.address
             ],[
               globalParams.address0,
@@ -195,23 +201,18 @@ export async function run(
               globalParams.address0,
               "0xB1A2BC2EC50000",
               "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000",
-              "0x2386F26FC10000"
+              50000
             ]
           ]],
           props: {}
         }) as Hounds;
-
-        const transferrableRoot: AlphaERC721 = dependencies.transferrableRoot.attach(hounds.address);
 
         resolve({
           houndsRestricted: houndsRestricted,
           houndsModifier: houndsModifier,
           houndsMinter: houndsMinter,
           houndsZerocost: houndsZerocost,
-          hounds: hounds,
-          transferrableRoot: transferrableRoot
+          hounds: hounds
         });
       });
 

@@ -70,7 +70,7 @@ export interface IPutHoundForBreed extends BaseContract {
 
   functions: {
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -78,7 +78,7 @@ export interface IPutHoundForBreed extends BaseContract {
   };
 
   putHoundForBreed(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     fee: BigNumberish,
     status: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -86,7 +86,7 @@ export interface IPutHoundForBreed extends BaseContract {
 
   callStatic: {
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: CallOverrides
@@ -97,7 +97,7 @@ export interface IPutHoundForBreed extends BaseContract {
 
   estimateGas: {
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -106,7 +106,7 @@ export interface IPutHoundForBreed extends BaseContract {
 
   populateTransaction: {
     putHoundForBreed(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       fee: BigNumberish,
       status: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }

@@ -5,6 +5,6 @@ import '../params/Arena.sol';
 
 interface IEditArena {
     
-    function editArena(uint256 theId, Arena.Struct memory arena) external;
+    function editArena(uint256 arenaId, Arena.Struct memory arena) external;
     
 }

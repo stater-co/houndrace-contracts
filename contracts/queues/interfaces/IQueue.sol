@@ -5,6 +5,6 @@ import '../params/Queue.sol';
 
 interface IQueue { 
 
-    function queue(uint256 theId) external view returns(Queue.Struct memory);
+    function queue(uint256 queueId) external view returns(Queue.Struct memory);
 
 }

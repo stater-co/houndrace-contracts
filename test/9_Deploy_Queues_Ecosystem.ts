@@ -33,6 +33,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
+            globalParams.address0,
             []
           ]],
           props: {}
@@ -46,6 +47,7 @@ export async function run(
             [],
             globalParams.address0,
             queuesRestricted.address,
+            globalParams.address0,
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
@@ -71,6 +73,7 @@ export async function run(
             globalParams.address0,
             globalParams.address0,
             globalParams.address0,
+            globalParams.address0,
             []
           ]],
           props: {}
@@ -90,6 +93,7 @@ export async function run(
             dependencies.houndsAddress,
             dependencies.paymentsAddress,
             dependencies.racesAddress,
+            String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             []
           ]],
           props: {}

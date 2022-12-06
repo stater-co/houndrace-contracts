@@ -19,7 +19,6 @@ export async function safeMintHound(
   expecting(before !== after && Number(before) === Number(after) - 1, "Mint hound method bugged");
 
   const hound = await params.contract.hound(before);
-  expecting(hound.stamina.staminaCap > 0 && hound.stamina.staminaPerTimeUnit > 0, "Bugged stamina setter");
   expecting(hound.profile.name.length > 0, "Bugged profile setter");
   expecting(hound.identity.geneticSequence[1] > 0, "Bugged incubator setter");
 

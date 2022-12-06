@@ -8,7 +8,7 @@ contract RacesRestricted is Params {
     constructor(RacesConstructor.Struct memory input) Params(input) {}
 
     function uploadRace(
-        uint256 theId, 
+        uint256 raceId, 
         uint256 queueId,
         Race.Struct memory race
     ) 
@@ -18,9 +18,9 @@ contract RacesRestricted is Params {
 
         IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 
-        IHandleRaceLoot(control.races).handleRaceLoot(race.core.payments);
+        IHandleRaceLoot(control.races).handleRaceLoot(race.payments);
 
-        races[theId] = race;
+        races[raceId] = race;
         uint32 staminaCost = IStaminaCostOf(control.queues).staminaCostOf(queueId);
 
         for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
@@ -28,7 +28,7 @@ contract RacesRestricted is Params {
             IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
         }
 
-        emit UploadRace(theId, queueId, race);
+        emit UploadRace(raceId, queueId, race);
 
     }
 

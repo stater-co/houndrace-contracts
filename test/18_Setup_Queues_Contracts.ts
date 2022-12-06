@@ -15,7 +15,7 @@ export async function set(
       await dependencies.queuesRestricted.setGlobalParameters({
         ...dependencies.constructor,
         operators: [signer.address, signer2.address, signer3.address],
-        targets: [['0x30f9a0f0'], ['0xe7c4d374'], ['0x19e3e592']]
+        targets: [['0x90c14066'], ['0xe7c4d374'], ['0x19e3e592', '0x857b29e5']]
       });
       const after = await dependencies.queuesRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Restricted global params setter bugged");
@@ -27,7 +27,7 @@ export async function set(
       await dependencies.queuesMethods.setGlobalParameters({
         ...dependencies.constructor,
         operators: [signer.address, signer2.address, signer3.address],
-        targets: [['0x30f9a0f0'], ['0xe7c4d374'], ['0x19e3e592']]
+        targets: [['0x90c14066'], ['0xe7c4d374'], ['0x19e3e592', '0x857b29e5']]
       });
       const after = await dependencies.queuesMethods.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Methods global params setter bugged");
@@ -39,7 +39,7 @@ export async function set(
       await dependencies.queuesZerocost.setGlobalParameters({
         ...dependencies.constructor,
         operators: [signer.address, signer2.address, signer3.address],
-        targets: [['0x30f9a0f0'], ['0xe7c4d374'], ['0x19e3e592']]
+        targets: [['0x90c14066'], ['0xe7c4d374'], ['0x19e3e592', '0x857b29e5']]
       });
       const after = await dependencies.queuesZerocost.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Methods global params setter bugged");
@@ -51,7 +51,7 @@ export async function set(
       await dependencies.queues.setGlobalParameters({
         ...dependencies.constructor,
         operators: [signer.address, signer2.address, signer3.address],
-        targets: [['0x30f9a0f0'], ['0xe7c4d374'], ['0x19e3e592']]
+        targets: [['0x90c14066'], ['0xe7c4d374', '0x857b29e5'], ['0x19e3e592']]
       });
       const after = await dependencies.queues.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Queues Methods global params setter bugged");

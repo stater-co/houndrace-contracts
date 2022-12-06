@@ -10,7 +10,7 @@ library Core {
 
         address feeCurrency;
 
-        address entryFeeCurrency;
+        address raceEntryTicketCurrency;
 
         uint256[] participants;
 
@@ -18,11 +18,9 @@ library Core {
 
         uint256 arena;
 
-        uint256 entryFee;
+        uint256 raceEntryTicket;
 
         uint256 fee;
-
-        Payment.Struct payments;
 
     }
 

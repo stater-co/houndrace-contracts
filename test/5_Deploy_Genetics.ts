@@ -18,8 +18,6 @@ export async function run(
         genetics = await deployContract({
           name: 'Genetics',
           constructor: [[
-            globalParams.maleBoilerplateGene,
-            globalParams.femaleBoilerplateGene,
             60,
             40,
             [2,6,10,14,18,22,26,30,34,38,48,58,68],

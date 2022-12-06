@@ -1,6 +1,6 @@
 import { BoostBreedingParams } from "../../common/dto/test/boostBreedingParams";
 import { globalParams } from "../../common/params";
-import { Hound } from '../../typechain-types/Hounds';
+import { Constructor, Hound } from '../../typechain-types/Hounds';
 import { expecting } from "../expecting";
 
 export async function boostHoundBreeding(
@@ -10,9 +10,10 @@ export async function boostHoundBreeding(
   let exists: boolean = false;
   let i = 1;
   let hound: Hound.StructStructOutput = await params.contract.hound(i);
+  let constructor = await params.contract.control();
   for ( ; i < totalHounds ; ++i ) {
     hound = await params.contract.hound(i);
-    if ( Number(hound.breeding.lastBreed) > 0 && Number(hound.breeding.lastBreed) > new Date(new Date().getTime() - Number(hound.breeding.breedingCooldown)).getTime() ) {
+    if ( Number(hound.breeding.lastBreed) > 0 && Number(hound.breeding.lastBreed) > new Date(new Date().getTime() - Number(constructor.breeding.breedingCooldown)).getTime() ) {
       exists = true;
       break;
     }
@@ -22,8 +23,8 @@ export async function boostHoundBreeding(
     await params.contract.boostHoundBreeding(
       i, 
       await params.contract.signer.getAddress(), 
-      hound.breeding.breedingCooldownCurrency === globalParams.address0 ? 0 : hound.breeding.breedingFee,{
-        value: hound.breeding.breedingCooldownCurrency === globalParams.address0 ? hound.breeding.breedingFee : 0
+      constructor.breeding.breedingCooldownCurrency === globalParams.address0 ? 0 : constructor.breeding.refillBreedingCooldownCost,{
+        value: constructor.breeding.breedingCooldownCurrency === globalParams.address0 ? constructor.breeding.refillBreedingCooldownCost : 0
       }
     );
   }

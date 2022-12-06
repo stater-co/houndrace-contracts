@@ -17,7 +17,7 @@ import { set as setArenas } from '../test/15_Setup_Arenas_Contracts';
 import { set as setHounds } from '../test/17_Setup_Hounds_Contracts';
 import { set as setRaces } from '../test/20_Setup_Races_Contracts';
 import { test as testHounds } from '../test/23_Hounds/23_1_Hounds_Basic_Tests';
-import { test as testHoundsAdvanced } from '../test/23_Hounds/23_2_Hounds_Custom_Token_Tests';
+import { test as testHoundsAdvanced } from '../test/23_Hounds/23_2_Hounds_Advanced_Tests';
 import { test as testArenas } from '../test/24_Arenas/24_1_Arenas_Basic_Tests';
 import { test as testQueues } from '../test/25_Queues/25_1_Queues_Basic_Tests';
 import { test as testQueuesAdvanced } from '../test/25_Queues/25_2_Queues_Advanced_Tests';
@@ -28,6 +28,7 @@ import { LootboxesSystem } from '../common/dto/test/lootboxesSystem.dto';
 import { test as testLootboxes } from '../test/27_Lootboxes/27_1_Lootboxes_Basic_Tests';
 import { test as testRacesAdvanced } from '../test/26_Races/26_2_Races_Advanced_Tests';
 import { set as setPayments } from '../test/13_Setup_Payments_Ecosystem';
+import { test as testDiscounts } from '../test/28_Shop/28_1_Shop_Basic_Tests';
 
 
 async function main() {
@@ -45,7 +46,6 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
     const races: RacesSystem = await runRaces({
@@ -83,12 +83,15 @@ async function main() {
     await setShop({
         shopMethods: payments.shopMethods,
         shopRestricted: payments.shopRestricted,
+        shopZerocost: payments.shopZerocost,
         shop: payments.shop,
         houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.shopMethods.address,
+            zerocost: payments.shopZerocost.address,
+            discounts: payments.shop.address,
             restricted: payments.shopRestricted.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             operators: [],
             targets: []
         }
@@ -109,7 +112,8 @@ async function main() {
             queues: queues.queues.address,
             zerocost: queues.queueZerocost.address,
             operators: [],
-            targets: []
+            targets: [],
+            raceUploader: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -119,13 +123,13 @@ async function main() {
         arenasRestricted: arenas.arenasRestricted,
         racesAddress: races.races.address,
         constructor: {
-            name: "HoundRace Arenas",
+            name: "Houndrace Arenas",
             symbol: "HRA",
             alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             methods: arenas.arenasMethods.address,
             restricted: arenas.arenasRestricted.address,
             payments: payments.payments.address,
-            alhpadunePercentage: 60,
+            alphadunePercentage: 60,
             operators: [],
             targets: []
         }
@@ -140,13 +144,16 @@ async function main() {
         queuesAddress: queues.queues.address,
         racesAddress: races.races.address,
         constructor: {
-           name: "HoundRace",
+           name: "Houndrace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
@@ -158,11 +165,12 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            breedCostCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
-            currency: globalParams.address0,
-            breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            platformBreedFeeCurrency: globalParams.address0,
+            breedTransactionFeeCurrency: globalParams.address0,
+            renameFeeCurrency: globalParams.address0,
+            renameFee: 50000,
+            platformBreedFee: "0xB1A2BC2EC50000",
+            breedTransactionFee: "0x2386F26FC10000"
            }
         }
     });
@@ -206,7 +214,7 @@ async function main() {
         houndIdToEnqueue: 1,
         queue: globalParams.defaultQueue,
         arenasContract: arenas.arenas,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
         payments: payments.payments
     });
 
@@ -226,13 +234,16 @@ async function main() {
         queuesAddress: queues.queues.address,
         racesAddress: races.races.address,
         constructor: {
-           name: "HoundRace",
+           name: "Houndrace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
             houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
@@ -244,27 +255,29 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            breedCostCurrency: payments.houndracePotions.address,
-            breedFeeCurrency: payments.houndracePotions.address,
-            currency: payments.houndracePotions.address,
-            breedCost: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            platformBreedFeeCurrency: payments.houndPotions.address,
+            breedTransactionFeeCurrency: payments.houndPotions.address,
+            renameFeeCurrency: payments.houndPotions.address,
+            platformBreedFee: "0xB1A2BC2EC50000",
+            breedTransactionFee: "0x2386F26FC10000",
+            renameFee: 50000
            }
         }
     });
 
     await testHoundsAdvanced.advancedTests({
         hounds: hounds.hounds,
-        transferableHounds: hounds.transferrableRoot,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
+        erc1155: payments.testErc1155,
         payments: payments.payments,
-        races: races.races
+        races: races.races,
+        shops: payments.shop
     });
 
     await testQueuesAdvanced.advancedTests({
         queuesContract: queues.queues,
         arenasContract: arenas.arenas,
-        erc20: payments.houndracePotions,
+        erc20: payments.houndPotions,
         queue: globalParams.defaultQueue,
         arena: globalParams.defaultArena,
         houndsContract: hounds.hounds,
@@ -283,6 +296,11 @@ async function main() {
         race: globalParams.defaultRace,
         queues: queues.queues,
         hounds: hounds.hounds
+    });
+
+    await testDiscounts.basicTest({
+        shop: payments.shop,
+        houndPotions: payments.houndPotions
     });
 
 }

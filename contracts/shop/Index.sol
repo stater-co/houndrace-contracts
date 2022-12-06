@@ -12,7 +12,7 @@ contract Shop is Params {
         require(success);
     }
 
-    function editDiscount(Discount.Struct memory discount, uint256 theId) external {
+    function editDiscount(Discount.Struct memory discount, uint256 discountId) external {
         (bool success, ) = control.restricted.delegatecall(msg.data);
         require(success);
     }
@@ -21,6 +21,10 @@ contract Shop is Params {
         (bool success, bytes memory output) = control.methods.delegatecall(msg.data);
         require(success);
         return abi.decode(output,(uint256));
+    }
+
+    function viewDiscount(address requester) external view returns(uint256) {
+        return IViewDiscount(control.zerocost).viewDiscount(requester);
     }
 
 }

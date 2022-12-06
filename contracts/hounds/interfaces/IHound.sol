@@ -5,6 +5,6 @@ import '../params/Hound.sol';
 
 interface IHound {
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory);
+    function hound(uint256 houndId) external view returns(Hound.Struct memory);
 
 }

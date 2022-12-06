@@ -15,7 +15,7 @@ export async function set(
         ...dependencies.constructor,
         alphadune: sig1.address,
         operators: [sig4.address, sig5.address, dependencies.racesAddress],
-        targets: [['0xe195c287'], ['0x3a420b95'], ['0x11a34393']]
+        targets: [['0xc5eab450'], ['0x2a6379c3'], ['0x11a34393']]
       });
       const after = await dependencies.arenasRestricted.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Arenas Restricted global params setter bugged");
@@ -28,7 +28,7 @@ export async function set(
         ...dependencies.constructor,
         alphadune: sig1.address,
         operators: [sig4.address, sig5.address, dependencies.racesAddress],
-        targets: [['0xe195c287'], ['0x3a420b95'], ['0x11a34393']]
+        targets: [['0xc5eab450'], ['0x2a6379c3'], ['0x11a34393']]
       });
       const after = await dependencies.arenasMethods.control();
       expecting(JSON.stringify(before) !== JSON.stringify(after), "Arenas Methods global params setter bugged");
@@ -40,7 +40,7 @@ export async function set(
         ...dependencies.constructor,
         alphadune: sig1.address,
         operators: [sig4.address, sig5.address, dependencies.racesAddress],
-        targets: [['0xe195c287'], ['0x3a420b95'], ['0x11a34393']]
+        targets: [['0xc5eab450'], ['0x2a6379c3'], ['0x11a34393']]
       });
     });
 

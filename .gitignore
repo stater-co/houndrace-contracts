@@ -109,6 +109,7 @@ output.errors
 
 node_modules
 .env
+.deployer.env
 coverage
 coverage.json
 typechain

@@ -18,7 +18,8 @@ library ConstructorBoilerplate {
         address genetics;
 
         // Payout checkpoint
-        address alphadune;
+        address houndsInitializer;
+        address houndsRenameHandler;
         
     }
 }

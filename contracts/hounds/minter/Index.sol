@@ -18,8 +18,8 @@ contract HoundsMinter is Params {
 
         require(
             matingSeason && 
-            hounds[hound2].breeding.lastBreed + hounds[hound2].breeding.breedingCooldown < block.timestamp && 
-            hounds[hound1].breeding.lastBreed + hounds[hound1].breeding.breedingCooldown < block.timestamp && 
+            hounds[hound2].breeding.lastBreed + control.breeding.breedingCooldown < block.timestamp && 
+            hounds[hound1].breeding.lastBreed + control.breeding.breedingCooldown < block.timestamp && 
             hounds[hound1].profile.runningOn == 0 && 
             hounds[hound2].profile.runningOn == 0 && 
             ( ( hounds[hound1].identity.geneticSequence[1] == 1 && hounds[hound2].identity.geneticSequence[1] == 2 ) || 
@@ -29,40 +29,42 @@ contract HoundsMinter is Params {
 
         uint256[] memory amounts = new uint256[](1);
 
-        amounts[0] = control.fees.breedCost;
+        amounts[0] = control.fees.platformBreedFee;
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedCostCurrency == address(0) ? amounts[0] : 0
+            value: control.fees.platformBreedFeeCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
             control.boilerplate.payments,
-            control.fees.breedCostCurrency,
+            control.fees.platformBreedFeeCurrency,
             new uint256[](0),
             amounts,
-            control.fees.breedCostCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.fees.platformBreedFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = control.fees.breedFee;
+        amounts[0] = control.fees.breedTransactionFee;
         IPay(control.boilerplate.payments).pay{
-            value: control.fees.breedFeeCurrency == address(0) ? amounts[0] : 0
+            value: control.fees.breedTransactionFeeCurrency == address(0) ? amounts[0] : 0
         }(
             msg.sender,
-            control.boilerplate.payments,
-            control.fees.breedFeeCurrency,
+            control.boilerplate.houndsInitializer,
+            control.fees.breedTransactionFeeCurrency,
             new uint256[](0),
             amounts,
-            control.fees.breedFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.fees.breedTransactionFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
         if ( ownerOf(hound2) != ownerOf(hound1) ) {
 
-            amounts[0] = hounds[hound2].breeding.breedingFee;
-            IPay(control.boilerplate.payments).pay(
+            amounts[0] = hounds[hound2].breeding.externalBreedingFee;
+            IPay(control.boilerplate.payments).pay{
+                value: control.breeding.externalBreedingFeeCurrency == address(0) ? amounts[0] : 0
+            }(
                 control.boilerplate.payments,
                 ownerOf(hound2),
-                hounds[hound2].breeding.breedingFeeCurrency,
+                control.breeding.externalBreedingFeeCurrency,
                 new uint256[](0),
                 amounts,
-                hounds[hound2].breeding.breedingFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+                control.breeding.externalBreedingFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
             );
                 
         }

@@ -26,8 +26,9 @@ export declare namespace Arena {
   export type StructStruct = {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumberish;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumberish;
+    arenaMap: BigNumberish;
     surface: BigNumberish;
     distance: BigNumberish;
     weather: BigNumberish;
@@ -38,14 +39,16 @@ export declare namespace Arena {
     string,
     string,
     BigNumber,
+    BigNumber,
     number,
     number,
     number
   ] & {
     name: string;
     token_uri: string;
-    currency: string;
-    fee: BigNumber;
+    platformAndArenaFeeCurrency: string;
+    platformAndArenaFee: BigNumber;
+    arenaMap: BigNumber;
     surface: number;
     distance: number;
     weather: number;
@@ -55,7 +58,7 @@ export declare namespace Arena {
 export interface IEditArenaInterface extends utils.Interface {
   contractName: "IEditArena";
   functions: {
-    "editArena(uint256,(string,string,address,uint256,uint32,uint32,uint32))": FunctionFragment;
+    "editArena(uint256,(string,string,address,uint256,uint256,uint32,uint32,uint32))": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -97,21 +100,21 @@ export interface IEditArena extends BaseContract {
 
   functions: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   editArena(
-    theId: BigNumberish,
+    arenaId: BigNumberish,
     arena: Arena.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -121,7 +124,7 @@ export interface IEditArena extends BaseContract {
 
   estimateGas: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -129,7 +132,7 @@ export interface IEditArena extends BaseContract {
 
   populateTransaction: {
     editArena(
-      theId: BigNumberish,
+      arenaId: BigNumberish,
       arena: Arena.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

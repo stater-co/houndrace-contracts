@@ -8,8 +8,9 @@ library Arena {
         string name;
         string token_uri;
 
-        address currency;
-        uint256 fee;
+        address platformAndArenaFeeCurrency;
+        uint256 platformAndArenaFee;
+        uint256 arenaMap;
         
         uint32 surface;
         uint32 distance;

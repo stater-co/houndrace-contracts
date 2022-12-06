@@ -7,28 +7,28 @@ contract ArenasMethods is Params {
 
     constructor(ArenasConstructor.Struct memory input) Params(input) {}
 
-    function handleArenaUsage(uint256 theId) external whitelisted {
+    function handleArenaUsage(uint256 arenaId) external whitelisted {
         
         uint256[] memory amounts = new uint256[](1);
         
-        amounts[0] = ( arenas[theId].fee / 100 ) * control.alhpadunePercentage;
+        amounts[0] = ( arenas[arenaId].platformAndArenaFee / 100 ) * control.alphadunePercentage;
         IPay(control.payments).pay(
-                control.payments,
-                control.alphadune,
-                arenas[theId].currency,
-                new uint256[](0),
-                amounts,
-                arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.payments,
+            control.alphadune,
+            arenas[arenaId].platformAndArenaFeeCurrency,
+            new uint256[](0),
+            amounts,
+            arenas[arenaId].platformAndArenaFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
-        amounts[0] = arenas[theId].fee - amounts[0];
+        amounts[0] = arenas[arenaId].platformAndArenaFee - amounts[0];
         IPay(control.payments).pay(
-                control.payments,
-                ownerOf(theId),
-                arenas[theId].currency,
-                new uint256[](0),
-                amounts,
-                arenas[theId].currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            control.payments,
+            ownerOf(arenaId),
+            arenas[arenaId].platformAndArenaFeeCurrency,
+            new uint256[](0),
+            amounts,
+            arenas[arenaId].platformAndArenaFeeCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
         
     }

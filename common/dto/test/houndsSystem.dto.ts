@@ -2,7 +2,6 @@ import { HoundsRestricted } from '../../../typechain-types/HoundsRestricted';
 import { HoundsMinter } from '../../../typechain-types/HoundsMinter';
 import { HoundsModifier } from '../../../typechain-types/HoundsModifier';
 import { Hounds } from '../../../typechain-types/Hounds';
-import { AlphaERC721 } from '../../../typechain-types/AlphaERC721';
 import { HoundsZerocost } from '../../../typechain-types/HoundsZerocost';
 
 export interface HoundsSystem {
@@ -11,5 +10,4 @@ export interface HoundsSystem {
     houndsZerocost: HoundsZerocost;
     houndsMinter: HoundsMinter;
     hounds: Hounds;
-    transferrableRoot: AlphaERC721;
 }

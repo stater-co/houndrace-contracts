@@ -17,6 +17,7 @@ library QueuesConstructor {
         address payments;
         address races;
 
+        address raceUploader;
         bytes4[][] targets;
     }
 }

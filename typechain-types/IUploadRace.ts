@@ -22,6 +22,39 @@ import type {
   OnEvent,
 } from "./common";
 
+export declare namespace Core {
+  export type StructStruct = {
+    name: string;
+    feeCurrency: string;
+    raceEntryTicketCurrency: string;
+    participants: BigNumberish[];
+    enqueueDates: BigNumberish[];
+    arena: BigNumberish;
+    raceEntryTicket: BigNumberish;
+    fee: BigNumberish;
+  };
+
+  export type StructStructOutput = [
+    string,
+    string,
+    string,
+    BigNumber[],
+    BigNumber[],
+    BigNumber,
+    BigNumber,
+    BigNumber
+  ] & {
+    name: string;
+    feeCurrency: string;
+    raceEntryTicketCurrency: string;
+    participants: BigNumber[];
+    enqueueDates: BigNumber[];
+    arena: BigNumber;
+    raceEntryTicket: BigNumber;
+    fee: BigNumber;
+  };
+}
+
 export declare namespace Payment {
   export type StructStruct = {
     from: string[];
@@ -49,67 +82,34 @@ export declare namespace Payment {
   };
 }
 
-export declare namespace Core {
-  export type StructStruct = {
-    name: string;
-    feeCurrency: string;
-    entryFeeCurrency: string;
-    participants: BigNumberish[];
-    enqueueDates: BigNumberish[];
-    arena: BigNumberish;
-    entryFee: BigNumberish;
-    fee: BigNumberish;
-    payments: Payment.StructStruct;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    BigNumber[],
-    BigNumber[],
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
-  ] & {
-    name: string;
-    feeCurrency: string;
-    entryFeeCurrency: string;
-    participants: BigNumber[];
-    enqueueDates: BigNumber[];
-    arena: BigNumber;
-    entryFee: BigNumber;
-    fee: BigNumber;
-    payments: Payment.StructStructOutput;
-  };
-}
-
 export declare namespace Race {
   export type StructStruct = {
     core: Core.StructStruct;
     queueId: BigNumberish;
     randomness: BigNumberish;
     seed: BytesLike;
+    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
     Core.StructStructOutput,
     BigNumber,
     BigNumber,
-    string
+    string,
+    Payment.StructStructOutput
   ] & {
     core: Core.StructStructOutput;
     queueId: BigNumber;
     randomness: BigNumber;
     seed: string;
+    payments: Payment.StructStructOutput;
   };
 }
 
 export interface IUploadRaceInterface extends utils.Interface {
   contractName: "IUploadRace";
   functions: {
-    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256,uint256,bytes))": FunctionFragment;
+    "uploadRace(uint256,uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256,uint256,bytes,(address[],address[],address[],uint256[][],uint256[][],uint8[])))": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -151,7 +151,7 @@ export interface IUploadRace extends BaseContract {
 
   functions: {
     uploadRace(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -159,7 +159,7 @@ export interface IUploadRace extends BaseContract {
   };
 
   uploadRace(
-    theId: BigNumberish,
+    raceId: BigNumberish,
     queueId: BigNumberish,
     race: Race.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -167,7 +167,7 @@ export interface IUploadRace extends BaseContract {
 
   callStatic: {
     uploadRace(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: CallOverrides
@@ -178,7 +178,7 @@ export interface IUploadRace extends BaseContract {
 
   estimateGas: {
     uploadRace(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -187,7 +187,7 @@ export interface IUploadRace extends BaseContract {
 
   populateTransaction: {
     uploadRace(
-      theId: BigNumberish,
+      raceId: BigNumberish,
       queueId: BigNumberish,
       race: Race.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }

@@ -7,6 +7,7 @@ import '../../genetics/interfaces/IMixGenes.sol';
 import '../../payments/interfaces/IPay.sol';
 import '../../shop/interfaces/ICalculateDiscount.sol';
 import '../../payments/params/MicroPayment.sol';
+import './RenamingProposal.sol';
 import '../../whitelist/Index.sol';
 import '../interfaces/IGetBreedCosts.sol';
 import './Constructor.sol';
@@ -16,8 +17,13 @@ import './Hound.sol';
 contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
     uint256 public id = 1;
     mapping(uint256 => Hound.Struct) public hounds;
+    mapping(uint256 => RenamingProposal.Struct) public renamingProposals;
 
-    event NewHound(uint256 indexed id, address indexed owner, Hound.Struct hound);
+    event NewHound(
+        uint256 indexed id, 
+        address indexed owner, 
+        Hound.Struct hound
+    );
 
     event BreedHound(
         uint256 parent1, 
@@ -27,18 +33,41 @@ contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
         address indexed owner
     );
 
-    event HoundBreedable(uint256 indexed id, uint256 price, bool status);
+    event HoundBreedable(
+        uint256 indexed id, 
+        uint256 price, 
+        bool status
+    );
 
-    event HoundStaminaUpdate(uint256 indexed id, uint32 stamina);
+    event HoundStaminaUpdate(
+        uint256 indexed id, 
+        uint32 stamina
+    );
 
-    event HoundBreedingStatusUpdate(uint256 indexed id, bool status);
+    event HoundBreedingStatusUpdate(
+        uint256 indexed id, 
+        bool status
+    );
 
-    event HoundQueueStatusUpdate(uint256 indexed id, uint256 indexed queueId);
+    event HoundQueueStatusUpdate(
+        uint256 indexed id, 
+        uint256 indexed queueId
+    );
+
+    event RenameProposal(
+        uint256 indexed id,
+        RenamingProposal.Struct renameProposal
+    );
 
     Constructor.Struct public control;
     bool public matingSeason = true;
 
-    constructor(Constructor.Struct memory input) ERC721(input.name,input.symbol) Whitelist(input.operators, input.targets) {
+    constructor(
+        Constructor.Struct memory input
+    ) 
+        ERC721(input.name,input.symbol) 
+        Whitelist(input.operators, input.targets) 
+    {
         control = input;
     }
 
@@ -55,8 +84,8 @@ contract Params is ERC721, ERC721Holder, ReentrancyGuard, Whitelist {
         return ownerOf(tokenId);
     }
 
-    function hound(uint256 theId) external view returns(Hound.Struct memory) {
-        return hounds[theId];
+    function hound(uint256 houndId) external view returns(Hound.Struct memory) {
+        return hounds[houndId];
     }
 
     function tokenURI(uint256 _tokenId) public view override returns (string memory) {

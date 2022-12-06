@@ -23,14 +23,14 @@ export async function run(
         arenasRestricted = await deployContract({
           name: 'ArenasRestricted',
           constructor: [[
-            'HoundRace Arenas', 
+            'Houndrace Arenas', 
             'HRA', 
             [owner.address],
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
             owner.address, 
-            [['0xe195c287']],
+            [['0xc5eab450']],
             60
           ]],
           props: {}
@@ -42,14 +42,14 @@ export async function run(
         arenasMethods = await deployContract({
           name: 'ArenasMethods',
           constructor: [[
-            'HoundRace Arenas', 
+            'Houndrace Arenas', 
             'HRA', 
             [owner.address],
             globalParams.address0, 
             globalParams.address0, 
             dependencies.paymentsAddress, 
             owner.address, 
-            [['0xe195c287']],
+            [['0xc5eab450']],
             60
           ]],
           props: {}
@@ -61,14 +61,14 @@ export async function run(
         arenas = await deployContract({
           name: 'Arenas',
           constructor: [[
-            'HoundRace Arenas', 
+            'Houndrace Arenas', 
             'HRA', 
             [owner.address], 
             arenasRestricted.address, 
             arenasMethods.address, 
             dependencies.paymentsAddress, 
             owner.address, 
-            [['0xe195c287']],
+            [['0xc5eab450']],
             60
           ]],
           props: {}

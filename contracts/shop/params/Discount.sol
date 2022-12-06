@@ -14,9 +14,11 @@ library Discount {
 
         uint256 dateStop;
 
+        uint256 amountToUsePerUsableDiscount;
+
         uint32 discount;
 
-        uint8 tokenType; // 0 - erc721 , 1 - erc1155 , 2 - geyser
+        uint8 tokenType; // 0 - erc721 , 1 - erc1155 , 2 - geyser , 3 - erc20
 
         bool usable;
 

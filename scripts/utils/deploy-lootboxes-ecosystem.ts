@@ -2,8 +2,7 @@ import DeploymentLogger from '../../logs/deployment/printers/deployment';
 import DeploymentError from '../../logs/deployment/printers/errors';
 import { run, network } from "hardhat";
 import { deployContract } from '../../plugins/test/deployContract';
-import { Lootboxes, LootboxesConstructor } from '../../typechain-types/Lootboxes';
-import { globalParams } from '../../common/params';
+import { HoundraceMysteryBoxes, LootboxesConstructor } from '../../typechain-types/HoundraceMysteryBoxes';
 
 
 const arrayfy = (input: any): Array<any> => {
@@ -15,29 +14,25 @@ async function main() {
   try {
 
     const lootboxesConstructor: LootboxesConstructor.StructStruct = {
-      name: "HoundRace Lootboxes",
-      allowedApprovals: [],
-      hounds: globalParams.address0,
-      payments: globalParams.address0,
-      alphadune: globalParams.address0,
-      canBeOpened: false
+      name: "Houndrace Mystery Boxes",
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
+      canBeOpened: true
     };
     const lootboxes = await deployContract({
-      name: 'Lootboxes',
+      name: 'HoundraceMysteryBoxes',
       constructor: [arrayfy(lootboxesConstructor)],
       props: {}
-    }) as Lootboxes;
+    }) as HoundraceMysteryBoxes;
     DeploymentLogger('export LOOTBOXES=' + lootboxes.address);
 
 
 
     const newLootboxesConstructor: LootboxesConstructor.StructStruct = {
-      name: "HoundRace Lootboxes",
-      allowedApprovals: [globalParams.OPENSEA_CONTRACT_ADDRESS],
-      hounds: String(process.env.HOUNDS),
-      payments: String(process.env.PAYMENTS),
-      alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
-      canBeOpened: true
+      name: "Houndrace Mystery Boxes",
+      operators: [String(process.env.ETH_ACCOUNT_PUBLIC_KEY)],
+      targets: [['0xc6e64e53','0x7c46a44b','0xedd0cb87']],
+      canBeOpened: false
     }
 
     try {

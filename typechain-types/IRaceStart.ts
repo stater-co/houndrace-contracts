@@ -22,44 +22,16 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Payment {
-  export type StructStruct = {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumberish[][];
-    amounts: BigNumberish[][];
-    paymentType: BigNumberish[];
-  };
-
-  export type StructStructOutput = [
-    string[],
-    string[],
-    string[],
-    BigNumber[][],
-    BigNumber[][],
-    number[]
-  ] & {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumber[][];
-    amounts: BigNumber[][];
-    paymentType: number[];
-  };
-}
-
 export declare namespace Core {
   export type StructStruct = {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
-    entryFee: BigNumberish;
+    raceEntryTicket: BigNumberish;
     fee: BigNumberish;
-    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
@@ -70,18 +42,16 @@ export declare namespace Core {
     BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
+    BigNumber
   ] & {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
-    entryFee: BigNumber;
+    raceEntryTicket: BigNumber;
     fee: BigNumber;
-    payments: Payment.StructStructOutput;
   };
 }
 
@@ -124,7 +94,7 @@ export declare namespace Queue {
 export interface IRaceStartInterface extends utils.Interface {
   contractName: "IRaceStart";
   functions: {
-    "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256,(address[],address[],address[],uint256[][],uint256[][],uint8[])),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
+    "raceStart(uint256,((string,address,address,uint256[],uint256[],uint256,uint256,uint256),uint256[],uint256,uint256,uint256,uint32,uint32,uint32,bool))": FunctionFragment;
   };
 
   encodeFunctionData(

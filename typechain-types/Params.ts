@@ -24,24 +24,13 @@ import type {
 
 export declare namespace GeneticsConstructor {
   export type StructStruct = {
-    male: BigNumberish[];
-    female: BigNumberish[];
     maleGenesProbability: BigNumberish;
     femaleGenesProbability: BigNumberish;
     geneticSequenceSignature: BigNumberish[];
     maxValues: BigNumberish[];
   };
 
-  export type StructStructOutput = [
-    number[],
-    number[],
-    number,
-    number,
-    number[],
-    number[]
-  ] & {
-    male: number[];
-    female: number[];
+  export type StructStructOutput = [number, number, number[], number[]] & {
     maleGenesProbability: number;
     femaleGenesProbability: number;
     geneticSequenceSignature: number[];
@@ -55,7 +44,7 @@ export interface ParamsInterface extends utils.Interface {
     "control()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "setGlobalParameters((uint32[72],uint32[72],uint32,uint32,uint32[13],uint32[72]))": FunctionFragment;
+    "setGlobalParameters((uint32,uint32,uint32[13],uint32[72]))": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
   };
 

@@ -70,21 +70,21 @@ export interface IUpdateHoundStamina extends BaseContract {
 
   functions: {
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   updateHoundStamina(
-    theId: BigNumberish,
+    houndId: BigNumberish,
     amount: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -94,7 +94,7 @@ export interface IUpdateHoundStamina extends BaseContract {
 
   estimateGas: {
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -102,7 +102,7 @@ export interface IUpdateHoundStamina extends BaseContract {
 
   populateTransaction: {
     updateHoundStamina(
-      theId: BigNumberish,
+      houndId: BigNumberish,
       amount: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

@@ -4,6 +4,6 @@ pragma solidity 0.8.17;
 
 interface IBoostHoundStamina {
 
-    function boostHoundStamina(uint256 theId, address user, uint256 payed) external payable;
+    function boostHoundStamina(uint256 houndId, address user, uint256 payed) external payable;
 
 }

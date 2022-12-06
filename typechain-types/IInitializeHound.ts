@@ -24,58 +24,24 @@ import type {
 
 export declare namespace Hound {
   export type StaminaStruct = {
-    staminaRefillCurrency: string;
     staminaLastUpdate: BigNumberish;
-    staminaRefill1x: BigNumberish;
     staminaValue: BigNumberish;
-    staminaPerTimeUnit: BigNumberish;
-    staminaCap: BigNumberish;
   };
 
-  export type StaminaStructOutput = [
-    string,
-    BigNumber,
-    BigNumber,
-    number,
-    number,
-    number
-  ] & {
-    staminaRefillCurrency: string;
+  export type StaminaStructOutput = [BigNumber, number] & {
     staminaLastUpdate: BigNumber;
-    staminaRefill1x: BigNumber;
     staminaValue: number;
-    staminaPerTimeUnit: number;
-    staminaCap: number;
   };
 
   export type BreedingStruct = {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
     lastBreed: BigNumberish;
-    breedingCooldown: BigNumberish;
-    breedingFee: BigNumberish;
-    breedingCooldownTimeUnit: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
+    externalBreedingFee: BigNumberish;
     availableToBreed: boolean;
   };
 
-  export type BreedingStructOutput = [
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    boolean
-  ] & {
-    breedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
+  export type BreedingStructOutput = [BigNumber, BigNumber, boolean] & {
     lastBreed: BigNumber;
-    breedingCooldown: BigNumber;
-    breedingFee: BigNumber;
-    breedingCooldownTimeUnit: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
+    externalBreedingFee: BigNumber;
     availableToBreed: boolean;
   };
 
@@ -144,7 +110,7 @@ export declare namespace Hound {
 export interface IInitializeHoundInterface extends utils.Interface {
   contractName: "IInitializeHound";
   functions: {
-    "initializeHound(uint256,address,((address,uint256,uint256,uint32,uint32,uint32),(address,address,uint256,uint256,uint256,uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)))": FunctionFragment;
+    "initializeHound(uint256,address,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)))": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -191,7 +157,7 @@ export interface IInitializeHound extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -199,7 +165,7 @@ export interface IInitializeHound extends BaseContract {
   initializeHound(
     onId: BigNumberish,
     owner: string,
-    theHound: Hound.StructStruct,
+    createdHound: Hound.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -207,7 +173,7 @@ export interface IInitializeHound extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -218,7 +184,7 @@ export interface IInitializeHound extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -227,7 +193,7 @@ export interface IInitializeHound extends BaseContract {
     initializeHound(
       onId: BigNumberish,
       owner: string,
-      theHound: Hound.StructStruct,
+      createdHound: Hound.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

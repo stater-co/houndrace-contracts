@@ -20,44 +20,16 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Payment {
-  export type StructStruct = {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumberish[][];
-    amounts: BigNumberish[][];
-    paymentType: BigNumberish[];
-  };
-
-  export type StructStructOutput = [
-    string[],
-    string[],
-    string[],
-    BigNumber[][],
-    BigNumber[][],
-    number[]
-  ] & {
-    from: string[];
-    to: string[];
-    currency: string[];
-    ids: BigNumber[][];
-    amounts: BigNumber[][];
-    paymentType: number[];
-  };
-}
-
 export declare namespace Core {
   export type StructStruct = {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumberish[];
     enqueueDates: BigNumberish[];
     arena: BigNumberish;
-    entryFee: BigNumberish;
+    raceEntryTicket: BigNumberish;
     fee: BigNumberish;
-    payments: Payment.StructStruct;
   };
 
   export type StructStructOutput = [
@@ -68,18 +40,16 @@ export declare namespace Core {
     BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber,
-    Payment.StructStructOutput
+    BigNumber
   ] & {
     name: string;
     feeCurrency: string;
-    entryFeeCurrency: string;
+    raceEntryTicketCurrency: string;
     participants: BigNumber[];
     enqueueDates: BigNumber[];
     arena: BigNumber;
-    entryFee: BigNumber;
+    raceEntryTicket: BigNumber;
     fee: BigNumber;
-    payments: Payment.StructStructOutput;
   };
 }
 
@@ -161,19 +131,19 @@ export interface IQueue extends BaseContract {
 
   functions: {
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[Queue.StructStructOutput]>;
   };
 
   queue(
-    theId: BigNumberish,
+    queueId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<Queue.StructStructOutput>;
 
   callStatic: {
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<Queue.StructStructOutput>;
   };
@@ -181,12 +151,12 @@ export interface IQueue extends BaseContract {
   filters: {};
 
   estimateGas: {
-    queue(theId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    queue(queueId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     queue(
-      theId: BigNumberish,
+      queueId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
