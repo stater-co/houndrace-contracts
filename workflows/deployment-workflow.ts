@@ -27,7 +27,6 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
 

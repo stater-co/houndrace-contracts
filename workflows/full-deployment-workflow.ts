@@ -37,7 +37,6 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
 
@@ -76,12 +75,15 @@ async function main() {
     await setShop({
         shopMethods: payments.shopMethods,
         shopRestricted: payments.shopRestricted,
+        shopZerocost: payments.shopZerocost,
         shop: payments.shop,
         houndsAddress: hounds.hounds.address,
         constructor: {
             methods: payments.shopMethods.address,
+            zerocost: payments.shopZerocost.address,
+            discounts: payments.shop.address,
             restricted: payments.shopRestricted.address,
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            discountsReceiverWallet: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             operators: [],
             targets: []
         }
@@ -102,7 +104,8 @@ async function main() {
             queues: queues.queues.address,
             zerocost: queues.queueZerocost.address,
             operators: [],
-            targets: []
+            targets: [],
+            raceUploader: String(process.env.ETH_ACCOUNT_PUBLIC_KEY)
         }
     });
 
@@ -135,11 +138,14 @@ async function main() {
         constructor: {
            name: "Houndrace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
@@ -152,10 +158,11 @@ async function main() {
            },
            fees: {
             platformBreedFeeCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
-            currency: globalParams.address0,
+            breedTransactionFeeCurrency: globalParams.address0,
+            renameFeeCurrency: globalParams.address0,
+            renameFee: 50000,
             platformBreedFee: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            breedTransactionFee: "0x2386F26FC10000"
            }
         }
     });
@@ -189,11 +196,14 @@ async function main() {
         constructor: {
            name: "Houndrace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             zerocost: hounds.houndsZerocost.address,
             houndsModifier: hounds.houndsModifier.address,
             minter: hounds.houndsMinter.address,
@@ -205,11 +215,12 @@ async function main() {
             genetics: genetics.genetics.address
            },
            fees: {
-            platformBreedFeeCurrency: payments.houndracePotions.address,
-            breedFeeCurrency: payments.houndracePotions.address,
-            currency: payments.houndracePotions.address,
+            platformBreedFeeCurrency: payments.houndPotions.address,
+            breedTransactionFeeCurrency: payments.houndPotions.address,
+            renameFeeCurrency: payments.houndPotions.address,
             platformBreedFee: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            breedTransactionFee: "0x2386F26FC10000",
+            renameFee: 50000
            }
         }
     });
