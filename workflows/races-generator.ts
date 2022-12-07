@@ -30,7 +30,6 @@ async function main() {
     const hounds: HoundsSystem = await runHounds({
         shopsAddress: payments.shop.address,
         paymentsAddress: payments.payments.address,
-        transferrableRoot: payments.testErc721,
         geneticsAddress: genetics.genetics.address
     });
 
@@ -58,11 +57,14 @@ async function main() {
         constructor: {
            name: "Houndrace",
            symbol: "HR",
+           breeding: globalParams.breedingConstructor,
+           stamina: globalParams.staminaConstructor,
            defaultHound: globalParams.defaultHound,
            operators: [],
            targets: [],
            boilerplate: {
-            alphadune: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsInitializer: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
+            houndsRenameHandler: String(process.env.ETH_ACCOUNT_PUBLIC_KEY),
             houndsModifier: hounds.houndsModifier.address,
             zerocost: hounds.houndsZerocost.address,
             minter: hounds.houndsMinter.address,
@@ -75,10 +77,11 @@ async function main() {
            },
            fees: {
             platformBreedFeeCurrency: globalParams.address0,
-            breedFeeCurrency: globalParams.address0,
-            currency: globalParams.address0,
+            breedTransactionFeeCurrency: globalParams.address0,
+            renameFeeCurrency: globalParams.address0,
+            renameFee: 50000,
             platformBreedFee: "0xB1A2BC2EC50000",
-            breedFee: "0x2386F26FC10000"
+            breedTransactionFee: "0x2386F26FC10000"
            }
         }
     });

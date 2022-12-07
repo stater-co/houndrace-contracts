@@ -59,6 +59,7 @@ const config: HardhatUserConfig = {
   },
   mocha: {
     reporter: 'eth-gas-reporter',
+    timeout: 100000000,
     reporterOptions : {
 
     }
