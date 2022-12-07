@@ -141,15 +141,11 @@ export async function plot(
 			}
 		}
 	];
-
-	console.log("OK HEHE 1");
 	
 	const chartCallback: ChartCallback = (ChartJS) => {
 		ChartJS.defaults.responsive = true;
 		ChartJS.defaults.maintainAspectRatio = false;
 	};
-
-	console.log("OK HEHE 2");
 
 	const chartJSNodeCanvas = new ChartJSNodeCanvas({ 
 		width: config.imageConfiguration.resolution.width, 
@@ -157,11 +153,6 @@ export async function plot(
 		chartCallback 
 	});
 
-	console.log("OK HEHE 3");
 	const buffer = await chartJSNodeCanvas.renderToBuffer(config.chartConfiguration);
-
-	console.log("OK HEHE 4");
 	await fs.writeFile(config.imageConfiguration.path + config.imageConfiguration.name + "." + config.imageConfiguration.extension.toLowerCase(), buffer, 'base64');
-
-	console.log("OK HEHE 5");
 }
