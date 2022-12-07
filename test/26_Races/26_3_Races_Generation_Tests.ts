@@ -104,7 +104,6 @@ async function generationTests(
             ids: ids,
             participants: participants
           })
-          console.log(response.data.statistics);
           const winners: Array<number> = response.data.participants.map((part: any) => Number(part.hex));
           performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
 
@@ -193,6 +192,7 @@ async function generationTests(
         plotConfiguration.chartConfiguration.data.datasets[0].data = performances;
         plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[4].toString()];
         await plot(plotConfiguration);
+
         resolve();
 
       });
@@ -206,7 +206,6 @@ async function generationTests(
         
           IDS.push(ids);  
 
-          console.log(participants);
           const response: any = await axios.post("http://localhost:3000/races/generate", {
             race: dependencies.race,
             arena: dependencies.arena,

@@ -1,5 +1,4 @@
 import { ChartJSNodeCanvas, ChartCallback } from '.';
-import { ChartConfiguration } from 'chart.js';
 import { promises as fs } from 'fs';
 
 export interface Resolution {
@@ -123,7 +122,7 @@ export const stringifiedArrayOfColors: Array<string> = Array.from({length: array
 
 export interface PlottingConfiguration {
 	imageConfiguration: ImageConfiguration;
-	chartConfiguration: ChartConfiguration;
+	chartConfiguration: any;
 }
 
 export async function plot(
@@ -155,6 +154,5 @@ export async function plot(
 	});
 
 	const buffer = await chartJSNodeCanvas.renderToBuffer(config.chartConfiguration);
-
 	await fs.writeFile(config.imageConfiguration.path + config.imageConfiguration.name + "." + config.imageConfiguration.extension.toLowerCase(), buffer, 'base64');
 }
