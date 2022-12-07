@@ -153,8 +153,6 @@ async function generationTests(
           mkdirSync(performance, { recursive: true });
         }
 
-        console.log("OK SO FAR 1");
-
         if ( plotConfiguration.chartConfiguration.options ) {
           if ( plotConfiguration.chartConfiguration.options.plugins ) {
             if ( plotConfiguration.chartConfiguration.options.plugins.title ) {
@@ -166,8 +164,6 @@ async function generationTests(
           }
         }
 
-        console.log("OK SO FAR 2");
-
         for ( let i = 0 , l = initialHoundsNumber ; i < l ; ++i ) {
           plotConfiguration.imageConfiguration.name = "Hound #" + ids[i];
           plotConfiguration.imageConfiguration.path = winratePath;
@@ -175,11 +171,8 @@ async function generationTests(
           plotConfiguration.chartConfiguration.data.datasets[0].label = allHoundsLabels[i] + " statistics";
           plotConfiguration.chartConfiguration.data.datasets[0].data = [topWinners[i].totalRuns,topWinners[i].firstPlace,topWinners[i].secondPlace,topWinners[i].thirdPlace];
           plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = houndStatisticsUsedColors;
-          console.log("Plotting: " + JSON.stringify(plotConfiguration));
           await plot(plotConfiguration);
         }
-
-        console.log("OK SO FAR 3");
 
         if ( plotConfiguration.chartConfiguration.options ) {
           if ( plotConfiguration.chartConfiguration.options.plugins ) {
@@ -192,8 +185,6 @@ async function generationTests(
           }
         }
 
-        console.log("OK SO FAR 4");
-
         plotConfiguration.imageConfiguration.name = "Hounds performances";
         plotConfiguration.imageConfiguration.path = performance;
         plotConfiguration.chartConfiguration.data.labels = ids.map((id) => "Hound #" + id);
@@ -201,8 +192,6 @@ async function generationTests(
         plotConfiguration.chartConfiguration.data.datasets[0].data = performances;
         plotConfiguration.chartConfiguration.data.datasets[0].backgroundColor = [stringifiedArrayOfColors[4].toString()];
         await plot(plotConfiguration);
-
-        console.log("OK SO FAR 5");
 
         resolve();
 
