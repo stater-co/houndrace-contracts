@@ -24,7 +24,6 @@ contract RacesRestricted is Params {
         uint32 staminaCost = IStaminaCostOf(control.queues).staminaCostOf(queueId);
 
         for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
-            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0) != 0);
             IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
         }
 
