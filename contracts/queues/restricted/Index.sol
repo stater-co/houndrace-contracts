@@ -58,7 +58,7 @@ contract QueuesRestricted is Params {
                 IPay(control.payments).pay{
                     value: arenaCurrency == address(0) ? queues[queueId].core.raceEntryTicket : 0
                 }(
-                    address(this),
+                    control.payments,
                     houndOwner,
                     arenaCurrency,
                     new uint256[](0),
