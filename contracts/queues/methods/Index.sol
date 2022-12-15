@@ -145,6 +145,10 @@ contract QueuesMethods is Params {
 
             IRaceStart(control.races).raceStart(queueId, queues[queueId]);
 
+            for ( uint256 i = 0 ; i < queues[queueId].core.participants.length ; ++i ) {
+                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], 0) != 0);
+            }
+
             delete queues[queueId].core.participants;
             delete queues[queueId].core.enqueueDates;
 
