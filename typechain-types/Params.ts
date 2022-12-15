@@ -22,356 +22,106 @@ import type {
   OnEvent,
 } from "./common";
 
-export declare namespace Hound {
-  export type StaminaStruct = {
-    staminaLastUpdate: BigNumberish;
-    staminaValue: BigNumberish;
-  };
-
-  export type StaminaStructOutput = [BigNumber, number] & {
-    staminaLastUpdate: BigNumber;
-    staminaValue: number;
-  };
-
-  export type BreedingStruct = {
-    lastBreed: BigNumberish;
-    externalBreedingFee: BigNumberish;
-    availableToBreed: boolean;
-  };
-
-  export type BreedingStructOutput = [BigNumber, BigNumber, boolean] & {
-    lastBreed: BigNumber;
-    externalBreedingFee: BigNumber;
-    availableToBreed: boolean;
-  };
-
-  export type IdentityStruct = {
-    maleParent: BigNumberish;
-    femaleParent: BigNumberish;
-    generation: BigNumberish;
-    birthDate: BigNumberish;
-    specie: BigNumberish;
-    geneticSequence: BigNumberish[];
-    extensionTraits: string;
-  };
-
-  export type IdentityStructOutput = [
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    BigNumber,
-    number[],
-    string
-  ] & {
-    maleParent: BigNumber;
-    femaleParent: BigNumber;
-    generation: BigNumber;
-    birthDate: BigNumber;
-    specie: BigNumber;
-    geneticSequence: number[];
-    extensionTraits: string;
-  };
-
-  export type ProfileStruct = {
-    name: string;
-    token_uri: string;
-    runningOn: BigNumberish;
-    custom: boolean;
-  };
-
-  export type ProfileStructOutput = [string, string, BigNumber, boolean] & {
-    name: string;
-    token_uri: string;
-    runningOn: BigNumber;
-    custom: boolean;
-  };
-
+export declare namespace ShopConstructor {
   export type StructStruct = {
-    stamina: Hound.StaminaStruct;
-    breeding: Hound.BreedingStruct;
-    identity: Hound.IdentityStruct;
-    profile: Hound.ProfileStruct;
+    operators: string[];
+    methods: string;
+    zerocost: string;
+    discounts: string;
+    restricted: string;
+    discountsReceiverWallet: string;
+    targets: BytesLike[][];
   };
 
   export type StructStructOutput = [
-    Hound.StaminaStructOutput,
-    Hound.BreedingStructOutput,
-    Hound.IdentityStructOutput,
-    Hound.ProfileStructOutput
+    string[],
+    string,
+    string,
+    string,
+    string,
+    string,
+    string[][]
   ] & {
-    stamina: Hound.StaminaStructOutput;
-    breeding: Hound.BreedingStructOutput;
-    identity: Hound.IdentityStructOutput;
-    profile: Hound.ProfileStructOutput;
+    operators: string[];
+    methods: string;
+    zerocost: string;
+    discounts: string;
+    restricted: string;
+    discountsReceiverWallet: string;
+    targets: string[][];
+  };
+}
+
+export declare namespace Discount {
+  export type StructStruct = {
+    tokenContract: string;
+    tokenIds: BigNumberish[];
+    dateStart: BigNumberish;
+    dateStop: BigNumberish;
+    amountToUsePerUsableDiscount: BigNumberish;
+    discount: BigNumberish;
+    tokenType: BigNumberish;
+    usable: boolean;
   };
 
-  export type ConstructorBreedingStruct = {
-    externalBreedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
-    breedingCooldown: BigNumberish;
-    breedingCooldownTimeUnit: BigNumberish;
-    refillBreedingCooldownCost: BigNumberish;
-  };
-
-  export type ConstructorBreedingStructOutput = [
+  export type StructStructOutput = [
     string,
-    string,
+    BigNumber[],
     BigNumber,
     BigNumber,
-    BigNumber
-  ] & {
-    externalBreedingFeeCurrency: string;
-    breedingCooldownCurrency: string;
-    breedingCooldown: BigNumber;
-    breedingCooldownTimeUnit: BigNumber;
-    refillBreedingCooldownCost: BigNumber;
-  };
-
-  export type ConstructorStaminaStruct = {
-    staminaRefillCurrency: string;
-    staminaRefill1x: BigNumberish;
-    staminaPerTimeUnit: BigNumberish;
-    staminaCap: BigNumberish;
-  };
-
-  export type ConstructorStaminaStructOutput = [
-    string,
     BigNumber,
     number,
-    number
+    number,
+    boolean
   ] & {
-    staminaRefillCurrency: string;
-    staminaRefill1x: BigNumber;
-    staminaPerTimeUnit: number;
-    staminaCap: number;
-  };
-}
-
-export declare namespace ConstructorBoilerplate {
-  export type StructStruct = {
-    restricted: string;
-    minter: string;
-    houndsModifier: string;
-    zerocost: string;
-    hounds: string;
-    payments: string;
-    shop: string;
-    races: string;
-    genetics: string;
-    houndsInitializer: string;
-    houndsRenameHandler: string;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string,
-    string
-  ] & {
-    restricted: string;
-    minter: string;
-    houndsModifier: string;
-    zerocost: string;
-    hounds: string;
-    payments: string;
-    shop: string;
-    races: string;
-    genetics: string;
-    houndsInitializer: string;
-    houndsRenameHandler: string;
-  };
-}
-
-export declare namespace ConstructorFees {
-  export type StructStruct = {
-    renameFeeCurrency: string;
-    platformBreedFeeCurrency: string;
-    breedTransactionFeeCurrency: string;
-    platformBreedFee: BigNumberish;
-    breedTransactionFee: BigNumberish;
-    renameFee: BigNumberish;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    string,
-    BigNumber,
-    BigNumber,
-    BigNumber
-  ] & {
-    renameFeeCurrency: string;
-    platformBreedFeeCurrency: string;
-    breedTransactionFeeCurrency: string;
-    platformBreedFee: BigNumber;
-    breedTransactionFee: BigNumber;
-    renameFee: BigNumber;
-  };
-}
-
-export declare namespace Constructor {
-  export type StructStruct = {
-    name: string;
-    symbol: string;
-    defaultHound: Hound.StructStruct;
-    breeding: Hound.ConstructorBreedingStruct;
-    stamina: Hound.ConstructorStaminaStruct;
-    operators: string[];
-    targets: BytesLike[][];
-    boilerplate: ConstructorBoilerplate.StructStruct;
-    fees: ConstructorFees.StructStruct;
-  };
-
-  export type StructStructOutput = [
-    string,
-    string,
-    Hound.StructStructOutput,
-    Hound.ConstructorBreedingStructOutput,
-    Hound.ConstructorStaminaStructOutput,
-    string[],
-    string[][],
-    ConstructorBoilerplate.StructStructOutput,
-    ConstructorFees.StructStructOutput
-  ] & {
-    name: string;
-    symbol: string;
-    defaultHound: Hound.StructStructOutput;
-    breeding: Hound.ConstructorBreedingStructOutput;
-    stamina: Hound.ConstructorStaminaStructOutput;
-    operators: string[];
-    targets: string[][];
-    boilerplate: ConstructorBoilerplate.StructStructOutput;
-    fees: ConstructorFees.StructStructOutput;
-  };
-}
-
-export declare namespace RenamingProposal {
-  export type StructStruct = {
-    proposal: string;
-    accepted: boolean;
-    sessionActive: boolean;
-  };
-
-  export type StructStructOutput = [string, boolean, boolean] & {
-    proposal: string;
-    accepted: boolean;
-    sessionActive: boolean;
+    tokenContract: string;
+    tokenIds: BigNumber[];
+    dateStart: BigNumber;
+    dateStop: BigNumber;
+    amountToUsePerUsableDiscount: BigNumber;
+    discount: number;
+    tokenType: number;
+    usable: boolean;
   };
 }
 
 export interface ParamsInterface extends utils.Interface {
   contractName: "Params";
   functions: {
-    "approve(address,uint256)": FunctionFragment;
-    "balanceOf(address)": FunctionFragment;
     "control()": FunctionFragment;
-    "getApproved(uint256)": FunctionFragment;
-    "hound(uint256)": FunctionFragment;
-    "houndOwner(uint256)": FunctionFragment;
-    "hounds(uint256)": FunctionFragment;
+    "discounts(uint256)": FunctionFragment;
+    "getDiscount(uint256)": FunctionFragment;
     "id()": FunctionFragment;
-    "isApprovedForAll(address,address)": FunctionFragment;
-    "matingSeason()": FunctionFragment;
-    "name()": FunctionFragment;
-    "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
-    "ownerOf(uint256)": FunctionFragment;
-    "renamingProposals(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
-    "safeTransferFrom(address,address,uint256)": FunctionFragment;
-    "setApprovalForAll(address,bool)": FunctionFragment;
-    "setGlobalParameters((string,string,((uint256,uint32),(uint256,uint256,bool),(uint256,uint256,uint256,uint256,uint256,uint32[72],string),(string,string,uint256,bool)),(address,address,uint256,uint256,uint256),(address,uint256,uint32,uint32),address[],bytes4[][],(address,address,address,address,address,address,address,address,address,address,address),(address,address,address,uint256,uint256,uint256)))": FunctionFragment;
-    "setMatingSeason(bool)": FunctionFragment;
-    "supportsInterface(bytes4)": FunctionFragment;
-    "symbol()": FunctionFragment;
-    "tokenURI(uint256)": FunctionFragment;
-    "transferFrom(address,address,uint256)": FunctionFragment;
+    "setGlobalParameters((address[],address,address,address,address,address,bytes4[][]))": FunctionFragment;
+    "totalDiscounts()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "whitelists(address,uint256)": FunctionFragment;
   };
 
-  encodeFunctionData(
-    functionFragment: "approve",
-    values: [string, BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
   encodeFunctionData(functionFragment: "control", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getApproved",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(functionFragment: "hound", values: [BigNumberish]): string;
-  encodeFunctionData(
-    functionFragment: "houndOwner",
+    functionFragment: "discounts",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "hounds",
+    functionFragment: "getDiscount",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "id", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "isApprovedForAll",
-    values: [string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "matingSeason",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "onERC721Received",
-    values: [string, string, BigNumberish, BytesLike]
-  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "ownerOf",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renamingProposals",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "safeTransferFrom",
-    values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setApprovalForAll",
-    values: [string, boolean]
-  ): string;
-  encodeFunctionData(
     functionFragment: "setGlobalParameters",
-    values: [Constructor.StructStruct]
+    values: [ShopConstructor.StructStruct]
   ): string;
   encodeFunctionData(
-    functionFragment: "setMatingSeason",
-    values: [boolean]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "supportsInterface",
-    values: [BytesLike]
-  ): string;
-  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "tokenURI",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferFrom",
-    values: [string, string, BigNumberish]
+    functionFragment: "totalDiscounts",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
@@ -382,46 +132,16 @@ export interface ParamsInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
 
-  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "control", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "discounts", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getApproved",
+    functionFragment: "getDiscount",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "hound", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "houndOwner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "hounds", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "id", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "isApprovedForAll",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "matingSeason",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "onERC721Received",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renamingProposals",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "safeTransferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -429,17 +149,7 @@ export interface ParamsInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setMatingSeason",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "supportsInterface",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "transferFrom",
+    functionFragment: "totalDiscounts",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -449,96 +159,20 @@ export interface ParamsInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "whitelists", data: BytesLike): Result;
 
   events: {
-    "Approval(address,address,uint256)": EventFragment;
-    "ApprovalForAll(address,address,bool)": EventFragment;
-    "BreedHound(uint256,uint256,uint256,tuple,address)": EventFragment;
-    "HoundBreedable(uint256,uint256,bool)": EventFragment;
-    "HoundBreedingStatusUpdate(uint256,bool)": EventFragment;
-    "HoundQueueStatusUpdate(uint256,uint256)": EventFragment;
-    "HoundStaminaUpdate(uint256,uint32)": EventFragment;
-    "NewHound(uint256,address,tuple)": EventFragment;
+    "NewDiscount(uint256,tuple)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
-    "RenameProposal(uint256,tuple)": EventFragment;
-    "Transfer(address,address,uint256)": EventFragment;
   };
 
-  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "BreedHound"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HoundBreedable"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HoundBreedingStatusUpdate"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HoundQueueStatusUpdate"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "HoundStaminaUpdate"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewHound"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "NewDiscount"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "RenameProposal"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
-export type ApprovalEvent = TypedEvent<
-  [string, string, BigNumber],
-  { owner: string; approved: string; tokenId: BigNumber }
+export type NewDiscountEvent = TypedEvent<
+  [BigNumber, Discount.StructStructOutput],
+  { id: BigNumber; discount: Discount.StructStructOutput }
 >;
 
-export type ApprovalEventFilter = TypedEventFilter<ApprovalEvent>;
-
-export type ApprovalForAllEvent = TypedEvent<
-  [string, string, boolean],
-  { owner: string; operator: string; approved: boolean }
->;
-
-export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
-
-export type BreedHoundEvent = TypedEvent<
-  [BigNumber, BigNumber, BigNumber, Hound.StructStructOutput, string],
-  {
-    parent1: BigNumber;
-    parent2: BigNumber;
-    id: BigNumber;
-    offspring: Hound.StructStructOutput;
-    owner: string;
-  }
->;
-
-export type BreedHoundEventFilter = TypedEventFilter<BreedHoundEvent>;
-
-export type HoundBreedableEvent = TypedEvent<
-  [BigNumber, BigNumber, boolean],
-  { id: BigNumber; price: BigNumber; status: boolean }
->;
-
-export type HoundBreedableEventFilter = TypedEventFilter<HoundBreedableEvent>;
-
-export type HoundBreedingStatusUpdateEvent = TypedEvent<
-  [BigNumber, boolean],
-  { id: BigNumber; status: boolean }
->;
-
-export type HoundBreedingStatusUpdateEventFilter =
-  TypedEventFilter<HoundBreedingStatusUpdateEvent>;
-
-export type HoundQueueStatusUpdateEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { id: BigNumber; queueId: BigNumber }
->;
-
-export type HoundQueueStatusUpdateEventFilter =
-  TypedEventFilter<HoundQueueStatusUpdateEvent>;
-
-export type HoundStaminaUpdateEvent = TypedEvent<
-  [BigNumber, number],
-  { id: BigNumber; stamina: number }
->;
-
-export type HoundStaminaUpdateEventFilter =
-  TypedEventFilter<HoundStaminaUpdateEvent>;
-
-export type NewHoundEvent = TypedEvent<
-  [BigNumber, string, Hound.StructStructOutput],
-  { id: BigNumber; owner: string; hound: Hound.StructStructOutput }
->;
-
-export type NewHoundEventFilter = TypedEventFilter<NewHoundEvent>;
+export type NewDiscountEventFilter = TypedEventFilter<NewDiscountEvent>;
 
 export type OwnershipTransferredEvent = TypedEvent<
   [string, string],
@@ -547,20 +181,6 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
-
-export type RenameProposalEvent = TypedEvent<
-  [BigNumber, RenamingProposal.StructStructOutput],
-  { id: BigNumber; renameProposal: RenamingProposal.StructStructOutput }
->;
-
-export type RenameProposalEventFilter = TypedEventFilter<RenameProposalEvent>;
-
-export type TransferEvent = TypedEvent<
-  [string, string, BigNumber],
-  { from: string; to: string; tokenId: BigNumber }
->;
-
-export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
 export interface Params extends BaseContract {
   contractName: "Params";
@@ -590,159 +210,52 @@ export interface Params extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        Hound.StructStructOutput,
-        Hound.ConstructorBreedingStructOutput,
-        Hound.ConstructorStaminaStructOutput,
-        ConstructorBoilerplate.StructStructOutput,
-        ConstructorFees.StructStructOutput
-      ] & {
-        name: string;
-        symbol: string;
-        defaultHound: Hound.StructStructOutput;
-        breeding: Hound.ConstructorBreedingStructOutput;
-        stamina: Hound.ConstructorStaminaStructOutput;
-        boilerplate: ConstructorBoilerplate.StructStructOutput;
-        fees: ConstructorFees.StructStructOutput;
+      [string, string, string, string, string] & {
+        methods: string;
+        zerocost: string;
+        discounts: string;
+        restricted: string;
+        discountsReceiverWallet: string;
       }
     >;
 
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    hound(
-      houndId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[Hound.StructStructOutput]>;
-
-    houndOwner(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    hounds(
+    discounts(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [
-        Hound.StaminaStructOutput,
-        Hound.BreedingStructOutput,
-        Hound.IdentityStructOutput,
-        Hound.ProfileStructOutput
-      ] & {
-        stamina: Hound.StaminaStructOutput;
-        breeding: Hound.BreedingStructOutput;
-        identity: Hound.IdentityStructOutput;
-        profile: Hound.ProfileStructOutput;
+      [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+        tokenContract: string;
+        dateStart: BigNumber;
+        dateStop: BigNumber;
+        amountToUsePerUsableDiscount: BigNumber;
+        discount: number;
+        tokenType: number;
+        usable: boolean;
       }
     >;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[Discount.StructStructOutput]>;
 
     id(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    isApprovedForAll(
-      owner: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    matingSeason(overrides?: CallOverrides): Promise<[boolean]>;
-
-    name(overrides?: CallOverrides): Promise<[string]>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     owner(overrides?: CallOverrides): Promise<[string]>;
-
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    renamingProposals(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, boolean, boolean] & {
-        proposal: string;
-        accepted: boolean;
-        sessionActive: boolean;
-      }
-    >;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    "safeTransferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    "safeTransferFrom(address,address,uint256,bytes)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setMatingSeason(
-      _matingSeason: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<[boolean]>;
-
-    symbol(overrides?: CallOverrides): Promise<[string]>;
-
-    tokenURI(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    totalDiscounts(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     transferOwnership(
       newOwner: string,
@@ -756,150 +269,52 @@ export interface Params extends BaseContract {
     ): Promise<[string]>;
   };
 
-  approve(
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-
   control(
     overrides?: CallOverrides
   ): Promise<
-    [
-      string,
-      string,
-      Hound.StructStructOutput,
-      Hound.ConstructorBreedingStructOutput,
-      Hound.ConstructorStaminaStructOutput,
-      ConstructorBoilerplate.StructStructOutput,
-      ConstructorFees.StructStructOutput
-    ] & {
-      name: string;
-      symbol: string;
-      defaultHound: Hound.StructStructOutput;
-      breeding: Hound.ConstructorBreedingStructOutput;
-      stamina: Hound.ConstructorStaminaStructOutput;
-      boilerplate: ConstructorBoilerplate.StructStructOutput;
-      fees: ConstructorFees.StructStructOutput;
+    [string, string, string, string, string] & {
+      methods: string;
+      zerocost: string;
+      discounts: string;
+      restricted: string;
+      discountsReceiverWallet: string;
     }
   >;
 
-  getApproved(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
-  hound(
-    houndId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<Hound.StructStructOutput>;
-
-  houndOwner(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  hounds(
+  discounts(
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<
-    [
-      Hound.StaminaStructOutput,
-      Hound.BreedingStructOutput,
-      Hound.IdentityStructOutput,
-      Hound.ProfileStructOutput
-    ] & {
-      stamina: Hound.StaminaStructOutput;
-      breeding: Hound.BreedingStructOutput;
-      identity: Hound.IdentityStructOutput;
-      profile: Hound.ProfileStructOutput;
+    [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+      tokenContract: string;
+      dateStart: BigNumber;
+      dateStop: BigNumber;
+      amountToUsePerUsableDiscount: BigNumber;
+      discount: number;
+      tokenType: number;
+      usable: boolean;
     }
   >;
+
+  getDiscount(
+    discountId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<Discount.StructStructOutput>;
 
   id(overrides?: CallOverrides): Promise<BigNumber>;
 
-  isApprovedForAll(
-    owner: string,
-    operator: string,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  matingSeason(overrides?: CallOverrides): Promise<boolean>;
-
-  name(overrides?: CallOverrides): Promise<string>;
-
-  onERC721Received(
-    arg0: string,
-    arg1: string,
-    arg2: BigNumberish,
-    arg3: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   owner(overrides?: CallOverrides): Promise<string>;
-
-  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  renamingProposals(
-    arg0: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<
-    [string, boolean, boolean] & {
-      proposal: string;
-      accepted: boolean;
-      sessionActive: boolean;
-    }
-  >;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  "safeTransferFrom(address,address,uint256)"(
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  "safeTransferFrom(address,address,uint256,bytes)"(
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setApprovalForAll(
-    operator: string,
-    approved: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   setGlobalParameters(
-    globalParameters: Constructor.StructStruct,
+    globalParameters: ShopConstructor.StructStruct,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setMatingSeason(
-    _matingSeason: boolean,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  supportsInterface(
-    interfaceId: BytesLike,
-    overrides?: CallOverrides
-  ): Promise<boolean>;
-
-  symbol(overrides?: CallOverrides): Promise<string>;
-
-  tokenURI(_tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-  transferFrom(
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferOwnership(
     newOwner: string,
@@ -913,154 +328,50 @@ export interface Params extends BaseContract {
   ): Promise<string>;
 
   callStatic: {
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(
       overrides?: CallOverrides
     ): Promise<
-      [
-        string,
-        string,
-        Hound.StructStructOutput,
-        Hound.ConstructorBreedingStructOutput,
-        Hound.ConstructorStaminaStructOutput,
-        ConstructorBoilerplate.StructStructOutput,
-        ConstructorFees.StructStructOutput
-      ] & {
-        name: string;
-        symbol: string;
-        defaultHound: Hound.StructStructOutput;
-        breeding: Hound.ConstructorBreedingStructOutput;
-        stamina: Hound.ConstructorStaminaStructOutput;
-        boilerplate: ConstructorBoilerplate.StructStructOutput;
-        fees: ConstructorFees.StructStructOutput;
+      [string, string, string, string, string] & {
+        methods: string;
+        zerocost: string;
+        discounts: string;
+        restricted: string;
+        discountsReceiverWallet: string;
       }
     >;
 
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    hound(
-      houndId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<Hound.StructStructOutput>;
-
-    houndOwner(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    hounds(
+    discounts(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [
-        Hound.StaminaStructOutput,
-        Hound.BreedingStructOutput,
-        Hound.IdentityStructOutput,
-        Hound.ProfileStructOutput
-      ] & {
-        stamina: Hound.StaminaStructOutput;
-        breeding: Hound.BreedingStructOutput;
-        identity: Hound.IdentityStructOutput;
-        profile: Hound.ProfileStructOutput;
+      [string, BigNumber, BigNumber, BigNumber, number, number, boolean] & {
+        tokenContract: string;
+        dateStart: BigNumber;
+        dateStop: BigNumber;
+        amountToUsePerUsableDiscount: BigNumber;
+        discount: number;
+        tokenType: number;
+        usable: boolean;
       }
     >;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<Discount.StructStructOutput>;
 
     id(overrides?: CallOverrides): Promise<BigNumber>;
 
-    isApprovedForAll(
-      owner: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    matingSeason(overrides?: CallOverrides): Promise<boolean>;
-
-    name(overrides?: CallOverrides): Promise<string>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     owner(overrides?: CallOverrides): Promise<string>;
-
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
-
-    renamingProposals(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<
-      [string, boolean, boolean] & {
-        proposal: string;
-        accepted: boolean;
-        sessionActive: boolean;
-      }
-    >;
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    "safeTransferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "safeTransferFrom(address,address,uint256,bytes)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: ShopConstructor.StructStruct,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setMatingSeason(
-      _matingSeason: boolean,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    symbol(overrides?: CallOverrides): Promise<string>;
-
-    tokenURI(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -1075,91 +386,14 @@ export interface Params extends BaseContract {
   };
 
   filters: {
-    "Approval(address,address,uint256)"(
-      owner?: string | null,
-      approved?: string | null,
-      tokenId?: BigNumberish | null
-    ): ApprovalEventFilter;
-    Approval(
-      owner?: string | null,
-      approved?: string | null,
-      tokenId?: BigNumberish | null
-    ): ApprovalEventFilter;
-
-    "ApprovalForAll(address,address,bool)"(
-      owner?: string | null,
-      operator?: string | null,
-      approved?: null
-    ): ApprovalForAllEventFilter;
-    ApprovalForAll(
-      owner?: string | null,
-      operator?: string | null,
-      approved?: null
-    ): ApprovalForAllEventFilter;
-
-    "BreedHound(uint256,uint256,uint256,tuple,address)"(
-      parent1?: null,
-      parent2?: null,
+    "NewDiscount(uint256,tuple)"(
       id?: BigNumberish | null,
-      offspring?: null,
-      owner?: string | null
-    ): BreedHoundEventFilter;
-    BreedHound(
-      parent1?: null,
-      parent2?: null,
+      discount?: null
+    ): NewDiscountEventFilter;
+    NewDiscount(
       id?: BigNumberish | null,
-      offspring?: null,
-      owner?: string | null
-    ): BreedHoundEventFilter;
-
-    "HoundBreedable(uint256,uint256,bool)"(
-      id?: BigNumberish | null,
-      price?: null,
-      status?: null
-    ): HoundBreedableEventFilter;
-    HoundBreedable(
-      id?: BigNumberish | null,
-      price?: null,
-      status?: null
-    ): HoundBreedableEventFilter;
-
-    "HoundBreedingStatusUpdate(uint256,bool)"(
-      id?: BigNumberish | null,
-      status?: null
-    ): HoundBreedingStatusUpdateEventFilter;
-    HoundBreedingStatusUpdate(
-      id?: BigNumberish | null,
-      status?: null
-    ): HoundBreedingStatusUpdateEventFilter;
-
-    "HoundQueueStatusUpdate(uint256,uint256)"(
-      id?: BigNumberish | null,
-      queueId?: BigNumberish | null
-    ): HoundQueueStatusUpdateEventFilter;
-    HoundQueueStatusUpdate(
-      id?: BigNumberish | null,
-      queueId?: BigNumberish | null
-    ): HoundQueueStatusUpdateEventFilter;
-
-    "HoundStaminaUpdate(uint256,uint32)"(
-      id?: BigNumberish | null,
-      stamina?: null
-    ): HoundStaminaUpdateEventFilter;
-    HoundStaminaUpdate(
-      id?: BigNumberish | null,
-      stamina?: null
-    ): HoundStaminaUpdateEventFilter;
-
-    "NewHound(uint256,address,tuple)"(
-      id?: BigNumberish | null,
-      owner?: string | null,
-      hound?: null
-    ): NewHoundEventFilter;
-    NewHound(
-      id?: BigNumberish | null,
-      owner?: string | null,
-      hound?: null
-    ): NewHoundEventFilter;
+      discount?: null
+    ): NewDiscountEventFilter;
 
     "OwnershipTransferred(address,address)"(
       previousOwner?: string | null,
@@ -1169,138 +403,35 @@ export interface Params extends BaseContract {
       previousOwner?: string | null,
       newOwner?: string | null
     ): OwnershipTransferredEventFilter;
-
-    "RenameProposal(uint256,tuple)"(
-      id?: BigNumberish | null,
-      renameProposal?: null
-    ): RenameProposalEventFilter;
-    RenameProposal(
-      id?: BigNumberish | null,
-      renameProposal?: null
-    ): RenameProposalEventFilter;
-
-    "Transfer(address,address,uint256)"(
-      from?: string | null,
-      to?: string | null,
-      tokenId?: BigNumberish | null
-    ): TransferEventFilter;
-    Transfer(
-      from?: string | null,
-      to?: string | null,
-      tokenId?: BigNumberish | null
-    ): TransferEventFilter;
   };
 
   estimateGas: {
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
-
     control(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    hound(houndId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    houndOwner(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    hounds(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
-
-    id(overrides?: CallOverrides): Promise<BigNumber>;
-
-    isApprovedForAll(
-      owner: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    matingSeason(overrides?: CallOverrides): Promise<BigNumber>;
-
-    name(overrides?: CallOverrides): Promise<BigNumber>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    renamingProposals(
+    discounts(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
+
+    getDiscount(
+      discountId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    id(overrides?: CallOverrides): Promise<BigNumber>;
+
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    "safeTransferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    "safeTransferFrom(address,address,uint256,bytes)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setMatingSeason(
-      _matingSeason: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    symbol(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tokenURI(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    totalDiscounts(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
@@ -1315,124 +446,32 @@ export interface Params extends BaseContract {
   };
 
   populateTransaction: {
-    approve(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    balanceOf(
-      owner: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     control(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    hound(
-      houndId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    houndOwner(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    hounds(
+    discounts(
       arg0: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getDiscount(
+      discountId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     id(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    isApprovedForAll(
-      owner: string,
-      operator: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    matingSeason(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    onERC721Received(
-      arg0: string,
-      arg1: string,
-      arg2: BigNumberish,
-      arg3: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    renamingProposals(
-      arg0: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    "safeTransferFrom(address,address,uint256)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    "safeTransferFrom(address,address,uint256,bytes)"(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setApprovalForAll(
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     setGlobalParameters(
-      globalParameters: Constructor.StructStruct,
+      globalParameters: ShopConstructor.StructStruct,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setMatingSeason(
-      _matingSeason: boolean,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    supportsInterface(
-      interfaceId: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tokenURI(
-      _tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    transferFrom(
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    totalDiscounts(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,

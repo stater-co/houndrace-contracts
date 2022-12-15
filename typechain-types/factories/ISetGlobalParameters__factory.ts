@@ -15,14 +15,19 @@ const _abi = [
       {
         components: [
           {
+            internalType: "string",
+            name: "name",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "symbol",
+            type: "string",
+          },
+          {
             internalType: "address[]",
             name: "operators",
             type: "address[]",
-          },
-          {
-            internalType: "address",
-            name: "methods",
-            type: "address",
           },
           {
             internalType: "address",
@@ -31,22 +36,7 @@ const _abi = [
           },
           {
             internalType: "address",
-            name: "queues",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "zerocost",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "arenas",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "hounds",
+            name: "methods",
             type: "address",
           },
           {
@@ -56,12 +46,7 @@ const _abi = [
           },
           {
             internalType: "address",
-            name: "races",
-            type: "address",
-          },
-          {
-            internalType: "address",
-            name: "raceUploader",
+            name: "alphadune",
             type: "address",
           },
           {
@@ -69,9 +54,14 @@ const _abi = [
             name: "targets",
             type: "bytes4[][]",
           },
+          {
+            internalType: "uint256",
+            name: "alphadunePercentage",
+            type: "uint256",
+          },
         ],
-        internalType: "struct QueuesConstructor.Struct",
-        name: "input",
+        internalType: "struct ArenasConstructor.Struct",
+        name: "globalParameters",
         type: "tuple",
       },
     ],
