@@ -77,11 +77,13 @@ contract QueuesMethods is Params {
         Hound.Struct memory houndStruct = IHound(control.hounds).hound(hound);
         require(houndStruct.stamina.staminaValue >= queues[queueId].staminaCost);
         
-        bool validSpecie;
-        for ( uint256 i = 0 ; i < queues[queueId].speciesAllowed.length ; ++i ) {
-            if ( queues[queueId].speciesAllowed[i] == houndStruct.identity.specie ) {
-                validSpecie = true;
-                break;
+        bool validSpecie = queues[queueId].speciesAllowed.length == 0;
+        if ( !validSpecie ) {
+            for ( uint256 i = 0 ; i < queues[queueId].speciesAllowed.length ; ++i ) {
+                if ( queues[queueId].speciesAllowed[i] == houndStruct.identity.specie ) {
+                    validSpecie = true;
+                    break;
+                }
             }
         }
         require(validSpecie);
