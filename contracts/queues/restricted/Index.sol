@@ -31,8 +31,6 @@ contract QueuesRestricted is Params {
         external 
         whitelisted 
     {
-        uint256 platformAndArenaFee = IPlatformAndArenaFee(control.arenas).platformAndArenaFee(queue.core.arena);
-        require(platformAndArenaFee < queue.core.raceEntryTicket / queue.totalParticipants);
         queues[queueId] = queue;
         emit EditQueue(queueId,queues[queueId]);
     }
