@@ -104,42 +104,48 @@ contract QueuesMethods is Params {
         ) = IGetEnqueueCost(control.zerocost).getEnqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
+        
         amounts[0] = startRaceTransactionFee.amount;
-
-        IPay(control.payments).pay{
-            value: startRaceTransactionFee.currency == address(0) ? startRaceTransactionFee.amount : 0
-        }(
-            msg.sender,
-            control.raceUploader,
-            startRaceTransactionFee.currency,
-            new uint256[](0),
-            amounts,
-            startRaceTransactionFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-        );
+        if ( amounts[0] > 0 ) {
+            IPay(control.payments).pay{
+                value: startRaceTransactionFee.currency == address(0) ? startRaceTransactionFee.amount : 0
+            }(
+                msg.sender,
+                control.raceUploader,
+                startRaceTransactionFee.currency,
+                new uint256[](0),
+                amounts,
+                startRaceTransactionFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            );
+        }
 
         amounts[0] = platformAndArenaFee.amount;
-        IPay(control.payments).pay{
-            value: platformAndArenaFee.currency == address(0) ? platformAndArenaFee.amount : 0
-        }(
-            msg.sender,
-            control.payments,
-            platformAndArenaFee.currency,
-            new uint256[](0),
-            amounts,
-            platformAndArenaFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-        );
+        if ( amounts[0] > 0 ) {
+            IPay(control.payments).pay{
+                value: platformAndArenaFee.currency == address(0) ? platformAndArenaFee.amount : 0
+            }(
+                msg.sender,
+                control.payments,
+                platformAndArenaFee.currency,
+                new uint256[](0),
+                amounts,
+                platformAndArenaFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            );
+        }
 
         amounts[0] = raceEntryTicket.amount;
-        IPay(control.payments).pay{
-            value: raceEntryTicket.currency == address(0) ? raceEntryTicket.amount : 0
-        }(
-            msg.sender,
-            control.payments,
-            raceEntryTicket.currency,
-            new uint256[](0),
-            amounts,
-            raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-        );
+        if ( amounts[0] > 0 ) {
+            IPay(control.payments).pay{
+                value: raceEntryTicket.currency == address(0) ? raceEntryTicket.amount : 0
+            }(
+                msg.sender,
+                control.payments,
+                raceEntryTicket.currency,
+                new uint256[](0),
+                amounts,
+                raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            );
+        }
 
         IRefreshStamina(control.hounds).refreshStamina(hound);
 
