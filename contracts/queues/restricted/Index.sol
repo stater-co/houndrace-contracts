@@ -46,23 +46,27 @@ contract QueuesRestricted is Params {
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = queues[queueId].core.raceEntryTicket;
 
-        address arenaCurrency = IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queues[queueId].core.arena);
+        address arenaCurrency;
+        if ( amounts[0] > 0 ) {
+            arenaCurrency = IPlatformAndArenaFeeCurrency(control.arenas).platformAndArenaFeeCurrency(queues[queueId].core.arena);
+        }
 
         for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
             if ( queues[queueId].core.participants[i] > 0 ) {
                 require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], queueId) != 0);
-                address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
-
-                IPay(control.payments).pay{
-                    value: arenaCurrency == address(0) ? queues[queueId].core.raceEntryTicket : 0
-                }(
-                    address(this),
-                    houndOwner,
-                    arenaCurrency,
-                    new uint256[](0),
-                    amounts,
-                    arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-                );
+                if ( amounts[0] > 0 ) {
+                    address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
+                    IPay(control.payments).pay{
+                        value: arenaCurrency == address(0) ? queues[queueId].core.raceEntryTicket : 0
+                    }(
+                        address(this),
+                        houndOwner,
+                        arenaCurrency,
+                        new uint256[](0),
+                        amounts,
+                        arenaCurrency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+                    );
+                }
             }
         }
 
