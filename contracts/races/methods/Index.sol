@@ -52,14 +52,16 @@ contract RacesMethods is Params {
     {
 
         for ( uint256 i = 0 ; i < payment.from.length ; ++i ) {
-            IPay(control.payments).pay(
-                payment.from[i],
-                payment.to[i],
-                payment.currency[i],
-                payment.ids[i],
-                payment.amounts[i],
-                payment.paymentType[i]
-            );
+            if ( payment.amounts[i][0] > 0 ) {
+                IPay(control.payments).pay(
+                    payment.from[i],
+                    payment.to[i],
+                    payment.currency[i],
+                    payment.ids[i],
+                    payment.amounts[i],
+                    payment.paymentType[i]
+                );
+            }
         }
 
     }
