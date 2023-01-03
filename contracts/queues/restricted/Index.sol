@@ -16,7 +16,7 @@ contract QueuesRestricted is Params {
         uint256 platformAndArenaFee;
         for ( uint256 i = 0 ; i < createdQueues.length ; ++i ) {
             platformAndArenaFee = IPlatformAndArenaFee(control.arenas).platformAndArenaFee(createdQueues[i].core.arena);
-            require(platformAndArenaFee <= createdQueues[i].core.raceEntryTicket);
+            require(platformAndArenaFee <= createdQueues[i].core.raceEntryTicket * 2);
             queues[id] = createdQueues[i];
             ++id;
         }
@@ -32,7 +32,7 @@ contract QueuesRestricted is Params {
         whitelisted 
     {
         uint256 platformAndArenaFee = IPlatformAndArenaFee(control.arenas).platformAndArenaFee(queue.core.arena);
-        require(platformAndArenaFee <= queue.core.raceEntryTicket);
+        require(platformAndArenaFee <= queue.core.raceEntryTicket * 2);
         queues[queueId] = queue;
         emit EditQueue(queueId,queues[queueId]);
     }
