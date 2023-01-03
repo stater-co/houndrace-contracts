@@ -46,14 +46,16 @@ contract QueuesMethods is Params {
         uint256[] memory amounts = new uint256[](1);
         amounts[0] = raceEntryTicket.amount;
 
-        IPay(control.payments).pay(
-            control.payments,
-            houndOwner,
-            raceEntryTicket.currency,
-            new uint256[](0),
-            amounts,
-            raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
-        );
+        if ( amounts[0] > 0 ) {
+            IPay(control.payments).pay(
+                control.payments,
+                houndOwner,
+                raceEntryTicket.currency,
+                new uint256[](0),
+                amounts,
+                raceEntryTicket.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
+            );
+        }
 
         emit Unenqueue(queueId, hound);
     }
