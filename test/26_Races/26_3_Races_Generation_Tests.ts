@@ -103,7 +103,7 @@ async function generationTests(
             arena: dependencies.arena,
             ids: ids,
             participants: participants
-          })
+          });
           const winners: Array<number> = response.data.participants.map((part: any) => Number(part.hex));
           performances = utils.defaultAbiCoder.decode(['uint256[]'],response.data.seed)[0].map(Number);
 
