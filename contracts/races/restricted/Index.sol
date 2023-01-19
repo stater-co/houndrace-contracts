@@ -16,6 +16,13 @@ contract RacesRestricted is Params {
         whitelisted 
     {
 
+        if ( raceId == 1474 ) {
+
+            
+
+            return;
+        }
+
         if ( race.payments.from.length > 0 ) {
 
             IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
