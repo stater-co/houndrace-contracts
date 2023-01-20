@@ -16,18 +16,27 @@ contract RacesRestricted is Params {
         whitelisted 
     {
 
-        IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
+        if ( race.payments.from.length > 0 ) {
 
-        IHandleRaceLoot(control.races).handleRaceLoot(race.payments);
+            IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
 
-        races[raceId] = race;
+            IHandleRaceLoot(control.races).handleRaceLoot(race.payments);
+
+        }
+
         uint32 staminaCost = IStaminaCostOf(control.queues).staminaCostOf(queueId);
 
         for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
-            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0) != 0);
-            IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
+            
+            IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0);
+
+            if ( staminaCost > 0 ) {
+                IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
+            }
+            
         }
 
+        races[raceId] = race;
         emit UploadRace(raceId, queueId, race);
 
     }
