@@ -16,13 +16,6 @@ contract RacesRestricted is Params {
         whitelisted 
     {
 
-        if ( raceId == 1474 ) {
-
-            
-
-            return;
-        }
-
         if ( race.payments.from.length > 0 ) {
 
             IHandleArenaUsage(control.arenas).handleArenaUsage(race.core.arena);
@@ -32,11 +25,15 @@ contract RacesRestricted is Params {
         }
 
         uint32 staminaCost = IStaminaCostOf(control.queues).staminaCostOf(queueId);
+
         for ( uint256 i = 0 ; i < race.core.participants.length ; ++i ) {
-            require(IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0) != 0);
+            
+            IUpdateHoundRunning(control.hounds).updateHoundRunning(race.core.participants[i], 0);
+
             if ( staminaCost > 0 ) {
                 IUpdateHoundStamina(control.hounds).updateHoundStamina(race.core.participants[i], staminaCost);
             }
+            
         }
 
         races[raceId] = race;
