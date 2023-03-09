@@ -75,7 +75,7 @@ contract QueuesMethods is Params {
         );
 
         Hound.Struct memory houndStruct = IHound(control.hounds).hound(hound);
-        require(houndStruct.stamina.staminaValue >= queues[queueId].staminaCost);
+        require(houndStruct.stamina.staminaValue >= queues[queueId].staminaCost && houndStruct.profile.runningOn == 0);
         
         bool validSpecie = queues[queueId].speciesAllowed.length == 0;
         if ( !validSpecie ) {
@@ -88,24 +88,21 @@ contract QueuesMethods is Params {
         }
         require(validSpecie);
 
-        for ( uint256 i = 0 ; i < queues[queueId].core.participants.length ; ++i ) {
-            require(queues[queueId].core.participants[i] != hound);
-        }
-
         queues[queueId].core.participants.push(hound);
         queues[queueId].core.enqueueDates.push(block.timestamp);
 
         require(IUpdateHoundRunning(control.hounds).updateHoundRunning(hound, queueId) == 0);
 
         (
-            MicroPayment.Struct memory startRaceTransactionFee, 
-            MicroPayment.Struct memory platformAndArenaFee, 
-            MicroPayment.Struct memory raceEntryTicket
+            MicroPayment.Struct memory startRaceTransactionFee, // Transaction fee required for the race to be generated
+            MicroPayment.Struct memory platformAndArenaFee, // Houndrace + Arena owner fee
+            MicroPayment.Struct memory raceEntryTicket // Race entry fee which will be added to the total race reward pool
         ) = IGetEnqueueCost(control.zerocost).getEnqueueCost(queueId);
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = startRaceTransactionFee.amount;
 
+        // Pay the transaction fee
+        amounts[0] = startRaceTransactionFee.amount;
         IPay(control.payments).pay{
             value: startRaceTransactionFee.currency == address(0) ? startRaceTransactionFee.amount : 0
         }(
@@ -117,6 +114,7 @@ contract QueuesMethods is Params {
             startRaceTransactionFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
+        // Pay the Houndrace + Arena owner fee
         amounts[0] = platformAndArenaFee.amount;
         IPay(control.payments).pay{
             value: platformAndArenaFee.currency == address(0) ? platformAndArenaFee.amount : 0
@@ -129,6 +127,7 @@ contract QueuesMethods is Params {
             platformAndArenaFee.currency == address(0) ? Payment.PaymentTypes.DEFAULT : Payment.PaymentTypes.ERC20
         );
 
+        // Pay the race entry fee
         amounts[0] = raceEntryTicket.amount;
         IPay(control.payments).pay{
             value: raceEntryTicket.currency == address(0) ? raceEntryTicket.amount : 0
