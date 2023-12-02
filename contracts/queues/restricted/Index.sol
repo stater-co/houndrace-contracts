@@ -50,7 +50,6 @@ contract QueuesRestricted is Params {
 
         for ( uint256 i = 0; i < queues[queueId].core.participants.length; ++i ) {
             if ( queues[queueId].core.participants[i] > 0 ) {
-                require(IUpdateHoundRunning(control.hounds).updateHoundRunning(queues[queueId].core.participants[i], queueId) != 0);
                 address houndOwner = IHoundOwner(control.hounds).houndOwner(queues[queueId].core.participants[i]);
 
                 IPay(control.payments).pay{
