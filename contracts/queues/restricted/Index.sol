@@ -66,6 +66,10 @@ contract QueuesRestricted is Params {
             }
         }
 
+        uint256[] memory empty;
+        queues[queueId].core.participants = empty;
+        queues[queueId].core.enqueueDates = empty;
+
         emit QueueClosed(queueId);
     }
 
