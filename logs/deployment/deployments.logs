@@ -716,3 +716,33 @@
 {"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0x48003AF6634B60B87Cc3b088DE64C0AA7D5C7764","network":"polygonMumbai","timestamp":"2022-12-15T09:37:44.311Z"}
 {"level":"info","message":"[DIIMIIM] export QUEUES=0x541d6613a3771B2c9611645e69F1f80484b23a68","network":"polygonMumbai","timestamp":"2022-12-15T09:37:50.978Z"}
 {"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x6F2698C6dc6CC392771B36B0a77237B01cE4dD9A","network":"polygonMumbai","timestamp":"2022-12-15T09:37:57.423Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"arbitrumSepolia","timestamp":"2026-05-24T07:42:17.340Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"arbitrumSepolia","timestamp":"2026-05-24T07:51:36.861Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"arbitrumSepolia","timestamp":"2026-05-24T07:54:38.855Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0x176a799daeC064cf1b4e39e2dAeF7cBa48626AE1","network":"arbitrumSepolia","timestamp":"2026-05-24T07:54:46.751Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"arbitrumSepolia","timestamp":"2026-05-24T07:56:43.127Z"}
+{"level":"info","message":"[DIIMIIM] ##############################################","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:11.947Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS_METHODS=0x6D9f94E479D87e0c4Ac8ec542104c972Fa8186e6","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:15.075Z"}
+{"level":"info","message":"[DIIMIIM] export PAYMENTS=0xdCefdC39FC01770a7b6AA7Ef4F27CfD785A4EB39","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:21.215Z"}
+{"level":"info","message":"[DIIMIIM] export HOUND_POTIONS=0xB85a3f7858D98EAAe6c812183ceA9040a54bED7a","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:23.272Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_RESTRICTED=0x23f442D5b123D839e31DD8B81710d8B447E16DeA","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:29.864Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_METHODS=0x9e5D3E75816FD5A0311f11F305f07C65bfF835a4","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:31.904Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP_ZEROCOST=0x6D79Bd356f5417c278c430ed5F5795C49809bb4E","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:38.355Z"}
+{"level":"info","message":"[DIIMIIM] export SHOP=0xa7528A4aAC19a2f1f2691ff482bEc2eF56b41B0E","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:40.389Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_RESTRICTED=0x9476b7D76E219e64b5e036679dc3DCFb441d2e54","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:46.856Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS_METHODS=0x157002cf6cA837EAf5ca65947835bF59465F438F","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:48.890Z"}
+{"level":"info","message":"[DIIMIIM] export ARENAS=0xECf09E2f18feDa5cEcecC61B99f540c501b079DF","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:55.150Z"}
+{"level":"info","message":"[DIIMIIM] export GENETICS=0x283a9ec4b24DFA6e89Df3886d2Ec76c65C905C4a","network":"arbitrumSepolia","timestamp":"2026-05-24T07:57:57.667Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_RESTRICTED=0xfdA350F6A385EFC06fd26a72fC718fa387557E4C","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:03.942Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_ZEROCOST=0xda216C195601d9859ec57066a07a580a141946c3","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:06.473Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MODIFIER=0xAb9715c59e999365Ec9b6a734DeB1dfec3d38337","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:12.866Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS_MINTER=0x1F5d19e762033316dF2B5978E5f49A6ef5D9453c","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:15.346Z"}
+{"level":"info","message":"[DIIMIIM] export HOUNDS=0xE0b2789b1DF2dc9c33053d497382Fd73dF439F5E","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:21.722Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_RESTRICTED=0x2a831ae6a6fD632E69263bdF6b990C926Ee799bF","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:24.230Z"}
+{"level":"info","message":"[DIIMIIM] export RACE_METHODS=0x57897181294Da46D3590E26CFf8d42961ec51E59","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:30.580Z"}
+{"level":"info","message":"[DIIMIIM] export RACE=0x3F05D6C31e2AcC4aA005bd00a70e0B1D6099677A","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:32.627Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_METHODS=0xD487ab72138406fC80A223f637c24607B06e2ee6","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:38.873Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_RESTRICTED=0x6D7FB360635386fA9901C7BabBad290701Ac1Ba1","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:45.446Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES_ZEROCOST=0xe743A8D2A487f42454640E063365863e98Ebc9Dd","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:51.878Z"}
+{"level":"info","message":"[DIIMIIM] export QUEUES=0x4DE9b5342f06816A691e0fC1CBcA59B89b455daB","network":"arbitrumSepolia","timestamp":"2026-05-24T07:58:53.913Z"}
+{"level":"info","message":"[DIIMIIM] export LOOTBOXES=0x193Fe3BDd4162E01e1fE86e72a91Ced6722C7911","network":"arbitrumSepolia","timestamp":"2026-05-24T07:59:00.297Z"}

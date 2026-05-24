@@ -9,6 +9,10 @@ import 'hardhat-deploy-ethers'
 import { HardhatUserConfig } from 'hardhat/config';
 
 
+const ethAccounts = process.env.ETH_ACCOUNT_PRIVATE_KEY
+  ? [process.env.ETH_ACCOUNT_PRIVATE_KEY]
+  : [];
+
 const config: HardhatUserConfig = {
   networks: {
     hardhat: {
@@ -16,17 +20,24 @@ const config: HardhatUserConfig = {
     },
     rinkeby: {
       url: String(process.env.RINKEBY_URL),
-      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
+      accounts: ethAccounts
     },
     polygonMumbai: {
       url: String(process.env.MUMBAI_URL),
-      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)]
+      accounts: ethAccounts
     },
     polygon: {
       url: String(process.env.POLYGON_URL),
-      accounts: [String(process.env.ETH_ACCOUNT_PRIVATE_KEY)],
+      accounts: ethAccounts,
       //gasMultiplier: 2,
       //gasPrice: "auto"
+    },
+    arbitrumSepolia: {
+      url: 'https://sepolia-rollup.arbitrum.io/rpc',
+      chainId: 421614,
+      accounts: ethAccounts,
+      gasMultiplier: 2,
+      gasPrice: 100_000_000,   // 0.1 gwei — well above ASep base fee
     }
   },
   etherscan: {
