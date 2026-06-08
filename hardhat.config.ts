@@ -38,6 +38,11 @@ const config: HardhatUserConfig = {
       accounts: ethAccounts,
       gasMultiplier: 2,
       gasPrice: 100_000_000,   // 0.1 gwei — well above ASep base fee
+    },
+    alphaDuneTestnet: {
+      url: 'https://rpc.testnet.alphadune.com',
+      chainId: 4126084,
+      accounts: ethAccounts,
     }
   },
   etherscan: {
