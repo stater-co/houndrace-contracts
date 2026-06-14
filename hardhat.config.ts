@@ -46,7 +46,23 @@ const config: HardhatUserConfig = {
     }
   },
   etherscan: {
-    apiKey: process.env.POLYSCAN_API_KEY
+    apiKey: {
+      polygon: String(process.env.POLYSCAN_API_KEY),
+      polygonMumbai: String(process.env.POLYSCAN_API_KEY),
+      rinkeby: String(process.env.ETHEREUM_API_KEY),
+      // Blockscout does not require a real API key; any non-empty string works
+      alphaDuneTestnet: 'alphadune'
+    },
+    customChains: [
+      {
+        network: 'alphaDuneTestnet',
+        chainId: 4126084,
+        urls: {
+          apiURL: 'https://explorer.testnet.alphadune.com/api',
+          browserURL: 'https://explorer.testnet.alphadune.com'
+        }
+      }
+    ]
   },
   solidity: {
     compilers: [
